@@ -80,6 +80,9 @@ export default function CheckoutPage() {
       </nav>
 
       <h1 className="font-serif text-4xl font-bold text-[var(--text)] mb-8">Checkout</h1>
+          <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg p-4 mb-6 text-sm text-[var(--text-secondary)]">
+            <strong className="text-[var(--accent)]">Crafted to Order</strong> — Each MythRealms piece is handcrafted upon order. Please allow <strong>2-3 weeks</strong> for production and delivery. You will receive updates at every stage.
+          </div>
 
       <form onSubmit={handleCheckout}>
         <div className="grid lg:grid-cols-[1fr_380px] gap-10 items-start">

@@ -107,6 +107,9 @@ export default async function ProductPage({
           </div>
 
           <div className="flex items-center justify-between mb-4"><span className="text-[13px] font-semibold uppercase tracking-wider text-[var(--text-secondary)]">Options</span><SizeGuideModal /></div>
+          <div className="bg-[var(--accent)]/5 border border-[var(--accent)]/10 rounded-lg p-3 mb-4 text-xs text-[var(--text-muted)]">
+            Crafted to order · Ships in 2-3 weeks · Free shipping over $69.99
+          </div>
           <ProductActions
             productId={product.id}
             productName={product.name}
