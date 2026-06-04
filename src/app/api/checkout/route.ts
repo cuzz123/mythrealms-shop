@@ -1,9 +1,8 @@
-// POST /api/checkout — Create LemonSqueezy Checkout
-// LemonSqueezy is MoR (Merchant of Record), handles global tax + payments
+// POST /api/checkout — Create order, redirect to LemonSqueezy
+// Uses direct checkout URL to avoid API call issues from Vercel
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { createCheckout } from "@/lib/lemonsqueezy";
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,96 +13,66 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
     }
 
-    // Step 1: Validate stock
-    try {
-      for (const item of items) {
-        if (item.variantId) {
-          const variant = await db.variant.findUnique({ where: { id: item.variantId } });
-          if (!variant || variant.stock < item.quantity) {
-            return NextResponse.json(
-              { error: `Insufficient stock for "${item.name}". Available: ${variant?.stock ?? 0}` },
-              { status: 400 }
-            );
-          }
+    // Validate stock
+    for (const item of items) {
+      if (item.variantId) {
+        const variant = await db.variant.findUnique({ where: { id: item.variantId } });
+        if (!variant || variant.stock < item.quantity) {
+          return NextResponse.json(
+            { error: `Insufficient stock for "${item.name}"` },
+            { status: 400 }
+          );
         }
       }
-    } catch (e: any) {
-      return NextResponse.json({ error: "DB stock check: " + e.message }, { status: 500 });
     }
 
-    // Step 2: Calculate totals
+    // Calculate totals from DB prices
     let subtotal = 0;
-    await Promise.all(
-      items.map(async (item: any) => {
-        const product = await db.product.findUnique({
-          where: { id: item.productId },
-          include: { variants: true },
-        });
-        const variant = product?.variants.find((v) => v.id === item.variantId);
-        const price = variant?.price || 0;
-        subtotal += Number(price) * item.quantity;
-      })
-    );
-
-    // Step 3: Create order
-    let order;
-    try {
-      order = await db.order.create({
-        data: {
-          email: email || "guest@example.com",
-          subtotal,
-          shipping: subtotal >= 69.99 ? 0 : 4.99,
-          total: subtotal >= 69.99 ? subtotal : subtotal + 4.99,
-          shippingAddress: JSON.stringify(shippingAddress || {}),
-          status: "PENDING",
-          items: {
-            create: items.map((item: any) => ({
-              productId: item.productId,
-              variantId: item.variantId,
-              quantity: item.quantity,
-              price: item.price || 0,
-              productSnapshot: JSON.stringify(item),
-            })),
-          },
-        },
+    for (const item of items) {
+      const product = await db.product.findUnique({
+        where: { id: item.productId },
+        include: { variants: true },
       });
-    } catch (e: any) {
-      return NextResponse.json({ error: "DB order create: " + e.message }, { status: 500 });
+      const variant = product?.variants.find((v) => v.id === item.variantId);
+      subtotal += Number(variant?.price || 0) * item.quantity;
     }
 
-    // Step 4: LemonSqueezy
-    const storeId = process.env.LEMONSQUEEZY_STORE_ID;
-    const variantId = process.env.LEMONSQUEEZY_VARIANT_ID;
+    // Create order
+    const order = await db.order.create({
+      data: {
+        email: email || "guest@example.com",
+        subtotal,
+        shipping: subtotal >= 69.99 ? 0 : 4.99,
+        total: subtotal >= 69.99 ? subtotal : subtotal + 4.99,
+        shippingAddress: JSON.stringify(shippingAddress || {}),
+        status: "PENDING",
+        items: { create: items.map((item: any) => ({
+          productId: item.productId, variantId: item.variantId,
+          quantity: item.quantity, price: item.price || 0,
+          productSnapshot: JSON.stringify(item),
+        }))},
+      },
+    });
 
-    if (!storeId || !variantId) {
-      return NextResponse.json({
-        url: `${process.env.AUTH_URL || request.nextUrl.origin}/checkout/success?orderId=${order.id}`,
-        demo: true,
-      });
-    }
-
+    // Use LemonSqueezy direct checkout URL (bypasses API, no IP restrictions)
+    const productUUID = process.env.LEMONSQUEEZY_PRODUCT_UUID;
     const baseUrl = process.env.AUTH_URL || request.nextUrl.origin;
-    try {
-      const checkout = await createCheckout({
-        storeId,
-        variantId,
-        email,
-        name: shippingAddress?.name || email,
-        successUrl: `${baseUrl}/checkout/success?orderId=${order.id}`,
-        cancelUrl: `${baseUrl}/checkout/cancel`,
-        customData: { orderId: order.id },
-      });
 
-      await db.order.update({
-        where: { id: order.id },
-        data: { stripeSessionId: checkout.id },
-      });
-
-      return NextResponse.json({ url: checkout.url });
-    } catch (e: any) {
-      return NextResponse.json({ error: "LemonSqueezy: " + e.message }, { status: 500 });
+    if (productUUID) {
+      const checkoutUrl = `https://jasperkit.lemonsqueezy.com/checkout/buy/${productUUID}?checkout[custom][orderId]=${order.id}&checkout[email]=${encodeURIComponent(email || "")}`;
+      return NextResponse.json({ url: checkoutUrl });
     }
+
+    // Demo mode fallback
+    return NextResponse.json({
+      url: `${baseUrl}/checkout/success?orderId=${order.id}`,
+      demo: true,
+    });
   } catch (e: any) {
-    return NextResponse.json({ error: "Parse: " + e.message }, { status: 500 });
+    console.error("Checkout error:", e);
+    return NextResponse.json(
+      { error: e?.message || "Checkout failed" },
+      { status: 500 }
+    );
   }
 }
