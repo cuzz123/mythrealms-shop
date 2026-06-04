@@ -207,7 +207,7 @@ export default async function HomePage() {
 
             {/* Ancient Talismans */}
             <Link
-              href="/collections/ancient-talismans"
+              href="/collections/talismans"
               className="group relative rounded-xl overflow-hidden border border-[#2A2520] bg-[#1A1816] aspect-[3/4] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
             >
               <div

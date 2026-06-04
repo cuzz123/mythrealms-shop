@@ -39,7 +39,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
   const variantPrices = product.variants.map(v => Number(v.price))
   const hasMultiplePrices = new Set(variantPrices).size > 1
   const minPrice = Math.min(...variantPrices)
-  const showFrom = hasMultiplePrices || product.variants.length > 1
+  const showFrom = hasMultiplePrices
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -57,81 +57,58 @@ export function ProductCard({ product, className }: ProductCardProps) {
   }
 
   return (
-    <Link
-      href={`/products/${product.slug}`}
-      className={cn("group block", className)}
-    >
-      {/* Image container */}
-      <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--border-light)] will-change-transform [transform:translateZ(0)]">
-        {isValidImage ? (
-          <>
-            <Image
-              src={image}
-              alt={product.name}
-              fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className={cn(
-                "object-cover transition-all duration-500 group-hover:scale-110",
-                imageLoaded ? "opacity-100" : "opacity-0"
-              )}
-              onLoad={() => setImageLoaded(true)}
-            />
-
-            {/* Skeleton pulse while loading */}
-            {!imageLoaded && (
-              <div className="absolute inset-0 animate-pulse bg-[var(--border)]" />
-            )}
-          </>
-        ) : (
-          <ProductImage name={product.name} className="absolute inset-0" />
-        )}
-
-        {/* Sale badge */}
-        {hasSale && (
-          <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-[var(--sale)] px-2.5 py-0.5 text-xs font-semibold text-white">
-            Sale
-          </span>
-        )}
-
-        {/* Quick add button - appears on hover */}
-        <button
-          onClick={handleQuickAdd}
-          className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[var(--text)] shadow-md opacity-0 translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-white hover:text-[var(--primary)] backdrop-blur-sm cursor-pointer"
-          aria-label={`Add ${product.name} to cart`}
-        >
-          <ShoppingBag className="h-4 w-4" />
-        </button>
-      </div>
-
-      {/* Product info */}
-      <div className="mt-3 space-y-1.5">
-        <h3 className="text-sm font-medium text-[var(--text)] line-clamp-2 font-serif">
-          {product.name}
-        </h3>
-
-        <div className="flex items-center gap-2">
-          {hasSale ? (
+    <div className={cn("group relative", className)}>
+      {/* Product link — covers image + info area, button sits on top */}
+      <Link href={`/products/${product.slug}`} className="block">
+        {/* Image container */}
+        <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--border-light)] will-change-transform [transform:translateZ(0)]">
+          {isValidImage ? (
             <>
-              <span className="text-sm font-semibold text-[var(--sale)]">
-                {showFrom ? "from " : ""}{formatPrice(hasMultiplePrices ? minPrice : price)}
-              </span>
-              <span className="text-xs text-[var(--text-muted)] line-through">
-                {formatPrice(comparePrice!)}
-              </span>
-              <span className="ml-auto text-xs font-semibold text-[var(--sale)]">
-                Save {formatPrice(savings)}
-              </span>
+              <Image src={image} alt={product.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                className={cn("object-cover transition-[transform] duration-500 group-hover:scale-110", imageLoaded ? "opacity-100" : "opacity-0")}
+                onLoad={() => setImageLoaded(true)} />
+              {!imageLoaded && (<div className="absolute inset-0 animate-pulse bg-[var(--border)]" />)}
             </>
           ) : (
-            <span className="text-sm font-semibold text-[var(--text)]">
-              {showFrom ? "from " : ""}{formatPrice(hasMultiplePrices ? minPrice : price)}
-            </span>
+            <ProductImage name={product.name} className="absolute inset-0" />
+          )}
+          {hasSale && (
+            <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-[var(--sale)] px-2.5 py-0.5 text-xs font-semibold text-white">Sale</span>
           )}
         </div>
 
-        {/* Stock urgency badge */}
-        {firstVariant?.stock !== undefined && firstVariant.stock > 0 && firstVariant.stock <= 3 && (
-          <div className="flex items-center gap-1 mt-1 text-xs font-medium text-red-400">
+        {/* Product info */}
+        <div className="mt-3 space-y-1.5">
+          <h3 className="text-sm font-medium text-[var(--text)] line-clamp-2 font-serif">{product.name}</h3>
+          <div className="flex items-center gap-2">
+            {hasSale ? (
+              <>
+                <span className="text-sm font-semibold text-[var(--sale)]">{showFrom ? "from " : ""}{formatPrice(hasMultiplePrices ? minPrice : price)}</span>
+                <span className="text-xs text-[var(--text-muted)] line-through">{formatPrice(comparePrice!)}</span>
+                <span className="ml-auto text-xs font-semibold text-[var(--sale)]">Save {formatPrice(savings)}</span>
+              </>
+            ) : (
+              <span className="text-sm font-semibold text-[var(--text)]">{showFrom ? "from " : ""}{formatPrice(hasMultiplePrices ? minPrice : price)}</span>
+            )}
+          </div>
+          {/* Stock urgency badge */}
+          {firstVariant?.stock !== undefined && firstVariant.stock > 0 && firstVariant.stock <= 3 && (
+            <div className="flex items-center gap-1 mt-1 text-xs font-medium text-red-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+              Only {firstVariant.stock} left
+            </div>
+          )}
+        </div>
+      </Link>
+
+      {/* Quick add button — outside the Link to avoid nested interactive elements */}
+      <button onClick={handleQuickAdd}
+        className="absolute bottom-[72px] right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[var(--text)] shadow-md opacity-0 translate-y-2 transition-[opacity,transform] duration-200 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-white hover:text-[var(--primary)] backdrop-blur-sm cursor-pointer"
+        aria-label={`Add ${product.name} to cart`}>
+        <ShoppingBag className="h-4 w-4" />
+      </button>
+    </div>
+  )
             <AlertTriangle className="w-3 h-3" />
             Only {firstVariant.stock} left
           </div>

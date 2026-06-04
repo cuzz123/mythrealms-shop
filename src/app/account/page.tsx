@@ -162,7 +162,7 @@ export default function AccountPage() {
               Start shopping and your orders will appear here.
             </p>
             <Link
-              href="/collections/bracelets"
+              href="/collections/star-bracelets"
               className="mt-6 inline-flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--primary)] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--primary-hover)]"
             >
               <ShoppingBag size={16} strokeWidth={2} />

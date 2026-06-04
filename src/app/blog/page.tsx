@@ -17,7 +17,7 @@ export default async function BlogPage() {
       </nav>
 
       <div className="text-center mb-12">
-        <h1 className="font-serif text-5xl font-bold mb-3">Taoverse Blog</h1>
+        <h1 className="font-serif text-5xl font-bold mb-3">MythRealms Blog</h1>
         <p className="text-[var(--text-muted)] max-w-lg mx-auto">Explore the wisdom of Taoist philosophy, Wu Xing elements, Bagua, and spiritual lifestyle inspiration</p>
       </div>
 
