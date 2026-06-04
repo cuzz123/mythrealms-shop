@@ -13,8 +13,10 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
+  const [state, setState] = useState("");
   const [country, setCountry] = useState("US");
   const [zip, setZip] = useState("");
 
@@ -49,7 +51,7 @@ export default function CheckoutPage() {
             image: item.product.image,
           })),
           email,
-          shippingAddress: { name, address, city, country, zip },
+          shippingAddress: { name, phone, address, city, state, country, zip },
         }),
       });
 
@@ -87,6 +89,7 @@ export default function CheckoutPage() {
               <div className="space-y-4">
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required className={inputClass} />
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" className={inputClass} />
+                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" className={inputClass} />
               </div>
             </div>
 
@@ -96,6 +99,7 @@ export default function CheckoutPage() {
                 <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" className={inputClass} />
                 <div className="grid grid-cols-2 gap-4">
                   <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" className={inputClass} />
+                  <input type="text" value={state} onChange={(e) => setState(e.target.value)} placeholder="State / Province" className={inputClass} />
                   <input type="text" value={zip} onChange={(e) => setZip(e.target.value)} placeholder="ZIP / Postal code" className={inputClass} />
                 </div>
                 <select value={country} onChange={(e) => setCountry(e.target.value)} className={`${inputClass} cursor-pointer`}>

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import { Gallery } from "@/components/product/Gallery";
 import { SizeGuideModal } from "@/components/product/SizeGuideModal";
@@ -9,6 +10,17 @@ import { formatPrice } from "@/lib/utils";
 import { Star, Play } from "lucide-react";
 
 export const dynamic = "force-dynamic"
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await db.product.findUnique({ where: { slug }, select: { name: true, description: true, images: true } });
+  if (!product) return { title: "Product Not Found — MythRealms" };
+  return {
+    title: `${product.name} — MythRealms`,
+    description: product.description.slice(0, 160),
+    openGraph: { title: product.name, description: product.description.slice(0, 160) },
+  };
+}
 
 
 export default async function ProductPage({
@@ -105,7 +117,7 @@ export default async function ProductPage({
           />
 
           {/* Mythical Legend badge */}
-          <div className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 cursor-pointer">
+          <div className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6">
             <Play className="w-5 h-5 text-[var(--accent)]" />
             <span className="text-sm font-medium text-[var(--text)]">
               Ancient Legend Behind This Piece —{" "}

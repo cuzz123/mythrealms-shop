@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Markdown from "react-markdown"
 import { ArrowLeft } from "lucide-react";
 
 export const dynamic = "force-dynamic"
@@ -33,8 +34,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <img src={post.image} alt={post.title} className="w-full rounded-xl mb-8 object-cover max-h-[400px]" />
       )}
 
-      <div className="prose prose-sm max-w-none text-[var(--text-secondary)] leading-relaxed whitespace-pre-line">
-        {post.content}
+      <div className="prose prose-sm prose-invert max-w-none text-[var(--text-secondary)] leading-relaxed">
+        <Markdown>{post.content}</Markdown>
       </div>
     </div>
   );
