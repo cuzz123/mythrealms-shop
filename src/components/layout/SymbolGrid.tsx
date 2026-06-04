@@ -34,7 +34,7 @@ export function SymbolGrid() {
             >
               <div className="w-16 h-16 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center overflow-hidden group-hover:border-[var(--accent)] group-hover:shadow-md transition">
                 {s.img ? (
-                  <img src={s.img} alt={s.name} className="w-10 h-10 object-contain" />
+                  <img src={s.img} alt={s.name} className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-xl text-[var(--text-muted)]">{s.name[0]}</span>
                 )}

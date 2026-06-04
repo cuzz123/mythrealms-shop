@@ -24,7 +24,7 @@ export function HeroCarousel() {
   useEffect(() => { if (isPaused) return; const timer = setInterval(next, 5000); return () => clearInterval(timer); }, [isPaused, next]);
   const slide = slides[current];
   return (
-    <div className="relative w-full h-[420px] md:h-[520px] overflow-hidden bg-[#2C1810]">
+    <div className="relative w-full aspect-[21/9] max-h-[500px] overflow-hidden bg-[#0A0808]">
       {slides.map((s, i) => (
         <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
           {s.image && <img src={s.image} alt={s.title} className="w-full h-full object-cover" />}
