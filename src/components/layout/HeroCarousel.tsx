@@ -4,16 +4,16 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
-  { image:"/images/hero/nine-tailed-fox.png", title:"Nine-Tailed Fox · 九尾狐", subtitle:"Wisdom earned through centuries — sterling silver pendant", cta:"Shop Beast Pendants", href:"/collections/beast-pendants" },
-  { image:"/images/hero/azure-dragon.png", title:"Azure Dragon · 青龙", subtitle:"Guardian of the Eastern sky — constellation ring set", cta:"Shop Dragons", href:"/collections/beast-pendants" },
-  { image:"/images/hero/qilin.png", title:"Qilin · 麒麟", subtitle:"Peace and prosperity — jade protection bracelet", cta:"Discover Qilin", href:"/collections/beast-pendants" },
-  { image:"/images/hero/phoenix.png", title:"Phoenix · 凤凰", subtitle:"Rebirth and renewal in gold and vermillion crystal", cta:"Shop Phoenix", href:"/collections/beast-pendants" },
-  { image:"/images/hero/white-tiger.png", title:"White Tiger · 白虎", subtitle:"Guardian of the West — silver guardian cuff", cta:"Shop Guardians", href:"/collections/four-symbols" },
-  { image:"/images/hero/black-tortoise.png", title:"Black Tortoise · 玄武", subtitle:"Endurance and longevity — onyx & hematite bracelet", cta:"Shop Tortoise", href:"/collections/four-symbols" },
-  { image:"/images/hero/bai-ze.png", title:"Bai Ze · 白泽", subtitle:"The beast who knows all 11,520 creatures — wisdom talisman", cta:"Shop Talismans", href:"/collections/talismans" },
-  { image:"/images/hero/kun-peng.png", title:"Kun Peng · 鲲鹏", subtitle:"Fish to bird — the ultimate transformation pendant set", cta:"Discover Kun Peng", href:"/collections/beast-pendants" },
-  { image:"/images/hero/yinglong.png", title:"Yinglong · 应龙", subtitle:"The only winged dragon — bronze cufflinks of power", cta:"Shop Yinglong", href:"/collections/beast-pendants" },
-  { image:"/images/hero/taotie.png", title:"Taotie · 饕餮", subtitle:"Shang dynasty power — ancient bronze protection amulet", cta:"Shop Taotie", href:"/collections/talismans" },
+  { image:"/images/hero/nine-tailed-fox.webp", title:"Nine-Tailed Fox · 九尾狐", subtitle:"Wisdom earned through centuries — sterling silver pendant", cta:"Shop Beast Pendants", href:"/collections/beast-pendants" },
+  { image:"/images/hero/azure-dragon.webp", title:"Azure Dragon · 青龙", subtitle:"Guardian of the Eastern sky — constellation ring set", cta:"Shop Dragons", href:"/collections/beast-pendants" },
+  { image:"/images/hero/qilin.webp", title:"Qilin · 麒麟", subtitle:"Peace and prosperity — jade protection bracelet", cta:"Discover Qilin", href:"/collections/beast-pendants" },
+  { image:"/images/hero/phoenix.webp", title:"Phoenix · 凤凰", subtitle:"Rebirth and renewal in gold and vermillion crystal", cta:"Shop Phoenix", href:"/collections/beast-pendants" },
+  { image:"/images/hero/white-tiger.webp", title:"White Tiger · 白虎", subtitle:"Guardian of the West — silver guardian cuff", cta:"Shop Guardians", href:"/collections/four-symbols" },
+  { image:"/images/hero/black-tortoise.webp", title:"Black Tortoise · 玄武", subtitle:"Endurance and longevity — onyx & hematite bracelet", cta:"Shop Tortoise", href:"/collections/four-symbols" },
+  { image:"/images/hero/bai-ze.webp", title:"Bai Ze · 白泽", subtitle:"The beast who knows all 11,520 creatures — wisdom talisman", cta:"Shop Talismans", href:"/collections/talismans" },
+  { image:"/images/hero/kun-peng.webp", title:"Kun Peng · 鲲鹏", subtitle:"Fish to bird — the ultimate transformation pendant set", cta:"Discover Kun Peng", href:"/collections/beast-pendants" },
+  { image:"/images/hero/yinglong.webp", title:"Yinglong · 应龙", subtitle:"The only winged dragon — bronze cufflinks of power", cta:"Shop Yinglong", href:"/collections/beast-pendants" },
+  { image:"/images/hero/taotie.webp", title:"Taotie · 饕餮", subtitle:"Shang dynasty power — ancient bronze protection amulet", cta:"Shop Taotie", href:"/collections/talismans" },
 ];
 
 export function HeroCarousel() {
