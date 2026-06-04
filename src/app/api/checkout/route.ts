@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
             variantId: item.variantId,
             quantity: item.quantity,
             price: item.price || 0,
-            productSnapshot: item,
+            productSnapshot: JSON.stringify(item),
           })),
         },
       },
