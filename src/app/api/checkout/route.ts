@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
                 variant_id: Number(variantId),
                 checkout_data: { email: email || "", custom: { orderId: order.id } },
                 product_options: { redirect_url: `${baseUrl}/checkout/success?orderId=${order.id}` },
-                checkout_options: { embed: false },
+                checkout_options: { embed: false, locale: "en" },
               },
               relationships: {
                 store: { data: { type: "stores", id: String(storeId) } },
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
     // Fallback: direct buy URL (no redirect_url, but always works)
     if (productUUID) {
       return NextResponse.json({
-        url: `https://jasperkit.lemonsqueezy.com/checkout/buy/${productUUID}?checkout[custom][orderId]=${order.id}&checkout[email]=${encodeURIComponent(email || "")}`,
+        url: `https://jasperkit.lemonsqueezy.com/checkout/buy/${productUUID}?checkout[custom][orderId]=${order.id}&checkout[email]=${encodeURIComponent(email || "")}&locale=en`,
       });
     }
 
