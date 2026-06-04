@@ -30,7 +30,7 @@
 
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 15px; line-height: 1.7;
   color: var(--text); background: var(--bg);
   -webkit-font-smoothing: antialiased;
@@ -52,16 +52,14 @@ body {
 
 @layer utilities {
   .font-serif {
-    font-family: "Cormorant Garamond", Georgia, serif;
+    font-family: var(--font-serif), Georgia, serif;
   }
   .font-body {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
   }
 }
 
-h1, h2, h3, h4, .font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
-
-body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+h1, h2, h3, h4, .font-serif { font-family: var(--font-serif), Georgia, serif; }
 
 /* Animation keyframes for homepage */
 @keyframes twinkle1 { from { opacity: 0.3; } to { opacity: 0.8; } }
