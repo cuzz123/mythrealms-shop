@@ -4,11 +4,16 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
-  { image:"/images/hero/ancient-beasts.png", title:"Where Ancient Myths Come Alive · 上古神兽", subtitle:"Discover jewelry inspired by China's oldest book of legends", cta:"Explore the Bestiary", href:"/collections/beast-pendants" },
-  { image:"/images/hero/four-symbols.png", title:"Four Symbols · 四象", subtitle:"Azure Dragon, Vermillion Bird, White Tiger, Black Tortoise", cta:"Shop Four Symbols", href:"/collections/four-symbols" },
-  { image:"/images/hero/kunlun-paradise.png", title:"Kunlun Paradise · 昆仑仙境", subtitle:"Where mythical beasts roam and peach trees grant immortality", cta:"Shop Beasts", href:"/collections/beast-pendants" },
-  { image:"/images/hero/shanhaijing-book.png", title:"Classic of Mountains and Seas · 山海经", subtitle:"2000 years before Tolkien — the oldest bestiary on Earth", cta:"Explore the Lore", href:"/blog" },
-  { image:"/images/hero/28-mansions.png", title:"28 Lunar Mansions · 二十八宿", subtitle:"Ancient Chinese star maps. Wear the heavens on your wrist.", cta:"Shop Stars", href:"/collections/star-bracelets" },
+  { image:"/images/hero/nine-tailed-fox.png", title:"Nine-Tailed Fox · 九尾狐", subtitle:"Wisdom earned through centuries — sterling silver pendant", cta:"Shop Beast Pendants", href:"/collections/beast-pendants" },
+  { image:"/images/hero/azure-dragon.png", title:"Azure Dragon · 青龙", subtitle:"Guardian of the Eastern sky — constellation ring set", cta:"Shop Dragons", href:"/collections/beast-pendants" },
+  { image:"/images/hero/qilin.png", title:"Qilin · 麒麟", subtitle:"Peace and prosperity — jade protection bracelet", cta:"Discover Qilin", href:"/collections/beast-pendants" },
+  { image:"/images/hero/phoenix.png", title:"Phoenix · 凤凰", subtitle:"Rebirth and renewal in gold and vermillion crystal", cta:"Shop Phoenix", href:"/collections/beast-pendants" },
+  { image:"/images/hero/white-tiger.png", title:"White Tiger · 白虎", subtitle:"Guardian of the West — silver guardian cuff", cta:"Shop Guardians", href:"/collections/four-symbols" },
+  { image:"/images/hero/black-tortoise.png", title:"Black Tortoise · 玄武", subtitle:"Endurance and longevity — onyx & hematite bracelet", cta:"Shop Tortoise", href:"/collections/four-symbols" },
+  { image:"/images/hero/bai-ze.png", title:"Bai Ze · 白泽", subtitle:"The beast who knows all 11,520 creatures — wisdom talisman", cta:"Shop Talismans", href:"/collections/talismans" },
+  { image:"/images/hero/kun-peng.png", title:"Kun Peng · 鲲鹏", subtitle:"Fish to bird — the ultimate transformation pendant set", cta:"Discover Kun Peng", href:"/collections/beast-pendants" },
+  { image:"/images/hero/yinglong.png", title:"Yinglong · 应龙", subtitle:"The only winged dragon — bronze cufflinks of power", cta:"Shop Yinglong", href:"/collections/beast-pendants" },
+  { image:"/images/hero/taotie.png", title:"Taotie · 饕餮", subtitle:"Shang dynasty power — ancient bronze protection amulet", cta:"Shop Taotie", href:"/collections/talismans" },
 ];
 
 export function HeroCarousel() {
