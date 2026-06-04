@@ -1,16 +1,16 @@
 import Link from "next/link";
 
 const symbols = [
-  { name: "Azure Dragon", href: "/collections/four-symbols", img: null },
-  { name: "Phoenix", href: "/collections/four-symbols", img: null },
-  { name: "White Tiger", href: "/collections/four-symbols", img: null },
-  { name: "Black Tortoise", href: "/collections/four-symbols", img: null },
-  { name: "Nine-Tailed Fox", href: "/collections/beast-pendants", img: null },
-  { name: "Qilin", href: "/collections/beast-pendants", img: null },
-  { name: "Bai Ze", href: "/collections/talismans", img: null },
-  { name: "Kun Peng", href: "/collections/beast-pendants", img: null },
-  { name: "Taotie", href: "/collections/talismans", img: null },
-  { name: "Yinglong", href: "/collections/beast-pendants", img: null },
+  { name: "Azure Dragon", href: "/collections/four-symbols", img: "/images/hero/azure-dragon.webp" },
+  { name: "Phoenix", href: "/collections/four-symbols", img: "/images/hero/phoenix.webp" },
+  { name: "White Tiger", href: "/collections/four-symbols", img: "/images/hero/white-tiger.webp" },
+  { name: "Black Tortoise", href: "/collections/four-symbols", img: "/images/hero/black-tortoise.webp" },
+  { name: "Nine-Tailed Fox", href: "/collections/beast-pendants", img: "/images/hero/nine-tailed-fox.webp" },
+  { name: "Qilin", href: "/collections/beast-pendants", img: "/images/hero/qilin.webp" },
+  { name: "Bai Ze", href: "/collections/talismans", img: "/images/hero/bai-ze.webp" },
+  { name: "Kun Peng", href: "/collections/beast-pendants", img: "/images/hero/kun-peng.webp" },
+  { name: "Taotie", href: "/collections/talismans", img: "/images/hero/taotie.webp" },
+  { name: "Yinglong", href: "/collections/beast-pendants", img: "/images/hero/yinglong.webp" },
 ];
 
 export function SymbolGrid() {

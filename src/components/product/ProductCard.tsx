@@ -109,11 +109,4 @@ export function ProductCard({ product, className }: ProductCardProps) {
       </button>
     </div>
   )
-            <AlertTriangle className="w-3 h-3" />
-            Only {firstVariant.stock} left
-          </div>
-        )}
-      </div>
-    </Link>
-  )
 }
