@@ -29,7 +29,7 @@ export async function createCheckout(opts: CheckoutOptions) {
         type: "checkouts",
         attributes: {
           store_id: Number(opts.storeId),
-          variant_id: Number(opts.variantId),
+          variant_id: opts.variantId,
           checkout_data: {
             email: opts.email,
             name: opts.name,
@@ -43,7 +43,8 @@ export async function createCheckout(opts: CheckoutOptions) {
           },
         },
         relationships: {
-          store: { data: { type: "stores", id: opts.storeId } },
+          store: { data: { type: "stores", id: String(opts.storeId) } },
+          variant: { data: { type: "variants", id: opts.variantId } },
         },
       },
     }),
