@@ -1,5 +1,5 @@
-// POST /api/checkout — Create order, redirect to LemonSqueezy
-// Uses direct checkout URL to avoid API call issues from Vercel
+// POST /api/checkout — Create LS checkout overlay URL
+// Uses embed mode: checkout stays on our site, no redirect needed
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
@@ -54,16 +54,74 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Use LemonSqueezy direct checkout URL (bypasses API, no IP restrictions)
+    // Use LemonSqueezy API to create checkout with embed mode
+    const apiKey = process.env.LEMONSQUEEZY_API_KEY;
+    const storeId = process.env.LEMONSQUEEZY_STORE_ID;
     const productUUID = process.env.LEMONSQUEEZY_PRODUCT_UUID;
     const baseUrl = process.env.AUTH_URL || request.nextUrl.origin;
 
-    if (productUUID) {
-      const checkoutUrl = `https://jasperkit.lemonsqueezy.com/checkout/buy/${productUUID}?checkout[custom][orderId]=${order.id}&checkout[email]=${encodeURIComponent(email || "")}`;
-      return NextResponse.json({ url: checkoutUrl });
+    if (apiKey && storeId && productUUID) {
+      try {
+        const res = await fetch("https://api.lemonsqueezy.com/v1/checkouts", {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({
+            data: {
+              type: "checkouts",
+              attributes: {
+                store_id: Number(storeId),
+                variant_id: productUUID,
+                checkout_data: {
+                  email: email || "",
+                  custom: { orderId: order.id },
+                },
+                product_options: {
+                  redirect_url: `${baseUrl}/checkout/success?orderId=${order.id}`,
+                },
+                checkout_options: {
+                  embed: true,
+                  media: false,
+                  logo: true,
+                },
+              },
+              relationships: {
+                store: { data: { type: "stores", id: String(storeId) } },
+                variant: { data: { type: "variants", id: productUUID } },
+              },
+            },
+          }),
+        });
+
+        if (res.ok) {
+          const json = await res.json();
+          const checkoutUrl = json.data.attributes.url;
+          await db.order.update({
+            where: { id: order.id },
+            data: { stripeSessionId: json.data.id },
+          });
+          return NextResponse.json({ url: checkoutUrl, embed: true });
+        }
+
+        // API failed, log and fall through to fallback
+        const errText = await res.text();
+        console.error("LS API failed:", res.status, errText);
+      } catch (e: any) {
+        console.error("LS API error:", e.message);
+      }
     }
 
-    // Demo mode fallback
+    // Fallback: direct buy URL
+    if (productUUID) {
+      return NextResponse.json({
+        url: `https://jasperkit.lemonsqueezy.com/checkout/buy/${productUUID}`,
+        embed: false,
+      });
+    }
+
     return NextResponse.json({
       url: `${baseUrl}/checkout/success?orderId=${order.id}`,
       demo: true,
