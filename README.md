@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Buddha Stones Shop
 
-## Getting Started
+A complete, production-ready e-commerce platform for spiritual jewelry and meditation supplies. Built with Next.js 14, Prisma, PostgreSQL, and Stripe.
 
-First, run the development server:
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 14 (App Router) |
+| Styling | Tailwind CSS 4 |
+| Database | PostgreSQL (Vercel Postgres / Neon) |
+| ORM | Prisma |
+| Auth | NextAuth.js v5 |
+| Payments | Stripe Checkout |
+| State | Zustand |
+| Icons | Lucide React |
+
+## Quick Start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env   # fill in your values
+npm run db:push
+npm run db:generate
+npm run seed           # creates demo data (20 products, 6 categories, 5 blog posts)
+npm run dev            # opens http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Default Admin Account (after seed)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Email: `admin@buddhastoneshop.com`
+- Password: `admin123`
+- Admin panel: `/admin`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Required Environment Variables
 
-## Learn More
+- `DATABASE_URL` — PostgreSQL connection string
+- `AUTH_SECRET` — `openssl rand -base64 32`
+- `STRIPE_SECRET_KEY` — Stripe test/production key
+- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` — Stripe publishable key
+- `STRIPE_WEBHOOK_SECRET` — Stripe webhook signing secret
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── page.tsx            # Homepage
+│   ├── products/[slug]/    # Product detail (SSR)
+│   ├── collections/[slug]/ # Category listing (SSR)
+│   ├── cart/               # Client-side cart
+│   ├── checkout/           # Stripe Checkout flow
+│   ├── blog/               # Blog with MD content
+│   ├── about/ faq/         # Static pages
+│   ├── admin/              # Admin dashboard
+│   └── api/                # REST + Stripe webhooks
+├── components/
+│   ├── layout/   (Header, Footer, CartDrawer)
+│   ├── product/  (Gallery, Variant, ProductCard, Grid)
+│   └── ui/       (Button, Tabs)
+└── lib/           (db, auth, stripe, cart, utils)
+prisma/
+├── schema.prisma  (User, Product, Variant, Order, Review, BlogPost)
+└── seed.ts       (Demo data)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+```bash
+vercel deploy
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Set all environment variables in the Vercel dashboard. Use Vercel Postgres or Neon for the database.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Stripe Setup
+
+**Local testing:**
+```bash
+stripe listen --forward-to localhost:3000/api/webhooks/stripe
+```
+
+**Production:** Add webhook endpoint in Stripe Dashboard → `https://yourdomain.com/api/webhooks/stripe` with events: `checkout.session.completed`, `checkout.session.expired`
