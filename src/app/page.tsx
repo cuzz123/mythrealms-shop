@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { BrandStory } from "@/components/layout/BrandStory";
 import { SymbolGrid } from "@/components/layout/SymbolGrid";
+import { GuardianMatch } from "@/components/layout/GuardianMatch";
 import { HomeBlogSection } from "@/components/layout/HomeBlogSection";
 import { ArrowRight, ChevronDown, Gem, Star, Shield, Compass } from "lucide-react";
 
@@ -309,6 +310,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ===== GUARDIAN MATCHING ===== */}
+      <GuardianMatch />
 
       {/* ===== BRAND STORY ===== */}
       <BrandStory />
