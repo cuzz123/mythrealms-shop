@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Bestiary", href: "/collections/beast-pendants" },
   { label: "星宿", href: "/collections/star-bracelets" },
   { label: "Talismans", href: "/collections/talismans" },
+  { label: "Quiz", href: "/guardian-quiz" },
   { label: "About", href: "/about" },
 ];
 
