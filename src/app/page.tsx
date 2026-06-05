@@ -78,33 +78,33 @@ export default async function HomePage() {
               className="block w-[6px] h-[6px] rounded-full bg-[#D4A84B]"
               style={{ animation: "pulseDot 2s ease-in-out infinite" }}
             />
-            Ancient Myths Reimagined in Bronze and Jade
+            10 Mythical Beasts. 277 Ancient Legends. One Guardian.
           </div>
 
           {/* Title */}
           <h1 className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] font-bold text-[#E8E0D5] leading-[1.15] mb-6 tracking-[0.01em]">
-            Where Ancient Myths<br />
-            Come Alive{" "}
+            Which Beast<br />
+            Guards Your Soul{" "}
             <span className="text-[#D4A84B]">{"·"}</span>{" "}
-            <span className="text-[#D4A84B]">{"上古神兽"}</span>
+            <span className="text-[#D4A84B]">{"山海经"}</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-[clamp(1.05rem,2vw,1.2rem)] text-[#A89880] leading-relaxed max-w-[620px] mx-auto mb-10 font-normal">
-            Discover jewelry inspired by China&apos;s oldest book of legends.<br />
-            2000 years before Tolkien, there was the{" "}
-            <em>Classic of Mountains and Seas</em>.
+            2000 years before Tolkien, China mapped the human soul onto 277 mythical creatures.<br />
+            Each one guards a different part of who you are.<br />
+            <em>Which one was born to protect you?</em>
           </p>
 
           {/* CTAs */}
           <div className="flex items-center justify-center gap-4 flex-wrap">
-            <Link href="/collections/beast-pendants">
+            <Link href="#symbol-grid">
               <Button
                 variant="accent"
                 size="lg"
                 className="shadow-[0_0_24px_rgba(212,168,75,0.18)] hover:shadow-[0_0_40px_rgba(212,168,75,0.28)] transition-[transform,box-shadow] hover:-translate-y-px"
               >
-                Explore the Bestiary <ArrowRight className="w-4 h-4 ml-1" />
+                Find Your Guardian <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
             <Link href="/collections">
@@ -113,7 +113,7 @@ export default async function HomePage() {
                 size="lg"
                 className="border-[#D4A84B] text-[#D4A84B] hover:bg-[rgba(212,168,75,0.1)] hover:border-[#E0C06E] hover:text-[#E0C06E] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)] transition-[transform,box-shadow] hover:-translate-y-px"
               >
-                View Collections
+                Shop the Collection
               </Button>
             </Link>
           </div>
@@ -303,7 +303,7 @@ export default async function HomePage() {
                 size="lg"
                 className="shadow-[0_0_24px_rgba(212,168,75,0.18)] hover:shadow-[0_0_40px_rgba(212,168,75,0.28)] transition-[transform,box-shadow] hover:-translate-y-px"
               >
-                Explore the Bestiary <ArrowRight className="w-4 h-4 ml-1" />
+                Find Your Guardian <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
           </div>

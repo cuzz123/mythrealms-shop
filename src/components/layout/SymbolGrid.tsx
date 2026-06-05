@@ -15,7 +15,7 @@ const symbols = [
 
 export function SymbolGrid() {
   return (
-    <section className="py-16 bg-[var(--surface)]">
+    <section id="symbol-grid" className="py-16 bg-[var(--surface)]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-10">
           <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-2">

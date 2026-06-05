@@ -106,6 +106,25 @@ export default async function ProductPage({
             </a>
           </div>
 
+          {/* Guardian Tag — emotional resonance */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-sm text-[var(--accent)]">
+            <span className="text-xs">⚔</span>
+            <span>
+              {product.slug.includes("nine-tailed") && "For the one who's been underestimated"}
+              {product.slug.includes("qilin") && "For the one who chooses peace when everyone fights"}
+              {product.slug.includes("azure-dragon") && "For the one carrying too much alone"}
+              {product.slug.includes("phoenix") && "For the one rebuilding from ashes"}
+              {product.slug.includes("white-tiger") && "For the one protecting others at their own cost"}
+              {product.slug.includes("black-tortoise") && "For the one still standing after everything"}
+              {product.slug.includes("bai-ze") && "For the one who sees what others don't"}
+              {product.slug.includes("kun-peng") && "For the one in a season of change"}
+              {product.slug.includes("four-symbols") && "For the one who contains multitudes"}
+              {product.slug.includes("28-mansions") && "For the one seeking their place in the universe"}
+              {product.slug.includes("taotie") && "For the one who knows when to say enough"}
+              {product.slug.includes("yinglong") && "For the one destined to rise above"}
+            </span>
+          </div>
+
           <div className="flex items-center justify-between mb-4"><span className="text-[13px] font-semibold uppercase tracking-wider text-[var(--text-secondary)]">Options</span><SizeGuideModal /></div>
           <div className="bg-[var(--accent)]/5 border border-[var(--accent)]/10 rounded-lg p-3 mb-4 text-xs text-[var(--text-muted)]">
             Crafted to order · Ships in 2-3 weeks · Free shipping over $69.99
