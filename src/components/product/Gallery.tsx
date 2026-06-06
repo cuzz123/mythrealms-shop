@@ -142,7 +142,7 @@ export function Gallery({ images, productName }: GalleryProps) {
               aria-label={`View image ${index + 1}`}
               aria-current={index === activeIndex ? "true" : undefined}
             >
-              {img && img.startsWith("http") ? (
+              {img && (img.startsWith("http") || img.startsWith("/")) ? (
                 <Image
                   src={img}
                   alt={`${productName} thumbnail ${index + 1}`}
