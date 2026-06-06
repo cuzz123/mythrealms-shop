@@ -1,16 +1,16 @@
 import Link from "next/link";
 
 const symbols = [
-  { name: "Azure Dragon", href: "/collections/four-symbols", img: "/images/hero/azure-dragon.webp" },
-  { name: "Phoenix", href: "/collections/four-symbols", img: "/images/hero/phoenix.webp" },
-  { name: "White Tiger", href: "/collections/four-symbols", img: "/images/hero/white-tiger.webp" },
-  { name: "Black Tortoise", href: "/collections/four-symbols", img: "/images/hero/black-tortoise.webp" },
-  { name: "Nine-Tailed Fox", href: "/collections/beast-pendants", img: "/images/hero/nine-tailed-fox.webp" },
-  { name: "Qilin", href: "/collections/beast-pendants", img: "/images/hero/qilin.webp" },
-  { name: "Bai Ze", href: "/collections/talismans", img: "/images/hero/bai-ze.webp" },
-  { name: "Kun Peng", href: "/collections/beast-pendants", img: "/images/hero/kun-peng.webp" },
-  { name: "Taotie", href: "/collections/talismans", img: "/images/hero/taotie.webp" },
-  { name: "Yinglong", href: "/collections/beast-pendants", img: "/images/hero/yinglong.webp" },
+  { name: "Azure Dragon", href: "/products/azure-dragon-ring", img: "/images/hero/azure-dragon.webp" },
+  { name: "Phoenix", href: "/products/phoenix-rebirth-necklace", img: "/images/hero/phoenix.webp" },
+  { name: "White Tiger", href: "/products/white-tiger-guardian-cuff", img: "/images/hero/white-tiger.webp" },
+  { name: "Black Tortoise", href: "/products/black-tortoise-endurance-bracelet", img: "/images/hero/black-tortoise.webp" },
+  { name: "Nine-Tailed Fox", href: "/products/nine-tailed-fox-pendant", img: "/images/hero/nine-tailed-fox.webp" },
+  { name: "Qilin", href: "/products/qilin-protection-bracelet", img: "/images/hero/qilin.webp" },
+  { name: "Bai Ze", href: "/products/bai-ze-wisdom-talisman", img: "/images/hero/bai-ze.webp" },
+  { name: "Kun Peng", href: "/products/kun-peng-transformation-set", img: "/images/hero/kun-peng.webp" },
+  { name: "Taotie", href: "/products/taotie-bronze-amulet", img: "/images/hero/taotie.webp" },
+  { name: "Yinglong", href: "/products/yinglong-winged-dragon-cufflinks", img: "/images/hero/yinglong.webp" },
 ];
 
 export function SymbolGrid() {
