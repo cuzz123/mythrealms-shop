@@ -153,7 +153,15 @@ async function main() {
     ['winter-crane-brooch', 'Winter Crane Brooch', 'Red-crowned crane brooch in carved white jade with red coral accents. In the deepest snow, the crane dances — a promise that grace survives every winter. Museum-quality craftsmanship.', 'Jade & Coral', 'Jade & Silver', 'Grace & Longevity', 82.99, 66.99],
   ]
   const seasonEntries: any[] = []
-  for (const [slug, name, desc, stone, material, intention, comparePrice, price] of seasons) {
+  for (const entry of seasons) {
+    const slug = entry[0] as string
+    const name = entry[1] as string
+    const desc = entry[2] as string
+    const stone = entry[3] as string
+    const material = entry[4] as string
+    const intention = entry[5] as string
+    const comparePrice = entry[6] as number
+    const price = entry[7] as number
     seasonEntries.push({
       name,
       slug,

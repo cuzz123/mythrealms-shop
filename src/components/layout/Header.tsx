@@ -10,10 +10,11 @@ import { SearchOverlay } from "./SearchOverlay";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Bestiary", href: "/collections/beast-pendants" },
-  { label: "星宿", href: "/collections/star-bracelets" },
-  { label: "Talismans", href: "/collections/talismans" },
+  { label: "28 Mansions", href: "/collections/28-mansions" },
+  { label: "Elements", href: "/collections/five-elements" },
+  { label: "Seasons", href: "/collections/four-seasons" },
+  { label: "Zodiac", href: "/collections/zodiac-amulets" },
   { label: "Quiz", href: "/guardian-quiz" },
-  { label: "About", href: "/about" },
 ];
 
 export function Header() {
