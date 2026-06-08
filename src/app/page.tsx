@@ -8,7 +8,7 @@ import { BrandStory } from "@/components/layout/BrandStory";
 import { SymbolGrid } from "@/components/layout/SymbolGrid";
 import { GuardianMatch } from "@/components/layout/GuardianMatch";
 import { HomeBlogSection } from "@/components/layout/HomeBlogSection";
-import { ArrowRight, ChevronDown, Gem, Star, Shield, Compass } from "lucide-react";
+import { ArrowRight, ChevronDown, Gem, Star, Shield, Compass, Sparkles, CircleDot } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -145,13 +145,13 @@ export default async function HomePage() {
               Realms of the Ancients
             </h2>
             <p className="text-[1.0625rem] text-[#A89880] max-w-[580px] mx-auto leading-relaxed">
-              Four paths into the mythic — each rooted in the lore of mountains,
-              seas, stars, and the sacred beasts that guard the cosmos.
+              Six realms await — each a gateway into the mythic. From celestial constellations
+              to the beasts that guard the cosmic order.
             </p>
           </div>
 
-          {/* Category cards — 4 fixed concept cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Category cards — 6 cards, 3-column grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Beast Pendants */}
             <Link
               href="/collections/beast-pendants"
@@ -257,6 +257,60 @@ export default async function HomePage() {
                 <p className="text-sm text-[#A89880] leading-relaxed">
                   The Azure Dragon, White Tiger, Vermillion Bird, and Black
                   Tortoise.
+                </p>
+              </div>
+            </Link>
+
+            {/* 28 Mansions */}
+            <Link
+              href="/collections/28-mansions"
+              className="group relative rounded-xl overflow-hidden border border-[#2A2520] bg-[#1A1816] aspect-[3/4] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #0b0f1a 0%, #1a1f3a 50%, #2a3a6a 100%)",
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.4)] to-[rgba(15,13,14,0.15)]" />
+              <div className="relative z-10 p-8">
+                <Sparkles className="mb-4 w-12 h-12 text-[#D4A84B] opacity-80" strokeWidth={1.5} />
+                <h3 className="font-serif text-2xl font-semibold text-[#E8E0D5] mb-1">
+                  {"二十八宿"}
+                </h3>
+                <p className="text-xs text-[#6B5F50] font-normal mb-1">
+                  28 Mansions
+                </p>
+                <p className="text-sm text-[#A89880] leading-relaxed">
+                  28 beaded bracelets — one for each Chinese lunar mansion. Find your star.
+                </p>
+              </div>
+            </Link>
+
+            {/* Zodiac Amulets */}
+            <Link
+              href="/collections/zodiac-amulets"
+              className="group relative rounded-xl overflow-hidden border border-[#2A2520] bg-[#1A1816] aspect-[3/4] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #1a0f0f 0%, #3a1f1f 50%, #5a2a2a 100%)",
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.4)] to-[rgba(15,13,14,0.15)]" />
+              <div className="relative z-10 p-8">
+                <CircleDot className="mb-4 w-12 h-12 text-[#D4A84B] opacity-80" strokeWidth={1.5} />
+                <h3 className="font-serif text-2xl font-semibold text-[#E8E0D5] mb-1">
+                  {"生肖护符"}
+                </h3>
+                <p className="text-xs text-[#6B5F50] font-normal mb-1">
+                  Zodiac Amulets
+                </p>
+                <p className="text-sm text-[#A89880] leading-relaxed">
+                  Twelve Chinese zodiac guardians — find the amulet of your birth year.
                 </p>
               </div>
             </Link>

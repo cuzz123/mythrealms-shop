@@ -5,8 +5,12 @@ import Link from "next/link";
 const exploreLinks = [
   { label: "About Us", href: "/about" },
   { label: "Blog", href: "/blog" },
-  { label: "Bestiary Guide", href: "/collections/beast-pendants" },
-  { label: "Star Map", href: "/collections/constellation-art" },
+  { label: "Bestiary", href: "/collections/beast-pendants" },
+  { label: "28 Mansions", href: "/collections/28-mansions" },
+  { label: "Five Elements", href: "/collections/five-elements" },
+  { label: "Four Seasons", href: "/collections/four-seasons" },
+  { label: "Zodiac Amulets", href: "/collections/zodiac-amulets" },
+  { label: "Artist Collabs", href: "/collections/artist-collabs" },
 ];
 
 const supportLinks = [
