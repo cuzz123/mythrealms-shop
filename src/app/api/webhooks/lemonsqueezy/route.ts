@@ -3,13 +3,13 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import crypto from "crypto";
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
   const signature = request.headers.get("x-signature") || "";
 
   // Verify webhook signature
-  const crypto = require("crypto");
   const secret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET;
   if (secret) {
     const hmac = crypto.createHmac("sha256", secret);

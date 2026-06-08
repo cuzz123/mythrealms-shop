@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic"
 
@@ -23,11 +24,17 @@ export default async function BlogPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
         {posts.map((post) => (
-          <Link key={post.id} href={`/blog/${post.slug}`} className="group bg-white border border-[var(--border-light)] rounded-xl overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1">
+          <Link key={post.id} href={`/blog/${post.slug}`} className="group bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1">
             <div className="aspect-[3/2] overflow-hidden bg-[var(--border-light)]">
-              <img src={post.image || ""} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              {post.image ? (
+                <Image src={post.image} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" unoptimized={post.image.startsWith("http")} />
+              ) : (
+                <div className="w-full h-full bg-[var(--border-light)] flex items-center justify-center">
+                  <span className="text-[var(--text-muted)] text-sm">MythRealms</span>
+                </div>
+              )}
             </div>
-            <div className="p-6">
+            <div className="p-6 bg-[var(--surface)]">
               <span className="text-[11px] uppercase tracking-widest text-[var(--accent)] font-semibold">{post.category}</span>
               <h2 className="font-serif text-xl font-bold mt-2 mb-2 leading-tight group-hover:text-[var(--primary)] transition-colors">{post.title}</h2>
               <p className="text-sm text-[var(--text-muted)] line-clamp-2 mb-4">{post.excerpt}</p>

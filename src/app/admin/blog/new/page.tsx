@@ -117,7 +117,7 @@ export default function NewBlogPostPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main editor */}
           <div className="lg:col-span-2 space-y-6">
-            <section className="bg-white border border-[var(--border-light)] rounded-xl p-6 space-y-5">
+            <section className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-5">
               <div>
                 <label className="block text-sm font-medium mb-1.5">
                   Title <span className="text-[var(--accent)]">*</span>
@@ -198,7 +198,7 @@ export default function NewBlogPostPage() {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            <section className="bg-white border border-[var(--border-light)] rounded-xl p-6 space-y-5">
+            <section className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-5">
               <h2 className="font-serif text-lg font-bold">Post Settings</h2>
 
               <div>
@@ -246,7 +246,7 @@ export default function NewBlogPostPage() {
               </div>
             </section>
 
-            <section className="bg-white border border-[var(--border-light)] rounded-xl p-6">
+            <section className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
               <Button
                 type="submit"
                 variant="accent"

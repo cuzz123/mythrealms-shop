@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { Providers } from "./providers";
 import { Analytics } from "@/components/layout/Analytics";
+import { CookieConsent } from "@/components/layout/CookieConsent";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <main id="main-content" className="min-h-screen">{children}</main>
           <Footer />
           <CartDrawer />
+          <CookieConsent />
           <Toaster position="bottom-center" />
         </Providers>
       </body>

@@ -27,7 +27,7 @@ export default async function AdminDashboard() {
           { icon: TrendingUp, label: "Revenue", value: `$${Number(totalRevenue._sum.total || 0).toFixed(2)}`, color: "text-[var(--accent)]" },
           { icon: FileText, label: "Blog Posts", value: postCount, color: "text-purple-500" },
         ].map(stat => (
-          <div key={stat.label} className="bg-white border border-[var(--border-light)] rounded-xl p-6">
+          <div key={stat.label} className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
             <stat.icon className={`w-8 h-8 ${stat.color} mb-3`} />
             <p className="text-sm text-[var(--text-muted)] mb-1">{stat.label}</p>
             <p className="text-2xl font-bold">{stat.value}</p>
@@ -35,7 +35,7 @@ export default async function AdminDashboard() {
         ))}
       </div>
 
-      <div className="bg-white border border-[var(--border-light)] rounded-xl p-6">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
         <h2 className="font-serif text-xl font-bold mb-4">Recent Orders</h2>
         {recentOrders.length === 0 ? (
           <p className="text-sm text-[var(--text-muted)]">No orders yet.</p>

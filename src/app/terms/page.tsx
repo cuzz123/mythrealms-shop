@@ -224,7 +224,7 @@ export default function TermsPage() {
           <p className="mb-3">
             For questions, concerns, or notices regarding these Terms of Service, please contact us:
           </p>
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-6 space-y-2">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-6 space-y-2">
             <p><span className="font-semibold text-[var(--text)]">Email:</span> <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a></p>
             <p><span className="font-semibold text-[var(--text)]">Website:</span> mythrealms.com</p>
           </div>

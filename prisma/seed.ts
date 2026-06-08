@@ -62,7 +62,8 @@ async function main() {
 
   for (const data of prods) {
     const { variants, ...rest } = data
-    const p = await db.product.create({ data: { ...rest, variants: { create: variants } } })
+    const minPrice = Math.min(...variants.map((v: any) => v.price))
+    const p = await db.product.create({ data: { ...rest, minPrice, variants: { create: variants } } })
     if (data.isFeatured) {
       await db.review.createMany({ data: [
         { productId:p.id, rating:5, content:'Absolutely stunning piece. The craftsmanship captures the ancient legend beautifully.', images:JSON.stringify([JSON.parse(data.images)[0]]), isVerified:true },

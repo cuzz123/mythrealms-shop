@@ -173,7 +173,7 @@ export default function NewProductPage() {
         )}
 
         {/* Basic Info */}
-        <section className="bg-white border border-[var(--border-light)] rounded-xl p-6 space-y-5">
+        <section className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-5">
           <h2 className="font-serif text-lg font-bold">Basic Information</h2>
 
           <div>
@@ -242,7 +242,7 @@ export default function NewProductPage() {
         </section>
 
         {/* Attributes */}
-        <section className="bg-white border border-[var(--border-light)] rounded-xl p-6 space-y-5">
+        <section className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-5">
           <h2 className="font-serif text-lg font-bold">Attributes</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -317,7 +317,7 @@ export default function NewProductPage() {
         </section>
 
         {/* Pricing & Status */}
-        <section className="bg-white border border-[var(--border-light)] rounded-xl p-6 space-y-5">
+        <section className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-5">
           <h2 className="font-serif text-lg font-bold">Pricing &amp; Status</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -352,7 +352,7 @@ export default function NewProductPage() {
         </section>
 
         {/* Variants */}
-        <section className="bg-white border border-[var(--border-light)] rounded-xl p-6 space-y-4">
+        <section className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-serif text-lg font-bold">Variants</h2>
             <Button type="button" variant="outline" size="sm" onClick={addVariant}>
@@ -374,7 +374,7 @@ export default function NewProductPage() {
                     type="text"
                     value={variant.name}
                     onChange={(e) => updateVariant(variant.key, "name", e.target.value)}
-                    className="w-full h-9 px-2.5 rounded border border-[var(--border)] bg-white text-sm focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+                    className="w-full h-9 px-2.5 rounded border border-[var(--border)] bg-[var(--bg)] text-sm focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
                     placeholder='e.g. "Small" or "Gold"'
                   />
                 </div>
@@ -388,7 +388,7 @@ export default function NewProductPage() {
                     min="0"
                     value={variant.price}
                     onChange={(e) => updateVariant(variant.key, "price", e.target.value)}
-                    className="w-full h-9 px-2.5 rounded border border-[var(--border)] bg-white text-sm focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+                    className="w-full h-9 px-2.5 rounded border border-[var(--border)] bg-[var(--bg)] text-sm focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
                     placeholder="0.00"
                   />
                 </div>
@@ -401,7 +401,7 @@ export default function NewProductPage() {
                     min="0"
                     value={variant.stock}
                     onChange={(e) => updateVariant(variant.key, "stock", e.target.value)}
-                    className="w-full h-9 px-2.5 rounded border border-[var(--border)] bg-white text-sm focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+                    className="w-full h-9 px-2.5 rounded border border-[var(--border)] bg-[var(--bg)] text-sm focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
                     placeholder="0"
                   />
                 </div>
@@ -420,7 +420,7 @@ export default function NewProductPage() {
         </section>
 
         {/* Images */}
-        <section className="bg-white border border-[var(--border-light)] rounded-xl p-6 space-y-4">
+        <section className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-serif text-lg font-bold">Images</h2>
             <Button type="button" variant="outline" size="sm" onClick={addImage}>

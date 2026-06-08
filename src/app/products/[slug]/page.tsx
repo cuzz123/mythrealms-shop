@@ -1,3 +1,5 @@
+import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { db } from "@/lib/db";
@@ -300,10 +302,21 @@ export default async function ProductPage({
               >
                 <div className="aspect-square overflow-hidden bg-[var(--border-light)] relative">
                   {p.images[0] && (p.images[0] as string).startsWith("http") ? (
-                    <img
+                    <Image
                       src={p.images[0] as string}
                       alt={p.name}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      fill
+                      sizes="240px"
+                      className="object-cover hover:scale-105 transition-transform duration-500"
+                      unoptimized
+                    />
+                  ) : p.images[0] ? (
+                    <Image
+                      src={p.images[0] as string}
+                      alt={p.name}
+                      fill
+                      sizes="240px"
+                      className="object-cover hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
                     <ProductImage name={p.name} className="absolute inset-0" />

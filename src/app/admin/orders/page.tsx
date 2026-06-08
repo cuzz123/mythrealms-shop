@@ -11,7 +11,7 @@ export default async function AdminOrdersPage() {
   return (
     <div>
       <h1 className="font-serif text-3xl font-bold mb-8">Orders</h1>
-      <div className="bg-white border border-[var(--border-light)] rounded-xl overflow-hidden">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--border-light)] text-left bg-[var(--bg)]">

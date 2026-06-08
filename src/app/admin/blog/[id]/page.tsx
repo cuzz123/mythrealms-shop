@@ -55,7 +55,7 @@ export default async function BlogEditPage({
       </div>
 
       <form action={updatePost} className="space-y-6">
-        <div className="bg-white border border-[var(--border-light)] rounded-xl p-6 space-y-4">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-4">
           <div>
             <label className="text-sm font-medium mb-1.5 block">Title</label>
             <input name="title" defaultValue={post.title} required className="w-full px-4 py-3 border border-[var(--border)] rounded-lg text-sm" />

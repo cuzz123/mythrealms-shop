@@ -22,17 +22,17 @@ export default function ShippingPage() {
 
       {/* Highlights */}
       <div className="grid sm:grid-cols-3 gap-4 mb-10">
-        <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 text-center">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 text-center">
           <Globe className="w-6 h-6 text-[var(--accent)] mx-auto mb-3" />
           <h3 className="font-semibold text-[var(--text)] mb-1">Free Worldwide Shipping</h3>
           <p className="text-sm text-[var(--text-muted)]">On all orders over $69.99</p>
         </div>
-        <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 text-center">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 text-center">
           <Truck className="w-6 h-6 text-[var(--accent)] mx-auto mb-3" />
           <h3 className="font-semibold text-[var(--text)] mb-1">80+ Countries</h3>
           <p className="text-sm text-[var(--text-muted)]">We ship to most destinations worldwide</p>
         </div>
-        <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 text-center">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 text-center">
           <Shield className="w-6 h-6 text-[var(--accent)] mx-auto mb-3" />
           <h3 className="font-semibold text-[var(--text)] mb-1">Tracked Delivery</h3>
           <p className="text-sm text-[var(--text-muted)]">All orders include tracking</p>
@@ -56,7 +56,7 @@ export default function ShippingPage() {
             <li><strong>Intention infusion</strong> — Pieces are prepared according to mythic tradition</li>
             <li><strong>Packaging</strong> — Carefully wrapped and packaged for safe transit</li>
           </ul>
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 mt-4 flex gap-3">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 mt-4 flex gap-3">
             <Clock className="w-5 h-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
             <p className="text-sm text-[var(--text-muted)]">
               During peak seasons (holidays, new collections, sales), processing times may extend to 5-7 business days. We appreciate your patience.
@@ -70,7 +70,7 @@ export default function ShippingPage() {
           <p className="mb-6">We offer two shipping options to meet your needs:</p>
 
           <div className="space-y-4">
-            <div className="bg-white border border-[var(--border-light)] rounded-lg p-6">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-6">
               <h3 className="font-semibold text-[var(--text)] text-lg mb-2">Standard Shipping</h3>
               <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
                 <li><span className="font-medium text-[var(--text)]">Delivery Time:</span> 7-20 business days</li>
@@ -80,7 +80,7 @@ export default function ShippingPage() {
               </ul>
             </div>
 
-            <div className="bg-white border border-[var(--border-light)] rounded-lg p-6">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-6">
               <h3 className="font-semibold text-[var(--text)] text-lg mb-2">Express Shipping (DHL)</h3>
               <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
                 <li><span className="font-medium text-[var(--text)]">Delivery Time:</span> 6-8 business days</li>
@@ -99,7 +99,7 @@ export default function ShippingPage() {
             The following table shows estimated delivery times for Standard Shipping to our most popular destinations. Times are in <strong>business days</strong> (Monday-Friday, excluding holidays).
           </p>
 
-          <div className="bg-white border border-[var(--border-light)] rounded-lg overflow-hidden">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg overflow-hidden">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-[var(--bg)] border-b border-[var(--border-light)]">
@@ -245,7 +245,7 @@ export default function ShippingPage() {
         </section>
 
         {/* FAQ Quick Links */}
-        <section className="bg-white border border-[var(--border-light)] rounded-lg p-8 text-center">
+        <section className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-8 text-center">
           <Truck className="w-8 h-8 text-[var(--accent)] mx-auto mb-4" />
           <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-2">Questions About Your Order?</h2>
           <p className="text-[var(--text-secondary)] mb-6 max-w-md mx-auto">

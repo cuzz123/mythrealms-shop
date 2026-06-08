@@ -22,28 +22,28 @@ export default function RefundPage() {
 
       {/* Highlights */}
       <div className="grid sm:grid-cols-2 gap-4 mb-10">
-        <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 flex gap-4">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
           <RotateCcw className="w-6 h-6 text-[var(--accent)] flex-shrink-0 mt-0.5" />
           <div>
             <h3 className="font-semibold text-[var(--text)] mb-1">30-Day Return Window</h3>
             <p className="text-sm text-[var(--text-muted)]">You have 30 days from the delivery date to initiate a return.</p>
           </div>
         </div>
-        <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 flex gap-4">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
           <Package className="w-6 h-6 text-[var(--accent)] flex-shrink-0 mt-0.5" />
           <div>
             <h3 className="font-semibold text-[var(--text)] mb-1">Unused Condition</h3>
             <p className="text-sm text-[var(--text-muted)]">Items must be unused, unworn, and in original packaging.</p>
           </div>
         </div>
-        <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 flex gap-4">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
           <AlertCircle className="w-6 h-6 text-[var(--accent)] flex-shrink-0 mt-0.5" />
           <div>
             <h3 className="font-semibold text-[var(--text)] mb-1">Sale Items Final</h3>
             <p className="text-sm text-[var(--text-muted)]">Items marked as sale or clearance are non-returnable.</p>
           </div>
         </div>
-        <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 flex gap-4">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
           <Gift className="w-6 h-6 text-[var(--accent)] flex-shrink-0 mt-0.5" />
           <div>
             <h3 className="font-semibold text-[var(--text)] mb-1">Gift Cards Non-Returnable</h3>
@@ -90,7 +90,7 @@ export default function RefundPage() {
         <section>
           <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">3. Return Shipping Costs</h2>
           <div className="space-y-4">
-            <div className="bg-white border border-[var(--border-light)] rounded-lg p-5">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
               <h3 className="font-semibold text-[var(--text)] mb-2">When We Pay Return Shipping</h3>
               <p className="text-sm text-[var(--text-muted)]">
                 We will cover the cost of return shipping and provide a prepaid return label if the return is due to our error — for example:
@@ -102,7 +102,7 @@ export default function RefundPage() {
               </ul>
             </div>
 
-            <div className="bg-white border border-[var(--border-light)] rounded-lg p-5">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
               <h3 className="font-semibold text-[var(--text)] mb-2">When You Pay Return Shipping</h3>
               <p className="text-sm text-[var(--text-muted)]">
                 Return shipping costs are the customer&apos;s responsibility in all other cases, including:
@@ -202,7 +202,7 @@ export default function RefundPage() {
         </section>
 
         {/* Contact */}
-        <section className="bg-white border border-[var(--border-light)] rounded-lg p-8">
+        <section className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-8">
           <div className="flex items-center gap-4 mb-4">
             <Mail className="w-8 h-8 text-[var(--accent)]" />
             <h2 className="font-serif text-2xl font-bold text-[var(--text)]">Need Help With a Return?</h2>

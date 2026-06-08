@@ -10,7 +10,7 @@ export default function NotFoundPage() {
     <div className="min-h-[70vh] flex items-center justify-center px-6 py-20">
       <div className="max-w-lg mx-auto text-center">
         {/* Icon */}
-        <div className="mb-8 inline-flex items-center justify-center w-24 h-24 rounded-full bg-white border border-[var(--border-light)]">
+        <div className="mb-8 inline-flex items-center justify-center w-24 h-24 rounded-full bg-[var(--surface)] border border-[var(--border)]">
           <span className="font-serif text-5xl text-[var(--text-muted)]">?</span>
         </div>
 

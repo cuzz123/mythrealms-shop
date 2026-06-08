@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
@@ -27,7 +28,9 @@ export function HeroCarousel() {
     <div className="relative w-full aspect-[16/9] max-h-[75vh] overflow-hidden bg-[#0A0808]">
       {slides.map((s, i) => (
         <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-          {s.image && <img src={s.image} alt={s.title} className="w-full h-full object-cover" />}
+          {s.image && (
+            <Image src={s.image} alt={s.title} fill sizes="100vw" priority={i === current} className="object-cover" />
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
         </div>
       ))}

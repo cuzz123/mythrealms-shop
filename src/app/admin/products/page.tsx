@@ -20,7 +20,7 @@ export default async function AdminProductsPage() {
         <Link href="/admin/products/new"><Button variant="accent" size="sm"><Plus className="w-4 h-4 mr-1" /> Add Product</Button></Link>
       </div>
 
-      <div className="bg-white border border-[var(--border-light)] rounded-xl overflow-hidden">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--border-light)] text-left bg-[var(--bg)]">

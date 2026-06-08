@@ -195,7 +195,7 @@ export default function PrivacyPage() {
           <p className="mb-3">
             If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
           </p>
-          <ul className="list-none space-y-2 bg-white border border-[var(--border-light)] rounded-lg p-6">
+          <ul className="list-none space-y-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg p-6">
             <li className="flex items-center gap-2">
               <span className="font-semibold text-[var(--text)] w-20">Email:</span>
               <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a>

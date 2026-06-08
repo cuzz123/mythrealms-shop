@@ -31,12 +31,12 @@ export async function GET(request: NextRequest) {
   }
 
   let orderBy: any = { createdAt: "desc" };
-  // Price sorting is done in JS after fetch because SQLite can't sort by related field prices
-  const needsJsPriceSort = sort === "price-low" || sort === "price-high";
   switch (sort) {
     case "price-low":
+      orderBy = { minPrice: "asc" };
+      break;
     case "price-high":
-      orderBy = { createdAt: "desc" }; // fetch all, sort in JS
+      orderBy = { minPrice: "desc" };
       break;
     case "newest":
       orderBy = { createdAt: "desc" };
@@ -61,14 +61,14 @@ export async function GET(request: NextRequest) {
         reviews: { select: { rating: true } },
       },
       orderBy,
-      // For price sorting, fetch all products and sort in JS; otherwise paginate via DB
-      ...(needsJsPriceSort ? {} : { skip: (page - 1) * limit, take: limit }),
+      skip: (page - 1) * limit,
+      take: limit,
     }),
     db.product.count({ where }),
   ]);
 
-  // Parse images JSON and calculate avg rating, handle price sorting
-  let productsWithParsedData = products.map((product) => {
+  // Parse images JSON and calculate avg rating
+  const productsWithParsedData = products.map((product) => {
     const avgRating =
       product.reviews.length > 0
         ? product.reviews.reduce((sum, r) => sum + r.rating, 0) /
@@ -80,25 +80,11 @@ export async function GET(request: NextRequest) {
       images: JSON.parse(product.images as string),
       avgRating: Math.round(avgRating * 10) / 10,
       reviewCount: product.reviews.length,
-      _minPrice: Math.min(...product.variants.map(v => Number(v.price))),
     };
   });
 
-  // Apply price sorting in JS for accurate results
-  if (sort === "price-low") {
-    productsWithParsedData.sort((a, b) => a._minPrice - b._minPrice);
-  } else if (sort === "price-high") {
-    productsWithParsedData.sort((a, b) => b._minPrice - a._minPrice);
-  }
-
-  // Remove internal _minPrice field and paginate if JS-sorted
-  const finalProducts = (needsJsPriceSort
-    ? productsWithParsedData.slice((page - 1) * limit, page * limit)
-    : productsWithParsedData
-  ).map(({ _minPrice, ...rest }) => rest) as typeof productsWithParsedData;
-
   return NextResponse.json({
-    products: finalProducts,
+    products: productsWithParsedData,
     pagination: {
       page,
       limit,

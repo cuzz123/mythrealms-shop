@@ -28,7 +28,7 @@ export default function SizeGuidePage() {
         </p>
 
         <div className="space-y-5">
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 flex gap-4">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
             <span className="flex-shrink-0 w-8 h-8 bg-[var(--bg)] rounded-full flex items-center justify-center font-bold text-[var(--text)] text-sm">1</span>
             <div>
               <h3 className="font-semibold text-[var(--text)] mb-1">Wrap the measuring tape</h3>
@@ -38,7 +38,7 @@ export default function SizeGuidePage() {
             </div>
           </div>
 
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 flex gap-4">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
             <span className="flex-shrink-0 w-8 h-8 bg-[var(--bg)] rounded-full flex items-center justify-center font-bold text-[var(--text)] text-sm">2</span>
             <div>
               <h3 className="font-semibold text-[var(--text)] mb-1">Keep it snug but not tight</h3>
@@ -48,7 +48,7 @@ export default function SizeGuidePage() {
             </div>
           </div>
 
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 flex gap-4">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
             <span className="flex-shrink-0 w-8 h-8 bg-[var(--bg)] rounded-full flex items-center justify-center font-bold text-[var(--text)] text-sm">3</span>
             <div>
               <h3 className="font-semibold text-[var(--text)] mb-1">No measuring tape? Use paper</h3>
@@ -58,7 +58,7 @@ export default function SizeGuidePage() {
             </div>
           </div>
 
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5 flex gap-4">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
             <span className="flex-shrink-0 w-8 h-8 bg-[var(--bg)] rounded-full flex items-center justify-center font-bold text-[var(--text)] text-sm">4</span>
             <div>
               <h3 className="font-semibold text-[var(--text)] mb-1">Measure your dominant hand</h3>
@@ -77,7 +77,7 @@ export default function SizeGuidePage() {
           Once you have your wrist measurement, use the table below to find your recommended bracelet size. Our sizing accounts for a comfortable fit that allows the bracelet to move slightly on your wrist without falling off.
         </p>
 
-        <div className="bg-white border border-[var(--border-light)] rounded-lg overflow-hidden">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-[var(--bg)] border-b border-[var(--border-light)]">
@@ -125,7 +125,7 @@ export default function SizeGuidePage() {
         </p>
 
         <div className="grid sm:grid-cols-2 gap-4">
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
             <h3 className="font-semibold text-[var(--text)] mb-2">Snug Fit</h3>
             <p className="text-sm text-[var(--text-secondary)] mb-3">
               Choose your exact wrist measurement for a closer, more fitted feel. The bracelet will stay in place with minimal movement.
@@ -150,7 +150,7 @@ export default function SizeGuidePage() {
             </ul>
           </div>
 
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
             <h3 className="font-semibold text-[var(--text)] mb-2">Loose Fit</h3>
             <p className="text-sm text-[var(--text-secondary)] mb-3">
               Add 1-2 cm to your wrist measurement for a relaxed, flowing feel. The bracelet will slide freely and create a more casual look.
@@ -182,28 +182,28 @@ export default function SizeGuidePage() {
         <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">Helpful Tips</h2>
 
         <div className="space-y-4">
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
             <h3 className="font-semibold text-[var(--text)] mb-2">Bead size affects fit</h3>
             <p className="text-sm text-[var(--text-secondary)]">
               Bracelets with larger beads (10mm or more) will feel slightly tighter than the measured length suggests because the beads take up more circumference. If you are between sizes and ordering a large-bead bracelet, consider sizing up.
             </p>
           </div>
 
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
             <h3 className="font-semibold text-[var(--text)] mb-2">Stretch bracelets have flexibility</h3>
             <p className="text-sm text-[var(--text-secondary)]">
               Our elastic stretch bracelets naturally accommodate a range of wrist sizes. The elastic cord provides approximately 1-2 cm of comfortable stretch, making them more forgiving than rigid bracelets.
             </p>
           </div>
 
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
             <h3 className="font-semibold text-[var(--text)] mb-2">Wrist size changes throughout the day</h3>
             <p className="text-sm text-[var(--text-secondary)]">
               Your wrist can expand and contract due to temperature, activity level, and hydration. Measure your wrist at a neutral time (not after intense exercise or in extreme cold) for the most accurate reading.
             </p>
           </div>
 
-          <div className="bg-white border border-[var(--border-light)] rounded-lg p-5">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
             <h3 className="font-semibold text-[var(--text)] mb-2">When in doubt, size up</h3>
             <p className="text-sm text-[var(--text-secondary)]">
               It is easier to wear a bracelet that is slightly loose than one that is too tight. A bracelet that is too small may be uncomfortable or break under tension. When choosing between two sizes, we recommend the larger one.
@@ -213,7 +213,7 @@ export default function SizeGuidePage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-white border border-[var(--border-light)] rounded-lg p-8 text-center">
+      <section className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-8 text-center">
         <Ruler className="w-8 h-8 text-[var(--accent)] mx-auto mb-4" />
         <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-2">Still Not Sure About Your Size?</h2>
         <p className="text-[var(--text-secondary)] mb-6 max-w-md mx-auto">

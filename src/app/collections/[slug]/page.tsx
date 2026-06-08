@@ -37,14 +37,14 @@ export default async function CollectionPage({
   }
 
   // Price sorting is done in JS after fetch — SQLite cannot sort by related variant prices
-  const needsJsPriceSort = sort === "price-low" || sort === "price-high";
+  // Use DB-level price sorting via minPrice field
   let orderBy: any = { createdAt: "desc" };
-  if (!needsJsPriceSort) {
-    switch (sort) {
-      case "newest": orderBy = { createdAt: "desc" }; break;
-      case "a-z": orderBy = { name: "asc" }; break;
-      case "z-a": orderBy = { name: "desc" }; break;
-    }
+  switch (sort) {
+    case "price-low": orderBy = { minPrice: "asc" }; break;
+    case "price-high": orderBy = { minPrice: "desc" }; break;
+    case "newest": orderBy = { createdAt: "desc" }; break;
+    case "a-z": orderBy = { name: "asc" }; break;
+    case "z-a": orderBy = { name: "desc" }; break;
   }
 
   const where: any = { categoryId: category.id, isActive: true };
@@ -63,13 +63,13 @@ export default async function CollectionPage({
     db.product.count({ where }),
   ]);
 
-  // Apply price filter in-memory (SQLite doesn't support decimal filtering well)
+  // Apply price filter in-memory using DB minPrice field
   let filteredProducts = products;
   if (priceMin !== undefined || priceMax !== undefined) {
     filteredProducts = products.filter((p) => {
-      const minPrice = Math.min(...p.variants.map((v) => v.price));
-      if (priceMin !== undefined && minPrice < priceMin) return false;
-      if (priceMax !== undefined && minPrice > priceMax) return false;
+      const minP = p.minPrice ?? Math.min(...p.variants.map((v) => v.price));
+      if (priceMin !== undefined && minP < priceMin) return false;
+      if (priceMax !== undefined && minP > priceMax) return false;
       return true;
     });
   }
@@ -79,16 +79,9 @@ export default async function CollectionPage({
     images: JSON.parse(p.images as string),
     avgRating: p.reviews.length ? p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length : 0,
     reviewCount: p.reviews.length,
-    _minPrice: Math.min(...p.variants.map(v => Number(v.price))),
   }));
 
-  // Apply price sorting in JS
-  if (sort === "price-low") {
-    productsParsed.sort((a, b) => a._minPrice - b._minPrice);
-  } else if (sort === "price-high") {
-    productsParsed.sort((a, b) => b._minPrice - a._minPrice);
-  }
-  const finalProducts = productsParsed.map(({ _minPrice, ...rest }) => rest) as typeof productsParsed;
+  const finalProducts = productsParsed;
 
   const totalPages = Math.ceil(filteredProducts.length / limit);
 
