@@ -36,7 +36,7 @@ async function main() {
 
   const admin = await db.user.create({ data:{ name:'Admin', email:'admin@mythrealms.com', password: await bcrypt.hash('admin123',12), role:'ADMIN' }})
   const cats = await Promise.all([
-    db.category.create({ data:{ name:'Beast Pendants · 神兽吊坠', slug:'beast-pendants', description:'Pendants inspired by the mythical beasts of Shan Hai Jing.', image:CAT.beasts, sortOrder:1 }}),
+    db.category.create({ data:{ name:'Mythical Beasts · 山海神兽', slug:'beast-pendants', description:'Rings, pendants, bracelets, and talismans inspired by the mythical creatures of Shan Hai Jing.', image:CAT.beasts, sortOrder:1 }}),
     db.category.create({ data:{ name:'Star Bracelets · 星宿手串', slug:'star-bracelets', description:'Bracelets aligned with the Chinese constellation system.', image:CAT.stars, sortOrder:2 }}),
     db.category.create({ data:{ name:'Four Symbols · 四象', slug:'four-symbols', description:'Azure Dragon, Vermillion Bird, White Tiger, Black Tortoise.', image:CAT.foursymbols, sortOrder:3 }}),
     db.category.create({ data:{ name:'Ancient Talismans · 上古护符', slug:'talismans', description:'Protective talismans from ancient Chinese lore.', image:CAT.beasts, sortOrder:4 }}),

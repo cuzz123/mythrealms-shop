@@ -171,10 +171,10 @@ export default async function HomePage() {
                   {"神兽吊坠"}
                 </h3>
                 <p className="text-xs text-[#6B5F50] font-normal mb-1">
-                  Beast Pendants
+                  Mythical Beasts
                 </p>
                 <p className="text-sm text-[#A89880] leading-relaxed">
-                  Mythical creatures rendered in bronze, silver, and jade.
+                  Rings, pendants, bracelets — each infused with the spirit of a legendary creature.
                 </p>
               </div>
             </Link>
