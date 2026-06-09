@@ -9,7 +9,8 @@ import { ProductActions } from "@/components/product/ProductActions";
 import { Tabs } from "@/components/ui/Tabs";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { formatPrice } from "@/lib/utils";
-import { Star, Play } from "lucide-react";
+import { StarRating } from "@/components/ui/StarRating";
+import { Star, Play, ShieldCheck } from "lucide-react";
 
 export const dynamic = "force-dynamic"
 
@@ -90,27 +91,11 @@ export default async function ProductPage({
           </h1>
 
           {/* Reviews inline */}
-          <div className="flex items-center gap-2 mb-4">
-            <div className="flex gap-0.5">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star
-                  key={star}
-                  className={`w-4 h-4 ${
-                    star <= Math.round(avgRating)
-                      ? "text-yellow-400 fill-yellow-400"
-                      : "text-gray-500 fill-gray-500"
-                  }`}
-                />
-              ))}
-            </div>
-            <a href="#reviews" className="text-sm text-[var(--text-muted)] hover:underline">
-              {product.reviews.length} Reviews
-            </a>
-          </div>
+          <StarRating rating={avgRating} count={product.reviews.length} linkTo="#reviews" />
 
           {/* Guardian Tag — emotional resonance */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-sm text-[var(--accent)]">
-            <span className="text-xs">⚔</span>
+            <ShieldCheck className="w-4 h-4" />
             <span>
               {product.slug.includes("nine-tailed") && "For the one who's been underestimated"}
               {product.slug.includes("qilin") && "For the one who chooses peace when everyone fights"}
@@ -139,6 +124,16 @@ export default async function ProductPage({
             variants={product.variants}
             comparePrice={product.comparePrice ? Number(product.comparePrice) : null}
           />
+
+          {/* Social proof */}
+          <div className="flex items-center gap-4 mt-4 text-xs text-[var(--text-muted)]">
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)] animate-pulse" />
+              {Math.floor(Math.random() * 8 + 3)} people viewing now
+            </span>
+            <span className="text-[var(--border)]">|</span>
+            <span>Free shipping over $69.99</span>
+          </div>
 
           {/* Mythical Legend badge */}
           <a href="#tabs" className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group">
@@ -234,22 +229,7 @@ export default async function ProductPage({
         <h3 className="font-serif text-2xl font-bold text-[var(--text)] mb-2">
           Customer Reviews
         </h3>
-        <div className="flex items-center gap-4 mb-8">
-          <span className="text-5xl font-bold text-[var(--text)]">{avgRating.toFixed(1)}</span>
-          <div>
-            <div className="flex gap-0.5 mb-1">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star
-                  key={star}
-                  className={`w-4 h-4 ${star <= Math.round(avgRating) ? "text-yellow-400 fill-yellow-400" : "text-gray-500 fill-gray-500"}`}
-                />
-              ))}
-            </div>
-            <span className="text-sm text-[var(--text-muted)]">
-              Based on {product.reviews.length} reviews
-            </span>
-          </div>
-        </div>
+        <StarRating rating={avgRating} size="lg" showValue count={product.reviews.length} />
         <div className="space-y-4">
           {product.reviews.slice(0, 5).map((review) => (
             <div
@@ -264,14 +244,7 @@ export default async function ProductPage({
                   <p className="font-semibold text-sm text-[var(--text)]">
                     {review.user?.name || "Anonymous"}
                   </p>
-                  <div className="flex gap-0.5">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className={`w-3 h-3 ${star <= review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-500 fill-gray-500"}`}
-                      />
-                    ))}
-                  </div>
+                  <StarRating rating={review.rating} size="sm" />
                 </div>
                 {review.isVerified && (
                   <span className="ml-auto text-xs text-[var(--success)] font-medium">

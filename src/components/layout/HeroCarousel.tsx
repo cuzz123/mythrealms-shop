@@ -18,9 +18,13 @@ const slides = [
 export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const next = useCallback(() => setCurrent((prev) => (prev + 1) % slides.length), []);
   const prev = useCallback(() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length), []);
-  useEffect(() => { if (isPaused) return; const timer = setInterval(next, 5000); return () => clearInterval(timer); }, [isPaused, next]);
+  useEffect(() => {
+    setPrefersReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+  useEffect(() => { if (isPaused || prefersReducedMotion) return; const timer = setInterval(next, 5000); return () => clearInterval(timer); }, [isPaused, next, prefersReducedMotion]);
   const slide = slides[current];
   return (
     <div className="relative w-full aspect-[16/9] max-h-[75vh] overflow-hidden bg-[#0A0808]">

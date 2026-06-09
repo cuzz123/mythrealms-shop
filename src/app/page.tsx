@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { db } from "@/lib/db";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { ProductGrid } from "@/components/product/ProductGrid";
@@ -7,32 +8,13 @@ import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { BrandStory } from "@/components/layout/BrandStory";
 import { SymbolGrid } from "@/components/layout/SymbolGrid";
 import { GuardianMatch } from "@/components/layout/GuardianMatch";
-import { HomeBlogSection } from "@/components/layout/HomeBlogSection";
+import { FeaturedProductsSection, FeaturedProductsFallback } from "@/components/layout/FeaturedProducts";
+import { HomeBlogAsync, HomeBlogFallback } from "@/components/layout/HomeBlogAsync";
 import { ArrowRight, ChevronDown, Gem, Star, Shield, Compass, Sparkles, CircleDot } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const featuredProducts = await db.product.findMany({
-    where: { isFeatured: true, isActive: true },
-    include: { variants: true, reviews: { select: { rating: true } } },
-    take: 8,
-    orderBy: { sortOrder: "asc" },
-  });
-
-  const categories = await db.category.findMany({
-    take: 5,
-    orderBy: { sortOrder: "asc" },
-  });
-
-  const products = featuredProducts.map((p) => ({
-    ...p,
-    images: JSON.parse(p.images as string),
-    avgRating: p.reviews.length
-      ? p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length
-      : 0,
-    reviewCount: p.reviews.length,
-  }));
 
   return (
     <>
@@ -348,7 +330,9 @@ export default async function HomePage() {
           />
 
           {/* Product Grid from existing component */}
-          <ProductGrid products={products} />
+          <Suspense fallback={<FeaturedProductsFallback />}>
+            <FeaturedProductsSection />
+          </Suspense>
 
           {/* CTA */}
           <div className="text-center mt-12">
@@ -458,7 +442,9 @@ export default async function HomePage() {
       </section>
 
       {/* ===== HOME BLOG SECTION ===== */}
-      <HomeBlogSection />
+      <Suspense fallback={<HomeBlogFallback />}>
+        <HomeBlogAsync />
+      </Suspense>
     </>
   );
 }

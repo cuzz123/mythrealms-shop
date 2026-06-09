@@ -101,11 +101,13 @@ export function SearchOverlay() {
 
   return (
     <>
-      {/* Trigger button - exposed as global function */}
+      {/* Trigger button */}
       <button
         onClick={() => setIsOpen(true)}
+        aria-label="Search products"
+        aria-expanded={isOpen}
+        aria-controls="search-overlay"
         className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[var(--border-light)] transition text-[var(--text-secondary)] hover:text-[var(--text)]"
-        aria-label="Search"
       >
         <Search className="w-5 h-5" />
       </button>
@@ -115,6 +117,10 @@ export function SearchOverlay() {
         <div
           className="fixed inset-0 z-[200] bg-black/40 animate-fade-in"
           onClick={() => setIsOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Search products"
+          id="search-overlay"
         >
           <div
             className="bg-[var(--surface)] rounded-xl shadow-2xl max-w-xl mx-auto mt-24 overflow-hidden animate-slide-up"
