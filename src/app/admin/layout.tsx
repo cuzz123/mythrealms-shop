@@ -3,13 +3,14 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Package, ShoppingCart, FileText, LogOut, ChevronLeft } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingCart, FileText, Tag, LogOut, ChevronLeft } from "lucide-react";
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/admin" },
   { icon: Package, label: "Products", href: "/admin/products" },
   { icon: ShoppingCart, label: "Orders", href: "/admin/orders" },
   { icon: FileText, label: "Blog", href: "/admin/blog" },
+  { icon: Tag, label: "Discounts", href: "/admin/discounts" },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
