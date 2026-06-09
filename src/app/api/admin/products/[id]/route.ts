@@ -111,7 +111,15 @@ export async function DELETE(
 
   const { id } = await params;
 
-  await db.product.delete({ where: { id } });
+  // Soft delete — check for existing orders first
+  const existingOrders = await db.orderItem.count({ where: { productId: id } });
+  if (existingOrders > 0) {
+    // Product has order history — deactivate instead of delete
+    await db.product.update({ where: { id }, data: { isActive: false } });
+    return NextResponse.json({ success: true, softDeleted: true });
+  }
 
+  // No orders — safe to hard delete
+  await db.product.delete({ where: { id } });
   return NextResponse.json({ success: true });
 }

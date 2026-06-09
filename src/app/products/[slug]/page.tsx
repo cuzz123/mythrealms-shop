@@ -141,13 +141,13 @@ export default async function ProductPage({
           />
 
           {/* Mythical Legend badge */}
-          <div className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6">
-            <Play className="w-5 h-5 text-[var(--accent)]" />
+          <a href="#tabs" className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group">
+            <Play className="w-5 h-5 text-[var(--accent)] group-hover:text-[var(--accent-hover)] transition-colors" />
             <span className="text-sm font-medium text-[var(--text)]">
               Ancient Legend Behind This Piece —{" "}
-              <span className="text-[var(--accent)]">Read the Story</span>
+              <span className="text-[var(--accent)] group-hover:underline">Read the Story</span>
             </span>
-          </div>
+          </a>
         </div>
       </div>
 

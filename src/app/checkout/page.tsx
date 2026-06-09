@@ -412,6 +412,34 @@ export default function CheckoutPage() {
                       <option value="FR">France</option>
                       <option value="JP">Japan</option>
                       <option value="SG">Singapore</option>
+                      <option value="IT">Italy</option>
+                      <option value="ES">Spain</option>
+                      <option value="NL">Netherlands</option>
+                      <option value="SE">Sweden</option>
+                      <option value="NO">Norway</option>
+                      <option value="DK">Denmark</option>
+                      <option value="FI">Finland</option>
+                      <option value="CH">Switzerland</option>
+                      <option value="AT">Austria</option>
+                      <option value="BE">Belgium</option>
+                      <option value="IE">Ireland</option>
+                      <option value="NZ">New Zealand</option>
+                      <option value="KR">South Korea</option>
+                      <option value="HK">Hong Kong</option>
+                      <option value="TW">Taiwan</option>
+                      <option value="MY">Malaysia</option>
+                      <option value="TH">Thailand</option>
+                      <option value="PH">Philippines</option>
+                      <option value="ID">Indonesia</option>
+                      <option value="IN">India</option>
+                      <option value="BR">Brazil</option>
+                      <option value="MX">Mexico</option>
+                      <option value="AE">United Arab Emirates</option>
+                      <option value="SA">Saudi Arabia</option>
+                      <option value="IL">Israel</option>
+                      <option value="PT">Portugal</option>
+                      <option value="PL">Poland</option>
+                      <option value="CZ">Czech Republic</option>
                     </select>
                   </div>
                 </div>

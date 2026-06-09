@@ -20,30 +20,45 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
     }
 
-    // --- Validate stock ---
-    for (const item of items) {
-      if (item.variantId) {
-        const variant = await db.variant.findUnique({
-          where: { id: item.variantId },
-        });
-        if (!variant || variant.stock < item.quantity) {
-          return NextResponse.json(
-            { error: `Insufficient stock for "${item.name}"` },
-            { status: 400 }
-          );
+    // --- Validate stock (batch query) ---
+    const variantIds = items.filter((i: any) => i.variantId).map((i: any) => i.variantId);
+    if (variantIds.length > 0) {
+      const variants = await db.variant.findMany({
+        where: { id: { in: variantIds } },
+        include: { product: { select: { name: true, isActive: true } } },
+      });
+      const variantMap = new Map(variants.map((v) => [v.id, v]));
+      for (const item of items) {
+        if (item.variantId) {
+          const variant = variantMap.get(item.variantId);
+          if (!variant || variant.stock < (item.quantity || 1)) {
+            return NextResponse.json(
+              { error: `Insufficient stock for "${item.name}"` },
+              { status: 400 }
+            );
+          }
+          if (!variant.product.isActive) {
+            return NextResponse.json(
+              { error: `"${variant.product.name}" is no longer available` },
+              { status: 400 }
+            );
+          }
         }
       }
     }
 
-    // --- Calculate totals ---
+    // --- Calculate totals (batch query) ---
     let subtotal = 0;
+    const productIds = [...new Set(items.map((i: any) => i.productId))] as string[];
+    const products = await db.product.findMany({
+      where: { id: { in: productIds } },
+      include: { variants: true },
+    });
+    const productMap = new Map(products.map((p) => [p.id, p]));
     for (const item of items) {
-      const product = await db.product.findUnique({
-        where: { id: item.productId },
-        include: { variants: true },
-      });
-      const variant = product?.variants.find((v) => v.id === item.variantId);
-      subtotal += Number(variant?.price || 0) * item.quantity;
+      const product = productMap.get(item.productId);
+      const variant = product?.variants.find((v: any) => v.id === item.variantId);
+      subtotal += Number(variant?.price || 0) * (item.quantity || 1);
     }
 
     const discountAmount = discount?.amount || 0;

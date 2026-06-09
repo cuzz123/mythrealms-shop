@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { User, ShoppingBag, Menu, X } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
@@ -20,9 +21,15 @@ const navLinks = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: session } = useSession();
+  const pathname = usePathname();
   const itemCount = useCartStore((s) => s.itemCount());
   const openCart = useCartUIStore((s) => s.openCart);
   const user = session?.user;
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <header className="sticky top-0 z-40 h-[72px] border-b border-[var(--border)] bg-[var(--surface)]">
@@ -65,7 +72,9 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)]"
+              className={`rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)] ${
+                isActive(link.href) ? "text-[var(--accent)] bg-[var(--accent)]/10" : "text-[var(--text-secondary)]"
+              }`}
             >
               {link.label}
             </Link>

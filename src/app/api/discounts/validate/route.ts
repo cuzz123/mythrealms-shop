@@ -139,14 +139,18 @@ export async function POST(request: NextRequest) {
     });
 
     if (pendantCategory) {
+      // Batch-fetch all product categories in one query
+      const productIds = [...new Set(items.map((i: any) => i.productId))] as string[];
+      const products = await db.product.findMany({
+        where: { id: { in: productIds } },
+        select: { id: true, categoryId: true },
+      });
+      const productCatMap = new Map(products.map((p) => [p.id, p.categoryId]));
+
       // Get all pendant items in cart with their category info
       const pendantItems = [];
       for (const item of items) {
-        const product = await db.product.findUnique({
-          where: { id: item.productId },
-          select: { categoryId: true },
-        });
-        if (product?.categoryId === pendantCategory.id) {
+        if (productCatMap.get(item.productId) === pendantCategory.id) {
           pendantItems.push(item);
         }
       }

@@ -118,7 +118,7 @@ export default function CartPage() {
             <div className="flex justify-between font-bold text-lg pt-4 border-t border-[var(--border)]"><span className="text-[var(--text)]">Total</span><span className="text-[var(--text)]">{formatPrice(total)}</span></div>
           </div>
           <Link href="/checkout">
-            <Button variant="primary" size="lg" className="w-full mt-6">Join Waitlist — Coming Soon</Button>
+            <Button variant="primary" size="lg" className="w-full mt-6">Proceed to Checkout</Button>
           </Link>
           <div className="flex justify-center gap-2 mt-4">
             {["VISA","MC","AMEX","PP","GPay"].map(p=><span key={p} className="px-2 py-1 bg-[var(--border-light)] rounded text-[10px] text-[var(--text-muted)] font-semibold">{p}</span>)}
