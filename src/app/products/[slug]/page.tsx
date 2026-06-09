@@ -16,12 +16,24 @@ export const dynamic = "force-dynamic"
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const product = await db.product.findUnique({ where: { slug }, select: { name: true, description: true, images: true } });
+  const product = await db.product.findUnique({ where: { slug }, select: { name: true, description: true, images: true, category: { select: { name: true } }, stone: true, variants: { select: { price: true }, orderBy: { price: "asc" } } } });
   if (!product) return { title: "Product Not Found — MythRealms" };
+  const images = JSON.parse(product.images as string) as string[];
+  const priceFrom = product.variants[0]?.price ? ` from $${product.variants[0].price.toFixed(0)}` : "";
+  const stoneTag = product.stone ? `${product.stone} · ` : "";
   return {
-    title: `${product.name} — MythRealms`,
-    description: product.description.slice(0, 160),
-    openGraph: { title: product.name, description: product.description.slice(0, 160) },
+    title: `${product.name}${priceFrom} — MythRealms Luxury Jewelry`,
+    description: `${stoneTag}${product.description.slice(0, 150)}`,
+    openGraph: {
+      title: product.name,
+      description: product.description.slice(0, 155),
+      images: images[0] ? [{ url: images[0].startsWith("http") ? images[0] : `${process.env.NEXT_PUBLIC_APP_URL || ""}${images[0]}` }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description: product.description.slice(0, 155),
+    },
   };
 }
 

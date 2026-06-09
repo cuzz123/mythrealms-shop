@@ -7,12 +7,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages = [
     "", "/about", "/faq", "/blog", "/contact", "/cart", "/checkout",
     "/track-order", "/shipping", "/refund", "/privacy", "/terms", "/size-guide",
-    "/auth/signin", "/auth/register",
+    "/auth/signin", "/auth/register", "/wishlist", "/search",
+    "/guardian-quiz", "/collections",
   ].map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : 0.8,
+    priority: path === "" ? 1 : path === "/collections" ? 0.9 : 0.8,
   }));
 
   // Dynamic: products
