@@ -30,6 +30,7 @@ export async function GET() {
     <g:availability>${availability}</g:availability>
     <g:condition>new</g:condition>
     <g:brand>MythRealms</g:brand>
+    <g:identifier_exists>no</g:identifier_exists>
     <g:google_product_category>188</g:google_product_category>
     <g:product_type>${escapeXml(p.category?.name || "")}</g:product_type>
   </item>`;
