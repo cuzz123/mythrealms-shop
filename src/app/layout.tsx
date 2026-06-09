@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   verification: {
     google: "uBe2lk1CCRJxdUU4b1HoJkR9KbnKodSifkNbU1XtLgs",
   },
+  other: {
+    "p:domain_verify": "f7403d777d8595e4acf712c703023325",
+  },
   openGraph: {
     title: "MythRealms — Ancient Beasts & Chinese Constellations",
     description: "Jewelry inspired by China's oldest book of legends. 2000 years before Tolkien, there was the Classic of Mountains and Seas.",

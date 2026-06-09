@@ -95,3 +95,88 @@
 - Product ads → specific product pages
 - Collection ads → collection pages
 - Discount ads → /collections/beast-pendants
+
+---
+
+## Platform Anti-Ban & Account Safety Strategies
+
+### Pinterest Anti-Ban
+
+**New account risk:** New accounts posting many outbound links in a short time are flagged as spam.
+
+**Safe warmup cadence:**
+
+| Phase | Days | Posts/day | Content Mix |
+|-------|------|:--:|------|
+| Warmup | 1-7 | 1-2 | 100% repin others' content |
+| Transition | 8-14 | 2-3 | 1 original + 2 repins |
+| Normal | 15+ | 3 | 2 original + 1 repin |
+
+**Key rules:**
+- Register a Pinterest Business account (free), not personal
+- Mix content types: product Pins + repins + image-only Pins (no link)
+- Engage daily: like 3-5, save 2-3, follow 1-2 accounts in your niche
+- Create 5+ boards, distribute Pins across them
+- No watermarks or aggressive commercial text on images
+- Use natural language in descriptions, avoid keyword stuffing
+- Consistent domain for all links
+
+**Never:**
+- Post 5+ linked Pins on day 1
+- Use automation/bot tools (Pinterest detects scripts aggressively)
+- Mass follow/unfollow (ratio >10:1 triggers ban)
+
+### TikTok Anti-Ban
+
+**Safe warmup cadence:**
+
+| Phase | Days | Posts/day | Rules |
+|-------|------|:--:|------|
+| Warmup | 1-7 | 0 | Browse, like, comment only — no posts or links |
+| Transition | 8-14 | 1 | Content only, no link in bio |
+| Normal | 15+ | 1-2 | Link in bio OK, but not every video |
+
+**Key rules:**
+- First 3 days: only browse/like/comment, zero posts
+- Watch 15-20 min daily, do not finish every video (scroll past some)
+- Phone-shot or face-in-frame videos preferred over slideshows
+- No watermarks from other platforms (instant shadowban)
+- Use Linktree or direct URL in bio, do not change frequently
+- Watch your own video fully after posting, then like + save
+- Do not switch IP via VPN frequently
+- Start with personal account, switch to Creator/Business after 2 weeks
+
+**Never:**
+- Repost others' videos
+- AI voiceover on text-only slideshows
+- Purchase link on every single video
+- Mass follow/DM strangers
+- Register with virtual phone number
+
+### Meta Ads Account Safety
+
+**Key rules:**
+- Use a real, aged Facebook account (6+ months old) to create Business Manager
+- Complete Business Manager profile fully: company name, address, phone, website
+- Enable 2FA immediately
+- Use personal FB/IG account normally for 2+ weeks before running ads
+- Start with small ad budget (do not deposit large amounts immediately)
+- Avoid "before/after" or "miracle cure" language in ad creative
+- Jewelry product images must match actual product (excessive retouching = rejection)
+- Landing page must have privacy policy, returns policy, contact info (your site has all three)
+- One Pixel per ad account only
+
+**Never:**
+- Use purchased/fake FB accounts for ads
+- Make false claims in ad copy ("guaranteed healing", "100% effective")
+- Change creative and targeting too frequently
+- Modify payment page during active campaigns
+- High spend immediately after deposit
+
+### Universal Anti-Ban Principles
+
+1. **Slow is fast** — warm up new accounts for 1-2 weeks before promoting
+2. **Act human** — browse, like, comment, occasionally be inactive
+3. **Original beats copied** — platform algorithms favor native content
+4. **Less is more** — 1-2 quality posts/day beats 5 spam posts + ban
+5. **Have backups** — register 2-3 backup accounts in advance to spread risk
