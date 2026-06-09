@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   title: "MythRealms — Ancient Beasts & Chinese Constellations",
   description: "Jewelry inspired by the Classic of Mountains and Seas. Nine-Tailed Fox, Qilin, Azure Dragon. Where ancient myths come alive.",
   keywords: ["shan hai jing", "mythical beasts", "chinese constellations", "nine-tailed fox", "qilin"],
+  verification: {
+    google: "uBe2lk1CCRJxdUU4b1HoJkR9KbnKodSifkNbU1XtLgs",
+  },
   openGraph: {
     title: "MythRealms — Ancient Beasts & Chinese Constellations",
     description: "Jewelry inspired by China's oldest book of legends. 2000 years before Tolkien, there was the Classic of Mountains and Seas.",
