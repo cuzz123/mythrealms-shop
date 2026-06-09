@@ -3,9 +3,10 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ShoppingBag, AlertTriangle } from "lucide-react"
+import { ShoppingBag, Heart } from "lucide-react"
 import { cn, formatPrice } from "@/lib/utils"
 import { useCartStore } from "@/lib/cart"
+import { useWishlistStore } from "@/lib/wishlist"
 import toast from "react-hot-toast"
 import { ProductImage } from "@/components/ui/ProductImage"
 
@@ -56,6 +57,23 @@ export function ProductCard({ product, className }: ProductCardProps) {
     toast.success(`${product.name} added to cart`)
   }
 
+  const toggleWishlist = useWishlistStore((s) => s.toggleItem)
+  const isWishlisted = useWishlistStore((s) => s.isWishlisted)
+  const wishlisted = isWishlisted(product.id)
+
+  const handleToggleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    toggleWishlist({
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      image,
+      price,
+    })
+    toast.success(wishlisted ? "Removed from wishlist" : "Added to wishlist!")
+  }
+
   return (
     <div className={cn("group relative", className)}>
       {/* Product link — covers image + info area, button sits on top */}
@@ -100,6 +118,13 @@ export function ProductCard({ product, className }: ProductCardProps) {
           )}
         </div>
       </Link>
+
+      {/* Wishlist button */}
+      <button onClick={handleToggleWishlist}
+        className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-[var(--sale)] shadow-md opacity-0 translate-y-1 transition-[opacity,transform] duration-200 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-white backdrop-blur-sm cursor-pointer max-sm:opacity-100 max-sm:translate-y-0"
+        aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}>
+        <Heart className={`h-4 w-4 ${wishlisted ? "fill-current" : ""}`} />
+      </button>
 
       {/* Quick add button — outside the Link to avoid nested interactive elements */}
       <button onClick={handleQuickAdd}

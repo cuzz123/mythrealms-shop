@@ -1,53 +1,7 @@
-// POST /api/discounts/validate — Validate discount codes and calculate savings
+// POST /api/discounts/validate — Validate discount codes from database and calculate savings
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { auth } from "@/lib/auth";
-
-// Discount definitions
-const DISCOUNTS: Record<
-  string,
-  {
-    type: "percentage" | "fixed" | "bogo";
-    value: number; // percentage (0-100) or fixed amount in dollars
-    label: string;
-    description: string;
-    minSubtotal?: number;
-    firstOrderOnly?: boolean;
-    maxUses?: number;
-  }
-> = {
-  MYTH15: {
-    type: "percentage",
-    value: 15,
-    label: "MYTH15",
-    description: "15% off your first order",
-    firstOrderOnly: true,
-    minSubtotal: 0,
-  },
-  WELCOME10: {
-    type: "percentage",
-    value: 10,
-    label: "WELCOME10",
-    description: "10% off for new customers",
-    firstOrderOnly: true,
-    minSubtotal: 0,
-  },
-  GUARDIAN20: {
-    type: "percentage",
-    value: 20,
-    label: "GUARDIAN20",
-    description: "20% off orders over $100",
-    minSubtotal: 100,
-  },
-  FREESHIP: {
-    type: "fixed",
-    value: 4.99,
-    label: "FREESHIP",
-    description: "Free shipping on any order",
-    minSubtotal: 0,
-  },
-};
 
 // B2G1: Buy 2 Get 1 Free on Pendants (auto-detected, no code needed)
 const B2G1_CATEGORY_SLUG = "beast-pendants";
@@ -78,24 +32,41 @@ export async function POST(request: NextRequest) {
       0
     );
 
-    // --- 1. Check manual discount code ---
+    // --- 1. Check manual discount code from database ---
     if (code) {
       const normalizedCode = code.trim().toUpperCase();
-      const discount = DISCOUNTS[normalizedCode];
+      const discount = await db.discountCode.findUnique({
+        where: { code: normalizedCode },
+      });
 
-      if (!discount) {
+      if (!discount || !discount.isActive) {
         return NextResponse.json(
           { error: "Invalid discount code" },
           { status: 400 }
         );
       }
 
-      if (discount.minSubtotal && subtotal < discount.minSubtotal) {
+      // Check expiration
+      if (discount.expiresAt && new Date() > discount.expiresAt) {
+        return NextResponse.json(
+          { error: "This discount code has expired" },
+          { status: 400 }
+        );
+      }
+
+      // Check max uses
+      if (discount.maxUses > 0 && discount.usedCount >= discount.maxUses) {
+        return NextResponse.json(
+          { error: "This discount code has reached its usage limit" },
+          { status: 400 }
+        );
+      }
+
+      // Check min subtotal
+      if (discount.minSubtotal > 0 && subtotal < discount.minSubtotal) {
         return NextResponse.json(
           {
-            error: `Minimum order of $${discount.minSubtotal.toFixed(
-              2
-            )} required for ${discount.label}`,
+            error: `Minimum order of $${discount.minSubtotal.toFixed(2)} required`,
           },
           { status: 400 }
         );
@@ -121,7 +92,7 @@ export async function POST(request: NextRequest) {
       if (discount.type === "percentage") {
         codeDiscount = subtotal * (discount.value / 100);
       } else if (discount.type === "fixed") {
-        codeDiscount = Math.min(discount.value, subtotal); // don't discount more than subtotal
+        codeDiscount = Math.min(discount.value, subtotal);
       }
 
       totalDiscount += codeDiscount;
@@ -129,7 +100,7 @@ export async function POST(request: NextRequest) {
         type: "code",
         label: discount.label,
         amount: codeDiscount,
-        description: discount.description,
+        description: discount.description || "",
       });
     }
 

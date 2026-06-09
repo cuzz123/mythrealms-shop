@@ -199,3 +199,21 @@ model BlogPost {
   authorId String?
   author   User? @relation(fields: [authorId], references: [id])
 }
+
+model DiscountCode {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  type        String   // "percentage" | "fixed" | "bogo"
+  value       Float    // percentage (0-100) or dollar amount
+  label       String
+  description String?
+  minSubtotal Float    @default(0)
+  maxUses     Int      @default(0) // 0 = unlimited
+  usedCount   Int      @default(0)
+  firstOrderOnly Boolean @default(false)
+  isActive    Boolean  @default(true)
+  startsAt    DateTime @default(now())
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

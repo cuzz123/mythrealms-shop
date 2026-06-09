@@ -4,8 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { User, ShoppingBag, Menu, X } from "lucide-react";
+import { User, ShoppingBag, Heart, Menu, X } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
+import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 
 const navLinks = [
@@ -24,6 +25,7 @@ export function Header() {
   const pathname = usePathname();
   const itemCount = useCartStore((s) => s.itemCount());
   const openCart = useCartUIStore((s) => s.openCart);
+  const wishlistCount = useWishlistStore((s) => s.count());
   const user = session?.user;
 
   const isActive = (href: string) => {
@@ -100,6 +102,20 @@ export function Header() {
               />
             ) : (
               <User size={20} strokeWidth={1.8} />
+            )}
+          </Link>
+
+          {/* Wishlist */}
+          <Link
+            href="/wishlist"
+            aria-label={`Wishlist, ${wishlistCount} items`}
+            className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--sale)]"
+          >
+            <Heart size={20} strokeWidth={1.8} />
+            {wishlistCount > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[var(--sale)] px-1 text-[10px] font-semibold leading-none text-white">
+                {wishlistCount > 99 ? "99+" : wishlistCount}
+              </span>
             )}
           </Link>
 
