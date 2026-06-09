@@ -5,16 +5,12 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
-  { image:"/images/hero/nine-tailed-fox.webp", title:"Nine-Tailed Fox · 九尾狐", subtitle:"Wisdom earned through centuries — sterling silver pendant", cta:"Shop Now", href:"/products/nine-tailed-fox-pendant" },
-  { image:"/images/hero/azure-dragon.webp", title:"Azure Dragon · 青龙", subtitle:"Guardian of the Eastern sky — constellation ring set", cta:"Shop Now", href:"/products/azure-dragon-ring" },
-  { image:"/images/hero/qilin.webp", title:"Qilin · 麒麟", subtitle:"Peace and prosperity — jade protection bracelet", cta:"Shop Now", href:"/products/qilin-protection-bracelet" },
-  { image:"/images/hero/phoenix.webp", title:"Phoenix · 凤凰", subtitle:"Rebirth and renewal in gold and vermillion crystal", cta:"Shop Now", href:"/products/phoenix-rebirth-necklace" },
-  { image:"/images/hero/white-tiger.webp", title:"White Tiger · 白虎", subtitle:"Guardian of the West — silver guardian cuff", cta:"Shop Now", href:"/products/white-tiger-guardian-cuff" },
-  { image:"/images/hero/black-tortoise.webp", title:"Black Tortoise · 玄武", subtitle:"Endurance and longevity — onyx & hematite bracelet", cta:"Shop Now", href:"/products/black-tortoise-endurance-bracelet" },
-  { image:"/images/hero/bai-ze.webp", title:"Bai Ze · 白泽", subtitle:"The beast who knows all 11,520 creatures — wisdom talisman", cta:"Shop Now", href:"/products/bai-ze-wisdom-talisman" },
-  { image:"/images/hero/kun-peng.webp", title:"Kun Peng · 鲲鹏", subtitle:"Fish to bird — the ultimate transformation pendant set", cta:"Shop Now", href:"/products/kun-peng-transformation-set" },
-  { image:"/images/hero/yinglong.webp", title:"Yinglong · 应龙", subtitle:"The only winged dragon — bronze cufflinks of power", cta:"Shop Now", href:"/products/yinglong-winged-dragon-cufflinks" },
-  { image:"/images/hero/taotie.webp", title:"Taotie · 饕餮", subtitle:"Shang dynasty power — ancient bronze protection amulet", cta:"Shop Taotie", href:"/products/taotie-bronze-amulet" },
+  { image:"/images/hero/hero-ninefox.webp", title:"Nine-Tailed Fox · 九尾狐", subtitle:"14k gold necklace with diamond pavé — nine arcs of ancient wisdom", cta:"Shop Now", href:"/products/nine-tailed-fox-pendant" },
+  { image:"/images/hero/hero-mansions.webp", title:"28 Mansions · 二十八宿", subtitle:"28 crystal bracelets — each one a star in the Chinese lunar sky", cta:"Explore", href:"/collections/28-mansions" },
+  { image:"/images/hero/hero-dragon.webp", title:"Azure Dragon · 青龙", subtitle:"Sterling silver ring with sapphire — dragon scale texture in precious metal", cta:"Shop Now", href:"/products/azure-dragon-ring" },
+  { image:"/images/hero/hero-phoenix.webp", title:"Phoenix · 凤凰", subtitle:"Rose gold necklace with graduating fire opals — the shape of rebirth", cta:"Shop Now", href:"/products/phoenix-rebirth-necklace" },
+  { image:"/images/hero/hero-zodiac.webp", title:"Zodiac Amulets · 生肖护符", subtitle:"12 gold medallions with gemstone accents — find your birth year guardian", cta:"Explore", href:"/collections/zodiac-amulets" },
+  { image:"/images/hero/hero-tiger.webp", title:"White Tiger · 白虎", subtitle:"Sterling silver cuff with diamonds — quiet strength in brushed metal", cta:"Shop Now", href:"/products/white-tiger-guardian-cuff" },
 ];
 
 export function HeroCarousel() {
