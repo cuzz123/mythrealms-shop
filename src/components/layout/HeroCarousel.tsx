@@ -5,12 +5,14 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
-  { image:"/images/hero/hero-ninefox.webp", title:"Nine-Tailed Fox · 九尾狐", subtitle:"14k gold necklace with diamond pavé — nine arcs of ancient wisdom", cta:"Shop Now", href:"/products/nine-tailed-fox-pendant" },
-  { image:"/images/hero/hero-mansions.webp", title:"28 Mansions · 二十八宿", subtitle:"28 crystal bracelets — each one a star in the Chinese lunar sky", cta:"Explore", href:"/collections/28-mansions" },
-  { image:"/images/hero/hero-dragon.webp", title:"Azure Dragon · 青龙", subtitle:"Sterling silver ring with sapphire — dragon scale texture in precious metal", cta:"Shop Now", href:"/products/azure-dragon-ring" },
-  { image:"/images/hero/hero-phoenix.webp", title:"Phoenix · 凤凰", subtitle:"Rose gold necklace with graduating fire opals — the shape of rebirth", cta:"Shop Now", href:"/products/phoenix-rebirth-necklace" },
-  { image:"/images/hero/hero-zodiac.webp", title:"Zodiac Amulets · 生肖护符", subtitle:"12 gold medallions with gemstone accents — find your birth year guardian", cta:"Explore", href:"/collections/zodiac-amulets" },
-  { image:"/images/hero/hero-tiger.webp", title:"White Tiger · 白虎", subtitle:"Sterling silver cuff with diamonds — quiet strength in brushed metal", cta:"Shop Now", href:"/products/white-tiger-guardian-cuff" },
+  { image:"/images/hero/hero-ninefox.webp", title:"Nine-Tailed Fox · 九尾狐", subtitle:"14k gold · diamond pavé · nine arcs of ancient wisdom", cta:"Shop Now", href:"/products/nine-tailed-fox-pendant" },
+  { image:"/images/products/phoenix-rebirth-necklace.png", title:"Phoenix · 凤凰", subtitle:"Rose gold necklace — graduating fire opals capture the moment of rebirth", cta:"Shop Now", href:"/products/phoenix-rebirth-necklace" },
+  { image:"/images/products/summer-sun-ring.png", title:"Summer Sun · 夏至", subtitle:"Gold sunburst ring — citrine center surrounded by diamond rays, Four Seasons collection", cta:"Shop Now", href:"/products/summer-sun-ring" },
+  { image:"/images/hero/hero-mansions.webp", title:"28 Mansions · 二十八宿", subtitle:"28 crystal bracelets — each mapped to a star in the ancient Chinese sky", cta:"Explore", href:"/collections/28-mansions" },
+  { image:"/images/products/spring-cherry-necklace.png", title:"Cherry Blossom · 春樱", subtitle:"Rose gold necklace — pink sapphire petals with diamond center, Four Seasons collection", cta:"Shop Now", href:"/products/spring-cherry-necklace" },
+  { image:"/images/products/artist-collab-jade-minimal.png", title:"Jade Minimal · 原石麒麟", subtitle:"Artist Collaboration — raw Burmese jadeite, one-of-a-kind collector piece, limited to 30", cta:"Shop Limited Edition", href:"/collections/artist-collabs" },
+  { image:"/images/products/artist-collab-porcelain-phoenix.png", title:"Porcelain Phoenix · 青花凤凰", subtitle:"Artist Collaboration — Ming dynasty cobalt blue porcelain, limited to 75 pieces", cta:"Shop Limited Edition", href:"/collections/artist-collabs" },
+  { image:"/images/products/winter-snowflake-pendant.png", title:"Winter Snowflake · 冬至", subtitle:"White gold pendant with brilliant diamonds — each snowflake unique, like you", cta:"Shop Now", href:"/products/winter-snowflake-pendant" },
 ];
 
 export function HeroCarousel() {
