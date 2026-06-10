@@ -710,7 +710,7 @@ function PayPalButton({
     }
     const script = document.createElement("script");
     script.id = "paypal-sdk";
-    script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=USD`;
+    script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=USD&intent=capture&disable-funding=credit,paylater&locale=en_US&buyer-country=US`;
     script.async = true;
     script.onload = () => setSdkReady(true);
     script.onerror = () => toast.error("Failed to load PayPal. Please try Card payment.");
