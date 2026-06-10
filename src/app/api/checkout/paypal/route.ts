@@ -89,8 +89,8 @@ export async function POST(request: NextRequest) {
 
     if (paypalClientId && paypalSecret) {
       try {
-        // Get PayPal access token
-        const authRes = await fetch("https://api-m.paypal.com/v1/oauth2/token", {
+        // Get PayPal access token (sandbox)
+        const authRes = await fetch("https://api-m.sandbox.paypal.com/v1/oauth2/token", {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -101,8 +101,8 @@ export async function POST(request: NextRequest) {
         const authData = await authRes.json();
         const accessToken = authData.access_token;
 
-        // Create PayPal order
-        const paypalRes = await fetch("https://api-m.paypal.com/v2/checkout/orders", {
+        // Create PayPal order (sandbox)
+        const paypalRes = await fetch("https://api-m.sandbox.paypal.com/v2/checkout/orders", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

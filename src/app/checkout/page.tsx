@@ -677,7 +677,7 @@ export default function CheckoutPage() {
       {paymentMethod === "paypal" && (
         <>
           <Script
-            src={`https://www.paypal.com/sdk/js?client-id=${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test"}&currency=USD`}
+            src={`https://www.paypal.com/sdk/js?client-id=${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test"}&currency=USD&intent=capture`}
             strategy="lazyOnload"
             onLoad={() => {
               const container = document.getElementById("paypal-button-container");
