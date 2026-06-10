@@ -2,6 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { auth } from "@/lib/auth";
 import { applyRateLimit } from "@/lib/server/rate-limit";
 
 export async function POST(request: NextRequest) {
@@ -66,9 +67,11 @@ export async function POST(request: NextRequest) {
     const total = Math.max(0, subtotal + shippingCost - discountAmount);
 
     // --- Create order in database ---
+    const session = await auth();
     const order = await db.order.create({
       data: {
-        email: email || "guest@example.com",
+        email: email || session?.user?.email || "guest@example.com",
+        userId: session?.user?.id || undefined,
         subtotal,
         shipping: shippingCost,
         discount: discountAmount,
