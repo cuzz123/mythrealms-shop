@@ -7,7 +7,6 @@ import { formatPrice } from "@/lib/utils";
 import Link from "next/link";
 import { Loader2, Tag, Check, AlertCircle, CreditCard } from "lucide-react";
 import toast from "react-hot-toast";
-import Script from "next/script";
 
 interface ValidationErrors {
   email?: string;
@@ -673,51 +672,93 @@ export default function CheckoutPage() {
         </div>
       </form>
 
-      {/* PayPal SDK */}
+      {/* PayPal SDK — loaded via useEffect for reliable popup */}
       {paymentMethod === "paypal" && (
-        <>
-          <Script
-            src={`https://www.paypal.com/sdk/js?client-id=${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test"}&currency=USD&intent=capture`}
-            strategy="lazyOnload"
-            onLoad={() => {
-              const container = document.getElementById("paypal-button-container");
-              if (container && (window as any).paypal) {
-                (window as any).paypal.Buttons({
-                  createOrder: async () => {
-                    if (!validateAll()) { toast.error("Please fix the errors below"); throw new Error("Validation failed"); }
-                    const res = await fetch("/api/checkout/paypal", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        items: items.map((item) => ({
-                          productId: item.product.id, variantId: item.product.variantId,
-                          quantity: item.quantity, price: item.product.price, name: item.product.name,
-                        })),
-                        email, shippingAddress: { name, phone, address, city, state, country, zip },
-                        discount: discountInfo ? { amount: discountInfo.discount } : undefined,
-                      }),
-                    });
-                    const data = await res.json();
-                    if (data.error) { toast.error(data.error); throw new Error(data.error); }
-                    if (data.orderId) {
-                      (window as any).__mythrealmsOrderId = data.dbOrderId;
-                      return data.orderId;
-                    }
-                    throw new Error("No order ID");
-                  },
-                  onApprove: async (data: any) => {
-                    clearCart();
-                    const dbOrderId = (window as any).__mythrealmsOrderId || data.orderID;
-                    window.location.href = `/checkout/success?orderId=${dbOrderId}`;
-                  },
-                  onError: (err: any) => { toast.error("Payment failed. Please try again."); },
-                  style: { color: "gold", shape: "rect", label: "pay" },
-                }).render("#paypal-button-container");
-              }
-            }}
-          />
-        </>
+        <PayPalButton
+          items={items}
+          email={email}
+          shippingAddress={{ name, phone, address, city, state, country, zip }}
+          discountInfo={discountInfo}
+          total={total}
+          onSuccess={() => {
+            clearCart();
+          }}
+        />
       )}
     </div>
   );
+}
+
+// Separate PayPal button component to manage SDK lifecycle
+function PayPalButton({
+  items, email, shippingAddress, discountInfo, total, onSuccess,
+}: {
+  items: any[];
+  email: string;
+  shippingAddress: any;
+  discountInfo: any;
+  total: number;
+  onSuccess: () => void;
+}) {
+  const [sdkReady, setSdkReady] = useState(false);
+  const paypalClientId = "ARmSKPZ0qCx3snv5uzU4mB7Qe2QotIWJoSVGpYQWDeCCfliLJ2D6xL9Q6eFtmJI6T1z1Dp4IO4FNcrN1";
+
+  useEffect(() => {
+    if (document.getElementById("paypal-sdk")) {
+      setSdkReady(true);
+      return;
+    }
+    const script = document.createElement("script");
+    script.id = "paypal-sdk";
+    script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=USD`;
+    script.async = true;
+    script.onload = () => setSdkReady(true);
+    script.onerror = () => toast.error("Failed to load PayPal. Please try Card payment.");
+    document.body.appendChild(script);
+    return () => { script.remove(); };
+  }, []);
+
+  useEffect(() => {
+    if (!sdkReady) return;
+    const container = document.getElementById("paypal-button-container");
+    if (!container || !(window as any).paypal) return;
+
+    // Clear previous buttons
+    container.innerHTML = "";
+
+    (window as any).paypal.Buttons({
+      createOrder: async () => {
+        const res = await fetch("/api/checkout/paypal", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: items.map((item) => ({
+              productId: item.product.id, variantId: item.product.variantId,
+              quantity: item.quantity, price: item.product.price, name: item.product.name,
+            })),
+            email,
+            shippingAddress,
+            discount: discountInfo ? { amount: discountInfo.discount } : undefined,
+          }),
+        });
+        const data = await res.json();
+        if (data.error) { toast.error(data.error); throw new Error(data.error); }
+        (window as any).__mythrealmsOrderId = data.dbOrderId;
+        return data.orderId;
+      },
+      onApprove: async (data: any) => {
+        onSuccess();
+        const dbOrderId = (window as any).__mythrealmsOrderId || data.orderID;
+        window.location.href = `/checkout/success?orderId=${dbOrderId}`;
+      },
+      onCancel: () => { toast.error("Payment cancelled."); },
+      onError: (err: any) => { toast.error("Payment failed. Please try again."); console.error("PayPal error:", err); },
+      style: { color: "gold", shape: "rect", label: "paypal", height: 48 },
+    }).render("#paypal-button-container");
+  }, [sdkReady]);
+
+  if (!sdkReady) {
+    return <div className="mt-4 h-12 bg-[var(--border)] rounded animate-pulse" />;
+  }
+  return null;
 }
