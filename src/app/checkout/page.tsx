@@ -5,8 +5,9 @@ import { useCartStore } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
 import Link from "next/link";
-import { Loader2, Tag, Check, AlertCircle } from "lucide-react";
+import { Loader2, Tag, Check, AlertCircle, CreditCard } from "lucide-react";
 import toast from "react-hot-toast";
+import Script from "next/script";
 
 interface ValidationErrors {
   email?: string;
@@ -55,6 +56,9 @@ export default function CheckoutPage() {
   const shipping = subtotal() >= 69.99 ? 0 : 4.99;
   const discountedSubtotal = discountInfo?.discountedSubtotal ?? subtotal();
   const total = discountedSubtotal + shipping;
+
+  // Payment method
+  const [paymentMethod, setPaymentMethod] = useState<"ls" | "paypal">("ls");
 
   // Auto-validate B2G1 on cart change
   useEffect(() => {
@@ -602,22 +606,60 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <Button
-              variant="primary"
-              size="lg"
-              type="submit"
-              className="w-full mt-6"
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                `Pay ${formatPrice(total)}`
-              )}
-            </Button>
+            {/* Payment Method Selector */}
+            <div className="mt-6">
+              <label className="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-3">
+                Payment Method
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod("ls")}
+                  className={`flex items-center justify-center gap-2 p-3 rounded-lg border text-sm font-medium transition ${
+                    paymentMethod === "ls"
+                      ? "border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]"
+                      : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--text-muted)]"
+                  }`}
+                >
+                  <CreditCard className="w-4 h-4" />
+                  Card
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod("paypal")}
+                  className={`flex items-center justify-center gap-2 p-3 rounded-lg border text-sm font-medium transition ${
+                    paymentMethod === "paypal"
+                      ? "border-[#0070BA] bg-[#0070BA]/10 text-[#0070BA]"
+                      : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--text-muted)]"
+                  }`}
+                >
+                  <span className="font-bold italic">P</span>
+                  PayPal
+                </button>
+              </div>
+            </div>
+
+            {/* Pay Button */}
+            {paymentMethod === "paypal" ? (
+              <div id="paypal-button-container" className="mt-4" />
+            ) : (
+              <Button
+                variant="primary"
+                size="lg"
+                type="submit"
+                className="w-full mt-4"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  `Pay ${formatPrice(total)}`
+                )}
+              </Button>
+            )}
 
             {/* Trust signals */}
             <div className="mt-4 flex items-center justify-center gap-2 text-xs text-[var(--text-muted)]">
@@ -630,6 +672,52 @@ export default function CheckoutPage() {
           </div>
         </div>
       </form>
+
+      {/* PayPal SDK */}
+      {paymentMethod === "paypal" && (
+        <>
+          <Script
+            src={`https://www.paypal.com/sdk/js?client-id=${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test"}&currency=USD`}
+            strategy="lazyOnload"
+            onLoad={() => {
+              const container = document.getElementById("paypal-button-container");
+              if (container && (window as any).paypal) {
+                (window as any).paypal.Buttons({
+                  createOrder: async () => {
+                    if (!validateAll()) { toast.error("Please fix the errors below"); throw new Error("Validation failed"); }
+                    const res = await fetch("/api/checkout/paypal", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        items: items.map((item) => ({
+                          productId: item.product.id, variantId: item.product.variantId,
+                          quantity: item.quantity, price: item.product.price, name: item.product.name,
+                        })),
+                        email, shippingAddress: { name, phone, address, city, state, country, zip },
+                        discount: discountInfo ? { amount: discountInfo.discount } : undefined,
+                      }),
+                    });
+                    const data = await res.json();
+                    if (data.error) { toast.error(data.error); throw new Error(data.error); }
+                    if (data.orderId) {
+                      (window as any).__mythrealmsOrderId = data.dbOrderId;
+                      return data.orderId;
+                    }
+                    throw new Error("No order ID");
+                  },
+                  onApprove: async (data: any) => {
+                    clearCart();
+                    const dbOrderId = (window as any).__mythrealmsOrderId || data.orderID;
+                    window.location.href = `/checkout/success?orderId=${dbOrderId}`;
+                  },
+                  onError: (err: any) => { toast.error("Payment failed. Please try again."); },
+                  style: { color: "gold", shape: "rect", label: "pay" },
+                }).render("#paypal-button-container");
+              }
+            }}
+          />
+        </>
+      )}
     </div>
   );
 }
