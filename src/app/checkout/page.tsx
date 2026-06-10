@@ -200,8 +200,9 @@ export default function CheckoutPage() {
           `${data.appliedDiscounts.length} discount${data.appliedDiscounts.length > 1 ? "s" : ""} applied!`
         );
       }
-    } catch {
-      setDiscountError("Failed to validate discount");
+    } catch (err: any) {
+      console.error("Discount validation error:", err);
+      setDiscountError(err?.message || "Failed to validate discount. Please try again.");
     } finally {
       setDiscountLoading(false);
     }
