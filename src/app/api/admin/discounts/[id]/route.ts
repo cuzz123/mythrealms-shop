@@ -16,6 +16,12 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await request.json();
+    // Whitelist allowed fields
+    const allowed = ["label", "description", "isActive", "minSubtotal", "maxUses", "firstOrderOnly", "expiresAt", "type", "value"];
+    const data: any = {};
+    for (const key of allowed) {
+      if (body[key] !== undefined) data[key] = body[key];
+    }
     const updated = await db.discountCode.update({
       where: { id },
       data: body,

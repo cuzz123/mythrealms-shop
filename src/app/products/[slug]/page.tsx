@@ -103,11 +103,11 @@ export default async function ProductPage({
 
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 py-4 text-sm text-[var(--text-muted)]">
-        <a href="/" className="hover:text-[var(--text)]">Home</a>
+        <Link href="/" className="hover:text-[var(--text)]">Home</Link>
         <span>/</span>
-        <a href={`/collections/${product.category.slug}`} className="hover:text-[var(--text)]">
+        <Link href={`/collections/${product.category.slug}`} className="hover:text-[var(--text)]">
           {product.category.name}
-        </a>
+        </Link>
         <span>/</span>
         <span className="text-[var(--text)] truncate max-w-[300px]">{product.name}</span>
       </nav>

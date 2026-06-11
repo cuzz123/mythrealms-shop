@@ -292,7 +292,9 @@ export default function CheckoutPage() {
     label: string,
     type: string = "text",
     required: boolean = true,
-    placeholder?: string
+    placeholder?: string,
+    autoComplete?: string,
+    inputMode?: string,
   ) {
     const valueMap: Record<string, string> = {
       email,
@@ -335,10 +337,14 @@ export default function CheckoutPage() {
           }}
           onBlur={() => handleBlur(field)}
           placeholder={placeholder || label}
+          autoComplete={autoComplete}
+          inputMode={inputMode as any}
+          aria-invalid={!!hasError}
+          aria-describedby={hasError ? `${field}-error` : undefined}
           className={`${inputClass} ${hasError ? inputErrorClass : inputNormalClass}`}
         />
         {hasError && (
-          <p className="mt-1 text-xs text-[var(--sale)] flex items-center gap-1">
+          <p id={`${field}-error`} className="mt-1 text-xs text-[var(--sale)] flex items-center gap-1">
             <AlertCircle className="w-3 h-3 flex-shrink-0" />
             {errors[field]}
           </p>
@@ -381,9 +387,9 @@ export default function CheckoutPage() {
                 Contact Information
               </h2>
               <div className="space-y-4">
-                {renderField("email", "Email Address", "email")}
-                {renderField("name", "Full Name")}
-                {renderField("phone", "Phone Number", "tel")}
+                {renderField("email", "Email Address", "email", true, undefined, "email")}
+                {renderField("name", "Full Name", "text", true, undefined, "name")}
+                {renderField("phone", "Phone Number", "tel", true, undefined, "tel", "tel")}
               </div>
             </div>
 
@@ -392,13 +398,13 @@ export default function CheckoutPage() {
                 Shipping Address
               </h2>
               <div className="space-y-4">
-                {renderField("address", "Street Address")}
+                {renderField("address", "Street Address", "text", true, undefined, "street-address")}
                 <div className="grid grid-cols-2 gap-4">
-                  {renderField("city", "City")}
-                  {renderField("state", "State / Province")}
+                  {renderField("city", "City", "text", true, undefined, "address-level2")}
+                  {renderField("state", "State / Province", "text", true, undefined, "address-level1")}
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  {renderField("zip", "ZIP / Postal Code")}
+                  {renderField("zip", "ZIP / Postal Code", "text", true, undefined, "postal-code", "numeric")}
                   <div>
                     <label className="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-1.5">
                       Country <span className="text-[var(--sale)] ml-0.5">*</span>
