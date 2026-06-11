@@ -16,32 +16,46 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: path === "" ? 1 : path === "/collections" ? 0.9 : 0.8,
   }));
 
-  // Dynamic: products
-  const products = await db.product.findMany({ where: { isActive: true }, select: { slug: true, updatedAt: true } });
-  const productUrls = products.map((p) => ({
-    url: `${baseUrl}/products/${p.slug}`,
-    lastModified: p.updatedAt,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  // Dynamic pages with error fallback
+  async function safeProductUrls() {
+    try {
+      const products = await db.product.findMany({ where: { isActive: true }, select: { slug: true, updatedAt: true } });
+      return products.map((p) => ({
+        url: `${baseUrl}/products/${p.slug}`,
+        lastModified: p.updatedAt,
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      }));
+    } catch { return []; }
+  }
 
-  // Dynamic: collections
-  const categories = await db.category.findMany({ select: { slug: true } });
-  const collectionUrls = categories.map((c) => ({
-    url: `${baseUrl}/collections/${c.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.9,
-  }));
+  async function safeCollectionUrls() {
+    try {
+      const categories = await db.category.findMany({ select: { slug: true } });
+      return categories.map((c) => ({
+        url: `${baseUrl}/collections/${c.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.9,
+      }));
+    } catch { return []; }
+  }
 
-  // Dynamic: blog posts
-  const posts = await db.blogPost.findMany({ select: { slug: true, updatedAt: true } });
-  const blogUrls = posts.map((p) => ({
-    url: `${baseUrl}/blog/${p.slug}`,
-    lastModified: p.updatedAt,
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
+  async function safeBlogUrls() {
+    try {
+      const posts = await db.blogPost.findMany({ select: { slug: true, updatedAt: true } });
+      return posts.map((p) => ({
+        url: `${baseUrl}/blog/${p.slug}`,
+        lastModified: p.updatedAt,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      }));
+    } catch { return []; }
+  }
+
+  const [productUrls, collectionUrls, blogUrls] = await Promise.all([
+    safeProductUrls(), safeCollectionUrls(), safeBlogUrls(),
+  ]);
 
   return [...staticPages, ...collectionUrls, ...productUrls, ...blogUrls];
 }
