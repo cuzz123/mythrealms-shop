@@ -308,7 +308,14 @@ export function CartDrawer() {
                 onClick={closeCart}
                 className="flex h-11 w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--primary)] text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--primary-hover)]"
               >
-                View Cart & Checkout
+                View Cart
+              </Link>
+              <Link
+                href="/checkout"
+                onClick={closeCart}
+                className="mt-2 flex h-11 w-full items-center justify-center rounded-[var(--radius-md)] border border-[var(--accent)] text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/10"
+              >
+                Checkout
               </Link>
               <button
                 type="button"

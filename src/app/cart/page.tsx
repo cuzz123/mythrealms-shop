@@ -120,8 +120,13 @@ export default function CartPage() {
           <Link href="/checkout">
             <Button variant="primary" size="lg" className="w-full mt-6">Proceed to Checkout</Button>
           </Link>
-          <div className="flex justify-center gap-2 mt-4">
-            {["VISA","MC","AMEX","PP","GPay"].map(p=><span key={p} className="px-2 py-1 bg-[var(--border-light)] rounded text-[10px] text-[var(--text-muted)] font-semibold">{p}</span>)}
+          <div className="flex justify-center gap-3 mt-4">
+            <span className="text-[10px] text-[var(--text-muted)] font-semibold">VISA</span>
+            <span className="text-[10px] text-[var(--text-muted)] font-semibold">MC</span>
+            <span className="text-[10px] text-[var(--text-muted)] font-semibold">AMEX</span>
+            <span className="text-[10px] text-[var(--text-muted)] font-semibold">PayPal</span>
+            <span className="text-[10px] text-[var(--text-muted)] font-semibold">Google Pay</span>
+            <span className="text-[10px] text-[var(--text-muted)] font-semibold">Apple Pay</span>
           </div>
           <Link href="/collections/beast-pendants" className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mt-6 justify-center"><ArrowLeft className="w-4 h-4" /> Continue Shopping</Link>
         </div>
