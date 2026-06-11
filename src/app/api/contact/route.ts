@@ -22,8 +22,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // In production: send to email service, CRM, or database
-    console.log("Contact form submission:", { name, email, subject, message });
+    // Send email via Resend
+    const apiKey = process.env.RESEND_API_KEY;
+    if (apiKey) {
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+        body: JSON.stringify({
+          from: "MythRealms Contact <noreply@mythrealms-shop.vercel.app>",
+          to: "support@mythrealms.com",
+          reply_to: email,
+          subject: `Contact: ${subject || "New message"} from ${name}`,
+          html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Subject:</strong> ${subject || "N/A"}</p><p><strong>Message:</strong></p><p>${message}</p>`,
+        }),
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch {

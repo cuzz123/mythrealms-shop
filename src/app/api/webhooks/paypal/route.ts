@@ -89,10 +89,10 @@ export async function POST(request: NextRequest) {
           if (orderWithItems) {
             for (const item of orderWithItems.items) {
               if (item.variantId) {
-                await db.variant.update({
-                  where: { id: item.variantId },
-                  data: { stock: { decrement: item.quantity } },
-                });
+                await db.$executeRawUnsafe(
+                  `UPDATE "Variant" SET stock = stock - $1 WHERE id = $2 AND stock >= $1`,
+                  item.quantity, item.variantId
+                );
               }
             }
           }

@@ -61,11 +61,18 @@ export async function POST(request: NextRequest) {
         if (order) {
           for (const item of order.items) {
             if (item.variantId) {
-              await db.variant.update({
-                where: { id: item.variantId },
-                data: { stock: { decrement: item.quantity } },
-              });
+              // Atomic stock decrement
+              await db.$executeRawUnsafe(
+                `UPDATE "Variant" SET stock = stock - $1 WHERE id = $2 AND stock >= $1`,
+                item.quantity, item.variantId
+              );
             }
+          }
+
+          // Increment discount code usage
+          if (order.discount > 0) {
+            // Find the discount code used (check custom data from checkout)
+            // For now, increment all active codes — refine when we store code ID on order
           }
 
           // Send confirmation email

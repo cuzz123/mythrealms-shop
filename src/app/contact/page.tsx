@@ -29,8 +29,7 @@ export default function ContactPage() {
         toast.error(data.error || "Failed to send message");
       }
     } catch {
-      toast.success("Message sent! We'll get back to you within 24 hours.");
-      setSent(true);
+      toast.error("Something went wrong. Please try again or email us directly.");
     } finally {
       setLoading(false);
     }

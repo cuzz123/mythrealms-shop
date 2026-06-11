@@ -20,6 +20,7 @@ export function SearchOverlay() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
+  const [searchError, setSearchError] = useState(false);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -67,6 +68,7 @@ export function SearchOverlay() {
         );
       } catch {
         setResults([]);
+        setSearchError(true);
       } finally {
         setLoading(false);
       }

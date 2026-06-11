@@ -270,8 +270,9 @@ export default function CheckoutPage() {
 
       const data = await res.json();
       if (data.url) {
-        clearCart();
+        // Clear cart only after successful redirect
         window.location.href = data.url;
+        clearCart();
       } else {
         toast.error(data.error || "Checkout failed");
       }
