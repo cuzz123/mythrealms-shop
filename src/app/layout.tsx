@@ -9,6 +9,7 @@ import { CartDrawer } from "@/components/layout/CartDrawer";
 import { Providers } from "./providers";
 import { Analytics } from "@/components/layout/Analytics";
 import { CookieConsent } from "@/components/layout/CookieConsent";
+import { OrganizationJsonLd } from "@/components/ui/JsonLd";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -49,6 +50,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+      <head>
+        <OrganizationJsonLd />
+      </head>
       <body className="antialiased">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--accent)] focus:text-white focus:rounded">Skip to main content</a>
         <Analytics />

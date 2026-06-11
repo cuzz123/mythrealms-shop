@@ -8,6 +8,7 @@ import { SizeGuideModal } from "@/components/product/SizeGuideModal";
 import { ProductActions } from "@/components/product/ProductActions";
 import { Tabs } from "@/components/ui/Tabs";
 import { ProductImage } from "@/components/ui/ProductImage";
+import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { formatPrice } from "@/lib/utils";
 import { StarRating } from "@/components/ui/StarRating";
 import { Star, Play, ShieldCheck } from "lucide-react";
@@ -82,6 +83,24 @@ export default async function ProductPage({
 
   return (
     <div className="max-w-7xl mx-auto px-6">
+      {/* JSON-LD Structured Data */}
+      <BreadcrumbJsonLd items={[
+        { name: "Home", url: `${process.env.NEXT_PUBLIC_APP_URL || ""}/` },
+        { name: product.category.name, url: `${process.env.NEXT_PUBLIC_APP_URL || ""}/collections/${product.category.slug}` },
+        { name: product.name, url: `${process.env.NEXT_PUBLIC_APP_URL || ""}/products/${product.slug}` },
+      ]} />
+      <ProductJsonLd
+        name={product.name}
+        description={product.description}
+        images={images}
+        price={product.variants[0]?.price || 0}
+        ratingValue={avgRating}
+        reviewCount={product.reviews.length}
+        url={`${process.env.NEXT_PUBLIC_APP_URL || ""}/products/${product.slug}`}
+        category={product.category.name}
+        sku={product.variants[0]?.sku || undefined}
+      />
+
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 py-4 text-sm text-[var(--text-muted)]">
         <a href="/" className="hover:text-[var(--text)]">Home</a>

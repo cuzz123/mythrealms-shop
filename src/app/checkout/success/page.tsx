@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle } from "lucide-react";
+import { SuccessTracker } from "./tracker";
 
 export default async function CheckoutSuccessPage({
   searchParams,
@@ -21,6 +22,7 @@ export default async function CheckoutSuccessPage({
         <Link href="/collections/beast-pendants"><Button variant="primary">Continue Shopping</Button></Link>
         <Link href="/"><Button variant="outline">Back to Home</Button></Link>
       </div>
+      {orderId && <SuccessTracker orderId={orderId} />}
     </div>
   );
 }
