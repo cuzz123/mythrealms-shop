@@ -645,6 +645,15 @@ export default function CheckoutPage() {
               </div>
             </div>
 
+            {/* Trust signals */}
+            <div className="mt-4 mb-4 flex items-center justify-center gap-3 text-xs bg-[var(--success)]/5 border border-[var(--success)]/10 rounded-lg py-2 px-4">
+              <svg className="w-4 h-4 text-[var(--success)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              <span className="text-[var(--success)] font-medium">SSL Encrypted</span>
+              <span className="text-[var(--border)]">|</span>
+              <Check className="w-3.5 h-3.5 text-[var(--success)]" />
+              <span className="text-[var(--success)]">30-Day Returns</span>
+            </div>
+
             {/* Pay Button */}
             {paymentMethod === "paypal" ? (
               <div id="paypal-button-container" className="mt-4" />
@@ -670,7 +679,7 @@ export default function CheckoutPage() {
             {/* Trust signals */}
             <div className="mt-4 flex items-center justify-center gap-2 text-xs text-[var(--text-muted)]">
               <Check className="w-3 h-3 text-[var(--success)]" />
-              Secure checkout
+              Free Shipping over $69.99
               <span className="text-[var(--border)]">|</span>
               <Check className="w-3 h-3 text-[var(--success)]" />
               30-day returns

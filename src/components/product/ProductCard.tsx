@@ -79,7 +79,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
       {/* Product link — covers image + info area, button sits on top */}
       <Link href={`/products/${product.slug}`} className="block">
         {/* Image container */}
-        <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--border-light)] will-change-transform [transform:translateZ(0)]">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--border-light)]">
           {isValidImage ? (
             <>
               <Image src={image} alt={product.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
