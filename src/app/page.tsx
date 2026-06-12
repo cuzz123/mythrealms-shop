@@ -243,24 +243,14 @@ export default async function HomePage() {
       {/* ===== BRAND STORY ===== */}
       <BrandStory />
 
-      {/* ===== CONSTELLATION MAP SECTION ===== */}
-      <section className="py-24 bg-[#1A1816] relative overflow-hidden [content-visibility:auto] [contain-intrinsic-size:auto_1200px]">
-        {/* Star field — single gradient layer instead of 15, way less CPU */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-20"
-          style={{
-            backgroundImage: "radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.5) 0%, transparent 100%)",
-            backgroundSize: "80px 80px",
-          }}
-        />
-
+      {/* ===== FOUR GUARDIANS SECTION ===== */}
+      <section className="py-16 bg-[var(--surface)] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          {/* Section header */}
-          <div className="text-center mb-12">
-            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-4">
+          <div className="text-center mb-8">
+            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-3">
               Celestial Cartography
             </span>
-            <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5] mb-4">
+            <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5] mb-3">
               The Twenty-Eight Mansions
             </h2>
             <p className="text-[1.0625rem] text-[#A89880] max-w-[580px] mx-auto leading-relaxed">
@@ -268,52 +258,34 @@ export default async function HomePage() {
             </p>
           </div>
 
-          {/* Four Celestial Guardians — Image Strips */}
-          <div className="flex flex-col gap-8">
+          {/* Four Guardian Cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: "Azure Dragon · 青龙", subtitle: "Eastern Spring — Guardian of the Blue-Green Heavens", img: "/images/constellations/azure-dragon.png", color: "rgba(74,158,207,0.15)", accent: "#6db3d4" },
-              { name: "Vermillion Bird · 朱雀", subtitle: "Southern Summer — Guardian of the Vermillion Skies", img: "/images/constellations/vermillion-bird.png", color: "rgba(224,122,61,0.15)", accent: "#e07a3d" },
-              { name: "White Tiger · 白虎", subtitle: "Western Autumn — Guardian of the White Heavens", img: "/images/constellations/white-tiger.png", color: "rgba(192,192,192,0.12)", accent: "#c0c0c0" },
-              { name: "Black Tortoise · 玄武", subtitle: "Northern Winter — Guardian of the Dark Heavens", img: "/images/constellations/black-tortoise.png", color: "rgba(139,92,246,0.15)", accent: "#8b5cf6" },
-            ].map((guardian) => (
-              <div key={guardian.name} className="group">
-                {/* Group Header */}
-                <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#2A2520]">
-                  <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: guardian.accent }} />
-                  <div>
-                    <h3 className="font-serif text-lg font-semibold text-[#E8E0D5]">{guardian.name}</h3>
-                    <p className="text-xs text-[#A89880]">{guardian.subtitle}</p>
-                  </div>
+              { name: "Azure Dragon", zh: "青龙", season: "Eastern Spring", color: "#6db3d4", href: "/collections/28-mansions" },
+              { name: "Vermillion Bird", zh: "朱雀", season: "Southern Summer", color: "#e07a3d", href: "/collections/28-mansions" },
+              { name: "White Tiger", zh: "白虎", season: "Western Autumn", color: "#c0c0c0", href: "/collections/28-mansions" },
+              { name: "Black Tortoise", zh: "玄武", season: "Northern Winter", color: "#8b5cf6", href: "/collections/28-mansions" },
+            ].map((g) => (
+              <Link
+                key={g.name}
+                href={g.href}
+                className="group flex items-center gap-3 p-4 rounded-xl border border-[var(--border)] bg-[var(--bg)] hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_20px_rgba(212,168,75,0.1)] transition-all"
+              >
+                <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: `${g.color}22` }}>
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: g.color }} />
                 </div>
-                {/* Image Strip — 7:1 aspect, scrollable on mobile */}
-                <div className="relative rounded-xl overflow-hidden border border-[#2A2520] group-hover:border-[rgba(212,168,75,0.3)] transition-[border-color] duration-500">
-                  <div className="absolute inset-0 pointer-events-none z-10" style={{ background: `linear-gradient(to bottom, ${guardian.color}, transparent 30%, transparent 70%, ${guardian.color})` }} />
-                  <img
-                    src={guardian.img}
-                    alt={guardian.name}
-                    loading="lazy"
-                    className="w-full h-auto block"
-                  />
-                  {/* Hover glow — opacity-only transition on pseudo layer, GPU only */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl"
-                    style={{ background: `radial-gradient(ellipse at 50% 50%, ${guardian.accent}22 0%, transparent 70%)` }} />
+                <div>
+                  <h4 className="text-sm font-semibold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
+                    {g.name} · {g.zh}
+                  </h4>
+                  <p className="text-xs text-[var(--text-muted)]">{g.season} · 7 Mansions</p>
                 </div>
-                {/* Mansion labels row */}
-                <div className="flex justify-between px-1 mt-2 text-[10px] text-[#6B6055] font-medium tracking-wider uppercase">
-                  {guardian.name.includes("Azure Dragon") && ["Jiao","Kang","Di","Fang","Xin","Wei","Ji"].map(m => <span key={m}>{m}</span>)}
-                  {guardian.name.includes("Vermillion") && ["Jing","Gui","Liu","Xing","Zhang","Yi","Zhen"].map(m => <span key={m}>{m}</span>)}
-                  {guardian.name.includes("White Tiger") && ["Kui","Lou","Wei","Mao","Bi","Zi","Shen"].map(m => <span key={m}>{m}</span>)}
-                  {guardian.name.includes("Black Tortoise") && ["Dou","Niu","Nv","Xu","Wei","Shi","Bi"].map(m => <span key={m}>{m}</span>)}
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
-
-          {/* Bronze pattern divider */}
-          <div className="h-[8px] rounded-full opacity-30 mt-16" style={{ background: "repeating-linear-gradient(90deg, #D4A84B 0px, #D4A84B 2px, transparent 2px, transparent 6px, #D4A84B 6px, #D4A84B 8px, transparent 8px, transparent 12px)" }} />
         </div>
 
-        <div className="max-w-[540px] mx-auto px-6 relative z-10 text-center">
+        <div className="max-w-[540px] mx-auto px-6 mt-16 relative z-10 text-center">
           <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-4">
             Stay Connected
           </span>
