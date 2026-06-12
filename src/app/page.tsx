@@ -10,7 +10,7 @@ import { SymbolGrid } from "@/components/layout/SymbolGrid";
 import { GuardianMatch } from "@/components/layout/GuardianMatch";
 import { FeaturedProductsSection, FeaturedProductsFallback } from "@/components/layout/FeaturedProducts";
 import { HomeBlogAsync, HomeBlogFallback } from "@/components/layout/HomeBlogAsync";
-import { ArrowRight, ChevronDown, Gem, Star, Shield, Compass, Sparkles, CircleDot } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -116,184 +116,72 @@ export default async function HomePage() {
       <HeroCarousel />
 
       {/* ===== CATEGORIES SECTION ===== */}
-      <section className="py-20 bg-[#0F0D0E]">
+      <section className="py-12 bg-[#0F0D0E]">
         <div className="max-w-7xl mx-auto px-6">
           {/* Section header */}
-          <div className="text-center mb-16">
-            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-4">
+          <div className="text-center mb-8">
+            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-3">
               Begin Your Expedition
             </span>
-            <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5] mb-4">
+            <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5] mb-3">
               Realms of the Ancients
             </h2>
             <p className="text-[1.0625rem] text-[#A89880] max-w-[580px] mx-auto leading-relaxed">
-              Six realms await — each a gateway into the mythic. From celestial constellations
-              to the beasts that guard the cosmic order.
+              Four paths into the mythic — each rooted in the lore of mountains, seas, stars, and the sacred beasts that guard the cosmos.
             </p>
           </div>
 
-          {/* Category cards — 6 cards, 3-column grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Beast Pendants */}
+          {/* Category cards — 4 cards with real images */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Mythical Beasts */}
             <Link
               href="/collections/beast-pendants"
-              className="group relative rounded-xl overflow-hidden border border-[#2A2520] bg-[#1A1816] aspect-[3/4] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
+              className="group relative rounded-xl overflow-hidden border border-[#2A2520] aspect-[4/5] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
-                }}
-              />
+              <img src="/images/categories/beast-pendants.png" alt="Mythical Beasts" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[400ms] group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.4)] to-[rgba(15,13,14,0.15)]" />
-              <div className="relative z-10 p-8">
-                <Gem className="mb-4 w-12 h-12 text-[#D4A84B] opacity-80" strokeWidth={1.5} />
-                <h3 className="font-serif text-2xl font-semibold text-[#E8E0D5] mb-1">
-                  {"神兽吊坠"}
-                </h3>
-                <p className="text-xs text-[#6B5F50] font-normal mb-1">
-                  Mythical Beasts
-                </p>
-                <p className="text-sm text-[#A89880] leading-relaxed">
-                  Rings, pendants, bracelets — each infused with the spirit of a legendary creature.
-                </p>
-              </div>
-            </Link>
-
-            {/* Star Bracelets */}
-            <Link
-              href="/collections/star-bracelets"
-              className="group relative rounded-xl overflow-hidden border border-[#2A2520] bg-[#1A1816] aspect-[3/4] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 50%, #4a1942 100%)",
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.4)] to-[rgba(15,13,14,0.15)]" />
-              <div className="relative z-10 p-8">
-                <Star className="mb-4 w-12 h-12 text-[#D4A84B] opacity-80" strokeWidth={1.5} />
-                <h3 className="font-serif text-2xl font-semibold text-[#E8E0D5] mb-1">
-                  {"星宿手串"}
-                </h3>
-                <p className="text-xs text-[#6B5F50] font-normal mb-1">
-                  Star Bracelets
-                </p>
-                <p className="text-sm text-[#A89880] leading-relaxed">
-                  Beaded bracelets mapped to the 28 Chinese mansions.
-                </p>
-              </div>
-            </Link>
-
-            {/* Ancient Talismans */}
-            <Link
-              href="/collections/talismans"
-              className="group relative rounded-xl overflow-hidden border border-[#2A2520] bg-[#1A1816] aspect-[3/4] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #1a120b 0%, #2d1f0f 50%, #5c3d2e 100%)",
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.4)] to-[rgba(15,13,14,0.15)]" />
-              <div className="relative z-10 p-8">
-                <Shield className="mb-4 w-12 h-12 text-[#D4A84B] opacity-80" strokeWidth={1.5} />
-                <h3 className="font-serif text-2xl font-semibold text-[#E8E0D5] mb-1">
-                  {"上古护符"}
-                </h3>
-                <p className="text-xs text-[#6B5F50] font-normal mb-1">
-                  Ancient Talismans
-                </p>
-                <p className="text-sm text-[#A89880] leading-relaxed">
-                  Protection charms inscribed with seals from the Shan Hai Jing.
-                </p>
-              </div>
-            </Link>
-
-            {/* Four Symbols */}
-            <Link
-              href="/collections/four-symbols"
-              className="group relative rounded-xl overflow-hidden border border-[#2A2520] bg-[#1A1816] aspect-[3/4] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #0b1a1a 0%, #0f2d2d 50%, #1a4a4a 100%)",
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.4)] to-[rgba(15,13,14,0.15)]" />
-              <div className="relative z-10 p-8">
-                <Compass className="mb-4 w-12 h-12 text-[#D4A84B] opacity-80" strokeWidth={1.5} />
-                <h3 className="font-serif text-2xl font-semibold text-[#E8E0D5] mb-1">
-                  {"四象系列"}
-                </h3>
-                <p className="text-xs text-[#6B5F50] font-normal mb-1">
-                  Four Symbols
-                </p>
-                <p className="text-sm text-[#A89880] leading-relaxed">
-                  The Azure Dragon, White Tiger, Vermillion Bird, and Black
-                  Tortoise.
-                </p>
+              <div className="relative z-10 p-5">
+                <h3 className="font-serif text-xl font-semibold text-[#E8E0D5] mb-0.5">Mythical Beasts</h3>
+                <p className="text-xs text-[#A89880]">12 designs · pendants, rings & cuffs</p>
               </div>
             </Link>
 
             {/* 28 Mansions */}
             <Link
               href="/collections/28-mansions"
-              className="group relative rounded-xl overflow-hidden border border-[#2A2520] bg-[#1A1816] aspect-[3/4] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
+              className="group relative rounded-xl overflow-hidden border border-[#2A2520] aspect-[4/5] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #0b0f1a 0%, #1a1f3a 50%, #2a3a6a 100%)",
-                }}
-              />
+              <img src="/images/categories/28-mansions-bracelets.png" alt="28 Mansions" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[400ms] group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.4)] to-[rgba(15,13,14,0.15)]" />
-              <div className="relative z-10 p-8">
-                <Sparkles className="mb-4 w-12 h-12 text-[#D4A84B] opacity-80" strokeWidth={1.5} />
-                <h3 className="font-serif text-2xl font-semibold text-[#E8E0D5] mb-1">
-                  {"二十八宿"}
-                </h3>
-                <p className="text-xs text-[#6B5F50] font-normal mb-1">
-                  28 Mansions
-                </p>
-                <p className="text-sm text-[#A89880] leading-relaxed">
-                  28 beaded bracelets — one for each Chinese lunar mansion. Find your star.
-                </p>
+              <div className="relative z-10 p-5">
+                <h3 className="font-serif text-xl font-semibold text-[#E8E0D5] mb-0.5">28 Mansions</h3>
+                <p className="text-xs text-[#A89880]">28 star bracelets · find your celestial guardian</p>
               </div>
             </Link>
 
-            {/* Zodiac Amulets */}
+            {/* Zodiac */}
             <Link
               href="/collections/zodiac-amulets"
-              className="group relative rounded-xl overflow-hidden border border-[#2A2520] bg-[#1A1816] aspect-[3/4] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
+              className="group relative rounded-xl overflow-hidden border border-[#2A2520] aspect-[4/5] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #1a0f0f 0%, #3a1f1f 50%, #5a2a2a 100%)",
-                }}
-              />
+              <img src="/images/categories/zodiac-amulets.png" alt="Zodiac" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[400ms] group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.4)] to-[rgba(15,13,14,0.15)]" />
-              <div className="relative z-10 p-8">
-                <CircleDot className="mb-4 w-12 h-12 text-[#D4A84B] opacity-80" strokeWidth={1.5} />
-                <h3 className="font-serif text-2xl font-semibold text-[#E8E0D5] mb-1">
-                  {"生肖护符"}
-                </h3>
-                <p className="text-xs text-[#6B5F50] font-normal mb-1">
-                  Zodiac Amulets
-                </p>
-                <p className="text-sm text-[#A89880] leading-relaxed">
-                  Twelve Chinese zodiac guardians — find the amulet of your birth year.
-                </p>
+              <div className="relative z-10 p-5">
+                <h3 className="font-serif text-xl font-semibold text-[#E8E0D5] mb-0.5">Zodiac Amulets</h3>
+                <p className="text-xs text-[#A89880]">12 gold medallions · find your birth year guardian</p>
+              </div>
+            </Link>
+
+            {/* Four Seasons */}
+            <Link
+              href="/collections/four-seasons"
+              className="group relative rounded-xl overflow-hidden border border-[#2A2520] aspect-[4/5] flex flex-col justify-end cursor-pointer transition-[transform,border-color,box-shadow] duration-[400ms] hover:-translate-y-1 hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_24px_rgba(212,168,75,0.18)]"
+            >
+              <img src="/images/categories/four-seasons-collection.png" alt="Four Seasons" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[400ms] group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.4)] to-[rgba(15,13,14,0.15)]" />
+              <div className="relative z-10 p-5">
+                <h3 className="font-serif text-xl font-semibold text-[#E8E0D5] mb-0.5">Four Seasons</h3>
+                <p className="text-xs text-[#A89880]">12 seasonal pieces · spring to winter</p>
               </div>
             </Link>
           </div>
@@ -304,7 +192,7 @@ export default async function HomePage() {
       <SymbolGrid />
 
       {/* ===== FEATURED PRODUCTS (PRODUCT GRID) ===== */}
-      <section className="py-24 bg-[#1A1816]">
+      <section className="py-16 bg-[#1A1816]">
         <div className="max-w-7xl mx-auto px-6">
           {/* Section header */}
           <div className="text-center mb-16">
