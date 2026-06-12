@@ -243,9 +243,9 @@ export default async function HomePage() {
       {/* ===== BRAND STORY ===== */}
       <BrandStory />
 
-      {/* ===== FOUR GUARDIANS SECTION ===== */}
-      <section className="py-16 bg-[var(--surface)] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+      {/* ===== 28 MANSIONS PRODUCTS ===== */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-8">
             <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-3">
               Celestial Cartography
@@ -254,38 +254,43 @@ export default async function HomePage() {
               The Twenty-Eight Mansions
             </h2>
             <p className="text-[1.0625rem] text-[#A89880] max-w-[580px] mx-auto leading-relaxed">
-              {"二十八宿"} — An ancient star map dividing the sky into four quadrants, each guarded by a sacred beast.
+              {"二十八宿"} — 28 crystal bracelets, each mapped to a star in the ancient Chinese sky.
             </p>
           </div>
 
-          {/* Four Guardian Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: "Azure Dragon", zh: "青龙", season: "Eastern Spring", color: "#6db3d4", href: "/collections/28-mansions" },
-              { name: "Vermillion Bird", zh: "朱雀", season: "Southern Summer", color: "#e07a3d", href: "/collections/28-mansions" },
-              { name: "White Tiger", zh: "白虎", season: "Western Autumn", color: "#c0c0c0", href: "/collections/28-mansions" },
-              { name: "Black Tortoise", zh: "玄武", season: "Northern Winter", color: "#8b5cf6", href: "/collections/28-mansions" },
-            ].map((g) => (
-              <Link
-                key={g.name}
-                href={g.href}
-                className="group flex items-center gap-3 p-4 rounded-xl border border-[var(--border)] bg-[var(--bg)] hover:border-[rgba(212,168,75,0.3)] hover:shadow-[0_0_20px_rgba(212,168,75,0.1)] transition-all"
-              >
-                <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: `${g.color}22` }}>
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: g.color }} />
+              { name: "Jiao · 角 — Horn Mansion", slug: "jiao-mansion-bracelet", stone: "Lapis Lazuli", color: "#4a9ecf" },
+              { name: "Xing · 星 — Star Mansion", slug: "xing-mansion-bracelet", stone: "Clear Quartz", color: "#e07a3d" },
+              { name: "Kui · 奎 — Legs Mansion", slug: "kui-mansion-bracelet", stone: "White Moonstone", color: "#c0c0c0" },
+              { name: "Dou · 斗 — Dipper Mansion", slug: "dou-mansion-bracelet", stone: "Dark Sodalite", color: "#8b5cf6" },
+            ].map((p) => (
+              <Link key={p.slug} href={`/products/${p.slug}`} className="group">
+                <div className="aspect-square rounded-xl overflow-hidden bg-[var(--bg)] border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
+                  <img
+                    src={`/images/products/${p.slug}.png`}
+                    alt={p.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
-                    {g.name} · {g.zh}
+                <div className="mt-3 px-1">
+                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">
+                    {p.name}
                   </h4>
-                  <p className="text-xs text-[var(--text-muted)]">{g.season} · 7 Mansions</p>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · 28 Mansions</p>
                 </div>
               </Link>
             ))}
           </div>
+
+          <div className="text-center mt-8">
+            <Link href="/collections/28-mansions" className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--accent)] text-[var(--accent)] rounded-full text-sm font-semibold hover:bg-[var(--accent)]/10 transition">
+              Explore All 28 Mansions <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
 
-        <div className="max-w-[540px] mx-auto px-6 mt-16 relative z-10 text-center">
+        <div className="max-w-[540px] mx-auto px-6 mt-16 text-center">
           <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-4">
             Stay Connected
           </span>
