@@ -3,12 +3,13 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Package, ShoppingCart, FileText, Tag, LogOut, ChevronLeft } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingCart, FileText, Tag, ClipboardList, LogOut, ChevronLeft } from "lucide-react";
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/admin" },
   { icon: Package, label: "Products", href: "/admin/products" },
   { icon: ShoppingCart, label: "Orders", href: "/admin/orders" },
+  { icon: ClipboardList, label: "Ops Tasks", href: "/admin/social-tasks" },
   { icon: FileText, label: "Blog", href: "/admin/blog" },
   { icon: Tag, label: "Discounts", href: "/admin/discounts" },
 ];
