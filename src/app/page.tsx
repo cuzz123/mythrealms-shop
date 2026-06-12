@@ -194,18 +194,18 @@ export default async function HomePage() {
       {/* ===== FEATURED PRODUCTS (PRODUCT GRID) ===== */}
       <section className="py-16 bg-[#1A1816]">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Section header */}
-          <div className="text-center mb-16">
-            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-4">
-              The Bestiary Collection
-            </span>
-            <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5] mb-4">
-              Featured Mythical Beasts
-            </h2>
-            <p className="text-[1.0625rem] text-[#A89880] max-w-[580px] mx-auto leading-relaxed">
-              Each piece tells a story from the Classic of Mountains and Seas —
-              handcrafted with reverence for the ancient lore.
-            </p>
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-3">
+                The Bestiary Collection
+              </span>
+              <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5]">
+                Featured Mythical Beasts
+              </h2>
+            </div>
+            <Link href="/collections/beast-pendants" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">
+              View All <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
           {/* Bronze pattern divider */}
@@ -246,46 +246,46 @@ export default async function HomePage() {
       {/* ===== 28 MANSIONS PRODUCTS ===== */}
       <section className="py-16 bg-[var(--surface)]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-8">
-            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-3">
-              Celestial Cartography
-            </span>
-            <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5] mb-3">
-              The Twenty-Eight Mansions
-            </h2>
-            <p className="text-[1.0625rem] text-[#A89880] max-w-[580px] mx-auto leading-relaxed">
-              {"二十八宿"} — 28 crystal bracelets, each mapped to a star in the ancient Chinese sky.
-            </p>
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-3">
+                Celestial Cartography
+              </span>
+              <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5]">
+                The Twenty-Eight Mansions
+              </h2>
+            </div>
+            <Link href="/collections/28-mansions" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">
+              View All 28 <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: "Jiao · 角 — Horn Mansion", slug: "jiao-mansion-bracelet", stone: "Lapis Lazuli", color: "#4a9ecf" },
-              { name: "Xing · 星 — Star Mansion", slug: "xing-mansion-bracelet", stone: "Clear Quartz", color: "#e07a3d" },
-              { name: "Kui · 奎 — Legs Mansion", slug: "kui-mansion-bracelet", stone: "White Moonstone", color: "#c0c0c0" },
-              { name: "Dou · 斗 — Dipper Mansion", slug: "dou-mansion-bracelet", stone: "Dark Sodalite", color: "#8b5cf6" },
+              { name: "Jiao · 角 — Horn", slug: "jiao-mansion-bracelet", stone: "Lapis Lazuli", quadrant: "Azure Dragon" },
+              { name: "Kang · 亢 — Neck", slug: "kang-mansion-bracelet", stone: "Tiger Eye", quadrant: "Azure Dragon" },
+              { name: "Jing · 井 — Well", slug: "jing-mansion-bracelet", stone: "Aquamarine", quadrant: "Vermillion Bird" },
+              { name: "Xing · 星 — Star", slug: "xing-mansion-bracelet", stone: "Clear Quartz", quadrant: "Vermillion Bird" },
+              { name: "Kui · 奎 — Legs", slug: "kui-mansion-bracelet", stone: "White Moonstone", quadrant: "White Tiger" },
+              { name: "Shen · 参 — Three Stars", slug: "shen-mansion-bracelet", stone: "Labradorite", quadrant: "White Tiger" },
+              { name: "Dou · 斗 — Dipper", slug: "dou-mansion-bracelet", stone: "Dark Sodalite", quadrant: "Black Tortoise" },
+              { name: "Nv · 女 — Girl", slug: "nv-mansion-bracelet", stone: "Rose Quartz", quadrant: "Black Tortoise" },
             ].map((p) => (
               <Link key={p.slug} href={`/products/${p.slug}`} className="group">
                 <div className="aspect-square rounded-xl overflow-hidden bg-[var(--bg)] border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
-                  <img
-                    src={`/images/products/${p.slug}.png`}
-                    alt={p.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
-                <div className="mt-3 px-1">
-                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">
-                    {p.name}
-                  </h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · 28 Mansions</p>
+                <div className="mt-2.5 px-1">
+                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {p.quadrant}</p>
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="text-center mt-8">
-            <Link href="/collections/28-mansions" className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--accent)] text-[var(--accent)] rounded-full text-sm font-semibold hover:bg-[var(--accent)]/10 transition">
-              Explore All 28 Mansions <ArrowRight className="w-4 h-4" />
+          <div className="text-center mt-6 sm:hidden">
+            <Link href="/collections/28-mansions" className="inline-flex items-center gap-2 px-5 py-2.5 border border-[var(--accent)] text-[var(--accent)] rounded-full text-sm font-semibold hover:bg-[var(--accent)]/10 transition">
+              View All 28 Mansions <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
