@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>订单 + GMC + Canva 操作指南 — MythRealms</title>
+<style>body{font-family:Georgia,serif;max-width:800px;margin:0 auto;padding:40px 20px;background:#0F0D0E;color:#E8E0D5;line-height:1.8}h1{color:#D4A84B;font-size:2em;border-bottom:1px solid #2A2520;padding-bottom:10px}h2{color:#D4A84B;margin-top:30px}h3{color:#A89880}ol,ul{padding-left:20px}li{margin:10px 0}a{color:#D4A84B}code{background:#1A1816;padding:2px 6px;border-radius:3px;font-size:14px}.step{background:#1A1816;border:1px solid #2A2520;border-radius:8px;padding:16px;margin:12px 0}.tip{background:rgba(212,168,75,0.1);border:1px solid rgba(212,168,75,0.3);border-radius:8px;padding:12px;margin:12px 0}.warn{background:rgba(207,106,75,0.1);border:1px solid rgba(207,106,75,0.3);border-radius:8px;padding:12px;margin:12px 0}table{width:100%;border-collapse:collapse;margin:12px 0}td,th{padding:8px 12px;border:1px solid #2A2520;text-align:left}th{background:#1A1816}</style></head>
+<body>
+<h1>订单处理 + 发货 + GMC 操作指南</h1>
+
+<h2>一、每日: 处理新订单</h2>
+<div class="step">
+  <h3>1.1 查看订单</h3>
+  <ol>
+    <li>打开 <code>https://mythrealms-shop.vercel.app/admin/orders</code></li>
+    <li>登录: <code>admin@mythrealms.com</code> / <code>admin123</code></li>
+    <li>看状态列: <strong>PENDING</strong> (待付款) / <strong>PAID</strong> (已付款待发货) / <strong>SHIPPED</strong> / <strong>DELIVERED</strong></li>
+  </ol>
+  <h3>1.2 发货流程</h3>
+  <table>
+    <tr><th>步骤</th><th>操作</th></tr>
+    <tr><td>1. 确认付款</td><td>检查 LS 或 PayPal 后台确认款项已到账</td></tr>
+    <tr><td>2. 安排制作</td><td>手工制作需要 2-3 周，通知供应商</td></tr>
+    <tr><td>3. 发货</td><td>拿到运单号后 → Admin Orders → 点 <strong>"Ship"</strong> → 状态变为 SHIPPED</td></tr>
+    <tr><td>4. 通知客户</td><td>运单号填入订单备注</td></tr>
+    <tr><td>5. 确认送达</td><td>物流显示签收后 → 点 <strong>"Deliver"</strong> → 状态变为 DELIVERED</td></tr>
+  </table>
+  <h3>1.3 LemonSqueezy 后台</h3>
+  <ol>
+    <li>打开 <a href="https://app.lemonsqueezy.com/orders" target="_blank">app.lemonsqueezy.com/orders</a></li>
+    <li>检查新付款 → 确认金额正确 → 在 Admin Orders 中标记为 PAID</li>
+  </ol>
+  <h3>1.4 PayPal 后台</h3>
+  <ol>
+    <li>打开 <a href="https://www.sandbox.paypal.com" target="_blank">sandbox.paypal.com</a> (沙盒) 或 paypal.com (正式)</li>
+    <li>检查交易记录 → 确认款项状态</li>
+  </ol>
+</div>
+
+<h2>二、每周: 检查库存</h2>
+<div class="step">
+  <ol>
+    <li>Admin → Products → 查看所有产品</li>
+    <li>筛选库存 < 5 的产品</li>
+    <li>如果某个产品卖出较多 → 补货或调整库存数字</li>
+  </ol>
+  <div class="warn">库存扣减在 Webhook 触发时自动执行。退款时库存自动回补。</div>
+</div>
+
+<h2>三、GMC (Google Merchant Center) 检查</h2>
+<div class="step">
+  <h3>3.1 每日检查</h3>
+  <ol>
+    <li>打开 <a href="https://merchants.google.com" target="_blank">merchants.google.com</a></li>
+    <li>左侧 → <strong>"产品"</strong> → 看概览页面</li>
+    <li>"未核准" 数量是否在减少？</li>
+    <li>点击未核准产品 → 查看详细拒绝原因</li>
+  </ol>
+  <h3>3.2 常见拒绝原因及修复</h3>
+  <table>
+    <tr><th>拒绝原因</th><th>修复方法</th></tr>
+    <tr><td>缺少 GTIN</td><td>✅ Feed 已声明 identifier_exists=no</td></tr>
+    <tr><td>图片不符合要求</td><td>检查产品图是否清晰、白色背景、无水印</td></tr>
+    <tr><td>缺少运费信息</td><td>✅ 已在 GMC 设置中配置</td></tr>
+    <tr><td>价格不一致</td><td>确认网站价格和 Feed 价格一致</td></tr>
+    <tr><td>缺少退货政策</td><td>✅ /refund 页面已有完整内容</td></tr>
+  </table>
+  <h3>3.3 Feed 状态</h3>
+  <p>左侧 → 产品 → Feeds → 点击 MythRealms Products → 看 "上次提取" 时间。应该每天自动更新。</p>
+  <p>如果显示 "失败" → 检查 Feed URL: <code>https://mythrealms-shop.vercel.app/api/feed/google</code> 是否可访问。</p>
+</div>
+
+<h2>四、Canva 做图指南</h2>
+<div class="step">
+  <h3>4.1 Pinterest 竖版 Pin (1000x1500)</h3>
+  <ol>
+    <li>打开 <a href="https://canva.com" target="_blank">canva.com</a></li>
+    <li>Create a design → 搜索 "Pinterest Pin" → 选 1000x1500</li>
+    <li>左侧 Uploads → 上传产品图</li>
+    <li>拖产品图到画布中间偏上 (占 60%)</li>
+    <li>下方空白加文字:
+      <ul><li>第一行: 产品英文名 (Add a text box → Serif 字体 → #D4A84B → 字号 36-48)</li>
+      <li>第二行: 材质+价格 (Sans-serif → 白色 → 字号 24)</li></ul>
+    </li>
+    <li>Background 改成 <code>#0F0D0E</code></li>
+    <li>Share → Download → PNG → 上传到 Pinterest</li>
+  </ol>
+  <h3>4.2 关于文字叠加</h3>
+  <p>Pinterest 推荐图片上有 2-8 个词的文字叠加，说明这是什么东西。例如: "14k Gold Pendant" / "Handcrafted Jade Bracelet"。</p>
+  <p>文字区不应超过图片面积的 20%。</p>
+</div>
+
+<p style="margin-top:40px;color:#8A7D6E;font-size:14px">MythRealms Operations · 2026-06-12</p>
+</body></html>

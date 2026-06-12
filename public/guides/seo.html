@@ -1,36 +1,70 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SEO 操作指南 — MythRealms</title>
-<style>body{font-family:Georgia,serif;max-width:800px;margin:0 auto;padding:40px 20px;background:#0F0D0E;color:#E8E0D5;line-height:1.8}h1{color:#D4A84B;font-size:2em;border-bottom:1px solid #2A2520;padding-bottom:10px}h2{color:#D4A84B;margin-top:30px}ol,ul{padding-left:20px}li{margin:8px 0}a{color:#D4A84B}code{background:#1A1816;padding:2px 6px;border-radius:3px;font-size:14px}.step{background:#1A1816;border:1px solid #2A2520;border-radius:8px;padding:16px;margin:12px 0}</style></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SEO 操作指南 (2026) — MythRealms</title>
+<style>body{font-family:Georgia,serif;max-width:800px;margin:0 auto;padding:40px 20px;background:#0F0D0E;color:#E8E0D5;line-height:1.8}h1{color:#D4A84B;font-size:2em;border-bottom:1px solid #2A2520;padding-bottom:10px}h2{color:#D4A84B;margin-top:30px}h3{color:#A89880}ol,ul{padding-left:20px}li{margin:10px 0}a{color:#D4A84B}code{background:#1A1816;padding:2px 6px;border-radius:3px;font-size:14px}.step{background:#1A1816;border:1px solid #2A2520;border-radius:8px;padding:16px;margin:12px 0}.tip{background:rgba(212,168,75,0.1);border:1px solid rgba(212,168,75,0.3);border-radius:8px;padding:12px;margin:12px 0}</style></head>
 <body>
-<h1>SEO 操作指南</h1>
+<h1>SEO 操作指南 (2026年6月最新版)</h1>
 
-<h2>每日: 查看 Search Console</h2>
+<h2>一、每日: Search Console 检查</h2>
 <div class="step">
   <p>打开 <a href="https://search.google.com/search-console" target="_blank">search.google.com/search-console</a></p>
-  <ol><li>左侧 → 效果 → 看过去 7 天的展示次数和点击率</li><li>点击 "查询" 标签 → 看哪些搜索词带来了展示</li><li>记录新出现的搜索词 → 考虑写对应的博客</li></ol>
+  <p>2026 年新版 Search Console 增加了 <strong>AI 驱动的 Performance 报告</strong>。</p>
+  <h3>1.1 查看效果数据</h3>
+  <ol>
+    <li>左侧菜单 → <strong>"效果" (Performance)</strong></li>
+    <li>页面顶部会有 <strong>"New! Customize your Performance report using AI"</strong> 横幅</li>
+    <li>在 AI 提示框输入自然语言查询，例如:
+      <ul><li><code>"Show me my top queries by impressions in the last 28 days"</code></li>
+      <li><code>"Show me CTR trends for my top pages"</code></li>
+      <li><code>"Compare mobile vs desktop impressions"</code></li>
+      <li><code>"Show queries with high impressions but low CTR"</code></li></ul>
+    </li>
+    <li>AI 会自动应用正确的指标、筛选器、日期范围</li>
+    <li>也可手动切换标签: <strong>Queries</strong> / <strong>Pages</strong> / <strong>Countries</strong> / <strong>Devices</strong></li>
+  </ol>
+  <h3>1.2 新功能: 24 小时实时视图</h3>
+  <p>日期范围可选 <strong>"24 hours"</strong> → 查看过去 24 小时内刚刚开始获得展示的新内容。延迟仅几小时。</p>
+  <h3>1.3 品牌 vs 非品牌查询</h3>
+  <p>2026 新增 <strong>"Branded Queries Filter"</strong> → 自动区分品牌搜索和非品牌搜索。追踪品牌认知度增长。</p>
+  <h3>1.4 自定义注释</h3>
+  <p>在图表上添加注释记录重要事件 (新博客发布、产品上线等) → 后续回顾时能看到流量变化的原因。</p>
 </div>
 
-<h2>每周: 发布博客</h2>
+<h2>二、每周: 发布博客</h2>
 <div class="step">
-  <ol><li>确定长尾关键词 (如 "mythical creature jewelry gifts")</li><li>写 300-500 字正文，开头加 120-150 字答案胶囊 (用 &lt;div class="answer-capsule"&gt; 包裹)</li><li>标题用问题格式 (H2)，如 "What is the Nine-Tailed Fox?"</li><li>内部链接: 至少链接到 2 个相关产品页和 1 个分类页</li><li>发布到 <code>/blog/[slug]</code></li></ol>
+  <h3>2.1 关键词研究</h3>
+  <ol>
+    <li>打开 Pinterest 搜索框 → 输入宽泛词 (如 "mythology jewelry") → 不要按回车 → 看自动建议列表 → 这些都是真实搜索词</li>
+    <li>打开 Google → 搜 "mythical creature jewelry" → 看 "People also ask" 和底部的 "Related searches"</li>
+    <li>记录 3 个下周要写的选题</li>
+  </ol>
+  <h3>2.2 写博客 (SEO 清单)</h3>
+  <ul>
+    <li>标题包含目标关键词</li>
+    <li>Meta description 150-160 字符 (自动生成)</li>
+    <li><strong>开头 120-150 字答案胶囊</strong> (用 &lt;div class="answer-capsule"&gt; 包裹) — 这是 AI 搜索优先抓取的内容</li>
+    <li>H2 小标题用问题格式 (如 "What is the Nine-Tailed Fox?")</li>
+    <li>图片 alt 属性包含关键词</li>
+    <li>内部链接: 至少链接到 2 个相关产品页 + 1 个分类页</li>
+    <li>Schema.org 结构化数据 (已自动生成)</li>
+  </ul>
 </div>
 
-<h2>每周: 检查 GMC</h2>
+<h2>三、每周: GMC 检查</h2>
 <div class="step">
-  <p>打开 <a href="https://merchants.google.com" target="_blank">merchants.google.com</a></p>
-  <p>产品 → 所有产品 → 查看未核准数量是否减少。如有拒绝原因，截图分析。</p>
+  <ol>
+    <li>打开 <a href="https://merchants.google.com" target="_blank">merchants.google.com</a></li>
+    <li>左侧 → 产品 → 所有产品 → 查看未核准数量</li>
+    <li>点击未核准产品 → 查看拒绝原因</li>
+    <li>Feed 自动每天更新，新问题会自动出现</li>
+  </ol>
 </div>
 
-<h2>博客 SEO 清单</h2>
+<h2>四、2026 SEO 新趋势</h2>
 <ul>
-  <li>标题包含目标关键词</li>
-  <li>Meta description 150-160 字符</li>
-  <li>H2 小标题用问题格式</li>
-  <li>图片 alt 属性包含关键词</li>
-  <li>答案胶囊放文章开头</li>
-  <li>内部链接 2-3 个</li>
+  <li><strong>AI Overviews</strong> 出现在 15-30% 的 Google 搜索中，传统排名点击率下降</li>
+  <li><strong>GEO > SEO</strong>: LLM 引用的流量转化率是传统搜索的 4.4 倍</li>
+  <li><strong>仅 38% 的 AI Overview 引用来自 Google Top 10</strong> — 不排第一也能被引用</li>
+  <li>结构化数据 (FAQ/Product Schema) 使 AI 可见性提升 30-40%</li>
 </ul>
 
-<p style="margin-top:40px;color:#8A7D6E;font-size:14px">MythRealms Operations — 2026-06</p>
+<p style="margin-top:40px;color:#8A7D6E;font-size:14px">MythRealms Operations · 2026-06-12</p>
 </body></html>
