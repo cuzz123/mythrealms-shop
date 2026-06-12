@@ -49,23 +49,36 @@ export default async function HomePage() {
       {/* ===== HERO CAROUSEL ===== */}
       <HeroCarousel />
 
+      {/* ===== TRUST BAR ===== */}
+      <div className="bg-[#0A0808] border-b border-[#2A2520]">
+        <div className="max-w-7xl mx-auto px-6 py-3 flex justify-center gap-6 sm:gap-10 text-xs text-[#8A7D6E] font-medium overflow-x-auto whitespace-nowrap">
+          <span>Free Shipping Over $69.99</span>
+          <span className="text-[#3A3220]">|</span>
+          <span>30-Day Returns</span>
+          <span className="text-[#3A3220]">|</span>
+          <span>Handcrafted to Order</span>
+          <span className="text-[#3A3220]">|</span>
+          <span>Secure Checkout</span>
+        </div>
+      </div>
+
       {/* ===== CATEGORIES — horizontal scroll on mobile ===== */}
       <section className="py-10 bg-[#0F0D0E]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="overflow-x-auto scrollbar-hide -mx-2 px-2">
             <div className="flex gap-3 lg:grid lg:grid-cols-4 min-w-max lg:min-w-0">
               {[
-                { name: "Mythical Beasts", count: "12", img: "/images/categories/beast-pendants.png", href: "/collections/beast-pendants" },
-                { name: "28 Mansions", count: "28", img: "/images/categories/28-mansions-bracelets.png", href: "/collections/28-mansions" },
-                { name: "Zodiac Amulets", count: "12", img: "/images/categories/zodiac-amulets.png", href: "/collections/zodiac-amulets" },
-                { name: "Four Seasons", count: "12", img: "/images/categories/four-seasons-collection.png", href: "/collections/four-seasons" },
+                { name: "Find Your Guardian", count: "12 Beasts", img: "/images/categories/beast-pendants.png", href: "/collections/beast-pendants", tag: "Which beast guards your soul?" },
+                { name: "Find Your Star", count: "28 Mansions", img: "/images/categories/28-mansions-bracelets.png", href: "/collections/28-mansions", tag: "Discover your celestial mansion" },
+                { name: "Find Your Destiny", count: "12 Zodiac", img: "/images/categories/zodiac-amulets.png", href: "/collections/zodiac-amulets", tag: "The amulet of your birth year" },
+                { name: "Find Your Season", count: "12 Seasons", img: "/images/categories/four-seasons-collection.png", href: "/collections/four-seasons", tag: "Jewelry for every season of life" },
               ].map((c) => (
                 <Link key={c.name} href={c.href} className="group relative w-[180px] lg:w-auto aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2520] flex-shrink-0 hover:border-[rgba(212,168,75,0.3)] transition-all">
                   <img src={c.img} alt={c.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.3)] to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <h3 className="font-serif text-base font-semibold text-[#E8E0D5]">{c.name}</h3>
-                    <p className="text-xs text-[var(--accent)]">{c.count} pieces</p>
+                    <p className="text-xs text-[var(--accent)]">{c.tag}</p>
                   </div>
                 </Link>
               ))}
@@ -134,6 +147,26 @@ export default async function HomePage() {
           <h2 className="font-serif text-3xl font-bold text-[#E8E0D5] mb-3">Join the Expedition · {"探索上古"}</h2>
           <p className="text-[#A89880] mb-8 leading-relaxed">Receive tales from the bestiary, early access to new collections, and exclusive discounts. No spam — only legends worthy of your inbox.</p>
           <NewsletterForm />
+        </div>
+      </section>
+
+      {/* ===== SOCIAL PROOF ===== */}
+      <section className="py-12 bg-[var(--surface)] border-t border-[var(--border)]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Join 1,000+ Guardians</h2>
+          <p className="text-[var(--text-muted)] text-sm mb-6">Each piece handcrafted for those who carry ancient wisdom</p>
+          <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
+            {[
+              { icon: "✧", text: "Handcrafted in small batches" },
+              { icon: "✦", text: "Ethically sourced gemstones" },
+              { icon: "♛", text: "30-day love it or return it" },
+            ].map((s) => (
+              <div key={s.text} className="bg-[var(--bg)] border border-[var(--border)] rounded-lg p-4 text-center">
+                <span className="text-[var(--accent)] text-xl">{s.icon}</span>
+                <p className="text-xs text-[var(--text-secondary)] mt-1">{s.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
