@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
   { image:"/images/hero/hero-ninefox.webp", title:"Nine-Tailed Fox · 九尾狐", subtitle:"14k gold · diamond pavé · nine arcs of ancient wisdom", cta:"Shop Now", href:"/products/nine-tailed-fox-pendant" },
-  { image:"/images/products/phoenix-rebirth-necklace.png", title:"Phoenix · 凤凰", subtitle:"Rose gold necklace — graduating fire opals capture the moment of rebirth", cta:"Shop Now", href:"/products/phoenix-rebirth-necklace" },
+  { image:"/images/products/phoenix.png", title:"Phoenix · 凤凰", subtitle:"Rose gold necklace — graduating fire opals capture the moment of rebirth", cta:"Shop Now", href:"/products/phoenix-rebirth-necklace" },
   { image:"/images/products/summer-sun-ring.png", title:"Summer Sun · 夏至", subtitle:"Gold sunburst ring — citrine center surrounded by diamond rays, Four Seasons collection", cta:"Shop Now", href:"/products/summer-sun-ring" },
   { image:"/images/hero/hero-mansions.webp", title:"28 Mansions · 二十八宿", subtitle:"28 crystal bracelets — each mapped to a star in the ancient Chinese sky", cta:"Explore", href:"/collections/28-mansions" },
   { image:"/images/products/spring-cherry-necklace.png", title:"Cherry Blossom · 春樱", subtitle:"Rose gold necklace — pink sapphire petals with diamond center, Four Seasons collection", cta:"Shop Now", href:"/products/spring-cherry-necklace" },
