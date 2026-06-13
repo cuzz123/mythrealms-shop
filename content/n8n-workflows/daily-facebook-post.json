@@ -1,0 +1,40 @@
+{
+  "name": "MythRealms — Daily Facebook Page Post",
+  "nodes": [
+    {
+      "parameters": { "rule": { "interval": [{}] }, "triggerTimes": { "hour": 10, "minute": 15 } },
+      "name": "Daily 10:15am EST",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const posts = [\n  {\n    message: '2000 years before Tolkien, China mapped the human soul onto 277 mythical creatures. Each one guards a different part of who you are. 🐉✨\\n\\nDiscover your guardian at mythrealms-shop.vercel.app',\n    link: 'https://mythrealms-shop.vercel.app/guardian-quiz'\n  },\n  {\n    message: 'Handcrafted in 14k gold. Inspired by legends older than the Silk Road.\\n\\nThe Nine-Tailed Fox pendant — for the one who\\'s been underestimated.\\n\\nShop the Bestiary: mythrealms-shop.vercel.app',\n    link: 'https://mythrealms-shop.vercel.app/collections/beast-pendants'\n  },\n  {\n    message: '\\"Jade was called the Stone of Heaven. Confucius listed eleven virtues of jade.\\" 💚\\n\\nDiscover the Five Elements collection — authentic gemstones worn by ancient emperors.\\n\\nhttps://mythrealms-shop.vercel.app/collections/five-elements',\n    link: 'https://mythrealms-shop.vercel.app/collections/five-elements'\n  },\n  {\n    message: '28 bracelets. 28 lunar mansions. 28 destinies. ⭐\\n\\nThe Chinese mapped the sky differently than the West. Find your star in the ancient celestial map.\\n\\nhttps://mythrealms-shop.vercel.app/collections/28-mansions',\n    link: 'https://mythrealms-shop.vercel.app/collections/28-mansions'\n  },\n];\n\nconst idx = new Date().getDate() % posts.length;\nreturn [{ json: posts[idx] }];"
+      },
+      "name": "Rotate Content Daily",
+      "type": "n8n-nodes-base.code",
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/YOUR_FACEBOOK_PAGE_ID/feed",
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "message", "value": "={{ $json.message }}" },
+            { "name": "link", "value": "={{ $json.link }}" }
+          ]
+        }
+      },
+      "name": "Post to Facebook Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Daily 10:15am EST": { "main": [[ { "node": "Rotate Content Daily", "type": "main", "index": 0 } ]] },
+    "Rotate Content Daily": { "main": [[ { "node": "Post to Facebook Page", "type": "main", "index": 0 } ]] }
+  ]
+}

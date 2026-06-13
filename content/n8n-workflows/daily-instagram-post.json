@@ -1,0 +1,59 @@
+{
+  "name": "MythRealms — Daily Instagram Post",
+  "nodes": [
+    {
+      "parameters": { "rule": { "interval": [{}] }, "triggerTimes": { "hour": 10, "minute": 0 } },
+      "name": "Daily 10am EST",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const products = [\n  { name: 'Nine-Tailed Fox Pendant', slug: 'nine-tailed-fox-pendant', emoji: '🦊' },\n  { name: 'Phoenix Necklace', slug: 'phoenix-rebirth-necklace', emoji: '🔥' },\n  { name: 'Azure Dragon Ring', slug: 'azure-dragon-ring', emoji: '🐉' },\n  { name: 'White Tiger Cuff', slug: 'white-tiger-guardian-cuff', emoji: '🐅' },\n  { name: 'Qilin Bracelet', slug: 'qilin-protection-bracelet', emoji: '✨' },\n  { name: 'Black Tortoise Bracelet', slug: 'black-tortoise-endurance-bracelet', emoji: '🐢' },\n  { name: '28 Mansions — Jiao', slug: 'jiao-mansion-bracelet', emoji: '⭐' },\n];\n\nconst d = new Date();\nconst idx = (d.getDate() - 1) % products.length;\nconst p = products[idx];\nconst imageUrl = `https://mythrealms-shop.vercel.app/images/products/${p.slug}.png`;\nconst caption = `${p.emoji} ${p.name}\n\nHandcrafted in 14k gold and sterling silver.\nInspired by the Classic of Mountains and Seas — China\\'s oldest book of legends.\n\nTap the link in bio to discover your guardian.\n\n#mythicaljewelry #chinesemythology #handcrafted #luxuryjewelry #shanhaijing`;\n\nreturn [{ json: { caption, imageUrl, productUrl: `https://mythrealms-shop.vercel.app/products/${p.slug}` } }];"
+      },
+      "name": "Rotate Product Daily",
+      "type": "n8n-nodes-base.code",
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/YOUR_INSTAGRAM_BUSINESS_ID/media",
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "image_url", "value": "={{ $json.imageUrl }}" },
+            { "name": "caption", "value": "={{ $json.caption }}" }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Create Instagram Media",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/YOUR_INSTAGRAM_BUSINESS_ID/media_publish",
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "creation_id", "value": "={{ $json.id }}" }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Publish Instagram",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Daily 10am EST": { "main": [[ { "node": "Rotate Product Daily", "type": "main", "index": 0 } ]] },
+    "Rotate Product Daily": { "main": [[ { "node": "Create Instagram Media", "type": "main", "index": 0 } ]] },
+    "Create Instagram Media": { "main": [[ { "node": "Publish Instagram", "type": "main", "index": 0 } ]] }
+  ]
+}
