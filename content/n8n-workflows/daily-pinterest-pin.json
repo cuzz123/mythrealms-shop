@@ -1,0 +1,62 @@
+{
+  "name": "MythRealms — Daily Pinterest Pin Generator",
+  "nodes": [
+    {
+      "parameters": { "rule": { "interval": [{}] } },
+      "name": "Schedule Trigger (Daily 8pm EST)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mythrealms-shop.vercel.app/api/automation/generate-pin",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "productSlug", "value": "nine-tailed-fox-pendant" },
+            { "name": "productName", "value": "Nine-Tailed Fox · 九尾狐 — 14k Gold Pendant" },
+            { "name": "mood", "value": "story" }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Generate Pin Content (AI)",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pinterest.com/v5/pins",
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "title", "value": "={{ $json.title }}" },
+            { "name": "description", "value": "={{ $json.description }}" },
+            { "name": "link", "value": "={{ $json.link }}" },
+            { "name": "board_id", "value": "YOUR_BOARD_ID" },
+            { "name": "media_source", "value": "YOUR_IMAGE_URL" }
+          ]
+        }
+      },
+      "name": "Publish to Pinterest",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = [\n  { slug: 'nine-tailed-fox-pendant', name: 'Nine-Tailed Fox · 九尾狐 — 14k Gold Pendant' },\n  { slug: 'phoenix-rebirth-necklace', name: 'Phoenix · 凤凰 — Rose Gold Necklace' },\n  { slug: 'azure-dragon-ring', name: 'Azure Dragon · 青龙 — Sapphire Ring' },\n  // Add all 73 products here or rotate daily\n];\n\nconst today = new Date().getDay();\nconst item = items[today % items.length];\nreturn [{ json: { productSlug: item.slug, productName: item.name, mood: today % 2 === 0 ? 'story' : 'craft' } }];"
+      },
+      "name": "Rotate Product Daily",
+      "type": "n8n-nodes-base.code",
+      "position": [250, 400]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger (Daily 8pm EST)": { "main": [[ { "node": "Rotate Product Daily", "type": "main", "index": 0 } ]] },
+    "Rotate Product Daily": { "main": [[ { "node": "Generate Pin Content (AI)", "type": "main", "index": 0 } ]] },
+    "Generate Pin Content (AI)": { "main": [[ { "node": "Publish to Pinterest", "type": "main", "index": 0 } ]] }
+  }
+}
