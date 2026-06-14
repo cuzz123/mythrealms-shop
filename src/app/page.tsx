@@ -5,6 +5,7 @@ import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { GuardianMatch } from "@/components/layout/GuardianMatch";
 import { HomeBlogAsync, HomeBlogFallback } from "@/components/layout/HomeBlogAsync";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { StarfieldCanvas } from "@/components/ui/StarfieldCanvas";
 
 export const dynamic = "force-dynamic";
 
@@ -13,8 +14,7 @@ export default async function HomePage() {
     <>
       {/* ===== HERO ===== */}
       <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-[#0F0D0E] pt-[72px]">
-        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(1.5px 1.5px at 50% 50%, rgba(255,255,255,0.5) 0%, transparent 100%)", backgroundSize: "100px 100px", animation: "twinkle1 4s ease-in-out infinite alternate" }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(1px 1px at 35% 35%, rgba(212,168,75,0.4) 0%, transparent 100%)", backgroundSize: "140px 140px", animation: "twinkle2 8s ease-in-out infinite alternate" }} />
+        <StarfieldCanvas />
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(212,168,75,0.04) 0%, transparent 60%)" }} />
         <div className="relative z-10 text-center max-w-[800px] px-6 py-10" style={{ animation: "fadeInUp 1s ease-out" }}>
           <div className="inline-flex items-center gap-2 px-4 py-1 mb-8 rounded-full border border-[rgba(212,168,75,0.3)] bg-[rgba(212,168,75,0.1)] text-sm text-[#D4A84B] font-medium tracking-[0.06em]">
