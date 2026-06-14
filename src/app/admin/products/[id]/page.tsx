@@ -3,7 +3,7 @@
 import { useState, useEffect, FormEvent, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { Plus, Trash2, Save, ArrowLeft, Loader2 } from "lucide-react";
+import { Plus, Trash2, Save, ArrowLeft, Loader2, Upload } from "lucide-react";
 import Link from "next/link";
 import { slugify } from "@/lib/utils";
 
@@ -42,6 +42,7 @@ export default function EditProductPage() {
   const [isActive, setIsActive] = useState(true);
   const [variants, setVariants] = useState<VariantRow[]>([]);
   const [images, setImages] = useState<ImageRow[]>([]);
+  const [uploading, setUploading] = useState<string | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -150,6 +151,27 @@ export default function EditProductPage() {
     setImages((prev) =>
       prev.map((img) => (img.key === key ? { ...img, url } : img))
     );
+  };
+
+  const handleUpload = async (key: string) => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/png,image/jpeg,image/webp";
+    input.onchange = async (e: any) => {
+      const file = e.target?.files?.[0];
+      if (!file) return;
+      setUploading(key);
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await fetch("/api/upload", { method: "POST", body: formData });
+        const data = await res.json();
+        if (data.url) updateImage(key, data.url);
+        else alert(data.error || "Upload failed");
+      } catch { alert("Upload failed. Check BLOB_READ_WRITE_TOKEN."); }
+      finally { setUploading(null); }
+    };
+    input.click();
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -511,6 +533,15 @@ export default function EditProductPage() {
                     placeholder="https://example.com/image.jpg"
                   />
                 </div>
+                <button
+                  type="button"
+                  onClick={() => handleUpload(img.key)}
+                  disabled={uploading === img.key}
+                  className="p-2 text-[var(--accent)] hover:bg-[var(--accent)]/10 rounded transition-colors disabled:opacity-50"
+                  title="Upload image"
+                >
+                  {uploading === img.key ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                </button>
                 <button
                   type="button"
                   onClick={() => removeImage(img.key)}
