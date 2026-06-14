@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
-import { ProductGrid } from "@/components/product/ProductGrid";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { GuardianMatch } from "@/components/layout/GuardianMatch";
-import { FeaturedProductsSection, FeaturedProductsFallback } from "@/components/layout/FeaturedProducts";
 import { HomeBlogAsync, HomeBlogFallback } from "@/components/layout/HomeBlogAsync";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
@@ -88,22 +86,6 @@ export default async function HomePage() {
       </section>
 
       {/* ===== FEATURED PRODUCTS ===== */}
-      <section className="py-14 bg-[#1A1816]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-end justify-between mb-8">
-            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Featured Mythical Beasts</h2>
-            <Link href="/collections/beast-pendants" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All <ArrowRight className="w-4 h-4" /></Link>
-          </div>
-          <Suspense fallback={<FeaturedProductsFallback />}>
-            <FeaturedProductsSection />
-          </Suspense>
-          <div className="text-center mt-6 sm:hidden">
-            <Link href="/collections/beast-pendants" className="inline-flex items-center gap-2 px-5 py-2.5 border border-[var(--accent)] text-[var(--accent)] rounded-full text-sm font-semibold">View All <ArrowRight className="w-4 h-4" /></Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 28 MANSIONS ===== */}
       <section className="py-14 bg-[#1A1816]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">

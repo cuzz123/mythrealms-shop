@@ -5,14 +5,12 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
-  { image:"/images/hero/hero-ninefox.webp", title:"Nine-Tailed Fox · 九尾狐", subtitle:"14k gold · diamond pavé · nine arcs of ancient wisdom", cta:"Shop Now", href:"/products/nine-tailed-fox-pendant" },
-  { image:"/images/products/phoenix.png", title:"Phoenix · 凤凰", subtitle:"Rose gold necklace — graduating fire opals capture the moment of rebirth", cta:"Shop Now", href:"/products/phoenix-rebirth-necklace" },
-  { image:"/images/products/summer-sun-ring.png", title:"Summer Sun · 夏至", subtitle:"Gold sunburst ring — citrine center surrounded by diamond rays", cta:"Shop Now", href:"/products/summer-sun-ring" },
-  { image:"/images/hero/hero-mansions.webp", title:"28 Mansions · 二十八宿", subtitle:"28 crystal bracelets — each mapped to a star in the ancient Chinese sky", cta:"Explore", href:"/collections/28-mansions" },
-  { image:"/images/products/spring-cherry-necklace.png", title:"Cherry Blossom · 春樱", subtitle:"Rose gold — pink sapphire petals with diamond center", cta:"Shop Now", href:"/products/spring-cherry-necklace" },
-  { image:"/images/products/artist-collab-jade-minimal.png", title:"Jade Minimal · 原石麒麟", subtitle:"Raw Burmese jadeite — one-of-a-kind collector piece, limited to 30", cta:"Shop Now", href:"/collections/artist-collabs" },
-  { image:"/images/products/artist-collab-porcelain-phoenix.png", title:"Porcelain Phoenix · 青花凤凰", subtitle:"Ming dynasty cobalt blue porcelain — limited to 75 pieces", cta:"Shop Now", href:"/collections/artist-collabs" },
-  { image:"/images/products/winter-snowflake-pendant.png", title:"Winter Snowflake · 冬至", subtitle:"White gold with brilliant diamonds — each snowflake unique", cta:"Shop Now", href:"/products/winter-snowflake-pendant" },
+  { image:"/images/hero/hero-mansions.webp", title:"28 Mansions · 二十八宿", subtitle:"28 crystal bracelets — each mapped to a star in the ancient Chinese sky", cta:"Shop Now", href:"/collections/28-mansions" },
+  { image:"/images/products/water-element-bracelet.png", title:"Five Elements · 五行", subtitle:"Wood · Fire · Earth · Metal · Water — the ancient Chinese philosophy in gemstone form", cta:"Shop Now", href:"/collections/five-elements" },
+  { image:"/images/products/moon-full-medallion.png", title:"Moon Phases · 月相", subtitle:"From crescent to full — each phase a moment in the moon goddess journey across the sky", cta:"Shop Now", href:"/collections/moon-phases" },
+  { image:"/images/products/pearl-aquamarine-bracelet.png", title:"Ocean Pearls · 海珠", subtitle:"Akoya pearls and aquamarine — each pearl a crystallized tear from ancient merfolk legend", cta:"Shop Now", href:"/collections/ocean-pearls" },
+  { image:"/images/products/spring-cherry-necklace.png", title:"Cherry Blossom · 春樱", subtitle:"Rose gold — pink sapphire petals with diamond center, Four Seasons collection", cta:"Shop Now", href:"/collections/four-seasons" },
+  { image:"/images/products/butterfly-bracelet.png", title:"Butterfly Dream · 蝶梦", subtitle:"Rose gold and diamond — Zhuangzi's dream of the butterfly, captured in precious metal", cta:"Shop Now", href:"/collections/butterfly-dream" },
 ];
 
 export function HeroCarousel() {
