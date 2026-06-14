@@ -1,6 +1,5 @@
-// POST /api/upload — Upload image to Vercel Blob
+// POST /api/upload — Simple file upload (base64, no external service needed)
 
-import { put } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -12,23 +11,28 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // Validate file type
-    const allowedTypes = ["image/png", "image/jpeg", "image/webp", "image/avif"];
+    const allowedTypes = ["image/png", "image/jpeg", "image/webp"];
     if (!allowedTypes.includes(file.type)) {
-      return NextResponse.json({ error: "Only PNG, JPEG, WebP, and AVIF are allowed" }, { status: 400 });
+      return NextResponse.json({ error: "Only PNG, JPEG, WebP allowed" }, { status: 400 });
     }
 
-    // Validate file size (max 10MB)
-    if (file.size > 10 * 1024 * 1024) {
-      return NextResponse.json({ error: "File must be under 10MB" }, { status: 400 });
+    if (file.size > 5 * 1024 * 1024) {
+      return NextResponse.json({ error: "Max 5MB" }, { status: 400 });
     }
 
-    const filename = `products/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
-    const blob = await put(filename, file, { access: "public" });
+    // Convert to base64 data URL
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const base64 = buffer.toString("base64");
+    const dataUrl = `data:${file.type};base64,${base64}`;
 
-    return NextResponse.json({ url: blob.url, filename: blob.pathname });
+    return NextResponse.json({
+      url: dataUrl,
+      filename: file.name,
+      size: file.size,
+    });
   } catch (e: any) {
-    console.error("Upload error:", e);
-    return NextResponse.json({ error: e?.message || "Upload failed" }, { status: 500 });
+    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 }
+
