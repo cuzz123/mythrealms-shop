@@ -17,7 +17,6 @@ const navLinks = [
   { label: "Pearls", href: "/collections/ocean-pearls" },
   { label: "Quiz", href: "/guardian-quiz" },
 ];
-];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

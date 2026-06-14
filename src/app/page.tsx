@@ -86,12 +86,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ===== FEATURED PRODUCTS ===== */}
       <section className="py-14 bg-[#1A1816]">
