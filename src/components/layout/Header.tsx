@@ -11,12 +11,12 @@ import { SearchOverlay } from "./SearchOverlay";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Bestiary", href: "/collections/beast-pendants" },
   { label: "28 Mansions", href: "/collections/28-mansions" },
   { label: "Elements", href: "/collections/five-elements" },
-  { label: "Seasons", href: "/collections/four-seasons" },
-  { label: "Zodiac", href: "/collections/zodiac-amulets" },
+  { label: "Moon", href: "/collections/moon-phases" },
+  { label: "Pearls", href: "/collections/ocean-pearls" },
   { label: "Quiz", href: "/guardian-quiz" },
+];
 ];
 
 export function Header() {

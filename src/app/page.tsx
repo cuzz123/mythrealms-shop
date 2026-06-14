@@ -68,10 +68,10 @@ export default async function HomePage() {
           <div className="overflow-x-auto scrollbar-hide -mx-2 px-2">
             <div className="flex gap-3 lg:grid lg:grid-cols-4 min-w-max lg:min-w-0">
               {[
-                { name: "Find Your Guardian", count: "12 Beasts", img: "/images/categories/beast-pendants.png", href: "/collections/beast-pendants", tag: "Which beast guards your soul?" },
-                { name: "Find Your Star", count: "28 Mansions", img: "/images/categories/28-mansions-bracelets.png", href: "/collections/28-mansions", tag: "Discover your celestial mansion" },
-                { name: "Find Your Destiny", count: "12 Zodiac", img: "/images/categories/zodiac-amulets.png", href: "/collections/zodiac-amulets", tag: "The amulet of your birth year" },
-                { name: "Find Your Season", count: "12 Seasons", img: "/images/categories/four-seasons-collection.png", href: "/collections/four-seasons", tag: "Jewelry for every season of life" },
+                { name: "28 Mansions", sub: "28 Celestial Bracelets", img: "/images/categories/28-mansions-bracelets.png", href: "/collections/28-mansions", tag: "Find your star in the ancient sky" },
+                { name: "Five Elements", sub: "5 Element Bracelets", img: "/images/categories/five-elements-stones.png", href: "/collections/five-elements", tag: "Wood · Fire · Earth · Metal · Water" },
+                { name: "Moon Phases", sub: "8 Lunar Bracelets", img: "/images/products/moon-full-medallion.png", href: "/collections/moon-phases", tag: "Waxing · Full · Waning — the cycle of Chang'e" },
+                { name: "Ocean Pearls", sub: "5 Pearl Bracelets", img: "/images/products/pearl-aquamarine-bracelet.png", href: "/collections/ocean-pearls", tag: "Mermaid tears crystallized in gold" },
               ].map((c) => (
                 <Link key={c.name} href={c.href} className="group relative w-[180px] lg:w-auto aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2520] flex-shrink-0 hover:border-[rgba(212,168,75,0.3)] transition-all">
                   <img src={c.img} alt={c.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -80,6 +80,12 @@ export default async function HomePage() {
                     <h3 className="font-serif text-base font-semibold text-[#E8E0D5]">{c.name}</h3>
                     <p className="text-xs text-[var(--accent)]">{c.tag}</p>
                   </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
                 </Link>
               ))}
             </div>
@@ -104,7 +110,7 @@ export default async function HomePage() {
       </section>
 
       {/* ===== 28 MANSIONS ===== */}
-      <section className="py-14 bg-[var(--surface)]">
+      <section className="py-14 bg-[#1A1816]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">
             <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">28 Mansions · 二十八宿</h2>
@@ -112,14 +118,14 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: "Jiao · 角 — Horn", slug: "jiao-mansion-bracelet", stone: "Lapis Lazuli", quadrant: "Azure Dragon" },
-              { name: "Kang · 亢 — Neck", slug: "kang-mansion-bracelet", stone: "Tiger Eye", quadrant: "Azure Dragon" },
-              { name: "Jing · 井 — Well", slug: "jing-mansion-bracelet", stone: "Aquamarine", quadrant: "Vermillion Bird" },
-              { name: "Xing · 星 — Star", slug: "xing-mansion-bracelet", stone: "Clear Quartz", quadrant: "Vermillion Bird" },
-              { name: "Kui · 奎 — Legs", slug: "kui-mansion-bracelet", stone: "White Moonstone", quadrant: "White Tiger" },
-              { name: "Shen · 参 — Three Stars", slug: "shen-mansion-bracelet", stone: "Labradorite", quadrant: "White Tiger" },
-              { name: "Dou · 斗 — Dipper", slug: "dou-mansion-bracelet", stone: "Dark Sodalite", quadrant: "Black Tortoise" },
-              { name: "Nv · 女 — Girl", slug: "nv-mansion-bracelet", stone: "Rose Quartz", quadrant: "Black Tortoise" },
+              { name: "Jiao · 角 — Horn", slug: "jiao-mansion-bracelet", stone: "Lapis Lazuli" },
+              { name: "Kang · 亢 — Neck", slug: "kang-mansion-bracelet", stone: "Tiger Eye" },
+              { name: "Jing · 井 — Well", slug: "jing-mansion-bracelet", stone: "Aquamarine" },
+              { name: "Xing · 星 — Star", slug: "xing-mansion-bracelet", stone: "Clear Quartz" },
+              { name: "Kui · 奎 — Legs", slug: "kui-mansion-bracelet", stone: "White Moonstone" },
+              { name: "Shen · 参 — Three Stars", slug: "shen-mansion-bracelet", stone: "Labradorite" },
+              { name: "Dou · 斗 — Dipper", slug: "dou-mansion-bracelet", stone: "Dark Sodalite" },
+              { name: "Nv · 女 — Girl", slug: "nv-mansion-bracelet", stone: "Rose Quartz" },
             ].map((p) => (
               <Link key={p.slug} href={`/products/${p.slug}`} className="group">
                 <div className="aspect-square rounded-xl overflow-hidden bg-[var(--bg)] border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
@@ -127,13 +133,70 @@ export default async function HomePage() {
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {p.quadrant}</p>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone}</p>
                 </div>
               </Link>
             ))}
           </div>
           <div className="text-center mt-6 sm:hidden">
             <Link href="/collections/28-mansions" className="inline-flex items-center gap-2 px-5 py-2.5 border border-[var(--accent)] text-[var(--accent)] rounded-full text-sm font-semibold">View All 28 <ArrowRight className="w-4 h-4" /></Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FIVE ELEMENTS ===== */}
+      <section className="py-14 bg-[var(--surface)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-end justify-between mb-8">
+            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Five Elements · 五行</h2>
+            <Link href="/collections/five-elements" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All <ArrowRight className="w-4 h-4" /></Link>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            {[
+              { name: "Wood · 木", slug: "wood-element-bracelet", stone: "Green Jade" },
+              { name: "Fire · 火", slug: "fire-element-bracelet", stone: "Red Garnet" },
+              { name: "Earth · 土", slug: "earth-element-bracelet", stone: "Tiger Eye" },
+              { name: "Metal · 金", slug: "metal-element-bracelet", stone: "Moonstone" },
+              { name: "Water · 水", slug: "water-element-bracelet", stone: "Lapis Lazuli" },
+            ].map((p) => (
+              <Link key={p.slug} href={`/products/${p.slug}`} className="group">
+                <div className="aspect-square rounded-xl overflow-hidden bg-[var(--bg)] border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
+                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="mt-2.5 px-1">
+                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== NEW COLLECTIONS ===== */}
+      <section className="py-14 bg-[#1A1816]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-end justify-between mb-8">
+            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">New Arrivals</h2>
+            <Link href="/collections" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All Collections <ArrowRight className="w-4 h-4" /></Link>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { name: "Moon Phases · 月相", slug: "moon-full-medallion", stone: "Moonstone & Diamond", href: "/collections/moon-phases" },
+              { name: "Celestial Stars · 星辰", slug: "star-constellation-necklace", stone: "Diamond & White Gold", href: "/collections/celestial-stars" },
+              { name: "Ocean Pearls · 海珠", slug: "pearl-aquamarine-bracelet", stone: "Akoya Pearl & Aquamarine", href: "/collections/ocean-pearls" },
+              { name: "Butterfly Dream · 蝶梦", slug: "butterfly-bracelet", stone: "Rose Gold & Diamond", href: "/collections/butterfly-dream" },
+            ].map((p) => (
+              <Link key={p.slug} href={p.href} className="group">
+                <div className="aspect-square rounded-xl overflow-hidden bg-[var(--bg)] border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
+                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="mt-2.5 px-1">
+                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
