@@ -112,10 +112,6 @@ export default async function HomePage() {
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {formatPrice(p.price)}</p>
                 </div>
-                <div className="mt-2.5 px-1">
-                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone}</p>
-                </div>
               </Link>
             ))}
           </div>
@@ -148,10 +144,6 @@ export default async function HomePage() {
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {formatPrice(p.price)}</p>
                 </div>
-                <div className="mt-2.5 px-1">
-                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone}</p>
-                </div>
               </Link>
             ))}
           </div>
@@ -179,10 +171,6 @@ export default async function HomePage() {
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {formatPrice(p.price)}</p>
-                </div>
-                <div className="mt-2.5 px-1">
-                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone}</p>
                 </div>
               </Link>
             ))}
