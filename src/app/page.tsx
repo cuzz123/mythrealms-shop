@@ -66,10 +66,10 @@ export default async function HomePage() {
           <div className="overflow-x-auto scrollbar-hide -mx-2 px-2">
             <div className="flex gap-3 lg:grid lg:grid-cols-4 min-w-max lg:min-w-0">
               {[
-                { name: "28 Mansions", sub: "28 Celestial Bracelets", img: "/images/categories/28-mansions-bracelets.png", href: "/collections/28-mansions", tag: "Find your star in the ancient sky" },
-                { name: "Five Elements", sub: "5 Element Bracelets", img: "/images/categories/five-elements-stones.png", href: "/collections/five-elements", tag: "Wood · Fire · Earth · Metal · Water" },
-                { name: "Moon Phases", sub: "8 Lunar Bracelets", img: "/images/products/moon-full-medallion.png", href: "/collections/moon-phases", tag: "Waxing · Full · Waning — the cycle of Chang'e" },
-                { name: "Ocean Pearls", sub: "5 Pearl Bracelets", img: "/images/products/pearl-aquamarine-bracelet.png", href: "/collections/ocean-pearls", tag: "Mermaid tears crystallized in gold" },
+                { name: "28 Mansions", sub: "28 Celestial Bracelets", img: "/images/categories/cat-28mansions.png", href: "/collections/28-mansions", tag: "Find your star in the ancient sky" },
+                { name: "Five Elements", sub: "5 Element Bracelets", img: "/images/categories/cat-elements.png", href: "/collections/five-elements", tag: "Wood · Fire · Earth · Metal · Water" },
+                { name: "Moon Phases", sub: "8 Lunar Bracelets", img: "/images/categories/cat-moon.png", href: "/collections/moon-phases", tag: "Waxing · Full · Waning — the cycle of eternity" },
+                { name: "Ocean Pearls", sub: "5 Pearl Bracelets", img: "/images/categories/cat-pearls.png", href: "/collections/ocean-pearls", tag: "Mermaid tears crystallized in precious metal" },
               ].map((c) => (
                 <Link key={c.name} href={c.href} className="group relative w-[180px] lg:w-auto aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2520] flex-shrink-0 hover:border-[rgba(212,168,75,0.3)] transition-all">
                   <img src={c.img} alt={c.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -158,10 +158,10 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: "Moon Phases · 月相", slug: "moon-full-medallion", stone: "Moonstone & Diamond", href: "/collections/moon-phases" },
-              { name: "Celestial Stars · 星辰", slug: "star-constellation-necklace", stone: "Diamond & White Gold", href: "/collections/celestial-stars" },
-              { name: "Ocean Pearls · 海珠", slug: "pearl-aquamarine-bracelet", stone: "Akoya Pearl & Aquamarine", href: "/collections/ocean-pearls" },
-              { name: "Butterfly Dream · 蝶梦", slug: "butterfly-bracelet", stone: "Rose Gold & Diamond", href: "/collections/butterfly-dream" },
+              { name: "Moon Phases · 月相", slug: "ml-full", stone: "Moonstone & Diamond", href: "/collections/moon-phases" },
+              { name: "Celestial Stars · 星辰", slug: "cs-constellation", stone: "Diamond & White Gold", href: "/collections/celestial-stars" },
+              { name: "Ocean Pearls · 海珠", slug: "op-aquamarine", stone: "Akoya Pearl & Aquamarine", href: "/collections/ocean-pearls" },
+              { name: "Butterfly Dream · 蝶梦", slug: "bf-bracelet", stone: "Rose Gold & Amethyst", href: "/collections/butterfly-dream" },
             ].map((p) => (
               <Link key={p.slug} href={p.href} className="group">
                 <div className="aspect-square rounded-xl overflow-hidden bg-[var(--bg)] border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">

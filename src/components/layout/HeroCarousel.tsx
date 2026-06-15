@@ -5,12 +5,12 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
-  { image:"/images/hero/hero-mansions.webp", title:"28 Mansions · 二十八宿", subtitle:"28 crystal bracelets — each mapped to a star in the ancient Chinese sky", cta:"Shop Now", href:"/collections/28-mansions" },
-  { image:"/images/products/water-element-bracelet.png", title:"Five Elements · 五行", subtitle:"Wood · Fire · Earth · Metal · Water — the ancient Chinese philosophy in gemstone form", cta:"Shop Now", href:"/collections/five-elements" },
-  { image:"/images/products/moon-full-medallion.png", title:"Moon Phases · 月相", subtitle:"From crescent to full — each phase a moment in the moon goddess journey across the sky", cta:"Shop Now", href:"/collections/moon-phases" },
-  { image:"/images/products/pearl-aquamarine-bracelet.png", title:"Ocean Pearls · 海珠", subtitle:"Akoya pearls and aquamarine — each pearl a crystallized tear from ancient merfolk legend", cta:"Shop Now", href:"/collections/ocean-pearls" },
-  { image:"/images/products/spring-cherry-necklace.png", title:"Cherry Blossom · 春樱", subtitle:"Rose gold — pink sapphire petals with diamond center, Four Seasons collection", cta:"Shop Now", href:"/collections/four-seasons" },
-  { image:"/images/products/butterfly-bracelet.png", title:"Butterfly Dream · 蝶梦", subtitle:"Rose gold and diamond — Zhuangzi's dream of the butterfly, captured in precious metal", cta:"Shop Now", href:"/collections/butterfly-dream" },
+  { image:"/images/products/m28-jiao.png", title:"28 Mansions · 二十八宿", subtitle:"Large gemstone beads with decorative gold spacers — each mapped to a star in the ancient Chinese sky", cta:"Shop Now", href:"/collections/28-mansions" },
+  { image:"/images/products/m5-water.png", title:"Five Elements · 五行", subtitle:"Wood · Fire · Earth · Metal · Water — the ancient philosophy in gemstone and gold", cta:"Shop Now", href:"/collections/five-elements" },
+  { image:"/images/products/ml-full.png", title:"Moon Phases · 月相", subtitle:"Moonstone and diamond — from crescent to full, the complete lunar cycle", cta:"Shop Now", href:"/collections/moon-phases" },
+  { image:"/images/products/op-aquamarine.png", title:"Ocean Pearls · 海珠", subtitle:"Akoya pearls and aquamarine — oceanic elegance on the wrist", cta:"Shop Now", href:"/collections/ocean-pearls" },
+  { image:"/images/products/fl-lotus.png", title:"Floral Collection · 繁花", subtitle:"Eight blooms in gemstone and gold — plum, peony, lotus, chrysanthemum, and more", cta:"Shop Now", href:"/collections/four-seasons" },
+  { image:"/images/products/bf-bracelet.png", title:"Butterfly Dream · 蝶梦", subtitle:"Rose gold and amethyst — Zhuangzi's dream captured in precious metal", cta:"Shop Now", href:"/collections/butterfly-dream" },
 ];
 
 export function HeroCarousel() {
