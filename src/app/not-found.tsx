@@ -33,17 +33,20 @@ export default function NotFoundPage() {
         <div className="mt-12 pt-8 border-t border-[var(--border-light)]">
           <p className="text-sm text-[var(--text-muted)] mb-4">You might be looking for:</p>
           <div className="flex flex-wrap justify-center gap-3 text-sm">
-            <Link href="/collections/beast-pendants" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
-              Beast Pendants
+            <Link href="/collections/28-mansions" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              28 Mansions
             </Link>
-            <Link href="/collections/star-bracelets" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
-              Star Bracelets
+            <Link href="/collections/five-elements" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              Five Elements
             </Link>
-            <Link href="/faq" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
-              FAQ
+            <Link href="/collections/moon-phases" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              Moon Phases
             </Link>
-            <Link href="/contact" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
-              Contact
+            <Link href="/collections/ocean-pearls" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              Ocean Pearls
+            </Link>
+            <Link href="/collections/four-seasons" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              Floral Collection
             </Link>
           </div>
         </div>
