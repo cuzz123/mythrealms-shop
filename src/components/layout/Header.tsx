@@ -15,6 +15,7 @@ const navLinks = [
   { label: "Elements", href: "/collections/five-elements" },
   { label: "Moon", href: "/collections/moon-phases" },
   { label: "Pearls", href: "/collections/ocean-pearls" },
+  { label: "Florals", href: "/collections/four-seasons" },
   { label: "Quiz", href: "/guardian-quiz" },
 ];
 
