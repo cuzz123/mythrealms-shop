@@ -180,31 +180,16 @@ export default async function HomePage() {
       {/* ===== GUARDIAN MATCHING ===== */}
       <GuardianMatch />
 
-      {/* ===== NEWSLETTER ===== */}
-      <section className="py-14 bg-[#1A1816]">
+      {/* ===== NEWSLETTER + TRUST ===== */}
+      <section className="py-12 bg-[#1A1816]">
         <div className="max-w-[540px] mx-auto px-6 text-center">
-          <h2 className="font-serif text-3xl font-bold text-[#E8E0D5] mb-3">Join the Expedition · {"探索上古"}</h2>
-          <p className="text-[#A89880] mb-8 leading-relaxed">Receive tales from the bestiary, early access to new collections, and exclusive discounts. No spam — only legends worthy of your inbox.</p>
+          <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Join the Expedition · {"探索上古"}</h2>
+          <p className="text-[#A89880] text-sm mb-6">Tales from the bestiary, early access to new collections, and exclusive discounts.</p>
           <NewsletterForm />
-        </div>
-      </section>
-
-      {/* ===== SOCIAL PROOF ===== */}
-      <section className="py-12 bg-[var(--surface)] border-t border-[var(--border)]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Join 1,000+ Guardians</h2>
-          <p className="text-[var(--text-muted)] text-sm mb-6">Each piece handcrafted for those who carry ancient wisdom</p>
-          <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
-            {[
-              { icon: "✧", text: "Handcrafted in small batches" },
-              { icon: "✦", text: "Ethically sourced gemstones" },
-              { icon: "♛", text: "30-day love it or return it" },
-            ].map((s) => (
-              <div key={s.text} className="bg-[var(--bg)] border border-[var(--border)] rounded-lg p-4 text-center">
-                <span className="text-[var(--accent)] text-xl">{s.icon}</span>
-                <p className="text-xs text-[var(--text-secondary)] mt-1">{s.text}</p>
-              </div>
-            ))}
+          <div className="flex justify-center gap-6 mt-6 text-xs text-[#8A7D6E]">
+            <span>Handcrafted</span><span className="text-[#3A3220]">|</span>
+            <span>Ethically Sourced</span><span className="text-[#3A3220]">|</span>
+            <span>30-Day Returns</span>
           </div>
         </div>
       </section>
