@@ -6,6 +6,7 @@ import { GuardianMatch } from "@/components/layout/GuardianMatch";
 import { HomeBlogAsync, HomeBlogFallback } from "@/components/layout/HomeBlogAsync";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { StarfieldCanvas } from "@/components/ui/StarfieldCanvas";
+import { formatPrice } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -94,18 +95,22 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: "Jiao · 角 — Horn", slug: "jiao-mansion-bracelet", stone: "Lapis Lazuli" },
-              { name: "Kang · 亢 — Neck", slug: "kang-mansion-bracelet", stone: "Tiger Eye" },
-              { name: "Jing · 井 — Well", slug: "jing-mansion-bracelet", stone: "Aquamarine" },
-              { name: "Xing · 星 — Star", slug: "xing-mansion-bracelet", stone: "Clear Quartz" },
-              { name: "Kui · 奎 — Legs", slug: "kui-mansion-bracelet", stone: "White Moonstone" },
-              { name: "Shen · 参 — Three Stars", slug: "shen-mansion-bracelet", stone: "Labradorite" },
-              { name: "Dou · 斗 — Dipper", slug: "dou-mansion-bracelet", stone: "Dark Sodalite" },
-              { name: "Nv · 女 — Girl", slug: "nv-mansion-bracelet", stone: "Rose Quartz" },
+              { name: "Jiao · 角 — Horn", slug: "jiao-mansion-bracelet", stone: "Lapis Lazuli", price: 34.99 },
+              { name: "Kang · 亢 — Neck", slug: "kang-mansion-bracelet", stone: "Tiger Eye", price: 34.99 },
+              { name: "Jing · 井 — Well", slug: "jing-mansion-bracelet", stone: "Aquamarine", price: 34.99 },
+              { name: "Xing · 星 — Star", slug: "xing-mansion-bracelet", stone: "Clear Quartz", price: 34.99 },
+              { name: "Kui · 奎 — Legs", slug: "kui-mansion-bracelet", stone: "White Moonstone", price: 34.99 },
+              { name: "Shen · 参 — Three Stars", slug: "shen-mansion-bracelet", stone: "Labradorite", price: 34.99 },
+              { name: "Dou · 斗 — Dipper", slug: "dou-mansion-bracelet", stone: "Dark Sodalite", price: 34.99 },
+              { name: "Nv · 女 — Girl", slug: "nv-mansion-bracelet", stone: "Rose Quartz", price: 34.99 },
             ].map((p) => (
               <Link key={p.slug} href={`/products/${p.slug}`} className="group">
-                <div className="aspect-square rounded-xl overflow-hidden bg-[var(--bg)] border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
-                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
+                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" data-reveal className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="mt-2.5 px-1">
+                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {formatPrice(p.price)}</p>
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
@@ -129,15 +134,19 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
             {[
-              { name: "Wood · 木", slug: "wood-element-bracelet", stone: "Green Jade" },
-              { name: "Fire · 火", slug: "fire-element-bracelet", stone: "Red Garnet" },
-              { name: "Earth · 土", slug: "earth-element-bracelet", stone: "Tiger Eye" },
-              { name: "Metal · 金", slug: "metal-element-bracelet", stone: "Moonstone" },
-              { name: "Water · 水", slug: "water-element-bracelet", stone: "Lapis Lazuli" },
+              { name: "Wood · 木", slug: "wood-element-bracelet", stone: "Green Jade", price: 32.99 },
+              { name: "Fire · 火", slug: "fire-element-bracelet", stone: "Red Garnet", price: 32.99 },
+              { name: "Earth · 土", slug: "earth-element-bracelet", stone: "Tiger Eye", price: 32.99 },
+              { name: "Metal · 金", slug: "metal-element-bracelet", stone: "Moonstone", price: 32.99 },
+              { name: "Water · 水", slug: "water-element-bracelet", stone: "Lapis Lazuli", price: 32.99 },
             ].map((p) => (
               <Link key={p.slug} href={`/products/${p.slug}`} className="group">
-                <div className="aspect-square rounded-xl overflow-hidden bg-[var(--bg)] border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
-                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
+                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" data-reveal className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="mt-2.5 px-1">
+                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {formatPrice(p.price)}</p>
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
@@ -158,14 +167,18 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: "Moon Phases · 月相", slug: "ml-full", stone: "Moonstone & Diamond", href: "/collections/moon-phases" },
-              { name: "Celestial Stars · 星辰", slug: "cs-constellation", stone: "Diamond & White Gold", href: "/collections/celestial-stars" },
-              { name: "Ocean Pearls · 海珠", slug: "op-aquamarine", stone: "Akoya Pearl & Aquamarine", href: "/collections/ocean-pearls" },
-              { name: "Butterfly Dream · 蝶梦", slug: "bf-bracelet", stone: "Rose Gold & Amethyst", href: "/collections/butterfly-dream" },
+              { name: "Moon Phases · 月相", slug: "ml-full", stone: "Moonstone & Diamond", price: 158.99, href: "/collections/moon-phases" },
+              { name: "Celestial Stars · 星辰", slug: "cs-constellation", stone: "Diamond & White Gold", price: 128.99, href: "/collections/celestial-stars" },
+              { name: "Ocean Pearls · 海珠", slug: "op-aquamarine", stone: "Akoya Pearl & Aquamarine", price: 128.99, href: "/collections/ocean-pearls" },
+              { name: "Butterfly Dream · 蝶梦", slug: "bf-bracelet", stone: "Rose Gold & Amethyst", price: 128.99, href: "/collections/butterfly-dream" },
             ].map((p) => (
               <Link key={p.slug} href={p.href} className="group">
-                <div className="aspect-square rounded-xl overflow-hidden bg-[var(--bg)] border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
-                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
+                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" data-reveal className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="mt-2.5 px-1">
+                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {formatPrice(p.price)}</p>
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
