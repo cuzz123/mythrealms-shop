@@ -4,8 +4,7 @@ import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { GuardianMatch } from "@/components/layout/GuardianMatch";
 import { HomeBlogAsync, HomeBlogFallback } from "@/components/layout/HomeBlogAsync";
-import { ArrowRight, ChevronDown } from "lucide-react";
-import { StarfieldCanvas } from "@/components/ui/StarfieldCanvas";
+import { ArrowRight } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -13,39 +12,7 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   return (
     <>
-      {/* ===== HERO ===== */}
-      <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-[#0F0D0E] pt-[72px]">
-        <StarfieldCanvas />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(212,168,75,0.04) 0%, transparent 60%)" }} />
-        <div className="relative z-10 text-center max-w-[800px] px-6 py-10" style={{ animation: "fadeInUp 1s ease-out" }}>
-          <div className="inline-flex items-center gap-2 px-4 py-1 mb-8 rounded-full border border-[rgba(212,168,75,0.3)] bg-[rgba(212,168,75,0.1)] text-sm text-[#D4A84B] font-medium tracking-[0.06em]">
-            <span className="block w-[6px] h-[6px] rounded-full bg-[#D4A84B]" style={{ animation: "pulseDot 2s ease-in-out infinite" }} />
-            10 Mythical Beasts. 277 Ancient Legends. One Guardian.
-          </div>
-          <h1 className="font-serif text-[clamp(2.8rem,6vw,4.5rem)] font-bold text-[#E8E0D5] leading-[1.15] mb-6 tracking-[0.01em]">
-            Which Beast<br />Guards Your Soul{" "}
-            <span className="text-[#D4A84B]">{"·"}</span>{" "}
-            <span className="text-[#D4A84B]">{"山海经"}</span>
-          </h1>
-          <p className="text-[clamp(1.05rem,2vw,1.2rem)] text-[#A89880] leading-relaxed max-w-[620px] mx-auto mb-10">
-            2000 years before Tolkien, China mapped the human soul onto 277 mythical creatures.<br />
-            Each one guards a different part of who you are.<br /><em>Which one was born to protect you?</em>
-          </p>
-          <div className="flex items-center justify-center gap-4 flex-wrap">
-            <Link href="/collections/beast-pendants" className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#D4A84B] text-white rounded-full font-semibold text-sm shadow-[0_0_24px_rgba(212,168,75,0.18)] hover:bg-[#C49A3C] hover:shadow-[0_0_40px_rgba(212,168,75,0.28)] transition-all hover:-translate-y-px">
-              Shop the Bestiary <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/guardian-quiz" className="inline-flex items-center gap-2 px-8 py-3.5 border border-[#D4A84B] text-[#D4A84B] rounded-full font-semibold text-sm hover:bg-[rgba(212,168,75,0.1)] transition-all hover:-translate-y-px">
-              Take the Quiz
-            </Link>
-          </div>
-        </div>
-        <div className="absolute bottom-10 left-1/2 flex flex-col items-center gap-2 text-[#6B5F50] text-xs tracking-[0.08em] cursor-pointer z-10" style={{ animation: "bounceDown 2s ease-in-out infinite" }}>
-          <span>SCROLL</span><ChevronDown className="w-5 h-5 opacity-50" />
-        </div>
-      </section>
-
-      {/* ===== HERO CAROUSEL ===== */}
+      {/* ===== HERO CAROUSEL (first thing visitor sees) ===== */}
       <HeroCarousel />
 
       {/* ===== TRUST BAR ===== */}
