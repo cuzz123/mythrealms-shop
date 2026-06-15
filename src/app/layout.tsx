@@ -10,6 +10,7 @@ import { Providers } from "./providers";
 import { Analytics } from "@/components/layout/Analytics";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { OrganizationJsonLd } from "@/components/ui/JsonLd";
+import { BackToTop } from "@/components/layout/BackToTop";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Footer />
           <CartDrawer />
           <CookieConsent />
+          <BackToTop />
           <Toaster position="bottom-center" />
         </Providers>
       </body>
