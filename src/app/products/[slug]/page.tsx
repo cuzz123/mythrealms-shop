@@ -11,6 +11,7 @@ import { ProductImage } from "@/components/ui/ProductImage";
 import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { formatPrice } from "@/lib/utils";
 import { StarRating } from "@/components/ui/StarRating";
+import { StickyAddToCart } from "@/components/product/StickyAddToCart";
 import { Star, Play, ShieldCheck } from "lucide-react";
 
 export const dynamic = "force-dynamic"
@@ -346,6 +347,15 @@ export default async function ProductPage({
           </div>
         </section>
       )}
+      <StickyAddToCart
+        productId={product.id}
+        productName={product.name}
+        productSlug={product.slug}
+        image={images[0]}
+        price={product.variants[0]?.price || 0}
+        variantId={product.variants[0]?.id}
+        variantName={product.variants[0]?.name}
+      />
     </div>
   );
 }
