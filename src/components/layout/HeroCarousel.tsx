@@ -5,12 +5,12 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
-  { image:"/images/products/m28-jiao.png", title:"28 Mansions · 二十八宿", subtitle:"Large gemstone beads with decorative gold spacers — each mapped to a star in the ancient Chinese sky", cta:"Shop Now", href:"/collections/28-mansions" },
-  { image:"/images/products/m5-water.png", title:"Five Elements · 五行", subtitle:"Wood · Fire · Earth · Metal · Water — the ancient philosophy in gemstone and gold", cta:"Shop Now", href:"/collections/five-elements" },
-  { image:"/images/products/ml-full.png", title:"Moon Phases · 月相", subtitle:"Moonstone and diamond — from crescent to full, the complete lunar cycle", cta:"Shop Now", href:"/collections/moon-phases" },
-  { image:"/images/products/op-aquamarine.png", title:"Ocean Pearls · 海珠", subtitle:"Akoya pearls and aquamarine — oceanic elegance on the wrist", cta:"Shop Now", href:"/collections/ocean-pearls" },
-  { image:"/images/products/fl-lotus.png", title:"Floral Collection · 繁花", subtitle:"Eight blooms in gemstone and gold — plum, peony, lotus, chrysanthemum, and more", cta:"Shop Now", href:"/collections/four-seasons" },
-  { image:"/images/products/bf-bracelet.png", title:"Butterfly Dream · 蝶梦", subtitle:"Rose gold and amethyst — Zhuangzi's dream captured in precious metal", cta:"Shop Now", href:"/collections/butterfly-dream" },
+  { image:"/images/products/m28-jiao.png", title:"28 Celestial Bracelets · Handcrafted in 14k Gold", subtitle:"Each bracelet mapped to a star in the ancient Chinese sky — free shipping over $69.99", cta:"Shop Now", href:"/collections/28-mansions" },
+  { image:"/images/products/m5-water.png", title:"Five Elements · 五行 — Gemstone & Gold", subtitle:"Wood · Fire · Earth · Metal · Water — the ancient philosophy in gemstone form", cta:"Shop Now", href:"/collections/five-elements" },
+  { image:"/images/products/ml-full.png", title:"Moon Phases · 月相 — Moonstone & Diamond", subtitle:"From crescent to full — each phase a moment in the eternal lunar cycle", cta:"Shop Now", href:"/collections/moon-phases" },
+  { image:"/images/products/op-aquamarine.png", title:"Ocean Pearls · 海珠 — Akoya & Aquamarine", subtitle:"Oceanic elegance on the wrist — warm pearls meeting cool blue stones", cta:"Shop Now", href:"/collections/ocean-pearls" },
+  { image:"/images/products/fl-lotus.png", title:"Floral Collection · 繁花 — Jade & Gold", subtitle:"Eight blooms in gemstone and gold — plum peony lotus chrysanthemum and more", cta:"Shop Now", href:"/collections/four-seasons" },
+  { image:"/images/products/bf-bracelet.png", title:"Butterfly Dream · 蝶梦 — Amethyst & Rose Gold", subtitle:"Zhuangzi's dream captured in precious metal — past present future", cta:"Shop Now", href:"/collections/butterfly-dream" },
 ];
 
 export function HeroCarousel() {
