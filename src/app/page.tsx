@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
@@ -72,8 +73,8 @@ export default async function HomePage() {
               { name: "Nv · 女 — Girl", slug: "nv-mansion-bracelet", stone: "Rose Quartz", price: 34.99 },
             ].map((p) => (
               <Link key={p.slug} href={`/products/${p.slug}`} className="group">
-                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
-                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" data-reveal className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
+                  <Image src={`/images/products/${p.slug}.png`} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
@@ -104,8 +105,8 @@ export default async function HomePage() {
               { name: "Water · 水", slug: "water-element-bracelet", stone: "Lapis Lazuli", price: 32.99 },
             ].map((p) => (
               <Link key={p.slug} href={`/products/${p.slug}`} className="group">
-                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
-                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" data-reveal className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
+                  <Image src={`/images/products/${p.slug}.png`} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
@@ -132,8 +133,8 @@ export default async function HomePage() {
               { name: "Butterfly Dream · 蝶梦", slug: "bf-bracelet", stone: "Rose Gold & Amethyst", price: 128.99, href: "/collections/butterfly-dream" },
             ].map((p) => (
               <Link key={p.slug} href={p.href} className="group">
-                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all">
-                  <img src={`/images/products/${p.slug}.png`} alt={p.name} loading="lazy" data-reveal className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
+                  <Image src={`/images/products/${p.slug}.png`} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
