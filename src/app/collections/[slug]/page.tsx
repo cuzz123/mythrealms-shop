@@ -52,7 +52,7 @@ export default async function CollectionPage({
   if (intentions.length > 0) where.intention = { in: intentions };
   if (materials.length > 0) where.material = { in: materials };
 
-  const [products, total] = await Promise.all([
+  const [products, total, stoneCounts, intentionCounts, materialCounts] = await Promise.all([
     db.product.findMany({
       where,
       include: { variants: true, reviews: { select: { rating: true } } },
@@ -61,7 +61,16 @@ export default async function CollectionPage({
       take: limit,
     }),
     db.product.count({ where }),
+    db.product.groupBy({ by: ["stone"], where: { categoryId: category.id, isActive: true }, _count: true, orderBy: { _count: { stone: "desc" } } }),
+    db.product.groupBy({ by: ["intention"], where: { categoryId: category.id, isActive: true }, _count: true }),
+    db.product.groupBy({ by: ["material"], where: { categoryId: category.id, isActive: true }, _count: true }),
   ]);
+
+  const filterCounts = {
+    stones: Object.fromEntries(stoneCounts.filter(s => s.stone).map(s => [s.stone!, s._count])),
+    intentions: Object.fromEntries(intentionCounts.filter(i => i.intention).map(i => [i.intention!, i._count])),
+    materials: Object.fromEntries(materialCounts.filter(m => m.material).map(m => [m.material!, m._count])),
+  };
 
   // Apply price filter in-memory using DB minPrice field
   let filteredProducts = products;
@@ -100,7 +109,7 @@ export default async function CollectionPage({
       <div className="flex items-center justify-between py-4 border-t border-[var(--border)] mb-6 gap-4 flex-wrap">
         <div className="flex items-center gap-2">
           <Suspense fallback={<div className="w-24 h-10" />}>
-            <CollectionFilters />
+            <CollectionFilters initialCounts={filterCounts} />
           </Suspense>
         </div>
         <CollectionToolbar total={total} sort={sort} slug={slug} />

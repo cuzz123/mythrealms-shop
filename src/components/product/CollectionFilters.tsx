@@ -19,12 +19,13 @@ const MATERIALS = [
   "Gemstone", "Jade",
 ];
 
-export function CollectionFilters() {
+export function CollectionFilters({ initialCounts }: { initialCounts?: { stones?: Record<string,number>; intentions?: Record<string,number>; materials?: Record<string,number> } }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const [isOpen, setIsOpen] = useState(false);
+  const counts = initialCounts || { stones: {}, intentions: {}, materials: {} };
   const [selectedStones, setSelectedStones] = useState<string[]>(
     searchParams.get("stone")?.split(",").filter(Boolean) || []
   );
@@ -113,6 +114,7 @@ export function CollectionFilters() {
                   <FilterCheckbox
                     key={s}
                     label={s}
+                    count={counts.stones?.[s] || 0}
                     checked={selectedStones.includes(s)}
                     onChange={() => setSelectedStones(toggleValue(selectedStones, s))}
                   />
@@ -125,6 +127,7 @@ export function CollectionFilters() {
                   <FilterCheckbox
                     key={s}
                     label={s}
+                    count={counts.intentions?.[s] || 0}
                     checked={selectedIntentions.includes(s)}
                     onChange={() => setSelectedIntentions(toggleValue(selectedIntentions, s))}
                   />
@@ -137,6 +140,7 @@ export function CollectionFilters() {
                   <FilterCheckbox
                     key={s}
                     label={s}
+                    count={counts.materials?.[s] || 0}
                     checked={selectedMaterials.includes(s)}
                     onChange={() => setSelectedMaterials(toggleValue(selectedMaterials, s))}
                   />
@@ -204,10 +208,12 @@ function FilterCheckbox({
   label,
   checked,
   onChange,
+  count,
 }: {
   label: string;
   checked: boolean;
   onChange: () => void;
+  count?: number;
 }) {
   return (
     <label className="flex items-center gap-2.5 py-1.5 cursor-pointer text-sm text-[var(--text-secondary)] hover:text-[var(--text)]">
@@ -218,6 +224,9 @@ function FilterCheckbox({
         className="w-4 h-4 rounded accent-[var(--accent)]"
       />
       {label}
+      {count !== undefined && count > 0 && (
+        <span className="text-[10px] text-[var(--text-muted)] ml-auto">{count}</span>
+      )}
     </label>
   );
 }
