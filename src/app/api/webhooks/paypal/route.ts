@@ -12,7 +12,7 @@ async function verifyPayPalWebhook(request: NextRequest, body: string): Promise<
   }
   try {
     // Get access token
-    const authRes = await fetch("https://api-m.sandbox.paypal.com/v1/oauth2/token", {
+    const authRes = await fetch("https://api-m.paypal.com/v1/oauth2/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -24,7 +24,7 @@ async function verifyPayPalWebhook(request: NextRequest, body: string): Promise<
     const authData = await authRes.json();
 
     // Verify webhook signature
-    const verifyRes = await fetch("https://api-m.sandbox.paypal.com/v1/notifications/verify-webhook-signature", {
+    const verifyRes = await fetch("https://api-m.paypal.com/v1/notifications/verify-webhook-signature", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
     if (paypalClientId && paypalSecret) {
       try {
         // Get PayPal access token (sandbox)
-        const authRes = await fetch("https://api-m.sandbox.paypal.com/v1/oauth2/token", {
+        const authRes = await fetch("https://api-m.paypal.com/v1/oauth2/token", {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
