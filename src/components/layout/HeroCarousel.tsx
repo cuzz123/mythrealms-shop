@@ -48,7 +48,7 @@ export function HeroCarousel() {
           fill
           sizes="100vw"
           priority
-          className="object-cover"
+          className="object-contain md:object-cover"
         />
       </div>
 
@@ -69,25 +69,25 @@ export function HeroCarousel() {
             aria-hidden={!isActive}
           >
             {s.image && (
-              <Image src={s.image} alt={s.title} fill sizes="100vw" priority={isActive} className="object-cover" />
+              <Image src={s.image} alt={s.title} fill sizes="100vw" priority={isActive} className="object-contain md:object-cover" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent md:from-black/60 md:via-black/30" />
           </div>
         );
       })}
 
       {/* Content overlay */}
-      <div className="absolute inset-0 flex items-center z-20">
-        <div className="max-w-7xl mx-auto px-6 w-full">
+      <div className="absolute inset-0 flex items-end md:items-center z-20 pb-24 md:pb-0">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 w-full">
           <div
             key={current}
-            className="max-w-lg"
+            className="max-w-xs sm:max-w-md md:max-w-lg"
             style={{ animation: "slideInContent 0.5s ease-out" }}
           >
-            <span className="inline-block text-xs uppercase tracking-[0.15em] text-[var(--accent)] font-semibold mb-3">MythRealms</span>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight mb-4">{slides[current].title}</h2>
-            <p className="text-white/75 text-base mb-6">{slides[current].subtitle}</p>
-            <Link href={slides[current].href} className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
+            <span className="inline-block text-[10px] md:text-xs uppercase tracking-[0.15em] text-[var(--accent)] font-semibold mb-2 md:mb-3">MythRealms</span>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl font-bold text-white leading-tight mb-2 md:mb-4">{slides[current].title}</h2>
+            <p className="text-white/75 text-sm md:text-base mb-4 md:mb-6 line-clamp-2 md:line-clamp-none">{slides[current].subtitle}</p>
+            <Link href={slides[current].href} className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
               {slides[current].cta}<ChevronRight className="w-4 h-4" />
             </Link>
           </div>
@@ -95,11 +95,11 @@ export function HeroCarousel() {
       </div>
 
       {/* Arrow controls */}
-      <button onClick={goPrev} className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition backdrop-blur-sm z-30">
-        <ChevronLeft className="w-6 h-6" />
+      <button onClick={goPrev} className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition backdrop-blur-sm z-30">
+        <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
       </button>
-      <button onClick={goNext} className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition backdrop-blur-sm z-30">
-        <ChevronRight className="w-6 h-6" />
+      <button onClick={goNext} className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition backdrop-blur-sm z-30">
+        <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
       </button>
 
       {/* Bottom bar */}
