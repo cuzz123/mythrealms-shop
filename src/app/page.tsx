@@ -40,7 +40,7 @@ export default async function HomePage() {
                 { name: "Moon Phases", sub: "8 Lunar Bracelets", img: "/images/categories/cat-moon.png", href: "/collections/moon-phases", tag: "Waxing · Full · Waning — the cycle of eternity" },
                 { name: "Ocean Pearls", sub: "5 Pearl Bracelets", img: "/images/categories/cat-pearls.png", href: "/collections/ocean-pearls", tag: "Mermaid tears crystallized in precious metal" },
               ].map((c) => (
-                <Link key={c.name} href={c.href} className="group relative w-[180px] lg:w-auto aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2520] flex-shrink-0 hover:border-[rgba(212,168,75,0.3)] transition-all">
+                <Link key={c.name} href={c.href} className="group relative w-[160px] sm:w-[200px] lg:w-auto aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2520] flex-shrink-0 hover:border-[rgba(212,168,75,0.3)] transition-all">
                   <img src={c.img} alt={c.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.3)] to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
