@@ -146,8 +146,31 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ===== GUARDIAN MATCHING ===== */}
-      <GuardianMatch />
+      {/* ===== WEAR THE LOOK ===== */}
+      <section className="py-12 bg-[var(--surface)] border-t border-[var(--border)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-6">
+            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Wrist Stories</span>
+            <h2 className="font-serif text-2xl font-bold text-[#E8E0D5]">Wear the Look · 叠戴灵感</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { name:"Celestial Stack", desc:"28 Mansions + Moon Phases — the sky on your wrist", img:"/images/products/mansion-collection-flatlay.png", link:"/collections/28-mansions" },
+              { name:"Elemental Layers", desc:"Wood + Fire + Earth — three elements, one story", img:"/images/products/m5-wood.png", link:"/collections/five-elements" },
+              { name:"Ocean Dreams", desc:"Pearls + Aquamarine — inspired by the Silk Road seas", img:"/images/products/op-aquamarine.png", link:"/collections/ocean-pearls" },
+            ].map(s => (
+              <Link key={s.name} href={s.link} className="group relative aspect-[4/3] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
+                <img src={s.img} alt={s.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <h3 className="font-serif text-lg font-semibold text-white">{s.name}</h3>
+                  <p className="text-xs text-white/70">{s.desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ===== NEWSLETTER + TRUST ===== */}
       <section className="py-12 bg-[#1A1816]">
