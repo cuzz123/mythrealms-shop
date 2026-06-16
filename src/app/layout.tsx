@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { Providers } from "./providers";
 import { Analytics } from "@/components/layout/Analytics";
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { OrganizationJsonLd } from "@/components/ui/JsonLd";
 import { BackToTop } from "@/components/layout/BackToTop";
@@ -60,10 +61,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Providers>
           <AnnouncementBar />
           <Header />
-          <main id="main-content" className="min-h-screen">{children}</main>
+          <main id="main-content" className="min-h-screen pb-14 lg:pb-0">{children}</main>
           <Footer />
           <CartDrawer />
           <CookieConsent />
+          <MobileBottomNav />
           <BackToTop />
           <Toaster position="bottom-center" />
         </Providers>
