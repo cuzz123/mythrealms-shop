@@ -717,9 +717,10 @@ function PayPalButton({
   onSuccess: () => void;
 }) {
   const [sdkReady, setSdkReady] = useState(false);
-  const paypalClientId = "ARmSKPZ0qCx3snv5uzU4mB7Qe2QotIWJoSVGpYQWDeCCfliLJ2D6xL9Q6eFtmJI6T1z1Dp4IO4FNcrN1";
+  const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "";
 
   useEffect(() => {
+    if (!paypalClientId) return;
     if (document.getElementById("paypal-sdk")) {
       setSdkReady(true);
       return;
@@ -763,9 +764,23 @@ function PayPalButton({
         return data.orderId;
       },
       onApprove: async (data: any) => {
-        onSuccess();
         const dbOrderId = (window as any).__mythrealmsOrderId || data.orderID;
-        window.location.href = `/checkout/success?orderId=${dbOrderId}`;
+        try {
+          const res = await fetch("/api/checkout/paypal/capture", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ paypalOrderId: data.orderID, dbOrderId }),
+          });
+          const result = await res.json();
+          if (!res.ok || !result.success) {
+            toast.error(result.error || "Payment could not be completed. Please contact support.");
+            return;
+          }
+          onSuccess();
+          window.location.href = `/checkout/success?orderId=${dbOrderId}`;
+        } catch {
+          toast.error("Payment confirmation failed. Please contact support.");
+        }
       },
       onCancel: () => { toast.error("Payment cancelled."); },
       onError: (err: any) => { toast.error("Payment failed. Please try again."); console.error("PayPal error:", err); },
@@ -773,6 +788,13 @@ function PayPalButton({
     }).render("#paypal-button-container");
   }, [sdkReady]);
 
+  if (!paypalClientId) {
+    return (
+      <p className="mt-4 text-sm text-[var(--text-muted)]">
+        PayPal is temporarily unavailable. Please use Card.
+      </p>
+    );
+  }
   if (!sdkReady) {
     return <div className="mt-4 h-12 bg-[var(--border)] rounded animate-pulse" />;
   }

@@ -125,6 +125,8 @@ export async function POST(request: NextRequest) {
             attributes: {
               store_id: Number(storeId),
               variant_id: Number(variantId),
+              // Charge the actual cart total (in cents), not the variant's fixed price
+              custom_price: Math.round(total * 100),
               checkout_data: {
                 email: email || "",
                 custom: {

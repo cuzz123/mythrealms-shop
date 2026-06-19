@@ -5,6 +5,8 @@ import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { applyRateLimit } from "@/lib/server/rate-limit";
 
+const PAYPAL_API = process.env.PAYPAL_API_BASE || "https://api-m.paypal.com";
+
 export async function POST(request: NextRequest) {
   const rateLimitResponse = applyRateLimit(request, {
     windowMs: 60_000,
@@ -89,8 +91,8 @@ export async function POST(request: NextRequest) {
 
     if (paypalClientId && paypalSecret) {
       try {
-        // Get PayPal access token (sandbox)
-        const authRes = await fetch("https://api-m.paypal.com/v1/oauth2/token", {
+        // Get PayPal access token
+        const authRes = await fetch(`${PAYPAL_API}/v1/oauth2/token`, {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -101,8 +103,8 @@ export async function POST(request: NextRequest) {
         const authData = await authRes.json();
         const accessToken = authData.access_token;
 
-        // Create PayPal order (sandbox)
-        const paypalRes = await fetch("https://api-m.sandbox.paypal.com/v2/checkout/orders", {
+        // Create PayPal order
+        const paypalRes = await fetch(`${PAYPAL_API}/v2/checkout/orders`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

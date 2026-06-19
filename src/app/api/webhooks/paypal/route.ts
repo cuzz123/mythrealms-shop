@@ -6,8 +6,9 @@ import { db } from "@/lib/db";
 async function verifyPayPalWebhook(request: NextRequest, body: string): Promise<boolean> {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   const secret = process.env.PAYPAL_CLIENT_SECRET;
-  if (!clientId || !secret) {
-    console.error("PayPal webhook: missing credentials for verification");
+  const webhookId = process.env.PAYPAL_WEBHOOK_ID;
+  if (!clientId || !secret || !webhookId) {
+    console.error("PayPal webhook: missing credentials/webhook id for verification");
     return false;
   }
   try {
@@ -36,7 +37,7 @@ async function verifyPayPalWebhook(request: NextRequest, body: string): Promise<
         transmission_id: request.headers.get("paypal-transmission-id") || "",
         transmission_sig: request.headers.get("paypal-transmission-sig") || "",
         transmission_time: request.headers.get("paypal-transmission-time") || "",
-        webhook_id: clientId,
+        webhook_id: webhookId,
         webhook_event: JSON.parse(body),
       }),
     });
