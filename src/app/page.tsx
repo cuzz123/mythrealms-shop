@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Suspense } from "react";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
-import { GuardianMatch } from "@/components/layout/GuardianMatch";
+import { GuardianTeaser } from "@/components/layout/GuardianTeaser";
 import { HomeBlogAsync, HomeBlogFallback } from "@/components/layout/HomeBlogAsync";
 import { ArrowRight } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
@@ -41,7 +41,7 @@ export default async function HomePage() {
                 { name: "Ocean Pearls", sub: "5 Pearl Bracelets", img: "/images/categories/cat-pearls.png", href: "/collections/ocean-pearls", tag: "Mermaid tears crystallized in precious metal" },
               ].map((c) => (
                 <Link key={c.name} href={c.href} className="group relative w-[160px] sm:w-[200px] lg:w-auto aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2520] flex-shrink-0 hover:border-[rgba(212,168,75,0.3)] transition-all">
-                  <img src={c.img} alt={c.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src={c.img} alt={c.name} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.3)] to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <h3 className="font-serif text-base font-semibold text-[#E8E0D5]">{c.name}</h3>
@@ -53,6 +53,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ===== GUARDIAN TEASER — personalization before browsing ===== */}
+      <GuardianTeaser />
 
       {/* ===== FEATURED PRODUCTS ===== */}
       <section className="py-14 bg-[#1A1816]">
@@ -160,7 +163,7 @@ export default async function HomePage() {
               { name:"Ocean Dreams", desc:"Pearls + Aquamarine — inspired by the Silk Road seas", img:"/images/products/op-aquamarine.png", link:"/collections/ocean-pearls" },
             ].map(s => (
               <Link key={s.name} href={s.link} className="group relative aspect-[4/3] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                <img src={s.img} alt={s.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <Image src={s.img} alt={s.name} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <h3 className="font-serif text-lg font-semibold text-white">{s.name}</h3>
