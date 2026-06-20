@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Save, ArrowLeft, Loader2, Eye } from "lucide-react";
 import Link from "next/link";
 import { slugify } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
 
 const BLOG_CATEGORIES = [
   "Crystal Guide",
@@ -170,8 +171,8 @@ export default function NewBlogPostPage() {
                 {preview ? (
                   <div className="min-h-[400px] p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)] overflow-auto prose prose-sm max-w-none">
                     {content ? (
-                      <div className="whitespace-pre-wrap font-sans text-sm leading-relaxed">
-                        {content}
+                      <div className="prose prose-sm max-w-none prose-invert text-[var(--text)]">
+                        <ReactMarkdown>{content}</ReactMarkdown>
                       </div>
                     ) : (
                       <p className="text-[var(--text-muted)] italic">

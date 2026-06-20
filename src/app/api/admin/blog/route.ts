@@ -6,7 +6,7 @@ import { auth } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
   const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
+  if (!session || session.user?.role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       excerpt,
       content,
       image: image || null,
-      authorId: (session.user as any).id,
+      authorId: session.user?.id,
       publishedAt: new Date(),
     },
     include: {
