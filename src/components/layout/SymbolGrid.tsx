@@ -1,16 +1,17 @@
 import Link from "next/link";
+import { imageUrl } from "@/lib/images";
 
 const symbols = [
-  { name: "Azure Dragon", href: "/products/azure-dragon-ring", img: "/images/hero/azure-dragon.webp" },
-  { name: "Phoenix", href: "/products/phoenix-rebirth-necklace", img: "/images/hero/phoenix.webp" },
-  { name: "White Tiger", href: "/products/white-tiger-guardian-cuff", img: "/images/hero/white-tiger.webp" },
-  { name: "Black Tortoise", href: "/products/black-tortoise-endurance-bracelet", img: "/images/hero/black-tortoise.webp" },
-  { name: "Nine-Tailed Fox", href: "/products/nine-tailed-fox-pendant", img: "/images/hero/nine-tailed-fox.webp" },
-  { name: "Qilin", href: "/products/qilin-protection-bracelet", img: "/images/hero/qilin.webp" },
-  { name: "Bai Ze", href: "/products/bai-ze-wisdom-talisman", img: "/images/hero/bai-ze.webp" },
-  { name: "Kun Peng", href: "/products/kun-peng-transformation-set", img: "/images/hero/kun-peng.webp" },
-  { name: "Taotie", href: "/products/taotie-bronze-amulet", img: "/images/hero/taotie.webp" },
-  { name: "Yinglong", href: "/products/yinglong-winged-dragon-cufflinks", img: "/images/hero/yinglong.webp" },
+  { name: "Azure Dragon", href: "/products/azure-dragon-ring", img: imageUrl("/images/hero/azure-dragon.webp") },
+  { name: "Phoenix", href: "/products/phoenix-rebirth-necklace", img: imageUrl("/images/hero/phoenix.webp") },
+  { name: "White Tiger", href: "/products/white-tiger-guardian-cuff", img: imageUrl("/images/hero/white-tiger.webp") },
+  { name: "Black Tortoise", href: "/products/black-tortoise-endurance-bracelet", img: imageUrl("/images/hero/black-tortoise.webp") },
+  { name: "Nine-Tailed Fox", href: "/products/nine-tailed-fox-pendant", img: imageUrl("/images/hero/nine-tailed-fox.webp") },
+  { name: "Qilin", href: "/products/qilin-protection-bracelet", img: imageUrl("/images/hero/qilin.webp") },
+  { name: "Bai Ze", href: "/products/bai-ze-wisdom-talisman", img: imageUrl("/images/hero/bai-ze.webp") },
+  { name: "Kun Peng", href: "/products/kun-peng-transformation-set", img: imageUrl("/images/hero/kun-peng.webp") },
+  { name: "Taotie", href: "/products/taotie-bronze-amulet", img: imageUrl("/images/hero/taotie.webp") },
+  { name: "Yinglong", href: "/products/yinglong-winged-dragon-cufflinks", img: imageUrl("/images/hero/yinglong.webp") },
 ];
 
 export function SymbolGrid() {

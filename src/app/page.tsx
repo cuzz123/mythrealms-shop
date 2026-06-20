@@ -7,6 +7,7 @@ import { GuardianTeaser } from "@/components/layout/GuardianTeaser";
 import { HomeBlogAsync, HomeBlogFallback } from "@/components/layout/HomeBlogAsync";
 import { ArrowRight } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
+import { imageUrl } from "@/lib/images";
 
 export const dynamic = "force-dynamic";
 
@@ -35,10 +36,10 @@ export default async function HomePage() {
           <div className="overflow-x-auto scrollbar-hide -mx-2 px-2">
             <div className="flex gap-3 lg:grid lg:grid-cols-4 min-w-max lg:min-w-0">
               {[
-                { name: "28 Mansions", sub: "28 Celestial Bracelets", img: "/images/categories/cat-28mansions.png", href: "/collections/28-mansions", tag: "Find your star in the ancient sky" },
-                { name: "Five Elements", sub: "5 Element Bracelets", img: "/images/categories/cat-elements.png", href: "/collections/five-elements", tag: "Wood · Fire · Earth · Metal · Water" },
-                { name: "Moon Phases", sub: "8 Lunar Bracelets", img: "/images/categories/cat-moon.png", href: "/collections/moon-phases", tag: "Waxing · Full · Waning — the cycle of eternity" },
-                { name: "Ocean Pearls", sub: "5 Pearl Bracelets", img: "/images/categories/cat-pearls.png", href: "/collections/ocean-pearls", tag: "Mermaid tears crystallized in precious metal" },
+                { name: "28 Mansions", sub: "28 Celestial Bracelets", img: imageUrl("/images/categories/cat-28mansions.png"), href: "/collections/28-mansions", tag: "Find your star in the ancient sky" },
+                { name: "Five Elements", sub: "5 Element Bracelets", img: imageUrl("/images/categories/cat-elements.png"), href: "/collections/five-elements", tag: "Wood · Fire · Earth · Metal · Water" },
+                { name: "Moon Phases", sub: "8 Lunar Bracelets", img: imageUrl("/images/categories/cat-moon.png"), href: "/collections/moon-phases", tag: "Waxing · Full · Waning — the cycle of eternity" },
+                { name: "Ocean Pearls", sub: "5 Pearl Bracelets", img: imageUrl("/images/categories/cat-pearls.png"), href: "/collections/ocean-pearls", tag: "Mermaid tears crystallized in precious metal" },
               ].map((c) => (
                 <Link key={c.name} href={c.href} className="group relative w-[160px] sm:w-[200px] lg:w-auto aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2520] flex-shrink-0 hover:border-[rgba(212,168,75,0.3)] transition-all">
                   <Image src={c.img} alt={c.name} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -77,7 +78,7 @@ export default async function HomePage() {
             ].map((p) => (
               <Link key={p.slug} href={`/products/${p.slug}`} className="group">
                 <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
-                  <Image src={`/images/products/${p.slug}.png`} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src={imageUrl(`/images/products/${p.slug}.png`)} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
@@ -109,7 +110,7 @@ export default async function HomePage() {
             ].map((p) => (
               <Link key={p.slug} href={`/products/${p.slug}`} className="group">
                 <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
-                  <Image src={`/images/products/${p.slug}.png`} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src={imageUrl(`/images/products/${p.slug}.png`)} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
@@ -137,7 +138,7 @@ export default async function HomePage() {
             ].map((p) => (
               <Link key={p.slug} href={p.href} className="group">
                 <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
-                  <Image src={`/images/products/${p.slug}.png`} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src={imageUrl(`/images/products/${p.slug}.png`)} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="mt-2.5 px-1">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
@@ -158,9 +159,9 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { name:"Celestial Stack", desc:"28 Mansions + Moon Phases — the sky on your wrist", img:"/images/products/mansion-collection-flatlay.png", link:"/collections/28-mansions" },
-              { name:"Elemental Layers", desc:"Wood + Fire + Earth — three elements, one story", img:"/images/products/m5-wood.png", link:"/collections/five-elements" },
-              { name:"Ocean Dreams", desc:"Pearls + Aquamarine — inspired by the Silk Road seas", img:"/images/products/op-aquamarine.png", link:"/collections/ocean-pearls" },
+              { name:"Celestial Stack", desc:"28 Mansions + Moon Phases — the sky on your wrist", img:imageUrl("/images/products/mansion-collection-flatlay.png"), link:"/collections/28-mansions" },
+              { name:"Elemental Layers", desc:"Wood + Fire + Earth — three elements, one story", img:imageUrl("/images/products/m5-wood.png"), link:"/collections/five-elements" },
+              { name:"Ocean Dreams", desc:"Pearls + Aquamarine — inspired by the Silk Road seas", img:imageUrl("/images/products/op-aquamarine.png"), link:"/collections/ocean-pearls" },
             ].map(s => (
               <Link key={s.name} href={s.link} className="group relative aspect-[4/3] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
                 <Image src={s.img} alt={s.name} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />

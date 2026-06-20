@@ -3,14 +3,15 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { imageUrl } from "@/lib/images";
 
 const slides = [
-  { image:"/images/products/m28-jiao.png", title:"28 Celestial Bracelets · Handcrafted in 14k Gold", subtitle:"Each bracelet mapped to a star in the ancient Chinese sky — free shipping over $69.99", cta:"Shop Now", href:"/collections/28-mansions" },
-  { image:"/images/products/m5-water.png", title:"Five Elements · 五行 — Gemstone & Gold", subtitle:"Wood · Fire · Earth · Metal · Water — the ancient philosophy in gemstone form", cta:"Shop Now", href:"/collections/five-elements" },
-  { image:"/images/products/ml-full.png", title:"Moon Phases · 月相 — Moonstone & Diamond", subtitle:"From crescent to full — each phase a moment in the eternal lunar cycle", cta:"Shop Now", href:"/collections/moon-phases" },
-  { image:"/images/products/op-aquamarine.png", title:"Ocean Pearls · 海珠 — Akoya & Aquamarine", subtitle:"Oceanic elegance on the wrist — warm pearls meeting cool blue stones", cta:"Shop Now", href:"/collections/ocean-pearls" },
-  { image:"/images/products/fl-lotus.png", title:"Floral Collection · 繁花 — Jade & Gold", subtitle:"Eight blooms in gemstone and gold — plum peony lotus chrysanthemum and more", cta:"Shop Now", href:"/collections/four-seasons" },
-  { image:"/images/products/bf-bracelet.png", title:"Butterfly Dream · 蝶梦 — Amethyst & Rose Gold", subtitle:"Zhuangzi's dream captured in precious metal — past present future", cta:"Shop Now", href:"/collections/butterfly-dream" },
+  { image: imageUrl("/images/products/m28-jiao.png"), title:"28 Celestial Bracelets · Handcrafted in 14k Gold", subtitle:"Each bracelet mapped to a star in the ancient Chinese sky — free shipping over $69.99", cta:"Shop Now", href:"/collections/28-mansions" },
+  { image: imageUrl("/images/products/m5-water.png"), title:"Five Elements · 五行 — Gemstone & Gold", subtitle:"Wood · Fire · Earth · Metal · Water — the ancient philosophy in gemstone form", cta:"Shop Now", href:"/collections/five-elements" },
+  { image: imageUrl("/images/products/ml-full.png"), title:"Moon Phases · 月相 — Moonstone & Diamond", subtitle:"From crescent to full — each phase a moment in the eternal lunar cycle", cta:"Shop Now", href:"/collections/moon-phases" },
+  { image: imageUrl("/images/products/op-aquamarine.png"), title:"Ocean Pearls · 海珠 — Akoya & Aquamarine", subtitle:"Oceanic elegance on the wrist — warm pearls meeting cool blue stones", cta:"Shop Now", href:"/collections/ocean-pearls" },
+  { image: imageUrl("/images/products/fl-lotus.png"), title:"Floral Collection · 繁花 — Jade & Gold", subtitle:"Eight blooms in gemstone and gold — plum peony lotus chrysanthemum and more", cta:"Shop Now", href:"/collections/four-seasons" },
+  { image: imageUrl("/images/products/bf-bracelet.png"), title:"Butterfly Dream · 蝶梦 — Amethyst & Rose Gold", subtitle:"Zhuangzi's dream captured in precious metal — past present future", cta:"Shop Now", href:"/collections/butterfly-dream" },
 ];
 
 export function HeroCarousel() {

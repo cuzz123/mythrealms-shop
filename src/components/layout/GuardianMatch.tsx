@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { imageUrl } from "@/lib/images";
 
 const pairings = [
-  { beast: "Phoenix", slug: "phoenix-rebirth-necklace", label: "For the one rebuilding from ashes", line: "This time, you rise on your own terms.", img: "/images/products/m5-fire.png" },
-  { beast: "Nine-Tailed Fox", slug: "nine-tailed-fox-pendant", label: "For the one who's been underestimated", line: "2000 years of wisdom. Now yours.", img: "/images/products/m28-shen.png" },
-  { beast: "Black Tortoise", slug: "black-tortoise-endurance-bracelet", label: "For the one still standing", line: "Endurance is a quiet kind of power.", img: "/images/products/m28-dou.png" },
-  { beast: "Kun Peng", slug: "kun-peng-transformation-set", label: "For the one in a season of change", line: "From the depths to the sky. Your time is now.", img: "/images/products/m5-water.png" },
+  { beast: "Phoenix", slug: "phoenix-rebirth-necklace", label: "For the one rebuilding from ashes", line: "This time, you rise on your own terms.", img: imageUrl("/images/products/m5-fire.png") },
+  { beast: "Nine-Tailed Fox", slug: "nine-tailed-fox-pendant", label: "For the one who's been underestimated", line: "2000 years of wisdom. Now yours.", img: imageUrl("/images/products/m28-shen.png") },
+  { beast: "Black Tortoise", slug: "black-tortoise-endurance-bracelet", label: "For the one still standing", line: "Endurance is a quiet kind of power.", img: imageUrl("/images/products/m28-dou.png") },
+  { beast: "Kun Peng", slug: "kun-peng-transformation-set", label: "For the one in a season of change", line: "From the depths to the sky. Your time is now.", img: imageUrl("/images/products/m5-water.png") },
 ];
 
 export function GuardianMatch() {
