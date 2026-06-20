@@ -5,66 +5,46 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Search, Package, MapPin, Clock } from "lucide-react";
 
-// Simulated tracking data (in production, fetch from API)
-const mockOrders: Record<string, any> = {
-  "MR-2026-0001": {
-    status: "In Transit",
-    estimated: "June 8, 2026",
-    origin: "Shanghai, China",
-    destination: "New York, USA",
-    events: [
-      { date: "Jun 2, 2026", time: "14:30", location: "New York Distribution Center", status: "Arrived at local facility" },
-      { date: "May 30, 2026", time: "08:15", location: "Guangzhou, China", status: "Departed international hub" },
-      { date: "May 28, 2026", time: "16:45", location: "Shanghai, China", status: "Package prepared and blessed" },
-      { date: "May 27, 2026", time: "10:00", location: "Shanghai, China", status: "Order confirmed" },
-    ],
-  },
-  "MR-2026-0042": {
-    status: "Delivered",
-    estimated: "May 20, 2026",
-    origin: "Beijing, China",
-    destination: "London, UK",
-    events: [
-      { date: "May 20, 2026", time: "11:20", location: "London, UK", status: "Delivered" },
-      { date: "May 18, 2026", time: "09:00", location: "London Distribution Center", status: "Out for delivery" },
-      { date: "May 15, 2026", time: "22:30", location: "Heathrow, UK", status: "Arrived at destination country" },
-      { date: "May 12, 2026", time: "14:00", location: "Beijing, China", status: "Package prepared and blessed" },
-    ],
-  },
-};
-
 export default function TrackOrderPage() {
   const [orderId, setOrderId] = useState("");
   const [email, setEmail] = useState("");
   const [tracking, setTracking] = useState<any>(null);
   const [searched, setSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function handleTrack(e: React.FormEvent) {
     e.preventDefault();
     setSearched(true);
     setTracking(null);
+    setLoading(true);
 
-    // Try real API first, fall back to mock data
     try {
       const res = await fetch(`/api/account/orders?orderId=${encodeURIComponent(orderId.trim())}&email=${encodeURIComponent(email.trim())}`);
       if (res.ok) {
         const data = await res.json();
         if (data.orders?.length > 0) {
           const order = data.orders[0];
+          let city = "N/A";
+          try {
+            if (order.shippingAddress) {
+              city = JSON.parse(order.shippingAddress)?.city || "N/A";
+            }
+          } catch { /* invalid JSON, use default */ }
           setTracking({
             status: order.status === "PAID" ? "In Transit" : order.status,
             estimated: "Processing",
             origin: "Fulfillment Center",
-            destination: order.shippingAddress ? JSON.parse(order.shippingAddress)?.city || "N/A" : "N/A",
+            destination: city,
             events: [{ date: new Date(order.createdAt).toLocaleDateString(), time: "", location: "Online", status: "Order placed" }],
           });
+          setLoading(false);
           return;
         }
       }
-    } catch { /* fall back to mock */ }
+    } catch { /* API error, show not found */ }
 
-    const order = mockOrders[orderId.trim().toUpperCase()];
-    setTracking(order || null);
+    setLoading(false);
+    setTracking(null);
   }
 
   const inputClass = "w-full px-4 py-3 border border-[var(--border)] rounded-lg text-sm bg-[var(--bg)] text-[var(--text)] placeholder:text-[var(--text-muted)]";

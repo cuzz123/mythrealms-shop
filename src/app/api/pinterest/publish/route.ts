@@ -6,9 +6,13 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const TOKEN = "pina_AEA3SIAYADL2UBYAGDAMQDYHJDMMXHQBACGSPIUE6B7Q7MMFAVCG7JI72PSTYTPB3TOAEWJCRSTLMXA4KBLRGI2PJ37RC3QA";
-  const BOARD_ID = "1137370149584940020";
-  const BASE = "https://mythrealms-shop.vercel.app";
+  const TOKEN = process.env.PINTEREST_API_TOKEN || "";
+  const BOARD_ID = process.env.PINTEREST_BOARD_ID || "";
+  const BASE = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
+
+  if (!TOKEN || !BOARD_ID) {
+    return NextResponse.json({ error: "Pinterest API not configured" }, { status: 500 });
+  }
 
   const pins = [
     { title:"Jiao · 角 — 28 Mansions Lapis Bracelet", desc:"The first mansion of the Azure Dragon. Deep blue lapis lazuli beads with gold star spacers. 28 bracelets. 28 destinies. Find your star.", img:imageUrl("/images/pins/pin28-jiao.png"), link:"/products/jiao-mansion-bracelet" },

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { DeleteButton } from "./DeleteButton";
+import { safeJsonParse } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -37,7 +38,7 @@ export default async function AdminProductsPage() {
               <tr key={product.id} className="border-b border-[var(--border-light)] hover:bg-[var(--bg)]">
                 <td className="py-3 px-4">
                   <div className="flex items-center gap-3">
-                    <img src={JSON.parse(product.images as string)[0]} alt={product.name} className="w-10 h-10 rounded object-cover" />
+                    <img src={safeJsonParse<string[]>(product.images as string, [])[0]} alt={product.name} className="w-10 h-10 rounded object-cover" />
                     <span className="font-medium line-clamp-1 max-w-[300px]">{product.name}</span>
                   </div>
                 </td>

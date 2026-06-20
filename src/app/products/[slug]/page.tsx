@@ -10,6 +10,7 @@ import { Tabs } from "@/components/ui/Tabs";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { formatPrice } from "@/lib/utils";
+import { safeJsonParse } from "@/lib/utils";
 import { StarRating } from "@/components/ui/StarRating";
 import { StickyAddToCart } from "@/components/product/StickyAddToCart";
 import { Star, Play, ShieldCheck } from "lucide-react";
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = await db.product.findUnique({ where: { slug }, select: { name: true, description: true, images: true, category: { select: { name: true } }, stone: true, variants: { select: { price: true }, orderBy: { price: "asc" } } } });
   if (!product) return { title: "Product Not Found — MythRealms" };
-  const images = JSON.parse(product.images as string) as string[];
+  const images = safeJsonParse<string[]>(product.images as string, []);
   const priceFrom = product.variants[0]?.price ? ` from $${product.variants[0].price.toFixed(0)}` : "";
   const stoneTag = product.stone ? `${product.stone} · ` : "";
   return {
@@ -57,7 +58,7 @@ export default async function ProductPage({
 
   if (!product) notFound();
 
-  const images = JSON.parse(product.images as string) as string[];
+  const images = safeJsonParse<string[]>(product.images as string, []);
   const avgRating =
     product.reviews.length > 0
       ? product.reviews.reduce((s, r) => s + r.rating, 0) / product.reviews.length
@@ -76,11 +77,11 @@ export default async function ProductPage({
 
   const relatedParsed = related.map((p) => ({
     ...p,
-    images: JSON.parse(p.images as string),
+    images: safeJsonParse<string[]>(p.images as string, []),
   }));
 
   // Parse details for beast properties or stone properties
-  const details = product.details ? JSON.parse(product.details as string) : null;
+  const details = safeJsonParse<Record<string, unknown> | null>(product.details as string, null);
 
   return (
     <div className="max-w-7xl mx-auto px-6">
@@ -123,7 +124,9 @@ export default async function ProductPage({
           </h1>
 
           {/* Reviews inline */}
-          <StarRating rating={avgRating} count={product.reviews.length} linkTo="#reviews" />
+          {product.reviews.length > 0 && (
+            <StarRating rating={avgRating} count={product.reviews.length} linkTo="#reviews" />
+          )}
 
           {/* Guardian Tag — emotional resonance */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-sm text-[var(--accent)]">
@@ -157,14 +160,16 @@ export default async function ProductPage({
             comparePrice={product.comparePrice ? Number(product.comparePrice) : null}
           />
 
-          {/* Social proof */}
+          {/* Trust signals */}
           <div className="flex items-center gap-4 mt-4 text-xs text-[var(--text-muted)]">
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)] animate-pulse" />
-              {Math.floor(Math.random() * 8 + 3)} people viewing now
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />
+              Handcrafted to order
             </span>
             <span className="text-[var(--border)]">|</span>
             <span>Free shipping over $69.99</span>
+            <span className="text-[var(--border)]">|</span>
+            <span>30-day returns</span>
           </div>
 
           {/* Mythical Legend badge */}
@@ -261,7 +266,13 @@ export default async function ProductPage({
         <h3 className="font-serif text-2xl font-bold text-[var(--text)] mb-2">
           Customer Reviews
         </h3>
-        <StarRating rating={avgRating} size="lg" showValue count={product.reviews.length} />
+        {product.reviews.length > 0 ? (
+          <StarRating rating={avgRating} size="lg" showValue count={product.reviews.length} />
+        ) : (
+          <p className="text-sm text-[var(--text-secondary)] mb-2">
+            No reviews yet — be among the first to share your experience with this piece.
+          </p>
+        )}
         <div className="space-y-4">
           {product.reviews.slice(0, 5).map((review) => (
             <div
@@ -313,7 +324,6 @@ export default async function ProductPage({
                       fill
                       sizes="240px"
                       className="object-cover hover:scale-105 transition-transform duration-500"
-                      unoptimized
                     />
                   ) : p.images[0] ? (
                     <Image

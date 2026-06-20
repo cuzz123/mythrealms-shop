@@ -37,6 +37,7 @@ export default function NewProductPage() {
   const [intention, setIntention] = useState("");
   const [comparePrice, setComparePrice] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
+  const [isActive, setIsActive] = useState(true);
   const [variants, setVariants] = useState<VariantRow[]>([
     { key: "1", name: "Default", price: "", stock: "0" },
   ]);
@@ -152,6 +153,7 @@ export default function NewProductPage() {
           intention: intention || undefined,
           comparePrice: comparePrice || undefined,
           isFeatured,
+          isActive,
           variants: variantList.map((v) => ({
             name: v.name,
             price: v.price,
@@ -368,6 +370,18 @@ export default function NewProductPage() {
                   className="w-4 h-4 rounded border-[var(--border)] text-[var(--accent)] focus:ring-[var(--accent)]"
                 />
                 <span className="text-sm font-medium">Featured Product</span>
+              </label>
+            </div>
+
+            <div className="flex items-end pb-1">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={isActive}
+                  onChange={(e) => setIsActive(e.target.checked)}
+                  className="w-4 h-4 rounded border-[var(--border)] text-[var(--accent)] focus:ring-[var(--accent)]"
+                />
+                <span className="text-sm font-medium">Active (visible to customers)</span>
               </label>
             </div>
           </div>

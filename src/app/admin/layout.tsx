@@ -23,7 +23,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return <div className="flex items-center justify-center min-h-screen"><div className="animate-spin w-8 h-8 border-2 border-[var(--accent)] border-t-transparent rounded-full" /></div>;
   }
 
-  if (!session || (session.user as any)?.role !== "ADMIN") {
+  if (!session || session.user?.role !== "ADMIN") {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
@@ -49,7 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               key={item.href}
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition ${
-                pathname === item.href ? "bg-white/15 text-white font-medium" : "text-white/60 hover:text-white hover:bg-white/5"
+                pathname === item.href || (item.href !== "/admin" && pathname.startsWith(item.href)) ? "bg-white/15 text-white font-medium" : "text-white/60 hover:text-white hover:bg-white/5"
               }`}
             >
               <item.icon className="w-4 h-4" />

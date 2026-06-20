@@ -14,7 +14,7 @@ export default async function BlogPage() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
       <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-4">
-        <a href="/" className="hover:text-[var(--text)]">Home</a><span>/</span><span className="text-[var(--text)]">Blog</span>
+        <Link href="/" className="hover:text-[var(--text)]">Home</Link><span>/</span><span className="text-[var(--text)]">Blog</span>
       </nav>
 
       <div className="text-center mb-12">

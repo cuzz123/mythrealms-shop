@@ -53,18 +53,22 @@ export default function CheckoutPage() {
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const shipping = subtotal() >= 69.99 ? 0 : 4.99;
-  const discountedSubtotal = discountInfo?.discountedSubtotal ?? subtotal();
+  const discountedSubtotal = Math.max(0, subtotal() - (discountInfo?.discount ?? 0));
   const total = discountedSubtotal + shipping;
 
   // Payment method
   const [paymentMethod, setPaymentMethod] = useState<"ls" | "paypal">("ls");
 
-  // Auto-validate B2G1 on cart change
+  // Re-validate discounts whenever the cart contents change so totals stay correct
+  const itemsKey = items.map((i) => `${i.product.id}:${i.product.variantId ?? ""}:${i.quantity}`).join("|");
   useEffect(() => {
     if (items.length > 0) {
-      validateDiscount(""); // trigger B2G1 auto-detection
+      validateDiscount(""); // recompute B2G1 + discount totals for the current cart
+    } else {
+      setDiscountInfo(null);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemsKey]);
 
   if (items.length === 0) {
     return (
@@ -270,9 +274,8 @@ export default function CheckoutPage() {
 
       const data = await res.json();
       if (data.url) {
-        // Clear cart only after successful redirect
-        window.location.href = data.url;
         clearCart();
+        window.location.href = data.url;
       } else {
         toast.error(data.error || "Checkout failed");
       }

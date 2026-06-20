@@ -12,18 +12,38 @@ export default function CartPage() {
   const [discountCode, setDiscountCode] = useState("");
   const [discountApplied, setDiscountApplied] = useState(false);
   const [discountError, setDiscountError] = useState("");
+  const [discountValue, setDiscountValue] = useState(0);
+  const [discountLabel, setDiscountLabel] = useState("");
+  const [validating, setValidating] = useState(false);
   const shipping = subtotal() >= 69.99 ? 0 : 4.99;
-  const discountAmount = discountApplied ? subtotal() * 0.15 : 0;
+  const discountAmount = discountApplied ? discountValue : 0;
   const total = subtotal() + shipping - discountAmount;
   const isEmpty = items.length === 0;
 
-  const handleApplyDiscount = () => {
-    if (discountCode.trim().toUpperCase() === "MYTH15") {
-      setDiscountApplied(true);
-      setDiscountError("");
-    } else {
-      setDiscountApplied(false);
-      setDiscountError("Invalid discount code");
+  const handleApplyDiscount = async () => {
+    const code = discountCode.trim();
+    if (!code) return;
+    setValidating(true);
+    setDiscountError("");
+    try {
+      const res = await fetch("/api/discounts/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code, subtotal: subtotal() }),
+      });
+      const data = await res.json();
+      if (data.valid) {
+        setDiscountApplied(true);
+        setDiscountValue(data.discountValue ?? subtotal() * 0.15);
+        setDiscountLabel(data.label || code);
+      } else {
+        setDiscountApplied(false);
+        setDiscountError(data.error || "Invalid discount code");
+      }
+    } catch {
+      setDiscountError("Unable to validate code. Please try again.");
+    } finally {
+      setValidating(false);
     }
   };
 
@@ -81,7 +101,7 @@ export default function CartPage() {
                 type="text"
                 value={discountCode}
                 onChange={(e) => { setDiscountCode(e.target.value); setDiscountError(""); }}
-                placeholder="Enter code (e.g. MYTH15)"
+                placeholder="Enter discount code"
                 className="flex-1 px-3 py-2 text-sm border border-[var(--border)] rounded-[var(--radius-sm)] bg-[var(--surface)] text-[var(--text)] placeholder:text-[var(--text-muted)] outline-none focus:border-[var(--accent)]"
               />
               <Button
@@ -96,7 +116,7 @@ export default function CartPage() {
             {discountApplied && (
               <p className="mt-2 flex items-center gap-1 text-sm text-[var(--success)]">
                 <CheckCircle2 className="w-4 h-4" />
-                15% discount applied! You save {formatPrice(discountAmount)}
+                {discountLabel || "Discount"} applied! You save {formatPrice(discountAmount)}
               </p>
             )}
             {discountError && (
@@ -113,7 +133,7 @@ export default function CartPage() {
             <div className={`flex justify-between ${shipping===0?'text-[var(--success)]':''}`}><span>Shipping</span><span>{shipping===0?'FREE':formatPrice(shipping)}</span></div>
             {shipping > 0 && <p className="text-xs text-[var(--text-muted)]">Add {formatPrice(69.99 - subtotal())} more for FREE shipping</p>}
             {discountApplied && (
-              <div className="flex justify-between text-[var(--success)]"><span>Discount (MYTH15)</span><span>-{formatPrice(discountAmount)}</span></div>
+              <div className="flex justify-between text-[var(--success)]"><span>Discount ({discountLabel || "Applied"})</span><span>-{formatPrice(discountAmount)}</span></div>
             )}
             <div className="flex justify-between font-bold text-lg pt-4 border-t border-[var(--border)]"><span className="text-[var(--text)]">Total</span><span className="text-[var(--text)]">{formatPrice(total)}</span></div>
           </div>

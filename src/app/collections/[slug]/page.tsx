@@ -1,11 +1,34 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { CollectionFilters } from "@/components/product/CollectionFilters";
 import { CollectionToolbar } from "./CollectionToolbar";
+import { BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { Suspense } from "react";
+import { safeJsonParse } from "@/lib/utils";
 
 export const dynamic = "force-dynamic"
+
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const category = await db.category.findUnique({ where: { slug } });
+  if (!category) return { title: "Collection Not Found — MythRealms" };
+  const desc = category.description?.slice(0, 155) || `Shop handcrafted ${category.name} — gemstone crystal bracelets inspired by ancient Chinese mythology.`;
+  return {
+    title: `${category.name} — Crystal Bracelets | MythRealms`,
+    description: desc,
+    alternates: { canonical: `${SITE_URL}/collections/${slug}` },
+    openGraph: {
+      title: `${category.name} — MythRealms`,
+      description: desc,
+      url: `${SITE_URL}/collections/${slug}`,
+      type: "website",
+    },
+  };
+}
 
 export default async function CollectionPage({
   params,
@@ -85,7 +108,7 @@ export default async function CollectionPage({
 
   let productsParsed = filteredProducts.map((p) => ({
     ...p,
-    images: JSON.parse(p.images as string),
+    images: safeJsonParse<string[]>(p.images as string, []),
     avgRating: p.reviews.length ? p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length : 0,
     reviewCount: p.reviews.length,
   }));
@@ -96,6 +119,27 @@ export default async function CollectionPage({
 
   return (
     <div className="max-w-7xl mx-auto px-6">
+      <BreadcrumbJsonLd items={[
+        { name: "Home", url: `${SITE_URL}/` },
+        { name: category.name, url: `${SITE_URL}/collections/${slug}` },
+      ]} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org/",
+        "@type": "CollectionPage",
+        name: category.name,
+        description: category.description || undefined,
+        url: `${SITE_URL}/collections/${slug}`,
+        mainEntity: {
+          "@type": "ItemList",
+          numberOfItems: total,
+          itemListElement: finalProducts.slice(0, 24).map((p: any, i: number) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            url: `${SITE_URL}/products/${p.slug}`,
+            name: p.name,
+          })),
+        },
+      }) }} />
       <nav className="flex items-center gap-2 py-4 text-sm text-[var(--text-muted)]">
         <Link href="/" className="hover:text-[var(--text)]">Home</Link><span>/</span>
         <span className="text-[var(--text)]">{category.name}</span>

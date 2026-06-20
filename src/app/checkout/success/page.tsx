@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { db } from "@/lib/db";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle } from "lucide-react";
 import { SuccessTracker } from "./tracker";
+import { safeJsonParse } from "@/lib/utils";
 
 export default async function CheckoutSuccessPage({
   searchParams,
@@ -9,6 +11,16 @@ export default async function CheckoutSuccessPage({
   searchParams: Promise<{ orderId?: string }>;
 }) {
   const { orderId } = await searchParams;
+  const order = orderId
+    ? await db.order.findUnique({ where: { id: orderId }, include: { items: true } })
+    : null;
+  const trackValue = order?.total ?? 0;
+  const trackItems = (order?.items ?? []).map((i) => ({
+    id: i.productId,
+    name: safeJsonParse<{ name?: string }>(i.productSnapshot, { name: "Product" }).name || "Product",
+    quantity: i.quantity,
+    price: i.price,
+  }));
   return (
     <div className="max-w-lg mx-auto px-6 py-20 text-center">
       <CheckCircle className="w-16 h-16 text-[var(--success)] mx-auto mb-6" />
@@ -22,7 +34,7 @@ export default async function CheckoutSuccessPage({
         <Link href="/collections/beast-pendants"><Button variant="primary">Continue Shopping</Button></Link>
         <Link href="/"><Button variant="outline">Back to Home</Button></Link>
       </div>
-      {orderId && <SuccessTracker orderId={orderId} />}
+      {orderId && <SuccessTracker orderId={orderId} value={trackValue} items={trackItems} />}
     </div>
   );
 }
