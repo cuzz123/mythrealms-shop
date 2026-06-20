@@ -74,6 +74,9 @@ export default async function CollectionPage({
   if (stones.length > 0) where.stone = { in: stones };
   if (intentions.length > 0) where.intention = { in: intentions };
   if (materials.length > 0) where.material = { in: materials };
+  // Apply price filter at DB level so pagination stays correct
+  if (priceMin !== undefined) where.minPrice = { ...(where.minPrice || {}), gte: priceMin };
+  if (priceMax !== undefined) where.minPrice = { ...(where.minPrice || {}), lte: priceMax };
 
   const [products, total, stoneCounts, intentionCounts, materialCounts] = await Promise.all([
     db.product.findMany({
@@ -95,18 +98,7 @@ export default async function CollectionPage({
     materials: Object.fromEntries(materialCounts.filter(m => m.material).map(m => [m.material!, m._count])),
   };
 
-  // Apply price filter in-memory using DB minPrice field
-  let filteredProducts = products;
-  if (priceMin !== undefined || priceMax !== undefined) {
-    filteredProducts = products.filter((p) => {
-      const minP = p.minPrice ?? Math.min(...p.variants.map((v) => v.price));
-      if (priceMin !== undefined && minP < priceMin) return false;
-      if (priceMax !== undefined && minP > priceMax) return false;
-      return true;
-    });
-  }
-
-  let productsParsed = filteredProducts.map((p) => ({
+  let productsParsed = products.map((p) => ({
     ...p,
     images: safeJsonParse<string[]>(p.images as string, []),
     avgRating: p.reviews.length ? p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length : 0,
@@ -115,7 +107,7 @@ export default async function CollectionPage({
 
   const finalProducts = productsParsed;
 
-  const totalPages = Math.ceil(filteredProducts.length / limit);
+  const totalPages = Math.ceil(total / limit);
 
   return (
     <div className="max-w-7xl mx-auto px-6">

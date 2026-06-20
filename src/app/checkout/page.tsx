@@ -724,6 +724,7 @@ function PayPalButton({
 
   useEffect(() => {
     if (!paypalClientId) return;
+    if (paymentMethod !== "paypal") return;
     if (document.getElementById("paypal-sdk")) {
       setSdkReady(true);
       return;
@@ -739,12 +740,13 @@ function PayPalButton({
   }, []);
 
   useEffect(() => {
+    if (!paypalClientId) return;
     if (!sdkReady) return;
     const container = document.getElementById("paypal-button-container");
     if (!container || !(window as any).paypal) return;
 
-    // Clear previous buttons
-    container.innerHTML = "";
+    // Skip re-render if buttons already exist (prevents flash on re-renders)
+    if (container.children.length > 0) return;
 
     (window as any).paypal.Buttons({
       createOrder: async () => {
