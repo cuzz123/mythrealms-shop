@@ -15,18 +15,20 @@ import { BackToTop } from "@/components/layout/BackToTop";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-serif",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app"),
   title: "MythRealms — Ancient Beasts & Chinese Constellations",
   description: "Jewelry inspired by the Classic of Mountains and Seas. Nine-Tailed Fox, Qilin, Azure Dragon. Where ancient myths come alive.",
   keywords: ["shan hai jing", "mythical beasts", "chinese constellations", "nine-tailed fox", "qilin"],
