@@ -7,7 +7,7 @@ import { applyRateLimit } from "@/lib/server/rate-limit";
 
 export async function POST(request: NextRequest) {
   // Rate limit: 5 requests per minute per IP
-  const rateLimitResponse = applyRateLimit(request, {
+  const rateLimitResponse = await applyRateLimit(request, {
     windowMs: 60_000,
     maxRequests: 5,
   });

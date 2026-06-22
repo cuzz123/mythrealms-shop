@@ -7,7 +7,7 @@ import { applyRateLimit } from "@/lib/server/rate-limit";
 const PAYPAL_API = process.env.PAYPAL_API_BASE || "https://api-m.paypal.com";
 
 export async function POST(request: NextRequest) {
-  const rateLimitResponse = applyRateLimit(request, {
+  const rateLimitResponse = await applyRateLimit(request, {
     windowMs: 60_000,
     maxRequests: 10,
   });

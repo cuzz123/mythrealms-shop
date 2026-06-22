@@ -68,7 +68,8 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { name:"Celestial Stack", desc:"28 Mansions + Moon Phases — the sky on your wrist", img:imageUrl("/images/products/mansion-collection-flatlay.png"), link:"/collections/28-mansions" },
+              // AGNES_REGEN: "Luxury wrist stack of 4-5 beaded bracelets layered on an elegant wrist, deep blue lapis lazuli beads with antique gold spacers, moon phase charms in rose gold, star-shaped gold connectors, small celestial diamond accents, dark moody background with subtle gold bokeh, premium jewelry editorial photography, Cartier and Van Cleef aesthetic, rich gold and midnight blue palette, mysterious ancient sky motifs, high-end ecommerce style" — model: agnes-image-2.1-flash, size: 1792x1024
+              { name:"Celestial Stack", desc:"28 Mansions + Moon Phases — the sky on your wrist", img:imageUrl("/images/products/celestial-stack.png"), link:"/collections/28-mansions" },
               { name:"Elemental Layers", desc:"Wood + Fire + Earth — three elements, one story", img:imageUrl("/images/products/m5-wood.png"), link:"/collections/five-elements" },
               { name:"Ocean Dreams", desc:"Pearls + Aquamarine — inspired by the Silk Road seas", img:imageUrl("/images/products/op-aquamarine.png"), link:"/collections/ocean-pearls" },
             ].map(s => (

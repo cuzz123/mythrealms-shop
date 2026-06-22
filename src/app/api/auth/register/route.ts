@@ -5,7 +5,7 @@ import { applyRateLimit } from "@/lib/server/rate-limit";
 
 export async function POST(request: NextRequest) {
   // Rate limit: 3 registrations per 10 minutes per IP
-  const rateLimitResponse = applyRateLimit(request, {
+  const rateLimitResponse = await applyRateLimit(request, {
     windowMs: 10 * 60_000,
     maxRequests: 3,
   });
