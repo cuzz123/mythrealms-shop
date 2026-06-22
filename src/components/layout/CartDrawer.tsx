@@ -3,7 +3,7 @@
 import { useEffect, useCallback, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { X, Minus, Plus, Trash2 } from "lucide-react";
+import { X, Minus, Plus, Trash2, Mail } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { cn, formatPrice } from "@/lib/utils";
 
@@ -19,12 +19,24 @@ export function CartDrawer() {
   const updateQuantity = useCartStore((s) => s.updateQuantity);
   const removeItem = useCartStore((s) => s.removeItem);
 
-  // Close on Escape key
+  // Abandoned cart save
+  const [showSave, setShowSave] = useState(false);
+  const [saveEmail, setSaveEmail] = useState("");
+  const [saved, setSaved] = useState(false);
+
+  // Close on Escape key — prompt save when cart has items
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeCart();
+      if (e.key === "Escape") {
+        if (items.length > 0 && !saved) {
+          setShowSave(true);
+        } else {
+          closeCart();
+          setShowSave(false);
+        }
+      }
     },
-    [closeCart],
+    [closeCart, items.length, saved],
   );
 
   useEffect(() => {
@@ -62,6 +74,43 @@ export function CartDrawer() {
       .catch(() => {});
   }, [isOpen]);
 
+  // ── Abandoned cart handlers ──
+  function handleClose() {
+    if (items.length > 0 && !saved) {
+      setShowSave(true);
+    } else {
+      closeCart();
+      setShowSave(false);
+    }
+  }
+
+  async function handleSave() {
+    if (!saveEmail) return;
+    try {
+      await fetch("/api/email/abandoned-cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: saveEmail,
+          cartItems: items.map((i) => ({
+            name: i.product.name,
+            price: i.product.price,
+            quantity: i.quantity,
+          })),
+          stage: "1h",
+        }),
+      });
+    } catch {
+      /* silent — best effort save */
+    }
+    setSaved(true);
+    setShowSave(false);
+    setTimeout(() => {
+      closeCart();
+      setSaved(false);
+    }, 1200);
+  }
+
   return (
     <>
       {/* Overlay */}
@@ -72,7 +121,7 @@ export function CartDrawer() {
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0",
         )}
-        onClick={closeCart}
+        onClick={handleClose}
         aria-hidden="true"
       />
 
@@ -93,7 +142,7 @@ export function CartDrawer() {
           </h2>
           <button
             type="button"
-            onClick={closeCart}
+            onClick={handleClose}
             className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-muted)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)]"
             aria-label="Close cart"
           >
@@ -219,6 +268,48 @@ export function CartDrawer() {
                 ))}
               </ul>
             </div>
+
+            {/* Abandoned Cart Save Prompt */}
+            {showSave && !saved && (
+              <div className="mx-5 mb-4 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--border-light)] px-4 py-3">
+                <p className="text-sm font-semibold text-[var(--text)] mb-1">
+                  Save your cart?
+                </p>
+                <p className="text-xs text-[var(--text-muted)] mb-3">
+                  We'll email you a link to pick up where you left off.
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    value={saveEmail}
+                    onChange={(e) => setSaveEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="flex-1 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--primary)]"
+                  />
+                  <button
+                    onClick={handleSave}
+                    className="flex items-center gap-1.5 rounded-[var(--radius-sm)] bg-[var(--primary)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--primary-hover)]"
+                  >
+                    <Mail size={14} />
+                    Save
+                  </button>
+                </div>
+                <button
+                  onClick={() => {
+                    closeCart();
+                    setShowSave(false);
+                  }}
+                  className="mt-2 text-xs text-[var(--text-muted)] hover:underline"
+                >
+                  No thanks
+                </button>
+              </div>
+            )}
+            {saved && (
+              <div className="mx-5 mb-4 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--border-light)] px-4 py-3 text-center text-sm font-semibold text-[var(--text)]">
+                Check your inbox!
+              </div>
+            )}
 
             {/* Footer */}
             <div className="border-t border-[var(--border)] px-5 py-4">

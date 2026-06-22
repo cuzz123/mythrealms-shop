@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { formatPrice } from "@/lib/utils";
 import { ShoppingBag } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
@@ -33,11 +34,16 @@ export function StickyAddToCart({ productId, productName, productSlug, image, pr
   };
 
   return (
-    <div className={`lg:hidden fixed bottom-14 left-0 right-0 z-30 bg-[var(--surface)] border-t border-[var(--border)] px-4 py-3 transition-transform duration-300 ${visible ? "translate-y-0" : "translate-y-full"}`}>
+    <div className={`lg:hidden fixed bottom-14 left-0 right-0 z-30 bg-[var(--surface)] border-t border-[var(--border)] px-4 py-3 transition-transform duration-200 ease-out ${visible ? "translate-y-0" : "translate-y-full"}`}>
       <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-sm font-medium text-[var(--text)] truncate">{productName}</p>
-          <p className="text-sm font-bold text-[var(--accent)]">{formatPrice(price)}</p>
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="relative w-10 h-10 flex-shrink-0 rounded-lg overflow-hidden border border-[var(--border)]">
+            <Image src={image} alt={productName} fill sizes="40px" className="object-cover" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-[var(--text)] truncate">{productName}</p>
+            <p className="text-sm font-bold text-[var(--accent)]">{formatPrice(price)}</p>
+          </div>
         </div>
         <button onClick={handleAdd} className="flex-shrink-0 inline-flex items-center gap-1.5 px-5 py-2.5 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
           <ShoppingBag className="w-4 h-4" />

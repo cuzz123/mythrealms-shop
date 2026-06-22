@@ -91,6 +91,14 @@ export async function POST(request: NextRequest) {
       } catch (e) {
         console.error("Email failed:", e);
       }
+
+      // Increment discount code usedCount
+      if (order.discount > 0) {
+        await db.discountCode.updateMany({
+          where: { isActive: true },
+          data: { usedCount: { increment: 1 } },
+        });
+      }
     }
 
     return NextResponse.json({ success: true, orderId: dbOrderId });

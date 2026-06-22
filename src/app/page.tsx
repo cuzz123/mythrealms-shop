@@ -1,10 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Suspense } from "react";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { GuardianTeaser } from "@/components/layout/GuardianTeaser";
-import { HomeBlogAsync, HomeBlogFallback } from "@/components/layout/HomeBlogAsync";
 import { ArrowRight } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
@@ -30,99 +28,10 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* ===== CATEGORIES — horizontal scroll on mobile ===== */}
-      <section className="py-10 bg-[#0F0D0E]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="overflow-x-auto scrollbar-hide -mx-2 px-2">
-            <div className="flex gap-3 lg:grid lg:grid-cols-4 min-w-max lg:min-w-0">
-              {[
-                { name: "28 Mansions", sub: "28 Celestial Bracelets", img: imageUrl("/images/categories/cat-28mansions.png"), href: "/collections/28-mansions", tag: "Find your star in the ancient sky" },
-                { name: "Five Elements", sub: "5 Element Bracelets", img: imageUrl("/images/categories/cat-elements.png"), href: "/collections/five-elements", tag: "Wood · Fire · Earth · Metal · Water" },
-                { name: "Moon Phases", sub: "8 Lunar Bracelets", img: imageUrl("/images/categories/cat-moon.png"), href: "/collections/moon-phases", tag: "Waxing · Full · Waning — the cycle of eternity" },
-                { name: "Ocean Pearls", sub: "5 Pearl Bracelets", img: imageUrl("/images/categories/cat-pearls.png"), href: "/collections/ocean-pearls", tag: "Mermaid tears crystallized in precious metal" },
-              ].map((c) => (
-                <Link key={c.name} href={c.href} className="group relative w-[160px] sm:w-[200px] lg:w-auto aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2520] flex-shrink-0 hover:border-[rgba(212,168,75,0.3)] transition-all">
-                  <Image src={c.img} alt={c.name} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,13,14,0.95)] via-[rgba(15,13,14,0.3)] to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="font-serif text-base font-semibold text-[#E8E0D5]">{c.name}</h3>
-                    <p className="text-xs text-[var(--accent)]">{c.tag}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ===== GUARDIAN TEASER — personalization before browsing ===== */}
       <GuardianTeaser />
 
-      {/* ===== FEATURED PRODUCTS ===== */}
-      <section className="py-14 bg-[#1A1816]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-end justify-between mb-8">
-            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">28 Mansions · 二十八宿</h2>
-            <Link href="/collections/28-mansions" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All 28 <ArrowRight className="w-4 h-4" /></Link>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { name: "Jiao · 角 — Horn", slug: "jiao-mansion-bracelet", stone: "Lapis Lazuli", price: 34.99 },
-              { name: "Kang · 亢 — Neck", slug: "kang-mansion-bracelet", stone: "Tiger Eye", price: 34.99 },
-              { name: "Jing · 井 — Well", slug: "jing-mansion-bracelet", stone: "Aquamarine", price: 34.99 },
-              { name: "Xing · 星 — Star", slug: "xing-mansion-bracelet", stone: "Clear Quartz", price: 34.99 },
-              { name: "Kui · 奎 — Legs", slug: "kui-mansion-bracelet", stone: "White Moonstone", price: 34.99 },
-              { name: "Shen · 参 — Three Stars", slug: "shen-mansion-bracelet", stone: "Labradorite", price: 34.99 },
-              { name: "Dou · 斗 — Dipper", slug: "dou-mansion-bracelet", stone: "Dark Sodalite", price: 34.99 },
-              { name: "Nv · 女 — Girl", slug: "nv-mansion-bracelet", stone: "Rose Quartz", price: 34.99 },
-            ].map((p) => (
-              <Link key={p.slug} href={`/products/${p.slug}`} className="group">
-                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
-                  <Image src={imageUrl(`/images/products/${p.slug}.png`)} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="mt-2.5 px-1">
-                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {formatPrice(p.price)}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="text-center mt-6 sm:hidden">
-            <Link href="/collections/28-mansions" className="inline-flex items-center gap-2 px-5 py-2.5 border border-[var(--accent)] text-[var(--accent)] rounded-full text-sm font-semibold">View All 28 <ArrowRight className="w-4 h-4" /></Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FIVE ELEMENTS ===== */}
-      <section className="py-14 bg-[var(--surface)]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-end justify-between mb-8">
-            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Five Elements · 五行</h2>
-            <Link href="/collections/five-elements" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All <ArrowRight className="w-4 h-4" /></Link>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-            {[
-              { name: "Wood · 木", slug: "wood-element-bracelet", stone: "Green Jade", price: 32.99 },
-              { name: "Fire · 火", slug: "fire-element-bracelet", stone: "Red Garnet", price: 32.99 },
-              { name: "Earth · 土", slug: "earth-element-bracelet", stone: "Tiger Eye", price: 32.99 },
-              { name: "Metal · 金", slug: "metal-element-bracelet", stone: "Moonstone", price: 32.99 },
-              { name: "Water · 水", slug: "water-element-bracelet", stone: "Lapis Lazuli", price: 32.99 },
-            ].map((p) => (
-              <Link key={p.slug} href={`/products/${p.slug}`} className="group">
-                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
-                  <Image src={imageUrl(`/images/products/${p.slug}.png`)} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="mt-2.5 px-1">
-                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {formatPrice(p.price)}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== NEW COLLECTIONS ===== */}
+      {/* ===== NEW COLLECTIONS (Featured Products) ===== */}
       <section className="py-14 bg-[#1A1816]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">
@@ -189,11 +98,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ===== BLOG ===== */}
-      <Suspense fallback={<HomeBlogFallback />}>
-        <HomeBlogAsync />
-      </Suspense>
     </>
   );
 }

@@ -69,10 +69,12 @@ export async function POST(request: NextRequest) {
             }
           }
 
-          // Increment discount code usage
+          // Increment discount code usedCount
           if (order.discount > 0) {
-            // Find the discount code used (check custom data from checkout)
-            // For now, increment all active codes — refine when we store code ID on order
+            await db.discountCode.updateMany({
+              where: { isActive: true },
+              data: { usedCount: { increment: 1 } },
+            });
           }
 
           // Send confirmation email
