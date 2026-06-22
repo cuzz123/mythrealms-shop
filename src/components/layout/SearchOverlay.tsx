@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Search, X, Loader2 } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
+import { imageUrl } from "@/lib/images";
 import Link from "next/link";
 
 interface SearchResult {
@@ -184,7 +185,7 @@ export function SearchOverlay() {
                     <div className="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-[var(--border-light)]">
                       {result.image && (result.image.startsWith("http") || result.image.startsWith("/")) ? (
                         <Image
-                          src={result.image}
+                          src={imageUrl(result.image)}
                           alt={result.name}
                           fill
                           sizes="48px"

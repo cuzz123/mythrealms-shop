@@ -6,6 +6,7 @@ import Link from "next/link";
 import { X, Minus, Plus, Trash2, Mail } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { cn, formatPrice } from "@/lib/utils";
+import { imageUrl } from "@/lib/images";
 
 const FREE_SHIPPING_THRESHOLD = 69.99;
 
@@ -185,7 +186,7 @@ export function CartDrawer() {
                     {/* Product image */}
                     <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-[var(--radius-md)] bg-[var(--border-light)]">
                       <Image
-                        src={item.product.image}
+                        src={imageUrl(item.product.image)}
                         alt={item.product.name}
                         fill
                         sizes="80px"
@@ -374,7 +375,7 @@ export function CartDrawer() {
                       >
                         <div className="w-[90px] h-[90px] rounded-[var(--radius-md)] overflow-hidden bg-[var(--border-light)] mb-1.5">
                           <Image
-                            src={Array.isArray(p.images) ? p.images[0] : (typeof p.images === "string" ? JSON.parse(p.images)[0] : "")}
+                            src={imageUrl(Array.isArray(p.images) ? p.images[0] : (typeof p.images === "string" ? JSON.parse(p.images)[0] : ""))}
                             alt={p.name}
                             width={90}
                             height={90}

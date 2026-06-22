@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useCartStore, CartProduct } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
+import { imageUrl } from "@/lib/images";
 import Link from "next/link";
 import { Minus, Plus, Trash2, ArrowLeft, ShoppingBag, TicketPercent, CheckCircle2 } from "lucide-react";
 
@@ -71,7 +72,7 @@ export default function CartPage() {
           {items.map((item) => (
             <div key={`${item.product.id}-${item.product.variantId}`} className="grid grid-cols-[80px_1fr_auto_auto] gap-4 items-center p-5 border-b border-[var(--border)] last:border-b-0">
               <div className="w-20 h-20 rounded-lg overflow-hidden bg-[var(--border-light)]">
-                <img src={item.product.image} alt={item.product.name} className="w-full h-full object-cover" />
+                <img src={imageUrl(item.product.image)} alt={item.product.name} className="w-full h-full object-cover" />
               </div>
               <div>
                 <h3 className="text-sm font-semibold line-clamp-2 mb-1 text-[var(--text)]">{item.product.name}</h3>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { formatPrice } from "@/lib/utils";
+import { imageUrl } from "@/lib/images";
 import { ShoppingBag } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import toast from "react-hot-toast";
@@ -38,7 +39,7 @@ export function StickyAddToCart({ productId, productName, productSlug, image, pr
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
           <div className="relative w-10 h-10 flex-shrink-0 rounded-lg overflow-hidden border border-[var(--border)]">
-            <Image src={image} alt={productName} fill sizes="40px" className="object-cover" />
+            <Image src={imageUrl(image)} alt={productName} fill sizes="40px" className="object-cover" />
           </div>
           <div className="min-w-0">
             <p className="text-sm font-medium text-[var(--text)] truncate">{productName}</p>

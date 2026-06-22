@@ -4,6 +4,7 @@ import { useState, useCallback } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight, ZoomIn, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { imageUrl } from "@/lib/images"
 import { ProductImage } from "@/components/ui/ProductImage"
 
 interface GalleryProps {
@@ -62,7 +63,7 @@ export function Gallery({ images, productName }: GalleryProps) {
         {isValidImage ? (
           <>
             <Image
-              src={currentImage}
+              src={imageUrl(currentImage)}
               alt={`${productName} - image ${activeIndex + 1}`}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
@@ -144,7 +145,7 @@ export function Gallery({ images, productName }: GalleryProps) {
             >
               {img && (img.startsWith("http") || img.startsWith("/")) ? (
                 <Image
-                  src={img}
+                  src={imageUrl(img)}
                   alt={`${productName} thumbnail ${index + 1}`}
                   fill
                   sizes="(max-width: 640px) 14vw, 80px"
@@ -211,7 +212,7 @@ export function Gallery({ images, productName }: GalleryProps) {
           >
             {isValidImage ? (
               <Image
-                src={currentImage}
+                src={imageUrl(currentImage)}
                 alt={`${productName} - image ${activeIndex + 1}`}
                 fill
                 sizes="90vw"

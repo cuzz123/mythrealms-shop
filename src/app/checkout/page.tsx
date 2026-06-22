@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useCartStore } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
+import { imageUrl } from "@/lib/images";
 import Link from "next/link";
 import { Loader2, Tag, Check, AlertCircle, CreditCard } from "lucide-react";
 import toast from "react-hot-toast";
@@ -475,7 +476,7 @@ export default function CheckoutPage() {
                   className="flex gap-3 text-sm"
                 >
                   <img
-                    src={item.product.image}
+                    src={imageUrl(item.product.image)}
                     alt={item.product.name}
                     className="w-12 h-12 rounded object-cover flex-shrink-0"
                   />

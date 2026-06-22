@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ShoppingBag, Heart } from "lucide-react"
 import { cn, formatPrice } from "@/lib/utils"
+import { imageUrl } from "@/lib/images"
 import { useCartStore } from "@/lib/cart"
 import { useWishlistStore } from "@/lib/wishlist"
 import toast from "react-hot-toast"
@@ -79,7 +80,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
         {/* Image container */}
         <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--border-light)]">
           {isValidImage ? (
-            <Image src={image} alt={product.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            <Image src={imageUrl(image)} alt={product.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               className="object-cover transition-transform duration-500 group-hover:scale-110" />
           ) : (
             <ProductImage name={product.name} className="absolute inset-0" />

@@ -3,6 +3,7 @@
 import { useWishlistStore } from "@/lib/wishlist";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
+import { imageUrl } from "@/lib/images";
 import Link from "next/link";
 import { Heart, ShoppingBag, ArrowLeft } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
@@ -39,7 +40,7 @@ export default function WishlistPage() {
         {items.map((item) => (
           <div key={item.id} className="flex items-center gap-4 bg-[var(--surface)] border border-[var(--border)] rounded-xl p-4">
             <Link href={`/products/${item.slug}`} className="w-20 h-20 rounded-lg overflow-hidden bg-[var(--border-light)] flex-shrink-0">
-              <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+              <img src={imageUrl(item.image)} alt={item.name} className="w-full h-full object-cover" />
             </Link>
             <div className="flex-1 min-w-0">
               <Link href={`/products/${item.slug}`} className="font-medium text-[var(--text)] hover:text-[var(--accent)] line-clamp-1">

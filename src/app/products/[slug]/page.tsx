@@ -14,6 +14,7 @@ import { safeJsonParse } from "@/lib/utils";
 import { StarRating } from "@/components/ui/StarRating";
 import { StickyAddToCart } from "@/components/product/StickyAddToCart";
 import { Star, Play, ShieldCheck } from "lucide-react";
+import { imageUrl, absoluteImageUrl } from "@/lib/images";
 
 export const dynamic = "force-dynamic"
 
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: product.name,
       description: product.description.slice(0, 155),
-      images: images[0] ? [{ url: images[0].startsWith("http") ? images[0] : `${process.env.NEXT_PUBLIC_APP_URL || ""}${images[0]}` }] : [],
+      images: images[0] ? [{ url: absoluteImageUrl(images[0]) }] : [],
     },
     twitter: {
       card: "summary_large_image",
@@ -94,7 +95,7 @@ export default async function ProductPage({
       <ProductJsonLd
         name={product.name}
         description={product.description}
-        images={images}
+        images={images.map(i => absoluteImageUrl(i))}
         price={product.variants[0]?.price || 0}
         ratingValue={avgRating}
         reviewCount={product.reviews.length}
@@ -327,7 +328,7 @@ export default async function ProductPage({
                     />
                   ) : p.images[0] ? (
                     <Image
-                      src={p.images[0] as string}
+                      src={imageUrl(p.images[0] as string)}
                       alt={p.name}
                       fill
                       sizes="240px"
