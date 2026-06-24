@@ -96,8 +96,7 @@ export function HeroCarousel() {
         <div className="max-w-7xl mx-auto px-4 md:px-6 w-full">
           <div
             key={current}
-            className="max-w-xs sm:max-w-md md:max-w-lg"
-            className="animate-slideInContent"
+            className="animate-slideInContent max-w-xs sm:max-w-md md:max-w-lg"
           >
             <span className="inline-block text-[10px] md:text-xs uppercase tracking-[0.15em] text-[var(--accent)] font-semibold mb-2 md:mb-3">Curated Gemstones</span>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl font-bold text-white leading-tight mb-2 md:mb-4">{slides[current].title}</h2>
