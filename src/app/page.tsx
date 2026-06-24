@@ -11,7 +11,7 @@ import { LazyImage } from "@/components/ui/LazyImage";
 export const dynamic = "force-static";
 
 export default function HomePage() {
-  const featured = PRODUCTS.filter(p => p.isBestSeller).slice(0, 4);
+  const featured = PRODUCTS.filter(p => p.isBestSeller).slice(0, 6);
   const categories = CATEGORIES;
 
   return (
