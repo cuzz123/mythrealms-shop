@@ -3,15 +3,20 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-import { imageUrl } from "@/lib/images";
+import { PRODUCTS } from "@/lib/1688-products";
 
-const slides = [
-  { image: imageUrl("/images/products/ml-full.png"), title:"Natural Stone Bracelets, Curated for the Modern Mystic", subtitle:"Hand-selected crystals. Artisan finishes. Pieces that feel like they've always belonged to you.", cta:"Shop by Stone", href:"/collections/curated-stones" },
-  { image: imageUrl("/images/products/bf-bracelet.png"), title:"Amethyst — The Stone of Clarity", subtitle:"Deep purple hues that quiet the mind. Each bead hand-knotted on silk cord.", cta:"Shop by Stone", href:"/collections/curated-stones" },
-  { image: imageUrl("/images/products/op-aquamarine.png"), title:"Moonstone — The Stone of New Beginnings", subtitle:"Luminous and ever-changing. A reminder that transformation is the only constant.", cta:"Shop by Stone", href:"/collections/curated-stones" },
-  { image: imageUrl("/images/products/fl-lotus.png"), title:"Rose Quartz — The Stone of the Heart", subtitle:"Soft blush. Gentle energy. For those who lead with love and boundary both.", cta:"Shop by Stone", href:"/collections/curated-stones" },
-  { image: imageUrl("/images/products/m5-water.png"), title:"Tiger's Eye — The Stone of Grounded Confidence", subtitle:"Golden bands that catch the light. For quiet strength and steady resolve.", cta:"Shop by Stone", href:"/collections/curated-stones" },
-  { image: imageUrl("/images/products/black-tortoise.png"), title:"Black Obsidian — The Stone of Protection", subtitle:"Volcanic glass. Ancient shield. For those who guard what matters most.", cta:"Shop by Stone", href:"/collections/curated-stones" },
+import { PRODUCTS } from "@/lib/1688-products";
+
+// Use best 1688 product images for hero slides
+const featured = PRODUCTS.filter(p => p.images.length >= 3).slice(0, 6);
+const slides = featured.length >= 3 ? featured.map((p, i) => ({
+  image: p.images[i % p.images.length] || p.image,
+  title: i === 0 ? "Hand-Selected Stone Bracelets, Curated for You" : `${p.categoryName} — ${p.name}`,
+  subtitle: i === 0 ? "Real craftsmanship. Natural stones. Pieces that feel like they've always belonged to you." : p.description,
+  cta: i === 0 ? "Shop the Collection" : "View Details",
+  href: i === 0 ? "/collections" : `/products/${p.slug}`,
+})) : [
+  { image: PRODUCTS[0]?.images?.[0] || "", title:"Hand-Selected Stone Bracelets", subtitle:"Natural gemstones, curated for the modern mystic.", cta:"Shop Now", href:"/collections" },
 ];
 
 export function HeroCarousel() {
