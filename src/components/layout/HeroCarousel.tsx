@@ -44,7 +44,7 @@ export function HeroCarousel() {
   }, [isPaused, goNext, prefersReducedMotion]);
 
   return (
-    <div className="relative w-full min-h-[60vh] md:min-h-[85vh] overflow-hidden bg-[#0A0808]">
+    <div className="relative w-full h-screen overflow-hidden bg-[#0A0808]">
       {/* Preload adjacent image for snappier transitions */}
       <div className="absolute inset-0" style={{ visibility: "hidden" }}>
         <Image

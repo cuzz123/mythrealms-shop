@@ -51,7 +51,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 h-[72px] border-b border-[var(--border)] bg-[var(--surface)]">
+    <header className="absolute top-0 left-0 right-0 z-40 h-[72px] bg-transparent">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4">
         {/* Left — Logo */}
         <Link
@@ -70,17 +70,17 @@ export function Header() {
             <path
               d="M14 2L22 10L14 26L6 10L14 2Z"
               fill="var(--accent)"
-              fillOpacity="0.7"
+              fillOpacity="0.9"
             />
             <path
               d="M14 8L18 12L14 20L10 12L14 8Z"
               fill="var(--primary)"
-              fillOpacity="0.6"
+              fillOpacity="0.8"
             />
             <circle cx="14" cy="5" r="1.5" fill="var(--accent)" />
           </svg>
 
-          <span className="font-serif text-xl font-semibold tracking-tight text-[var(--text)]">
+          <span className="font-serif text-xl font-semibold tracking-tight text-white">
             MythRealms
           </span>
         </Link>
@@ -94,8 +94,8 @@ export function Header() {
                   type="button"
                   onClick={() => setShopOpen(!shopOpen)}
                   onMouseEnter={() => setShopOpen(true)}
-                  className={`rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)] inline-flex items-center gap-1 ${
-                    isActive(link.href) ? "text-[var(--accent)] bg-[var(--accent)]/10" : "text-[var(--text-secondary)]"
+                  className={`rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white inline-flex items-center gap-1 ${
+                    isActive(link.href) ? "text-white" : "text-white/80"
                   }`}
                 >
                   {link.label}
@@ -103,7 +103,7 @@ export function Header() {
                 </button>
                 {shopOpen && (
                   <div
-                    className="absolute top-full left-0 mt-1 w-48 bg-[var(--surface)] border border-[var(--border)] rounded-lg shadow-xl py-1 z-50 animate-fade-in"
+                    className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-xl py-1 z-50 animate-fade-in"
                     onMouseLeave={() => setShopOpen(false)}
                   >
                     {link.children.map((child) => (
@@ -111,8 +111,8 @@ export function Header() {
                         key={child.href}
                         href={child.href}
                         onClick={() => setShopOpen(false)}
-                        className={`block px-4 py-2.5 text-sm transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)] ${
-                          pathname.startsWith(child.href) ? "text-[var(--accent)] bg-[var(--accent)]/5" : "text-[var(--text-secondary)]"
+                        className={`block px-4 py-2.5 text-sm transition-colors hover:bg-gray-100 ${
+                          pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : "text-gray-700"
                         }`}
                       >
                         {child.label}
@@ -125,8 +125,8 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)] ${
-                  isActive(link.href) ? "text-[var(--accent)] bg-[var(--accent)]/10" : "text-[var(--text-secondary)]"
+                className={`rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white ${
+                  isActive(link.href) ? "text-white" : "text-white/80"
                 }`}
               >
                 {link.label}
@@ -144,7 +144,7 @@ export function Header() {
           <Link
             href="/account"
             aria-label={user ? `${user.name || "My account"} — View account` : "My account — Sign in"}
-            className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)]"
+            className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
             {user?.image ? (
               <img
@@ -161,7 +161,7 @@ export function Header() {
           <Link
             href="/wishlist"
             aria-label={`Wishlist, ${wishlistCount} items`}
-            className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--sale)]"
+            className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
             <Heart size={20} strokeWidth={1.8} />
             {wishlistCount > 0 && (
@@ -176,7 +176,7 @@ export function Header() {
             type="button"
             onClick={openCart}
             aria-label={`Shopping cart, ${itemCount} items`}
-            className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)]"
+            className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
             <ShoppingBag size={20} strokeWidth={1.8} />
             {itemCount > 0 && (
@@ -190,7 +190,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="ml-1 flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)] lg:hidden"
+            className="ml-1 flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-white/80 transition-colors hover:bg-white/10 hover:text-white lg:hidden"
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
           >
