@@ -592,5 +592,35 @@
       "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail4.jpg",
       "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail5.jpg"
     ]
+  },
+  {
+    "type": "single-product",
+    "slug": "crystal-bling-single",
+    "name": "Crystal Bling Bracelet",
+    "description": "Sparkling crystal bracelet with brilliant light-catching facets",
+    "price": 34.99,
+    "mainImage": "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-main.jpg",
+    "images": [
+      "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-main.jpg",
+      "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail1.jpg",
+      "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail2.jpg",
+      "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail3.jpg"
+    ]
+  },
+  {
+    "type": "single-product",
+    "slug": "golden-weave-single",
+    "name": "Golden Weave Bracelet",
+    "description": "Intricate woven gold-tone bracelet for sophisticated layering",
+    "price": 34.99,
+    "mainImage": "/images/products/1688-shop/golden-weave-single/golden-weave-single-main.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-weave-single/golden-weave-single-main.jpg",
+      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail1.jpg",
+      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail2.jpg",
+      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail3.jpg",
+      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail4.jpg",
+      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail5.jpg"
+    ]
   }
 ]

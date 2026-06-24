@@ -1,4 +1,4 @@
-// 1688 Products — MythRealms
+// 1688 Products — MythRealms (auto-generated)
 export interface Product {
   id: string; name: string; slug: string; category: string; categoryName: string;
   description: string; price: number; compareAt?: number;
@@ -828,6 +828,42 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     rating: 4.9,
     reviewCount: 14,
+  },
+  {
+    id: '1688-046',
+    name: 'Crystal Bling Bracelet',
+    slug: 'crystal-bling-single',
+    category: 'curated-singles',
+    categoryName: 'Curated Singles',
+    description: 'Sparkling crystal bracelet with brilliant light-catching facets',
+    price: 34.99,
+    image: '/images/products/1688-shop/crystal-bling-single/crystal-bling-single-main.jpg',
+    images: ["/images/products/1688-shop/crystal-bling-single/crystal-bling-single-main.jpg", "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail1.jpg", "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail2.jpg", "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail3.jpg"],
+    tag: 'New',
+    isBestSeller: true,
+    isNew: true,
+    isActive: true,
+    inStock: true,
+    rating: 4.5,
+    reviewCount: 15,
+  },
+  {
+    id: '1688-047',
+    name: 'Golden Weave Bracelet',
+    slug: 'golden-weave-single',
+    category: 'curated-singles',
+    categoryName: 'Curated Singles',
+    description: 'Intricate woven gold-tone bracelet for sophisticated layering',
+    price: 34.99,
+    image: '/images/products/1688-shop/golden-weave-single/golden-weave-single-main.jpg',
+    images: ["/images/products/1688-shop/golden-weave-single/golden-weave-single-main.jpg", "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail1.jpg", "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail2.jpg", "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail3.jpg", "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail4.jpg", "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail5.jpg"],
+    tag: 'New',
+    isBestSeller: true,
+    isNew: true,
+    isActive: true,
+    inStock: true,
+    rating: 4.6,
+    reviewCount: 16,
   },
 ];
 
