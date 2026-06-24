@@ -9,6 +9,10 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 const HERO_IMAGES = [
   "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_03_37.png",
   "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_08_34.png",
+  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_15_17.png",
+  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_30_53.png",
+  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_20.png",
+  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_43.png",
 ];
 
 const slides = HERO_IMAGES.map((img, i) => ({
