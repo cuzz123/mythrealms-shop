@@ -74,14 +74,14 @@ export function HeroCarousel() {
             aria-hidden={!isActive}
           >
             {s.image && (
-              <div className="absolute inset-0 overflow-hidden">
+              <div className={`absolute inset-0 overflow-hidden ${isActive ? "animate-ken-burns" : ""}`}>
                 <Image
                   src={s.image}
                   alt={s.title}
                   fill
                   sizes="100vw"
                   priority={isActive}
-                  className={`object-cover ${isActive ? "animate-ken-burns" : ""}`}
+                  className="object-cover scale-[1.02]"
                 />
               </div>
             )}
@@ -139,15 +139,15 @@ export function HeroCarousel() {
 
       <style jsx>{`
         @keyframes slideInContent {
-          from { opacity: 0; transform: translateX(30px); }
-          to { opacity: 1; transform: translateX(0); }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
         @keyframes kenBurns {
-          0% { transform: scale(1) translate(0, 0); }
-          100% { transform: scale(1.08) translate(-1%, -0.5%); }
+          0%   { transform: scale(1.00); }
+          100% { transform: scale(1.06); }
         }
         .animate-ken-burns {
-          animation: kenBurns 8s ease-in-out forwards;
+          animation: kenBurns 7s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
         }
       `}</style>
     </div>
