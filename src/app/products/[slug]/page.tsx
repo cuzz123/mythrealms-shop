@@ -13,6 +13,8 @@ import { formatPrice } from "@/lib/utils";
 import { safeJsonParse } from "@/lib/utils";
 import { StarRating } from "@/components/ui/StarRating";
 import { StickyAddToCart } from "@/components/product/StickyAddToCart";
+import { Product1688 } from "./1688-product";
+import { PRODUCTS as P1688 } from "@/lib/1688-products";
 import { Star, Play, ShieldCheck } from "lucide-react";
 import { imageUrl, absoluteImageUrl } from "@/lib/images";
 
@@ -48,6 +50,12 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  // 1688 static products
+  if (P1688.some(p => p.slug === slug)) {
+    return <Product1688 slug={slug} />;
+  }
+
   const product = await db.product.findUnique({
     where: { slug },
     include: {

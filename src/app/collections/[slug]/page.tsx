@@ -7,6 +7,8 @@ import { CollectionToolbar } from "./CollectionToolbar";
 import { BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { Suspense } from "react";
 import { safeJsonParse } from "@/lib/utils";
+import { Collection1688 } from "./1688-collection";
+import { CATEGORIES } from "@/lib/1688-products";
 
 // Quick stone filter chips for Curated Stones collection
 const CURATED_STONES = ["Amethyst", "Rose Quartz", "Black Obsidian", "Moonstone", "Tiger's Eye"];
@@ -71,6 +73,11 @@ export default async function CollectionPage({
 }) {
   const { slug } = await params;
   const sp = await searchParams;
+
+  // 1688 static data categories
+  if (CATEGORIES.some(c => c.slug === slug)) {
+    return <Collection1688 slug={slug} />;
+  }
   const page = parseInt(sp.page || "1");
   const sort = sp.sort || "featured";
   const limit = 24;
