@@ -65,7 +65,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Mobile nav */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#0A0808] text-white z-50 flex justify-around py-3">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#0A0808] text-white z-50 flex justify-around py-3 safe-area-bottom">
         {navItems.map((item) => (
           <Link key={item.href} href={item.href} className={`flex flex-col items-center gap-1 text-xs ${pathname===item.href?'text-[var(--accent)]':'text-white/50'}`}>
             <item.icon className="w-5 h-5" /> {item.label}
@@ -74,7 +74,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
 
       {/* Main content */}
-      <main className="flex-1 bg-[var(--bg)] p-6 lg:p-10 pb-20 lg:pb-10">{children}</main>
+      <main
+        className="flex-1 bg-[var(--bg)] p-6 lg:p-10 pb-20 lg:pb-10"
+        style={{ paddingBottom: "calc(5rem + env(safe-area-inset-bottom, 0px))" }}
+      >
+        {children}
+      </main>
     </div>
   );
 }

@@ -1,4 +1,14 @@
 // POST /api/discounts/validate — Validate discount codes from database and calculate savings
+//
+// Rate limiting note: This endpoint is called on every cart change (add, remove,
+// quantity update) and on every checkout field keystroke (the cart-items effect
+// re-validates). That can fire dozens of requests in a single checkout session.
+// The validateDiscount() caller on the frontend debounces implicitly via React
+// batching, but there is no explicit debounce here. If DB load becomes a concern:
+//   1. Add a short in-memory debounce per session (e.g. 500ms) in this route.
+//   2. Or move the B2G1 calculation fully to the client and only call this route
+//      when a manual discount code is entered.
+//   3. Or apply the existing generic rate limiter from @/lib/server/rate-limit.
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";

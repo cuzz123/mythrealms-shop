@@ -757,6 +757,9 @@ function PayPalButton({
     if (container.children.length > 0) return;
 
     (window as any).paypal.Buttons({
+      // createOrder calls POST /api/checkout/paypal which sets
+      // PayPal's purchase_units[0].custom_id = order.id so the
+      // webhook can map incoming payments back to our DB orders.
       createOrder: async () => {
         const res = await fetch("/api/checkout/paypal", {
           method: "POST",

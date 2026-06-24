@@ -65,7 +65,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Providers>
           <AnnouncementBar />
           <Header />
-          <main id="main-content" className="min-h-screen pb-14 lg:pb-0">{children}</main>
+          <main
+            id="main-content"
+            className="min-h-screen pb-14 lg:pb-0"
+            style={{ paddingBottom: "calc(3.5rem + env(safe-area-inset-bottom, 0px))" }}
+          >
+            {children}
+          </main>
           <Footer />
           <CartDrawer />
           <CookieConsent />

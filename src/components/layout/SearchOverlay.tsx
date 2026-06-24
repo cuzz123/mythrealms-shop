@@ -24,6 +24,7 @@ export function SearchOverlay() {
   const [searchError, setSearchError] = useState(false);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -47,14 +48,23 @@ export function SearchOverlay() {
   useEffect(() => {
     if (query.length < 2) {
       setResults([]);
+      setSearchError(false);
       return;
     }
+
+    // Cancel any in-flight request from a previous keystroke
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
 
     const timer = setTimeout(async () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `/api/products?search=${encodeURIComponent(query)}&limit=8`
+          `/api/products?search=${encodeURIComponent(query)}&limit=8`,
+          { signal: controller.signal }
         );
         const data = await res.json();
         setResults(
@@ -67,15 +77,20 @@ export function SearchOverlay() {
             category: p.category?.name || "",
           }))
         );
-      } catch {
+        setSearchError(false);
+      } catch (err: any) {
+        if (err.name === "AbortError") return; // silently ignore cancelled requests
         setResults([]);
         setSearchError(true);
       } finally {
         setLoading(false);
       }
-    }, 300);
+    }, 350);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [query]);
 
   function handleSubmit(e: React.FormEvent) {
