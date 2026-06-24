@@ -695,6 +695,7 @@ export default function CheckoutPage() {
       {/* PayPal SDK — loaded via useEffect for reliable popup */}
       {paymentMethod === "paypal" && (
         <PayPalButton
+          paymentMethod={paymentMethod}
           items={items}
           email={email}
           shippingAddress={{ name, phone, address, city, state, country, zip }}
@@ -711,7 +712,7 @@ export default function CheckoutPage() {
 
 // Separate PayPal button component to manage SDK lifecycle
 function PayPalButton({
-  items, email, shippingAddress, discountInfo, total, onSuccess,
+  items, email, shippingAddress, discountInfo, total, onSuccess, paymentMethod,
 }: {
   items: any[];
   email: string;
@@ -719,6 +720,7 @@ function PayPalButton({
   discountInfo: any;
   total: number;
   onSuccess: () => void;
+  paymentMethod: string;
 }) {
   const [sdkReady, setSdkReady] = useState(false);
   const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "";
