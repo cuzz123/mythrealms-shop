@@ -23,7 +23,16 @@ const navLinks = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
+  const shopTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shopRef = useRef<HTMLDivElement>(null);
+
+  const openShop = () => {
+    if (shopTimeout.current) clearTimeout(shopTimeout.current);
+    setShopOpen(true);
+  };
+  const closeShop = () => {
+    shopTimeout.current = setTimeout(() => setShopOpen(false), 150);
+  };
   const { data: session } = useSession();
   const pathname = usePathname();
   const itemCount = useCartStore((s) => s.itemCount());
@@ -31,14 +40,6 @@ export function Header() {
   const wishlistCount = useWishlistStore((s) => s.count());
   const user = session?.user;
 
-  // Close shop dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (shopRef.current && !shopRef.current.contains(e.target as Node)) {
-        setShopOpen(false);
-      }
-    }
-    if (shopOpen) {
       document.addEventListener("mousedown", handleClickOutside);
       return () => document.removeEventListener("mousedown", handleClickOutside);
     }
@@ -89,11 +90,10 @@ export function Header() {
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
           {navLinks.map((link) =>
             link.children ? (
-              <div key={link.href} ref={shopRef} className="relative">
+              <div key={link.href} ref={shopRef} className="relative" onMouseEnter={openShop} onMouseLeave={closeShop}>
                 <button
                   type="button"
                   onClick={() => setShopOpen(!shopOpen)}
-                  onMouseEnter={() => setShopOpen(true)}
                   className={`rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white inline-flex items-center gap-1 ${
                     isActive(link.href) ? "text-white" : "text-white/80"
                   }`}
@@ -102,10 +102,7 @@ export function Header() {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${shopOpen ? "rotate-180" : ""}`} />
                 </button>
                 {shopOpen && (
-                  <div
-                    className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-xl py-1 z-50 animate-fade-in"
-                    onMouseLeave={() => setShopOpen(false)}
-                  >
+                  <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-xl py-1 z-50">
                     {link.children.map((child) => (
                       <Link
                         key={child.href}
