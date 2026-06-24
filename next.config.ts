@@ -33,6 +33,52 @@ const nextConfig: NextConfig = {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net https://s.pinimg.com",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: https: blob: https://images.unsplash.com https://*.vercel-storage.com https://*.supabase.co https://*.amazonaws.com https://*.cloudinary.com https://*.imgix.net https://www.facebook.com https://ct.pinterest.com https://www.google-analytics.com",
+              "font-src 'self'",
+              "connect-src 'self' https://*.vercel-storage.com https://*.supabase.co https://*.agnes-ai.space https://www.google-analytics.com https://*.paypal.com https://*.lemonsqueezy.com",
+              "frame-src 'self' https://*.paypal.com https://*.lemonsqueezy.com",
+              "media-src 'self'",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+            ].join("; "),
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

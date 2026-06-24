@@ -4,15 +4,31 @@ import Link from "next/link";
 import Image from "next/image";
 import { PRODUCTS } from "@/lib/1688-products";
 import { formatPrice } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn, ShoppingBag } from "lucide-react";
+import { useCartStore, useCartUIStore } from "@/lib/cart";
+import toast from "react-hot-toast";
 
 export function Product1688({ slug }: { slug: string }) {
   const product = PRODUCTS.find(p => p.slug === slug);
   const [activeIdx, setActiveIdx] = useState(0);
+  const addItem = useCartStore((s) => s.addItem);
+  const openCart = useCartUIStore((s) => s.openCart);
   
   if (!product) return null;
   const images = product.images;
   const mainImg = images[activeIdx] || product.image;
+
+  function handleAddToCart() {
+    addItem({
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      image: product.image,
+      price: product.price,
+    });
+    toast.success("Added to cart!");
+    openCart();
+  }
   
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -72,7 +88,8 @@ export function Product1688({ slug }: { slug: string }) {
           )}
 
           <div className="mt-6">
-            <button className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all">
+            <button onClick={handleAddToCart} className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2">
+              <ShoppingBag className="w-4 h-4" />
               Add to Cart — {formatPrice(product.price)}
             </button>
           </div>
@@ -84,6 +101,19 @@ export function Product1688({ slug }: { slug: string }) {
             <span>·</span>
             <span>Hand-selected</span>
           </div>
+
+          {/* Story link */}
+          <a
+            href="/about"
+            className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group"
+          >
+            <span className="text-sm font-medium text-[var(--text)]">
+              Every stone has a story —{" "}
+              <span className="text-[var(--accent)] group-hover:underline">
+                Read the Story
+              </span>
+            </span>
+          </a>
         </div>
       </div>
     </div>

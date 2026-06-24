@@ -96,9 +96,17 @@ export async function applyRateLimit(
   request: Request,
   config: Omit<RateLimitConfig, "identifier"> & { identifier?: string }
 ): Promise<Response | null> {
+  // Vercel acts as a trusted reverse proxy and always sets x-forwarded-for
+  // with the real client IP as the leftmost entry. We trust this header
+  // because Vercel's edge network strips any x-forwarded-for that the
+  // client may have sent, replacing it with the verified origin IP.
+  const forwarded = request.headers.get("x-forwarded-for");
   const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    forwarded?.split(",")[0]?.trim() ||
     request.headers.get("x-real-ip") ||
+    // When running without a proxy (local dev), there is no x-forwarded-for.
+    // Cloudflare Workers / Node fetch do not expose the raw socket address,
+    // so we fall back to a generic identifier in those environments.
     "unknown";
 
   const result = await rateLimit({

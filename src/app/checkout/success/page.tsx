@@ -31,7 +31,7 @@ export default async function CheckoutSuccessPage({
       )}
       <p className="text-sm text-[var(--text-muted)] mb-8">A confirmation email will be sent shortly. Ancient legends are already on their way to you.</p>
       <div className="flex gap-3 justify-center">
-        <Link href="/collections/beast-pendants"><Button variant="primary">Continue Shopping</Button></Link>
+        <Link href="/collections/curated-singles"><Button variant="primary">Continue Shopping</Button></Link>
         <Link href="/"><Button variant="outline">Back to Home</Button></Link>
       </div>
       {orderId && <SuccessTracker orderId={orderId} value={trackValue} items={trackItems} />}

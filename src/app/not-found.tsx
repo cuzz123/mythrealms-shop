@@ -33,20 +33,20 @@ export default function NotFoundPage() {
         <div className="mt-12 pt-8 border-t border-[var(--border-light)]">
           <p className="text-sm text-[var(--text-muted)] mb-4">You might be looking for:</p>
           <div className="flex flex-wrap justify-center gap-3 text-sm">
-            <Link href="/collections/28-mansions" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
-              28 Mansions
+            <Link href="/collections/copper-braid-series" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              Copper Braid Collection
             </Link>
-            <Link href="/collections/five-elements" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
-              Five Elements
+            <Link href="/collections/golden-luxe-series" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              Golden Luxe Collection
             </Link>
-            <Link href="/collections/moon-phases" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
-              Moon Phases
+            <Link href="/collections/dark-mineral-series" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              Dark Mineral Collection
             </Link>
-            <Link href="/collections/ocean-pearls" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
-              Ocean Pearls
+            <Link href="/collections/pearl-crystal-series" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              Pearl & Crystal
             </Link>
-            <Link href="/collections/four-seasons" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
-              Floral Collection
+            <Link href="/collections/curated-singles" className="text-[var(--text-secondary)] hover:text-[var(--text)] transition underline underline-offset-2">
+              Curated Singles
             </Link>
           </div>
         </div>

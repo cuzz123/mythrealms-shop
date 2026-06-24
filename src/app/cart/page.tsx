@@ -53,8 +53,8 @@ export default function CartPage() {
       <div className="max-w-2xl mx-auto px-6 py-20 text-center">
         <ShoppingBag className="w-16 h-16 text-[var(--text-muted)] mx-auto mb-6" />
         <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Your Cart is Empty</h1>
-        <p className="text-[var(--text-muted)] mb-8">Looks like you haven&apos;t added anything yet. Explore the Bestiary to find your mythical companion.</p>
-        <Link href="/collections/beast-pendants"><Button variant="primary" size="lg">Start Exploring</Button></Link>
+        <p className="text-[var(--text-muted)] mb-8">Looks like you haven&apos;t added anything yet. Browse our curated collections to find your perfect piece.</p>
+        <Link href="/collections/curated-singles"><Button variant="primary" size="lg">Start Exploring</Button></Link>
       </div>
     );
   }
@@ -149,7 +149,7 @@ export default function CartPage() {
             <span className="text-[10px] text-[var(--text-muted)] font-semibold">Google Pay</span>
             <span className="text-[10px] text-[var(--text-muted)] font-semibold">Apple Pay</span>
           </div>
-          <Link href="/collections/beast-pendants" className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mt-6 justify-center"><ArrowLeft className="w-4 h-4" /> Continue Shopping</Link>
+          <Link href="/collections/curated-singles" className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mt-6 justify-center"><ArrowLeft className="w-4 h-4" /> Continue Shopping</Link>
         </div>
       </div>
     </div>

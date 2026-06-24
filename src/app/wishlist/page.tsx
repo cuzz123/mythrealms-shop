@@ -19,8 +19,8 @@ export default function WishlistPage() {
         <Heart className="w-16 h-16 text-[var(--text-muted)] mx-auto mb-6" />
         <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Your Wishlist is Empty</h1>
         <p className="text-[var(--text-muted)] mb-8">Save your favorite mythical pieces here and come back to them anytime.</p>
-        <Link href="/collections/beast-pendants">
-          <Button variant="primary" size="lg">Explore the Bestiary</Button>
+        <Link href="/collections/curated-singles">
+          <Button variant="primary" size="lg">Explore Curated Singles</Button>
         </Link>
       </div>
     );
@@ -71,7 +71,7 @@ export default function WishlistPage() {
         ))}
       </div>
 
-      <Link href="/collections/beast-pendants" className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mt-8 justify-center">
+      <Link href="/collections/curated-singles" className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mt-8 justify-center">
         <ArrowLeft className="w-4 h-4" /> Continue Browsing
       </Link>
     </div>

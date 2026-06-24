@@ -1,13 +1,34 @@
 "use client";
 
 import Script from "next/script";
+import { useState, useEffect } from "react";
 
 export function Analytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   const pinterestId = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID;
 
+  // Only load analytics if the user has consented
+  const [consented, setConsented] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("cookie-consent");
+      if (raw) {
+        const consent = JSON.parse(raw);
+        // "all" means both analytics and marketing are accepted,
+        // "analytics" means at minimum analytics is accepted
+        if (consent.analytics === true || consent.all === true) {
+          setConsented(true);
+        }
+      }
+    } catch {
+      // Corrupt consent value — treat as no consent
+    }
+  }, []);
+
   if (!gaId && !pixelId && !pinterestId) return null;
+  if (!consented) return null;
 
   return (
     <>

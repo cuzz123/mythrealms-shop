@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
 // B2G1: Buy 2 Get 1 Free on Pendants (auto-detected, no code needed)
-const B2G1_CATEGORY_SLUG = "beast-pendants";
+const B2G1_CATEGORY_SLUG = "curated-singles";
 
 export async function POST(request: NextRequest) {
   try {

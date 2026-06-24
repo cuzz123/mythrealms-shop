@@ -3,14 +3,11 @@
 import Link from "next/link";
 
 const exploreLinks = [
-  { label: "28 Mansions", href: "/collections/28-mansions" },
-  { label: "Five Elements", href: "/collections/five-elements" },
-  { label: "Moon Phases", href: "/collections/moon-phases" },
-  { label: "Ocean Pearls", href: "/collections/ocean-pearls" },
-  { label: "Floral Collection", href: "/collections/four-seasons" },
-  { label: "Celestial Stars", href: "/collections/celestial-stars" },
-  { label: "Butterfly Dream", href: "/collections/butterfly-dream" },
-  { label: "Zodiac Amulets", href: "/collections/zodiac-amulets" },
+  { label: "Copper Braid Collection", href: "/collections/copper-braid-series" },
+  { label: "Golden Luxe Collection", href: "/collections/golden-luxe-series" },
+  { label: "Dark Mineral Collection", href: "/collections/dark-mineral-series" },
+  { label: "Pearl & Crystal", href: "/collections/pearl-crystal-series" },
+  { label: "Curated Singles", href: "/collections/curated-singles" },
   { label: "About Us", href: "/about" },
   { label: "Blog", href: "/blog" },
 ];
@@ -24,7 +21,7 @@ const supportLinks = [
 const socialLinks = [
   {
     label: "Instagram",
-    href: "https://instagram.com",
+    href: "https://instagram.com/mythrealms.shop",
     icon: (
       <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
         <rect
@@ -43,7 +40,7 @@ const socialLinks = [
   },
   {
     label: "Facebook",
-    href: "https://facebook.com",
+    href: "https://facebook.com/mythrealms.shop",
     icon: (
       <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
         <path
@@ -55,7 +52,7 @@ const socialLinks = [
   },
   {
     label: "YouTube",
-    href: "https://youtube.com",
+    href: "https://youtube.com/@mythrealms",
     icon: (
       <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
         <path

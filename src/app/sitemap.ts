@@ -26,7 +26,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "monthly" as const,
         priority: 0.7,
       }));
-    } catch { return []; }
+    } catch (err) {
+      console.warn("[sitemap] Failed to load products for sitemap:", err);
+      return [];
+    }
   }
 
   async function safeCollectionUrls() {
@@ -38,7 +41,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "weekly" as const,
         priority: 0.9,
       }));
-    } catch { return []; }
+    } catch (err) {
+      console.warn("[sitemap] Failed to load collections for sitemap:", err);
+      return [];
+    }
   }
 
   async function safeBlogUrls() {
@@ -50,7 +56,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "monthly" as const,
         priority: 0.6,
       }));
-    } catch { return []; }
+    } catch (err) {
+      console.warn("[sitemap] Failed to load blog posts for sitemap:", err);
+      return [];
+    }
   }
 
   const [productUrls, collectionUrls, blogUrls] = await Promise.all([

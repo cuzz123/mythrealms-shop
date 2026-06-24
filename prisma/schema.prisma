@@ -143,6 +143,7 @@ model Order {
   total               Float
   shippingAddress     String?  // JSON string
   email               String
+  // Stores checkout session IDs from Stripe, LemonSqueezy, and PayPal orders
   stripeSessionId     String?  @unique
   stripePaymentStatus String?
   trackingNumber      String?

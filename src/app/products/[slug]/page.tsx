@@ -269,7 +269,7 @@ export default async function ProductPage({
           </div>
 
           {/* Story badge */}
-          <a href="#tabs" className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group">
+          <a href="/about" className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group">
             <Play className="w-5 h-5 text-[var(--accent)] group-hover:text-[var(--accent-hover)] transition-colors" />
             <span className="text-sm font-medium text-[var(--text)]">
               {isCuratedStones ? "The Story of This Stone" : "Ancient Legend Behind This Piece"} —{" "}

@@ -77,7 +77,7 @@ export default function CheckoutPage() {
         <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-4">
           Your cart is empty
         </h1>
-        <Link href="/collections/beast-pendants">
+        <Link href="/collections/curated-singles">
           <Button variant="primary">Shop Now</Button>
         </Link>
       </div>
@@ -648,6 +648,11 @@ export default function CheckoutPage() {
                 </button>
               </div>
             </div>
+
+            {/* Processing fee note */}
+            <p className="mt-3 text-xs text-[var(--text-muted)] text-center">
+              A small processing fee may be added by the payment provider.
+            </p>
 
             {/* Trust signals */}
             <div className="mt-4 mb-4 flex items-center justify-center gap-3 text-xs bg-[var(--success)]/5 border border-[var(--success)]/10 rounded-lg py-2 px-4">
