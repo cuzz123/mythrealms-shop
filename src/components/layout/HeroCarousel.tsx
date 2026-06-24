@@ -73,7 +73,7 @@ export function HeroCarousel() {
             }`}
             aria-hidden={!isActive}
           >
-            <div className="absolute inset-0 overflow-hidden">
+            <div className={`absolute inset-0 overflow-hidden ${isActive ? "animate-subtle-zoom" : ""}`}>
                 <LazyImage
                   src={s.image}
                   alt={s.title}
