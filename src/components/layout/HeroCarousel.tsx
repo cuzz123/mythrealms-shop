@@ -62,26 +62,30 @@ export function HeroCarousel() {
         />
       </div>
 
-      {/* Slides with horizontal slide transition */}
+      {/* Slides with fade transition + Ken Burns zoom */}
       {slides.map((s, i) => {
         const isActive = i === current;
-        const enterFromRight = direction === 1;
         return (
           <div
             key={i}
-            className="absolute inset-0"
-            style={{
-              transform: isActive ? "translateX(0)" : enterFromRight ? "translateX(100%)" : "translateX(-100%)",
-              transition: isActive ? "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
-              zIndex: isActive ? 10 : 0,
-              pointerEvents: isActive ? "auto" : "none",
-            }}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+            }`}
             aria-hidden={!isActive}
           >
             {s.image && (
-              <Image src={s.image} alt={s.title} fill sizes="100vw" priority={isActive} className="object-contain md:object-cover" />
+              <div className="absolute inset-0 overflow-hidden">
+                <Image
+                  src={s.image}
+                  alt={s.title}
+                  fill
+                  sizes="100vw"
+                  priority={isActive}
+                  className={`object-cover ${isActive ? "animate-ken-burns" : ""}`}
+                />
+              </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent md:from-black/60 md:via-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent md:from-black/60 md:via-black/30" />
           </div>
         );
       })}
@@ -137,6 +141,13 @@ export function HeroCarousel() {
         @keyframes slideInContent {
           from { opacity: 0; transform: translateX(30px); }
           to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes kenBurns {
+          0% { transform: scale(1) translate(0, 0); }
+          100% { transform: scale(1.08) translate(-1%, -0.5%); }
+        }
+        .animate-ken-burns {
+          animation: kenBurns 8s ease-in-out forwards;
         }
       `}</style>
     </div>
