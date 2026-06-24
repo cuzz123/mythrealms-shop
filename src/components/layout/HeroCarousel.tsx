@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 
 // 1688 Hero images — generated from 单品 reference shots
@@ -50,15 +51,16 @@ export function HeroCarousel() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-[#0A0808]">
-      {/* Preload adjacent image for snappier transitions */}
+      {/* Preload adjacent image */}
       <div className="absolute inset-0" style={{ visibility: "hidden" }}>
-        <Image
+        <LazyImage
           src={slides[(current + 1) % slides.length].image}
           alt=""
           fill
           sizes="100vw"
           priority
-          className="object-contain md:object-cover"
+          className="object-cover"
+          containerClassName="absolute inset-0"
         />
       </div>
 
@@ -73,18 +75,19 @@ export function HeroCarousel() {
             }`}
             aria-hidden={!isActive}
           >
-            {s.image && (
-              <div className={`absolute inset-0 overflow-hidden ${isActive ? "animate-ken-burns" : ""}`}>
-                <Image
+            <div className="absolute inset-0 overflow-hidden">
+              <div className={`absolute inset-0 ${isActive ? "animate-ken-burns" : ""}`}>
+                <LazyImage
                   src={s.image}
                   alt={s.title}
                   fill
                   sizes="100vw"
                   priority={isActive}
                   className="object-cover scale-[1.02]"
+                  containerClassName="absolute inset-0"
                 />
               </div>
-            )}
+            </div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent md:from-black/60 md:via-black/30" />
           </div>
         );
