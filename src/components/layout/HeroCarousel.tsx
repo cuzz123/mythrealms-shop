@@ -76,17 +76,15 @@ export function HeroCarousel() {
             aria-hidden={!isActive}
           >
             <div className="absolute inset-0 overflow-hidden">
-              <div className={`absolute inset-0 ${isActive ? "animate-ken-burns" : ""}`}>
                 <LazyImage
                   src={s.image}
                   alt={s.title}
                   fill
                   sizes="100vw"
                   priority={isActive}
-                  className="object-cover scale-[1.02]"
+                  className="object-cover"
                   containerClassName="absolute inset-0"
                 />
-              </div>
             </div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent md:from-black/60 md:via-black/30" />
           </div>
@@ -145,14 +143,3 @@ export function HeroCarousel() {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes kenBurns {
-          0%   { transform: scale(1.00); }
-          100% { transform: scale(1.06); }
-        }
-        .animate-ken-burns {
-          animation: kenBurns 7s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-        }
-      `}</style>
-    </div>
-  );
-}
