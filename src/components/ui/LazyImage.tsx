@@ -14,7 +14,6 @@ export function LazyImage({
   useEffect(() => {
     mounted.current = true;
     setReady(false);
-    // Preload via JavaScript Image() — only show after FULL download
     const img = new window.Image();
     img.onload = () => { if (mounted.current) setReady(true); };
     img.onerror = () => { if (mounted.current) setReady(true); };
@@ -23,15 +22,13 @@ export function LazyImage({
   }, [src]);
 
   return (
-    <div className={`relative overflow-hidden ${containerClassName || ""}`}>
+    <div className={`relative w-full h-full overflow-hidden ${containerClassName || ""}`}>
       {!ready && <div className="absolute inset-0 bg-[#1A1816]" />}
       {ready && (
-        <div className="relative w-full h-full animate-shimmer-reveal">
-          <Image
-            src={src} alt={alt} fill={fill} sizes={sizes} priority={priority}
-            className={`${className || ""}`}
-          />
-        </div>
+        <Image
+          src={src} alt={alt} fill={fill} sizes={sizes} priority={priority}
+          className={`animate-shimmer-reveal ${className || ""}`}
+        />
       )}
     </div>
   );
