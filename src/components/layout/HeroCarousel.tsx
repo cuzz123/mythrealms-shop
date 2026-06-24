@@ -5,19 +5,18 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { PRODUCTS } from "@/lib/1688-products";
 
-import { PRODUCTS } from "@/lib/1688-products";
 
-// Use best 1688 product images for hero slides
-const featured = PRODUCTS.filter(p => p.images.length >= 3).slice(0, 6);
-const slides = featured.length >= 3 ? featured.map((p, i) => ({
-  image: p.images[i % p.images.length] || p.image,
-  title: i === 0 ? "Hand-Selected Stone Bracelets, Curated for You" : `${p.categoryName} — ${p.name}`,
-  subtitle: i === 0 ? "Real craftsmanship. Natural stones. Pieces that feel like they've always belonged to you." : p.description,
+// Use best 1688 product images for hero (mix singles + series for 6 slides)
+const singles = PRODUCTS.filter(p => p.isBestSeller).slice(0, 3);
+const series = PRODUCTS.filter(p => !p.isBestSeller).slice(0, 3);
+const heroProducts = [...singles, ...series].slice(0, 6);
+const slides = heroProducts.map((p, i) => ({
+  image: p.images?.[0] || p.image,
+  title: i === 0 ? "Hand-Selected Stone Bracelets, Curated for You" : p.name,
+  subtitle: i === 0 ? "Real craftsmanship. Natural stones. Pieces that feel like they've always belonged to you." : p.description?.slice(0, 120) || "",
   cta: i === 0 ? "Shop the Collection" : "View Details",
   href: i === 0 ? "/collections" : `/products/${p.slug}`,
-})) : [
-  { image: PRODUCTS[0]?.images?.[0] || "", title:"Hand-Selected Stone Bracelets", subtitle:"Natural gemstones, curated for the modern mystic.", cta:"Shop Now", href:"/collections" },
-];
+}));
 
 export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
