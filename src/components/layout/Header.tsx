@@ -40,11 +40,6 @@ export function Header() {
   const wishlistCount = useWishlistStore((s) => s.count());
   const user = session?.user;
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
-    }
-  }, [shopOpen]);
-
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     if (href === "#") return shopLinks.some((l) => pathname.startsWith(l.href));
