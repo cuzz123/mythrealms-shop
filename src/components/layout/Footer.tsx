@@ -83,8 +83,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-[#B0A590]">
-              Bringing China's oldest legends to life. Each piece tells a story
-              from the Classic of Mountains and Seas.
+              Hand-selected crystals. Artisan finishes. Each stone tells a story
+              — find the one that speaks to you.
             </p>
             {/* Social icons */}
             <div className="flex items-center gap-3">
@@ -148,8 +148,8 @@ export function Footer() {
             </h3>
             <div className="space-y-3 text-sm text-[#B0A590]">
               <p>
-                Have questions about our mythical collections or need guidance on
-                your journey through the Classic of Mountains and Seas? We are here to help.
+                Have questions about our gemstone collections or need guidance on
+                finding the right stone for you? We are here to help.
               </p>
               <a
                 href="mailto:support@mythrealms.com"

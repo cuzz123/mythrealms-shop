@@ -20,11 +20,11 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-6 py-3 flex justify-center gap-6 sm:gap-10 text-xs text-[#8A7D6E] font-medium overflow-x-auto whitespace-nowrap">
           <span>Free Shipping Over $69.99</span>
           <span className="text-[#3A3220]">|</span>
-          <span>30-Day Returns</span>
+          <span>Hand-Selected Stones</span>
           <span className="text-[#3A3220]">|</span>
-          <span>Handcrafted to Order</span>
+          <span>30-Day Easy Returns</span>
           <span className="text-[#3A3220]">|</span>
-          <span>Secure Checkout</span>
+          <span>Ethically Sourced</span>
         </div>
       </div>
 
@@ -36,14 +36,14 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">
             <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">New Arrivals</h2>
-            <Link href="/collections" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All Collections <ArrowRight className="w-4 h-4" /></Link>
+            <Link href="/collections/curated-stones" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All Stones <ArrowRight className="w-4 h-4" /></Link>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: "Moon Phases · 月相", slug: "ml-full", stone: "Moonstone & Diamond", price: 158.99, href: "/collections/moon-phases" },
-              { name: "Celestial Stars · 星辰", slug: "cs-constellation", stone: "Diamond & White Gold", price: 128.99, href: "/collections/celestial-stars" },
-              { name: "Ocean Pearls · 海珠", slug: "op-aquamarine", stone: "Akoya Pearl & Aquamarine", price: 128.99, href: "/collections/ocean-pearls" },
-              { name: "Butterfly Dream · 蝶梦", slug: "bf-bracelet", stone: "Rose Gold & Amethyst", price: 128.99, href: "/collections/butterfly-dream" },
+              { name: "Amethyst Serenity Bracelet", slug: "bf-bracelet", stone: "Amethyst & Rose Gold", price: 128.99, href: "/collections/curated-stones" },
+              { name: "Moonstone Lumina Bracelet", slug: "ml-full", stone: "Moonstone & Diamond", price: 158.99, href: "/collections/curated-stones" },
+              { name: "Rose Quartz Heart Bracelet", slug: "op-aquamarine", stone: "Rose Quartz & Aquamarine", price: 128.99, href: "/collections/curated-stones" },
+              { name: "Black Obsidian Shield Bracelet", slug: "cs-constellation", stone: "Obsidian & White Gold", price: 128.99, href: "/collections/curated-stones" },
             ].map((p) => (
               <Link key={p.slug} href={p.href} className="group">
                 <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
@@ -63,15 +63,14 @@ export default async function HomePage() {
       <section className="py-12 bg-[var(--surface)] border-t border-[var(--border)]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-6">
-            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Wrist Stories</span>
-            <h2 className="font-serif text-2xl font-bold text-[#E8E0D5]">Wear the Look · 叠戴灵感</h2>
+            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Stack & Layer</span>
+            <h2 className="font-serif text-2xl font-bold text-[#E8E0D5]">Wear the Look · Curated Combinations</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              // AGNES_REGEN: "Luxury wrist stack of 4-5 beaded bracelets layered on an elegant wrist, deep blue lapis lazuli beads with antique gold spacers, moon phase charms in rose gold, star-shaped gold connectors, small celestial diamond accents, dark moody background with subtle gold bokeh, premium jewelry editorial photography, Cartier and Van Cleef aesthetic, rich gold and midnight blue palette, mysterious ancient sky motifs, high-end ecommerce style" — model: agnes-image-2.1-flash, size: 1792x1024
-              { name:"Celestial Stack", desc:"28 Mansions + Moon Phases — the sky on your wrist", img:imageUrl("/images/products/celestial-stack.png"), link:"/collections/28-mansions" },
-              { name:"Elemental Layers", desc:"Wood + Fire + Earth — three elements, one story", img:imageUrl("/images/products/m5-wood.png"), link:"/collections/five-elements" },
-              { name:"Ocean Dreams", desc:"Pearls + Aquamarine — inspired by the Silk Road seas", img:imageUrl("/images/products/op-aquamarine.png"), link:"/collections/ocean-pearls" },
+              { name:"The Mystic Stack", desc:"Moonstone + Amethyst + Rose Quartz — clarity, love, and intuition layered on one wrist", img:imageUrl("/images/products/ml-full.png"), link:"/collections/curated-stones" },
+              { name:"The Grounded Set", desc:"Black Obsidian + Tiger's Eye + Hematite — protection, confidence, and deep roots", img:imageUrl("/images/products/black-tortoise.png"), link:"/collections/curated-stones" },
+              { name:"The Elemental Trio", desc:"Wood + Fire + Earth — three elements, one story of balance", img:imageUrl("/images/products/m5-wood.png"), link:"/collections/five-elements" },
             ].map(s => (
               <Link key={s.name} href={s.link} className="group relative aspect-[4/3] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
                 <Image src={s.img} alt={s.name} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -89,11 +88,11 @@ export default async function HomePage() {
       {/* ===== NEWSLETTER + TRUST ===== */}
       <section className="py-12 bg-[#1A1816]">
         <div className="max-w-[540px] mx-auto px-6 text-center">
-          <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Join the Expedition · {"探索上古"}</h2>
-          <p className="text-[#A89880] text-sm mb-6">Tales from the bestiary, early access to new collections, and exclusive discounts.</p>
+          <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Join the Circle · Stay Connected</h2>
+          <p className="text-[#A89880] text-sm mb-6">Early access to new stone collections, styling guides, and exclusive subscriber-only discounts.</p>
           <NewsletterForm />
           <div className="flex justify-center gap-6 mt-6 text-xs text-[#8A7D6E]">
-            <span>Handcrafted</span><span className="text-[#3A3220]">|</span>
+            <span>Hand-Selected</span><span className="text-[#3A3220]">|</span>
             <span>Ethically Sourced</span><span className="text-[#3A3220]">|</span>
             <span>30-Day Returns</span>
           </div>

@@ -1,26 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { User, ShoppingBag, Heart, Menu, X } from "lucide-react";
+import { User, ShoppingBag, Heart, Menu, X, ChevronDown } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 
+const shopLinks = [
+  { label: "Curated Stones", href: "/collections/curated-stones" },
+  { label: "28 Mansions", href: "/collections/28-mansions" },
+  { label: "Five Elements", href: "/collections/five-elements" },
+];
+
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "28 Mansions", href: "/collections/28-mansions" },
-  { label: "Elements", href: "/collections/five-elements" },
-  { label: "Moon", href: "/collections/moon-phases" },
-  { label: "Pearls", href: "/collections/ocean-pearls" },
-  { label: "Florals", href: "/collections/four-seasons" },
-  { label: "Quiz", href: "/guardian-quiz" },
+  { label: "Shop", href: "#", children: shopLinks },
+  { label: "Collections", href: "/collections" },
+  { label: "Find Your Stone", href: "/guardian-quiz" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [shopOpen, setShopOpen] = useState(false);
+  const shopRef = useRef<HTMLDivElement>(null);
   const { data: session } = useSession();
   const pathname = usePathname();
   const itemCount = useCartStore((s) => s.itemCount());
@@ -28,8 +35,22 @@ export function Header() {
   const wishlistCount = useWishlistStore((s) => s.count());
   const user = session?.user;
 
+  // Close shop dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (shopRef.current && !shopRef.current.contains(e.target as Node)) {
+        setShopOpen(false);
+      }
+    }
+    if (shopOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [shopOpen]);
+
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
+    if (href === "#") return shopLinks.some((l) => pathname.startsWith(l.href));
     return pathname.startsWith(href);
   };
 
@@ -42,7 +63,7 @@ export function Header() {
           className="flex shrink-0 items-center gap-2.5"
           aria-label="MythRealms home"
         >
-          {/* Dragon scale / flame SVG */}
+          {/* Gemstone SVG */}
           <svg
             viewBox="0 0 28 28"
             fill="none"
@@ -51,16 +72,16 @@ export function Header() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M14 2C14 2 18 8 18 13C18 15.5 17 17 15 18.5L20 22L16 24L14 26L12 24L8 22L13 18.5C11 17 10 15.5 10 13C10 8 14 2 14 2Z"
+              d="M14 2L22 10L14 26L6 10L14 2Z"
               fill="var(--accent)"
               fillOpacity="0.7"
             />
             <path
-              d="M14 6C14 6 16 10 16 13C16 14.5 15.5 15.5 14.5 16.5L17 19L14 20.5L11 19L13.5 16.5C12.5 15.5 12 14.5 12 13C12 10 14 6 14 6Z"
+              d="M14 8L18 12L14 20L10 12L14 8Z"
               fill="var(--primary)"
               fillOpacity="0.6"
             />
-            <circle cx="14" cy="9" r="1.5" fill="var(--accent)" />
+            <circle cx="14" cy="5" r="1.5" fill="var(--accent)" />
           </svg>
 
           <span className="font-serif text-xl font-semibold tracking-tight text-[var(--text)]">
@@ -70,17 +91,52 @@ export function Header() {
 
         {/* Center — Desktop navigation */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)] ${
-                isActive(link.href) ? "text-[var(--accent)] bg-[var(--accent)]/10" : "text-[var(--text-secondary)]"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.children ? (
+              <div key={link.href} ref={shopRef} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setShopOpen(!shopOpen)}
+                  onMouseEnter={() => setShopOpen(true)}
+                  className={`rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)] inline-flex items-center gap-1 ${
+                    isActive(link.href) ? "text-[var(--accent)] bg-[var(--accent)]/10" : "text-[var(--text-secondary)]"
+                  }`}
+                >
+                  {link.label}
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${shopOpen ? "rotate-180" : ""}`} />
+                </button>
+                {shopOpen && (
+                  <div
+                    className="absolute top-full left-0 mt-1 w-48 bg-[var(--surface)] border border-[var(--border)] rounded-lg shadow-xl py-1 z-50 animate-fade-in"
+                    onMouseLeave={() => setShopOpen(false)}
+                  >
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        onClick={() => setShopOpen(false)}
+                        className={`block px-4 py-2.5 text-sm transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)] ${
+                          pathname.startsWith(child.href) ? "text-[var(--accent)] bg-[var(--accent)]/5" : "text-[var(--text-secondary)]"
+                        }`}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)] ${
+                  isActive(link.href) ? "text-[var(--accent)] bg-[var(--accent)]/10" : "text-[var(--text-secondary)]"
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </nav>
 
         {/* Right — Icon buttons */}
@@ -158,16 +214,34 @@ export function Header() {
             className="flex flex-col gap-0.5 px-4 py-3"
             aria-label="Mobile navigation"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="rounded-[var(--radius-sm)] px-3 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:bg-[var(--border-light)]"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.children ? (
+                <div key={link.href}>
+                  <div className="px-3 py-2 text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                    {link.label}
+                  </div>
+                  {link.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block rounded-[var(--radius-sm)] px-6 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:bg-[var(--border-light)]"
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-[var(--radius-sm)] px-3 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:bg-[var(--border-light)]"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </nav>
         </div>
       )}

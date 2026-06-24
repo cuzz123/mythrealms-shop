@@ -4,11 +4,14 @@ import { db } from "@/lib/db"
 export const dynamic = "force-dynamic"
 
 export default async function CollectionsPage() {
-  const categories = await db.category.findMany({ orderBy: { sortOrder: "asc" } })
+  const categories = await db.category.findMany({
+    where: { parentId: null },
+    orderBy: { sortOrder: "asc" },
+  })
   return (
     <div className="max-w-7xl mx-auto px-6 py-16">
       <h1 className="font-serif text-4xl font-bold text-[var(--text)] mb-2">All Collections</h1>
-      <p className="text-[var(--text-muted)] mb-10">Explore our complete range of mythical jewelry</p>
+      <p className="text-[var(--text-muted)] mb-10">Explore our complete range of hand-selected gemstone jewelry</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map(cat => (
           <Link key={cat.id} href={`/collections/${cat.slug}`}

@@ -83,6 +83,88 @@ export default async function ProductPage({
 
   // Parse details for beast properties or stone properties
   const details = safeJsonParse<Record<string, unknown> | null>(product.details as string, null);
+  const isCuratedStones = product.category?.slug === "curated-stones";
+
+  // Stone care instructions by type
+  const stoneCare: Record<string, string> = {
+    Amethyst: "Cleanse with lukewarm water and a soft cloth. Avoid prolonged sun exposure to preserve color. Recharge under the full moon.",
+    "Rose Quartz": "Rinse gently with water and pat dry. Avoid harsh chemicals and ultrasonic cleaners. Charge with selenite or moonlight.",
+    "Black Obsidian": "Wipe with a dry or slightly damp cloth. This stone absorbs negative energy — cleanse regularly under running water or with sage smoke.",
+    Moonstone: "Handle with care — moonstone is softer than quartz. Clean with a dry microfiber cloth only. Avoid water, chemicals, and sharp impacts.",
+    "Tiger's Eye": "Clean with a soft damp cloth and mild soap if needed. Avoid abrasive materials. Recharge in indirect sunlight.",
+  };
+
+  // Determine the first tab label and content
+  const firstTabLabel = isCuratedStones ? "The Stone" : "Details";
+  const firstTabContent = (
+    <div className="space-y-6">
+      <div>
+        <h4 className="font-semibold text-[var(--text)] mb-2">About This Piece</h4>
+        <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+          {product.description}
+        </p>
+      </div>
+      {isCuratedStones && product.stone && (
+        <div>
+          <h4 className="font-semibold text-[var(--text)] mb-2">Stone Type & Origin</h4>
+          <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+            <strong className="text-[var(--text)]">{product.stone}</strong> — hand-selected for quality and character. Each {product.stone.toLowerCase()} bead is sourced from ethical mines and individually inspected before stringing.
+          </p>
+          {stoneCare[product.stone] && (
+            <div className="mt-3 p-4 rounded-lg bg-[var(--border-light)]/30 border border-[var(--border)]">
+              <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-1">Care Instructions</p>
+              <p className="text-sm text-[var(--text-secondary)]">{stoneCare[product.stone]}</p>
+            </div>
+          )}
+        </div>
+      )}
+      {isCuratedStones && details?.stoneProperties ? (
+        <div>
+          <h4 className="font-semibold text-[var(--text)] mb-2">Metaphysical Properties</h4>
+          <ul className="space-y-2">
+            {(details.stoneProperties as any[]).map((sp: any, i: number) => (
+              <li key={i} className="text-sm text-[var(--text-secondary)]">
+                <strong className="text-[var(--text)]">{sp.stone || sp.name}</strong> — {sp.benefit || sp.property}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+      {!isCuratedStones && (details?.beastProperties || details?.stoneProperties) ? (
+        <div>
+          <h4 className="font-semibold text-[var(--text)] mb-2">Mythical Properties</h4>
+          <ul className="space-y-2">
+            {((details.beastProperties || details.stoneProperties) as any[]).map(
+              (sp: any, i: number) => (
+                <li key={i} className="text-sm text-[var(--text-secondary)]">
+                  <strong className="text-[var(--text)]">{sp.beast || sp.stone}</strong> — {sp.benefit}
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+      ) : null}
+      {details?.specs ? (
+        <div>
+          <h4 className="font-semibold text-[var(--text)] mb-2">Specifications</h4>
+          <table className="w-full text-sm">
+            <tbody>
+              {Object.entries(details.specs as Record<string, unknown>).map(
+                ([key, value]) => (
+                  <tr key={key} className="border-b border-[var(--border)]">
+                    <td className="py-2 font-medium text-[var(--text)] w-40">{key}</td>
+                    <td className="py-2 text-[var(--text-secondary)]">
+                      {value as string}
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
+        </div>
+      ) : null}
+    </div>
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-6">
@@ -133,18 +215,23 @@ export default async function ProductPage({
           <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-sm text-[var(--accent)]">
             <ShieldCheck className="w-4 h-4" />
             <span>
-              {product.slug.includes("nine-tailed") && "For the one who's been underestimated"}
-              {product.slug.includes("qilin") && "For the one who chooses peace when everyone fights"}
-              {product.slug.includes("azure-dragon") && "For the one carrying too much alone"}
-              {product.slug.includes("phoenix") && "For the one rebuilding from ashes"}
-              {product.slug.includes("white-tiger") && "For the one protecting others at their own cost"}
-              {product.slug.includes("black-tortoise") && "For the one still standing after everything"}
-              {product.slug.includes("bai-ze") && "For the one who sees what others don't"}
-              {product.slug.includes("kun-peng") && "For the one in a season of change"}
-              {product.slug.includes("four-symbols") && "For the one who contains multitudes"}
-              {product.slug.includes("28-mansions") && "For the one seeking their place in the universe"}
-              {product.slug.includes("taotie") && "For the one who knows when to say enough"}
-              {product.slug.includes("yinglong") && "For the one destined to rise above"}
+              {isCuratedStones && product.stone === "Amethyst" && "For the one seeking clarity in a noisy world"}
+              {isCuratedStones && product.stone === "Rose Quartz" && "For the one who loves deeply and guards their heart"}
+              {isCuratedStones && product.stone === "Black Obsidian" && "For the one who protects what matters most"}
+              {isCuratedStones && product.stone === "Moonstone" && "For the one in a season of transformation"}
+              {isCuratedStones && product.stone === "Tiger's Eye" && "For the one who walks with quiet confidence"}
+              {!isCuratedStones && product.slug.includes("nine-tailed") && "For the one who's been underestimated"}
+              {!isCuratedStones && product.slug.includes("qilin") && "For the one who chooses peace when everyone fights"}
+              {!isCuratedStones && product.slug.includes("azure-dragon") && "For the one carrying too much alone"}
+              {!isCuratedStones && product.slug.includes("phoenix") && "For the one rebuilding from ashes"}
+              {!isCuratedStones && product.slug.includes("white-tiger") && "For the one protecting others at their own cost"}
+              {!isCuratedStones && product.slug.includes("black-tortoise") && "For the one still standing after everything"}
+              {!isCuratedStones && product.slug.includes("bai-ze") && "For the one who sees what others don't"}
+              {!isCuratedStones && product.slug.includes("kun-peng") && "For the one in a season of change"}
+              {!isCuratedStones && product.slug.includes("four-symbols") && "For the one who contains multitudes"}
+              {!isCuratedStones && product.slug.includes("28-mansions") && "For the one seeking their place in the universe"}
+              {!isCuratedStones && product.slug.includes("taotie") && "For the one who knows when to say enough"}
+              {!isCuratedStones && product.slug.includes("yinglong") && "For the one destined to rise above"}
             </span>
           </div>
 
@@ -173,11 +260,11 @@ export default async function ProductPage({
             <span>30-day returns</span>
           </div>
 
-          {/* Mythical Legend badge */}
+          {/* Story badge */}
           <a href="#tabs" className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group">
             <Play className="w-5 h-5 text-[var(--accent)] group-hover:text-[var(--accent-hover)] transition-colors" />
             <span className="text-sm font-medium text-[var(--text)]">
-              Ancient Legend Behind This Piece —{" "}
+              {isCuratedStones ? "The Story of This Stone" : "Ancient Legend Behind This Piece"} —{" "}
               <span className="text-[var(--accent)] group-hover:underline">Read the Story</span>
             </span>
           </a>
@@ -188,50 +275,8 @@ export default async function ProductPage({
       <Tabs
         tabs={[
           {
-            label: "Details",
-            content: (
-              <div className="space-y-6">
-                <div>
-                  <h4 className="font-semibold text-[var(--text)] mb-2">About This Piece</h4>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                    {product.description}
-                  </p>
-                </div>
-                {(details?.beastProperties || details?.stoneProperties) && (
-                  <div>
-                    <h4 className="font-semibold text-[var(--text)] mb-2">Mythical Properties</h4>
-                    <ul className="space-y-2">
-                      {(details.beastProperties || details.stoneProperties).map(
-                        (sp: any, i: number) => (
-                          <li key={i} className="text-sm text-[var(--text-secondary)]">
-                            <strong className="text-[var(--text)]">{sp.beast || sp.stone}</strong> — {sp.benefit}
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  </div>
-                )}
-                {details?.specs && (
-                  <div>
-                    <h4 className="font-semibold text-[var(--text)] mb-2">Specifications</h4>
-                    <table className="w-full text-sm">
-                      <tbody>
-                        {Object.entries(details.specs).map(
-                          ([key, value]) => (
-                            <tr key={key} className="border-b border-[var(--border)]">
-                              <td className="py-2 font-medium text-[var(--text)] w-40">{key}</td>
-                              <td className="py-2 text-[var(--text-secondary)]">
-                                {value as string}
-                              </td>
-                            </tr>
-                          )
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
-            ),
+            label: firstTabLabel,
+            content: firstTabContent,
           },
           {
             label: "Shipping Policy",

@@ -6,12 +6,12 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { imageUrl } from "@/lib/images";
 
 const slides = [
-  { image: imageUrl("/images/products/m28-jiao.png"), title:"28 Celestial Bracelets · Handcrafted in 14k Gold", subtitle:"Each bracelet mapped to a star in the ancient Chinese sky — free shipping over $69.99", cta:"Shop Now", href:"/collections/28-mansions" },
-  { image: imageUrl("/images/products/m5-water.png"), title:"Five Elements · 五行 — Gemstone & Gold", subtitle:"Wood · Fire · Earth · Metal · Water — the ancient philosophy in gemstone form", cta:"Shop Now", href:"/collections/five-elements" },
-  { image: imageUrl("/images/products/ml-full.png"), title:"Moon Phases · 月相 — Moonstone & Diamond", subtitle:"From crescent to full — each phase a moment in the eternal lunar cycle", cta:"Shop Now", href:"/collections/moon-phases" },
-  { image: imageUrl("/images/products/op-aquamarine.png"), title:"Ocean Pearls · 海珠 — Akoya & Aquamarine", subtitle:"Oceanic elegance on the wrist — warm pearls meeting cool blue stones", cta:"Shop Now", href:"/collections/ocean-pearls" },
-  { image: imageUrl("/images/products/fl-lotus.png"), title:"Floral Collection · 繁花 — Jade & Gold", subtitle:"Eight blooms in gemstone and gold — plum peony lotus chrysanthemum and more", cta:"Shop Now", href:"/collections/four-seasons" },
-  { image: imageUrl("/images/products/bf-bracelet.png"), title:"Butterfly Dream · 蝶梦 — Amethyst & Rose Gold", subtitle:"Zhuangzi's dream captured in precious metal — past present future", cta:"Shop Now", href:"/collections/butterfly-dream" },
+  { image: imageUrl("/images/products/ml-full.png"), title:"Natural Stone Bracelets, Curated for the Modern Mystic", subtitle:"Hand-selected crystals. Artisan finishes. Pieces that feel like they've always belonged to you.", cta:"Shop by Stone", href:"/collections/curated-stones" },
+  { image: imageUrl("/images/products/bf-bracelet.png"), title:"Amethyst — The Stone of Clarity", subtitle:"Deep purple hues that quiet the mind. Each bead hand-knotted on silk cord.", cta:"Shop by Stone", href:"/collections/curated-stones" },
+  { image: imageUrl("/images/products/op-aquamarine.png"), title:"Moonstone — The Stone of New Beginnings", subtitle:"Luminous and ever-changing. A reminder that transformation is the only constant.", cta:"Shop by Stone", href:"/collections/curated-stones" },
+  { image: imageUrl("/images/products/fl-lotus.png"), title:"Rose Quartz — The Stone of the Heart", subtitle:"Soft blush. Gentle energy. For those who lead with love and boundary both.", cta:"Shop by Stone", href:"/collections/curated-stones" },
+  { image: imageUrl("/images/products/m5-water.png"), title:"Tiger's Eye — The Stone of Grounded Confidence", subtitle:"Golden bands that catch the light. For quiet strength and steady resolve.", cta:"Shop by Stone", href:"/collections/curated-stones" },
+  { image: imageUrl("/images/products/black-tortoise.png"), title:"Black Obsidian — The Stone of Protection", subtitle:"Volcanic glass. Ancient shield. For those who guard what matters most.", cta:"Shop by Stone", href:"/collections/curated-stones" },
 ];
 
 export function HeroCarousel() {
@@ -85,12 +85,17 @@ export function HeroCarousel() {
             className="max-w-xs sm:max-w-md md:max-w-lg"
             style={{ animation: "slideInContent 0.5s ease-out" }}
           >
-            <span className="inline-block text-[10px] md:text-xs uppercase tracking-[0.15em] text-[var(--accent)] font-semibold mb-2 md:mb-3">MythRealms</span>
+            <span className="inline-block text-[10px] md:text-xs uppercase tracking-[0.15em] text-[var(--accent)] font-semibold mb-2 md:mb-3">Curated Gemstones</span>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl font-bold text-white leading-tight mb-2 md:mb-4">{slides[current].title}</h2>
             <p className="text-white/75 text-sm md:text-base mb-4 md:mb-6 line-clamp-2 md:line-clamp-none">{slides[current].subtitle}</p>
-            <Link href={slides[current].href} className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
-              {slides[current].cta}<ChevronRight className="w-4 h-4" />
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link href={slides[current].href} className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
+                {slides[current].cta}<ChevronRight className="w-4 h-4" />
+              </Link>
+              <Link href="/guardian-quiz" className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 border border-white/30 text-white rounded-full font-semibold text-sm hover:bg-white/10 transition">
+                Find Your Stone<ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

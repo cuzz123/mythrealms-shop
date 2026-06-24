@@ -5,25 +5,25 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
 
 const question = {
-  text: "When life knocks you down, you…",
+  text: "What energy are you seeking right now?",
   options: [
     {
-      label: "Get up and fight harder",
+      label: "Clarity and focus — I need to cut through the noise",
+      direction: "clarity",
+      teaser: "You're drawn to stones of the mind. Amethyst, clear quartz, and lapis lazuli resonate with your path — stones that sharpen intuition and bring stillness to a busy mind.",
+      guardians: ["Amethyst", "Clear Quartz", "Lapis Lazuli"],
+    },
+    {
+      label: "Strength and protection — I'm holding a lot right now",
       direction: "strength",
-      teaser: "Your guardian walks the path of strength — the ones who carry the sky, hold the line, and rise when called.",
-      guardians: ["White Tiger", "Azure Dragon", "Yinglong"],
+      teaser: "You carry more than most. Black obsidian, tiger's eye, and hematite are your allies — stones that absorb what you cannot and return only what you need.",
+      guardians: ["Black Obsidian", "Tiger's Eye", "Hematite"],
     },
     {
-      label: "Go quiet, strategize, then come back stronger",
-      direction: "wisdom",
-      teaser: "Your guardian walks the path of wisdom — the ones who see through masks, endure in silence, and know what others miss.",
-      guardians: ["Nine-Tailed Fox", "Black Tortoise", "Bai Ze"],
-    },
-    {
-      label: "Burn the old version and start completely new",
+      label: "Love and renewal — I'm ready for a fresh chapter",
       direction: "transformation",
-      teaser: "Your guardian walks the path of transformation — the ones who rise from ashes, cross oceans, and become something new.",
-      guardians: ["Phoenix", "Kun Peng", "Taotie"],
+      teaser: "Something is ending. Something is beginning. Rose quartz, moonstone, and green aventurine walk with you through this threshold — stones of the heart, of new moons, of spring.",
+      guardians: ["Rose Quartz", "Moonstone", "Green Aventurine"],
     },
   ],
 } as const;
@@ -56,11 +56,11 @@ export function GuardianTeaser() {
           <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20">
             <ShieldCheck className="w-3.5 h-3.5 text-[var(--accent)]" />
             <span className="text-xs font-semibold text-[var(--accent)] tracking-[0.04em]">
-              Find Your Guardian
+              Find Your Stone
             </span>
           </div>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] font-bold text-[var(--text)] text-balance leading-tight">
-            {chosen ? "A path reveals itself" : "Which Beast Were You Born To Wear?"}
+            {chosen ? "Your stones are calling" : "Which Crystal Speaks to Your Soul?"}
           </h2>
         </div>
 

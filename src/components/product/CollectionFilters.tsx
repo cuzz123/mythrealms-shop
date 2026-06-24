@@ -5,8 +5,8 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { SlidersHorizontal, X } from "lucide-react";
 
 const STONES = [
-  "Tiger Eye", "Amethyst", "Jade", "Obsidian", "Lapis Lazuli",
-  "Rose Quartz", "Hematite", "Agate", "Lava Rock", "Red String",
+  "Amethyst", "Rose Quartz", "Black Obsidian", "Moonstone", "Tiger's Eye",
+  "Jade", "Lapis Lazuli", "Hematite", "Agate", "Lava Rock", "Red String",
 ];
 
 const INTENTIONS = [

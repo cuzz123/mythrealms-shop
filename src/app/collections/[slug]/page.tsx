@@ -8,6 +8,38 @@ import { BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { Suspense } from "react";
 import { safeJsonParse } from "@/lib/utils";
 
+// Quick stone filter chips for Curated Stones collection
+const CURATED_STONES = ["Amethyst", "Rose Quartz", "Black Obsidian", "Moonstone", "Tiger's Eye"];
+
+function StoneQuickFilters({ slug, currentStone }: { slug: string; currentStone: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-2 pb-2">
+      {CURATED_STONES.map((stone) => {
+        const isActive = currentStone.includes(stone);
+        const nextStones = isActive
+          ? currentStone.filter((s) => s !== stone)
+          : [...currentStone, stone];
+        const params = new URLSearchParams();
+        if (nextStones.length) params.set("stone", nextStones.join(","));
+        const href = `/collections/${slug}${params.toString() ? "?" + params.toString() : ""}`;
+        return (
+          <Link
+            key={stone}
+            href={href}
+            className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
+              isActive
+                ? "bg-[var(--accent)] text-white border-[var(--accent)]"
+                : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent)]/40 hover:text-[var(--text)]"
+            }`}
+          >
+            {stone}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
 export const dynamic = "force-dynamic"
 
 const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
@@ -16,9 +48,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const category = await db.category.findUnique({ where: { slug } });
   if (!category) return { title: "Collection Not Found — MythRealms" };
-  const desc = category.description?.slice(0, 155) || `Shop handcrafted ${category.name} — gemstone crystal bracelets inspired by ancient Chinese mythology.`;
+  const desc = category.description?.slice(0, 155) || `Shop handcrafted ${category.name} — gemstone crystal bracelets for the modern mystic.`;
   return {
-    title: `${category.name} — Crystal Bracelets | MythRealms`,
+    title: `${category.name} — ${slug === "curated-stones" ? "Natural Stone Bracelets" : "Crystal Bracelets"} | MythRealms`,
     description: desc,
     alternates: { canonical: `${SITE_URL}/collections/${slug}` },
     openGraph: {
@@ -49,7 +81,10 @@ export default async function CollectionPage({
   const priceMin = sp.priceMin ? parseFloat(sp.priceMin) : undefined;
   const priceMax = sp.priceMax ? parseFloat(sp.priceMax) : undefined;
 
-  const category = await db.category.findUnique({ where: { slug } });
+  const category = await db.category.findUnique({
+    where: { slug },
+    include: { children: { select: { id: true, name: true, slug: true } } },
+  });
   if (!category) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-20 text-center">
@@ -58,6 +93,10 @@ export default async function CollectionPage({
       </div>
     );
   }
+
+  // If this is a parent category, include child category products
+  const childIds = category.children.map((c) => c.id);
+  const categoryIds = childIds.length > 0 ? [category.id, ...childIds] : [category.id];
 
   // Price sorting is done in JS after fetch — SQLite cannot sort by related variant prices
   // Use DB-level price sorting via minPrice field
@@ -70,7 +109,7 @@ export default async function CollectionPage({
     case "z-a": orderBy = { name: "desc" }; break;
   }
 
-  const where: any = { categoryId: category.id, isActive: true };
+  const where: any = { categoryId: { in: categoryIds }, isActive: true };
   if (stones.length > 0) where.stone = { in: stones };
   if (intentions.length > 0) where.intention = { in: intentions };
   if (materials.length > 0) where.material = { in: materials };
@@ -87,9 +126,9 @@ export default async function CollectionPage({
       take: limit,
     }),
     db.product.count({ where }),
-    db.product.groupBy({ by: ["stone"], where: { categoryId: category.id, isActive: true }, _count: true, orderBy: { _count: { stone: "desc" } } }),
-    db.product.groupBy({ by: ["intention"], where: { categoryId: category.id, isActive: true }, _count: true }),
-    db.product.groupBy({ by: ["material"], where: { categoryId: category.id, isActive: true }, _count: true }),
+    db.product.groupBy({ by: ["stone"], where: { categoryId: { in: categoryIds }, isActive: true }, _count: true, orderBy: { _count: { stone: "desc" } } }),
+    db.product.groupBy({ by: ["intention"], where: { categoryId: { in: categoryIds }, isActive: true }, _count: true }),
+    db.product.groupBy({ by: ["material"], where: { categoryId: { in: categoryIds }, isActive: true }, _count: true }),
   ]);
 
   const filterCounts = {
@@ -142,6 +181,35 @@ export default async function CollectionPage({
         {category.description && <p className="text-sm text-[var(--text-secondary)] max-w-3xl">{category.description}</p>}
       </div>
 
+      {/* Subcategory links — shown for parent categories with children */}
+      {childIds.length > 0 && (
+        <div className="flex flex-wrap gap-2 pb-6 border-b border-[var(--border)] mb-6">
+          <Link
+            href={`/collections/${slug}`}
+            className="px-4 py-2 rounded-full text-sm font-medium bg-[var(--accent)] text-white border border-[var(--accent)]"
+          >
+            All
+          </Link>
+          {category.children.map((child) => (
+            <Link
+              key={child.id}
+              href={`/collections/${child.slug}`}
+              className="px-4 py-2 rounded-full text-sm text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--accent)]/40 hover:text-[var(--text)] transition-colors"
+            >
+              {child.name}
+            </Link>
+          ))}
+        </div>
+      )}
+
+      {/* Quick stone filter chips — Curated Stones only */}
+      {slug === "curated-stones" && (
+        <div className="pb-2">
+          <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-semibold mb-3">Filter by Stone</p>
+          <StoneQuickFilters slug={slug} currentStone={stones} />
+        </div>
+      )}
+
       <div className="flex items-center justify-between py-4 border-t border-[var(--border)] mb-6 gap-4 flex-wrap">
         <div className="flex items-center gap-2">
           <Suspense fallback={<div className="w-24 h-10" />}>
@@ -163,7 +231,9 @@ export default async function CollectionPage({
             <div className="prose prose-invert prose-sm mx-auto text-[var(--text-secondary)] leading-relaxed max-w-prose">
               <p>{category.description}</p>
               <p className="mt-3 text-xs text-[var(--text-muted)]">
-                Explore our handcrafted collection of {category.name.toLowerCase()}, each piece inspired by the ancient myths and legends of the Classic of Mountains and Seas. Discover authentic craftsmanship, premium materials, and timeless designs that honor China&apos;s rich cultural heritage.
+                {slug === "curated-stones"
+                  ? "Explore our hand-selected collection of natural stone bracelets, each piece chosen for its unique character and energy. From the deep purple of amethyst to the warm glow of tiger's eye, find the crystal that speaks to you."
+                  : `Explore our handcrafted collection of ${category.name.toLowerCase()}, each piece inspired by the ancient myths and legends of the Classic of Mountains and Seas. Discover authentic craftsmanship, premium materials, and timeless designs that honor China's rich cultural heritage.`}
               </p>
             </div>
           </div>

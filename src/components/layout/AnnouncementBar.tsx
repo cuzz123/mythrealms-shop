@@ -16,18 +16,18 @@ export function AnnouncementBar() {
           <span>
             Free Shipping Over $69.99{" "}
             <span className="text-[#8B7355]">|</span>{" "}
-            15% Off First Order: MYTH15{" "}
+            New: Curated Stones Collection{" "}
             <span className="text-[#8B7355]">|</span>{" "}
-            Buy 2 Get 1 Free on Pendants
+            15% Off First Order: MYTH15
           </span>
         </div>
       </div>
 
-      {/* Bottom bar — 30-Day Legend */}
+      {/* Bottom bar — Trust & Quality */}
       <div className="bg-[#1A1210] text-[var(--announcement-text)]">
         <div className="mx-auto max-w-7xl px-4 py-2.5 text-center text-sm leading-relaxed">
           <div className="flex flex-col items-center justify-center gap-1 sm:flex-row sm:gap-3">
-            <span>30-Day Legend · 30日无忧退换</span>
+            <span>Hand-Selected Stones · 30-Day Easy Returns · Ethically Sourced</span>
           </div>
         </div>
       </div>

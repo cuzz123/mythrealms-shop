@@ -29,9 +29,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app"),
-  title: "MythRealms — Ancient Beasts & Chinese Constellations",
-  description: "Jewelry inspired by the Classic of Mountains and Seas. Nine-Tailed Fox, Qilin, Azure Dragon. Where ancient myths come alive.",
-  keywords: ["shan hai jing", "mythical beasts", "chinese constellations", "nine-tailed fox", "qilin"],
+  title: "MythRealms — Natural Stone Bracelets, Curated for the Modern Mystic",
+  description: "Hand-selected crystal bracelets. Amethyst, rose quartz, black obsidian, moonstone, and tiger's eye. Artisan finishes. Pieces that feel like they've always belonged to you.",
+  keywords: ["natural stone bracelets", "crystal bracelets", "amethyst", "rose quartz", "black obsidian", "moonstone", "tigers eye", "gemstone jewelry"],
   verification: {
     google: "uBe2lk1CCRJxdUU4b1HoJkR9KbnKodSifkNbU1XtLgs",
   },
@@ -39,15 +39,15 @@ export const metadata: Metadata = {
     "p:domain_verify": "f7403d777d8595e4acf712c703023325",
   },
   openGraph: {
-    title: "MythRealms — Ancient Beasts & Chinese Constellations",
-    description: "Jewelry inspired by China's oldest book of legends. 2000 years before Tolkien, there was the Classic of Mountains and Seas.",
+    title: "MythRealms — Natural Stone Bracelets, Curated for the Modern Mystic",
+    description: "Hand-selected crystal bracelets. Artisan finishes. Pieces that feel like they've always belonged to you.",
     type: "website",
     siteName: "MythRealms",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MythRealms — Ancient Beasts & Chinese Constellations",
-    description: "Jewelry inspired by China's oldest book of legends.",
+    title: "MythRealms — Natural Stone Bracelets, Curated for the Modern Mystic",
+    description: "Hand-selected crystal bracelets. Artisan finishes. Pieces that feel like they've always belonged to you.",
   },
 };
 
