@@ -5,13 +5,12 @@
     "name": "Blush Rose Bracelet",
     "description": "Soft rose-toned bracelet",
     "price": 31.99,
-    "mainImage": "/images/products/1688-shop/blush-rose-single/blush-rose-single-main.jpg",
+    "mainImage": "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail1.jpg",
     "images": [
-      "/images/products/1688-shop/blush-rose-single/blush-rose-single-main.jpg",
       "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail1.jpg",
       "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail2.jpg",
       "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail3.jpg",
-      "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail4.jpg"
+      "/images/products/1688-shop/blush-rose-single/blush-rose-single-main.jpg"
     ],
     "category": "curated-singles",
     "categoryName": "Curated Singles"
@@ -179,13 +178,13 @@
     "name": "Dark Stone Bracelet",
     "description": "Deep charcoal mineral stone",
     "price": 51.99,
-    "mainImage": "/images/products/1688-shop/dark-stone-single/dark-stone-single-main.jpg",
+    "mainImage": "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail1.jpg",
     "images": [
-      "/images/products/1688-shop/dark-stone-single/dark-stone-single-main.jpg",
       "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail1.jpg",
       "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail2.jpg",
       "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail3.jpg",
-      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail4.jpg"
+      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail4.jpg",
+      "/images/products/1688-shop/dark-stone-single/dark-stone-single-main.jpg"
     ],
     "category": "curated-singles",
     "categoryName": "Curated Singles"
