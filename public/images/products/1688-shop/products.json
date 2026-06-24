@@ -1,556 +1,10 @@
 [
   {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-01",
-    "name": "Copper Braid #1",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 31.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-01.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-01.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-02",
-    "name": "Copper Braid #2",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 32.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-02.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-02.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-03",
-    "name": "Copper Braid #3",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 34.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-03.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-03.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-04",
-    "name": "Copper Braid #4",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 35.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-04.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-04.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-05",
-    "name": "Copper Braid #5",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 37.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-05.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-05.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-06",
-    "name": "Copper Braid #6",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 38.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-06.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-06.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-07",
-    "name": "Copper Braid #7",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 40.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-07.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-07.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-08",
-    "name": "Copper Braid #8",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 41.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-08.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-08.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-09",
-    "name": "Copper Braid #9",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 43.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-09.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-09.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-10",
-    "name": "Copper Braid #10",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 44.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-10.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-10.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-11",
-    "name": "Copper Braid #11",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 46.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-11.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-11.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection",
-    "slug": "copper-braid-series-12",
-    "name": "Copper Braid #12",
-    "description": "From the Copper Braid Collection. Warm braided copper bracelets with earthy sunset tones",
-    "price": 47.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-12.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-12.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-01",
-    "name": "Golden Luxe #1",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 31.49,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-01.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-01.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-02",
-    "name": "Golden Luxe #2",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 32.99,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-02.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-02.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-03",
-    "name": "Golden Luxe #3",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 34.49,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-03.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-03.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-04",
-    "name": "Golden Luxe #4",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 35.99,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-04.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-04.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-05",
-    "name": "Golden Luxe #5",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 37.49,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-05.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-05.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-06",
-    "name": "Golden Luxe #6",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 38.99,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-06.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-06.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-07",
-    "name": "Golden Luxe #7",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 40.49,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-07.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-07.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-08",
-    "name": "Golden Luxe #8",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 41.99,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-08.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-08.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-09",
-    "name": "Golden Luxe #9",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 43.49,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-09.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-09.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-10",
-    "name": "Golden Luxe #10",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 44.99,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-10.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-10.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-11",
-    "name": "Golden Luxe #11",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 46.49,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-11.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-11.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-12",
-    "name": "Golden Luxe #12",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 47.99,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-12.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-12.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "golden-luxe-series",
-    "categoryName": "Golden Luxe Collection",
-    "slug": "golden-luxe-series-13",
-    "name": "Golden Luxe #13",
-    "description": "From the Golden Luxe Collection. Light luxury gold-accent bracelets for everyday elegance",
-    "price": 49.49,
-    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-13.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-13.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-01",
-    "name": "Dark Mineral #1",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 31.49,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-01.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-01.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-02",
-    "name": "Dark Mineral #2",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 32.99,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-02.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-02.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-03",
-    "name": "Dark Mineral #3",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 34.49,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-03.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-03.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-04",
-    "name": "Dark Mineral #4",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 35.99,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-04.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-04.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-05",
-    "name": "Dark Mineral #5",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 37.49,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-05.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-05.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-06",
-    "name": "Dark Mineral #6",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 38.99,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-06.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-06.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-07",
-    "name": "Dark Mineral #7",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 40.49,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-07.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-07.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-08",
-    "name": "Dark Mineral #8",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 41.99,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-08.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-08.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-09",
-    "name": "Dark Mineral #9",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 43.49,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-09.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-09.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-10",
-    "name": "Dark Mineral #10",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 44.99,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-10.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-10.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-11",
-    "name": "Dark Mineral #11",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 46.49,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-11.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-11.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-12",
-    "name": "Dark Mineral #12",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 47.99,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-12.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-12.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-13",
-    "name": "Dark Mineral #13",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 49.49,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-13.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-13.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "dark-mineral-series",
-    "categoryName": "Dark Mineral Collection",
-    "slug": "dark-mineral-series-14",
-    "name": "Dark Mineral #14",
-    "description": "From the Dark Mineral Collection. Deep charcoal and mineral stone bracelets with raw texture",
-    "price": 50.99,
-    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-14.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-14.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal Series",
-    "slug": "pearl-crystal-series-01",
-    "name": "Pearl & Crystal #1",
-    "description": "From the Pearl & Crystal Series. Luminous pearl and crystal bracelets with delicate shimmer",
-    "price": 31.49,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal Series",
-    "slug": "pearl-crystal-series-02",
-    "name": "Pearl & Crystal #2",
-    "description": "From the Pearl & Crystal Series. Luminous pearl and crystal bracelets with delicate shimmer",
-    "price": 32.99,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02.jpg"
-    ]
-  },
-  {
-    "type": "series-product",
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal Series",
-    "slug": "pearl-crystal-series-03",
-    "name": "Pearl & Crystal #3",
-    "description": "From the Pearl & Crystal Series. Luminous pearl and crystal bracelets with delicate shimmer",
-    "price": 34.49,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03.jpg"
-    ]
-  },
-  {
     "type": "single-product",
     "slug": "blush-rose-single",
     "name": "Blush Rose Bracelet",
-    "description": "Soft rose-toned bracelet with delicate craftsmanship",
-    "price": 34.99,
+    "description": "Soft rose-toned bracelet",
+    "price": 31.99,
     "mainImage": "/images/products/1688-shop/blush-rose-single/blush-rose-single-main.jpg",
     "images": [
       "/images/products/1688-shop/blush-rose-single/blush-rose-single-main.jpg",
@@ -558,14 +12,68 @@
       "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail2.jpg",
       "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail3.jpg",
       "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail4.jpg"
-    ]
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
+  },
+  {
+    "type": "single-product",
+    "slug": "turquoise-single",
+    "name": "Turquoise Dream Bracelet",
+    "description": "Vibrant turquoise stone",
+    "price": 33.99,
+    "mainImage": "/images/products/1688-shop/turquoise-single/turquoise-single-main.jpg",
+    "images": [
+      "/images/products/1688-shop/turquoise-single/turquoise-single-main.jpg",
+      "/images/products/1688-shop/turquoise-single/turquoise-single-detail1.jpg",
+      "/images/products/1688-shop/turquoise-single/turquoise-single-detail2.jpg",
+      "/images/products/1688-shop/turquoise-single/turquoise-single-detail3.jpg",
+      "/images/products/1688-shop/turquoise-single/turquoise-single-detail4.jpg",
+      "/images/products/1688-shop/turquoise-single/turquoise-single-detail5.jpg",
+      "/images/products/1688-shop/turquoise-single/turquoise-single-detail6.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
+  },
+  {
+    "type": "single-product",
+    "slug": "multi-stone-single",
+    "name": "Multi-Stone Mix Bracelet",
+    "description": "Mixed gemstone eclectic",
+    "price": 35.99,
+    "mainImage": "/images/products/1688-shop/multi-stone-single/multi-stone-single-main.jpg",
+    "images": [
+      "/images/products/1688-shop/multi-stone-single/multi-stone-single-main.jpg",
+      "/images/products/1688-shop/multi-stone-single/multi-stone-single-detail1.jpg",
+      "/images/products/1688-shop/multi-stone-single/multi-stone-single-detail2.jpg",
+      "/images/products/1688-shop/multi-stone-single/multi-stone-single-detail3.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
+  },
+  {
+    "type": "single-product",
+    "slug": "rose-gold-single",
+    "name": "Rose Gold Finish Bracelet",
+    "description": "Rose gold plated elegance",
+    "price": 37.99,
+    "mainImage": "/images/products/1688-shop/rose-gold-single/rose-gold-single-main.jpg",
+    "images": [
+      "/images/products/1688-shop/rose-gold-single/rose-gold-single-main.jpg",
+      "/images/products/1688-shop/rose-gold-single/rose-gold-single-detail1.jpg",
+      "/images/products/1688-shop/rose-gold-single/rose-gold-single-detail2.jpg",
+      "/images/products/1688-shop/rose-gold-single/rose-gold-single-detail3.jpg",
+      "/images/products/1688-shop/rose-gold-single/rose-gold-single-detail4.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
   },
   {
     "type": "single-product",
     "slug": "copper-elegance-single",
-    "name": "Copper Elegance",
-    "description": "Refined copper bracelet with intricate detailing",
-    "price": 34.99,
+    "name": "Copper Elegance Bracelet",
+    "description": "Refined copper bracelet",
+    "price": 39.99,
     "mainImage": "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-main.jpg",
     "images": [
       "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-main.jpg",
@@ -575,14 +83,16 @@
       "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-detail4.jpg",
       "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-detail5.jpg",
       "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-detail6.jpg"
-    ]
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
   },
   {
     "type": "single-product",
     "slug": "golden-accent-single",
-    "name": "Golden Accent",
-    "description": "Warm gold-accent bracelet for sophisticated layering",
-    "price": 34.99,
+    "name": "Golden Accent Bracelet",
+    "description": "Warm gold-accent bracelet",
+    "price": 41.99,
     "mainImage": "/images/products/1688-shop/golden-accent-single/golden-accent-single-main.jpg",
     "images": [
       "/images/products/1688-shop/golden-accent-single/golden-accent-single-main.jpg",
@@ -591,28 +101,32 @@
       "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail3.jpg",
       "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail4.jpg",
       "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail5.jpg"
-    ]
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
   },
   {
     "type": "single-product",
     "slug": "crystal-bling-single",
     "name": "Crystal Bling Bracelet",
-    "description": "Sparkling crystal bracelet with brilliant light-catching facets",
-    "price": 34.99,
+    "description": "Sparkling crystal facets",
+    "price": 43.99,
     "mainImage": "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-main.jpg",
     "images": [
       "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-main.jpg",
       "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail1.jpg",
       "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail2.jpg",
       "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail3.jpg"
-    ]
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
   },
   {
     "type": "single-product",
     "slug": "golden-weave-single",
     "name": "Golden Weave Bracelet",
-    "description": "Intricate woven gold-tone bracelet for sophisticated layering",
-    "price": 34.99,
+    "description": "Intricate woven gold-tone",
+    "price": 45.99,
     "mainImage": "/images/products/1688-shop/golden-weave-single/golden-weave-single-main.jpg",
     "images": [
       "/images/products/1688-shop/golden-weave-single/golden-weave-single-main.jpg",
@@ -621,6 +135,622 @@
       "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail3.jpg",
       "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail4.jpg",
       "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail5.jpg"
-    ]
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
+  },
+  {
+    "type": "single-product",
+    "slug": "silver-chain-single",
+    "name": "Silver Chain Bracelet",
+    "description": "Delicate silver chain with charm",
+    "price": 47.99,
+    "mainImage": "/images/products/1688-shop/silver-chain-single/silver-chain-single-main.jpg",
+    "images": [
+      "/images/products/1688-shop/silver-chain-single/silver-chain-single-main.jpg",
+      "/images/products/1688-shop/silver-chain-single/silver-chain-single-detail1.jpg",
+      "/images/products/1688-shop/silver-chain-single/silver-chain-single-detail2.jpg",
+      "/images/products/1688-shop/silver-chain-single/silver-chain-single-detail3.jpg",
+      "/images/products/1688-shop/silver-chain-single/silver-chain-single-detail4.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-drop-single",
+    "name": "Pearl Drop Bracelet",
+    "description": "Luminous pearl accent",
+    "price": 49.99,
+    "mainImage": "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-main.jpg",
+      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-detail1.jpg",
+      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-detail2.jpg",
+      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-detail3.jpg",
+      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-detail4.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
+  },
+  {
+    "type": "single-product",
+    "slug": "dark-stone-single",
+    "name": "Dark Stone Bracelet",
+    "description": "Deep charcoal mineral stone",
+    "price": 51.99,
+    "mainImage": "/images/products/1688-shop/dark-stone-single/dark-stone-single-main.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-stone-single/dark-stone-single-main.jpg",
+      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail1.jpg",
+      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail2.jpg",
+      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail3.jpg",
+      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail4.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
+  },
+  {
+    "type": "single-product",
+    "slug": "amber-bead-single",
+    "name": "Amber Bead Bracelet",
+    "description": "Warm amber resin beads",
+    "price": 53.99,
+    "mainImage": "/images/products/1688-shop/amber-bead-single/amber-bead-single-main.jpg",
+    "images": [
+      "/images/products/1688-shop/amber-bead-single/amber-bead-single-main.jpg",
+      "/images/products/1688-shop/amber-bead-single/amber-bead-single-detail1.jpg",
+      "/images/products/1688-shop/amber-bead-single/amber-bead-single-detail2.jpg",
+      "/images/products/1688-shop/amber-bead-single/amber-bead-single-detail3.jpg",
+      "/images/products/1688-shop/amber-bead-single/amber-bead-single-detail4.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-01",
+    "name": "Copper Braid Collection #1",
+    "description": "Warm braided copper bracelets",
+    "price": 26.49,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-01.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-01.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-02",
+    "name": "Copper Braid Collection #2",
+    "description": "Warm braided copper bracelets",
+    "price": 27.99,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-02.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-02.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-03",
+    "name": "Copper Braid Collection #3",
+    "description": "Warm braided copper bracelets",
+    "price": 29.49,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-03.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-03.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-04",
+    "name": "Copper Braid Collection #4",
+    "description": "Warm braided copper bracelets",
+    "price": 30.99,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-04.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-04.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-05",
+    "name": "Copper Braid Collection #5",
+    "description": "Warm braided copper bracelets",
+    "price": 32.49,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-05.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-05.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-06",
+    "name": "Copper Braid Collection #6",
+    "description": "Warm braided copper bracelets",
+    "price": 33.99,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-06.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-06.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-07",
+    "name": "Copper Braid Collection #7",
+    "description": "Warm braided copper bracelets",
+    "price": 35.49,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-07.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-07.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-08",
+    "name": "Copper Braid Collection #8",
+    "description": "Warm braided copper bracelets",
+    "price": 36.99,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-08.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-08.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-09",
+    "name": "Copper Braid Collection #9",
+    "description": "Warm braided copper bracelets",
+    "price": 38.49,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-09.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-09.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-10",
+    "name": "Copper Braid Collection #10",
+    "description": "Warm braided copper bracelets",
+    "price": 39.99,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-10.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-10.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-11",
+    "name": "Copper Braid Collection #11",
+    "description": "Warm braided copper bracelets",
+    "price": 41.49,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-11.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-11.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "copper-braid-series-12",
+    "name": "Copper Braid Collection #12",
+    "description": "Warm braided copper bracelets",
+    "price": 42.99,
+    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-12.jpg",
+    "images": [
+      "/images/products/1688-shop/copper-braid-series/copper-braid-series-12.jpg"
+    ],
+    "category": "copper-braid-series",
+    "categoryName": "Copper Braid Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-01",
+    "name": "Golden Luxe Collection #1",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 26.49,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-01.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-01.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-02",
+    "name": "Golden Luxe Collection #2",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 27.99,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-02.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-02.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-03",
+    "name": "Golden Luxe Collection #3",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 29.49,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-03.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-03.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-04",
+    "name": "Golden Luxe Collection #4",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 30.99,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-04.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-04.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-05",
+    "name": "Golden Luxe Collection #5",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 32.49,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-05.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-05.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-06",
+    "name": "Golden Luxe Collection #6",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 33.99,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-06.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-06.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-07",
+    "name": "Golden Luxe Collection #7",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 35.49,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-07.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-07.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-08",
+    "name": "Golden Luxe Collection #8",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 36.99,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-08.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-08.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-09",
+    "name": "Golden Luxe Collection #9",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 38.49,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-09.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-09.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-10",
+    "name": "Golden Luxe Collection #10",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 39.99,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-10.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-10.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-11",
+    "name": "Golden Luxe Collection #11",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 41.49,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-11.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-11.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-12",
+    "name": "Golden Luxe Collection #12",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 42.99,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-12.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-12.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "golden-luxe-series-13",
+    "name": "Golden Luxe Collection #13",
+    "description": "Light luxury gold-accent bracelets",
+    "price": 44.49,
+    "mainImage": "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-13.jpg",
+    "images": [
+      "/images/products/1688-shop/golden-luxe-series/golden-luxe-series-13.jpg"
+    ],
+    "category": "golden-luxe-series",
+    "categoryName": "Golden Luxe Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-01",
+    "name": "Dark Mineral Collection #1",
+    "description": "Deep charcoal and mineral stone",
+    "price": 26.49,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-01.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-01.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-02",
+    "name": "Dark Mineral Collection #2",
+    "description": "Deep charcoal and mineral stone",
+    "price": 27.99,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-02.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-02.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-03",
+    "name": "Dark Mineral Collection #3",
+    "description": "Deep charcoal and mineral stone",
+    "price": 29.49,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-03.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-03.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-04",
+    "name": "Dark Mineral Collection #4",
+    "description": "Deep charcoal and mineral stone",
+    "price": 30.99,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-04.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-04.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-05",
+    "name": "Dark Mineral Collection #5",
+    "description": "Deep charcoal and mineral stone",
+    "price": 32.49,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-05.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-05.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-06",
+    "name": "Dark Mineral Collection #6",
+    "description": "Deep charcoal and mineral stone",
+    "price": 33.99,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-06.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-06.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-07",
+    "name": "Dark Mineral Collection #7",
+    "description": "Deep charcoal and mineral stone",
+    "price": 35.49,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-07.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-07.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-08",
+    "name": "Dark Mineral Collection #8",
+    "description": "Deep charcoal and mineral stone",
+    "price": 36.99,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-08.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-08.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-09",
+    "name": "Dark Mineral Collection #9",
+    "description": "Deep charcoal and mineral stone",
+    "price": 38.49,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-09.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-09.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-10",
+    "name": "Dark Mineral Collection #10",
+    "description": "Deep charcoal and mineral stone",
+    "price": 39.99,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-10.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-10.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-11",
+    "name": "Dark Mineral Collection #11",
+    "description": "Deep charcoal and mineral stone",
+    "price": 41.49,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-11.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-11.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-12",
+    "name": "Dark Mineral Collection #12",
+    "description": "Deep charcoal and mineral stone",
+    "price": 42.99,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-12.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-12.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-13",
+    "name": "Dark Mineral Collection #13",
+    "description": "Deep charcoal and mineral stone",
+    "price": 44.49,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-13.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-13.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "dark-mineral-series-14",
+    "name": "Dark Mineral Collection #14",
+    "description": "Deep charcoal and mineral stone",
+    "price": 45.99,
+    "mainImage": "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-14.jpg",
+    "images": [
+      "/images/products/1688-shop/dark-mineral-series/dark-mineral-series-14.jpg"
+    ],
+    "category": "dark-mineral-series",
+    "categoryName": "Dark Mineral Collection"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-crystal-series-01",
+    "name": "Pearl & Crystal #1",
+    "description": "Luminous pearl and crystal",
+    "price": 26.49,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-crystal-series-02",
+    "name": "Pearl & Crystal #2",
+    "description": "Luminous pearl and crystal",
+    "price": 27.99,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-crystal-series-03",
+    "name": "Pearl & Crystal #3",
+    "description": "Luminous pearl and crystal",
+    "price": 29.49,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal"
   }
 ]
