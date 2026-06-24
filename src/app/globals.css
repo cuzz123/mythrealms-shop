@@ -157,3 +157,13 @@ h4 { line-height: 1.3; }
 .stagger-9 { animation-delay: 0.50s; }
 .stagger-10 { animation-delay: 0.55s; }
 .stagger-11 { animation-delay: 0.60s; }
+
+/* Shimmer reveal — subtle white flash on image load */
+@keyframes shimmerReveal {
+  0%   { filter: brightness(1.4); opacity: 0.6; }
+  40%  { filter: brightness(1.15); opacity: 0.9; }
+  100% { filter: brightness(1); opacity: 1; }
+}
+.animate-shimmer-reveal {
+  animation: shimmerReveal 0.5s ease-out forwards;
+}

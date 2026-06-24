@@ -26,10 +26,12 @@ export function LazyImage({
     <div className={`relative overflow-hidden ${containerClassName || ""}`}>
       {!ready && <div className="absolute inset-0 bg-[#1A1816]" />}
       {ready && (
-        <Image
-          src={src} alt={alt} fill={fill} sizes={sizes} priority={priority}
-          className={`animate-fade-in ${className || ""}`}
-        />
+        <div className="relative w-full h-full animate-shimmer-reveal">
+          <Image
+            src={src} alt={alt} fill={fill} sizes={sizes} priority={priority}
+            className={`${className || ""}`}
+          />
+        </div>
       )}
     </div>
   );
