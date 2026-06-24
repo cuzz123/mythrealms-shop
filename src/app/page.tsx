@@ -6,6 +6,7 @@ import { GuardianTeaser } from "@/components/layout/GuardianTeaser";
 import { ArrowRight } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { PRODUCTS, CATEGORIES, getBestSellers } from "@/lib/1688-products";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 export const dynamic = "force-static";
 
@@ -39,11 +40,11 @@ export default function HomePage() {
             <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Shop by Series</h2>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {categories.slice(0, 4).map((cat) => {
+            {categories.slice(0, 4).map((cat, i) => {
               const first = PRODUCTS.filter(p => p.category === cat.slug)[0];
               return (
-                <Link key={cat.slug} href={`/collections/${cat.slug}`} className="group relative aspect-[3/4] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                  {first && <Image src={first.image} alt={cat.name} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />}
+                <Link key={cat.slug} href={`/collections/${cat.slug}`} className={`stagger-item stagger-${i} group relative aspect-[3/4] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all`}>
+                  {first && <LazyImage src={first.image} alt={cat.name} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <h3 className="font-serif text-lg font-semibold text-white">{cat.name}</h3>
@@ -64,10 +65,10 @@ export default function HomePage() {
             <Link href="/collections/curated-singles" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All <ArrowRight className="w-4 h-4" /></Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featured.map((p) => (
-              <Link key={p.slug} href={`/products/${p.slug}`} className="group flex gap-4 bg-[var(--surface)] rounded-xl p-3 border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
+            {featured.map((p, i) => (
+              <Link key={p.slug} href={`/products/${p.slug}`} className={`stagger-item stagger-${i} group flex gap-4 bg-[var(--surface)] rounded-xl p-3 border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all`}>
                 <div className="relative w-24 h-24 rounded-lg overflow-hidden shrink-0">
-                  <Image src={p.image} alt={p.name} fill sizes="96px" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <LazyImage src={p.image} alt={p.name} fill sizes="96px" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
                 </div>
                 <div className="flex flex-col justify-center min-w-0">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1">{p.name}</h4>

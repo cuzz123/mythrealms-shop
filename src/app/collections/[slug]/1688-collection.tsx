@@ -18,7 +18,7 @@ export function Collection1688({ slug }: { slug: string }) {
         <p className="mt-1 text-sm text-[var(--accent)]">{products.length} styles</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {products.map((p) => (
+        {products.map((p, i) => (
           <Link key={p.slug} href={`/products/${p.slug}`} className="group">
             <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
               <Image src={p.image} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
