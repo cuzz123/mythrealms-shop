@@ -5,14 +5,17 @@ import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { GuardianTeaser } from "@/components/layout/GuardianTeaser";
 import { ArrowRight } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
-import { imageUrl } from "@/lib/images";
+import { PRODUCTS, CATEGORIES, getBestSellers } from "@/lib/1688-products";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
-export default async function HomePage() {
+export default function HomePage() {
+  const featured = PRODUCTS.filter(p => p.isBestSeller).slice(0, 4);
+  const categories = CATEGORIES;
+
   return (
     <>
-      {/* ===== HERO CAROUSEL (first thing visitor sees) ===== */}
+      {/* ===== HERO ===== */}
       <HeroCarousel />
 
       {/* ===== TRUST BAR ===== */}
@@ -28,30 +31,48 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* ===== GUARDIAN TEASER — personalization before browsing ===== */}
-      <GuardianTeaser />
+      {/* ===== SHOP BY COLLECTION ===== */}
+      <section className="py-14 bg-[var(--surface)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-8">
+            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">New Collection</span>
+            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Shop by Series</h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {categories.slice(0, 4).map((cat) => {
+              const first = PRODUCTS.filter(p => p.category === cat.slug)[0];
+              return (
+                <Link key={cat.slug} href={`/collections/${cat.slug}`} className="group relative aspect-[3/4] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
+                  {first && <Image src={first.image} alt={cat.name} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="font-serif text-lg font-semibold text-white">{cat.name}</h3>
+                    <p className="text-xs text-white/60 mt-0.5">{PRODUCTS.filter(p => p.category === cat.slug).length} styles</p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-      {/* ===== NEW COLLECTIONS (Featured Products) ===== */}
+      {/* ===== FEATURED SINGLES ===== */}
       <section className="py-14 bg-[#1A1816]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">
-            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">New Arrivals</h2>
-            <Link href="/collections/curated-stones" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All Stones <ArrowRight className="w-4 h-4" /></Link>
+            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Curated Singles</h2>
+            <Link href="/collections/curated-singles" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All <ArrowRight className="w-4 h-4" /></Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { name: "Amethyst Serenity Bracelet", slug: "bf-bracelet", stone: "Amethyst & Rose Gold", price: 128.99, href: "/collections/curated-stones" },
-              { name: "Moonstone Lumina Bracelet", slug: "ml-full", stone: "Moonstone & Diamond", price: 158.99, href: "/collections/curated-stones" },
-              { name: "Rose Quartz Heart Bracelet", slug: "op-aquamarine", stone: "Rose Quartz & Aquamarine", price: 128.99, href: "/collections/curated-stones" },
-              { name: "Black Obsidian Shield Bracelet", slug: "cs-constellation", stone: "Obsidian & White Gold", price: 128.99, href: "/collections/curated-stones" },
-            ].map((p) => (
-              <Link key={p.slug} href={p.href} className="group">
-                <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
-                  <Image src={imageUrl(`/images/products/${p.slug}.png`)} alt={p.name} fill sizes="(max-width:640px) 50vw, 25vw" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {featured.map((p) => (
+              <Link key={p.slug} href={`/products/${p.slug}`} className="group flex gap-4 bg-[var(--surface)] rounded-xl p-3 border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
+                <div className="relative w-24 h-24 rounded-lg overflow-hidden shrink-0">
+                  <Image src={p.image} alt={p.name} fill sizes="96px" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
-                <div className="mt-2.5 px-1">
-                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.stone} · {formatPrice(p.price)}</p>
+                <div className="flex flex-col justify-center min-w-0">
+                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1">{p.name}</h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.categoryName} · {formatPrice(p.price)}</p>
+                  {p.images.length > 1 && <p className="text-[10px] text-[var(--accent)] mt-1">{p.images.length} detail photos</p>}
                 </div>
               </Link>
             ))}
@@ -59,36 +80,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ===== WEAR THE LOOK ===== */}
-      <section className="py-12 bg-[var(--surface)] border-t border-[var(--border)]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-6">
-            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Stack & Layer</span>
-            <h2 className="font-serif text-2xl font-bold text-[#E8E0D5]">Wear the Look · Curated Combinations</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { name:"The Mystic Stack", desc:"Moonstone + Amethyst + Rose Quartz — clarity, love, and intuition layered on one wrist", img:imageUrl("/images/products/ml-full.png"), link:"/collections/curated-stones" },
-              { name:"The Grounded Set", desc:"Black Obsidian + Tiger's Eye + Hematite — protection, confidence, and deep roots", img:imageUrl("/images/products/black-tortoise.png"), link:"/collections/curated-stones" },
-              { name:"The Elemental Trio", desc:"Wood + Fire + Earth — three elements, one story of balance", img:imageUrl("/images/products/m5-wood.png"), link:"/collections/five-elements" },
-            ].map(s => (
-              <Link key={s.name} href={s.link} className="group relative aspect-[4/3] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                <Image src={s.img} alt={s.name} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h3 className="font-serif text-lg font-semibold text-white">{s.name}</h3>
-                  <p className="text-xs text-white/70">{s.desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== NEWSLETTER + TRUST ===== */}
+      {/* ===== NEWSLETTER ===== */}
       <section className="py-12 bg-[#1A1816]">
         <div className="max-w-[540px] mx-auto px-6 text-center">
-          <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Join the Circle · Stay Connected</h2>
+          <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Join the Circle</h2>
           <p className="text-[#A89880] text-sm mb-6">Early access to new stone collections, styling guides, and exclusive subscriber-only discounts.</p>
           <NewsletterForm />
           <div className="flex justify-center gap-6 mt-6 text-xs text-[#8A7D6E]">
