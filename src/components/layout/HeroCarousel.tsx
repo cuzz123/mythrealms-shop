@@ -3,19 +3,20 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-import { PRODUCTS } from "@/lib/1688-products";
 
 
-// Use best 1688 product images for hero (mix singles + series for 6 slides)
-const singles = PRODUCTS.filter(p => p.isBestSeller).slice(0, 3);
-const series = PRODUCTS.filter(p => !p.isBestSeller).slice(0, 3);
-const heroProducts = [...singles, ...series].slice(0, 6);
-const slides = heroProducts.map((p, i) => ({
-  image: p.images?.[0] || p.image,
-  title: i === 0 ? "Hand-Selected Stone Bracelets, Curated for You" : p.name,
-  subtitle: i === 0 ? "Real craftsmanship. Natural stones. Pieces that feel like they've always belonged to you." : p.description?.slice(0, 120) || "",
-  cta: i === 0 ? "Shop the Collection" : "View Details",
-  href: i === 0 ? "/collections" : `/products/${p.slug}`,
+// 1688 Hero images — generated from 单品 reference shots
+const HERO_IMAGES = [
+  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_03_37.png",
+  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_08_34.png",
+];
+
+const slides = HERO_IMAGES.map((img, i) => ({
+  image: img,
+  title: i === 0 ? "Hand-Selected Stone Bracelets" : "Curated for the Modern Mystic",
+  subtitle: i === 0 ? "Real craftsmanship. Natural stones. Pieces that feel like they've always belonged to you." : "Each bracelet hand-selected. Each stone tells a story.",
+  cta: i === 0 ? "Shop the Collection" : "View All",
+  href: i === 0 ? "/collections" : "/collections/curated-singles",
 }));
 
 export function HeroCarousel() {
