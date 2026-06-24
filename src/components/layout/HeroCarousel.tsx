@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
-
-
 // 1688 Hero images — generated from 单品 reference shots
 const HERO_IMAGES = [
   "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_03_37.png",
@@ -137,3 +135,6 @@ export function HeroCarousel() {
         </div>
       </div>
 
+    </div>
+  );
+}
