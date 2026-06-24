@@ -23,13 +23,15 @@ export function LazyImage({
 
   return (
     <div className={`relative w-full h-full overflow-hidden ${containerClassName || ""}`}>
-      {!ready && <div className="absolute inset-0 bg-[#1A1816]" />}
-      {ready && (
-        <Image
-          src={src} alt={alt} fill={fill} sizes={sizes} priority={priority}
-          className={`animate-shimmer-reveal ${className || ""}`}
-        />
-      )}
+      {/* Image always in DOM — maintains correct dimensions, no CLS */}
+      <Image
+        src={src} alt={alt} fill={fill} sizes={sizes} priority={priority}
+        className={`transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"} ${className || ""}`}
+      />
+      {/* Dark overlay covers image while loading, fades out on ready */}
+      <div
+        className={`absolute inset-0 bg-[#1A1816] transition-opacity duration-300 pointer-events-none ${ready ? "opacity-0" : "opacity-100"}`}
+      />
     </div>
   );
 }

@@ -43,7 +43,7 @@ export default function HomePage() {
             {categories.slice(0, 4).map((cat, i) => {
               const first = PRODUCTS.filter(p => p.category === cat.slug)[0];
               return (
-                <Link key={cat.slug} href={`/collections/${cat.slug}`} className={`stagger-item stagger-${i} group relative aspect-[3/4] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all`}>
+                <Link key={cat.slug} href={`/collections/${cat.slug}`} className="group relative aspect-[3/4] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
                   {first && <LazyImage src={first.image} alt={cat.name} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -66,7 +66,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {featured.map((p, i) => (
-              <Link key={p.slug} href={`/products/${p.slug}`} className={`stagger-item stagger-${i} group flex gap-4 bg-[var(--surface)] rounded-xl p-3 border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all`}>
+              <Link key={p.slug} href={`/products/${p.slug}`} className="group flex gap-4 bg-[var(--surface)] rounded-xl p-3 border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
                 <div className="relative w-24 h-24 rounded-lg overflow-hidden shrink-0">
                   <LazyImage src={p.image} alt={p.name} fill sizes="96px" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
                 </div>
