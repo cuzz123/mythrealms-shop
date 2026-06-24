@@ -97,7 +97,7 @@ export function HeroCarousel() {
           <div
             key={current}
             className="max-w-xs sm:max-w-md md:max-w-lg"
-            style={{ animation: "slideInContent 0.5s ease-out" }}
+            className="animate-slideInContent"
           >
             <span className="inline-block text-[10px] md:text-xs uppercase tracking-[0.15em] text-[var(--accent)] font-semibold mb-2 md:mb-3">Curated Gemstones</span>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl font-bold text-white leading-tight mb-2 md:mb-4">{slides[current].title}</h2>
@@ -138,9 +138,3 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes slideInContent {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
