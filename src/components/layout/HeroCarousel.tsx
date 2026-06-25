@@ -103,18 +103,23 @@ export function HeroCarousel() {
       </div>
 
 
-      {/* Progress bar — bottom of hero, gaps between segments */}
+      {/* Progress bar — clickable, 5x taller */}
       <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-[2px]">
         {slides.map((_, i) => (
-          <div key={i} className="flex-1 h-[3px] bg-white/15">
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className="flex-1 h-[15px] bg-white/15 cursor-pointer relative overflow-hidden"
+          >
             <div
-              className="h-full bg-white transition-none"
+              className="absolute inset-0 bg-white transition-none"
               style={{
-                width: i === current ? "100%" : "0%",
+                transform: i === current ? "scaleX(1)" : "scaleX(0)",
+                transformOrigin: "left",
                 animation: i === current ? "progressFill 5s linear forwards" : "none",
               }}
             />
-          </div>
+          </button>
         ))}
       </div>
 
