@@ -133,10 +133,20 @@ export function Product1688({ slug }: { slug: string }) {
             {viewers} {viewers === 1 ? 'person is' : 'people are'} viewing this right now
           </p>
 
+          {/* Delivery estimate */}
+          <p className="mt-1.5 text-xs text-[var(--text-muted)]">
+            Free shipping over $69.99 · Delivered in 7-14 business days
+          </p>
+
           <div className="mt-5 space-y-3 text-sm text-[var(--text-muted)] leading-relaxed">
             <p>{p.description}</p>
             <p>Material: Natural stone · Elastic fit · One size fits most</p>
             <p>Hand-selected. Each piece is unique — natural stone variations are part of its character.</p>
+            {p.category !== "curated-singles" && (
+              <p className="text-[var(--accent)]/80 italic">
+                From the {p.categoryName} — each piece in this collection is individually hand-finished.
+              </p>
+            )}
           </div>
 
           {p.images.length > 1 && (

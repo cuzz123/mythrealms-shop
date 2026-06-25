@@ -1,8 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
-import { GuardianTeaser } from "@/components/layout/GuardianTeaser";
 import { ArrowRight, Gem, Leaf, ShieldCheck } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { PRODUCTS, CATEGORIES, getBestSellers } from "@/lib/1688-products";
