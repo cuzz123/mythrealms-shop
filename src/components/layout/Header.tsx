@@ -9,9 +9,13 @@ import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 
-import { CATEGORIES } from "@/lib/1688-products";
-
-const shopLinks = CATEGORIES.map(c => ({ label: c.name, href: `/collections/${c.slug}` }));
+const shopLinks = [
+  { label: "Copper Braid Collection", href: "/collections/copper-braid-series" },
+  { label: "Golden Luxe Collection", href: "/collections/golden-luxe-series" },
+  { label: "Dark Mineral Collection", href: "/collections/dark-mineral-series" },
+  { label: "Pearl & Crystal", href: "/collections/pearl-crystal-series" },
+  { label: "Curated Singles", href: "/collections/curated-singles" },
+];
 
 const navLinks = [
   { label: "Home", href: "/" },

@@ -7,6 +7,7 @@ import { ArrowRight, Gem, Leaf, ShieldCheck } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { PRODUCTS, CATEGORIES, getBestSellers } from "@/lib/1688-products";
 import { LazyImage } from "@/components/ui/LazyImage";
+import { RecentlyViewed } from "@/components/ui/RecentlyViewed";
 
 export const dynamic = "force-static";
 
@@ -147,6 +148,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ===== RECENTLY VIEWED ===== */}
+      <RecentlyViewed />
     </>
   );
 }

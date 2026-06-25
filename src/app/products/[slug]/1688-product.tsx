@@ -1,9 +1,9 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { PRODUCTS } from "@/lib/1688-products";
 import { formatPrice } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, ZoomIn, ShoppingBag } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn, ShoppingBag, Minus, Plus, Share2 } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import toast from "react-hot-toast";
@@ -14,12 +14,24 @@ export function Product1688({ slug }: { slug: string }) {
   const addItem = useCartStore((s) => s.addItem);
   const openCart = useCartUIStore((s) => s.openCart);
   const [viewers] = useState(() => Math.floor(Math.random() * 13) + 3); // 3-15
+  const [quantity, setQuantity] = useState(1);
 
   // Related products: 4 random singles excluding current
   const related = useMemo(() => {
     const singles = PRODUCTS.filter(p => p.category === 'curated-singles' && p.slug !== slug);
     const shuffled = [...singles].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, 4);
+  }, [slug]);
+
+  // Save to recently viewed
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("mythrealms-recently-viewed");
+      const existing: string[] = raw ? JSON.parse(raw) : [];
+      const filtered = existing.filter(s => s !== slug);
+      const updated = [slug, ...filtered].slice(0, 6);
+      localStorage.setItem("mythrealms-recently-viewed", JSON.stringify(updated));
+    } catch { /* localStorage not available */ }
   }, [slug]);
 
   if (!product) return null;
@@ -35,9 +47,21 @@ export function Product1688({ slug }: { slug: string }) {
       slug: p.slug,
       image: p.image,
       price: p.price,
-    });
-    toast.success("Added to cart!");
+    }, quantity);
+    toast.success(`${quantity > 1 ? `${quantity} items` : "Item"} added to cart!`);
     openCart();
+  }
+
+  function handleShare() {
+    const url = window.location.href;
+    if (navigator.share) {
+      navigator.share({ title: p.name, url }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(url).then(
+        () => toast.success("Link copied!"),
+        () => toast.error("Could not copy link"),
+      );
+    }
   }
 
   return (
@@ -82,7 +106,17 @@ export function Product1688({ slug }: { slug: string }) {
         {/* Product Info */}
         <div>
           <p className="text-xs text-[var(--accent)] uppercase tracking-wider font-medium">{p.categoryName}</p>
-          <h1 className="font-serif text-2xl lg:text-3xl font-bold text-[var(--text)] mt-1.5">{p.name}</h1>
+          <div className="flex items-start gap-2 mt-1.5">
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-[var(--text)] flex-1">{p.name}</h1>
+            <button
+              onClick={handleShare}
+              className="shrink-0 mt-1 w-9 h-9 flex items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/40 transition-colors"
+              aria-label="Share this product"
+              title="Share"
+            >
+              <Share2 className="w-4 h-4" />
+            </button>
+          </div>
 
           {/* Price with compareAt */}
           <div className="mt-4">
@@ -111,7 +145,34 @@ export function Product1688({ slug }: { slug: string }) {
             </div>
           )}
 
-          <div className="mt-6">
+          <div className="mt-6 space-y-3">
+            {/* Quantity selector */}
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-[var(--text-muted)]">Qty</span>
+              <div className="flex items-center border border-[var(--border)] rounded-lg overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                  disabled={quantity <= 1}
+                  className="w-10 h-10 flex items-center justify-center text-[var(--text)] hover:bg-[var(--surface)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  aria-label="Decrease quantity"
+                >
+                  <Minus className="w-3.5 h-3.5" />
+                </button>
+                <span className="w-12 h-10 flex items-center justify-center text-sm font-semibold text-[var(--text)] bg-[var(--surface)]">
+                  {quantity}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setQuantity(q => Math.min(10, q + 1))}
+                  disabled={quantity >= 10}
+                  className="w-10 h-10 flex items-center justify-center text-[var(--text)] hover:bg-[var(--surface)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  aria-label="Increase quantity"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
             <button onClick={handleAddToCart} className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2">
               <ShoppingBag className="w-4 h-4" />
               Add to Cart — {formatPrice(p.price)}

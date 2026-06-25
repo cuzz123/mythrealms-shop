@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { db } from "@/lib/db";
+import { PRODUCTS, CATEGORIES } from "@/lib/1688-products";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
@@ -62,9 +63,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // Static 1688 product entries
+  const staticProducts = PRODUCTS
+    .filter(p => p.isActive)
+    .map((p) => ({
+      url: `${baseUrl}/products/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+
+  // Static 1688 collection entries
+  const staticCollections = CATEGORIES.map((c) => ({
+    url: `${baseUrl}/collections/${c.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
   const [productUrls, collectionUrls, blogUrls] = await Promise.all([
     safeProductUrls(), safeCollectionUrls(), safeBlogUrls(),
   ]);
 
-  return [...staticPages, ...collectionUrls, ...productUrls, ...blogUrls];
+  return [...staticPages, ...staticCollections, ...collectionUrls, ...staticProducts, ...productUrls, ...blogUrls];
 }

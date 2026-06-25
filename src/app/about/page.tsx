@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Gem, Sparkles, Users, Globe, Shield, Award, Clock } from "lucide-react";
 
 export default function AboutPage() {
@@ -10,16 +11,30 @@ export default function AboutPage() {
       </nav>
 
       {/* Hero */}
-      <div className="text-center mb-16">
-        <h1 className="font-serif text-5xl font-bold text-[var(--text)] mb-4">MythRealms</h1>
-        <p className="text-xl text-[var(--accent)] font-serif italic mb-6">Curated Gemstones. Artisan Craftsmanship. Timeless Beauty.</p>
-        <p className="text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-          Every stone carries a story millions of years in the making. From the depths of the earth
-          to your wrist, natural gemstones have been treasured across cultures for their beauty,
-          their energy, and their quiet power. MythRealms brings you hand-selected crystal bracelets
-          — each bead chosen, each piece finished by hand, each design a personal talisman for the
-          modern mystic.
-        </p>
+      <div className="relative rounded-2xl overflow-hidden mb-16">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/1688-hero/单品1.png"
+            alt=""
+            fill
+            sizes="(max-width:768px) 100vw, 896px"
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-transparent to-transparent" />
+        </div>
+        <div className="relative z-10 text-center py-20 px-6">
+          <h1 className="font-serif text-5xl font-bold text-white mb-4">MythRealms</h1>
+          <p className="text-xl text-[var(--accent)] font-serif italic mb-6">Curated Gemstones. Artisan Craftsmanship. Timeless Beauty.</p>
+          <p className="text-white/80 max-w-2xl mx-auto leading-relaxed">
+            Every stone carries a story millions of years in the making. From the depths of the earth
+            to your wrist, natural gemstones have been treasured across cultures for their beauty,
+            their energy, and their quiet power. MythRealms brings you hand-selected crystal bracelets
+            — each bead chosen, each piece finished by hand, each design a personal talisman for the
+            modern mystic.
+          </p>
+        </div>
       </div>
 
       {/* Three Pillars */}
