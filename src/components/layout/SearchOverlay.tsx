@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Search, X, Loader2 } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
+import { PRODUCTS } from "@/lib/1688-products";
 import Link from "next/link";
 
 interface SearchResult {
@@ -52,6 +53,23 @@ export function SearchOverlay() {
       return;
     }
 
+    // Search local 1688 products immediately (synchronous, no loading state)
+    const q = query.toLowerCase();
+    const localMatches: SearchResult[] = PRODUCTS
+      .filter(p => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q))
+      .slice(0, 8)
+      .map(p => ({
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        price: p.price,
+        image: p.image,
+        category: p.categoryName,
+      }));
+
+    // Show local results right away
+    setResults(localMatches);
+
     // Cancel any in-flight request from a previous keystroke
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
@@ -67,20 +85,25 @@ export function SearchOverlay() {
           { signal: controller.signal }
         );
         const data = await res.json();
-        setResults(
-          data.products.map((p: any) => ({
-            id: p.id,
-            name: p.name,
-            slug: p.slug,
-            price: p.variants[0]?.price || 0,
-            image: p.images[0],
-            category: p.category?.name || "",
-          }))
-        );
+        const apiResults: SearchResult[] = data.products.map((p: any) => ({
+          id: p.id,
+          name: p.name,
+          slug: p.slug,
+          price: p.variants[0]?.price || 0,
+          image: p.images[0],
+          category: p.category?.name || "",
+        }));
+        // Merge: local first, then API results (deduplicate by slug)
+        const localSlugs = new Set(localMatches.map(r => r.slug));
+        const merged = [...localMatches, ...apiResults.filter((r: SearchResult) => !localSlugs.has(r.slug))];
+        setResults(merged);
         setSearchError(false);
       } catch (err: any) {
         if (err.name === "AbortError") return; // silently ignore cancelled requests
-        setResults([]);
+        // Keep local results on API error
+        if (localMatches.length === 0) {
+          setResults([]);
+        }
         setSearchError(true);
       } finally {
         setLoading(false);

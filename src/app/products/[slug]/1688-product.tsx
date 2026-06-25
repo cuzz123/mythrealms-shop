@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { PRODUCTS } from "@/lib/1688-products";
 import { formatPrice } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, ZoomIn, ShoppingBag } from "lucide-react";
+import { LazyImage } from "@/components/ui/LazyImage";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import toast from "react-hot-toast";
 
@@ -46,7 +46,7 @@ export function Product1688({ slug }: { slug: string }) {
         {/* Gallery */}
         <div>
           <div className="relative aspect-square rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
-            <Image src={mainImg} alt={p.name} fill sizes="(max-width:1024px) 100vw, 50vw" priority className="object-cover" />
+            <LazyImage src={mainImg} alt={p.name} fill sizes="(max-width:1024px) 100vw, 50vw" priority className="object-cover" containerClassName="absolute inset-0" />
             {images.length > 1 && (
               <>
                 <button onClick={() => setActiveIdx(i => i > 0 ? i-1 : images.length-1)} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors">
@@ -63,7 +63,7 @@ export function Product1688({ slug }: { slug: string }) {
             <div className="grid grid-cols-6 gap-2 mt-3">
               {images.map((img, i) => (
                 <button key={i} onClick={() => setActiveIdx(i)} className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-colors ${i === activeIdx ? 'border-[var(--accent)]' : 'border-transparent hover:border-[var(--border)]'}`}>
-                  <Image src={img} alt={`${p.name} ${i+1}`} fill sizes="80px" className="object-cover" />
+                  <LazyImage src={img} alt={`${p.name} ${i+1}`} fill sizes="80px" className="object-cover" containerClassName="absolute inset-0" />
                 </button>
               ))}
             </div>

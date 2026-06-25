@@ -96,8 +96,8 @@ export function HeroCarousel() {
               <Link href={slides[current].href} className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
                 {slides[current].cta}<ChevronRight className="w-4 h-4" />
               </Link>
-              <Link href="/guardian-quiz" className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 border border-white/30 text-white rounded-full font-semibold text-sm hover:bg-white/10 transition">
-                Find Your Stone<ChevronRight className="w-4 h-4" />
+              <Link href="/collections/curated-singles" className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 border border-white/30 text-white rounded-full font-semibold text-sm hover:bg-white/10 transition">
+                Browse All Singles<ChevronRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

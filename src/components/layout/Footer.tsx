@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { NewsletterForm } from "@/components/layout/NewsletterForm";
 
 const exploreLinks = [
   { label: "Copper Braid Collection", href: "/collections/copper-braid-series" },
@@ -138,23 +139,26 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 — Contact */}
+          {/* Column 4 — Contact & Newsletter */}
           <div>
             <h3 className="mb-5 font-serif text-sm font-semibold tracking-wide text-white uppercase">
-              Contact
+              Stay Connected
             </h3>
-            <div className="space-y-3 text-sm text-[#B0A590]">
+            <div className="space-y-4 text-sm text-[#B0A590]">
               <p>
-                Have questions about our gemstone collections or need guidance on
-                finding the right stone for you? We are here to help.
+                Early access to new collections, stone stories, and
+                subscriber-only offers — no spam, just the good stuff.
               </p>
-              <a
-                href="mailto:support@mythrealms.com"
-                className="inline-block text-white transition-colors hover:text-[var(--accent)]"
-              >
-                support@mythrealms.com
-              </a>
-              <p>Mon &ndash; Fri, 9am &ndash; 6pm EST</p>
+              <NewsletterForm />
+              <div className="pt-2 space-y-2">
+                <a
+                  href="mailto:support@mythrealms.com"
+                  className="inline-block text-white transition-colors hover:text-[var(--accent)]"
+                >
+                  support@mythrealms.com
+                </a>
+                <p>Mon &ndash; Fri, 9am &ndash; 6pm EST</p>
+              </div>
             </div>
           </div>
         </div>
