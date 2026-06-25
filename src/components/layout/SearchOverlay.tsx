@@ -208,9 +208,24 @@ export function SearchOverlay() {
                     ))}
                   </div>
                 </div>
+              ) : loading && results.length === 0 ? (
+                /* Loading skeleton while fetching API results */
+                <div className="p-4 space-y-3">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <div key={i} className="flex items-center gap-4 animate-pulse">
+                      <div className="w-12 h-12 rounded-lg bg-[var(--border)] flex-shrink-0" />
+                      <div className="flex-1 space-y-2">
+                        <div className="h-4 bg-[var(--border)] rounded w-3/4" />
+                        <div className="h-3 bg-[var(--border)] rounded w-1/2" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               ) : results.length === 0 && !loading ? (
                 <div className="p-6 text-center text-sm text-[var(--text-muted)]">
-                  No results found for &ldquo;{query}&rdquo;
+                  {searchError
+                    ? "Could not search right now. Please try again."
+                    : <>No results found for &ldquo;{query}&rdquo;</>}
                 </div>
               ) : (
                 results.map((result) => (
@@ -245,6 +260,15 @@ export function SearchOverlay() {
                     <Search className="w-4 h-4 text-[var(--text-muted)] flex-shrink-0" />
                   </Link>
                 ))
+              )}
+              {/* Show results + subtle loading indicator when API is still fetching */}
+              {loading && results.length > 0 && (
+                <div className="px-5 py-2 border-t border-[var(--border)]">
+                  <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                    Searching...
+                  </div>
+                </div>
               )}
             </div>
 

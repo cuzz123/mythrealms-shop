@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { Button } from "@/components/ui/Button";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Package, Truck, Home } from "lucide-react";
 import { SuccessTracker } from "./tracker";
 import { safeJsonParse } from "@/lib/utils";
 
@@ -34,6 +34,49 @@ export default async function CheckoutSuccessPage({
         <Link href="/collections/curated-singles"><Button variant="primary">Continue Shopping</Button></Link>
         <Link href="/"><Button variant="outline">Back to Home</Button></Link>
       </div>
+
+      {/* What happens next */}
+      <div className="mt-12 text-left">
+        <h2 className="font-serif text-xl font-semibold text-[var(--text)] mb-6 text-center">
+          What Happens Next
+        </h2>
+        <div className="space-y-5">
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--accent)]/10 flex items-center justify-center">
+              <Package className="w-5 h-5 text-[var(--accent)]" />
+            </div>
+            <div>
+              <p className="font-medium text-[var(--text)] text-sm">We prepare your order</p>
+              <p className="text-sm text-[var(--text-secondary)] mt-0.5">
+                Our artisans carefully inspect and package each piece. This takes 2-3 business days.
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--accent)]/10 flex items-center justify-center">
+              <Truck className="w-5 h-5 text-[var(--accent)]" />
+            </div>
+            <div>
+              <p className="font-medium text-[var(--text)] text-sm">We ship with tracking</p>
+              <p className="text-sm text-[var(--text-secondary)] mt-0.5">
+                Once shipped, you will receive an email with a tracking number to follow your package.
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--accent)]/10 flex items-center justify-center">
+              <Home className="w-5 h-5 text-[var(--accent)]" />
+            </div>
+            <div>
+              <p className="font-medium text-[var(--text)] text-sm">It arrives at your door</p>
+              <p className="text-sm text-[var(--text-secondary)] mt-0.5">
+                Delivery typically takes 7-14 business days within the United States. International orders may vary.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {orderId && <SuccessTracker orderId={orderId} value={trackValue} items={trackItems} />}
     </div>
   );

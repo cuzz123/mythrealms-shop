@@ -32,6 +32,10 @@ export const metadata: Metadata = {
   title: "MythRealms — Natural Stone Bracelets, Curated for the Modern Mystic",
   description: "Hand-selected crystal bracelets. Amethyst, rose quartz, black obsidian, moonstone, and tiger's eye. Artisan finishes. Pieces that feel like they've always belonged to you.",
   keywords: ["natural stone bracelets", "crystal bracelets", "amethyst", "rose quartz", "black obsidian", "moonstone", "tigers eye", "gemstone jewelry"],
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-icon.png",
+  },
   verification: {
     google: "uBe2lk1CCRJxdUU4b1HoJkR9KbnKodSifkNbU1XtLgs",
   },

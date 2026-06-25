@@ -217,7 +217,7 @@ export function Header() {
 
       {/* Mobile navigation dropdown */}
       {mobileMenuOpen && (
-        <div className="animate-fade-in border-b border-[var(--border)] bg-[var(--surface)] lg:hidden">
+        <div className="animate-slide-down border-b border-[var(--border)] bg-[var(--surface)] lg:hidden">
           <nav
             className="flex flex-col gap-0.5 px-4 py-3"
             aria-label="Mobile navigation"
