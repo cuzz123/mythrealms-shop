@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { PRODUCTS } from "@/lib/1688-products";
 import { formatPrice } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, ZoomIn, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info, Heart, Copy, Check, Star, MessageSquare } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info, Heart, Copy, Check, Star, MessageSquare, Loader2 } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
@@ -19,6 +19,8 @@ export function Product1688({ slug }: { slug: string }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [justToggledWishlist, setJustToggledWishlist] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [addToCartState, setAddToCartState] = useState<"idle" | "adding" | "added">("idle");
+  const [pulseWishlist, setPulseWishlist] = useState(false);
 
   // Wishlist
   const toggleWishlistItem = useWishlistStore((s) => s.toggleItem);
@@ -50,6 +52,7 @@ export function Product1688({ slug }: { slug: string }) {
   const hasCompare = p.compareAt && p.compareAt > p.price;
 
   function handleAddToCart() {
+    setAddToCartState("adding");
     addItem({
       id: p.id,
       name: p.name,
@@ -57,8 +60,12 @@ export function Product1688({ slug }: { slug: string }) {
       image: p.image,
       price: p.price,
     }, quantity);
-    toast.success(`${quantity > 1 ? `${quantity} items` : "Item"} added to cart!`);
-    openCart();
+    setTimeout(() => {
+      setAddToCartState("added");
+      toast.success(`${quantity > 1 ? `${quantity} items` : "Item"} added to cart!`);
+      openCart();
+      setTimeout(() => setAddToCartState("idle"), 1000);
+    }, 400);
   }
 
   function handleShare() {
@@ -82,7 +89,9 @@ export function Product1688({ slug }: { slug: string }) {
       price: p.price,
     });
     setJustToggledWishlist(true);
+    setPulseWishlist(true);
     setTimeout(() => setJustToggledWishlist(false), 300);
+    setTimeout(() => setPulseWishlist(false), 600);
     toast.success(wishlisted ? "Removed from wishlist" : "Added to wishlist!");
   }
 
@@ -147,7 +156,7 @@ export function Product1688({ slug }: { slug: string }) {
                 wishlisted
                   ? "border-[var(--sale)] text-[var(--sale)] bg-[var(--sale)]/10"
                   : "border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--sale)] hover:border-[var(--sale)]/40"
-              } ${justToggledWishlist ? "scale-125" : "scale-100"}`}
+              } ${justToggledWishlist ? "scale-125" : "scale-100"} ${pulseWishlist ? "animate-heart-pulse" : ""}`}
               aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
               title={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
             >
@@ -256,9 +265,18 @@ export function Product1688({ slug }: { slug: string }) {
                 </button>
               </div>
             </div>
-            <button onClick={handleAddToCart} className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2">
-              <ShoppingBag className="w-4 h-4" />
-              Add to Cart — {formatPrice(p.price)}
+            <button
+              onClick={handleAddToCart}
+              disabled={addToCartState !== "idle"}
+              className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {addToCartState === "adding" ? (
+                <><Loader2 className="w-4 h-4 animate-spin" /> Adding...</>
+              ) : addToCartState === "added" ? (
+                <><Check className="w-4 h-4" /> Added!</>
+              ) : (
+                <><ShoppingBag className="w-4 h-4" /> Add to Cart — {formatPrice(p.price)}</>
+              )}
             </button>
           </div>
 

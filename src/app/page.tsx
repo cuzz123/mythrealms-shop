@@ -3,9 +3,10 @@ import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { ArrowRight, Gem, Leaf, ShieldCheck } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
-import { PRODUCTS, CATEGORIES, getBestSellers } from "@/lib/1688-products";
+import { PRODUCTS, CATEGORIES } from "@/lib/1688-products";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { RecentlyViewed } from "@/components/ui/RecentlyViewed";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const dynamic = "force-static";
 
@@ -20,7 +21,7 @@ export default function HomePage() {
 
 
       {/* ===== SHOP BY COLLECTION ===== */}
-      <section className="py-14 bg-[var(--surface)]">
+      <ScrollReveal as="section" className="py-14 bg-[var(--surface)]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-8">
             <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">New Collection</span>
@@ -43,12 +44,12 @@ export default function HomePage() {
             })}
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
       <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
 
       {/* ===== FEATURED SINGLES ===== */}
-      <section className="py-14 bg-[#1A1816]">
+      <ScrollReveal as="section" className="py-14 bg-[#1A1816]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">
             <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Curated Singles</h2>
@@ -69,12 +70,12 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
       <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
 
       {/* ===== WHY MYTHREALMS ===== */}
-      <section className="py-14 bg-[#0A0808]">
+      <ScrollReveal as="section" className="py-14 bg-[#0A0808]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Why MythRealms</span>
           <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5] mb-10">Crafted with Intention</h2>
@@ -102,12 +103,12 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
       <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
 
       {/* ===== STYLED BY YOU ===== */}
-      <section className="py-14 bg-[var(--surface)]">
+      <ScrollReveal as="section" className="py-14 bg-[var(--surface)]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Styled by You</span>
           <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5] mb-2">Share Your Look</h2>
@@ -125,12 +126,12 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
       <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
 
       {/* ===== NEWSLETTER ===== */}
-      <section className="py-12 bg-[#1A1816]">
+      <ScrollReveal as="section" className="py-12 bg-[#1A1816]">
         <div className="max-w-[540px] mx-auto px-6 text-center">
           <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Join the Circle</h2>
           <p className="text-[#A89880] text-sm mb-6">Early access to new stone collections, styling guides, and exclusive subscriber-only discounts.</p>
@@ -141,9 +142,7 @@ export default function HomePage() {
             <span>30-Day Returns</span>
           </div>
         </div>
-      </section>
-
-      {/* ===== RECENTLY VIEWED ===== */}
+      </ScrollReveal>
       <RecentlyViewed />
     </>
   );

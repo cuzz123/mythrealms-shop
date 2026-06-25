@@ -15,10 +15,11 @@ export function LazyImage({
     mounted.current = true;
     setReady(false);
     const img = new window.Image();
-    img.onload = () => { if (mounted.current) setReady(true); };
-    img.onerror = () => { if (mounted.current) setReady(true); };
+    const timeout = setTimeout(() => { if (mounted.current) setReady(true); }, 10000);
+    img.onload = () => { clearTimeout(timeout); if (mounted.current) setReady(true); };
+    img.onerror = () => { clearTimeout(timeout); if (mounted.current) setReady(true); };
     img.src = src;
-    return () => { mounted.current = false; };
+    return () => { mounted.current = false; clearTimeout(timeout); };
   }, [src]);
 
   return (

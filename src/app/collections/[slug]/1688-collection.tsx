@@ -19,7 +19,7 @@ export function Collection1688({ slug }: { slug: string }) {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((p, i) => (
-          <Link key={p.slug} href={`/products/${p.slug}`} className="group" aria-label={`View ${p.name}`}>
+          <Link key={p.slug} href={`/products/${p.slug}`} className="group animate-slide-up" style={{ animationDelay: `${i * 50}ms`, animationFillMode: "backwards" }} aria-label={`View ${p.name}`}>
             <div className="img-container aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
               <Image
                 src={p.image}

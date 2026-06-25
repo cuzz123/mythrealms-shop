@@ -14,7 +14,7 @@ export default function AboutPage() {
       <div className="relative rounded-2xl overflow-hidden mb-16">
         <div className="absolute inset-0">
           <Image
-            src="/images/1688-hero/单品1.png"
+            src="/images/1688-hero/单品1.webp"
             alt=""
             fill
             sizes="(max-width:768px) 100vw, 896px"
