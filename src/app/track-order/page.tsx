@@ -72,8 +72,17 @@ export default function TrackOrderPage() {
             <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="Order email address" required className={inputClass} />
           </div>
         </div>
-        <Button variant="primary" size="lg" type="submit" className="w-full">
-          <Search className="w-4 h-4 mr-2" /> Track Package
+        <Button variant="primary" size="lg" type="submit" className="w-full" disabled={loading}>
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              Searching...
+            </span>
+          ) : (
+            <>
+              <Search className="w-4 h-4 mr-2" /> Track Package
+            </>
+          )}
         </Button>
       </form>
 

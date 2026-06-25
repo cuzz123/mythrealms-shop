@@ -47,6 +47,24 @@ const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.ver
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+
+  // Check 1688 static categories first
+  const cat1688 = CATEGORIES.find(c => c.slug === slug);
+  if (cat1688) {
+    const desc = cat1688.description?.slice(0, 155) || `Shop handcrafted ${cat1688.name} — gemstone crystal bracelets for the modern mystic.`;
+    return {
+      title: `${cat1688.name} — Crystal Bracelets | MythRealms`,
+      description: desc,
+      alternates: { canonical: `${SITE_URL}/collections/${slug}` },
+      openGraph: {
+        title: `${cat1688.name} — MythRealms`,
+        description: desc,
+        url: `${SITE_URL}/collections/${slug}`,
+        type: "website",
+      },
+    };
+  }
+
   const category = await db.category.findUnique({ where: { slug } });
   if (!category) return { title: "Collection Not Found — MythRealms" };
   const desc = category.description?.slice(0, 155) || `Shop handcrafted ${category.name} — gemstone crystal bracelets for the modern mystic.`;
@@ -248,15 +266,28 @@ export default async function CollectionPage({
 
       {totalPages > 1 && (
         <div className="flex justify-center gap-1 py-12">
-          {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => {
+          {Array.from({ length: Math.min(totalPages, 20) }, (_, i) => {
             const pageNum = i + 1;
+            // Preserve all active filter/search params in pagination links
+            const pageParams = new URLSearchParams();
+            pageParams.set("page", String(pageNum));
+            pageParams.set("sort", sort);
+            if (stones.length) pageParams.set("stone", stones.join(","));
+            if (intentions.length) pageParams.set("intention", intentions.join(","));
+            if (materials.length) pageParams.set("material", materials.join(","));
+            if (priceMin !== undefined) pageParams.set("priceMin", String(priceMin));
+            if (priceMax !== undefined) pageParams.set("priceMax", String(priceMax));
+            const qs = pageParams.toString();
             return (
-              <Link key={pageNum} href={`/collections/${slug}?page=${pageNum}&sort=${sort}`}
+              <Link key={pageNum} href={`/collections/${slug}?${qs}`}
                 className={`min-w-[40px] h-10 flex items-center justify-center rounded-full text-sm font-medium ${pageNum === page ? "bg-[var(--text)] text-white" : "border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--text)]"}`}>
                 {pageNum}
               </Link>
             );
           })}
+          {totalPages > 20 && (
+            <span className="min-w-[40px] h-10 flex items-center justify-center text-sm text-[var(--text-muted)]">...</span>
+          )}
         </div>
       )}
     </div>

@@ -25,7 +25,7 @@ export default async function BlogPage() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
         {posts.map((post) => (
           <Link key={post.id} href={`/blog/${post.slug}`} className="group bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1">
-            <div className="aspect-[3/2] overflow-hidden bg-[var(--border-light)]">
+            <div className="aspect-[3/2] overflow-hidden bg-[var(--border-light)] relative">
               {post.image ? (
                 <Image src={post.image} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" unoptimized={post.image.startsWith("http")} />
               ) : (

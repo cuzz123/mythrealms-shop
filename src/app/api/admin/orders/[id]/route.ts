@@ -1,3 +1,4 @@
+// GET  /api/admin/orders/[id] — Read single order detail
 // PATCH /api/admin/orders/[id] — Update order status, tracking, etc.
 
 import { NextRequest, NextResponse } from "next/server";
@@ -10,6 +11,30 @@ const VALID_TRANSITIONS: Record<string, string[]> = {
   SHIPPED: ["DELIVERED", "REFUNDED"],
   DELIVERED: ["REFUNDED"],
 };
+
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth();
+  if (!session || (session.user as any)?.role !== "ADMIN") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const { id } = await params;
+  const order = await db.order.findUnique({
+    where: { id },
+    include: {
+      items: {
+        include: {
+          product: { select: { name: true, slug: true, images: true } },
+          variant: { select: { name: true } },
+        },
+      },
+    },
+  });
+  if (!order) return NextResponse.json({ error: "Order not found" }, { status: 404 });
+  return NextResponse.json(order);
+}
 
 export async function PATCH(
   request: NextRequest,

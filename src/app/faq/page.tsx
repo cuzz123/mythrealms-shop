@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import Link from "next/link";
+import { Plus, Minus, HelpCircle } from "lucide-react";
 
 const faqs = [
   { q:"How long does shipping take?", a:"Standard shipping takes 7-20 business days. Express shipping via DHL takes 6-8 business days. US orders typically arrive within 8-14 business days.", cat:"shipping" },
@@ -36,7 +37,7 @@ export default function FAQPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
       <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-4">
-        <a href="/" className="hover:text-[var(--text)]">Home</a><span>/</span><span className="text-[var(--text)]">FAQs</span>
+        <Link href="/" className="hover:text-[var(--text)]">Home</Link><span>/</span><span className="text-[var(--text)]">FAQs</span>
       </nav>
 
       <div className="text-center mb-10">
@@ -63,6 +64,12 @@ export default function FAQPage() {
             {openIndex===i && <div className="px-5 pb-5 text-sm text-[var(--text-secondary)] leading-relaxed">{faq.a}</div>}
           </div>
         ))}
+        {filtered.length === 0 && (
+          <div className="text-center py-12">
+            <HelpCircle className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-3" />
+            <p className="text-[var(--text-muted)]">No FAQs match this filter.</p>
+          </div>
+        )}
       </div>
 
       <div className="text-center mt-16 pt-12 border-t border-[var(--border)]">
