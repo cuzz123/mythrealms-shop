@@ -104,7 +104,7 @@ export default function AboutPage() {
         <p className="text-[var(--text-secondary)] mb-6">The bracelet that speaks to you is out there — hand-selected, artisan-finished, and ready to ship.</p>
         <div className="flex justify-center gap-4">
           <Link href="/collections/curated-singles" className="px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Explore the Collection</Link>
-          <Link href="/products" className="px-8 py-3 border border-[var(--border)] text-[var(--text)] rounded-full font-semibold hover:border-[var(--accent)] transition">Shop All</Link>
+          <Link href="/collections/curated-singles" className="px-8 py-3 border border-[var(--border)] text-[var(--text)] rounded-full font-semibold hover:border-[var(--accent)] transition">Shop All</Link>
         </div>
       </div>
     </div>

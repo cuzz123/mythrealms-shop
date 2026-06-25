@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { X, Minus, Plus, Trash2, Mail } from "lucide-react";
@@ -25,6 +25,9 @@ export function CartDrawer() {
   const [saveEmail, setSaveEmail] = useState("");
   const [saved, setSaved] = useState(false);
 
+  // Focus management: return focus to cart button on close
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
   // Close on Escape key — prompt save when cart has items
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -42,9 +45,17 @@ export function CartDrawer() {
 
   useEffect(() => {
     if (isOpen) {
+      // Save the currently focused element (the cart toggle button)
+      previousFocusRef.current = document.activeElement as HTMLElement;
       document.addEventListener("keydown", handleKeyDown);
       // Prevent body scroll while drawer is open
       document.body.style.overflow = "hidden";
+    } else {
+      // Return focus to the cart button when drawer closes
+      if (previousFocusRef.current) {
+        setTimeout(() => previousFocusRef.current?.focus(), 0);
+        previousFocusRef.current = null;
+      }
     }
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
@@ -60,16 +71,23 @@ export function CartDrawer() {
   );
   const hasFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
 
-  // Recommended products
+  // Recommended products — ref-based cache so we only fetch once
   const [recommended, setRecommended] = useState<any[]>([]);
+  const recommendedCacheRef = useRef<any[] | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
+    if (recommendedCacheRef.current) {
+      setRecommended(recommendedCacheRef.current);
+      return;
+    }
     fetch("/api/products?featured=true&limit=3")
       .then((r) => r.json())
       .then((data) => {
         if (data.products) {
-          setRecommended(data.products.slice(0, 3));
+          const items = data.products.slice(0, 3);
+          recommendedCacheRef.current = items;
+          setRecommended(items);
         }
       })
       .catch(() => {});

@@ -51,7 +51,7 @@ export default function ContactPage() {
         {[
           { icon: Mail, title: "Email", info: "support@mythrealms.com", desc: "We reply within 24 hours" },
           { icon: Clock, title: "Hours", info: "Mon–Fri 9:00–18:00 (EST)", desc: "Weekend inquiries replied on Monday" },
-          { icon: MapPin, title: "Location", info: "Inspired by China · Worldwide", desc: "Ships to 80+ countries" },
+          { icon: MapPin, title: "Location", info: "Inspired by China · Worldwide", desc: "Ships to 36 countries" },
         ].map((item) => (
           <div key={item.title} className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 text-center">
             <item.icon className="w-8 h-8 text-[var(--accent)] mx-auto mb-3" />

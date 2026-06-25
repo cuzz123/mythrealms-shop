@@ -18,7 +18,7 @@ import { PRODUCTS as P1688 } from "@/lib/1688-products";
 import { Star, Play, ShieldCheck } from "lucide-react";
 import { imageUrl, absoluteImageUrl } from "@/lib/images";
 
-export const dynamic = "force-dynamic"
+export const revalidate = 3600
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;

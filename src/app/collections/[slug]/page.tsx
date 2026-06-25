@@ -42,7 +42,6 @@ function StoneQuickFilters({ slug, currentStone }: { slug: string; currentStone:
   );
 }
 
-export const dynamic = "force-dynamic"
 
 const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
 

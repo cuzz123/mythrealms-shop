@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { Search } from "lucide-react";
 import type { Metadata } from "next";
+import { PRODUCTS as P1688 } from "@/lib/1688-products";
 
 export const dynamic = "force-dynamic";
 
@@ -53,16 +54,45 @@ export default async function SearchPage({
       orderBy: { sortOrder: "asc" },
     });
 
-    total = results.length;
+    // Merge 1688 static products
+    const q = query.toLowerCase();
+    const p1688Matches = P1688.filter(
+      p => p.isActive && (
+        p.name.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.categoryName.toLowerCase().includes(q)
+      )
+    ).map(p => ({
+      ...p,
+      category: { name: p.categoryName, slug: p.category },
+      variants: [{ price: p.price }],
+      avgRating: p.rating,
+      reviewCount: p.reviewCount,
+      images: p.images,
+      id: p.id,
+      slug: p.slug,
+      name: p.name,
+      description: p.description,
+      isActive: p.isActive,
+      inStock: p.inStock,
+      isBestSeller: p.isBestSeller,
+      isNew: p.isNew,
+      tag: p.tag,
+      comparePrice: p.compareAt,
+    }));
 
-    products = results.map((p) => ({
+    const merged = [...results.map((p) => ({
       ...p,
       images: JSON.parse(p.images as string),
       avgRating: p.reviews.length
         ? p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length
         : 0,
       reviewCount: p.reviews.length,
-    }));
+    })), ...p1688Matches];
+
+    total = merged.length;
+
+    products = merged;
   }
 
   const popularSearches = [

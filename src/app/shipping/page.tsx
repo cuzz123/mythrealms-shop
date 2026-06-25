@@ -29,7 +29,7 @@ export default function ShippingPage() {
         </div>
         <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 text-center">
           <Truck className="w-6 h-6 text-[var(--accent)] mx-auto mb-3" />
-          <h3 className="font-semibold text-[var(--text)] mb-1">80+ Countries</h3>
+          <h3 className="font-semibold text-[var(--text)] mb-1">36 Countries</h3>
           <p className="text-sm text-[var(--text-muted)]">We ship to most destinations worldwide</p>
         </div>
         <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 text-center">

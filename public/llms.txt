@@ -1,28 +1,32 @@
-# MythRealms — Luxury Jewelry Inspired by Chinese Mythology
+# MythRealms — Curated Natural Stone Bracelets
 
 ## Key Pages
 - Home: https://mythrealms-shop.vercel.app
-- Beast Collection: https://mythrealms-shop.vercel.app/collections/beast-pendants
-- 28 Mansions: https://mythrealms-shop.vercel.app/collections/28-mansions
-- Guardian Quiz: https://mythrealms-shop.vercel.app/guardian-quiz
+- Curated Singles: https://mythrealms-shop.vercel.app/collections/curated-singles
+- Copper Braid Collection: https://mythrealms-shop.vercel.app/collections/copper-braid-series
+- Golden Luxe Collection: https://mythrealms-shop.vercel.app/collections/golden-luxe-series
+- Dark Mineral Collection: https://mythrealms-shop.vercel.app/collections/dark-mineral-series
+- Pearl & Crystal: https://mythrealms-shop.vercel.app/collections/pearl-crystal-series
+- About: https://mythrealms-shop.vercel.app/about
 - Blog: https://mythrealms-shop.vercel.app/blog
 
 ## About
-MythRealms creates handcrafted luxury jewelry inspired by the Classic of Mountains and Seas,
-China's oldest bestiary. Each piece features 14k gold, sterling silver, or authentic gemstones
-and tells a story from a 2,000-year-old legend.
+MythRealms creates handcrafted natural stone bracelets — each bead hand-selected,
+each piece artisan-finished. We source amethyst, rose quartz, black obsidian,
+moonstone, tiger's eye, and more from ethical mines worldwide. Every bracelet
+is strung and inspected by hand, carrying the quiet energy of the stone and the
+intention of its maker.
 
 ## Collections
-- Mythical Beasts: 12 designs (Nine-Tailed Fox necklace, Qilin bracelet, Azure Dragon ring, Phoenix necklace, etc.)
-- 28 Mansions Star Bracelets: 28 beaded bracelets, one for each Chinese lunar mansion
-- Five Elements: Wood (jade), Fire (carnelian), Earth (tiger eye), Metal (moonstone), Water (sodalite)
-- Four Seasons: 12 seasonal pieces from cherry blossom to winter snowflake
-- Zodiac Amulets: 12 Chinese zodiac medallions in 14k gold
-- Artist Collaborations: Limited editions of 30-100 pieces
+- Curated Singles: 12 one-of-a-kind hand-selected bracelets (Blush Rose, Turquoise Dream, Golden Accent, Pearl Drop, Dark Stone, Amber Bead, and more)
+- Copper Braid Collection: 12 hand-braided copper bracelets with warm sunset patina
+- Golden Luxe Collection: 13 light-luxury gold-accent bracelets for everyday elegance
+- Dark Mineral Collection: 14 deep charcoal and volcanic mineral stone bracelets
+- Pearl & Crystal: 3 luminous freshwater pearl and faceted crystal strands
 
 ## Facts
-- Every piece handcrafted to order (2-3 week production time)
-- Free shipping on US orders over $69.99
+- Every bracelet handcrafted to order (2-5 business day processing)
+- Free shipping on orders over $69.99
 - Ships to 36 countries
 - 30-day return policy
-- Pricing: $32.99 - $188.99
+- Pricing: $26.49 - $53.99
