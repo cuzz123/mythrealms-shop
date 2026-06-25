@@ -51,10 +51,15 @@ export default function CartPage() {
   if (isEmpty) {
     return (
       <div className="max-w-2xl mx-auto px-6 py-20 text-center">
-        <ShoppingBag className="w-16 h-16 text-[var(--text-muted)] mx-auto mb-6" />
-        <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Your Cart is Empty</h1>
-        <p className="text-[var(--text-muted)] mb-8">Looks like you haven&apos;t added anything yet. Browse our curated collections to find your perfect piece.</p>
-        <Link href="/collections/curated-singles"><Button variant="primary" size="lg">Start Exploring</Button></Link>
+        <div className="w-20 h-20 rounded-full bg-[#1A1812] border border-[#3A3220] flex items-center justify-center mx-auto mb-6">
+          <ShoppingBag className="w-9 h-9 text-[var(--accent)]" />
+        </div>
+        <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Your cart is waiting</h1>
+        <p className="text-[var(--text-muted)] mb-8 max-w-sm mx-auto leading-relaxed">Fill it with hand-selected stones — each piece is individually chosen for its unique character and energy.</p>
+        <Link href="/collections/curated-singles" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all">
+          <ShoppingBag className="w-4 h-4" />
+          Browse Curated Singles
+        </Link>
       </div>
     );
   }

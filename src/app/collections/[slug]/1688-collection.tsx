@@ -7,9 +7,9 @@ import { formatPrice } from "@/lib/utils";
 export function Collection1688({ slug }: { slug: string }) {
   const cat = CATEGORIES.find(c => c.slug === slug);
   const products = PRODUCTS.filter(p => p.category === slug);
-  
+
   if (!cat || products.length === 0) return null;
-  
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
       <div className="mb-10">
@@ -29,10 +29,20 @@ export function Collection1688({ slug }: { slug: string }) {
                 {...(i < 3 ? { priority: true } : { loading: "lazy" })}
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
+              {p.tag && (
+                <span className={`absolute top-3 left-3 text-[10px] font-semibold px-2 py-0.5 rounded-full ${p.tag === 'New' ? 'bg-[var(--accent)]/20 text-[var(--accent)]' : 'bg-white/80 text-[#1A1816]'}`}>
+                  {p.tag}
+                </span>
+              )}
             </div>
             <div className="mt-2.5 px-1">
               <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{p.name}</h4>
-              <p className="text-xs text-[var(--text-muted)] mt-0.5">{formatPrice(p.price)}</p>
+              <div className="flex items-baseline gap-2 mt-0.5">
+                <span className="text-xs font-semibold text-[var(--text)]">{formatPrice(p.price)}</span>
+                {p.compareAt && p.compareAt > p.price && (
+                  <span className="text-[10px] text-[var(--text-muted)] line-through">{formatPrice(p.compareAt)}</span>
+                )}
+              </div>
             </div>
           </Link>
         ))}

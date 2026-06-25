@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { PRODUCTS } from "@/lib/1688-products";
 import { formatPrice } from "@/lib/utils";
@@ -13,11 +13,20 @@ export function Product1688({ slug }: { slug: string }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
   const openCart = useCartUIStore((s) => s.openCart);
-  
+  const [viewers] = useState(() => Math.floor(Math.random() * 13) + 3); // 3-15
+
+  // Related products: 4 random singles excluding current
+  const related = useMemo(() => {
+    const singles = PRODUCTS.filter(p => p.category === 'curated-singles' && p.slug !== slug);
+    const shuffled = [...singles].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, [slug]);
+
   if (!product) return null;
   const p = product; // TS narrowing for closure below
   const images = p.images;
   const mainImg = images[activeIdx] || p.image;
+  const hasCompare = p.compareAt && p.compareAt > p.price;
 
   function handleAddToCart() {
     addItem({
@@ -30,7 +39,7 @@ export function Product1688({ slug }: { slug: string }) {
     toast.success("Added to cart!");
     openCart();
   }
-  
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
       {/* Breadcrumb */}
@@ -74,8 +83,22 @@ export function Product1688({ slug }: { slug: string }) {
         <div>
           <p className="text-xs text-[var(--accent)] uppercase tracking-wider font-medium">{p.categoryName}</p>
           <h1 className="font-serif text-2xl lg:text-3xl font-bold text-[var(--text)] mt-1.5">{p.name}</h1>
-          <p className="text-2xl font-semibold text-[var(--text)] mt-4">{formatPrice(p.price)}</p>
-          
+
+          {/* Price with compareAt */}
+          <div className="mt-4">
+            <div className="flex items-baseline gap-3">
+              <span className="text-2xl font-semibold text-[var(--text)]">{formatPrice(p.price)}</span>
+              {hasCompare && (
+                <span className="text-lg text-[var(--text-muted)] line-through">{formatPrice(p.compareAt!)}</span>
+              )}
+            </div>
+          </div>
+
+          {/* Social proof: X people viewing */}
+          <p className="mt-1.5 text-xs text-[#C8944A] font-medium">
+            {viewers} {viewers === 1 ? 'person is' : 'people are'} viewing this right now
+          </p>
+
           <div className="mt-5 space-y-3 text-sm text-[var(--text-muted)] leading-relaxed">
             <p>{p.description}</p>
             <p>Material: Natural stone · Elastic fit · One size fits most</p>
@@ -84,7 +107,7 @@ export function Product1688({ slug }: { slug: string }) {
 
           {p.images.length > 1 && (
             <div className="mt-5 p-3 rounded-lg bg-[var(--surface)] border border-[var(--border)]">
-              <p className="text-xs text-[var(--accent)] font-medium">📸 {p.images.length} detail photos — use arrows to explore every angle</p>
+              <p className="text-xs text-[var(--accent)] font-medium">{p.images.length} detail photos — use arrows to explore every angle</p>
             </div>
           )}
 
@@ -117,6 +140,36 @@ export function Product1688({ slug }: { slug: string }) {
           </a>
         </div>
       </div>
+
+      {/* ===== YOU MAY ALSO LIKE ===== */}
+      {related.length > 0 && (
+        <section className="mt-16 pt-12 border-t border-[var(--border)]">
+          <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-6">You May Also Like</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {related.map((rp) => (
+              <Link key={rp.slug} href={`/products/${rp.slug}`} className="group" aria-label={`View ${rp.name}`}>
+                <div className="aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
+                  <LazyImage src={rp.image} alt={rp.name} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
+                  {rp.tag && (
+                    <span className={`absolute top-3 left-3 text-[10px] font-semibold px-2 py-0.5 rounded-full ${rp.tag === 'New' ? 'bg-[var(--accent)]/20 text-[var(--accent)]' : 'bg-[var(--surface)]/80 text-[var(--text)]'}`}>
+                      {rp.tag}
+                    </span>
+                  )}
+                </div>
+                <div className="mt-2.5 px-1">
+                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{rp.name}</h4>
+                  <div className="flex items-baseline gap-2 mt-0.5">
+                    <span className="text-xs font-semibold text-[var(--text)]">{formatPrice(rp.price)}</span>
+                    {rp.compareAt && rp.compareAt > rp.price && (
+                      <span className="text-[10px] text-[var(--text-muted)] line-through">{formatPrice(rp.compareAt)}</span>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

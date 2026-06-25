@@ -3,7 +3,7 @@ import Image from "next/image";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { GuardianTeaser } from "@/components/layout/GuardianTeaser";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Gem, Leaf, ShieldCheck } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { PRODUCTS, CATEGORIES, getBestSellers } from "@/lib/1688-products";
 import { LazyImage } from "@/components/ui/LazyImage";
@@ -73,10 +73,62 @@ export default function HomePage() {
                 </div>
                 <div className="flex flex-col justify-center min-w-0">
                   <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1">{p.name}</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.categoryName} · {formatPrice(p.price)}</p>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.categoryName} · {formatPrice(p.price)}{p.compareAt && p.compareAt > p.price ? <span className="line-through ml-1.5">{formatPrice(p.compareAt)}</span> : null}</p>
                   {p.images.length > 1 && <p className="text-[10px] text-[var(--accent)] mt-1">{p.images.length} detail photos</p>}
                 </div>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== WHY MYTHREALMS ===== */}
+      <section className="py-14 bg-[#0A0808]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Why MythRealms</span>
+          <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5] mb-10">Crafted with Intention</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-full bg-[#1A1816] border border-[#2A2520] flex items-center justify-center mb-4">
+                <Gem className="w-6 h-6 text-[#D4A84B]" />
+              </div>
+              <h3 className="font-serif text-lg font-semibold text-[#E8E0D5] mb-2">Hand-Selected</h3>
+              <p className="text-sm text-[#8A7D6E] leading-relaxed">Each stone is individually chosen for its unique character and energy. No mass production — every piece is one of a kind.</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-full bg-[#1A1816] border border-[#2A2520] flex items-center justify-center mb-4">
+                <Leaf className="w-6 h-6 text-[#D4A84B]" />
+              </div>
+              <h3 className="font-serif text-lg font-semibold text-[#E8E0D5] mb-2">Ethically Sourced</h3>
+              <p className="text-sm text-[#8A7D6E] leading-relaxed">Direct from artisan mines with fair labor practices. We know every stone's origin and the hands that shaped it.</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-full bg-[#1A1816] border border-[#2A2520] flex items-center justify-center mb-4">
+                <ShieldCheck className="w-6 h-6 text-[#D4A84B]" />
+              </div>
+              <h3 className="font-serif text-lg font-semibold text-[#E8E0D5] mb-2">30-Day Trial</h3>
+              <p className="text-sm text-[#8A7D6E] leading-relaxed">Wear it, love it, or return it. If it doesn't feel like yours within 30 days, send it back — no questions asked.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== STYLED BY YOU ===== */}
+      <section className="py-14 bg-[var(--surface)]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Styled by You</span>
+          <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5] mb-2">Share Your Look</h2>
+          <p className="text-[#8A7D6E] text-sm mb-8">Tag <span className="text-[#D4A84B]">@mythrealms.shop</span> for a chance to be featured</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {['/images/1688-hero/单品1.png', '/images/1688-hero/单品3.png', '/images/1688-hero/单品5.png', '/images/1688-hero/单品7.png'].map((src, i) => (
+              <a key={i} href="https://instagram.com/mythrealms.shop" target="_blank" rel="noopener noreferrer" className="group relative aspect-square rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
+                <LazyImage src={src} alt={`MythRealms styled look ${i+1}`} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                  <span className="text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 px-3 py-1.5 rounded-full">
+                    Tag @mythrealms.shop
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
         </div>
