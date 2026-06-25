@@ -6,12 +6,12 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 
 const slides = [
-  { image: "/images/1688-hero/单品1.png", title: "Blush Rose Bracelet", subtitle: "Soft rose-toned natural stone · hand-selected", cta: "Shop This Piece", href: "/products/blush-rose-single" },
-  { image: "/images/1688-hero/单品3.png", title: "Golden Accent Bracelet", subtitle: "Warm gold-accent · sophisticated layering", cta: "Shop This Piece", href: "/products/golden-accent-single" },
-  { image: "/images/1688-hero/单品4.png", title: "Crystal Bling Bracelet", subtitle: "Sparkling crystal facets · pure brilliance", cta: "Shop This Piece", href: "/products/crystal-bling-single" },
-  { image: "/images/1688-hero/单品5.png", title: "Golden Weave Bracelet", subtitle: "Intricate woven gold-tone · sculptural texture", cta: "Shop This Piece", href: "/products/golden-weave-single" },
-  { image: "/images/1688-hero/单品6.png", title: "Silver Chain Bracelet", subtitle: "Delicate silver · liquid metal elegance", cta: "Shop This Piece", href: "/products/silver-chain-single" },
-  { image: "/images/1688-hero/单品7.png", title: "Pearl Drop Bracelet", subtitle: "Luminous freshwater pearl · natural iridescence", cta: "Shop This Piece", href: "/products/pearl-drop-single" },
+  { image: "/images/1688-hero/单品1.png", mobileImage: "/images/1688-hero-mobile/单品1.png", title: "Blush Rose Bracelet", subtitle: "Soft rose-toned natural stone · hand-selected", cta: "Shop This Piece", href: "/products/blush-rose-single" },
+  { image: "/images/1688-hero/单品3.png", mobileImage: "/images/1688-hero-mobile/单品3.png", title: "Golden Accent Bracelet", subtitle: "Warm gold-accent · sophisticated layering", cta: "Shop This Piece", href: "/products/golden-accent-single" },
+  { image: "/images/1688-hero/单品4.png", mobileImage: "/images/1688-hero-mobile/单品4.png", title: "Crystal Bling Bracelet", subtitle: "Sparkling crystal facets · pure brilliance", cta: "Shop This Piece", href: "/products/crystal-bling-single" },
+  { image: "/images/1688-hero/单品5.png", mobileImage: "/images/1688-hero-mobile/单品5.png", title: "Golden Weave Bracelet", subtitle: "Intricate woven gold-tone · sculptural texture", cta: "Shop This Piece", href: "/products/golden-weave-single" },
+  { image: "/images/1688-hero/单品6.png", mobileImage: "/images/1688-hero-mobile/单品6.png", title: "Silver Chain Bracelet", subtitle: "Delicate silver · liquid metal elegance", cta: "Shop This Piece", href: "/products/silver-chain-single" },
+  { image: "/images/1688-hero/单品7.png", mobileImage: "/images/1688-hero-mobile/单品7.png", title: "Pearl Drop Bracelet", subtitle: "Luminous freshwater pearl · natural iridescence", cta: "Shop This Piece", href: "/products/pearl-drop-single" },
 ];
 
 export function HeroCarousel() {
@@ -67,15 +67,14 @@ export function HeroCarousel() {
             aria-hidden={!isActive}
           >
             <div className={`absolute inset-0 overflow-hidden ${isActive ? "animate-subtle-zoom" : ""}`}>
-                <LazyImage
-                  src={s.image}
-                  alt={s.title}
-                  fill
-                  sizes="100vw"
-                  priority={isActive}
-                  className="object-cover"
-                  containerClassName="absolute inset-0"
-                />
+                {/* Desktop: landscape image */}
+                <div className="hidden md:block absolute inset-0">
+                  <LazyImage src={s.image} alt={s.title} fill sizes="100vw" priority={isActive} className="object-cover" containerClassName="absolute inset-0" />
+                </div>
+                {/* Mobile: portrait image */}
+                <div className="block md:hidden absolute inset-0">
+                  <LazyImage src={s.mobileImage || s.image} alt={s.title} fill sizes="100vw" priority={isActive} className="object-cover" containerClassName="absolute inset-0" />
+                </div>
             </div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent md:from-black/60 md:via-black/30" />
           </Link>
