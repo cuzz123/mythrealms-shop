@@ -4,28 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
-// 1688 Hero images — generated from 单品 reference shots
-const HERO_IMAGES = [
-  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_03_37.png",
-  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_08_34.png",
-  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_15_17.png",
-  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_30_53.png",
-  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_20.png",
-  "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_43.png",
+
+const slides = [
+  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_03_37.png", title: "Blush Rose Bracelet", subtitle: "Soft rose-toned natural stone · hand-selected", cta: "Shop This Piece", href: "/products/blush-rose-single" },
+  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_08_34.png", title: "Copper Elegance Bracelet", subtitle: "Refined copper · intricate detailing", cta: "Shop This Piece", href: "/products/copper-elegance-single" },
+  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_15_17.png", title: "Golden Accent Bracelet", subtitle: "Warm gold-accent · sophisticated layering", cta: "Shop This Piece", href: "/products/golden-accent-single" },
+  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_30_53.png", title: "Crystal Bling Bracelet", subtitle: "Sparkling crystal facets · pure brilliance", cta: "Shop This Piece", href: "/products/crystal-bling-single" },
+  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_20.png", title: "Dark Stone Bracelet", subtitle: "Deep mineral stone · grounded protection", cta: "Shop This Piece", href: "/products/dark-stone-single" },
+  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_43.png", title: "Turquoise Dream Bracelet", subtitle: "Vibrant turquoise · desert sky spirit", cta: "Shop This Piece", href: "/products/turquoise-single" },
 ];
-
-const slides = HERO_IMAGES.map((img, i) => ({
-  image: img,
-  title: i === 0 ? "Hand-Selected Stone Bracelets" : "Curated for the Modern Mystic",
-  subtitle: i === 0 ? "Real craftsmanship. Natural stones. Pieces that feel like they've always belonged to you." : "Each bracelet hand-selected. Each stone tells a story.",
-  cta: i === 0 ? "Shop the Collection" : "View All",
-  href: i === 0 ? "/collections" : "/collections/curated-singles",
-}));
-
-export function HeroCarousel() {
-  const [current, setCurrent] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [direction, setDirection] = useState(1); // 1=forward, -1=backward
 
   const goNext = useCallback(() => {
