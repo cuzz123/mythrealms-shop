@@ -27,6 +27,20 @@ export function AnnouncementBar() {
           {MESSAGES[idx]}
         </span>
       </div>
+      {/* Progress bar integrated into announcement bar */}
+      <div className="flex gap-0">
+        {MESSAGES.map((_, i) => (
+          <div key={i} className="flex-1 h-[2px] bg-white/15">
+            <div
+              className="h-full bg-white/60 transition-none"
+              style={{
+                width: i === idx ? "100%" : "0%",
+                animation: i === idx ? "progressFill 3.5s linear forwards" : "none",
+              }}
+            />
+          </div>
+        ))}
+      </div>
       <button
         type="button"
         onClick={() => setDismissed(true)}

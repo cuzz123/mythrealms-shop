@@ -88,7 +88,6 @@ export function HeroCarousel() {
             key={current}
             className="animate-slideInContent max-w-xs sm:max-w-md md:max-w-lg"
           >
-            <span className="inline-block text-[10px] md:text-xs uppercase tracking-[0.15em] text-[var(--accent)] font-semibold mb-2 md:mb-3">Curated Gemstones</span>
             <h2 className="font-serif text-3xl sm:text-3xl md:text-5xl font-bold text-white leading-tight mb-2 md:mb-4">{slides[current].title}</h2>
             <p className="text-white/75 text-sm md:text-base mb-4 md:mb-6 line-clamp-2 md:line-clamp-none">{slides[current].subtitle}</p>
             <div className="flex flex-wrap gap-3 pointer-events-auto">
@@ -103,20 +102,6 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      {/* Animated progress bar — bottom of hero */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-0">
-        {slides.map((_, i) => (
-          <div key={i} className="flex-1 h-[3px] bg-white/25">
-            <div
-              className="h-full bg-white transition-none"
-              style={{
-                width: i === current ? "100%" : "0%",
-                animation: i === current ? "progressFill 5s linear forwards" : "none",
-              }}
-            />
-          </div>
-        ))}
-      </div>
 
     </div>
   );

@@ -79,8 +79,8 @@ export function Header() {
   };
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-40 h-[72px]">
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4">
+    <header className="absolute top-[28px] left-0 right-0 z-40 h-[64px]">
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
         {/* Left — Logo */}
         <Link
           href="/"
@@ -121,7 +121,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => setShopOpen(!shopOpen)}
-                  className={`text-[15px] tracking-wide px-4 py-2 font-medium transition-all inline-flex items-center gap-1 ${
+                  className={`text-[16px] tracking-wide px-5 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
                     shopOpen
                       ? "bg-white text-gray-900"
                       : isActive(link.href) ? "text-white" : "text-white/80 hover:text-white"
@@ -153,7 +153,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-[15px] tracking-wide px-4 py-2 font-medium transition-all ${
+                className={`text-[16px] tracking-wide px-5 py-2.5 font-medium transition-all ${
                   isActive(link.href) ? "text-white" : "text-white/80 hover:bg-white hover:text-gray-900"
                 }`}
               >
@@ -206,7 +206,7 @@ export function Header() {
             aria-label={`Shopping cart, ${itemCount} items`}
             className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
-            <ShoppingBag size={20} strokeWidth={1.8} className={justAdded ? "animate-cart-bounce" : ""} />
+            <ShoppingBag size={20} strokeWidth={1.8} className={justAdded ? "cart-slide-up" : ""} />
             {itemCount > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[var(--primary)] px-1 text-[10px] font-semibold leading-none text-white">
                 {itemCount > 99 ? "99+" : itemCount}
