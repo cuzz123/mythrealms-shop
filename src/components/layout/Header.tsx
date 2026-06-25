@@ -44,6 +44,22 @@ export function Header() {
   const wishlistCount = useWishlistStore((s) => s.count());
   const user = session?.user;
 
+  // Cart bounce animation on add
+  const [justAdded, setJustAdded] = useState(false);
+  const prevCount = useRef(itemCount);
+  const bounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    if (itemCount > prevCount.current) {
+      setJustAdded(true);
+      if (bounceTimer.current) clearTimeout(bounceTimer.current);
+      bounceTimer.current = setTimeout(() => setJustAdded(false), 300);
+    }
+    prevCount.current = itemCount;
+    return () => {
+      if (bounceTimer.current) clearTimeout(bounceTimer.current);
+    };
+  }, [itemCount]);
+
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     if (href === "#") return shopLinks.some((l) => pathname.startsWith(l.href));
@@ -174,7 +190,7 @@ export function Header() {
             aria-label={`Shopping cart, ${itemCount} items`}
             className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
-            <ShoppingBag size={20} strokeWidth={1.8} />
+            <ShoppingBag size={20} strokeWidth={1.8} className={justAdded ? "animate-cart-bounce" : ""} />
             {itemCount > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[var(--primary)] px-1 text-[10px] font-semibold leading-none text-white">
                 {itemCount > 99 ? "99+" : itemCount}

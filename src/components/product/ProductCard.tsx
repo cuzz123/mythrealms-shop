@@ -28,6 +28,8 @@ export function ProductCard({ product, className }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem)
 
   const image = product.images[0] || ""
+  const secondImage = product.images[1] || ""
+  const hasSecondImage = product.images.length >= 2
   const isValidImage = image && (image.startsWith("http") || image.startsWith("/"))
   const firstVariant = product.variants[0]
   const price = Number(firstVariant?.price ?? 0)
@@ -80,8 +82,16 @@ export function ProductCard({ product, className }: ProductCardProps) {
         {/* Image container */}
         <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--border-light)]">
           {isValidImage ? (
-            <Image src={imageUrl(image)} alt={product.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-110" />
+            <>
+              {/* Primary image */}
+              <Image src={imageUrl(image)} alt={product.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                className={`object-cover transition-all duration-500 group-hover:scale-110 ${hasSecondImage ? "opacity-100 group-hover:opacity-0" : ""}`} />
+              {/* Secondary image — fades in on hover */}
+              {hasSecondImage && (
+                <Image src={imageUrl(secondImage)} alt={`${product.name} — alternate view`} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+              )}
+            </>
           ) : (
             <ProductImage name={product.name} className="absolute inset-0" />
           )}
