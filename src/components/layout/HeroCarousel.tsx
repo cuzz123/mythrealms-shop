@@ -103,6 +103,21 @@ export function HeroCarousel() {
       </div>
 
 
+      {/* Progress bar — bottom of hero, gaps between segments */}
+      <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-[2px]">
+        {slides.map((_, i) => (
+          <div key={i} className="flex-1 h-[3px] bg-white/15">
+            <div
+              className="h-full bg-white transition-none"
+              style={{
+                width: i === current ? "100%" : "0%",
+                animation: i === current ? "progressFill 5s linear forwards" : "none",
+              }}
+            />
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }

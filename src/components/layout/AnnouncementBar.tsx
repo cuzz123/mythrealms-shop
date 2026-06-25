@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 
 const MESSAGES = [
-  "Free Shipping Over $69.99",
-  "New: Curated Stones Collection",
+  "Free Shipping Over $69.99  |  Hand-Selected Stones  |  30-Day Easy Returns  |  Ethically Sourced",
+  "New: Curated Stones Collection — Shop Now",
   "15% Off First Order — Code: MYTH15",
 ];
 
@@ -26,20 +26,6 @@ export function AnnouncementBar() {
         <span key={idx} className="animate-fade-in">
           {MESSAGES[idx]}
         </span>
-      </div>
-      {/* Progress bar integrated into announcement bar */}
-      <div className="flex gap-0">
-        {MESSAGES.map((_, i) => (
-          <div key={i} className="flex-1 h-[2px] bg-white/15">
-            <div
-              className="h-full bg-white/60 transition-none"
-              style={{
-                width: i === idx ? "100%" : "0%",
-                animation: i === idx ? "progressFill 3.5s linear forwards" : "none",
-              }}
-            />
-          </div>
-        ))}
       </div>
       <button
         type="button"

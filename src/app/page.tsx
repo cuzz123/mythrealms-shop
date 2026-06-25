@@ -18,18 +18,6 @@ export default function HomePage() {
       {/* ===== HERO ===== */}
       <HeroCarousel />
 
-      {/* ===== TRUST BAR ===== */}
-      <div className="bg-[#0A0808] border-b border-[#2A2520]">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex justify-center gap-6 sm:gap-10 text-xs text-[#8A7D6E] font-medium overflow-x-auto whitespace-nowrap">
-          <span>Free Shipping Over $69.99</span>
-          <span className="text-[#3A3220]">|</span>
-          <span>Hand-Selected Stones</span>
-          <span className="text-[#3A3220]">|</span>
-          <span>30-Day Easy Returns</span>
-          <span className="text-[#3A3220]">|</span>
-          <span>Ethically Sourced</span>
-        </div>
-      </div>
 
       {/* ===== SHOP BY COLLECTION ===== */}
       <section className="py-14 bg-[var(--surface)]">
