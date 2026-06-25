@@ -96,13 +96,13 @@ export function HeroCarousel() {
       </div>
 
 
-      {/* Progress bar — transparent track, white fill on active */}
+      {/* Progress bar — subtle grey track, white fill on active */}
       <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-[8px]">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className="flex-1 h-[8px] bg-transparent cursor-pointer relative overflow-hidden"
+            className="flex-1 h-[8px] bg-white/10 cursor-pointer relative overflow-hidden"
           >
             <div
               key={`progress-${current}`}
