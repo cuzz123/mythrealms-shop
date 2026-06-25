@@ -137,18 +137,21 @@ export function CartDrawer() {
         aria-label={`Shopping cart with ${itemCount} items`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
-          <h2 className="font-serif text-lg font-semibold text-[var(--text)]">
-            Your Cart ({itemCount})
-          </h2>
-          <button
-            type="button"
-            onClick={handleClose}
-            className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-muted)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)]"
-            aria-label="Close cart"
-          >
-            <X size={20} strokeWidth={1.8} />
-          </button>
+        <div className="px-5 py-4">
+          <div className="flex items-center justify-between">
+            <h2 className="font-serif text-lg font-semibold text-[var(--text)]">
+              Your Cart ({itemCount})
+            </h2>
+            <button
+              type="button"
+              onClick={handleClose}
+              className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-muted)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)]"
+              aria-label="Close cart"
+            >
+              <X size={20} strokeWidth={1.8} />
+            </button>
+          </div>
+          <div className="mt-3 border-b border-[var(--border)] mx-2" />
         </div>
 
         {/* Body — cart items or empty state */}
