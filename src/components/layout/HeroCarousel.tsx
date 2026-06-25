@@ -6,12 +6,12 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 
 const slides = [
-  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_03_37.png", title: "Blush Rose Bracelet", subtitle: "Soft rose-toned natural stone · hand-selected", cta: "Shop This Piece", href: "/products/blush-rose-single" },
-  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_08_34.png", title: "Copper Elegance Bracelet", subtitle: "Refined copper · intricate detailing", cta: "Shop This Piece", href: "/products/copper-elegance-single" },
-  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_15_17.png", title: "Golden Accent Bracelet", subtitle: "Warm gold-accent · sophisticated layering", cta: "Shop This Piece", href: "/products/golden-accent-single" },
-  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_30_53.png", title: "Crystal Bling Bracelet", subtitle: "Sparkling crystal facets · pure brilliance", cta: "Shop This Piece", href: "/products/crystal-bling-single" },
-  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_20.png", title: "Dark Stone Bracelet", subtitle: "Deep mineral stone · grounded protection", cta: "Shop This Piece", href: "/products/dark-stone-single" },
-  { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_43.png", title: "Turquoise Dream Bracelet", subtitle: "Vibrant turquoise · desert sky spirit", cta: "Shop This Piece", href: "/products/turquoise-single" },
+  { image: "/images/1688-hero/单品1.png", title: "Blush Rose Bracelet", subtitle: "Soft rose-toned natural stone · hand-selected", cta: "Shop This Piece", href: "/products/blush-rose-single" },
+  { image: "/images/1688-hero/单品3.png", title: "Golden Accent Bracelet", subtitle: "Warm gold-accent · sophisticated layering", cta: "Shop This Piece", href: "/products/golden-accent-single" },
+  { image: "/images/1688-hero/单品4.png", title: "Crystal Bling Bracelet", subtitle: "Sparkling crystal facets · pure brilliance", cta: "Shop This Piece", href: "/products/crystal-bling-single" },
+  { image: "/images/1688-hero/单品5.png", title: "Golden Weave Bracelet", subtitle: "Intricate woven gold-tone · sculptural texture", cta: "Shop This Piece", href: "/products/golden-weave-single" },
+  { image: "/images/1688-hero/单品6.png", title: "Silver Chain Bracelet", subtitle: "Delicate silver · liquid metal elegance", cta: "Shop This Piece", href: "/products/silver-chain-single" },
+  { image: "/images/1688-hero/单品7.png", title: "Pearl Drop Bracelet", subtitle: "Luminous freshwater pearl · natural iridescence", cta: "Shop This Piece", href: "/products/pearl-drop-single" },
 ];
 
 export function HeroCarousel() {
