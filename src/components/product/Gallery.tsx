@@ -129,7 +129,7 @@ export function Gallery({ images, productName }: GalleryProps) {
 
       {/* Thumbnail strip */}
       {hasMultiple && (
-        <div className="grid grid-cols-7 gap-2">
+        <div className="grid grid-cols-5 lg:grid-cols-7 gap-2">
           {images.map((img, index) => (
             <button
               key={index}

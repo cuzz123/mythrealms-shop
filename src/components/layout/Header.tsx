@@ -60,6 +60,18 @@ export function Header() {
     };
   }, [itemCount]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [mobileMenuOpen]);
+
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     if (href === "#") return shopLinks.some((l) => pathname.startsWith(l.href));
@@ -219,17 +231,26 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile navigation dropdown */}
+      {/* Mobile navigation — full overlay */}
       {mobileMenuOpen && (
-        <div className="animate-slide-down border-b border-[var(--border)] bg-[var(--surface)] lg:hidden">
-          <nav
-            className="flex flex-col gap-0.5 px-4 py-3"
-            aria-label="Mobile navigation"
-          >
+        <div className="fixed inset-0 z-50 bg-[#0A0808] animate-slide-down lg:hidden">
+          {/* Top bar with X button */}
+          <div className="flex items-center justify-end px-4 h-[72px]">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              aria-label="Close navigation menu"
+            >
+              <X size={28} strokeWidth={1.8} />
+            </button>
+          </div>
+
+          <nav className="flex flex-col gap-2 px-6 pt-4" aria-label="Mobile navigation">
             {navLinks.map((link) =>
               link.children ? (
-                <div key={link.href}>
-                  <div className="px-3 py-2 text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                <div key={link.href} className="py-2">
+                  <div className="px-3 py-2 text-sm font-semibold text-[#B0A590] uppercase tracking-wider">
                     {link.label}
                   </div>
                   {link.children.map((child) => (
@@ -237,7 +258,7 @@ export function Header() {
                       key={child.href}
                       href={child.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block rounded-[var(--radius-sm)] px-6 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:bg-[var(--border-light)]"
+                      className="block rounded-[var(--radius-sm)] px-6 py-3.5 text-base font-medium text-white transition-colors hover:bg-white/10"
                     >
                       {child.label}
                     </Link>
@@ -248,13 +269,20 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="rounded-[var(--radius-sm)] px-3 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:bg-[var(--border-light)]"
+                  className="rounded-[var(--radius-sm)] px-3 py-3.5 text-base font-medium text-white transition-colors hover:bg-white/10"
                 >
                   {link.label}
                 </Link>
               )
             )}
           </nav>
+
+          {/* Bottom branding */}
+          <div className="absolute bottom-10 left-0 right-0 flex justify-center">
+            <span className="font-serif text-lg font-semibold tracking-tight text-white/30">
+              MythRealms
+            </span>
+          </div>
         </div>
       )}
     </header>

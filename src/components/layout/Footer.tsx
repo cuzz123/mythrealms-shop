@@ -71,7 +71,7 @@ export function Footer() {
   return (
     <footer className="bg-[#0A0808] text-[var(--announcement-text)]">
       {/* Main content */}
-      <div className="mx-auto max-w-7xl px-4 py-16">
+      <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Column 1 — Brand */}
           <div className="space-y-4">
@@ -111,7 +111,7 @@ export function Footer() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-[#B0A590] transition-colors hover:text-white"
+                    className="block py-2 text-sm text-[#B0A590] transition-colors hover:text-white"
                   >
                     {label}
                   </Link>
@@ -130,7 +130,7 @@ export function Footer() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-[#B0A590] transition-colors hover:text-white"
+                    className="block py-2 text-sm text-[#B0A590] transition-colors hover:text-white"
                   >
                     {label}
                   </Link>

@@ -40,7 +40,7 @@ export function HeroCarousel() {
   }, [isPaused, goNext, prefersReducedMotion]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[#0A0808]">
+    <div className="relative w-full h-[70vh] md:h-screen overflow-hidden bg-[#0A0808]">
       {/* Preload adjacent image */}
       <div className="absolute inset-0" style={{ visibility: "hidden" }}>
         <LazyImage
@@ -82,14 +82,14 @@ export function HeroCarousel() {
       })}
 
       {/* Content overlay */}
-      <div className="absolute inset-0 flex items-end md:items-center z-20 pb-24 md:pb-0 pointer-events-none">
+      <div className="absolute inset-0 flex items-center z-20 pb-16 md:pb-0 pointer-events-none">
         <div className="max-w-7xl mx-auto px-4 md:px-6 w-full">
           <div
             key={current}
             className="animate-slideInContent max-w-xs sm:max-w-md md:max-w-lg"
           >
             <span className="inline-block text-[10px] md:text-xs uppercase tracking-[0.15em] text-[var(--accent)] font-semibold mb-2 md:mb-3">Curated Gemstones</span>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl font-bold text-white leading-tight mb-2 md:mb-4">{slides[current].title}</h2>
+            <h2 className="font-serif text-3xl sm:text-3xl md:text-5xl font-bold text-white leading-tight mb-2 md:mb-4">{slides[current].title}</h2>
             <p className="text-white/75 text-sm md:text-base mb-4 md:mb-6 line-clamp-2 md:line-clamp-none">{slides[current].subtitle}</p>
             <div className="flex flex-wrap gap-3 pointer-events-auto">
               <Link href={slides[current].href} className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
@@ -115,7 +115,7 @@ export function HeroCarousel() {
             />
           ))}
         </div>
-        <div className="flex justify-center gap-3 pb-6 pt-4">
+        <div className="hidden md:flex justify-center gap-3 pb-6 pt-4">
           {slides.map((_, i) => (
             <button
               key={i}

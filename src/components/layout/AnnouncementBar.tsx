@@ -30,10 +30,10 @@ export function AnnouncementBar() {
       <button
         type="button"
         onClick={() => setDismissed(true)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full text-[#8B7355] transition-colors hover:bg-white/10 hover:text-white"
+        className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full text-[#8B7355] transition-colors hover:bg-white/10 hover:text-white"
         aria-label="Close announcement"
       >
-        <X size={14} strokeWidth={2} />
+        <X size={16} strokeWidth={2} />
       </button>
     </div>
   );
