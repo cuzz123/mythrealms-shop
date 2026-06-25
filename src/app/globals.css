@@ -168,6 +168,13 @@ h4 { line-height: 1.3; }
 .animate-slideInContent { animation: slideInContent 0.5s ease-out; }
 
 /* Subtle hero zoom — 1.0 → 1.03 over 7s, barely perceptible but cinematic */
+@keyframes subtleZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.03); }
+}
+.animate-subtle-zoom {
+  animation: subtleZoom 7s ease-out forwards;
+}
 
 /* Nav link underline progress animation */
 .nav-underline {
