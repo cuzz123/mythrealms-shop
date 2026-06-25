@@ -103,25 +103,24 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      {/* Arrow controls */}
-      <button onClick={goPrev} className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition backdrop-blur-sm z-30">
-        <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
-      </button>
-      <button onClick={goNext} className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition backdrop-blur-sm z-30">
-        <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
-      </button>
-
-      {/* Bottom bar */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-6 z-30">
-        <button onClick={() => setIsPaused(!isPaused)} className="text-white/60 hover:text-white transition">
-          {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
-        </button>
-        <div className="flex gap-2.5">
+      {/* Bottom progress bar */}
+      <div className="absolute bottom-0 left-0 right-0 z-30">
+        <div className="flex gap-0">
           {slides.map((_, i) => (
             <button
               key={i}
-              onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); }}
-              className={`rounded-full transition-all ${i === current ? "w-8 h-2 bg-[var(--accent)]" : "w-2 h-2 bg-white/30 hover:bg-white/50"}`}
+              onClick={() => { setCurrent(i); }}
+              className="flex-1 h-[3px] transition-colors duration-300"
+              style={{ background: i === current ? '#fff' : 'rgba(255,255,255,0.25)' }}
+            />
+          ))}
+        </div>
+        <div className="flex justify-center gap-3 pb-6 pt-4">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { setCurrent(i); }}
+              className={`rounded-full transition-all ${i === current ? "w-2 h-2 bg-white" : "w-2 h-2 bg-white/30 hover:bg-white/50"}`}
             />
           ))}
         </div>

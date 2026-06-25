@@ -109,27 +109,31 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => setShopOpen(!shopOpen)}
-                  className={`nav-underline text-[15px] tracking-wide rounded-[var(--radius-sm)] px-3 py-2 font-medium transition-colors hover:text-white inline-flex items-center gap-1 ${
-                    isActive(link.href) ? "text-white" : "text-white/80"
+                  className={`text-[15px] tracking-wide px-4 py-2 font-medium transition-all inline-flex items-center gap-1 ${
+                    shopOpen
+                      ? "bg-white text-gray-900"
+                      : isActive(link.href) ? "text-white" : "text-white/80 hover:text-white"
                   }`}
                 >
                   {link.label}
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${shopOpen ? "rotate-180" : ""}`} />
                 </button>
                 {shopOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-xl py-1 z-50">
-                    {link.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        onClick={() => setShopOpen(false)}
-                        className={`block px-4 py-2.5 text-sm transition-colors hover:bg-gray-100 ${
-                          pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : "text-gray-700"
-                        }`}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] bg-white shadow-2xl z-50" style={{borderRadius: 0}}>
+                    <div className="grid grid-cols-2 gap-0 p-6">
+                      {link.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={() => setShopOpen(false)}
+                          className={`block px-4 py-3 text-[14px] transition-colors hover:bg-gray-50 ${
+                            pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : "text-gray-700"
+                          }`}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -137,8 +141,8 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-underline text-[15px] tracking-wide rounded-[var(--radius-sm)] px-3 py-2 font-medium transition-colors ${
-                  isActive(link.href) ? "text-white" : "text-white/80 hover:text-white"
+                className={`text-[15px] tracking-wide px-4 py-2 font-medium transition-all ${
+                  isActive(link.href) ? "text-white" : "text-white/80 hover:bg-white hover:text-gray-900"
                 }`}
               >
                 {link.label}
