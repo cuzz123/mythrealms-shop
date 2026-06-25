@@ -112,11 +112,11 @@ export function HeroCarousel() {
             className="flex-1 h-[8px] bg-white/15 cursor-pointer relative overflow-hidden"
           >
             <div
+              key={`progress-${current}`}
               className="absolute inset-0 bg-white transition-none"
               style={{
-                transform: i === current ? "scaleX(1)" : "scaleX(0)",
-                transformOrigin: "left",
                 animation: i === current ? "progressFill 5s linear forwards" : "none",
+                transformOrigin: "left",
               }}
             />
           </button>
