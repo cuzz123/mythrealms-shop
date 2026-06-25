@@ -57,6 +57,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
+
       {/* ===== FEATURED SINGLES ===== */}
       <section className="py-14 bg-[#1A1816]">
         <div className="max-w-7xl mx-auto px-6">
@@ -80,6 +82,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
 
       {/* ===== WHY MYTHREALMS ===== */}
       <section className="py-14 bg-[#0A0808]">
@@ -112,6 +116,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
+
       {/* ===== STYLED BY YOU ===== */}
       <section className="py-14 bg-[var(--surface)]">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -132,6 +138,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
 
       {/* ===== NEWSLETTER ===== */}
       <section className="py-12 bg-[#1A1816]">

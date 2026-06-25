@@ -78,8 +78,12 @@ export default function ContactPage() {
             </div>
             <input type="text" value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})} placeholder="Subject" required className="px-4 py-3 border border-[var(--border)] rounded-lg text-sm w-full bg-[var(--bg)] text-[var(--text)] placeholder:text-[var(--text-muted)]" />
             <textarea value={form.message} onChange={e=>setForm({...form,message:e.target.value})} placeholder="Your message" required rows={5} className="px-4 py-3 border border-[var(--border)] rounded-lg text-sm w-full resize-none bg-[var(--bg)] text-[var(--text)] placeholder:text-[var(--text-muted)]" />
-            <Button variant="primary" size="lg" type="submit" className="w-full">
-              <Send className="w-4 h-4 mr-2" /> {loading ? "Sending..." : "Send Message"}
+            <Button variant="primary" size="lg" type="submit" className="w-full" disabled={loading}>
+              {loading ? (
+                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Sending...</>
+              ) : (
+                <><Send className="w-4 h-4 mr-2" /> Send Message</>
+              )}
             </Button>
           </form>
         )}

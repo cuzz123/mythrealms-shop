@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { PRODUCTS } from "@/lib/1688-products";
 import { formatPrice } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, ZoomIn, ShoppingBag, Minus, Plus, Share2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import toast from "react-hot-toast";
@@ -15,6 +15,7 @@ export function Product1688({ slug }: { slug: string }) {
   const openCart = useCartUIStore((s) => s.openCart);
   const [viewers] = useState(() => Math.floor(Math.random() * 13) + 3); // 3-15
   const [quantity, setQuantity] = useState(1);
+  const [detailsOpen, setDetailsOpen] = useState(false);
 
   // Related products: 4 random singles excluding current
   const related = useMemo(() => {
@@ -149,6 +150,15 @@ export function Product1688({ slug }: { slug: string }) {
             )}
           </div>
 
+          {/* Care note */}
+          <div className="mt-4 p-3 rounded-lg bg-[#1A1812] border border-[#3A3220] flex items-start gap-3">
+            <Info className="w-4 h-4 text-[#C8944A] mt-0.5 shrink-0" />
+            <p className="text-xs text-[#A89880] leading-relaxed">
+              <span className="font-semibold text-[#C8944A]">Care: </span>
+              Avoid water exposure. Store in a dry place. Clean with a soft cloth. Natural stones may vary slightly in color — this is a sign of authenticity, not a flaw.
+            </p>
+          </div>
+
           {p.images.length > 1 && (
             <div className="mt-5 p-3 rounded-lg bg-[var(--surface)] border border-[var(--border)]">
               <p className="text-xs text-[var(--accent)] font-medium">{p.images.length} detail photos — use arrows to explore every angle</p>
@@ -209,6 +219,37 @@ export function Product1688({ slug }: { slug: string }) {
               </span>
             </span>
           </a>
+
+          {/* ===== PRODUCT DETAILS ACCORDION ===== */}
+          <div className="mt-6 border border-[var(--border)] rounded-lg overflow-hidden">
+            <button
+              onClick={() => setDetailsOpen(!detailsOpen)}
+              className="w-full flex items-center justify-between px-5 py-4 text-sm font-semibold text-[var(--text)] hover:bg-[var(--surface)] transition-colors"
+            >
+              <span>Product Details</span>
+              <ChevronDown className={`w-4 h-4 text-[var(--text-muted)] transition-transform duration-200 ${detailsOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {detailsOpen && (
+              <div className="px-5 pb-5 space-y-4 border-t border-[var(--border)] pt-4">
+                <div>
+                  <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Materials</h4>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Natural stone beads, elastic cord. Each bead is hand-selected for quality and character. Slight variations in color, pattern, and texture are expected and confirm the authenticity of natural gemstones.</p>
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Sizing</h4>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">One size fits most — designed for wrist sizes 6.5 to 7.5 inches (16.5–19 cm). The elastic cord provides a comfortable, flexible fit that adapts to your wrist. For custom sizing inquiries, contact us.</p>
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Care Instructions</h4>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Avoid prolonged water exposure — remove before swimming, showering, or bathing. Store in a dry place away from direct sunlight. Clean gently with a soft, dry cloth. Avoid contact with perfumes, lotions, and harsh chemicals.</p>
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Shipping Info</h4>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Free standard shipping on orders over $69.99. US delivery in 7–14 business days. International delivery in 14–21 business days. Each order is carefully packaged in a MythRealms gift box with a story card.</p>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
