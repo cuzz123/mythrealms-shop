@@ -96,7 +96,7 @@ export function HeroCarousel() {
       </div>
 
 
-      {/* Progress bar — clickable */}
+      {/* Progress bar — transparent track, white fill on active */}
       <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-[8px]">
         {slides.map((_, i) => (
           <button
@@ -106,10 +106,10 @@ export function HeroCarousel() {
           >
             <div
               key={`progress-${current}`}
-              className="absolute inset-0 bg-white transition-none"
+              className="absolute inset-0 bg-white"
               style={{
+                width: i === current ? "100%" : "0%",
                 animation: i === current ? "progressFill 5s linear forwards" : "none",
-                transformOrigin: "left",
               }}
             />
           </button>
