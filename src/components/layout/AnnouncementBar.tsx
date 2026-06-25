@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 
 const MESSAGES = [
@@ -12,6 +13,8 @@ const MESSAGES = [
 export function AnnouncementBar() {
   const [dismissed, setDismissed] = useState(false);
   const [idx, setIdx] = useState(0);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const t = setInterval(() => setIdx(i => (i + 1) % MESSAGES.length), 3500);
@@ -21,7 +24,7 @@ export function AnnouncementBar() {
   if (dismissed) return null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-sm text-[var(--announcement-text)]" role="region" aria-label="Announcement">
+    <div className={`${isHome ? "fixed bg-black/40 backdrop-blur-sm" : "relative bg-[#0A0808]"} top-0 left-0 right-0 z-50 text-[var(--announcement-text)]`} role="region" aria-label="Announcement">
       <div className="mx-auto max-w-7xl px-10 py-1.5 text-center text-xs">
         <span key={idx} className="animate-fade-in">
           {MESSAGES[idx]}

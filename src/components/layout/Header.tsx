@@ -78,8 +78,10 @@ export function Header() {
     return pathname.startsWith(href);
   };
 
+  const isHome = pathname === "/";
+
   return (
-    <header className="absolute top-[28px] left-0 right-0 z-40 h-[64px]">
+    <header className={`${isHome ? "absolute top-[28px]" : "sticky top-0 bg-black/80 backdrop-blur-md"} left-0 right-0 z-40 h-[64px]`}>
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
         {/* Left — Logo */}
         <Link
