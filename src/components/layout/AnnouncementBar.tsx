@@ -21,7 +21,7 @@ export function AnnouncementBar() {
   if (dismissed) return null;
 
   return (
-    <div className="relative z-50 bg-[var(--announcement-bg)] text-[var(--announcement-text)]" role="region" aria-label="Announcement">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-sm text-[var(--announcement-text)]" role="region" aria-label="Announcement">
       <div className="mx-auto max-w-7xl px-10 py-1.5 text-center text-xs">
         <span key={idx} className="animate-fade-in">
           {MESSAGES[idx]}

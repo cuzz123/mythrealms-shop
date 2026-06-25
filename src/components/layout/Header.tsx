@@ -79,7 +79,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 h-[72px] bg-[#0A0808]/0">
+    <header className="absolute top-0 left-0 right-0 z-40 h-[72px]">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4">
         {/* Left — Logo */}
         <Link
