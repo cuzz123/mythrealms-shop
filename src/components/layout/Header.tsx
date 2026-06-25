@@ -96,7 +96,7 @@ export function Header() {
             <circle cx="14" cy="5" r="1.5" fill="var(--accent)" />
           </svg>
 
-          <span className="font-serif text-xl font-semibold tracking-tight text-white">
+          <span className="font-serif text-[22px] font-semibold tracking-tight text-white">
             MythRealms
           </span>
         </Link>
@@ -109,7 +109,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => setShopOpen(!shopOpen)}
-                  className={`nav-underline rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors hover:text-white inline-flex items-center gap-1 ${
+                  className={`nav-underline text-[15px] tracking-wide rounded-[var(--radius-sm)] px-3 py-2 font-medium transition-colors hover:text-white inline-flex items-center gap-1 ${
                     isActive(link.href) ? "text-white" : "text-white/80"
                   }`}
                 >
@@ -137,7 +137,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-underline rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium transition-colors ${
+                className={`nav-underline text-[15px] tracking-wide rounded-[var(--radius-sm)] px-3 py-2 font-medium transition-colors ${
                   isActive(link.href) ? "text-white" : "text-white/80 hover:text-white"
                 }`}
               >
