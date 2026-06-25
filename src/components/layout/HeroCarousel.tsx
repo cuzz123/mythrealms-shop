@@ -109,7 +109,7 @@ export function HeroCarousel() {
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className="flex-1 h-[8px] bg-white/15 cursor-pointer relative overflow-hidden"
+            className="flex-1 h-[8px] bg-transparent cursor-pointer relative overflow-hidden"
           >
             <div
               key={`progress-${current}`}
