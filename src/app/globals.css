@@ -58,7 +58,7 @@ body {
   font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: var(--text-base);
   line-height: var(--leading-body);
-  color: var(--text); background: var(--bg);
+  color: var(--text); background: #0A0808;
   -webkit-font-smoothing: antialiased;
   /* Safe area for notched phones (iPhone X+ home indicator) */
   padding-bottom: env(safe-area-inset-bottom, 0px);

@@ -103,8 +103,8 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      {/* Animated progress bar */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-0">
+      {/* Animated progress bar — below header, always visible */}
+      <div className="absolute top-[72px] left-0 right-0 z-30 flex gap-0">
         {slides.map((_, i) => (
           <div key={i} className="flex-1 h-[3px] bg-white/25">
             <div
