@@ -58,8 +58,9 @@ export function HeroCarousel() {
       {slides.map((s, i) => {
         const isActive = i === current;
         return (
-          <div
+          <Link
             key={i}
+            href={s.href}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
             }`}
@@ -77,7 +78,7 @@ export function HeroCarousel() {
                 />
             </div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent md:from-black/60 md:via-black/30" />
-          </div>
+          </Link>
         );
       })}
 
