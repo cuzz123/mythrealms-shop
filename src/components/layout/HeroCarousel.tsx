@@ -6,12 +6,12 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 
 const slides = [
-  { image: "/images/1688-hero/单品1.png", mobileImage: "/images/1688-hero-mobile/单品1.png", title: "Blush Rose Bracelet", subtitle: "Soft rose-toned natural stone · hand-selected", cta: "Shop This Piece", href: "/products/blush-rose-single" },
-  { image: "/images/1688-hero/单品3.png", mobileImage: "/images/1688-hero-mobile/单品3.png", title: "Golden Accent Bracelet", subtitle: "Warm gold-accent · sophisticated layering", cta: "Shop This Piece", href: "/products/golden-accent-single" },
-  { image: "/images/1688-hero/单品4.png", mobileImage: "/images/1688-hero-mobile/单品4.png", title: "Crystal Bling Bracelet", subtitle: "Sparkling crystal facets · pure brilliance", cta: "Shop This Piece", href: "/products/crystal-bling-single" },
-  { image: "/images/1688-hero/单品5.png", mobileImage: "/images/1688-hero-mobile/单品5.png", title: "Golden Weave Bracelet", subtitle: "Intricate woven gold-tone · sculptural texture", cta: "Shop This Piece", href: "/products/golden-weave-single" },
-  { image: "/images/1688-hero/单品6.png", mobileImage: "/images/1688-hero-mobile/单品6.png", title: "Silver Chain Bracelet", subtitle: "Delicate silver · liquid metal elegance", cta: "Shop This Piece", href: "/products/silver-chain-single" },
-  { image: "/images/1688-hero/单品7.png", mobileImage: "/images/1688-hero-mobile/单品7.png", title: "Pearl Drop Bracelet", subtitle: "Luminous freshwater pearl · natural iridescence", cta: "Shop This Piece", href: "/products/pearl-drop-single" },
+  { image: "/images/1688-hero/单品\1.webp", mobileImage: "/images/1688-hero-mobile/单品\1.webp", title: "Blush Rose Bracelet", subtitle: "Soft rose-toned natural stone · hand-selected", cta: "Shop This Piece", href: "/products/blush-rose-single" },
+  { image: "/images/1688-hero/单品\1.webp", mobileImage: "/images/1688-hero-mobile/单品\1.webp", title: "Golden Accent Bracelet", subtitle: "Warm gold-accent · sophisticated layering", cta: "Shop This Piece", href: "/products/golden-accent-single" },
+  { image: "/images/1688-hero/单品\1.webp", mobileImage: "/images/1688-hero-mobile/单品\1.webp", title: "Crystal Bling Bracelet", subtitle: "Sparkling crystal facets · pure brilliance", cta: "Shop This Piece", href: "/products/crystal-bling-single" },
+  { image: "/images/1688-hero/单品\1.webp", mobileImage: "/images/1688-hero-mobile/单品\1.webp", title: "Golden Weave Bracelet", subtitle: "Intricate woven gold-tone · sculptural texture", cta: "Shop This Piece", href: "/products/golden-weave-single" },
+  { image: "/images/1688-hero/单品\1.webp", mobileImage: "/images/1688-hero-mobile/单品\1.webp", title: "Silver Chain Bracelet", subtitle: "Delicate silver · liquid metal elegance", cta: "Shop This Piece", href: "/products/silver-chain-single" },
+  { image: "/images/1688-hero/单品\1.webp", mobileImage: "/images/1688-hero-mobile/单品\1.webp", title: "Pearl Drop Bracelet", subtitle: "Luminous freshwater pearl · natural iridescence", cta: "Shop This Piece", href: "/products/pearl-drop-single" },
 ];
 
 export function HeroCarousel() {
@@ -103,13 +103,13 @@ export function HeroCarousel() {
       </div>
 
 
-      {/* Progress bar — clickable, 5x taller */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-[2px]">
+      {/* Progress bar — clickable */}
+      <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-[8px]">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className="flex-1 h-[15px] bg-white/15 cursor-pointer relative overflow-hidden"
+            className="flex-1 h-[8px] bg-white/15 cursor-pointer relative overflow-hidden"
           >
             <div
               className="absolute inset-0 bg-white transition-none"
