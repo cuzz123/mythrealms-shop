@@ -22,7 +22,7 @@ export function AnnouncementBar() {
 
   return (
     <div className="relative z-50 bg-[var(--announcement-bg)] text-[var(--announcement-text)]" role="region" aria-label="Announcement">
-      <div className="mx-auto max-w-7xl px-10 py-2.5 text-center text-sm">
+      <div className="mx-auto max-w-7xl px-10 py-1.5 text-center text-xs">
         <span key={idx} className="animate-fade-in">
           {MESSAGES[idx]}
         </span>

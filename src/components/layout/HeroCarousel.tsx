@@ -103,27 +103,19 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      {/* Bottom progress bar */}
-      <div className="absolute bottom-0 left-0 right-0 z-30">
-        <div className="flex gap-0">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => { setCurrent(i); }}
-              className="flex-1 h-[3px] transition-colors duration-300"
-              style={{ background: i === current ? '#fff' : 'rgba(255,255,255,0.25)' }}
+      {/* Animated progress bar */}
+      <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-0">
+        {slides.map((_, i) => (
+          <div key={i} className="flex-1 h-[3px] bg-white/25">
+            <div
+              className="h-full bg-white transition-none"
+              style={{
+                width: i === current ? "100%" : "0%",
+                animation: i === current ? "progressFill 5s linear forwards" : "none",
+              }}
             />
-          ))}
-        </div>
-        <div className="hidden md:flex justify-center gap-3 pb-6 pt-4">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => { setCurrent(i); }}
-              className={`rounded-full transition-all ${i === current ? "w-2 h-2 bg-white" : "w-2 h-2 bg-white/30 hover:bg-white/50"}`}
-            />
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
     </div>
