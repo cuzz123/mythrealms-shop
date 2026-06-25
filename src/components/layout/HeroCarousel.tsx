@@ -13,7 +13,12 @@ const slides = [
   { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_20.png", title: "Dark Stone Bracelet", subtitle: "Deep mineral stone · grounded protection", cta: "Shop This Piece", href: "/products/dark-stone-single" },
   { image: "/images/1688-hero/ChatGPT_Image_2026年6月24日_22_42_43.png", title: "Turquoise Dream Bracelet", subtitle: "Vibrant turquoise · desert sky spirit", cta: "Shop This Piece", href: "/products/turquoise-single" },
 ];
-  const [direction, setDirection] = useState(1); // 1=forward, -1=backward
+
+export function HeroCarousel() {
+  const [current, setCurrent] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [direction, setDirection] = useState(1);
 
   const goNext = useCallback(() => {
     setDirection(1);
