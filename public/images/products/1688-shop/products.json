@@ -157,23 +157,6 @@
   },
   {
     "type": "single-product",
-    "slug": "pearl-drop-single",
-    "name": "Pearl Drop Bracelet",
-    "description": "Luminous pearl accent",
-    "price": 49.99,
-    "mainImage": "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-main.jpg",
-      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-detail1.jpg",
-      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-detail2.jpg",
-      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-detail3.jpg",
-      "/images/products/1688-shop/pearl-drop-single/pearl-drop-single-detail4.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
     "slug": "dark-stone-single",
     "name": "Dark Stone Bracelet",
     "description": "Deep charcoal mineral stone",
@@ -714,42 +697,348 @@
     "categoryName": "Dark Mineral Collection"
   },
   {
-    "type": "series-product",
-    "slug": "pearl-crystal-series-01",
-    "name": "Pearl & Crystal #1",
-    "description": "Luminous pearl and crystal",
-    "price": 26.49,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01.jpg",
+    "type": "single-product",
+    "slug": "pearl-single-01",
+    "name": "Lustre Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 31.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-01-main.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-single-01-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-01-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-01-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-01-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-01-detail4.jpg"
     ],
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal"
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
   },
   {
-    "type": "series-product",
-    "slug": "pearl-crystal-series-02",
-    "name": "Pearl & Crystal #2",
-    "description": "Luminous pearl and crystal",
-    "price": 27.99,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02.jpg",
+    "type": "single-product",
+    "slug": "pearl-single-10",
+    "name": "Coin Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 44.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-10-main.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-single-10-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-10-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-10-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-10-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-10-detail4.jpg"
     ],
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal"
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
   },
   {
-    "type": "series-product",
-    "slug": "pearl-crystal-series-03",
-    "name": "Pearl & Crystal #3",
-    "description": "Luminous pearl and crystal",
-    "price": 29.49,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03.jpg",
+    "type": "single-product",
+    "slug": "pearl-single-11",
+    "name": "Rice Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 46.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-11-main.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-single-11-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-11-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-11-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-11-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-11-detail4.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-11-detail5.jpg"
     ],
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal"
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-12",
+    "name": "Biwa Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 47.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-12-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-12-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-12-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-12-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-12-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-12-detail4.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-12-detail5.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-12-detail6.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-12-detail7.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-13",
+    "name": "Edison Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 49.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-13-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-13-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-13-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-13-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-13-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-13-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-14",
+    "name": "South Sea Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 50.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-14-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-14-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-14-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-14-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-14-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-14-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-15",
+    "name": "Seed Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 52.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-15-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-15-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-15-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-15-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-15-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-15-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-16",
+    "name": "Button Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 53.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-16-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-16-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-16-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-16-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-16-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-16-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-17",
+    "name": "Circle Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 55.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-17-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-17-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-17-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-17-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-17-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-17-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-18",
+    "name": "Drop Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 56.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-18-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-18-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-18-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-18-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-18-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-18-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-19",
+    "name": "Oval Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 58.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-19-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-19-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-19-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-19-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-19-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-19-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-02",
+    "name": "Classic White Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 32.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-02-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-02-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-02-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-02-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-02-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-02-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-20",
+    "name": "Nugget Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 59.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-20-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-20-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-20-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-20-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-20-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-20-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-03",
+    "name": "Baroque Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 34.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-03-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-03-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-03-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-03-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-03-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-03-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-04",
+    "name": "Golden Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 35.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-04-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-04-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-04-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-04-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-04-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-04-detail4.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-04-detail5.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-05",
+    "name": "Tahitian Black Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 37.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-05-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-05-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-05-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-05-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-05-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-05-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-06",
+    "name": "Freshwater Pearl Strand Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 38.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-06-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-06-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-06-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-06-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-06-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-06-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-07",
+    "name": "Akoya Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 40.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-07-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-07-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-07-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-07-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-07-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-07-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-08",
+    "name": "Keshi Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 41.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-08-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-08-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-08-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-08-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-08-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-08-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-single-09",
+    "name": "Mabe Pearl Bracelet",
+    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "price": 43.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-09-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-single-09-main.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-09-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-09-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-09-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-single-09-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection"
   }
 ]

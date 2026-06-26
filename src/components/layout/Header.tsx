@@ -10,7 +10,7 @@ import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 
 const shopLinks = [
-  { label: "Copper Braid Collection", href: "/collections/copper-braid-series" },
+  { label: "Pearl Collection", href: "/collections/pearl-series" },
   { label: "Golden Luxe Collection", href: "/collections/golden-luxe-series" },
   { label: "Dark Mineral Collection", href: "/collections/dark-mineral-series" },
   { label: "Pearl & Crystal", href: "/collections/pearl-crystal-series" },
