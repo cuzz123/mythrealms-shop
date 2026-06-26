@@ -6,7 +6,7 @@ export const CATEGORIES: Category[] = [
   { name: 'Pearl Collection', slug: 'pearl-series', description: 'Luminous freshwater and saltwater pearls with natural iridescence', image: '/images/products/1688-shop/pearl-series/cover.webp' },
   { name: 'Golden Luxe Collection', slug: 'golden-luxe-series', description: 'Light luxury gold-accent bracelets', image: '/images/products/1688-shop/golden-luxe-series/cover.jpg' },
   { name: 'Dark Mineral Collection', slug: 'dark-mineral-series', description: 'Deep charcoal and mineral stone bracelets', image: '/images/products/1688-shop/dark-mineral-series/cover.jpg' },
-  { name: 'Pearl & Crystal', slug: 'pearl-crystal-series', description: 'Luminous pearl and crystal bracelets with delicate shimmer' },
+  { name: 'Pearl & Crystal', slug: 'pearl-crystal-series', description: 'Luminous pearl and crystal bracelets with delicate shimmer', image: '/images/products/1688-shop/pearl-crystal-series/cover.webp' },
   { name: 'Curated Singles', slug: 'curated-singles', description: 'One-of-a-kind hand-selected bracelets' },
 ];
 
