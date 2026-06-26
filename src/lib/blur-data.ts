@@ -1,0 +1,12 @@
+export const BLUR_PLACEHOLDERS: Record<string, string> = {
+  'cover-crystal.webp': 'data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoKAAYABUB8JZQCdAEVwCYYIAD+6csIn3D/eAPYa46P/TEu8wAAAA==',
+  'cover-pearl.webp': 'data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAABwAQCdASoKAAYABUB8JZQCdAFAAAD+7oeyo+xar4JDIR19k5pD/0ThAAA=',
+  '单品1.webp': 'data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACQAQCdASoKAAYABUB8JQBOgB7DHqAA/s9lxoUK6ddC21yirhIsp6YcFnQAAA==',
+  '单品3.webp': 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAQCdASoKAAYABUB8JYwCw7EOGXjAAP6+UTAng+hFB7I9gtzh2E7R7tcxIAAA',
+  '单品4.webp': 'data:image/webp;base64,UklGRjQAAABXRUJQVlA4ICgAAACwAQCdASoKAAYABUB8JZQC7ADx9UAAAP7l7P/MRnOBTtoJ3jZm5OAA',
+  '单品5.webp': 'data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADQAQCdASoKAAYABUB8JYwCdAEVysuFAAD+2oTkbw15o14LKpDBYK7zAAA=',
+  '单品6.webp': 'data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAABwAQCdASoKAAYABUB8JaWDrAGIAAD+7oh8aRcqHCiVHuaaLGYAAA==',
+  '单品7.webp': 'data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoKAAYABUB8JYwAAv+4UOfLAAD+5DP75IK/ZjFBrRrYgHFk4lhKhHQOAAA=',
+  '轮播图1.webp': 'data:image/webp;base64,UklGRi4AAABXRUJQVlA4ICIAAABQAQCdASoKAAYABUB8JZwABDOAAP7vX+DXvpOjAyuP8AAA',
+  '轮播图2.webp': 'data:image/webp;base64,UklGRjQAAABXRUJQVlA4ICgAAACQAQCdASoKAAYABUB8JZwAAma2gBAA/u7eUzkI5RsHFzqs2StADgAA',
+};
