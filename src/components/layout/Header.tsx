@@ -209,7 +209,7 @@ export function Header() {
           <Link
             href="/wishlist"
             aria-label={`Wishlist, ${wishlistCount} items`}
-            className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}"
+            className={`relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
           >
             <Heart size={20} strokeWidth={1.8} />
             {wishlistCount > 0 && (
@@ -224,7 +224,7 @@ export function Header() {
             type="button"
             onClick={openCart}
             aria-label={`Shopping cart, ${itemCount} items`}
-            className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}"
+            className={`relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
           >
             <ShoppingBag size={20} strokeWidth={1.8} className={justAdded ? "cart-slide-up" : ""} />
             {itemCount > 0 && (
@@ -238,7 +238,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="ml-1 flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"} lg:hidden"
+            className={`ml-1 flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"} lg:hidden`}
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -259,7 +259,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}"
+              className={`flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
               aria-label="Close navigation menu"
             >
               <X size={28} strokeWidth={1.8} />
