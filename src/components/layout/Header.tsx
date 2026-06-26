@@ -28,7 +28,6 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const shopTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shopRef = useRef<HTMLDivElement>(null);
 
@@ -107,7 +106,7 @@ export function Header() {
     : "sticky top-0 bg-black/80 backdrop-blur-md text-white";
 
   const linkHover = isScrolled ? "hover:bg-gray-100 hover:text-gray-900" : "hover:bg-white/10 hover:text-white";
-  const iconColor = isScrolled ? "text-gray-600 hover:text-gray-900" : "${isScrolled} ? "text-gray-600 hover:text-gray-900" : "text-white/80 hover:text-white"";
+  const iconColor = isScrolled ? "text-gray-600 hover:text-gray-900" : "text-white/80 hover:text-white";
 
   return (
     <header className={`${headerBg} left-0 right-0 z-40 h-[64px] transition-all duration-300`}>
@@ -155,7 +154,7 @@ export function Header() {
                   className={`text-[16px] tracking-wide px-5 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
                     shopOpen
                       ? "bg-white text-gray-900"
-                      : isActive(link.href) ? "text-white" : "${isScrolled} ? "text-gray-600 hover:text-gray-900" : "text-white/80 hover:text-white""
+                      : isActive(link.href) ? "text-white" : "text-white/80 hover:text-white"
                   }`}
                 >
                   {link.label}
