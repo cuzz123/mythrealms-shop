@@ -54,16 +54,6 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
-  const isHome = pathname === "/";
-
-  // Detect scroll past hero
-  useEffect(() => {
-    if (!isHome) { setIsScrolled(true); return; }
-    const onScroll = () => setIsScrolled(window.scrollY > window.innerHeight * 0.5);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
 
   // Cart bounce animation on add
   const [justAdded, setJustAdded] = useState(false);
