@@ -1040,5 +1040,114 @@
     ],
     "category": "pearl-series",
     "categoryName": "Pearl Collection"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-crystal-01",
+    "name": "Pearl & Crystal #1",
+    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
+    "price": 36.99,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-main.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-detail3.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "tag": "New"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-crystal-02",
+    "name": "Pearl & Crystal #2",
+    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
+    "price": 38.99,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-main.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-detail3.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-detail4.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "tag": "New"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-crystal-03",
+    "name": "Pearl & Crystal #3",
+    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
+    "price": 40.99,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-main.png",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-main.png",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail3.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail4.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail5.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail6.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "tag": "New"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-crystal-04",
+    "name": "Pearl & Crystal #4",
+    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
+    "price": 42.99,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-main.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-detail3.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "tag": "New"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-crystal-05",
+    "name": "Pearl & Crystal #5",
+    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
+    "price": 44.99,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-main.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail3.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail4.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail5.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "tag": "New"
+  },
+  {
+    "type": "single-product",
+    "slug": "pearl-crystal-06",
+    "name": "Pearl & Crystal #6",
+    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
+    "price": 46.99,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-main.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-main.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-detail3.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-detail4.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "tag": "New"
   }
 ]

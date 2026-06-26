@@ -23,7 +23,7 @@ export function AnnouncementBar() {
   return (
     <Link
       href="/collections/curated-singles"
-      className={`block ${isHome ? "absolute bg-black" : "relative bg-black"} top-0 left-0 right-0 z-50 text-[var(--announcement-text)]`}
+      className={`block ${isHome ? "absolute bg-black z-50" : "relative bg-black z-40"} top-0 left-0 right-0 text-[var(--announcement-text)]`}
       role="region"
       aria-label="Announcement"
     >

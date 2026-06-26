@@ -93,7 +93,7 @@ export function Header() {
     ? "fixed top-0 bg-white shadow-md text-gray-900"
     : isHome
     ? "absolute top-[28px] bg-transparent text-white"
-    : "sticky top-0 bg-black/80 backdrop-blur-md text-white";
+    : "sticky top-0 bg-black/80 backdrop-blur-md text-white z-[60]";
 
   const linkHover = isScrolled ? "hover:bg-gray-100 hover:text-gray-900" : "hover:bg-white/10 hover:text-white";
   const iconColor = isScrolled ? "text-gray-600 hover:text-gray-900" : "text-white/80 hover:text-white";
