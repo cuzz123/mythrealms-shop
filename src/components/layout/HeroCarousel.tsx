@@ -66,7 +66,7 @@ export function HeroCarousel() {
             }`}
             aria-hidden={!isActive}
           >
-            <div className={`absolute inset-0 overflow-hidden ${isActive ? "animate-subtle-zoom" : ""}`}>
+            <div className={`absolute inset-0 overflow-hidden ${isActive ? "animate-kenburns" : ""}`}>
                 {/* Desktop: landscape */}
                 <div className="hidden md:block absolute inset-0">
                   <LazyImage src={s.image} alt={s.title} fill sizes="100vw" priority={isActive} className="object-cover" containerClassName="absolute inset-0" />
