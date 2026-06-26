@@ -192,7 +192,7 @@ export function Header() {
           <Link
             href="/account"
             aria-label={user ? `${user.name || "My account"} — View account` : "My account — Sign in"}
-            className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}"
+            className={`flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
           >
             {user?.image ? (
               <img
