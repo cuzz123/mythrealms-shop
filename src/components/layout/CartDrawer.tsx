@@ -162,7 +162,7 @@ export function CartDrawer() {
             </h2>
             <button
               type="button"
-              onClick={handleClose}
+              onClick={closeCart}
               className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-muted)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)]"
               aria-label="Close cart"
             >
