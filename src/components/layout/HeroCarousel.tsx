@@ -6,13 +6,11 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 
 const slides = [
+  { image: "/images/1688-hero/cover-pearl.webp", title: "Pearl Collection", subtitle: "Luminous freshwater & saltwater pearls · 20 styles", cta: "Shop Pearls", href: "/collections/pearl-series" },
+  { image: "/images/1688-hero/cover-crystal.webp", title: "Pearl & Crystal", subtitle: "Luminous crystal with delicate shimmer · 9 styles", cta: "Shop Pearl & Crystal", href: "/collections/pearl-crystal-series" },
   { image: "/images/1688-hero/单品1.webp", mobileImage: "/images/1688-hero-mobile/单品1.webp", title: "Blush Rose Bracelet", subtitle: "Soft rose-toned natural stone", cta: "Shop This Piece", href: "/products/blush-rose-single" },
   { image: "/images/1688-hero/单品3.webp", mobileImage: "/images/1688-hero-mobile/单品3.webp", title: "Golden Accent Bracelet", subtitle: "Warm gold-accent · sophisticated layering", cta: "Shop This Piece", href: "/products/golden-accent-single" },
   { image: "/images/1688-hero/单品4.webp", mobileImage: "/images/1688-hero-mobile/单品4.webp", title: "Crystal Bling Bracelet", subtitle: "Sparkling crystal facets · pure brilliance", cta: "Shop This Piece", href: "/products/crystal-bling-single" },
-  { image: "/images/1688-hero/cover-pearl.webp", title: "Pearl Collection", subtitle: "Luminous pearls · natural iridescence · 20 styles", cta: "Shop Pearls", href: "/collections/pearl-series" },
-  { image: "/images/1688-hero/cover-golden.webp", title: "Golden Luxe Collection", subtitle: "Light luxury gold-accent bracelets · 13 styles", cta: "Shop Golden Luxe", href: "/collections/golden-luxe-series" },
-  { image: "/images/1688-hero/cover-dark.webp", title: "Dark Mineral Collection", subtitle: "Deep charcoal and mineral stone · 14 styles", cta: "Shop Dark Mineral", href: "/collections/dark-mineral-series" },
-  { image: "/images/1688-hero/cover-crystal.webp", title: "Pearl & Crystal Series", subtitle: "Luminous crystal with delicate shimmer · 9 styles", cta: "Shop Pearl & Crystal", href: "/collections/pearl-crystal-series" },
 ];
 
 export function HeroCarousel() {

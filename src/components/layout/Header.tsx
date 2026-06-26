@@ -144,7 +144,9 @@ export function Header() {
                   className={`text-[16px] tracking-wide px-5 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
                     shopOpen
                       ? "bg-white text-gray-900"
-                      : isActive(link.href) ? "text-white" : isScrolled ? "text-gray-700 hover:text-gray-900" : "text-white/80 hover:text-white"
+                      : isScrolled
+                      ? isActive(link.href) ? "text-gray-900" : "text-gray-700 hover:text-gray-900"
+                      : isActive(link.href) ? "text-white" : "text-white/80 hover:text-white"
                   }`}
                 >
                   {link.label}
