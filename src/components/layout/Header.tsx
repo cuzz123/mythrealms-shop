@@ -28,6 +28,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const shopTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shopRef = useRef<HTMLDivElement>(null);
 
@@ -44,6 +45,16 @@ export function Header() {
   const openCart = useCartUIStore((s) => s.openCart);
   const wishlistCount = useWishlistStore((s) => s.count());
   const user = session?.user;
+  const isHome = pathname === "/";
+
+  // Scroll detection
+  useEffect(() => {
+    if (!isHome) { setIsScrolled(true); return; }
+    const onScroll = () => setIsScrolled(window.scrollY > window.innerHeight * 0.5);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
   const isHome = pathname === "/";
 
   // Detect scroll past hero
