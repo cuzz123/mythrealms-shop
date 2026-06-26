@@ -27,6 +27,7 @@ const navLinks = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const shopTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shopRef = useRef<HTMLDivElement>(null);
 
@@ -43,6 +44,16 @@ export function Header() {
   const openCart = useCartUIStore((s) => s.openCart);
   const wishlistCount = useWishlistStore((s) => s.count());
   const user = session?.user;
+  const isHome = pathname === "/";
+
+  // Detect scroll past hero
+  useEffect(() => {
+    if (!isHome) { setIsScrolled(true); return; }
+    const onScroll = () => setIsScrolled(window.scrollY > window.innerHeight * 0.5);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   // Cart bounce animation on add
   const [justAdded, setJustAdded] = useState(false);
@@ -78,10 +89,17 @@ export function Header() {
     return pathname.startsWith(href);
   };
 
-  const isHome = pathname === "/";
+  const headerBg = isScrolled
+    ? "fixed top-0 bg-white shadow-md text-gray-900"
+    : isHome
+    ? "absolute top-[28px] bg-transparent text-white"
+    : "sticky top-0 bg-black/80 backdrop-blur-md text-white";
+
+  const linkHover = isScrolled ? "hover:bg-gray-100 hover:text-gray-900" : "hover:bg-white/10 hover:text-white";
+  const iconColor = isScrolled ? "text-gray-600 hover:text-gray-900" : "${isScrolled} ? "text-gray-600 hover:text-gray-900" : "text-white/80 hover:text-white"";
 
   return (
-    <header className={`${isHome ? "absolute top-[28px]" : "sticky top-0 bg-black/80 backdrop-blur-md"} left-0 right-0 z-40 h-[64px]`}>
+    <header className={`${headerBg} left-0 right-0 z-40 h-[64px] transition-all duration-300`}>
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
         {/* Left — Logo */}
         <Link
@@ -126,7 +144,7 @@ export function Header() {
                   className={`text-[16px] tracking-wide px-5 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
                     shopOpen
                       ? "bg-white text-gray-900"
-                      : isActive(link.href) ? "text-white" : "text-white/80 hover:text-white"
+                      : isActive(link.href) ? "text-white" : "${isScrolled} ? "text-gray-600 hover:text-gray-900" : "text-white/80 hover:text-white""
                   }`}
                 >
                   {link.label}
