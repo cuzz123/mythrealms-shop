@@ -8,6 +8,7 @@ const MESSAGES = [
   "Free Shipping Over $69.99  |  Hand-Selected Stones  |  30-Day Easy Returns  |  Ethically Sourced",
   "New: Curated Stones Collection — Shop Now",
   "15% Off First Order — Code: MYTH15",
+  "Limited quantities — each piece hand-selected and unique",
 ];
 
 export function AnnouncementBar() {
