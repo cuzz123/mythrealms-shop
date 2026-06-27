@@ -209,7 +209,7 @@ export function Product1688({ slug }: { slug: string }) {
 
           {/* Delivery estimate */}
           <p className="mt-1.5 text-xs text-[var(--text-muted)]">
-            Free shipping over $69.99 · Delivered in 7-14 business days
+            Free shipping over $69.99 · Delivered in 7-20 business days
           </p>
 
           {/* Discount code badge */}
@@ -346,7 +346,7 @@ export function Product1688({ slug }: { slug: string }) {
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Shipping Info</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Free standard shipping on orders over $69.99. US delivery in 7–14 business days. International delivery in 14–21 business days. Each order is carefully packaged in a MythRealms gift box with a story card.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Free standard shipping on orders over $69.99. US delivery in 7–20 business days. International delivery in 14–21 business days. Each order is carefully packaged in a MythRealms gift box with a story card.</p>
                 </div>
               </div>
             )}

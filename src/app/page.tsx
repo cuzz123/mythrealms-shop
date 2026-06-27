@@ -11,7 +11,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 export const dynamic = "force-static";
 
 export default function HomePage() {
-  const featured = PRODUCTS.filter(p => p.isBestSeller).slice(0, 6);
+  const featured = PRODUCTS.filter(p => p.category === 'curated-singles' && p.isBestSeller).slice(0, 6);
   const categories = CATEGORIES;
 
   return (
@@ -52,7 +52,7 @@ export default function HomePage() {
       <ScrollReveal as="section" className="py-14 bg-[#1A1816]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-8">
-            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Curated Singles</h2>
+            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Best Sellers</h2>
             <Link href="/collections/curated-singles" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All <ArrowRight className="w-4 h-4" /></Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

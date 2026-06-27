@@ -152,15 +152,15 @@ export function Header() {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${shopOpen ? "rotate-180" : ""}`} />
                 </button>
                 {shopOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] bg-white shadow-2xl z-50 animate-slide-down" style={{borderRadius: 0}}>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] bg-[var(--surface)] border border-[var(--border)] shadow-2xl z-50 animate-slide-down" style={{borderRadius: 0}}>
                     <div className="grid grid-cols-2 gap-0 p-6">
                       {link.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
                           onClick={() => setShopOpen(false)}
-                          className={`block px-4 py-3 text-[14px] transition-colors hover:bg-gray-50 ${
-                            pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : "text-gray-700"
+                          className={`block px-4 py-3 text-[14px] transition-colors hover:bg-[var(--border-light)] ${
+                            pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : "text-[var(--text-secondary)]"
                           }`}
                         >
                           {child.label}
@@ -239,14 +239,14 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className={`ml-1 flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"} lg:hidden`}
+            className={`ml-1 flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"} lg:hidden`}
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? (
-              <X size={22} strokeWidth={1.8} />
+              <X size={24} strokeWidth={1.8} />
             ) : (
-              <Menu size={22} strokeWidth={1.8} />
+              <Menu size={24} strokeWidth={1.8} />
             )}
           </button>
         </div>

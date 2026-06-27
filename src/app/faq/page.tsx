@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Plus, Minus, HelpCircle } from "lucide-react";
 
@@ -30,6 +30,15 @@ const faqs = [
 export default function FAQPage() {
   const [activeCat, setActiveCat] = useState("all");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+
+  // Show sticky contact bar after scrolling past first few FAQs
+  useEffect(() => {
+    const onScroll = () => setShowStickyBar(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const filtered = activeCat === "all" ? faqs : faqs.filter(f => f.cat === activeCat);
   const categories = ["all", "order", "shipping", "returns", "products"];
@@ -77,6 +86,21 @@ export default function FAQPage() {
         <p className="text-sm text-[var(--text-muted)] mb-4">Our support team typically responds within 24 hours</p>
         <a href="mailto:support@mythrealms.com" className="inline-block px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Contact Us</a>
       </div>
+
+      {/* Sticky contact bar — appears after scrolling past first few FAQs */}
+      {showStickyBar && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-[var(--surface)] border-t border-[var(--border)] shadow-[0_-4px_20px_rgba(0,0,0,0.5)] animate-slide-up">
+          <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-[var(--text)]">Still have questions?</p>
+              <p className="text-xs text-[var(--text-muted)]">Our support team typically responds within 24 hours</p>
+            </div>
+            <Link href="/contact" className="shrink-0 px-5 py-2 bg-[var(--accent)] text-white rounded-full text-sm font-semibold hover:bg-[var(--accent-hover)] transition">
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* FAQPage Structured Data */}
       <script

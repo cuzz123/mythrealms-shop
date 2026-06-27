@@ -116,8 +116,8 @@ export default function AboutPage() {
         <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Find Your Mountain. Wear Its Stone.</h2>
         <p className="text-[var(--text-secondary)] mb-6">The mountain that calls to you is in the Classic. Its stone is here — hand-selected, artisan-finished, ready to ship.</p>
         <div className="flex justify-center gap-4">
-          <Link href="/collections" className="px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Explore the Collection</Link>
-          <Link href="/collections" className="px-8 py-3 border border-[var(--border)] text-[var(--text)] rounded-full font-semibold hover:border-[var(--accent)] transition">Shop All</Link>
+          <Link href="/collections/curated-singles" className="px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Discover Curated Singles</Link>
+          <Link href="/collections" className="px-8 py-3 border border-[var(--border)] text-[var(--text)] rounded-full font-semibold hover:border-[var(--accent)] transition">Explore All Collections</Link>
         </div>
       </div>
     </div>
