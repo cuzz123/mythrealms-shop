@@ -18,10 +18,10 @@ export async function HomeBlogAsync() {
             From the Archives
           </span>
           <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5] mb-4">
-            Legends & Lore
+            Stone Stories
           </h2>
           <p className="text-[1.0625rem] text-[#A89880] max-w-[580px] mx-auto leading-relaxed">
-            Stories from the Classic of Mountains and Seas, Taoist philosophy, and the ancient art of living.
+            Crystal wellness, intention practices, stone meanings, and spiritual lifestyle inspiration.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">

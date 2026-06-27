@@ -16,8 +16,8 @@ export async function generateMetadata({
   return {
     title: q ? `Search: ${q} — MythRealms` : "Search — MythRealms",
     description: q
-      ? `Search results for "${q}" — discover mythical jewelry and ancient guardians`
-      : "Search our collection of mythical beast jewelry and ancient guardian talismans",
+      ? `Search results for "${q}" — discover intention-based crystal jewelry and spiritual wellness pieces`
+      : "Search our collection of intention-based crystal and pearl jewelry",
   };
 }
 
@@ -96,14 +96,14 @@ export default async function SearchPage({
   }
 
   const popularSearches = [
-    "Nine-Tailed Fox",
-    "Qilin",
-    "Azure Dragon",
-    "Phoenix",
-    "White Tiger",
-    "Four Symbols",
-    "Bai Ze",
-    "Kun Peng",
+    "Protection",
+    "Rose Quartz",
+    "Self-Love",
+    "Amethyst",
+    "Confidence",
+    "Black Obsidian",
+    "Abundance",
+    "Clarity",
   ];
 
   return (
@@ -123,7 +123,7 @@ export default async function SearchPage({
         <p className="text-[var(--text-muted)] max-w-lg mx-auto">
           {query
             ? `${total} result${total !== 1 ? "s" : ""} found`
-            : "Find your guardian among the ancient beasts"}
+            : "Find your intention among the stones"}
         </p>
       </div>
 
@@ -174,7 +174,7 @@ export default async function SearchPage({
             What Are You Looking For?
           </h2>
           <p className="text-[var(--text-muted)] max-w-md mx-auto mb-8">
-            Search for mythical beasts, constellations, gemstones, or intentions. Use the search bar above or try a suggestion below.
+            Search for crystals, intentions, gemstones, or purposes. Use the search bar above or try a suggestion below.
           </p>
 
           <div className="flex flex-wrap justify-center gap-2 max-w-lg mx-auto">

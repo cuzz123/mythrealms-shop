@@ -44,7 +44,7 @@ export default function ContactPage() {
 
       <div className="text-center mb-12">
         <h1 className="font-serif text-5xl font-bold text-[var(--text)] mb-3">Contact Us</h1>
-        <p className="text-[var(--text-muted)] max-w-lg mx-auto">We would love to hear from you. Whether you have a question about our mythical collections, orders, or the legends themselves.</p>
+        <p className="text-[var(--text-muted)] max-w-lg mx-auto">We would love to hear from you. Whether you have a question about our intention pieces, crystals, or your order.</p>
       </div>
 
       <div className="grid md:grid-cols-3 gap-8 mb-12">

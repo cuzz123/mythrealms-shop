@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "MythRealms — Ancient Chinese Mythology Jewelry";
+export const alt = "MythRealms — Intention-Based Crystal Wellness Jewelry";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -25,10 +25,10 @@ export default function Image() {
           MYTHREALMS
         </div>
         <div style={{ marginTop: 28, fontSize: 34, color: "#E8DEC8", maxWidth: 900, textAlign: "center" }}>
-          Handcrafted Gemstone Bracelets · Ancient Chinese Mythology
+          Stones With Intention · Wear Your Becoming
         </div>
         <div style={{ marginTop: 36, fontSize: 25, color: "#B9A77E" }}>
-          28 Lunar Mansions · Five Elements · Find your guardian
+          Protection · Love · Clarity · Abundance · Courage
         </div>
       </div>
     ),

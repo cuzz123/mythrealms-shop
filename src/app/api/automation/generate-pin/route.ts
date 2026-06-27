@@ -9,19 +9,19 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.PIN_AI_API_KEY || process.env.AGNES_API_KEY;
     if (!apiKey) {
       // Return template-based content if no AI key
-      const title = `${productName || "Mythical Guardian"} — Handcrafted Luxury Jewelry`;
+      const title = `${productName || "Crystal Intention"} — Handcrafted Intention Jewelry`;
       const description = `Discover the legend behind this ${productName || "piece"}. Handcrafted in 14k gold and sterling silver. Free shipping on orders over $69.99. Shop the collection at mythrealms-shop.vercel.app`;
       return NextResponse.json({
         title,
         description,
         link: `https://mythrealms-shop.vercel.app/products/${productSlug || ""}`,
-        board: "Mythical Jewelry Collection",
-        tags: ["mythicaljewelry", "chinesemythology", "luxuryjewelry"],
+        board: "Crystal Intention Jewelry",
+        tags: ["crystaljewelry", "intentionbracelet", "spiritualwellness", "crystalhealing"],
       });
     }
 
     const prompt = mood === "story"
-      ? `Write a Pinterest pin title and description for ${productName || "a mythical beast jewelry piece"} from MythRealms. Title: max 100 chars, keyword-rich. Description: max 500 chars, natural language, emotional, includes CTA. Format: JSON {\"title\":\"...\",\"description\":\"...\"}`
+      ? `Write a Pinterest pin title and description for ${productName || "a crystal intention jewelry piece"} from MythRealms. Title: max 100 chars, keyword-rich. Description: max 500 chars, natural language, emotional, includes CTA. Format: JSON {\"title\":\"...\",\"description\":\"...\"}`
       : `Write a Pinterest pin title and description for ${productName || "a luxury jewelry piece"} from MythRealms. Focus on ${mood || "craftsmanship and materials"}. Format: JSON {\"title\":\"...\",\"description\":\"...\"}`;
 
     const res = await fetch("https://apihub.agnes-ai.com/v1/chat/completions", {
@@ -48,8 +48,8 @@ export async function POST(request: NextRequest) {
       title: parsed?.title || `${productName} — MythRealms`,
       description: parsed?.description || `${productName}. Handcrafted luxury jewelry. Free shipping.`,
       link: `https://mythrealms-shop.vercel.app/products/${productSlug || ""}`,
-      board: mood === "story" ? "Chinese Mythology & Legends" : "Mythical Jewelry Collection",
-      tags: ["mythicaljewelry", "chinesemythology", "luxuryjewelry", "shanhaijing"],
+      board: mood === "story" ? "Intention & Crystal Wellness" : "Crystal Intention Jewelry",
+      tags: ["crystaljewelry", "intentionbracelet", "spiritualwellness", "crystalhealing"],
     });
   } catch (e: any) {
     return NextResponse.json({ error: e?.message }, { status: 500 });

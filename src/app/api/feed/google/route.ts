@@ -41,7 +41,7 @@ export async function GET() {
 <channel>
   <title>MythRealms</title>
   <link>${baseUrl}</link>
-  <description>Luxury jewelry inspired by Chinese mythology — the Classic of Mountains and Seas</description>
+  <description>Intention-based crystal and pearl jewelry — stones with purpose, worn with intention. Protection, love, clarity, abundance. Hand-selected. Artisan-finished.</description>
 ${items.join("\n")}
 </channel>
 </rss>`;

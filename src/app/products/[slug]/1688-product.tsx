@@ -314,9 +314,9 @@ export function Product1688({ slug }: { slug: string }) {
             className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group"
           >
             <span className="text-sm font-medium text-[var(--text)]">
-              Every stone has a story —{" "}
+              Stones with intention —{" "}
               <span className="text-[var(--accent)] group-hover:underline">
-                Read the Story
+                Read Our Story
               </span>
             </span>
           </a>
@@ -343,6 +343,10 @@ export function Product1688({ slug }: { slug: string }) {
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Care Instructions</h4>
                   <p className="text-sm text-[var(--text-muted)] leading-relaxed">Avoid prolonged water exposure — remove before swimming, showering, or bathing. Store in a dry place away from direct sunlight. Clean gently with a soft, dry cloth. Avoid contact with perfumes, lotions, and harsh chemicals.</p>
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">How to Wear Your Intention</h4>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Hold your bracelet each morning. Close your eyes. Name one thing you are releasing — a fear, a worry, a story that no longer serves you. Name one thing you are inviting — a quality, a shift, a new way of being. Put the bracelet on your left wrist, the receiving side. When you notice it during the day — a brush against your desk, a glint in the light — let it remind you of the intention you set. This is not jewelry. This is practice.</p>
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Shipping Info</h4>

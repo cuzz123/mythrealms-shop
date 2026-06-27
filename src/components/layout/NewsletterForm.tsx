@@ -36,7 +36,7 @@ export function NewsletterForm() {
     return (
       <div className="flex items-center gap-3 justify-center py-4 px-6 bg-[var(--success)]/10 border border-[var(--success)]/20 rounded-lg">
         <Check className="w-5 h-5 text-[var(--success)]" />
-        <span className="text-[var(--success)] font-medium">Welcome to the expedition. Check your inbox.</span>
+        <span className="text-[var(--success)] font-medium">Welcome to the circle. Check your inbox.</span>
       </div>
     );
   }
@@ -62,7 +62,7 @@ export function NewsletterForm() {
         {status === "loading" ? (
           <Loader2 className="w-5 h-5 animate-spin" />
         ) : (
-          "Embark"
+          "Subscribe"
         )}
       </Button>
       {status === "error" && (

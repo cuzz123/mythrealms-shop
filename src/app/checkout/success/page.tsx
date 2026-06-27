@@ -8,7 +8,7 @@ import { safeJsonParse } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Order Confirmed — MythRealms",
-  description: "Your order has been confirmed. Ancient legends are on their way to you.",
+  description: "Your order has been confirmed. Your intentions are on their way to you.",
 };
 
 export default async function CheckoutSuccessPage({
@@ -35,7 +35,7 @@ export default async function CheckoutSuccessPage({
       {orderId && (
         <p className="text-sm text-[var(--text-muted)] mb-8">Order ID: <code className="bg-[var(--border-light)] px-2 py-1 rounded text-[var(--text)]">{orderId}</code></p>
       )}
-      <p className="text-sm text-[var(--text-muted)] mb-8">A confirmation email will be sent shortly. Ancient legends are already on their way to you.</p>
+      <p className="text-sm text-[var(--text-muted)] mb-8">A confirmation email will be sent shortly. Your intention pieces are already on their way to you.</p>
       <div className="flex gap-3 justify-center">
         <Link href="/collections/curated-singles"><Button variant="primary">Continue Shopping</Button></Link>
         <Link href="/"><Button variant="outline">Back to Home</Button></Link>

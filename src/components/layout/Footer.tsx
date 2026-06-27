@@ -4,10 +4,10 @@ import Link from "next/link";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 
 const exploreLinks = [
-  { label: "Pearl Collection", href: "/collections/pearl-series" },
-  { label: "Luxe Collection", href: "/collections/luxe-collection" },
-  { label: "Pearl & Crystal", href: "/collections/pearl-crystal-series" },
-  { label: "Curated Singles", href: "/collections/curated-singles" },
+  { label: "Serenity Collection", href: "/collections/pearl-series" },
+  { label: "The Intention Stones", href: "/collections/luxe-collection" },
+  { label: "Balance & Light", href: "/collections/pearl-crystal-series" },
+  { label: "The Archetypes", href: "/collections/curated-singles" },
   { label: "About Us", href: "/about" },
   { label: "Blog", href: "/blog" },
 ];
@@ -80,8 +80,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-[#B0A590]">
-              Hand-selected crystals. Artisan finishes. Each stone tells a story
-              — find the one that speaks to you.
+              Stones with intention. Artisan finishes. Each piece holds a purpose
+              — find the one that names what you are becoming.
             </p>
             {/* Social icons */}
             <div className="flex items-center gap-3">
@@ -145,8 +145,8 @@ export function Footer() {
             </h3>
             <div className="space-y-4 text-sm text-[#B0A590]">
               <p>
-                Early access to new collections, stone stories, and
-                subscriber-only offers — no spam, just the good stuff.
+                New intentions, stone stories, and subscriber-only offers
+                — no spam, just the good stuff.
               </p>
               <NewsletterForm />
               <div className="pt-2 space-y-2">

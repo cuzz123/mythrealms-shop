@@ -77,7 +77,7 @@ export function OrganizationJsonLd() {
     "@type": "Organization",
     name: "MythRealms",
     url: "https://mythrealms-shop.vercel.app",
-    description: "Curated natural stone bracelets — hand-selected crystals, artisan finishes. Amethyst, rose quartz, black obsidian, moonstone, and tiger's eye.",
+    description: "Intention-based crystal and pearl jewelry. Protection, love, clarity, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
     sameAs: [
       "https://instagram.com/mythrealms.shop",
     ],

@@ -29,9 +29,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app"),
-  title: "MythRealms — Natural Stone Bracelets, Curated for the Modern Mystic",
-  description: "Hand-selected crystal bracelets. Amethyst, rose quartz, black obsidian, moonstone, and tiger's eye. Artisan finishes. Pieces that feel like they've always belonged to you.",
-  keywords: ["natural stone bracelets", "crystal bracelets", "amethyst", "rose quartz", "black obsidian", "moonstone", "tigers eye", "gemstone jewelry"],
+  title: "MythRealms — Stones With Intention. Wear Your Becoming.",
+  description: "Intention-based crystal and pearl jewelry. Protection, clarity, love, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
+  keywords: ["intention bracelet", "crystal healing bracelet", "spiritual wellness jewelry", "protection bracelet", "self-love jewelry", "gemstone bracelet", "pearl bracelet", "amethyst", "rose quartz", "black obsidian", "moonstone", "tigers eye"],
   icons: {
     icon: "/icon.svg",
     apple: "/apple-icon.png",
@@ -43,15 +43,15 @@ export const metadata: Metadata = {
     "p:domain_verify": "f7403d777d8595e4acf712c703023325",
   },
   openGraph: {
-    title: "MythRealms — Natural Stone Bracelets, Curated for the Modern Mystic",
-    description: "Hand-selected crystal bracelets. Artisan finishes. Pieces that feel like they've always belonged to you.",
+    title: "MythRealms — Stones With Intention. Wear Your Becoming.",
+    description: "Intention-based crystal and pearl jewelry. Protection, clarity, love, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
     type: "website",
     siteName: "MythRealms",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MythRealms — Natural Stone Bracelets, Curated for the Modern Mystic",
-    description: "Hand-selected crystal bracelets. Artisan finishes. Pieces that feel like they've always belonged to you.",
+    title: "MythRealms — Stones With Intention. Wear Your Becoming.",
+    description: "Intention-based crystal and pearl jewelry. Protection, clarity, love, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
   },
 };
 

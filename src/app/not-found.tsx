@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 export default function NotFoundPage() {
   // First product image per category for link thumbnails
   const categoryLinks = [
-    { slug: "pearl-series", label: "Pearl Collection" },
-    { slug: "luxe-collection", label: "Luxe Collection" },
-    { slug: "pearl-crystal-series", label: "Pearl & Crystal" },
-    { slug: "curated-singles", label: "Curated Singles" },
+    { slug: "pearl-series", label: "Serenity Collection" },
+    { slug: "luxe-collection", label: "Intention Stones" },
+    { slug: "pearl-crystal-series", label: "Balance & Light" },
+    { slug: "curated-singles", label: "The Archetypes" },
   ].map((c) => {
     const first = PRODUCTS.find((p) => p.category === c.slug);
     return { ...c, thumb: first?.image };
@@ -31,7 +31,7 @@ export default function NotFoundPage() {
         </h1>
 
         <p className="text-[var(--text-secondary)] leading-relaxed mb-8 max-w-sm mx-auto">
-          The page you are looking for does not exist in this realm. Perhaps it has vanished into myth, or maybe the path was never here at all.
+          The page you are looking for does not exist. But you are exactly where you are meant to be.
         </p>
 
         <Link

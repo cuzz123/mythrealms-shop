@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Blog — MythRealms",
-  description: "Explore the wisdom of Taoist philosophy, Wu Xing elements, Bagua, and spiritual lifestyle inspiration — from the world of MythRealms.",
+  description: "Explore the wisdom of crystal wellness, intention setting, stone meanings, and spiritual lifestyle inspiration — from the world of MythRealms.",
 };
 
 export default async function BlogPage() {
@@ -24,7 +24,7 @@ export default async function BlogPage() {
 
       <div className="text-center mb-12">
         <h1 className="font-serif text-5xl font-bold mb-3">MythRealms Blog</h1>
-        <p className="text-[var(--text-muted)] max-w-lg mx-auto">Explore the wisdom of Taoist philosophy, Wu Xing elements, Bagua, and spiritual lifestyle inspiration</p>
+        <p className="text-[var(--text-muted)] max-w-lg mx-auto">Explore crystal wellness, intention practices, stone meanings, and spiritual lifestyle inspiration</p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">

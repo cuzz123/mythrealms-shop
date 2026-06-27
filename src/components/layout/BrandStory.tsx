@@ -9,18 +9,19 @@ export function BrandStory() {
           About MythRealms
         </h2>
         <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
-          More than just jewelry, MythRealms brings China's oldest legends to life.
-          Drawing from the Classic of Mountains and Seas (Shan Hai Jing) — a text
-          that predates Tolkien by two millennia — each piece tells a story of mythical
-          beasts, celestial guardians, and ancient wisdom.
+          More than jewelry, MythRealms creates intention pieces — wearable reminders
+          of who you are becoming. Each stone carries a singular purpose: protection,
+          clarity, love, confidence, or abundance. You choose the intention. You wear
+          the practice.
         </p>
         <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-          We craft wearable mythology for those who feel the pull of{" "}
-          <strong className="text-[var(--text)]">LEGENDARY, MYSTICAL, POWERFUL, TIMELESS and EXTRAORDINARY.</strong>
+          We craft stones with intention for those who believe that what you wear
+          shapes how you move through the world —{" "}
+          <strong className="text-[var(--text)]">INTENTIONAL, GROUNDED, LUMINOUS and TRUE.</strong>
         </p>
         <Link href="/about">
           <Button variant="outline" size="md">
-            Read More About Our Story
+            Read Our Story
           </Button>
         </Link>
       </div>

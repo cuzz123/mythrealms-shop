@@ -6,10 +6,10 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 
 const slides = [
-  { image: "/images/1688-hero/轮播图1.webp", title: "Pearl Collection", subtitle: "Luminous freshwater & saltwater pearls · 20 styles", cta: "Shop Pearls", href: "/collections/pearl-series" },
-  { image: "/images/1688-hero/轮播图2.webp", title: "Luxe Collection", subtitle: "Premium hand-selected bracelets · 12 styles", cta: "Shop Luxe", href: "/collections/luxe-collection" },
-  { image: "/images/1688-hero/单品1.webp", mobileImage: "/images/1688-hero-mobile/单品1.webp", title: "Pearl & Crystal", subtitle: "Luminous crystal with delicate shimmer · 4 styles", cta: "Shop Pearl & Crystal", href: "/collections/pearl-crystal-series" },
-  { image: "/images/1688-hero/单品3.webp", mobileImage: "/images/1688-hero-mobile/单品3.webp", title: "Curated Singles", subtitle: "One-of-a-kind hand-selected bracelets · 6 styles", cta: "Shop Singles", href: "/collections/curated-singles" },
+  { image: "/images/1688-hero/轮播图1.webp", title: "The Serenity Collection", subtitle: "Luminous freshwater & saltwater pearls for emotional balance · 20 styles", cta: "Shop Serenity", href: "/collections/pearl-series" },
+  { image: "/images/1688-hero/轮播图2.webp", title: "The Intention Stones", subtitle: "Premium hand-strung bracelets. Each stone holds a singular purpose. · 12 styles", cta: "Shop Intentions", href: "/collections/luxe-collection" },
+  { image: "/images/1688-hero/单品1.webp", mobileImage: "/images/1688-hero-mobile/单品1.webp", title: "Balance & Light", subtitle: "Where pearl meets crystal — pieces for those who hold both at once · 4 styles", cta: "Shop Balance", href: "/collections/pearl-crystal-series" },
+  { image: "/images/1688-hero/单品3.webp", mobileImage: "/images/1688-hero-mobile/单品3.webp", title: "The Archetypes", subtitle: "Six stones. Six intentions. No two alike. · 6 styles", cta: "Shop Archetypes", href: "/collections/curated-singles" },
 ];
 
 const SWIPE_THRESHOLD = 50;

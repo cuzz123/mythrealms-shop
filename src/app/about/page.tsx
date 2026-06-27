@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Mountain, Waves, Droplets, Sparkles } from "lucide-react";
+import { Gem, Sparkles, Clock, User } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About MythRealms — From an Ancient Book to Your Wrist",
-  description: "The Classic of Mountains and Seas held 550 mountains, countless stones. MythRealms brings those stones from the page to the present — each piece a fragment of an ancient geological treasure map.",
+  title: "About MythRealms — Stones With Intention. Wear Your Becoming.",
+  description: "We create intention pieces — wearable reminders of who you are becoming. Each stone carries a singular purpose. Protection, love, clarity, abundance — choose yours.",
 };
 
 export default function AboutPage() {
@@ -21,7 +21,7 @@ export default function AboutPage() {
         <div className="absolute inset-0">
           <Image
             src="/images/1688-hero/单品1.webp"
-            alt="MythRealms curated singles bracelet — one-of-a-kind hand-selected stone jewelry"
+            alt="MythRealms intention bracelet — hand-selected stone with purpose"
             fill
             sizes="(max-width:768px) 100vw, 896px"
             className="object-cover"
@@ -31,15 +31,14 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-transparent to-transparent" />
         </div>
         <div className="relative z-10 text-center py-20 px-6">
-          <h1 className="font-serif text-5xl font-bold text-white mb-4">From an Ancient Book to Your Wrist</h1>
-          <p className="text-xl text-[var(--accent)] font-serif italic mb-6">Every stone carries a story. Ours begin in the Classic of Mountains and Seas.</p>
+          <h1 className="font-serif text-5xl font-bold text-white mb-4">Stones With Intention. Wear Your Becoming.</h1>
+          <p className="text-xl text-[var(--accent)] font-serif italic mb-6">You are not just wearing a bracelet. You are wearing a practice.</p>
           <p className="text-white/80 max-w-2xl mx-auto leading-relaxed">
-            The <span className="italic">Classic of Mountains and Seas</span> (Shan Hai Jing), written
-            2,500 years ago, was not merely a bestiary. It was a map of stones. Every mountain held a
-            gem. Every river carried a crystal. Every sea guarded a pearl. One book. 277 mythical
-            creatures. 550 mountains. Countless stones waiting to be found. MythRealms brings those
-            stones from the page to the present — each piece a fragment of an ancient geological
-            treasure map, worn not as costume but as connection.
+            One stone. One intention. One daily reminder of who you are becoming.
+            Protection. Clarity. Love. Confidence. Abundance. Renewal. Choose the
+            intention that names what you need most right now. Wear it every day. Let
+            it anchor the person you are growing into — not who you used to be, but
+            who you are choosing to become.
           </p>
         </div>
       </div>
@@ -47,10 +46,10 @@ export default function AboutPage() {
       {/* Four Pillars */}
       <div className="grid md:grid-cols-2 gap-8 mb-16">
         {[
-          { icon: Mountain, title: "The Mountains — Stones of Power", descNode: <>Every mountain in the Classic holds a gem. Jade from <Link href="/collections/luxe-collection" className="text-[var(--accent)] hover:underline">Kunlun</Link>. Agate from the peaks of the east. Crystal from the summits that touch heaven. We trace the ancient names and bring their stones to the surface — each mountain a source, each stone a piece of living geography.</> },
-          { icon: Waves, title: "The Seas — Pearls of the Dragon Kings", descNode: <>The four <Link href="/collections/pearl-series" className="text-[var(--accent)] hover:underline">Dragon Kings</Link> guard the oceans in Chinese myth. Ao Guang rules the East Sea. Ao Qin commands the South. Ao Run oversees the West. Ao Shun guards the North. Their tears, shed over millennia, became the pearls we string today. Each one carries the depth of an undersea palace.</> },
-          { icon: Droplets, title: "The Rivers — Crystals of the Sky", descNode: "Rivers in the Classic carry minerals from the heavens. Crystal, quartz, and moonstone wash down from sacred peaks, polished by the current over thousands of years. Our river-sourced stones carry the clarity of mountain streams and the patience of moving water." },
-          { icon: Sparkles, title: "The Beasts — Guardians of Each Stone", descNode: <>277 creatures populate the Shan Hai Jing. The <Link href="/products/curated-singles-04" className="text-[var(--accent)] hover:underline">nine-tailed fox</Link>. The <Link href="/products/curated-singles-03" className="text-[var(--accent)] hover:underline">qilin</Link>. The <Link href="/products/curated-singles-05" className="text-[var(--accent)] hover:underline">phoenix</Link>. The <Link href="/products/curated-singles-06" className="text-[var(--accent)] hover:underline">white tiger</Link>. Each one protects a mineral deposit. Each one guards a geological secret. When you wear a MythRealms piece, you wear the stone a mythical beast was said to protect — a quiet inheritance from a world that believed every rock had a keeper.</> },
+          { icon: Gem, title: "The Intentions — Six Paths to Yourself", descNode: <>Every MythRealms piece begins with a single intention. <Link href="/collections/curated-singles" className="text-[var(--accent)] hover:underline">Protection</Link>. Love. Clarity. Confidence. Renewal. Abundance. You do not buy a bracelet because you like how it looks. You choose it because it names something true about where you are right now — and where you are trying to go.</> },
+          { icon: Sparkles, title: "The Stones — Nature's Vocabulary", descNode: <>Each stone carries a meaning refined over centuries. Black obsidian absorbs and protects. Rose quartz opens and softens. Amethyst quiets and clarifies. Tiger's eye steadies and focuses. Moonstone renews and transforms. Green aventurine attracts and receives. We select each stone for its quality and its energy — hand-picked, never mass-sourced.</> },
+          { icon: Clock, title: "The Practice — A Daily Ritual", descNode: <>The bracelet is not the practice. The practice is what you do with it. Hold it each morning. Name one thing you are releasing. One thing you are inviting. Put it on. Move through your day with the stone against your skin — a constant, quiet reminder of the intention you set when the day was new. This is not jewelry. This is showing up for yourself.</> },
+          { icon: User, title: "The Archetypes — Six Versions of You", descNode: <>The <Link href="/products/curated-singles-01" className="text-[var(--accent)] hover:underline">Watchman</Link>. The <Link href="/products/curated-singles-02" className="text-[var(--accent)] hover:underline">Heart Opener</Link>. The <Link href="/products/curated-singles-03" className="text-[var(--accent)] hover:underline">Seer</Link>. The <Link href="/products/curated-singles-04" className="text-[var(--accent)] hover:underline">Phoenix</Link>. The <Link href="/products/curated-singles-05" className="text-[var(--accent)] hover:underline">Strategist</Link>. The <Link href="/products/curated-singles-06" className="text-[var(--accent)] hover:underline">Lion's Share</Link>. Six archetypes. Six intentions. You may be more than one — but one is calling to you right now. That is the one you start with.</> },
         ].map((p) => (
           <div key={p.title} className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 text-center">
             <p.icon className="w-10 h-10 text-[var(--accent)] mx-auto mb-4" strokeWidth={1.5} />
@@ -62,35 +61,32 @@ export default function AboutPage() {
 
       {/* Story Section */}
       <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-8 mb-16">
-        <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-6 text-center">A Designer Walked Into a Used Bookstore</h2>
+        <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-6 text-center">A Designer Put On a Bracelet and Everything Shifted</h2>
         <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
           <p>
-            She was not looking for anything in particular. A cramped shop in a back alley.
-            Shelves stacked to the ceiling. The smell of old paper. She pulled a tattered
-            volume from a pile — the cover half-detached, the pages yellowed at the edges.
-            It was a translation of the <span className="italic">Shan Hai Jing</span>, the
-            Classic of Mountains and Seas.
+            She was not looking for a spiritual practice. She was a jewelry designer —
+            practical, visual, someone who thought in shapes and materials and how light
+            falls across a finished piece. The bracelet was just a prototype. Rose quartz.
+            Simple. She put it on to test the fit and forgot she was wearing it.
           </p>
           <p>
-            She was not a historian. She was a jewelry designer. And flipping through the
-            brittle pages, she noticed something that generations of scholars had overlooked.
-            The book did not just list creatures and legends. It catalogued geology. It told
-            you <span className="italic">exactly</span> which mountain produced jade, which
-            river held pearls, which peak yielded crystal. It was a mineral survey wrapped in
-            mythology — a geological treasure map disguised as a bestiary.
+            A week later, she noticed something. She was softer with herself. Less reactive
+            in conversations that would have normally hooked her. Something about the weight
+            of the stone against her wrist — a tiny, constant presence — was anchoring her
+            in a way she could not explain.
           </p>
           <p>
-            She read past midnight. She read through the weekend. The names of mountains
-            she had never heard of — <Link href="/collections/luxe-collection" className="text-[var(--accent)] hover:underline">Kunlun</Link>, Buzhou, the peaks of the Eastern Sea — became
-            coordinates on a map only she could see. She started sketching. A bracelet named
-            for a dragon king's tear. A necklace inspired by a shattered pillar of the sky.
-            A ring that carried the name of a mountain that existed only in myth.
+            She started experimenting. Black obsidian on hard days. Amethyst before sleep.
+            Tiger's eye into meetings that scared her. Each stone felt different. Each one
+            seemed to hold a frequency — not magic, but focus. A tangible reminder of an
+            intention she was choosing to hold.
           </p>
           <p>
-            MythRealms was born that afternoon in a used bookstore, and every piece we make
-            carries that same impulse: the belief that the stones described in a 2,500-year-old
-            text are not just archaeology. They are alive. They can be worn. They belong in the
-            present.
+            MythRealms was born from that experiment. Not from an ancient text. Not from
+            a marketing strategy. From the simple, private discovery that wearing a stone
+            with intention changes how you move through the world. Every piece we make
+            carries that same belief: that what you put on your body shapes what happens
+            inside it. Choose your intention. Wear it daily. Watch what shifts.
           </p>
         </div>
       </div>
@@ -98,10 +94,10 @@ export default function AboutPage() {
       {/* Commitment */}
       <div className="grid md:grid-cols-2 gap-6 mb-16">
         {[
-          { icon: Mountain, title: "Traced from Ancient Sources", text: "Every stone in our collection corresponds to a named deposit in the Shan Hai Jing. We cross-reference translations, geological surveys, and historical mining records to verify each origin. This is not costume jewelry. This is material heritage." },
-          { icon: Waves, title: "Hand-Finished in Small Batches", text: "No warehouses. No mass production. Every bracelet is strung, knotted, and inspected by hand after you order. 1-2 weeks from your click to your doorstep. The stones waited 2,500 years to be found. We can take a week to finish them properly." },
-          { icon: Droplets, title: "Ethical Stones, Transparent Supply", text: "Our stones travel trusted supply chains with verified origins. We work exclusively with suppliers who guarantee fair wages, safe conditions, and environmental responsibility. A stone that came from a sacred mountain should not arrive through suffering." },
-          { icon: Sparkles, title: "One Founder, Every Piece", text: "MythRealms is run by the designer who found that book. She selects every stone, oversees every design, and personally inspects every finished piece before it ships. No investors. No board. One person who believes that ancient stones still have something to say." },
+          { icon: Gem, title: "Sourced with Intention", text: "We select every stone individually — not by the kilo, not by the lot. Each piece is chosen for its quality, its energy, and its ability to hold meaning. We know where every stone comes from and who shaped it." },
+          { icon: Sparkles, title: "Hand-Finished in Small Batches", text: "No warehouses. No mass production. Every bracelet is strung, knotted, and inspected by hand after you order. The stone has waited millions of years to find you. We can take a week to finish it properly." },
+          { icon: Clock, title: "Ethical Stones, Transparent Chain", text: "Our stones travel trusted supply chains with verified origins. We work exclusively with suppliers who guarantee fair wages, safe conditions, and environmental responsibility. A stone worn with intention should not arrive through suffering." },
+          { icon: User, title: "One Founder, Every Piece", text: "MythRealms is run by the designer who started the experiment. She selects every stone, oversees every design, and personally inspects every finished piece. No investors. No board. One person who believes that a bracelet can change your day — and enough days change a life." },
         ].map((p) => (
           <div key={p.title} className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
             <p.icon className="w-6 h-6 text-[var(--accent)] mb-3" strokeWidth={1.5} />
@@ -113,10 +109,10 @@ export default function AboutPage() {
 
       {/* CTA */}
       <div className="text-center border-t border-[var(--border)] pt-12">
-        <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Find Your Mountain. Wear Its Stone.</h2>
-        <p className="text-[var(--text-secondary)] mb-6">The mountain that calls to you is in the Classic. Its stone is here — hand-selected, artisan-finished, ready to ship.</p>
+        <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Find Your Intention. Wear Your Becoming.</h2>
+        <p className="text-[var(--text-secondary)] mb-6">Six archetypes. Six intentions. One is calling to you right now. Its stone is here — hand-selected, artisan-finished, ready to ship.</p>
         <div className="flex justify-center gap-4">
-          <Link href="/collections/curated-singles" className="px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Discover Curated Singles</Link>
+          <Link href="/collections/curated-singles" className="px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Discover The Archetypes</Link>
           <Link href="/collections" className="px-8 py-3 border border-[var(--border)] text-[var(--text)] rounded-full font-semibold hover:border-[var(--accent)] transition">Explore All Collections</Link>
         </div>
       </div>

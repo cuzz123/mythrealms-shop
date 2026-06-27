@@ -56,7 +56,7 @@ export function GuardianTeaser() {
           <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20">
             <ShieldCheck className="w-3.5 h-3.5 text-[var(--accent)]" />
             <span className="text-xs font-semibold text-[var(--accent)] tracking-[0.04em]">
-              Find Your Stone
+              Crystal Intention Quiz
             </span>
           </div>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] font-bold text-[var(--text)] text-balance leading-tight">

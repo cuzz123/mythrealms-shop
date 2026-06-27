@@ -13,16 +13,16 @@ const faqs = [
   { q:"How do I use a discount code?", a:"Enter your code at checkout in the Discount Code field and click Apply. First-time customers can use MYTH15 for 15% off.", cat:"order" },
   { q:"Are the gemstones and materials genuine?", a:"Absolutely. We source authentic gemstones — jade, lapis lazuli, garnet, citrine, onyx, and more. All metals are 925 sterling silver, 14k or 18k gold. Each piece comes with a material certification card.", cat:"products" },
   { q:"How do I care for my piece?", a:"Remove before swimming, showering, or exercising. Avoid contact with perfumes, lotions, and hairspray. Store in the provided soft pouch away from direct sunlight. Clean gently with the included polishing cloth.", cat:"products" },
-  { q:"Why does it take 2-3 weeks to ship?", a:"Every MythRealms piece is handcrafted to order — not mass-produced. Your guardian is cast, polished, inspected, and packaged individually. This is slow luxury. It is worth the wait.", cat:"products" },
+  { q:"Why does it take 2-3 weeks to ship?", a:"Every MythRealms piece is handcrafted to order — not mass-produced. Your piece is cast, polished, inspected, and packaged individually. This is slow luxury. It is worth the wait.", cat:"products" },
   { q:"What size bracelet should I order?", a:"Measure your wrist just below the wrist bone with a soft tape measure. Add 0.5 inch for snug fit, 1 inch for comfortable fit. Most bracelets are 16-18cm adjustable. We also offer custom sizing — email us.", cat:"products" },
   { q:"Can I change or cancel my order?", a:"Orders can be modified or cancelled within 4 hours of placement. Contact us immediately with your order number.", cat:"order" },
-  { q:"Where do the mythical beast designs come from?", a:"Every design is researched from the Classic of Mountains and Seas (Shan Hai Jing) — China's oldest bestiary, compiled over 2,000 years ago. The 28 Mansions collection maps actual Chinese lunar astronomy. The Four Symbols are the cornerstone of Chinese cosmology.", cat:"products" },
-  { q:"Do you offer gift wrapping?", a:"Yes. Every order arrives in a MythRealms gift box lined with silk, accompanied by a story card that explains the legend behind your guardian. No price tags are included — ready to gift directly.", cat:"order" },
+  { q:"How do I know which crystal intention is right for me?", a:"Trust what draws you. The stone you keep looking at — the one you click on and come back to — is usually the one. If you're unsure, take our Crystal Intention Quiz. It asks three questions and matches you to one of six archetypes: The Watchman (protection), The Heart Opener (self-love), The Seer (intuition), The Phoenix (renewal), The Strategist (confidence), or The Lion's Share (abundance).", cat:"products" },
+  { q:"Do you offer gift wrapping?", a:"Yes. Every order arrives in a MythRealms gift box lined with silk, accompanied by a story card that explains the meaning behind your stone. No price tags are included — ready to gift directly.", cat:"order" },
   { q:"My item arrived damaged. What now?", a:"Email support@mythrealms.com within 48 hours of delivery with photos. We will arrange a free replacement or full refund immediately — no return shipping cost to you.", cat:"returns" },
   { q:"Do you offer wholesale or bulk orders?", a:"We offer wholesale pricing for orders of 10+ pieces. Ideal for boutiques, museum shops, and wellness studios. Email wholesale@mythrealms.com for our catalog and pricing guide.", cat:"order" },
   { q:"Are your products ethically sourced?", a:"Yes. Our gemstones are sourced from the same regions that supplied the ancient Silk Road — Burma, Afghanistan, Xinjiang — through suppliers who guarantee fair labor practices. Our precious metals are recycled where possible.", cat:"products" },
-  { q:"How do the 28 Mansions bracelets work?", a:"Each of the 28 lunar mansions has a distinct astrological character. The bracelet you choose aligns with the mansion that matches your intention — protection, clarity, abundance, wisdom, or transformation. Each comes with a card explaining your mansion's meaning.", cat:"products" },
-  { q:"Can I layer multiple bracelets?", a:"Absolutely. Many customers wear 2-3 mansion bracelets together, each representing a different intention. The 5 Elements collection is designed to be stacked. The Four Symbols stacking rings are meant to be worn together or separately.", cat:"products" },
+  { q:"Can I wear multiple intention bracelets at once?", a:"Absolutely. Many people stack two or three intentions — protection on one wrist, abundance on the other. The practice is personal. Wear what feels right.", cat:"products" },
+  { q:"Can I layer multiple bracelets?", a:"Absolutely. Many customers wear 2-3 intention bracelets together, each representing a different purpose. Our stacking rings are designed to be worn together or separately. The practice is personal — wear what feels right.", cat:"products" },
   { q:"What if my piece breaks or needs repair?", a:"We offer complimentary repairs for manufacturing defects within one year of purchase. For wear-and-tear repairs after one year, contact us for a quote. We believe jewelry should last generations.", cat:"returns" },
   { q:"Do you have a physical store?", a:"MythRealms is an online-only atelier, which allows us to offer handcrafted luxury at accessible prices — no retail markup, no middlemen. Every dollar goes into materials and craftsmanship.", cat:"order" },
 ];
@@ -51,7 +51,7 @@ export default function FAQPage() {
 
       <div className="text-center mb-10">
         <h1 className="font-serif text-4xl font-bold text-[var(--text)] mb-3">Frequently Asked Questions</h1>
-        <p className="text-[var(--text-muted)]">Find answers to common questions about our mythical collections, shipping, returns, and more</p>
+        <p className="text-[var(--text-muted)]">Find answers to common questions about our intention pieces and crystals, shipping, returns, and more</p>
       </div>
 
       <div className="flex justify-center gap-2 mb-8 flex-wrap">

@@ -19,7 +19,7 @@ export default function WishlistPage() {
       <div className="max-w-2xl mx-auto px-6 py-20 text-center">
         <Heart className="w-16 h-16 text-[var(--text-muted)] mx-auto mb-6" />
         <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Your Wishlist is Empty</h1>
-        <p className="text-[var(--text-muted)] mb-8">Save your favorite mythical pieces here and come back to them anytime.</p>
+        <p className="text-[var(--text-muted)] mb-8">Save your favorite intention pieces here and come back to them anytime.</p>
         <Link href="/collections/curated-singles">
           <Button variant="primary" size="lg">Explore Curated Singles</Button>
         </Link>

@@ -257,7 +257,7 @@ export default async function CollectionPage({
               <p className="mt-3 text-xs text-[var(--text-muted)]">
                 {slug === "curated-stones"
                   ? "Explore our hand-selected collection of natural stone bracelets, each piece chosen for its unique character and energy. From the deep purple of amethyst to the warm glow of tiger's eye, find the crystal that speaks to you."
-                  : `Explore our handcrafted collection of ${category.name.toLowerCase()}, each piece inspired by the ancient myths and legends of the Classic of Mountains and Seas. Discover authentic craftsmanship, premium materials, and timeless designs that honor China's rich cultural heritage.`}
+                  : `Explore our handcrafted collection of ${category.name.toLowerCase()}, each piece hand-strung with intention. Discover authentic craftsmanship, premium natural stones, and timeless designs made to be worn daily.`}
               </p>
             </div>
           </div>

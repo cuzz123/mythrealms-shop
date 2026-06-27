@@ -24,7 +24,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-8">
             <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">New Collection</span>
-            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Shop by Series</h2>
+            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Shop by Intention</h2>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {categories.slice(0, 4).map((cat, i) => {
@@ -76,7 +76,7 @@ export default function HomePage() {
       {/* ===== WHY MYTHREALMS ===== */}
       <ScrollReveal as="section" className="py-14 bg-[var(--surface-alt)]">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Why MythRealms</span>
+          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Our Promise</span>
           <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5] mb-10">Crafted with Intention</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div className="flex flex-col items-center text-center">
@@ -84,21 +84,21 @@ export default function HomePage() {
                 <Gem className="w-6 h-6 text-[#D4A84B]" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-[#E8E0D5] mb-2">Hand-Selected</h3>
-              <p className="text-sm text-[#8A7D6E] leading-relaxed">Each stone is individually chosen for its unique character and energy. No mass production — every piece is one of a kind.</p>
+              <p className="text-sm text-[#8A7D6E] leading-relaxed">Each stone individually chosen for its unique energy and character. No mass production — every piece is one of a kind, hand-strung with purpose.</p>
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="w-14 h-14 rounded-full bg-[#1A1816] border border-[#2A2520] flex items-center justify-center mb-4">
                 <Leaf className="w-6 h-6 text-[#D4A84B]" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-[#E8E0D5] mb-2">Ethically Sourced</h3>
-              <p className="text-sm text-[#8A7D6E] leading-relaxed">Direct from artisan mines with fair labor practices. We know every stone's origin and the hands that shaped it.</p>
+              <p className="text-sm text-[#8A7D6E] leading-relaxed">Direct supply chains. Fair labor practices. Every stone has a clean origin — we know where each piece comes from and the hands that shaped it.</p>
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="w-14 h-14 rounded-full bg-[#1A1816] border border-[#2A2520] flex items-center justify-center mb-4">
                 <ShieldCheck className="w-6 h-6 text-[#D4A84B]" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-[#E8E0D5] mb-2">30-Day Trial</h3>
-              <p className="text-sm text-[#8A7D6E] leading-relaxed">Wear it, love it, or return it. If it doesn't feel like yours within 30 days, send it back — no questions asked.</p>
+              <p className="text-sm text-[#8A7D6E] leading-relaxed">Wear it. Connect with it. If it doesn't feel like yours within 30 days, return it — no questions asked.</p>
             </div>
           </div>
         </div>
@@ -130,8 +130,8 @@ export default function HomePage() {
       {/* ===== NEWSLETTER ===== */}
       <ScrollReveal as="section" className="py-12 bg-[#1A1816]">
         <div className="max-w-[540px] mx-auto px-6 text-center">
-          <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Join the Circle</h2>
-          <p className="text-[#A89880] text-sm mb-6">Early access to new stone collections, styling guides, and exclusive subscriber-only discounts.</p>
+          <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Stay Connected</h2>
+          <p className="text-[#A89880] text-sm mb-6">New intentions, stone stories, and exclusive subscriber-only offers. No spam — just the good stuff.</p>
           <NewsletterForm />
           <div className="flex justify-center gap-6 mt-6 text-xs text-[#8A7D6E]">
             <span>Hand-Selected</span><span className="text-[#3A3220]">|</span>

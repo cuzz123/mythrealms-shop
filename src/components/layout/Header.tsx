@@ -10,10 +10,10 @@ import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 
 const shopLinks = [
-  { label: "Pearl Collection", href: "/collections/pearl-series" },
-  { label: "Luxe Collection", href: "/collections/luxe-collection" },
-  { label: "Pearl & Crystal", href: "/collections/pearl-crystal-series" },
-  { label: "Curated Singles", href: "/collections/curated-singles" },
+  { label: "Serenity Collection", href: "/collections/pearl-series" },
+  { label: "Intention Stones", href: "/collections/luxe-collection" },
+  { label: "Balance & Light", href: "/collections/pearl-crystal-series" },
+  { label: "The Archetypes", href: "/collections/curated-singles" },
 ];
 
 const navLinks = [
