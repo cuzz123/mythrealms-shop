@@ -802,8 +802,8 @@
   {
     "type": "series-product",
     "slug": "luxe-01",
-    "name": "luxe-01-detail5.jpg #1",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #1",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 31.49,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-01-main.jpg",
     "images": [
@@ -815,15 +815,15 @@
       "/images/products/1688-shop/luxe-collection/luxe-01-detail5.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-01-detail5.jpg",
+    "categoryName": "Luxe Collection",
     "isBestSeller": true,
     "tag": "Bestseller"
   },
   {
     "type": "series-product",
     "slug": "luxe-02",
-    "name": "luxe-02-detail5.jpg #2",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #2",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 32.99,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-02-main.jpg",
     "images": [
@@ -831,19 +831,18 @@
       "/images/products/1688-shop/luxe-collection/luxe-02-detail1.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-02-detail2.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-02-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-02-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-02-detail5.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-02-detail4.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-02-detail5.jpg",
+    "categoryName": "Luxe Collection",
     "isBestSeller": true,
     "tag": "Bestseller"
   },
   {
     "type": "series-product",
     "slug": "luxe-03",
-    "name": "luxe-03-detail3.jpg #3",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #3",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 34.49,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-03-main.jpg",
     "images": [
@@ -853,35 +852,33 @@
       "/images/products/1688-shop/luxe-collection/luxe-03-detail3.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-03-detail3.jpg",
-    "isBestSeller": true,
-    "tag": "Bestseller"
+    "categoryName": "Luxe Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
     "type": "series-product",
     "slug": "luxe-04",
-    "name": "luxe-04-detail5.jpg #4",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #4",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 35.99,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-04-main.jpg",
     "images": [
       "/images/products/1688-shop/luxe-collection/luxe-04-main.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-04-detail1.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-04-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-04-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-04-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-04-detail5.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-04-detail3.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-04-detail5.jpg",
+    "categoryName": "Luxe Collection",
     "isBestSeller": false,
     "tag": "New"
   },
   {
     "type": "series-product",
     "slug": "luxe-05",
-    "name": "luxe-05-detail4.jpg #5",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #5",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 37.49,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-05-main.jpg",
     "images": [
@@ -892,51 +889,72 @@
       "/images/products/1688-shop/luxe-collection/luxe-05-detail4.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-05-detail4.jpg",
+    "categoryName": "Luxe Collection",
     "isBestSeller": false,
     "tag": "New"
   },
   {
     "type": "series-product",
     "slug": "luxe-06",
-    "name": "luxe-06-detail4.jpg #6",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #6",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 38.99,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-06-main.jpg",
     "images": [
       "/images/products/1688-shop/luxe-collection/luxe-06-main.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-06-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-06-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-06-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-06-detail4.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-06-detail2.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-06-detail4.jpg",
+    "categoryName": "Luxe Collection",
     "isBestSeller": false,
     "tag": "New"
   },
   {
     "type": "series-product",
     "slug": "luxe-07",
-    "name": "luxe-07-detail2.jpg #7",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #7",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 40.49,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-07-main.jpg",
     "images": [
       "/images/products/1688-shop/luxe-collection/luxe-07-main.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-07-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-07-detail2.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-07-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-07-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-07-detail4.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-07-detail5.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-07-detail2.jpg",
+    "categoryName": "Luxe Collection",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "luxe-08",
+    "name": "Luxe Collection #8",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "price": 41.99,
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-08-main.jpg",
+    "images": [
+      "/images/products/1688-shop/luxe-collection/luxe-08-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-08-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-08-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-08-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-08-detail4.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-08-detail5.jpg"
+    ],
+    "category": "luxe-collection",
+    "categoryName": "Luxe Collection",
     "isBestSeller": false,
     "tag": "New"
   },
   {
     "type": "series-product",
     "slug": "luxe-09",
-    "name": "luxe-09-detail5.jpg #9",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #9",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 43.49,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-09-main.jpg",
     "images": [
@@ -944,19 +962,18 @@
       "/images/products/1688-shop/luxe-collection/luxe-09-detail1.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-09-detail2.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-09-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-09-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-09-detail5.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-09-detail4.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-09-detail5.jpg",
+    "categoryName": "Luxe Collection",
     "isBestSeller": false,
     "tag": "New"
   },
   {
     "type": "series-product",
     "slug": "luxe-10",
-    "name": "luxe-10-detail5.jpg #10",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #10",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 44.99,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-10-main.jpg",
     "images": [
@@ -968,15 +985,15 @@
       "/images/products/1688-shop/luxe-collection/luxe-10-detail5.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-10-detail5.jpg",
+    "categoryName": "Luxe Collection",
     "isBestSeller": false,
     "tag": "New"
   },
   {
     "type": "series-product",
     "slug": "luxe-11",
-    "name": "luxe-11-detail5.jpg #11",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #11",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 46.49,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-11-main.jpg",
     "images": [
@@ -984,109 +1001,27 @@
       "/images/products/1688-shop/luxe-collection/luxe-11-detail1.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-11-detail2.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-11-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-11-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-11-detail5.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-11-detail4.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-11-detail5.jpg",
+    "categoryName": "Luxe Collection",
     "isBestSeller": false,
     "tag": "New"
   },
   {
     "type": "series-product",
     "slug": "luxe-12",
-    "name": "luxe-12-detail5.jpg #12",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
+    "name": "Luxe Collection #12",
+    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
     "price": 47.99,
     "mainImage": "/images/products/1688-shop/luxe-collection/luxe-12-main.jpg",
     "images": [
       "/images/products/1688-shop/luxe-collection/luxe-12-main.jpg",
       "/images/products/1688-shop/luxe-collection/luxe-12-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-12-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-12-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-12-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-12-detail5.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-12-detail2.jpg"
     ],
     "category": "luxe-collection",
-    "categoryName": "luxe-12-detail5.jpg",
-    "isBestSeller": false,
-    "tag": "New"
-  },
-  {
-    "type": "series-product",
-    "slug": "luxe-13",
-    "name": "luxe-13-detail4.jpg #13",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
-    "price": 49.49,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-13-main.jpg",
-    "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-13-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-13-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-13-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-13-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-13-detail4.jpg"
-    ],
-    "category": "luxe-collection",
-    "categoryName": "luxe-13-detail4.jpg",
-    "isBestSeller": false,
-    "tag": "New"
-  },
-  {
-    "type": "series-product",
-    "slug": "luxe-14",
-    "name": "luxe-14-detail5.jpg #14",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
-    "price": 50.99,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-14-main.jpg",
-    "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-14-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-14-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-14-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-14-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-14-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-14-detail5.jpg"
-    ],
-    "category": "luxe-collection",
-    "categoryName": "luxe-14-detail5.jpg",
-    "isBestSeller": false,
-    "tag": "New"
-  },
-  {
-    "type": "series-product",
-    "slug": "luxe-15",
-    "name": "luxe-15-detail4.jpg #15",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
-    "price": 52.49,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-15-main.jpg",
-    "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-15-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-15-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-15-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-15-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-15-detail4.jpg"
-    ],
-    "category": "luxe-collection",
-    "categoryName": "luxe-15-detail4.jpg",
-    "isBestSeller": false,
-    "tag": "New"
-  },
-  {
-    "type": "series-product",
-    "slug": "luxe-16",
-    "name": "luxe-16-detail5.jpg #16",
-    "description": "Premium hand-selected bracelets with refined finishes and artisanal details",
-    "price": 53.99,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-16-main.jpg",
-    "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-16-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-16-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-16-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-16-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-16-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-16-detail5.jpg"
-    ],
-    "category": "luxe-collection",
-    "categoryName": "luxe-16-detail5.jpg",
+    "categoryName": "Luxe Collection",
     "isBestSeller": false,
     "tag": "New"
   }
