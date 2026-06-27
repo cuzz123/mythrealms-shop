@@ -5,10 +5,10 @@ html {
 }
 
 :root {
-  --bg: #0F0D0E;
-  --surface: #1A1816;
-  --surface-raised: #1E1C19;
-  --surface-alt: #131110;
+  --bg: #0A0808;
+  --surface: #171412;
+  --surface-raised: #1F1A15;
+  --surface-alt: #110F0D;
   --text: #E8E0D5;
   --text-secondary: #A89880;
   --text-muted: #8A7D6E;
@@ -19,8 +19,8 @@ html {
   --sale: #CF6A4B;
   --sale-bg: #2A1F18;
   --success: #5A9E6F;
-  --border: #2E2824;
-  --border-light: #23201D;
+  --border: #2A241F;
+  --border-light: #1E1A16;
   --announcement-bg: #0A0808;
   --announcement-text: #8A7A65;
   --overlay: rgba(0,0,0,0.7);
@@ -60,7 +60,7 @@ body {
   font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: var(--text-base);
   line-height: var(--leading-body);
-  color: var(--text); background: #0A0808;
+  color: var(--text); background: var(--bg);
   -webkit-font-smoothing: antialiased;
   /* Safe area for notched phones (iPhone X+ home indicator) */
   padding-bottom: env(safe-area-inset-bottom, 0px);

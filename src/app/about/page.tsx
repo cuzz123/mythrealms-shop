@@ -63,7 +63,7 @@ export default function AboutPage() {
               <Link
                 key={s.slug}
                 href={`/products/${s.slug}`}
-                className="group bg-[var(--surface)] border border-[var(--border)] rounded-xl p-5 hover:border-[var(--accent)]/40 transition-all duration-300 text-center"
+                className="group bg-[var(--surface-alt)] border border-[var(--border)] rounded-xl p-5 hover:border-[var(--accent)]/40 transition-all duration-300 text-center"
               >
                 {product && (
                   <div className="relative w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden">
@@ -142,7 +142,7 @@ export default function AboutPage() {
             { icon: Clock, title: "Ethical & Transparent", text: "Fair wages. Safe conditions. Clean supply chains. A stone worn with intention should not arrive through suffering." },
             { icon: User, title: "One Founder, Every Piece", text: "No investors. No board. One person who selects every stone, oversees every design, and inspects every finished piece before it ships." },
           ].map((p) => (
-            <div key={p.title} className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
+            <div key={p.title} className="bg-[var(--surface-alt)] border border-[var(--border)] rounded-xl p-6">
               <p.icon className="w-6 h-6 text-[var(--accent)] mb-3" strokeWidth={1.5} />
               <h3 className="font-serif text-lg font-bold text-[var(--text)] mb-2">{p.title}</h3>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.text}</p>

@@ -150,7 +150,7 @@ export function SearchOverlay() {
           id="search-overlay"
         >
           <div
-            className="bg-[var(--surface)] rounded-xl shadow-2xl max-w-xl mx-auto mt-24 overflow-hidden animate-slide-up"
+            className="bg-[var(--surface-raised)] rounded-xl shadow-2xl max-w-xl mx-auto mt-24 overflow-hidden animate-slide-up"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Input */}

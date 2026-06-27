@@ -152,7 +152,7 @@ export function Header() {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${shopOpen ? "rotate-180" : ""}`} />
                 </button>
                 {shopOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] bg-white border border-gray-200 shadow-2xl z-50 animate-slide-down" style={{borderRadius: 0}}>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] bg-[var(--surface-raised)] border border-gray-200 shadow-2xl z-50 animate-slide-down" style={{borderRadius: 0}}>
                     <div className="grid grid-cols-2 gap-0 p-6">
                       {link.children.map((child) => (
                         <Link
@@ -254,7 +254,7 @@ export function Header() {
 
       {/* Mobile navigation — full overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0A0808] animate-slide-down lg:hidden">
+        <div className="fixed inset-0 z-50 bg-[var(--surface-raised)] animate-slide-down lg:hidden">
           {/* Top bar with X button */}
           <div className="flex items-center justify-end px-4 h-[72px]">
             <button

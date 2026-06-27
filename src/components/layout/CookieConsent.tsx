@@ -45,7 +45,7 @@ export function CookieConsent() {
       aria-modal="false"
       aria-label="Cookie consent"
     >
-      <div className="bg-[var(--surface)] border-t border-[var(--border)] shadow-[var(--shadow-xl)]">
+      <div className="bg-[var(--surface-raised)] border-t border-[var(--border)] shadow-[var(--shadow-xl)]">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             {/* Content */}

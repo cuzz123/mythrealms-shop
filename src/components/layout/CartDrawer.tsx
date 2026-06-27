@@ -137,7 +137,7 @@ export function CartDrawer() {
       {/* Drawer panel */}
       <aside
         className={cn(
-          "fixed top-0 right-0 z-50 flex h-full w-full flex-col bg-[var(--surface)] shadow-[var(--shadow-xl)] transition-transform duration-400 ease-out sm:w-[420px]",
+          "fixed top-0 right-0 z-50 flex h-full w-full flex-col bg-[var(--surface-raised)] shadow-[var(--shadow-xl)] transition-transform duration-400 ease-out sm:w-[420px]",
           isOpen ? "translate-x-0" : "translate-x-full",
         )}
         role="dialog"

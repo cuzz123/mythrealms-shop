@@ -440,7 +440,7 @@ export default function CheckoutPage() {
           </div>
 
           {/* Right Column — Order Summary */}
-          <div className="sticky top-24 bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
+          <div className="sticky top-24 bg-[var(--surface-alt)] border border-[var(--border)] rounded-xl p-6">
             <h2 className="font-serif text-xl font-bold text-[var(--text)] mb-4 pb-3 border-b border-[var(--border)]">
               Your Order
             </h2>
