@@ -140,7 +140,7 @@ export default async function ProductPage({
       ) : null}
       {!isCuratedStones && (details?.beastProperties || details?.stoneProperties) ? (
         <div>
-          <h4 className="font-semibold text-[var(--text)] mb-2">Mythical Properties</h4>
+          <h4 className="font-semibold text-[var(--text)] mb-2">Stone Properties</h4>
           <ul className="space-y-2">
             {((details.beastProperties || details.stoneProperties) as any[]).map(
               (sp: any, i: number) => (
@@ -223,23 +223,12 @@ export default async function ProductPage({
           <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-sm text-[var(--accent)]">
             <ShieldCheck className="w-4 h-4" />
             <span>
-              {isCuratedStones && product.stone === "Amethyst" && "For the one seeking clarity in a noisy world"}
-              {isCuratedStones && product.stone === "Rose Quartz" && "For the one who loves deeply and guards their heart"}
-              {isCuratedStones && product.stone === "Black Obsidian" && "For the one who protects what matters most"}
-              {isCuratedStones && product.stone === "Moonstone" && "For the one in a season of transformation"}
-              {isCuratedStones && product.stone === "Tiger's Eye" && "For the one who walks with quiet confidence"}
-              {!isCuratedStones && product.slug.includes("nine-tailed") && "For the one who's been underestimated"}
-              {!isCuratedStones && product.slug.includes("qilin") && "For the one who chooses peace when everyone fights"}
-              {!isCuratedStones && product.slug.includes("azure-dragon") && "For the one carrying too much alone"}
-              {!isCuratedStones && product.slug.includes("phoenix") && "For the one rebuilding from ashes"}
-              {!isCuratedStones && product.slug.includes("white-tiger") && "For the one protecting others at their own cost"}
-              {!isCuratedStones && product.slug.includes("black-tortoise") && "For the one still standing after everything"}
-              {!isCuratedStones && product.slug.includes("bai-ze") && "For the one who sees what others don't"}
-              {!isCuratedStones && product.slug.includes("kun-peng") && "For the one in a season of change"}
-              {!isCuratedStones && product.slug.includes("four-symbols") && "For the one who contains multitudes"}
-              {!isCuratedStones && product.slug.includes("28-mansions") && "For the one seeking their place in the universe"}
-              {!isCuratedStones && product.slug.includes("taotie") && "For the one who knows when to say enough"}
-              {!isCuratedStones && product.slug.includes("yinglong") && "For the one destined to rise above"}
+              {isCuratedStones && product.stone === "Amethyst" && "Wear calm. Wear clarity. Wear the answers already within you."}
+              {isCuratedStones && product.stone === "Rose Quartz" && "Wear softness as strength. Wear the heart that keeps opening."}
+              {isCuratedStones && product.stone === "Black Obsidian" && "Wear your boundary. Wear the armor you chose."}
+              {isCuratedStones && product.stone === "Moonstone" && "Wear the new moon. Wear who you are becoming."}
+              {isCuratedStones && product.stone === "Tiger's Eye" && "Wear quiet confidence. Wear the nerve to act."}
+              {!isCuratedStones && "Hand-selected. Artisan-finished. Worn with intention."}
             </span>
           </div>
 
@@ -272,7 +261,7 @@ export default async function ProductPage({
           <Link href="/about" className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group">
             <Play className="w-5 h-5 text-[var(--accent)] group-hover:text-[var(--accent-hover)] transition-colors" />
             <span className="text-sm font-medium text-[var(--text)]">
-              {isCuratedStones ? "The Story of This Stone" : "Ancient Legend Behind This Piece"} —{" "}
+              {isCuratedStones ? "The Intention Behind This Stone" : "The Story Behind This Piece"} —{" "}
               <span className="text-[var(--accent)] group-hover:underline">Read the Story</span>
             </span>
           </Link>
