@@ -177,7 +177,7 @@ export function SearchOverlay() {
             <div className="max-h-80 overflow-y-auto">
               {query.length < 2 ? (
                 <div className="p-8 text-center">
-                  <p className="text-[28px] font-serif text-[var(--text-muted)] animate-pulse">
+                  <p className="text-[28px] font-serif text-[var(--text-muted)] animate-search-breathe">
                     Search gemstones, pearls, crystals...
                   </p>
                 </div>
