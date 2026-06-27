@@ -125,21 +125,6 @@ export function SearchOverlay() {
     }
   }
 
-  const popularSearches = [
-    "Nine-Tailed Fox",
-    "Qilin",
-    "Azure Dragon",
-    "Phoenix",
-    "Four Symbols",
-  ];
-
-  function handleSuggestionClick(suggestion: string) {
-    setQuery(suggestion);
-    router.push(`/search?q=${encodeURIComponent(suggestion)}`);
-    setIsOpen(false);
-    setQuery("");
-  }
-
   return (
     <>
       {/* Trigger button */}
@@ -191,22 +176,10 @@ export function SearchOverlay() {
             {/* Results */}
             <div className="max-h-80 overflow-y-auto">
               {query.length < 2 ? (
-                <div className="p-5">
-                  <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-3">
-                    Popular Searches
+                <div className="p-8 text-center">
+                  <p className="text-[28px] font-serif text-[var(--text-muted)] animate-pulse">
+                    Search gemstones, pearls, crystals...
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {popularSearches.map((suggestion) => (
-                      <button
-                        key={suggestion}
-                        type="button"
-                        onClick={() => handleSuggestionClick(suggestion)}
-                        className="px-3 py-1.5 text-sm border border-[var(--border)] rounded-full text-[var(--text-secondary)] hover:border-[var(--accent)] hover:text-[var(--text)] hover:bg-[var(--accent)]/5 transition cursor-pointer"
-                      >
-                        {suggestion}
-                      </button>
-                    ))}
-                  </div>
                 </div>
               ) : loading && results.length === 0 ? (
                 /* Loading skeleton while fetching API results */

@@ -141,7 +141,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => setShopOpen(!shopOpen)}
-                  className={`nav-underline text-[16px] tracking-wide px-5 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
+                  className={`nav-underline text-[16px] tracking-wide px-3 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
                     shopOpen
                       ? "bg-white text-gray-900"
                       : isScrolled
@@ -175,7 +175,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-underline text-[16px] tracking-wide px-5 py-2.5 font-medium transition-all ${
+                className={`nav-underline text-[16px] tracking-wide px-3 py-2.5 font-medium transition-all ${
                   isActive(link.href) ? (isScrolled ? "text-gray-900" : "text-white") : isScrolled ? "text-gray-700 hover:text-gray-900" : "text-white/80 hover:bg-white hover:text-gray-900"
                 }`}
               >
