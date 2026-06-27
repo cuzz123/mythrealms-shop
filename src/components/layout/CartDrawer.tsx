@@ -6,6 +6,7 @@ import Link from "next/link";
 import { X, Minus, Plus, Trash2, Mail } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { cn, formatPrice } from "@/lib/utils";
+import { PRODUCTS } from "@/lib/1688-products";
 import { imageUrl } from "@/lib/images";
 
 const FREE_SHIPPING_THRESHOLD = 69.99;
@@ -71,27 +72,14 @@ export function CartDrawer() {
   );
   const hasFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
 
-  // Recommended products — ref-based cache so we only fetch once
+  // Recommended — use static 1688 products (shuffled curated singles)
   const [recommended, setRecommended] = useState<any[]>([]);
-  const recommendedCacheRef = useRef<any[] | null>(null);
-
   useEffect(() => {
-    if (!isOpen) return;
-    if (recommendedCacheRef.current) {
-      setRecommended(recommendedCacheRef.current);
-      return;
-    }
-    fetch("/api/products?featured=true&limit=3")
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.products) {
-          const items = data.products.slice(0, 3);
-          recommendedCacheRef.current = items;
-          setRecommended(items);
-        }
-      })
-      .catch(() => {});
-  }, [isOpen]);
+    if (!isOpen || recommended.length > 0) return;
+    const singles = PRODUCTS.filter(p => p.category === "curated-singles");
+    const shuffled = [...singles].sort(() => Math.random() - 0.5);
+    setRecommended(shuffled.slice(0, 3));
+  }, [isOpen, recommended.length]);
 
   // ── Abandoned cart handlers ──
   function handleClose() {
