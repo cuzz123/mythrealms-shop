@@ -1,818 +1,400 @@
 [
   {
-    "type": "single-product",
-    "slug": "blush-rose-single",
-    "name": "Blush Rose Bracelet",
-    "description": "Soft rose-toned bracelet",
-    "price": 31.99,
-    "mainImage": "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail1.jpg",
-    "images": [
-      "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail1.jpg",
-      "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail2.jpg",
-      "/images/products/1688-shop/blush-rose-single/blush-rose-single-detail3.jpg",
-      "/images/products/1688-shop/blush-rose-single/blush-rose-single-main.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "turquoise-single",
-    "name": "Turquoise Dream Bracelet",
-    "description": "Vibrant turquoise stone",
-    "price": 33.99,
-    "mainImage": "/images/products/1688-shop/turquoise-single/turquoise-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/turquoise-single/turquoise-single-main.jpg",
-      "/images/products/1688-shop/turquoise-single/turquoise-single-detail1.jpg",
-      "/images/products/1688-shop/turquoise-single/turquoise-single-detail2.jpg",
-      "/images/products/1688-shop/turquoise-single/turquoise-single-detail3.jpg",
-      "/images/products/1688-shop/turquoise-single/turquoise-single-detail4.jpg",
-      "/images/products/1688-shop/turquoise-single/turquoise-single-detail5.jpg",
-      "/images/products/1688-shop/turquoise-single/turquoise-single-detail6.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "multi-stone-single",
-    "name": "Multi-Stone Mix Bracelet",
-    "description": "Mixed gemstone eclectic",
-    "price": 35.99,
-    "mainImage": "/images/products/1688-shop/multi-stone-single/multi-stone-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/multi-stone-single/multi-stone-single-main.jpg",
-      "/images/products/1688-shop/multi-stone-single/multi-stone-single-detail1.jpg",
-      "/images/products/1688-shop/multi-stone-single/multi-stone-single-detail2.jpg",
-      "/images/products/1688-shop/multi-stone-single/multi-stone-single-detail3.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "rose-gold-single",
-    "name": "Rose Gold Finish Bracelet",
-    "description": "Rose gold plated elegance",
-    "price": 37.99,
-    "mainImage": "/images/products/1688-shop/rose-gold-single/rose-gold-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/rose-gold-single/rose-gold-single-main.jpg",
-      "/images/products/1688-shop/rose-gold-single/rose-gold-single-detail1.jpg",
-      "/images/products/1688-shop/rose-gold-single/rose-gold-single-detail2.jpg",
-      "/images/products/1688-shop/rose-gold-single/rose-gold-single-detail3.jpg",
-      "/images/products/1688-shop/rose-gold-single/rose-gold-single-detail4.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "copper-elegance-single",
-    "name": "Copper Elegance Bracelet",
-    "description": "Refined copper bracelet",
-    "price": 39.99,
-    "mainImage": "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-main.jpg",
-      "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-detail1.jpg",
-      "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-detail2.jpg",
-      "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-detail3.jpg",
-      "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-detail4.jpg",
-      "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-detail5.jpg",
-      "/images/products/1688-shop/copper-elegance-single/copper-elegance-single-detail6.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "golden-accent-single",
-    "name": "Golden Accent Bracelet",
-    "description": "Warm gold-accent bracelet",
-    "price": 41.99,
-    "mainImage": "/images/products/1688-shop/golden-accent-single/golden-accent-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-accent-single/golden-accent-single-main.jpg",
-      "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail1.jpg",
-      "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail2.jpg",
-      "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail3.jpg",
-      "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail4.jpg",
-      "/images/products/1688-shop/golden-accent-single/golden-accent-single-detail5.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "crystal-bling-single",
-    "name": "Crystal Bling Bracelet",
-    "description": "Sparkling crystal facets",
-    "price": 43.99,
-    "mainImage": "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-main.jpg",
-      "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail1.jpg",
-      "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail2.jpg",
-      "/images/products/1688-shop/crystal-bling-single/crystal-bling-single-detail3.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "golden-weave-single",
-    "name": "Golden Weave Bracelet",
-    "description": "Intricate woven gold-tone",
-    "price": 45.99,
-    "mainImage": "/images/products/1688-shop/golden-weave-single/golden-weave-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/golden-weave-single/golden-weave-single-main.jpg",
-      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail1.jpg",
-      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail2.jpg",
-      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail3.jpg",
-      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail4.jpg",
-      "/images/products/1688-shop/golden-weave-single/golden-weave-single-detail5.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "silver-chain-single",
-    "name": "Silver Chain Bracelet",
-    "description": "Delicate silver chain with charm",
-    "price": 47.99,
-    "mainImage": "/images/products/1688-shop/silver-chain-single/silver-chain-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/silver-chain-single/silver-chain-single-main.jpg",
-      "/images/products/1688-shop/silver-chain-single/silver-chain-single-detail1.jpg",
-      "/images/products/1688-shop/silver-chain-single/silver-chain-single-detail2.jpg",
-      "/images/products/1688-shop/silver-chain-single/silver-chain-single-detail3.jpg",
-      "/images/products/1688-shop/silver-chain-single/silver-chain-single-detail4.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "dark-stone-single",
-    "name": "Dark Stone Bracelet",
-    "description": "Deep charcoal mineral stone",
-    "price": 51.99,
-    "mainImage": "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail1.jpg",
-    "images": [
-      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail1.jpg",
-      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail2.jpg",
-      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail3.jpg",
-      "/images/products/1688-shop/dark-stone-single/dark-stone-single-detail4.jpg",
-      "/images/products/1688-shop/dark-stone-single/dark-stone-single-main.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
-    "type": "single-product",
-    "slug": "amber-bead-single",
-    "name": "Amber Bead Bracelet",
-    "description": "Warm amber resin beads",
-    "price": 53.99,
-    "mainImage": "/images/products/1688-shop/amber-bead-single/amber-bead-single-main.jpg",
-    "images": [
-      "/images/products/1688-shop/amber-bead-single/amber-bead-single-main.jpg",
-      "/images/products/1688-shop/amber-bead-single/amber-bead-single-detail1.jpg",
-      "/images/products/1688-shop/amber-bead-single/amber-bead-single-detail2.jpg",
-      "/images/products/1688-shop/amber-bead-single/amber-bead-single-detail3.jpg",
-      "/images/products/1688-shop/amber-bead-single/amber-bead-single-detail4.jpg"
-    ],
-    "category": "curated-singles",
-    "categoryName": "Curated Singles"
-  },
-  {
     "type": "series-product",
-    "slug": "copper-braid-series-01",
-    "name": "Copper Braid Collection #1",
-    "description": "Warm braided copper bracelets",
-    "price": 26.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-01.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-01.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-02",
-    "name": "Copper Braid Collection #2",
-    "description": "Warm braided copper bracelets",
-    "price": 27.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-02.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-02.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-03",
-    "name": "Copper Braid Collection #3",
-    "description": "Warm braided copper bracelets",
-    "price": 29.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-03.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-03.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-04",
-    "name": "Copper Braid Collection #4",
-    "description": "Warm braided copper bracelets",
-    "price": 30.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-04.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-04.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-05",
-    "name": "Copper Braid Collection #5",
-    "description": "Warm braided copper bracelets",
-    "price": 32.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-05.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-05.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-06",
-    "name": "Copper Braid Collection #6",
-    "description": "Warm braided copper bracelets",
-    "price": 33.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-06.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-06.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-07",
-    "name": "Copper Braid Collection #7",
-    "description": "Warm braided copper bracelets",
-    "price": 35.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-07.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-07.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-08",
-    "name": "Copper Braid Collection #8",
-    "description": "Warm braided copper bracelets",
-    "price": 36.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-08.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-08.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-09",
-    "name": "Copper Braid Collection #9",
-    "description": "Warm braided copper bracelets",
-    "price": 38.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-09.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-09.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-10",
-    "name": "Copper Braid Collection #10",
-    "description": "Warm braided copper bracelets",
-    "price": 39.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-10.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-10.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-11",
-    "name": "Copper Braid Collection #11",
-    "description": "Warm braided copper bracelets",
-    "price": 41.49,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-11.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-11.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "series-product",
-    "slug": "copper-braid-series-12",
-    "name": "Copper Braid Collection #12",
-    "description": "Warm braided copper bracelets",
-    "price": 42.99,
-    "mainImage": "/images/products/1688-shop/copper-braid-series/copper-braid-series-12.jpg",
-    "images": [
-      "/images/products/1688-shop/copper-braid-series/copper-braid-series-12.jpg"
-    ],
-    "category": "copper-braid-series",
-    "categoryName": "Copper Braid Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-single-01",
-    "name": "Lustre Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "slug": "pearl-series-01",
+    "name": "Pearl Collection #1",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 31.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-01-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-01-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-01-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-01-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-01-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-01-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-01-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-01-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-01-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-01-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-01-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-01-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": true,
+    "tag": "Bestseller"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-10",
-    "name": "Coin Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-02",
+    "name": "Pearl Collection #2",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
+    "price": 32.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-02-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-series-02-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-02-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-02-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-02-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-02-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection",
+    "isBestSeller": true,
+    "tag": "Bestseller"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-series-03",
+    "name": "Pearl Collection #3",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
+    "price": 34.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-03-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-series-03-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-03-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-03-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-03-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-03-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-series-04",
+    "name": "Pearl Collection #4",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
+    "price": 35.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-04-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-series-04-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-04-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-04-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-04-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-04-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-series-05",
+    "name": "Pearl Collection #5",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
+    "price": 37.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-05-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-series-05-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-05-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-05-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-05-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-05-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-series-06",
+    "name": "Pearl Collection #6",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
+    "price": 38.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-06-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-series-06-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-06-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-06-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-06-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-06-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-series-07",
+    "name": "Pearl Collection #7",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
+    "price": 40.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-07-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-series-07-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-07-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-07-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-07-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-07-detail4.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-07-detail5.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-series-08",
+    "name": "Pearl Collection #8",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
+    "price": 41.99,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-08-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-series-08-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-08-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-08-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-08-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-08-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-series-09",
+    "name": "Pearl Collection #9",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
+    "price": 43.49,
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-09-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-series/pearl-series-09-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-09-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-09-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-09-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-09-detail4.jpg"
+    ],
+    "category": "pearl-series",
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-series-10",
+    "name": "Pearl Collection #10",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 44.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-10-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-10-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-10-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-10-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-10-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-10-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-10-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-10-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-10-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-10-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-10-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-10-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-11",
-    "name": "Rice Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-11",
+    "name": "Pearl Collection #11",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 46.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-11-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-11-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-11-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-11-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-11-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-11-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-11-detail4.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-11-detail5.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-11-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-11-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-11-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-11-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-11-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-12",
-    "name": "Biwa Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-12",
+    "name": "Pearl Collection #12",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 47.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-12-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-12-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-12-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-12-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-12-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-12-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-12-detail4.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-12-detail5.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-12-detail6.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-12-detail7.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-12-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-12-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-12-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-12-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-12-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-13",
-    "name": "Edison Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-13",
+    "name": "Pearl Collection #13",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 49.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-13-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-13-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-13-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-13-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-13-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-13-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-13-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-13-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-13-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-13-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-13-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-13-detail4.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-13-detail5.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-14",
-    "name": "South Sea Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-14",
+    "name": "Pearl Collection #14",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 50.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-14-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-14-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-14-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-14-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-14-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-14-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-14-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-14-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-14-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-14-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-14-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-14-detail4.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-14-detail5.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-14-detail6.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-14-detail7.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-15",
-    "name": "Seed Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-15",
+    "name": "Pearl Collection #15",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 52.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-15-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-15-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-15-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-15-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-15-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-15-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-15-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-15-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-15-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-15-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-15-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-15-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-16",
-    "name": "Button Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-16",
+    "name": "Pearl Collection #16",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 53.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-16-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-16-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-16-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-16-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-16-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-16-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-16-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-16-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-16-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-16-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-16-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-16-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-17",
-    "name": "Circle Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-17",
+    "name": "Pearl Collection #17",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 55.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-17-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-17-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-17-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-17-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-17-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-17-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-17-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-17-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-17-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-17-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-17-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-17-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-18",
-    "name": "Drop Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-18",
+    "name": "Pearl Collection #18",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 56.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-18-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-18-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-18-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-18-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-18-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-18-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-18-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-18-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-18-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-18-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-18-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-18-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-19",
-    "name": "Oval Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-19",
+    "name": "Pearl Collection #19",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 58.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-19-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-19-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-19-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-19-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-19-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-19-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-19-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-19-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-19-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-19-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-19-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-19-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
+    "tag": "New"
   },
   {
-    "type": "single-product",
-    "slug": "pearl-single-02",
-    "name": "Classic White Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
-    "price": 32.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-02-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-02-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-02-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-02-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-02-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-02-detail4.jpg"
-    ],
-    "category": "pearl-series",
-    "categoryName": "Pearl Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-single-20",
-    "name": "Nugget Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
+    "type": "series-product",
+    "slug": "pearl-series-20",
+    "name": "Pearl Collection #20",
+    "description": "Luminous freshwater and saltwater pearls with natural iridescence",
     "price": 59.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-20-main.jpg",
+    "mainImage": "/images/products/1688-shop/pearl-series/pearl-series-20-detail0.jpg",
     "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-20-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-20-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-20-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-20-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-20-detail4.jpg"
+      "/images/products/1688-shop/pearl-series/pearl-series-20-detail0.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-20-detail1.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-20-detail2.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-20-detail3.jpg",
+      "/images/products/1688-shop/pearl-series/pearl-series-20-detail4.jpg"
     ],
     "category": "pearl-series",
-    "categoryName": "Pearl Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-single-03",
-    "name": "Baroque Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
-    "price": 34.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-03-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-03-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-03-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-03-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-03-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-03-detail4.jpg"
-    ],
-    "category": "pearl-series",
-    "categoryName": "Pearl Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-single-04",
-    "name": "Golden Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
-    "price": 35.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-04-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-04-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-04-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-04-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-04-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-04-detail4.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-04-detail5.jpg"
-    ],
-    "category": "pearl-series",
-    "categoryName": "Pearl Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-single-05",
-    "name": "Tahitian Black Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
-    "price": 37.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-05-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-05-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-05-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-05-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-05-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-05-detail4.jpg"
-    ],
-    "category": "pearl-series",
-    "categoryName": "Pearl Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-single-06",
-    "name": "Freshwater Pearl Strand Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
-    "price": 38.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-06-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-06-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-06-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-06-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-06-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-06-detail4.jpg"
-    ],
-    "category": "pearl-series",
-    "categoryName": "Pearl Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-single-07",
-    "name": "Akoya Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
-    "price": 40.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-07-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-07-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-07-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-07-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-07-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-07-detail4.jpg"
-    ],
-    "category": "pearl-series",
-    "categoryName": "Pearl Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-single-08",
-    "name": "Keshi Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
-    "price": 41.99,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-08-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-08-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-08-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-08-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-08-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-08-detail4.jpg"
-    ],
-    "category": "pearl-series",
-    "categoryName": "Pearl Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-single-09",
-    "name": "Mabe Pearl Bracelet",
-    "description": "Hand-selected pearl bracelet with luminous natural luster. Each pearl is individually chosen for its iridescence and character.",
-    "price": 43.49,
-    "mainImage": "/images/products/1688-shop/pearl-series/pearl-single-09-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-series/pearl-single-09-main.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-09-detail1.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-09-detail2.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-09-detail3.jpg",
-      "/images/products/1688-shop/pearl-series/pearl-single-09-detail4.jpg"
-    ],
-    "category": "pearl-series",
-    "categoryName": "Pearl Collection"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-crystal-01",
-    "name": "Pearl & Crystal #1",
-    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
-    "price": 36.99,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-main.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-detail1.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-detail2.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-01-detail3.jpg"
-    ],
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal",
-    "tag": "New"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-crystal-02",
-    "name": "Pearl & Crystal #2",
-    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
-    "price": 38.99,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-main.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-detail1.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-detail2.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-detail3.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-02-detail4.jpg"
-    ],
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal",
-    "tag": "New"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-crystal-03",
-    "name": "Pearl & Crystal #3",
-    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
-    "price": 40.99,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-main.png",
-    "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-main.png",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail1.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail2.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail3.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail4.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail5.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-03-detail6.jpg"
-    ],
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal",
-    "tag": "New"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-crystal-04",
-    "name": "Pearl & Crystal #4",
-    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
-    "price": 42.99,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-main.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-detail1.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-detail2.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-04-detail3.jpg"
-    ],
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal",
-    "tag": "New"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-crystal-05",
-    "name": "Pearl & Crystal #5",
-    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
-    "price": 44.99,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-main.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail1.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail2.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail3.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail4.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-05-detail5.jpg"
-    ],
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal",
-    "tag": "New"
-  },
-  {
-    "type": "single-product",
-    "slug": "pearl-crystal-06",
-    "name": "Pearl & Crystal #6",
-    "description": "Luminous pearl and crystal bracelet with delicate shimmer — hand-selected for its unique character.",
-    "price": 46.99,
-    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-main.jpg",
-    "images": [
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-main.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-detail1.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-detail2.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-detail3.jpg",
-      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-06-detail4.jpg"
-    ],
-    "category": "pearl-crystal-series",
-    "categoryName": "Pearl & Crystal",
+    "categoryName": "Pearl Collection",
+    "isBestSeller": false,
     "tag": "New"
   },
   {
     "type": "series-product",
-    "slug": "luxe-01",
+    "slug": "luxe-collection-01",
     "name": "Luxe Collection #1",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 31.49,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-01-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-01-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-01-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-01-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-01-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-01-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-01-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-01-detail5.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-01-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-01-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-01-detail2.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -821,17 +403,18 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-02",
+    "slug": "luxe-collection-02",
     "name": "Luxe Collection #2",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 32.99,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-02-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-02-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-02-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-02-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-02-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-02-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-02-detail4.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-02-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-02-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-02-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-02-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-02-detail4.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-02-detail5.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -840,16 +423,18 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-03",
+    "slug": "luxe-collection-03",
     "name": "Luxe Collection #3",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 34.49,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-03-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-03-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-03-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-03-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-03-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-03-detail3.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-03-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-03-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-03-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-03-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-03-detail4.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-03-detail5.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -858,16 +443,17 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-04",
+    "slug": "luxe-collection-04",
     "name": "Luxe Collection #4",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 35.99,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-04-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-04-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-04-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-04-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-04-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-04-detail3.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-04-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-04-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-04-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-04-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-04-detail4.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -876,17 +462,17 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-05",
+    "slug": "luxe-collection-05",
     "name": "Luxe Collection #5",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 37.49,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-05-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-05-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-05-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-05-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-05-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-05-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-05-detail4.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-05-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-05-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-05-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-05-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-05-detail4.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -895,15 +481,18 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-06",
+    "slug": "luxe-collection-06",
     "name": "Luxe Collection #6",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 38.99,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-06-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-06-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-06-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-06-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-06-detail2.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-06-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-06-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-06-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-06-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-06-detail4.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-06-detail5.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -912,18 +501,17 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-07",
+    "slug": "luxe-collection-07",
     "name": "Luxe Collection #7",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 40.49,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-07-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-07-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-07-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-07-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-07-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-07-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-07-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-07-detail5.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-07-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-07-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-07-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-07-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-07-detail4.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -932,18 +520,15 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-08",
+    "slug": "luxe-collection-08",
     "name": "Luxe Collection #8",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 41.99,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-08-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-08-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-08-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-08-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-08-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-08-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-08-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-08-detail5.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-08-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-08-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-08-detail2.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -952,17 +537,17 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-09",
+    "slug": "luxe-collection-09",
     "name": "Luxe Collection #9",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 43.49,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-09-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-09-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-09-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-09-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-09-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-09-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-09-detail4.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-09-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-09-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-09-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-09-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-09-detail4.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -971,18 +556,16 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-10",
+    "slug": "luxe-collection-10",
     "name": "Luxe Collection #10",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 44.99,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-10-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-10-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-10-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-10-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-10-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-10-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-10-detail4.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-10-detail5.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-10-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-10-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-10-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-10-detail3.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -991,17 +574,16 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-11",
+    "slug": "luxe-collection-11",
     "name": "Luxe Collection #11",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 46.49,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-11-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-11-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-11-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-11-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-11-detail2.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-11-detail3.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-11-detail4.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-11-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-11-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-11-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-11-detail3.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
@@ -1010,19 +592,216 @@
   },
   {
     "type": "series-product",
-    "slug": "luxe-12",
+    "slug": "luxe-collection-12",
     "name": "Luxe Collection #12",
-    "description": "Premium hand-selected bracelet with refined finish and artisanal details",
+    "description": "Premium hand-selected bracelets with refined finishes",
     "price": 47.99,
-    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-12-main.jpg",
+    "mainImage": "/images/products/1688-shop/luxe-collection/luxe-collection-12-main.jpg",
     "images": [
-      "/images/products/1688-shop/luxe-collection/luxe-12-main.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-12-detail1.jpg",
-      "/images/products/1688-shop/luxe-collection/luxe-12-detail2.jpg"
+      "/images/products/1688-shop/luxe-collection/luxe-collection-12-main.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-12-detail1.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-12-detail2.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-12-detail3.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-12-detail4.jpg",
+      "/images/products/1688-shop/luxe-collection/luxe-collection-12-detail5.jpg"
     ],
     "category": "luxe-collection",
     "categoryName": "Luxe Collection",
     "isBestSeller": false,
     "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-crystal-series-01",
+    "name": "Pearl & Crystal #1",
+    "description": "Luminous pearl and crystal bracelets with delicate shimmer",
+    "price": 31.49,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01-detail0.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-01-detail3.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "isBestSeller": true,
+    "tag": "Bestseller"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-crystal-series-02",
+    "name": "Pearl & Crystal #2",
+    "description": "Luminous pearl and crystal bracelets with delicate shimmer",
+    "price": 32.99,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02-detail0.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02-detail3.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02-detail4.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02-detail5.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-02-detail6.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "isBestSeller": true,
+    "tag": "Bestseller"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-crystal-series-03",
+    "name": "Pearl & Crystal #3",
+    "description": "Luminous pearl and crystal bracelets with delicate shimmer",
+    "price": 34.49,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03-detail0.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03-detail3.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03-detail4.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03-detail5.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-03-detail6.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "series-product",
+    "slug": "pearl-crystal-series-04",
+    "name": "Pearl & Crystal #4",
+    "description": "Luminous pearl and crystal bracelets with delicate shimmer",
+    "price": 35.99,
+    "mainImage": "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-04-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-04-detail0.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-04-detail1.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-04-detail2.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-04-detail3.jpg",
+      "/images/products/1688-shop/pearl-crystal-series/pearl-crystal-series-04-detail4.jpg"
+    ],
+    "category": "pearl-crystal-series",
+    "categoryName": "Pearl & Crystal",
+    "isBestSeller": false,
+    "tag": "New"
+  },
+  {
+    "type": "single-product",
+    "slug": "single-01",
+    "name": "Curated Singles",
+    "description": "One-of-a-kind hand-selected bracelets",
+    "price": 31.49,
+    "mainImage": "/images/products/1688-shop/curated-singles/single-01-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/curated-singles/single-01-detail0.jpg",
+      "/images/products/1688-shop/curated-singles/single-01-detail1.jpg",
+      "/images/products/1688-shop/curated-singles/single-01-detail2.jpg",
+      "/images/products/1688-shop/curated-singles/single-01-detail3.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles",
+    "isBestSeller": true,
+    "tag": "Bestseller"
+  },
+  {
+    "type": "single-product",
+    "slug": "single-02",
+    "name": "Curated Singles",
+    "description": "One-of-a-kind hand-selected bracelets",
+    "price": 32.99,
+    "mainImage": "/images/products/1688-shop/curated-singles/single-02-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/curated-singles/single-02-detail0.jpg",
+      "/images/products/1688-shop/curated-singles/single-02-detail1.jpg",
+      "/images/products/1688-shop/curated-singles/single-02-detail2.jpg",
+      "/images/products/1688-shop/curated-singles/single-02-detail3.jpg",
+      "/images/products/1688-shop/curated-singles/single-02-detail4.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles",
+    "isBestSeller": true,
+    "tag": "Bestseller"
+  },
+  {
+    "type": "single-product",
+    "slug": "single-03",
+    "name": "Curated Singles",
+    "description": "One-of-a-kind hand-selected bracelets",
+    "price": 34.49,
+    "mainImage": "/images/products/1688-shop/curated-singles/single-03-detail0.png",
+    "images": [
+      "/images/products/1688-shop/curated-singles/single-03-detail0.png",
+      "/images/products/1688-shop/curated-singles/single-03-detail1.jpg",
+      "/images/products/1688-shop/curated-singles/single-03-detail2.jpg",
+      "/images/products/1688-shop/curated-singles/single-03-detail3.jpg",
+      "/images/products/1688-shop/curated-singles/single-03-detail4.jpg",
+      "/images/products/1688-shop/curated-singles/single-03-detail5.jpg",
+      "/images/products/1688-shop/curated-singles/single-03-detail6.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles",
+    "isBestSeller": true,
+    "tag": "Bestseller"
+  },
+  {
+    "type": "single-product",
+    "slug": "single-04",
+    "name": "Curated Singles",
+    "description": "One-of-a-kind hand-selected bracelets",
+    "price": 35.99,
+    "mainImage": "/images/products/1688-shop/curated-singles/single-04-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/curated-singles/single-04-detail0.jpg",
+      "/images/products/1688-shop/curated-singles/single-04-detail1.jpg",
+      "/images/products/1688-shop/curated-singles/single-04-detail2.jpg",
+      "/images/products/1688-shop/curated-singles/single-04-detail3.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles",
+    "isBestSeller": true,
+    "tag": "Bestseller"
+  },
+  {
+    "type": "single-product",
+    "slug": "single-05",
+    "name": "Curated Singles",
+    "description": "One-of-a-kind hand-selected bracelets",
+    "price": 37.49,
+    "mainImage": "/images/products/1688-shop/curated-singles/single-05-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/curated-singles/single-05-detail0.jpg",
+      "/images/products/1688-shop/curated-singles/single-05-detail1.jpg",
+      "/images/products/1688-shop/curated-singles/single-05-detail2.jpg",
+      "/images/products/1688-shop/curated-singles/single-05-detail3.jpg",
+      "/images/products/1688-shop/curated-singles/single-05-detail4.jpg",
+      "/images/products/1688-shop/curated-singles/single-05-detail5.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles",
+    "isBestSeller": true,
+    "tag": "Bestseller"
+  },
+  {
+    "type": "single-product",
+    "slug": "single-06",
+    "name": "Curated Singles",
+    "description": "One-of-a-kind hand-selected bracelets",
+    "price": 38.99,
+    "mainImage": "/images/products/1688-shop/curated-singles/single-06-detail0.jpg",
+    "images": [
+      "/images/products/1688-shop/curated-singles/single-06-detail0.jpg",
+      "/images/products/1688-shop/curated-singles/single-06-detail1.jpg",
+      "/images/products/1688-shop/curated-singles/single-06-detail2.jpg",
+      "/images/products/1688-shop/curated-singles/single-06-detail3.jpg",
+      "/images/products/1688-shop/curated-singles/single-06-detail4.jpg"
+    ],
+    "category": "curated-singles",
+    "categoryName": "Curated Singles",
+    "isBestSeller": true,
+    "tag": "Bestseller"
   }
 ]
