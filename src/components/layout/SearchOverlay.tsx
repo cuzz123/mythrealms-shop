@@ -133,9 +133,10 @@ export function SearchOverlay() {
         aria-label="Search products"
         aria-expanded={isOpen}
         aria-controls="search-overlay"
-        className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[var(--border-light)] transition text-[var(--text-secondary)] hover:text-[var(--text)]"
+        className="flex items-center gap-1 h-10 px-3 rounded-full hover:bg-[var(--border-light)] transition text-[var(--text-secondary)] hover:text-[var(--text)]"
       >
         <Search className="w-5 h-5" />
+        <span className="text-xs ml-1 hidden lg:inline">Search</span>
       </button>
 
       {/* Overlay */}

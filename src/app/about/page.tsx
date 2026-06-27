@@ -47,15 +47,15 @@ export default function AboutPage() {
       {/* Four Pillars */}
       <div className="grid md:grid-cols-2 gap-8 mb-16">
         {[
-          { icon: Mountain, title: "The Mountains — Stones of Power", desc: "Every mountain in the Classic holds a gem. Jade from Kunlun. Agate from the peaks of the east. Crystal from the summits that touch heaven. We trace the ancient names and bring their stones to the surface — each mountain a source, each stone a piece of living geography." },
-          { icon: Waves, title: "The Seas — Pearls of the Dragon Kings", desc: "The four Dragon Kings guard the oceans in Chinese myth. Ao Guang rules the East Sea. Ao Qin commands the South. Ao Run oversees the West. Ao Shun guards the North. Their tears, shed over millennia, became the pearls we string today. Each one carries the depth of an undersea palace." },
-          { icon: Droplets, title: "The Rivers — Crystals of the Sky", desc: "Rivers in the Classic carry minerals from the heavens. Crystal, quartz, and moonstone wash down from sacred peaks, polished by the current over thousands of years. Our river-sourced stones carry the clarity of mountain streams and the patience of moving water." },
-          { icon: Sparkles, title: "The Beasts — Guardians of Each Stone", desc: "277 creatures populate the Shan Hai Jing. The nine-tailed fox. The qilin. The phoenix. The white tiger. Each one protects a mineral deposit. Each one guards a geological secret. When you wear a MythRealms piece, you wear the stone a mythical beast was said to protect — a quiet inheritance from a world that believed every rock had a keeper." },
+          { icon: Mountain, title: "The Mountains — Stones of Power", descNode: <>Every mountain in the Classic holds a gem. Jade from <Link href="/collections/luxe-collection" className="text-[var(--accent)] hover:underline">Kunlun</Link>. Agate from the peaks of the east. Crystal from the summits that touch heaven. We trace the ancient names and bring their stones to the surface — each mountain a source, each stone a piece of living geography.</> },
+          { icon: Waves, title: "The Seas — Pearls of the Dragon Kings", descNode: <>The four <Link href="/collections/pearl-series" className="text-[var(--accent)] hover:underline">Dragon Kings</Link> guard the oceans in Chinese myth. Ao Guang rules the East Sea. Ao Qin commands the South. Ao Run oversees the West. Ao Shun guards the North. Their tears, shed over millennia, became the pearls we string today. Each one carries the depth of an undersea palace.</> },
+          { icon: Droplets, title: "The Rivers — Crystals of the Sky", descNode: "Rivers in the Classic carry minerals from the heavens. Crystal, quartz, and moonstone wash down from sacred peaks, polished by the current over thousands of years. Our river-sourced stones carry the clarity of mountain streams and the patience of moving water." },
+          { icon: Sparkles, title: "The Beasts — Guardians of Each Stone", descNode: <>277 creatures populate the Shan Hai Jing. The <Link href="/products/curated-singles-04" className="text-[var(--accent)] hover:underline">nine-tailed fox</Link>. The <Link href="/products/curated-singles-03" className="text-[var(--accent)] hover:underline">qilin</Link>. The <Link href="/products/curated-singles-05" className="text-[var(--accent)] hover:underline">phoenix</Link>. The <Link href="/products/curated-singles-06" className="text-[var(--accent)] hover:underline">white tiger</Link>. Each one protects a mineral deposit. Each one guards a geological secret. When you wear a MythRealms piece, you wear the stone a mythical beast was said to protect — a quiet inheritance from a world that believed every rock had a keeper.</> },
         ].map((p) => (
           <div key={p.title} className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 text-center">
             <p.icon className="w-10 h-10 text-[var(--accent)] mx-auto mb-4" strokeWidth={1.5} />
             <h3 className="font-serif text-lg font-bold text-[var(--text)] mb-2">{p.title}</h3>
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.desc}</p>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.descNode}</p>
           </div>
         ))}
       </div>
@@ -81,7 +81,7 @@ export default function AboutPage() {
           </p>
           <p>
             She read past midnight. She read through the weekend. The names of mountains
-            she had never heard of — Kunlun, Buzhou, the peaks of the Eastern Sea — became
+            she had never heard of — <Link href="/collections/luxe-collection" className="text-[var(--accent)] hover:underline">Kunlun</Link>, Buzhou, the peaks of the Eastern Sea — became
             coordinates on a map only she could see. She started sketching. A bracelet named
             for a dragon king's tear. A necklace inspired by a shattered pillar of the sky.
             A ring that carried the name of a mountain that existed only in myth.
