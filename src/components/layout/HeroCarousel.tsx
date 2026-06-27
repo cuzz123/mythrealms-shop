@@ -7,10 +7,9 @@ import { LazyImage } from "@/components/ui/LazyImage";
 
 const slides = [
   { image: "/images/1688-hero/轮播图1.webp", title: "Pearl Collection", subtitle: "Luminous freshwater & saltwater pearls · 20 styles", cta: "Shop Pearls", href: "/collections/pearl-series" },
-  { image: "/images/1688-hero/轮播图2.webp", title: "Pearl & Crystal", subtitle: "Luminous crystal with delicate shimmer · 9 styles", cta: "Shop Pearl & Crystal", href: "/collections/pearl-crystal-series" },
-  { image: "/images/1688-hero/单品1.webp", mobileImage: "/images/1688-hero-mobile/单品1.webp", title: "Blush Rose Bracelet", subtitle: "Soft rose-toned natural stone", cta: "Shop This Piece", href: "/products/blush-rose-single" },
-  { image: "/images/1688-hero/单品3.webp", mobileImage: "/images/1688-hero-mobile/单品3.webp", title: "Golden Accent Bracelet", subtitle: "Warm gold-accent · sophisticated layering", cta: "Shop This Piece", href: "/products/golden-accent-single" },
-  { image: "/images/1688-hero/单品4.webp", mobileImage: "/images/1688-hero-mobile/单品4.webp", title: "Crystal Bling Bracelet", subtitle: "Sparkling crystal facets · pure brilliance", cta: "Shop This Piece", href: "/products/crystal-bling-single" },
+  { image: "/images/1688-hero/轮播图2.webp", title: "Luxe Collection", subtitle: "Premium hand-selected bracelets · 12 styles", cta: "Shop Luxe", href: "/collections/luxe-collection" },
+  { image: "/images/1688-hero/单品1.webp", mobileImage: "/images/1688-hero-mobile/单品1.webp", title: "Pearl & Crystal", subtitle: "Luminous crystal with delicate shimmer · 4 styles", cta: "Shop Pearl & Crystal", href: "/collections/pearl-crystal-series" },
+  { image: "/images/1688-hero/单品3.webp", mobileImage: "/images/1688-hero-mobile/单品3.webp", title: "Curated Singles", subtitle: "One-of-a-kind hand-selected bracelets · 6 styles", cta: "Shop Singles", href: "/collections/curated-singles" },
 ];
 
 export function HeroCarousel() {

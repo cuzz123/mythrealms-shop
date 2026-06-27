@@ -4,9 +4,8 @@ import Link from "next/link";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 
 const exploreLinks = [
-  { label: "Copper Braid Collection", href: "/collections/copper-braid-series" },
-  { label: "Golden Luxe Collection", href: "/collections/golden-luxe-series" },
-  { label: "Dark Mineral Collection", href: "/collections/dark-mineral-series" },
+  { label: "Pearl Collection", href: "/collections/pearl-series" },
+  { label: "Luxe Collection", href: "/collections/luxe-collection" },
   { label: "Pearl & Crystal", href: "/collections/pearl-crystal-series" },
   { label: "Curated Singles", href: "/collections/curated-singles" },
   { label: "About Us", href: "/about" },

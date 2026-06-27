@@ -9,10 +9,9 @@ export const metadata: Metadata = {
 export default function NotFoundPage() {
   // First product image per category for link thumbnails
   const categoryLinks = [
-    { slug: "copper-braid-series", label: "Copper Braid Collection" },
-    { slug: "golden-luxe-series", label: "Golden Luxe Collection" },
-    { slug: "dark-mineral-series", label: "Dark Mineral Collection" },
-    { slug: "pearl-crystal-series", label: "Pearl &amp; Crystal" },
+    { slug: "pearl-series", label: "Pearl Collection" },
+    { slug: "luxe-collection", label: "Luxe Collection" },
+    { slug: "pearl-crystal-series", label: "Pearl & Crystal" },
     { slug: "curated-singles", label: "Curated Singles" },
   ].map((c) => {
     const first = PRODUCTS.find((p) => p.category === c.slug);
