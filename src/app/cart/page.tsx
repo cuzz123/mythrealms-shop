@@ -152,8 +152,6 @@ export default function CartPage() {
             <span className="text-[10px] text-[var(--text-muted)] font-semibold">MC</span>
             <span className="text-[10px] text-[var(--text-muted)] font-semibold">AMEX</span>
             <span className="text-[10px] text-[var(--text-muted)] font-semibold">PayPal</span>
-            <span className="text-[10px] text-[var(--text-muted)] font-semibold">Google Pay</span>
-            <span className="text-[10px] text-[var(--text-muted)] font-semibold">Apple Pay</span>
           </div>
           <Link href="/collections/curated-singles" className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mt-6 justify-center"><ArrowLeft className="w-4 h-4" /> Continue Shopping</Link>
         </div>

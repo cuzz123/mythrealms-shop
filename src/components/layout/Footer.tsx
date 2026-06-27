@@ -171,8 +171,7 @@ export function Footer() {
             reserved.
           </p>
           <p>
-            We accept: VISA &bull; Mastercard &bull; AMEX &bull; PayPal &bull;
-            Google Pay
+            We accept: VISA &bull; Mastercard &bull; AMEX &bull; PayPal
           </p>
         </div>
       </div>
