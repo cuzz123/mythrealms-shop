@@ -90,6 +90,15 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // --- Increment discount code usedCount ---
+    if (discountAmount > 0 && discount?.codes?.length) {
+      const codeLabels = discount.codes.map((c: string) => c.trim().toUpperCase());
+      await db.discountCode.updateMany({
+        where: { code: { in: codeLabels } },
+        data: { usedCount: { increment: 1 } },
+      });
+    }
+
     // --- LemonSqueezy Checkout ---
     const apiKey = process.env.LEMONSQUEEZY_API_KEY;
     const storeId = process.env.LEMONSQUEEZY_STORE_ID;

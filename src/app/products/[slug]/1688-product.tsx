@@ -46,7 +46,13 @@ export function Product1688({ slug }: { slug: string }) {
     } catch { /* localStorage not available */ }
   }, [slug]);
 
-  if (!product) return null;
+  if (!product) return (
+    <div className="max-w-7xl mx-auto px-6 py-20 text-center">
+      <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-4">Product Not Found</h1>
+      <p className="text-[var(--text-muted)] mb-6">This product does not exist or may have been removed.</p>
+      <a href="/collections" className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">Browse Collections</a>
+    </div>
+  );
   const p = product; // TS narrowing for closure below
   const images = p.images;
   const mainImg = images[activeIdx] || p.image;

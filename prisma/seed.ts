@@ -83,6 +83,24 @@ async function main() {
   ]
   for (const post of posts) { await db.blogPost.create({ data: post }) }
   console.log(`Created ${posts.length} blog posts`)
+
+  // Seed discount codes
+  await db.discountCode.upsert({
+    where: { code: 'MYTH15' },
+    update: {},
+    create: {
+      code: 'MYTH15',
+      type: 'percentage',
+      value: 15,
+      label: '15% Off Your First Order',
+      description: 'Welcome offer for new customers — 15% off your first purchase.',
+      minSubtotal: 0,
+      maxUses: 0,
+      firstOrderOnly: true,
+      isActive: true,
+    },
+  })
+  console.log('Seeded discount code: MYTH15')
   console.log('MythRealms seed complete!')
 }
 main().catch(e => { console.error('Seed error:', e); process.exit(1) }).finally(() => db.$disconnect())
