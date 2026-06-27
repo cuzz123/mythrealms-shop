@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PRODUCTS } from "@/lib/1688-products";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 export const metadata: Metadata = {
   title: "Page Not Found — MythRealms",
@@ -51,8 +52,8 @@ export default function NotFoundPage() {
                 className="inline-flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text)] transition group"
               >
                 {c.thumb && (
-                  <span className="w-10 h-10 rounded-lg overflow-hidden bg-[var(--surface)] border border-[var(--border)] flex-shrink-0">
-                    <img src={c.thumb} alt="" className="w-full h-full object-cover" />
+                  <span className="relative w-10 h-10 rounded-lg overflow-hidden bg-[var(--surface)] border border-[var(--border)] flex-shrink-0">
+                    <LazyImage src={c.thumb} alt="" fill sizes="40px" className="object-cover" containerClassName="absolute inset-0" />
                   </span>
                 )}
                 <span className="underline underline-offset-2 group-hover:no-underline">{c.label}</span>

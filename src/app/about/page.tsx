@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Mountain, Waves, Droplets, Sparkles } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About MythRealms — From an Ancient Book to Your Wrist",
+  description: "The Classic of Mountains and Seas held 550 mountains, countless stones. MythRealms brings those stones from the page to the present — each piece a fragment of an ancient geological treasure map.",
+};
 
 export default function AboutPage() {
   return (

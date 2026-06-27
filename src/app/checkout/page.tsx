@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCartStore } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
+import { LazyImage } from "@/components/ui/LazyImage";
 import Link from "next/link";
 import { Loader2, Tag, Check, AlertCircle, CreditCard } from "lucide-react";
 import toast from "react-hot-toast";
@@ -451,11 +452,16 @@ export default function CheckoutPage() {
                   key={`${item.product.id}-${item.product.variantId}`}
                   className="flex gap-3 text-sm"
                 >
-                  <img
-                    src={imageUrl(item.product.image)}
-                    alt={item.product.name}
-                    className="w-12 h-12 rounded object-cover flex-shrink-0"
-                  />
+                  <div className="relative w-12 h-12 flex-shrink-0">
+                    <LazyImage
+                      src={imageUrl(item.product.image)}
+                      alt={item.product.name}
+                      fill
+                      sizes="48px"
+                      className="object-cover rounded"
+                      containerClassName="absolute inset-0"
+                    />
+                  </div>
                   <div className="min-w-0">
                     <p className="font-medium text-[var(--text)] line-clamp-1">
                       {item.product.name}
@@ -704,6 +710,7 @@ function PayPalButton({
   paymentMethod: string;
 }) {
   const [sdkReady, setSdkReady] = useState(false);
+  const buttonsRef = useRef<any>(null);
   const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "";
 
   useEffect(() => {
@@ -777,7 +784,16 @@ function PayPalButton({
       onCancel: () => { toast.error("Payment cancelled."); },
       onError: (err: any) => { toast.error("Payment failed. Please try again."); console.error("PayPal error:", err); },
       style: { color: "gold", shape: "rect", label: "paypal", height: 48 },
-    }).render("#paypal-button-container");
+    }).render("#paypal-button-container").then((instance: any) => {
+      buttonsRef.current = instance;
+    });
+
+    return () => {
+      if (buttonsRef.current && typeof buttonsRef.current.close === "function") {
+        buttonsRef.current.close();
+        buttonsRef.current = null;
+      }
+    };
   }, [sdkReady]);
 
   if (!paypalClientId) {

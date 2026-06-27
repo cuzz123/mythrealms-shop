@@ -3,8 +3,9 @@ import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { PRODUCTS } from "@/lib/1688-products";
 import { formatPrice } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, ZoomIn, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info, Heart, Copy, Check, Star, MessageSquare, Loader2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info, Heart, Copy, Check, Star, MessageSquare, Loader2 } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
+import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import toast from "react-hot-toast";
@@ -106,8 +107,27 @@ export function Product1688({ slug }: { slug: string }) {
     );
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mythrealms-shop.vercel.app";
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
+      {/* JSON-LD Structured Data */}
+      <ProductJsonLd
+        name={p.name}
+        description={p.description}
+        images={[p.image]}
+        price={p.price}
+        currency="USD"
+        url={`${siteUrl}/products/${p.slug}`}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: p.categoryName, url: `/collections/${p.category}` },
+          { name: p.name, url: `${siteUrl}/products/${p.slug}` },
+        ]}
+      />
+
       {/* Breadcrumb */}
       <nav className="text-xs text-[var(--text-muted)] mb-6">
         <Link href="/" className="hover:text-[var(--accent)]">Home</Link>

@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle, Package, Truck, Home } from "lucide-react";
 import { SuccessTracker } from "./tracker";
 import { safeJsonParse } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Order Confirmed — MythRealms",
+  description: "Your order has been confirmed. Ancient legends are on their way to you.",
+};
 
 export default async function CheckoutSuccessPage({
   searchParams,

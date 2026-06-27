@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link"
 import { CATEGORIES } from "@/lib/1688-products"
+
+export const metadata: Metadata = {
+  title: "All Collections — MythRealms",
+  description: "Explore our complete range of hand-selected gemstone jewelry — Pearl Collection, Luxe Collection, Pearl & Crystal Series, and Curated Singles.",
+};
 
 export default function CollectionsPage() {
   return (
