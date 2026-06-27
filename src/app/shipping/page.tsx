@@ -267,6 +267,28 @@ export default function ShippingPage() {
           </div>
         </section>
 
+        {/* Ready to find your stone? */}
+        <section className="text-center border-t border-[var(--border)] pt-12">
+          <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Ready to find your stone?</h2>
+          <p className="text-[var(--text-secondary)] mb-6 max-w-md mx-auto">
+            Every stone tells a story. Browse our hand-selected collections and find the one that speaks to you.
+          </p>
+          <div className="flex justify-center gap-4">
+            <Link
+              href="/collections/curated-singles"
+              className="px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
+            >
+              Shop Curated Singles
+            </Link>
+            <Link
+              href="/collections"
+              className="px-8 py-3 border border-[var(--border)] text-[var(--text)] rounded-full font-semibold text-sm hover:border-[var(--accent)] transition"
+            >
+              Browse Collections
+            </Link>
+          </div>
+        </section>
+
       </div>
     </div>
   );

@@ -68,7 +68,15 @@ export default function ContactPage() {
           <div className="text-center py-8">
             <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
             <h3 className="font-semibold text-[var(--text)] text-lg mb-2">Message Sent!</h3>
-            <p className="text-sm text-[var(--text-muted)]">Thank you for reaching out. We will get back to you soon.</p>
+            <p className="text-sm text-[var(--text-muted)] mb-6">Thank you for reaching out. We will get back to you soon.</p>
+            <div className="flex justify-center gap-3">
+              <Link href="/collections/curated-singles">
+                <Button variant="primary">Continue Shopping</Button>
+              </Link>
+              <Link href="/collections">
+                <Button variant="outline">Browse Collections</Button>
+              </Link>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">

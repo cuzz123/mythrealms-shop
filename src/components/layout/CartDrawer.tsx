@@ -33,7 +33,7 @@ export function CartDrawer() {
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        if (items.length > 0 && !saved) {
+        if (items.length > 0 && !saved && !sessionStorage.getItem("mr_cart_save_shown")) {
           setShowSave(true);
         } else {
           closeCart();
@@ -72,18 +72,19 @@ export function CartDrawer() {
   );
   const hasFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
 
-  // Recommended — use static 1688 products (shuffled curated singles)
+  // Recommended — use static 1688 products (shuffled curated singles), exclude cart items
   const [recommended, setRecommended] = useState<any[]>([]);
   useEffect(() => {
     if (!isOpen || recommended.length > 0) return;
-    const singles = PRODUCTS.filter(p => p.category === "curated-singles");
+    const cartProductIds = new Set(items.map(i => i.product.id));
+    const singles = PRODUCTS.filter(p => p.category === "curated-singles" && !cartProductIds.has(p.id));
     const shuffled = [...singles].sort(() => Math.random() - 0.5);
     setRecommended(shuffled.slice(0, 3));
-  }, [isOpen, recommended.length]);
+  }, [isOpen, recommended.length, items]);
 
   // ── Abandoned cart handlers ──
   function handleClose() {
-    if (items.length > 0 && !saved) {
+    if (items.length > 0 && !saved && !sessionStorage.getItem("mr_cart_save_shown")) {
       setShowSave(true);
     } else {
       closeCart();
@@ -112,6 +113,7 @@ export function CartDrawer() {
     }
     setSaved(true);
     setShowSave(false);
+    sessionStorage.setItem("mr_cart_save_shown", "1");
     setTimeout(() => {
       closeCart();
       setSaved(false);
@@ -306,6 +308,7 @@ export function CartDrawer() {
                 </div>
                 <button
                   onClick={() => {
+                    sessionStorage.setItem("mr_cart_save_shown", "1");
                     closeCart();
                     setShowSave(false);
                   }}

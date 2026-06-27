@@ -84,11 +84,11 @@ export function ProductCard({ product, className }: ProductCardProps) {
           {isValidImage ? (
             <>
               {/* Primary image */}
-              <Image src={imageUrl(image)} alt={product.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              <Image src={imageUrl(image)} alt={product.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" loading="lazy"
                 className={`object-cover transition-all duration-500 group-hover:scale-110 ${hasSecondImage ? "opacity-100 group-hover:opacity-0" : ""}`} />
               {/* Secondary image — fades in on hover */}
               {hasSecondImage && (
-                <Image src={imageUrl(secondImage)} alt={`${product.name} — alternate view`} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                <Image src={imageUrl(secondImage)} alt={`${product.name} — alternate view`} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" loading="lazy"
                   className="object-cover opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
               )}
             </>

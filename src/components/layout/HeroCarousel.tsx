@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
@@ -12,11 +12,15 @@ const slides = [
   { image: "/images/1688-hero/单品3.webp", mobileImage: "/images/1688-hero-mobile/单品3.webp", title: "Curated Singles", subtitle: "One-of-a-kind hand-selected bracelets · 6 styles", cta: "Shop Singles", href: "/collections/curated-singles" },
 ];
 
+const SWIPE_THRESHOLD = 50;
+
 export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [direction, setDirection] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const goNext = useCallback(() => {
     setDirection(1);
@@ -37,8 +41,34 @@ export function HeroCarousel() {
     return () => clearInterval(timer);
   }, [isPaused, goNext, prefersReducedMotion]);
 
+  // Touch swipe handlers
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX;
+    };
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (touchStartX.current === null) return;
+      const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+      if (Math.abs(deltaX) >= SWIPE_THRESHOLD) {
+        if (deltaX > 0) goPrev();
+        else goNext();
+      }
+      touchStartX.current = null;
+    };
+
+    el.addEventListener("touchstart", handleTouchStart, { passive: true });
+    el.addEventListener("touchend", handleTouchEnd, { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", handleTouchStart);
+      el.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [goNext, goPrev]);
+
   return (
-    <div className="relative w-full h-[70vh] md:h-screen overflow-hidden bg-[#0A0808]">
+    <div ref={containerRef} className="relative w-full h-[70vh] md:h-screen overflow-hidden bg-[#0A0808]">
       {/* Preload adjacent image */}
       <div className="absolute inset-0" style={{ visibility: "hidden" }}>
         <LazyImage

@@ -629,6 +629,14 @@ export default function CheckoutPage() {
                   PayPal
                 </button>
               </div>
+
+              {/* Accepted payment methods */}
+              <div className="mt-3 flex items-center justify-center gap-3 text-[var(--text-muted)]">
+                <svg className="h-5 w-8" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="#1A1F71" stroke="var(--border)"/><text x="24" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="700" fontFamily="Arial">VISA</text></svg>
+                <svg className="h-5 w-8" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="#EB001B" stroke="var(--border)"/><circle cx="19" cy="16" r="7" fill="#F79E1B"/><circle cx="29" cy="16" r="7" fill="#FF5F00"/><path fillRule="evenodd" clipRule="evenodd" d="M24 20.5c1.6-1.2 2.5-2.8 2.5-4.5s-0.9-3.3-2.5-4.5c1.6-1.2 3.7-1.5 5.5-0.8 2.7 1.1 4 4.1 2.9 6.8s-4.1 4-6.8 2.9c-1.8-0.7-2.9-2.2-3.1-3.9z" fill="#EB001B"/></svg>
+                <svg className="h-5 w-8" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="#016FD0" stroke="var(--border)"/><text x="24" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="700" fontFamily="Arial">AMEX</text></svg>
+                <span className="text-[10px]">+ more</span>
+              </div>
             </div>
 
             {/* Processing fee note */}

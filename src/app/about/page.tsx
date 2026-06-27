@@ -21,7 +21,7 @@ export default function AboutPage() {
         <div className="absolute inset-0">
           <Image
             src="/images/1688-hero/单品1.webp"
-            alt=""
+            alt="MythRealms curated singles bracelet — one-of-a-kind hand-selected stone jewelry"
             fill
             sizes="(max-width:768px) 100vw, 896px"
             className="object-cover"

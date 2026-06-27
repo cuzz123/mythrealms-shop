@@ -152,19 +152,15 @@ export function Header() {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${shopOpen ? "rotate-180" : ""}`} />
                 </button>
                 {shopOpen && (
-                  <div className={`absolute top-full left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] shadow-2xl z-50 animate-slide-down ${isScrolled ? "bg-white border border-gray-200" : "bg-[#252320] border border-[#3A3228]"} `} style={{borderRadius: 0}}>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] bg-white border border-gray-200 shadow-2xl z-50 animate-slide-down" style={{borderRadius: 0}}>
                     <div className="grid grid-cols-2 gap-0 p-6">
                       {link.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
                           onClick={() => setShopOpen(false)}
-                          className={`block px-4 py-3 text-[14px] transition-colors ${
-                            isScrolled
-                              ? "hover:bg-gray-50 text-gray-700"
-                              : "hover:bg-[#1A1816] text-[var(--text-secondary)]"
-                          } ${
-                            pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : ""
+                          className={`block px-4 py-3 text-[14px] transition-colors hover:bg-gray-50 ${
+                            pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : "text-gray-700"
                           }`}
                         >
                           {child.label}
