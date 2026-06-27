@@ -433,9 +433,6 @@ export default function CheckoutPage() {
                       ))}
                     </datalist>
                   </div>
-                      <option value="CZ">Czech Republic</option>
-                    </select>
-                  </div>
                 </div>
               </div>
             </div>
