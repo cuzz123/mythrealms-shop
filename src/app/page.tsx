@@ -110,17 +110,15 @@ export default function HomePage() {
       {/* ===== STYLED BY YOU ===== */}
       <ScrollReveal as="section" className="py-14 bg-[var(--surface)]">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Styled by You</span>
+          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Coming Soon</span>
           <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5] mb-2">Share Your Look</h2>
-          <p className="text-[#8A7D6E] text-sm mb-8">Tag <span className="text-[#D4A84B]">@mythrealms.shop</span> for a chance to be featured</p>
+          <p className="text-[#8A7D6E] text-sm mb-8">We are building our community gallery. Tag <span className="text-[#D4A84B]">@mythrealms.shop</span> on Instagram. The first 20 featured looks get a special gift.</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {['/images/1688-hero/单品1.png', '/images/1688-hero/单品3.png', '/images/1688-hero/单品5.png', '/images/1688-hero/单品7.png'].map((src, i) => (
-              <a key={i} href="https://instagram.com/mythrealms.shop" target="_blank" rel="noopener noreferrer" className="group relative aspect-square rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                <LazyImage src={src} alt={`MythRealms styled look ${i+1}`} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                  <span className="text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 px-3 py-1.5 rounded-full">
-                    Tag @mythrealms.shop
-                  </span>
+            {['/images/1688-hero/cover-pearl.webp', '/images/1688-hero/cover-crystal.webp', '/images/1688-hero/单品1.webp', '/images/1688-hero/单品3.webp'].map((src, i) => (
+              <a key={i} href="https://instagram.com/mythrealms.shop" target="_blank" rel="noopener noreferrer" className="group relative aspect-[4/5] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
+                <LazyImage src={src} alt={`MythRealms — share your look`} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-end justify-center pb-3">
+                  <span className="text-white/80 text-[10px] font-medium opacity-0 group-hover:opacity-100 transition-opacity">Your photo here →</span>
                 </div>
               </a>
             ))}

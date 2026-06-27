@@ -9,6 +9,9 @@ import Link from "next/link";
 import { Loader2, Tag, Check, AlertCircle, CreditCard } from "lucide-react";
 import toast from "react-hot-toast";
 
+const COUNTRY_NAMES: Record<string, string> = { US:"United States",GB:"United Kingdom",CA:"Canada",AU:"Australia",DE:"Germany",FR:"France",JP:"Japan",SG:"Singapore",IT:"Italy",ES:"Spain",NL:"Netherlands",SE:"Sweden",NO:"Norway",DK:"Denmark",FI:"Finland",CH:"Switzerland",AT:"Austria",BE:"Belgium",IE:"Ireland",NZ:"New Zealand",KR:"South Korea",HK:"Hong Kong",TW:"Taiwan",MY:"Malaysia",TH:"Thailand",PH:"Philippines",ID:"Indonesia",IN:"India",BR:"Brazil",MX:"Mexico",AE:"United Arab Emirates",SA:"Saudi Arabia",IL:"Israel",PT:"Portugal",PL:"Poland" };
+const COUNTRY_CODES: Record<string, string> = Object.fromEntries(Object.entries(COUNTRY_NAMES).map(([k,v]) => [v,k]));
+
 interface ValidationErrors {
   email?: string;
   name?: string;
@@ -414,46 +417,22 @@ export default function CheckoutPage() {
                     <label className="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-1.5">
                       Country <span className="text-[var(--sale)] ml-0.5">*</span>
                     </label>
-                    <select
-                      value={country}
-                      onChange={(e) => setCountry(e.target.value)}
-                      className={`${inputClass} ${inputNormalClass} cursor-pointer`}
-                    >
-                      <option value="US">United States</option>
-                      <option value="GB">United Kingdom</option>
-                      <option value="CA">Canada</option>
-                      <option value="AU">Australia</option>
-                      <option value="DE">Germany</option>
-                      <option value="FR">France</option>
-                      <option value="JP">Japan</option>
-                      <option value="SG">Singapore</option>
-                      <option value="IT">Italy</option>
-                      <option value="ES">Spain</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="SE">Sweden</option>
-                      <option value="NO">Norway</option>
-                      <option value="DK">Denmark</option>
-                      <option value="FI">Finland</option>
-                      <option value="CH">Switzerland</option>
-                      <option value="AT">Austria</option>
-                      <option value="BE">Belgium</option>
-                      <option value="IE">Ireland</option>
-                      <option value="NZ">New Zealand</option>
-                      <option value="KR">South Korea</option>
-                      <option value="HK">Hong Kong</option>
-                      <option value="TW">Taiwan</option>
-                      <option value="MY">Malaysia</option>
-                      <option value="TH">Thailand</option>
-                      <option value="PH">Philippines</option>
-                      <option value="ID">Indonesia</option>
-                      <option value="IN">India</option>
-                      <option value="BR">Brazil</option>
-                      <option value="MX">Mexico</option>
-                      <option value="AE">United Arab Emirates</option>
-                      <option value="SA">Saudi Arabia</option>
-                      <option value="IL">Israel</option>
-                      <option value="PT">Portugal</option>
-                      <option value="PL">Poland</option>
+                    <input
+                      list="country-list"
+                      value={COUNTRY_NAMES[country] || country}
+                      onChange={(e) => {
+                        const code = COUNTRY_CODES[e.target.value] || e.target.value;
+                        setCountry(code);
+                      }}
+                      placeholder="Type to search..."
+                      className={`${inputClass} ${inputNormalClass}`}
+                    />
+                    <datalist id="country-list">
+                      {Object.entries(COUNTRY_NAMES).map(([code, name]) => (
+                        <option key={code} value={name}>{code}</option>
+                      ))}
+                    </datalist>
+                  </div>
                       <option value="CZ">Czech Republic</option>
                     </select>
                   </div>
