@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scheme 1: Warm Cream Light Luxury — MythRealms Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FBF8F4;
+  --surface: #FFFFFF;
+  --surface-alt: #F5F0E8;
+  --surface-raised: #FFFFFF;
+  --text: #1A1612;
+  --text-secondary: #6B5E52;
+  --text-muted: #9B8D80;
+  --accent: #B8860B;
+  --accent-hover: #9A7008;
+  --border: #E8E0D5;
+  --border-light: #F0ECE4;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
+}
+body { margin:0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+h1,h2,h3 { font-family: 'Cormorant Garamond', Georgia, serif; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.announcement { background: #1A1612; color: #C4B99A; text-align: center; padding: 10px; font-size: 12px; letter-spacing: 0.08em; }
+.header { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.header .logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: #1A1612; }
+.header nav a { margin-left: 28px; text-decoration: none; color: var(--text-secondary); font-size: 14px; font-weight: 500; }
+.header nav a:hover { color: var(--accent); }
+.hero { position: relative; height: 520px; background: linear-gradient(135deg, #F5F0E8 0%, #EDE4D6 50%, #F0E8DA 100%); display: flex; align-items: center; justify-content: center; text-align: center; border-radius: 0 0 48px 48px; overflow: hidden; }
+.hero::before { content:''; position:absolute; top:-50%; right:-20%; width:600px; height:600px; background: radial-gradient(circle, rgba(184,134,11,0.08) 0%, transparent 70%); border-radius: 50%; }
+.hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin: 0 0 16px; line-height: 1.1; }
+.hero p { font-size: 18px; color: var(--text-secondary); max-width: 500px; margin: 0 auto 32px; }
+.btn-primary { display: inline-block; background: var(--accent); color: #fff; padding: 14px 36px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px; letter-spacing: 0.02em; }
+.btn-outline { display: inline-block; border: 1.5px solid var(--border); color: var(--text); padding: 14px 36px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px; margin-left: 12px; }
+.section { padding: 80px 0; }
+.section-alt { background: var(--surface-alt); }
+.section-title { text-align: center; margin-bottom: 48px; }
+.section-title span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; }
+.section-title h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin: 8px 0 0; }
+.products { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+.product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+.product-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.product-card .img { background: var(--surface-alt); height: 280px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 13px; }
+.product-card .info { padding: 20px; }
+.product-card .info h3 { margin: 0; font-size: 18px; }
+.product-card .info .price { color: var(--accent); font-weight: 600; font-size: 15px; margin-top: 6px; }
+.product-card .info .tag { display: inline-block; font-size: 10px; background: var(--accent); color: #fff; padding: 2px 8px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px; }
+.trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center; }
+.trust-item { padding: 32px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; }
+.trust-item .icon { font-size: 32px; margin-bottom: 12px; }
+.trust-item h3 { margin: 0 0 8px; }
+.trust-item p { color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin: 0; }
+.footer { background: #1A1612; color: #9B8D80; padding: 48px 0 24px; font-size: 13px; }
+.footer .brand { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #E8E0D5; }
+.cart-drawer { position: fixed; top:0; right:0; width:380px; height:100%; background: var(--surface-raised); box-shadow: var(--shadow-lg); z-index: 100; padding: 24px; }
+.badge { position: fixed; bottom:24px; right:24px; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 12px; padding: 12px 20px; font-size: 12px; color: var(--text-muted); box-shadow: var(--shadow-md); z-index:99; }
+.badge b { color: var(--text); display: block; font-size: 16px; margin-top: 2px; }
+@media (max-width:768px) { .trust { grid-template-columns: 1fr; } .header nav { display: none; } }
+</style>
+</head>
+<body>
+<div class="announcement">Free Shipping Over $69.99 &nbsp;|&nbsp; Hand-Selected Stones &nbsp;|&nbsp; 30-Day Returns</div>
+<header class="header container">
+  <div class="logo">MythRealms</div>
+  <nav><a href="#">Home</a><a href="#">Shop</a><a href="#">Collections</a><a href="#">About</a></nav>
+  <div style="display:flex;gap:16px;align-items:center;"><span style="font-size:13px;color:var(--text-secondary)">Cart (2)</span></div>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Stones With Intention.<br>Wear Your Becoming.</h1>
+    <p>Hand-selected crystal & pearl bracelets. Each stone carries a singular purpose — protection, love, clarity, abundance.</p>
+    <div><a href="#" class="btn-primary">Shop The Archetypes</a><a href="#" class="btn-outline">Explore Collections</a></div>
+  </div>
+</section>
+
+<section class="section container">
+  <div class="section-title"><span>Best Sellers</span><h2>The Archetypes</h2></div>
+  <div class="products">
+    <div class="product-card"><div class="img">The Watchman · Black Obsidian</div><div class="info"><h3>The Watchman</h3><p class="price">$36.99</p><span class="tag">Protection</span></div></div>
+    <div class="product-card"><div class="img">The Heart Opener · Rose Quartz</div><div class="info"><h3>The Heart Opener</h3><p class="price">$38.99</p><span class="tag">Self-Love</span></div></div>
+    <div class="product-card"><div class="img">The Seer · Amethyst</div><div class="info"><h3>The Seer</h3><p class="price">$40.99</p><span class="tag">Intuition</span></div></div>
+    <div class="product-card"><div class="img">The Phoenix · Moonstone</div><div class="info"><h3>The Phoenix</h3><p class="price">$42.99</p><span class="tag">Renewal</span></div></div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title"><span>Why MythRealms</span><h2>Crafted with Intention</h2></div>
+    <div class="trust">
+      <div class="trust-item"><div class="icon">&#9670;</div><h3>Hand-Selected</h3><p>Each stone individually chosen for its unique energy and character. No mass production — every piece is one of a kind.</p></div>
+      <div class="trust-item"><div class="icon">&#9733;</div><h3>Ethically Sourced</h3><p>Direct supply chains. Fair labor practices. Every stone has a clean origin.</p></div>
+      <div class="trust-item"><div class="icon">&#9823;</div><h3>30-Day Trial</h3><p>Wear it. Connect with it. If it doesn't feel like yours within 30 days, return it.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container"><div class="brand">MythRealms</div><p style="margin-top:12px">Stones with intention. Artisan finishes. Wear your becoming.</p><p style="margin-top:24px;color:#5A5044">&copy; 2026 MythRealms. We accept VISA &bull; MC &bull; AMEX &bull; PayPal</p></div>
+</footer>
+
+<div class="badge"><b>Scheme 1</b>Warm Cream Light Luxury<br>Mejuri / Missoma 风格</div>
+
+</body>
+</html>
