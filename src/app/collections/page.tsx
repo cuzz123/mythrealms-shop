@@ -60,7 +60,7 @@ export default function CollectionsPage() {
               className={`group relative rounded-2xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all duration-500 flex flex-col ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"}`}
             >
               {/* Image */}
-              <div className="relative lg:w-1/2 aspect-[4/3] lg:aspect-auto overflow-hidden">
+              <div className="relative lg:w-1/2 aspect-[4/3] overflow-hidden">
                 {cat.image ? (
                   <Image
                     src={cat.image}
