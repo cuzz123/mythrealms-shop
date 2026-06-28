@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
 import { ArrowRight, Gem, Leaf, ShieldCheck } from "lucide-react";
@@ -128,7 +129,7 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
 
       {/* ===== NEWSLETTER ===== */}
-      <ScrollReveal as="section" className="py-12 bg-[#1A1816]">
+      <ScrollReveal as="section" className="py-12 bg-[var(--surface)]">
         <div className="max-w-[540px] mx-auto px-6 text-center">
           <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Stay Connected</h2>
           <p className="text-[#A89880] text-sm mb-6">New intentions, stone stories, and exclusive subscriber-only offers. No spam — just the good stuff.</p>
@@ -140,6 +141,25 @@ export default function HomePage() {
           </div>
         </div>
       </ScrollReveal>
+
+      {/* ===== FOOTER BANNER ===== */}
+      <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
+        <Image
+          src="/images/under/footer-banner.webp"
+          alt="MythRealms — crystal bracelets, meditation, intention"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="font-serif text-2xl md:text-3xl text-white text-center px-6 leading-relaxed">
+            Every stone holds a purpose.<br />
+            <span className="text-[var(--accent)]">Which one is calling you?</span>
+          </p>
+        </div>
+      </div>
+
       <RecentlyViewed />
     </>
   );
