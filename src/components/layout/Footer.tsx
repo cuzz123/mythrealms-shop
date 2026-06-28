@@ -68,18 +68,8 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#0A0808] text-[var(--announcement-text)]">
-      {/* Background image with overlay */}
-      <div className="absolute inset-0 overflow-hidden">
-        <img
-          src="/images/under/footer-bg.webp"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover opacity-70"
-          loading="lazy"
-        />
-      </div>
-      {/* Main content */}
-      <div className="relative mx-auto max-w-7xl px-6 py-16">
+    <footer className="relative bg-[#0A0808] text-[var(--announcement-text)]" style={{ backgroundImage: 'url(/images/under/footer-bg.webp)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundBlendMode: 'overlay' }}>
+      <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Column 1 — Brand */}
           <div className="space-y-4">
