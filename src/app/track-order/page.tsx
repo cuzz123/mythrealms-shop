@@ -19,23 +19,20 @@ export default function TrackOrderPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(`/api/account/orders?orderId=${encodeURIComponent(orderId.trim())}&email=${encodeURIComponent(email.trim())}`);
+      const res = await fetch(`/api/track-order?orderId=${encodeURIComponent(orderId.trim())}&email=${encodeURIComponent(email.trim())}`);
       if (res.ok) {
-        const data = await res.json();
-        if (data.orders?.length > 0) {
-          const order = data.orders[0];
-          let city = "N/A";
-          try {
-            if (order.shippingAddress) {
-              city = JSON.parse(order.shippingAddress)?.city || "N/A";
-            }
-          } catch { /* invalid JSON, use default */ }
+        const order = await res.json();
+        if (order.id) {
           setTracking({
-            status: order.status === "PAID" ? "In Transit" : order.status,
-            estimated: "Processing",
+            status: order.status,
+            estimated: new Date(order.estimatedDelivery).toLocaleDateString(),
             origin: "Fulfillment Center",
-            destination: city,
-            events: [{ date: new Date(order.createdAt).toLocaleDateString(), time: "", location: "Online", status: "Order placed" }],
+            destination: order.destination,
+            events: [
+              { date: new Date(order.createdAt).toLocaleDateString(), time: "", location: "Online", status: "Order placed" },
+              ...(order.status === "Shipped" || order.status === "In Transit" ? [{ date: "", time: "", location: "In Transit", status: "Package in transit" }] : []),
+              ...(order.status === "Delivered" ? [{ date: new Date(order.estimatedDelivery).toLocaleDateString(), time: "", location: order.destination, status: "Delivered" }] : []),
+            ],
           });
           setLoading(false);
           return;

@@ -7,7 +7,7 @@ import { Plus, Minus, HelpCircle } from "lucide-react";
 const faqs = [
   { q:"How long does shipping take?", a:"Standard shipping takes 7-20 business days. Express shipping via DHL takes 6-8 business days. US orders typically arrive within 8-14 business days.", cat:"shipping" },
   { q:"Do you ship internationally?", a:"Yes! We ship to 36 countries including US, UK, Canada, Australia, all EU countries, Japan, Singapore, and more. See the full list at checkout.", cat:"shipping" },
-  { q:"What is your return policy?", a:"30-day money-back guarantee. Items must be unused and in original packaging. Return shipping is free if the item arrived damaged or incorrect. Contact us to initiate a return.", cat:"returns" },
+  { q:"What is your return policy?", a:"30-day money-back guarantee. Items must be unused and in original packaging. Start a return at /returns or contact us.", cat:"returns" },
   { q:"How do I track my order?", a:"You will receive a confirmation email with a tracking number once your order ships. You can also check your order status at /track-order.", cat:"shipping" },
   { q:"What payment methods do you accept?", a:"We accept Visa, Mastercard, American Express, and Discover — all processed securely through LemonSqueezy. We also offer PayPal checkout directly on our site.", cat:"order" },
   { q:"How do I use a discount code?", a:"Enter your code at checkout in the Discount Code field and click Apply. First-time customers can use MYTH15 for 15% off.", cat:"order" },

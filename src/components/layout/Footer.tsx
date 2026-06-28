@@ -15,6 +15,7 @@ const exploreLinks = [
 const supportLinks = [
   { label: "Contact", href: "/contact" },
   { label: "Track Order", href: "/track-order" },
+  { label: "Returns", href: "/returns" },
   { label: "FAQs", href: "/faq" },
 ];
 
