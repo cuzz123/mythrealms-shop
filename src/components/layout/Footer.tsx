@@ -74,10 +74,10 @@ export function Footer() {
         <img
           src="/images/under/footer-bg.webp"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0808] via-[#0A0808]/90 to-[#0A0808]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0808] via-[#0A0808]/70 to-[#0A0808]" />
       </div>
       {/* Main content */}
       <div className="relative mx-auto max-w-7xl px-6 py-16">
