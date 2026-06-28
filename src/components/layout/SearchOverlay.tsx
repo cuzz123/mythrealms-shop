@@ -18,7 +18,7 @@ interface SearchResult {
   category: string;
 }
 
-export function SearchOverlay() {
+export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -133,7 +133,7 @@ export function SearchOverlay() {
         aria-label="Search products"
         aria-expanded={isOpen}
         aria-controls="search-overlay"
-        className="flex items-center gap-1 h-10 px-3 rounded-full hover:bg-gray-100 transition text-gray-700 hover:text-gray-900"
+        className={`flex items-center gap-1 h-10 px-3 rounded-full transition ${isScrolled ? "text-gray-700 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
       >
         <Search className="w-5 h-5" />
         <span className="text-xs ml-1 hidden lg:inline">Search</span>

@@ -190,7 +190,7 @@ export function Header() {
         {/* Right — Icon buttons */}
         <div className="flex items-center gap-1">
           {/* Search */}
-          <SearchOverlay />
+          <SearchOverlay isScrolled={isScrolled} />
 
           {/* Account */}
           <Link

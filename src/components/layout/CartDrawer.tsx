@@ -398,7 +398,7 @@ export function CartDrawer() {
                           {p.name}
                         </p>
                         <p className="text-[11px] font-medium text-[var(--text-secondary)]">
-                          {formatPrice(p.variants?.[0]?.price || 0)}
+                          {formatPrice(p.price || p.variants?.[0]?.price || 0)}
                         </p>
                       </Link>
                     ))}
