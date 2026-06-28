@@ -1,9 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-import { LazyImage } from "@/components/ui/LazyImage";
 
 const slides = [
   { image: "/images/1688-hero/轮播图1.webp", mobileImage: "/images/1688-hero-mobile/手机hero1.webp", title: "The Serenity Collection", subtitle: "Luminous freshwater & saltwater pearls for emotional balance · 20 styles", cta: "Shop Serenity", href: "/collections/pearl-series" },
@@ -69,19 +67,6 @@ export function HeroCarousel() {
 
   return (
     <div ref={containerRef} className="relative w-full h-[70vh] md:h-screen overflow-hidden bg-[#0A0808]">
-      {/* Preload adjacent image */}
-      <div className="absolute inset-0" style={{ visibility: "hidden" }}>
-        <LazyImage
-          src={slides[(current + 1) % slides.length].image}
-          alt=""
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover"
-          containerClassName="absolute inset-0"
-        />
-      </div>
-
       {/* Slides with fade transition + Ken Burns zoom */}
       {slides.map((s, i) => {
         const isActive = i === current;
@@ -104,7 +89,7 @@ export function HeroCarousel() {
                   <img src={s.mobileImage || s.image} alt={s.title} className="absolute inset-0 w-full h-full object-cover" />
                 </div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent md:from-black/60 md:via-black/30 z-[2]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent z-[2]" />
           </Link>
         );
       })}
