@@ -12,6 +12,7 @@ import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { OrganizationJsonLd } from "@/components/ui/JsonLd";
 import { BackToTop } from "@/components/layout/BackToTop";
+import { SocialProof } from "@/components/ui/SocialProof";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Footer />
           <CartDrawer />
           <CookieConsent />
+          <SocialProof />
           <MobileBottomNav />
           <BackToTop />
           <Toaster position="bottom-center" />
