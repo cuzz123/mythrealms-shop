@@ -9,7 +9,9 @@ const exploreLinks = [
   { label: "Balance & Light", href: "/collections/pearl-crystal-series" },
   { label: "The Archetypes", href: "/collections/curated-singles" },
   { label: "About Us", href: "/about" },
+  { label: "Gift Cards", href: "/gift-cards" },
   { label: "Blog", href: "/blog" },
+  { label: "Loyalty", href: "/loyalty" },
 ];
 
 const supportLinks = [

@@ -22,6 +22,7 @@ const navLinks = [
   { label: "Collections", href: "/collections" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
+  { label: "Gift Cards", href: "/gift-cards" },
 ];
 
 export function Header() {
