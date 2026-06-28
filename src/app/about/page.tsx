@@ -30,7 +30,7 @@ export default function AboutPage() {
       {/* ===== HERO ===== */}
       <div className="relative rounded-2xl overflow-hidden mb-20">
         <Image
-          src="/images/pages/about-hero.webp"
+          src="/images/about/hero.webp"
           alt="Hand wearing a crystal bracelet, morning light — MythRealms intention jewelry"
           fill
           sizes="(max-width:768px) 100vw, 1120px"
