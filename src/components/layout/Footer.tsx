@@ -23,6 +23,15 @@ const supportLinks = [
 
 const socialLinks = [
   {
+    label: "TikTok",
+    href: "https://tiktok.com/@mythrealms.shop",
+    icon: (
+      <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
+        <path d="M12.5 3h-1.75v8.5a1.5 1.5 0 11-1.5-1.5V8.25a3.25 3.25 0 103.25 3.25V5.5a4.25 4.25 0 002.5.8V4.55a2.5 2.5 0 01-2.5-1.55z" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
     label: "Instagram",
     href: "https://instagram.com/mythrealms.shop",
     icon: (
