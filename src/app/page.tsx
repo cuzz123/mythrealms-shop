@@ -31,7 +31,7 @@ export default function HomePage() {
               const first = PRODUCTS.filter(p => p.category === cat.slug)[0];
               const coverImage = cat.image || first?.image;
               return (
-                <Link key={cat.slug} href={`/collections/${cat.slug}`} className="group relative aspect-[3/4] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
+                <Link key={cat.slug} href={`/collections/${cat.slug}`} className="group relative aspect-square rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
                   {coverImage && <LazyImage src={coverImage} alt={cat.name} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">

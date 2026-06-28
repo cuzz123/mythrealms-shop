@@ -143,9 +143,9 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => setShopOpen(!shopOpen)}
-                  className={`text-[16px] tracking-wide px-3 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
+                  className={`text-[16px] tracking-wide px-3 py-2.5 font-medium transition-all inline-flex items-center gap-1 relative z-[51] ${
                     shopOpen
-                      ? "bg-white text-gray-900 border border-gray-200 border-b-0"
+                      ? "bg-white text-gray-900 border-2 border-gray-300 border-b-0"
                       : isScrolled
                       ? isActive(link.href) ? "text-gray-900" : "text-gray-700 hover:text-gray-900"
                       : isActive(link.href) ? "text-white" : "text-white/80 hover:text-white"
@@ -155,7 +155,7 @@ export function Header() {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${shopOpen ? "rotate-180" : ""}`} />
                 </button>
                 {shopOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] bg-white border border-gray-200 border-t-0 shadow-lg z-50 animate-slide-down" style={{borderRadius: 0}}>
+                  <div className="absolute top-[calc(100%-2px)] left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] bg-white border-2 border-gray-300 border-t-0 shadow-lg z-50 animate-slide-down" style={{borderRadius: 0}}>
                     <div className="grid grid-cols-2 gap-0 p-6">
                       {link.children.map((child) => (
                         <Link

@@ -80,7 +80,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
       {/* Product link — covers image + info area, button sits on top */}
       <Link href={`/products/${product.slug}`} className="block">
         {/* Image container */}
-        <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--border-light)]">
+        <div className="relative aspect-square overflow-hidden rounded-[var(--radius-lg)] bg-[var(--border-light)]">
           {isValidImage ? (
             <>
               {/* Primary image */}
