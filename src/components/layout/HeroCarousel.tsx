@@ -8,8 +8,8 @@ import { LazyImage } from "@/components/ui/LazyImage";
 const slides = [
   { image: "/images/1688-hero/轮播图1.webp", mobileImage: "/images/1688-hero-mobile/手机hero1.webp", title: "The Serenity Collection", subtitle: "Luminous freshwater & saltwater pearls for emotional balance · 20 styles", cta: "Shop Serenity", href: "/collections/pearl-series" },
   { image: "/images/1688-hero/轮播图2.webp", mobileImage: "/images/1688-hero-mobile/手机hero2.webp", title: "The Intention Stones", subtitle: "Premium hand-strung bracelets. Each stone holds a singular purpose. · 12 styles", cta: "Shop Intentions", href: "/collections/luxe-collection" },
-  { image: "/images/1688-hero/单品1.webp", mobileImage: "/images/1688-hero-mobile/手机hero3.webp", title: "Balance & Light", subtitle: "Where pearl meets crystal — pieces for those who hold both at once · 4 styles", cta: "Shop Balance", href: "/collections/pearl-crystal-series" },
-  { image: "/images/1688-hero/单品3.webp", mobileImage: "/images/1688-hero-mobile/单品3.webp", title: "The Archetypes", subtitle: "Six stones. Six intentions. No two alike. · 6 styles", cta: "Shop Archetypes", href: "/collections/curated-singles" },
+  { image: "/images/1688-hero/轮播图3.webp", mobileImage: "/images/1688-hero-mobile/手机hero3.webp", title: "Balance & Light", subtitle: "Where pearl meets crystal — pieces for those who hold both at once · 4 styles", cta: "Shop Balance", href: "/collections/pearl-crystal-series" },
+  { image: "/images/1688-hero/轮播图4.webp", mobileImage: "/images/1688-hero-mobile/单品3.webp", title: "The Archetypes", subtitle: "Six stones. Six intentions. No two alike. · 6 styles", cta: "Shop Archetypes", href: "/collections/curated-singles" },
 ];
 
 const SWIPE_THRESHOLD = 50;
