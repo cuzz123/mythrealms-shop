@@ -82,7 +82,7 @@ export default function TermsPage() {
 
           <h3 className="font-serif text-lg font-bold text-[var(--text)] mb-2">Order Modification and Cancellation</h3>
           <p>
-            You may modify or cancel your order within 2 hours of placing it by contacting us at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a>. After 2 hours, orders may already be in processing and cannot be modified or canceled.
+            You may modify or cancel your order within 2 hours of placing it by contacting us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a>. After 2 hours, orders may already be in processing and cannot be modified or canceled.
           </p>
         </section>
 
@@ -225,7 +225,7 @@ export default function TermsPage() {
             For questions, concerns, or notices regarding these Terms of Service, please contact us:
           </p>
           <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-6 space-y-2">
-            <p><span className="font-semibold text-[var(--text)]">Email:</span> <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a></p>
+            <p><span className="font-semibold text-[var(--text)]">Email:</span> <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a></p>
             <p><span className="font-semibold text-[var(--text)]">Website:</span> mythrealms.com</p>
           </div>
         </section>

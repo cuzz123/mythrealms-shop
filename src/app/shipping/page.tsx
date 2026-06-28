@@ -159,7 +159,7 @@ export default function ShippingPage() {
           </div>
 
           <p className="text-sm text-[var(--text-muted)] mt-4">
-            If your country is not listed above, please contact us at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a> for a delivery estimate. We ship to most countries worldwide.
+            If your country is not listed above, please contact us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a> for a delivery estimate. We ship to most countries worldwide.
           </p>
         </section>
 
@@ -205,7 +205,7 @@ export default function ShippingPage() {
             <li>Certain countries may be subject to shipping restrictions due to sanctions or trade regulations</li>
           </ul>
           <p>
-            If your shipping address is not accepted at checkout, please contact us at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a> to verify availability.
+            If your shipping address is not accepted at checkout, please contact us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a> to verify availability.
           </p>
         </section>
 
@@ -223,7 +223,7 @@ export default function ShippingPage() {
             <li>Holiday periods and public holidays in origin or destination countries</li>
           </ul>
           <p>
-            If your order has not arrived within the estimated delivery window, please first check your tracking number for the latest status. If you need further assistance, contact us at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a> and we will help investigate.
+            If your order has not arrived within the estimated delivery window, please first check your tracking number for the latest status. If you need further assistance, contact us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a> and we will help investigate.
           </p>
         </section>
 
@@ -253,10 +253,10 @@ export default function ShippingPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <a
-              href="mailto:support@mythrealms.com"
+              href="mailto:mythrealms@outlook.com"
               className="inline-flex items-center gap-2 bg-[var(--primary)] text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-[var(--primary-hover)] transition"
             >
-              support@mythrealms.com
+              mythrealms@outlook.com
             </a>
             <Link
               href="/track-order"

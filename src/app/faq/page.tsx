@@ -18,8 +18,8 @@ const faqs = [
   { q:"Can I change or cancel my order?", a:"Orders can be modified or cancelled within 4 hours of placement. Contact us immediately with your order number.", cat:"order" },
   { q:"How do I know which crystal intention is right for me?", a:"Trust what draws you. The stone you keep looking at — the one you click on and come back to — is usually the one. If you're unsure, take our Crystal Intention Quiz. It asks three questions and matches you to one of six archetypes: The Watchman (protection), The Heart Opener (self-love), The Seer (intuition), The Phoenix (renewal), The Strategist (confidence), or The Lion's Share (abundance).", cat:"products" },
   { q:"Do you offer gift wrapping?", a:"Yes. Every order arrives in a MythRealms gift box lined with silk, accompanied by a story card that explains the meaning behind your stone. No price tags are included — ready to gift directly.", cat:"order" },
-  { q:"My item arrived damaged. What now?", a:"Email support@mythrealms.com within 48 hours of delivery with photos. We will arrange a free replacement or full refund immediately — no return shipping cost to you.", cat:"returns" },
-  { q:"Do you offer wholesale or bulk orders?", a:"We offer wholesale pricing for orders of 10+ pieces. Ideal for boutiques, museum shops, and wellness studios. Email wholesale@mythrealms.com for our catalog and pricing guide.", cat:"order" },
+  { q:"My item arrived damaged. What now?", a:"Email mythrealms@outlook.com within 48 hours of delivery with photos. We will arrange a free replacement or full refund immediately — no return shipping cost to you.", cat:"returns" },
+  { q:"Do you offer wholesale or bulk orders?", a:"We offer wholesale pricing for orders of 10+ pieces. Ideal for boutiques, museum shops, and wellness studios. Email mythrealms@outlook.com for our catalog and pricing guide.", cat:"order" },
   { q:"Are your products ethically sourced?", a:"Yes. Our gemstones are sourced from the same regions that supplied the ancient Silk Road — Burma, Afghanistan, Xinjiang — through suppliers who guarantee fair labor practices. Our precious metals are recycled where possible.", cat:"products" },
   { q:"Can I wear multiple intention bracelets at once?", a:"Absolutely. Many people stack two or three intentions — protection on one wrist, abundance on the other. The practice is personal. Wear what feels right.", cat:"products" },
   { q:"Can I layer multiple bracelets?", a:"Absolutely. Many customers wear 2-3 intention bracelets together, each representing a different purpose. Our stacking rings are designed to be worn together or separately. The practice is personal — wear what feels right.", cat:"products" },
@@ -84,7 +84,7 @@ export default function FAQPage() {
       <div className="text-center mt-16 pt-12 border-t border-[var(--border)]">
         <h3 className="font-serif text-2xl font-bold text-[var(--text)] mb-2">Still have questions?</h3>
         <p className="text-sm text-[var(--text-muted)] mb-4">Our support team typically responds within 24 hours</p>
-        <a href="mailto:support@mythrealms.com" className="inline-block px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Contact Us</a>
+        <a href="mailto:mythrealms@outlook.com" className="inline-block px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Contact Us</a>
       </div>
 
       {/* Sticky contact bar — appears after scrolling past first few FAQs */}

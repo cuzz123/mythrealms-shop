@@ -82,7 +82,7 @@ export default function RefundPage() {
             <li><strong>Intimate or sanitary items</strong> — For hygiene reasons, certain items cannot be returned once opened</li>
           </ul>
           <p>
-            If you are unsure whether your item qualifies for a return, please contact us before initiating a return at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a>.
+            If you are unsure whether your item qualifies for a return, please contact us before initiating a return at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a>.
           </p>
         </section>
 
@@ -121,7 +121,7 @@ export default function RefundPage() {
           <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">4. How to Initiate a Return</h2>
           <ol className="list-decimal pl-6 space-y-3 mb-4">
             <li>
-              <strong>Contact Us:</strong> Email <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a> with your order number, the item(s) you wish to return, and the reason for the return.
+              <strong>Contact Us:</strong> Email <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a> with your order number, the item(s) you wish to return, and the reason for the return.
             </li>
             <li>
               <strong>Receive Authorization:</strong> We will review your request and, if approved, provide a Return Merchandise Authorization (RMA) number and return instructions. Do not ship items back without authorization.
@@ -154,7 +154,7 @@ export default function RefundPage() {
             <li>Original shipping charges are <strong>non-refundable</strong> (except in cases where the return is due to our error)</li>
           </ul>
           <p>
-            If you have not received your refund within 15 business days of approval, please first check with your bank or credit card company, then contact us at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a>.
+            If you have not received your refund within 15 business days of approval, please first check with your bank or credit card company, then contact us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a>.
           </p>
         </section>
 
@@ -162,7 +162,7 @@ export default function RefundPage() {
         <section>
           <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">6. Damaged or Defective Items</h2>
           <p className="mb-3">
-            If your item arrives damaged or defective, please contact us within <strong>48 hours</strong> of delivery at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a>.
+            If your item arrives damaged or defective, please contact us within <strong>48 hours</strong> of delivery at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a>.
           </p>
           <p className="mb-3">
             Include the following information in your email:
@@ -197,7 +197,7 @@ export default function RefundPage() {
           <ul className="list-disc pl-6 space-y-2 mb-4">
             <li>Check your bank account again — processing times vary by institution</li>
             <li>Contact your credit card company or bank — they may have a holding period before posting the refund</li>
-            <li>If you still have not received it, contact us at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a></li>
+            <li>If you still have not received it, contact us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a></li>
           </ul>
         </section>
 
@@ -211,11 +211,11 @@ export default function RefundPage() {
             Our support team is here to help. We typically respond within 24 hours.
           </p>
           <a
-            href="mailto:support@mythrealms.com"
+            href="mailto:mythrealms@outlook.com"
             className="inline-flex items-center gap-2 bg-[var(--primary)] text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-[var(--primary-hover)] transition"
           >
             <Mail className="w-4 h-4" />
-            support@mythrealms.com
+            mythrealms@outlook.com
           </a>
         </section>
 

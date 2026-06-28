@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "MythRealms <noreply@mythrealms-shop.vercel.app>",
+        from: "MythRealms <mythrealms@outlook.com>",
         to: email,
         subject: config.subject,
         html: `<!DOCTYPE html><html><body style="background:#0F0D0E;color:#E8E0D5;font-family:Georgia,serif;padding:40px;max-width:600px;margin:0 auto"><h1 style="color:#D4A84B">MythRealms</h1><p style="font-size:16px;line-height:1.6">${config.body}</p><hr style="border-color:#2A2520;margin:30px 0"><p style="font-size:12px;color:#8A7D6E">MythRealms · Stones With Intention<br><a href="${baseUrl}" style="color:#D4A84B">${baseUrl}</a><br><br><a href="${baseUrl}/unsubscribe" style="color:#8A7D6E">Unsubscribe</a></p></body></html>`,

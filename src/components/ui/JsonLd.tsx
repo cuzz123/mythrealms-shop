@@ -83,7 +83,7 @@ export function OrganizationJsonLd() {
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      email: "support@mythrealms.com",
+      email: "mythrealms@outlook.com",
       contactType: "customer service",
     },
   };

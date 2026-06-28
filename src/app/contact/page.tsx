@@ -49,7 +49,7 @@ export default function ContactPage() {
 
       <div className="grid md:grid-cols-3 gap-8 mb-12">
         {[
-          { icon: Mail, title: "Email", info: "support@mythrealms.com", desc: "We reply within 24 hours" },
+          { icon: Mail, title: "Email", info: "mythrealms@outlook.com", desc: "We reply within 24 hours" },
           { icon: Clock, title: "Hours", info: "Mon–Fri 9:00–18:00 (EST)", desc: "Weekend inquiries replied on Monday" },
           { icon: MapPin, title: "Location", info: "Inspired by China · Worldwide", desc: "Ships to 36 countries" },
         ].map((item) => (

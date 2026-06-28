@@ -9,7 +9,7 @@ export async function sendOrderConfirmation(email: string, orderId: string, tota
   }
 
   await resend.emails.send({
-    from: 'MythRealms <orders@mythrealms.com>',
+    from: 'MythRealms <mythrealms@outlook.com>',
     to: email,
     subject: `Order Confirmed — #${orderId.slice(-8)}`,
     html: OrderConfirmationTemplate(orderId, total, items),
@@ -20,7 +20,7 @@ export async function sendAbandonedCart(email: string, cartUrl: string) {
   if (!process.env.RESEND_API_KEY) return;
 
   await resend.emails.send({
-    from: 'MythRealms <orders@mythrealms.com>',
+    from: 'MythRealms <mythrealms@outlook.com>',
     to: email,
     subject: 'Your cart is waiting — complete your order',
     html: AbandonedCartTemplate(cartUrl),

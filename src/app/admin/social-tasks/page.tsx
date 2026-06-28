@@ -67,7 +67,7 @@ const CATEGORIES: Category[] = [
     icon: "\u{1F4E6}", name: "Operations",
     tasks: [
       { id: "ops-orders", label: "检查新订单", detail: "Admin → Orders → PAID → SHIPPED", freq: "daily", guide: "/guides/orders.html" },
-      { id: "ops-emails", label: "回复客户邮件", detail: "检查 support@mythrealms.com", freq: "daily", guide: "/guides/orders.html" },
+      { id: "ops-emails", label: "回复客户邮件", detail: "检查 mythrealms@outlook.com", freq: "daily", guide: "/guides/orders.html" },
       { id: "ops-stock", label: "检查低库存产品", detail: "库存 < 5 的产品决定是否补货", freq: "weekly", guide: "/guides/orders.html" },
     ],
   },

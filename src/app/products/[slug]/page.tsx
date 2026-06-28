@@ -297,7 +297,7 @@ export default async function ProductPage({
             content: (
               <div className="space-y-4 text-sm text-[var(--text-secondary)]">
                 <p>30-day money-back guarantee. Items must be unused and in original packaging. Return shipping at customer's expense unless due to our error.</p>
-                <p>Contact: <strong>support@mythrealms.com</strong></p>
+                <p>Contact: <strong>mythrealms@outlook.com</strong></p>
               </div>
             ),
           },

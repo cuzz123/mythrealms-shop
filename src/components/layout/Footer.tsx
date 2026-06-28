@@ -151,10 +151,10 @@ export function Footer() {
               <NewsletterForm />
               <div className="pt-2 space-y-2">
                 <a
-                  href="mailto:support@mythrealms.com"
+                  href="mailto:mythrealms@outlook.com"
                   className="inline-block text-white transition-colors hover:text-[var(--accent)]"
                 >
-                  support@mythrealms.com
+                  mythrealms@outlook.com
                 </a>
                 <p>Mon &ndash; Fri, 9am &ndash; 6pm EST</p>
               </div>

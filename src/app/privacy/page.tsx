@@ -133,7 +133,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">7. Data Retention</h2>
           <p>
-            We retain your personal information only for as long as necessary to fulfill the purposes outlined in this policy, unless a longer retention period is required by law. When your data is no longer needed, we securely delete or anonymize it. You may request deletion of your account and associated data at any time by contacting us at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a>.
+            We retain your personal information only for as long as necessary to fulfill the purposes outlined in this policy, unless a longer retention period is required by law. When your data is no longer needed, we securely delete or anonymize it. You may request deletion of your account and associated data at any time by contacting us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a>.
           </p>
         </section>
 
@@ -150,7 +150,7 @@ export default function PrivacyPage() {
             <li><strong>Withdraw Consent:</strong> Withdraw previously given consent at any time</li>
           </ul>
           <p>
-            To exercise any of these rights, please contact us at <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a>. We will respond to your request within 30 days. We may need to verify your identity before processing your request.
+            To exercise any of these rights, please contact us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a>. We will respond to your request within 30 days. We may need to verify your identity before processing your request.
           </p>
         </section>
 
@@ -198,7 +198,7 @@ export default function PrivacyPage() {
           <ul className="list-none space-y-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg p-6">
             <li className="flex items-center gap-2">
               <span className="font-semibold text-[var(--text)] w-20">Email:</span>
-              <a href="mailto:support@mythrealms.com" className="text-[var(--accent)] hover:underline">support@mythrealms.com</a>
+              <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a>
             </li>
             <li className="flex items-center gap-2">
               <span className="font-semibold text-[var(--text)] w-20">Website:</span>
