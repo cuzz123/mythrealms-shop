@@ -95,14 +95,12 @@ export function HeroCarousel() {
             aria-hidden={!isActive}
           >
             <div className={`absolute inset-0 overflow-hidden ${isActive ? "animate-kenburns" : ""}`}>
-                {/* Warm radial ambient glow behind the image — prevents pure black on dark photos */}
-                <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,rgba(212,168,75,0.25)_0%,rgba(212,168,75,0.06)_60%,transparent_90%)]" />
                 {/* Desktop: landscape */}
-                <div className="hidden md:block absolute inset-0 z-[1]">
+                <div className="hidden md:block absolute inset-0">
                   <LazyImage src={s.image} alt={s.title} fill sizes="100vw" priority={isActive} className="object-cover" containerClassName="absolute inset-0" />
                 </div>
                 {/* Mobile: portrait */}
-                <div className="block md:hidden absolute inset-0 z-[1]">
+                <div className="block md:hidden absolute inset-0">
                   <LazyImage src={s.mobileImage || s.image} alt={s.title} fill sizes="100vw" priority={isActive} className="object-cover" containerClassName="absolute inset-0" />
                 </div>
             </div>
