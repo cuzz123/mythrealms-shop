@@ -23,6 +23,32 @@ export function Product1688({ slug }: { slug: string }) {
   const [addToCartState, setAddToCartState] = useState<"idle" | "adding" | "added">("idle");
   const [pulseWishlist, setPulseWishlist] = useState(false);
 
+  // Back-in-stock notification
+  const [notifyEmail, setNotifyEmail] = useState("");
+  const [notifyState, setNotifyState] = useState<"idle" | "submitting" | "submitted">("idle");
+  const [notifyError, setNotifyError] = useState("");
+
+  // Review form
+  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewContent, setReviewContent] = useState("");
+  const [reviewImageUrl, setReviewImageUrl] = useState("");
+  const [reviewState, setReviewState] = useState<"idle" | "reviewed" | "submitting" | "submitted" | "error">("idle");
+  const [reviewError, setReviewError] = useState("");
+
+  // Check localStorage for previously reviewed products
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("mythrealms-reviewed-products");
+      if (raw) {
+        const reviewed: string[] = JSON.parse(raw);
+        if (reviewed.includes(product?.id || "")) {
+          setReviewState("reviewed");
+        }
+      }
+    } catch { /* localStorage not available */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Wishlist
   const toggleWishlistItem = useWishlistStore((s) => s.toggleItem);
   const isWishlisted = useWishlistStore((s) => s.isWishlisted);
@@ -73,6 +99,83 @@ export function Product1688({ slug }: { slug: string }) {
       openCart();
       setTimeout(() => setAddToCartState("idle"), 1000);
     }, 400);
+  }
+
+  async function handleNotifyMe(e: React.FormEvent) {
+    e.preventDefault();
+    if (!notifyEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(notifyEmail)) {
+      setNotifyError("Please enter a valid email");
+      return;
+    }
+    setNotifyState("submitting");
+    setNotifyError("");
+    try {
+      const res = await fetch("/api/stock-alerts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: p.id,
+          productName: p.name,
+          email: notifyEmail.trim(),
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setNotifyState("submitted");
+        toast.success(data.message || "You'll be notified when back in stock!");
+      } else {
+        setNotifyError(data.error || "Failed to subscribe");
+        setNotifyState("idle");
+      }
+    } catch {
+      setNotifyError("Something went wrong. Please try again.");
+      setNotifyState("idle");
+    }
+  }
+
+  async function handleSubmitReview(e: React.FormEvent) {
+    e.preventDefault();
+    if (reviewRating === 0) {
+      setReviewError("Please select a rating");
+      return;
+    }
+    if (reviewContent.trim().length < 5) {
+      setReviewError("Review must be at least 5 characters");
+      return;
+    }
+    setReviewState("submitting");
+    setReviewError("");
+    try {
+      const res = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: p.id,
+          rating: reviewRating,
+          content: reviewContent.trim(),
+          images: reviewImageUrl.trim() || undefined,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setReviewState("submitted");
+        // Persist to localStorage so we show "reviewed" state on revisit
+        try {
+          const raw = localStorage.getItem("mythrealms-reviewed-products");
+          const reviewed: string[] = raw ? JSON.parse(raw) : [];
+          if (!reviewed.includes(p.id)) {
+            reviewed.push(p.id);
+            localStorage.setItem("mythrealms-reviewed-products", JSON.stringify(reviewed));
+          }
+        } catch { /* localStorage not available */ }
+      } else {
+        setReviewError(data.error || "Failed to submit review");
+        setReviewState("idle");
+      }
+    } catch {
+      setReviewError("Something went wrong. Please try again.");
+      setReviewState("idle");
+    }
   }
 
   function handleShare() {
@@ -213,6 +316,12 @@ export function Product1688({ slug }: { slug: string }) {
             {viewers} {viewers === 1 ? 'person is' : 'people are'} viewing this right now
           </p>
 
+          {/* BNPL Badge */}
+          <div className="flex items-center gap-2 mt-2 text-xs text-[var(--text-muted)]">
+            <span>or 4 interest-free payments of {formatPrice(p.price / 4)} with</span>
+            <span className="font-semibold text-[var(--text)]">Afterpay</span>
+          </div>
+
           {/* Delivery estimate */}
           <p className="mt-1.5 text-xs text-[var(--text-muted)]">
             Free shipping over $69.99 · Delivered in 7-20 business days
@@ -263,48 +372,91 @@ export function Product1688({ slug }: { slug: string }) {
             </div>
           )}
 
-          <div className="mt-6 space-y-3">
-            {/* Quantity selector */}
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-[var(--text-muted)]">Qty</span>
-              <div className="flex items-center border border-[var(--border)] rounded-lg overflow-hidden">
-                <button
-                  type="button"
-                  onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                  disabled={quantity <= 1}
-                  className="w-10 h-10 flex items-center justify-center text-[var(--text)] hover:bg-[var(--surface)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                  aria-label="Decrease quantity"
-                >
-                  <Minus className="w-3.5 h-3.5" />
-                </button>
-                <span className="w-12 h-10 flex items-center justify-center text-sm font-semibold text-[var(--text)] bg-[var(--surface)]">
-                  {quantity}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setQuantity(q => Math.min(10, q + 1))}
-                  disabled={quantity >= 10}
-                  className="w-10 h-10 flex items-center justify-center text-[var(--text)] hover:bg-[var(--surface)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                  aria-label="Increase quantity"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                </button>
+          {p.inStock === false ? (
+            /* Back-in-Stock Notification Form */
+            <div className="mt-6 space-y-3">
+              <div className="p-4 rounded-lg bg-[var(--accent)]/5 border border-[var(--accent)]/15">
+                <p className="text-sm font-medium text-[var(--text)] mb-1">Out of Stock</p>
+                <p className="text-xs text-[var(--text-muted)] mb-3">Enter your email to be notified when this item is back in stock.</p>
+                {notifyState === "submitted" ? (
+                  <div className="flex items-center gap-2 text-sm text-[var(--success)]">
+                    <Check className="w-4 h-4" />
+                    <span>You'll be notified when this item is back in stock!</span>
+                  </div>
+                ) : (
+                  <form onSubmit={handleNotifyMe} className="space-y-2">
+                    <div className="flex gap-2">
+                      <input
+                        type="email"
+                        value={notifyEmail}
+                        onChange={(e) => { setNotifyEmail(e.target.value); setNotifyError(""); }}
+                        placeholder="your@email.com"
+                        required
+                        className={`flex-1 px-3 py-2.5 rounded-lg border text-sm bg-[var(--bg)] text-[var(--text)] placeholder:text-[var(--text-muted)] ${notifyError ? 'border-[var(--sale)]' : 'border-[var(--border)]'}`}
+                      />
+                      <button
+                        type="submit"
+                        disabled={notifyState === "submitting"}
+                        className="px-5 py-2.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 whitespace-nowrap"
+                      >
+                        {notifyState === "submitting" ? (
+                          <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</>
+                        ) : (
+                          "Notify Me"
+                        )}
+                      </button>
+                    </div>
+                    {notifyError && (
+                      <p className="text-xs text-[var(--sale)]">{notifyError}</p>
+                    )}
+                  </form>
+                )}
               </div>
             </div>
-            <button
-              onClick={handleAddToCart}
-              disabled={addToCartState !== "idle"}
-              className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
-            >
-              {addToCartState === "adding" ? (
-                <><Loader2 className="w-4 h-4 animate-spin" /> Adding...</>
-              ) : addToCartState === "added" ? (
-                <><Check className="w-4 h-4" /> Added!</>
-              ) : (
-                <><ShoppingBag className="w-4 h-4" /> Add to Cart — {formatPrice(p.price)}</>
-              )}
-            </button>
-          </div>
+          ) : (
+            <div className="mt-6 space-y-3">
+              {/* Quantity selector */}
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-[var(--text-muted)]">Qty</span>
+                <div className="flex items-center border border-[var(--border)] rounded-lg overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                    disabled={quantity <= 1}
+                    className="w-10 h-10 flex items-center justify-center text-[var(--text)] hover:bg-[var(--surface)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                    aria-label="Decrease quantity"
+                  >
+                    <Minus className="w-3.5 h-3.5" />
+                  </button>
+                  <span className="w-12 h-10 flex items-center justify-center text-sm font-semibold text-[var(--text)] bg-[var(--surface)]">
+                    {quantity}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(q => Math.min(10, q + 1))}
+                    disabled={quantity >= 10}
+                    className="w-10 h-10 flex items-center justify-center text-[var(--text)] hover:bg-[var(--surface)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                    aria-label="Increase quantity"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+              <button
+                onClick={handleAddToCart}
+                disabled={addToCartState !== "idle"}
+                className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {addToCartState === "adding" ? (
+                  <><Loader2 className="w-4 h-4 animate-spin" /> Adding...</>
+                ) : addToCartState === "added" ? (
+                  <><Check className="w-4 h-4" /> Added!</>
+                ) : (
+                  <><ShoppingBag className="w-4 h-4" /> Add to Cart — {formatPrice(p.price)}</>
+                )}
+              </button>
+            </div>
+          )}
 
           <div className="mt-4 flex items-center gap-4 text-xs text-[var(--text-muted)]">
             <span>Free shipping over $69.99</span>
@@ -392,27 +544,83 @@ export function Product1688({ slug }: { slug: string }) {
                   <span className="text-sm font-semibold text-[var(--text)]">{p.rating}</span>
                   <span className="text-xs text-[var(--text-muted)]">({p.reviewCount} {p.reviewCount === 1 ? "review" : "reviews"})</span>
                 </div>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1.5 text-xs text-[var(--accent)] hover:underline transition-colors"
-                >
-                  <MessageSquare className="w-3 h-3" />
-                  Write a Review
-                </Link>
               </div>
             ) : (
               <div>
                 <p className="text-sm text-[var(--text-muted)] mb-3">
                   Be the first to review this piece. Your words help others discover their perfect stone.
                 </p>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[var(--accent)]/30 text-xs font-medium text-[var(--accent)] hover:bg-[var(--accent)]/10 transition-colors"
-                >
-                  <MessageSquare className="w-3.5 h-3.5" />
-                  Write a Review
-                </Link>
               </div>
+            )}
+
+            {/* Review Form */}
+            {reviewState === "reviewed" ? (
+              <div className="flex items-center gap-2 text-xs text-[var(--success)] mt-3 pt-3 border-t border-[var(--border)]">
+                <Check className="w-3.5 h-3.5" />
+                <span>You reviewed this product</span>
+              </div>
+            ) : reviewState === "submitted" ? (
+              <div className="flex items-center gap-2 text-xs text-[var(--success)] mt-3 pt-3 border-t border-[var(--border)]">
+                <Check className="w-3.5 h-3.5" />
+                <span>Review submitted! Thank you for sharing your experience.</span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmitReview} className="mt-3 pt-3 border-t border-[var(--border)] space-y-3">
+                <p className="text-xs font-semibold text-[var(--text)]">Write a Review</p>
+                {/* Star rating */}
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setReviewRating(star)}
+                      className="transition-colors"
+                      aria-label={`${star} star${star !== 1 ? "s" : ""}`}
+                    >
+                      <Star
+                        className={`w-5 h-5 ${
+                          star <= reviewRating
+                            ? "fill-[var(--accent)] text-[var(--accent)]"
+                            : "text-[var(--border)] hover:text-[var(--accent)]/60"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+                {/* Content textarea */}
+                <textarea
+                  value={reviewContent}
+                  onChange={(e) => { setReviewContent(e.target.value); setReviewError(""); }}
+                  placeholder="Share your experience with this piece..."
+                  rows={3}
+                  minLength={5}
+                  className="w-full px-3 py-2.5 rounded-lg border border-[var(--border)] bg-[var(--bg)] text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] resize-none focus:outline-none focus:border-[var(--accent)]/50 transition-colors"
+                />
+                {/* Image URL */}
+                <input
+                  type="url"
+                  value={reviewImageUrl}
+                  onChange={(e) => setReviewImageUrl(e.target.value)}
+                  placeholder="Image URL (optional)"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--border)] bg-[var(--bg)] text-xs text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]/50 transition-colors"
+                />
+                {/* Error */}
+                {reviewError && (
+                  <p className="text-xs text-[var(--sale)]">{reviewError}</p>
+                )}
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={reviewState === "submitting"}
+                  className="px-5 py-2 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  {reviewState === "submitting" ? (
+                    <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
+                  ) : (
+                    <><MessageSquare className="w-3.5 h-3.5" /> Submit Review</>
+                  )}
+                </button>
+              </form>
             )}
             {/* Review highlights — trust-building even without real reviews */}
             <div className="mt-4 pt-4 border-t border-[var(--border)] grid grid-cols-3 gap-3">

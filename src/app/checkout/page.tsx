@@ -637,6 +637,11 @@ export default function CheckoutPage() {
                 <svg className="h-5 w-8" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="#016FD0" stroke="var(--border)"/><text x="24" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="700" fontFamily="Arial">AMEX</text></svg>
                 <span className="text-[10px]">+ more</span>
               </div>
+              {/* BNPL badges */}
+              <div className="mt-2 flex items-center justify-center gap-2 text-[10px] text-[var(--text-muted)]">
+                <span className="px-2 py-0.5 rounded-full bg-[var(--surface)] border border-[var(--border)] font-semibold text-[var(--text)]">Afterpay</span>
+                <span className="px-2 py-0.5 rounded-full bg-[var(--surface)] border border-[var(--border)] font-semibold text-[var(--text)]">Klarna</span>
+              </div>
             </div>
 
             {/* Processing fee note */}
