@@ -68,7 +68,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#0A0808] text-[var(--announcement-text)]" style={{ backgroundImage: 'url(/images/under/footer-bg.webp)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundBlendMode: 'overlay' }}>
+    <footer className="relative text-[var(--announcement-text)]" style={{ background: 'linear-gradient(180deg, #0A0808 0%, #13100D 40%, #110E0B 70%, #0A0808 100%)' }}>
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Column 1 — Brand */}
