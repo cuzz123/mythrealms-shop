@@ -163,7 +163,7 @@ export function Header() {
                           href={child.href}
                           onClick={() => setShopOpen(false)}
                           className={`block px-4 py-3 text-[14px] transition-colors ${
-                            pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-[var(--text-muted)] hover:bg-[var(--border-light)] hover:text-[var(--text)]"
+                            pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : isScrolled ? "text-gray-900 hover:bg-gray-50" : "text-[var(--text-muted)] hover:bg-[var(--border-light)] hover:text-[var(--text)]"
                           }`}
                         >
                           {child.label}
