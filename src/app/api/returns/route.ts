@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
           },
           body: JSON.stringify({
             from: "MythRealms <onboarding@resend.dev>",
-            to: "mythrealms@outlook.com",
+            to: "1145840883@qq.com",
             subject: `Return Request — Order ${orderId}`,
             html: `
               <h2>Return Request</h2>

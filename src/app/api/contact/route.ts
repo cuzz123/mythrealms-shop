@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
         body: JSON.stringify({
           from: "MythRealms <onboarding@resend.dev>",
-          to: "mythrealms@outlook.com",
+          to: "1145840883@qq.com",
           reply_to: email,
           subject: `Contact: ${subject || "New message"} from ${name}`,
           html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Subject:</strong> ${subject || "N/A"}</p><p><strong>Message:</strong></p><p>${message}</p>`,
