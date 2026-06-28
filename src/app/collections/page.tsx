@@ -28,7 +28,7 @@ export default function CollectionsPage() {
       {/* Hero */}
       <div className="relative rounded-2xl overflow-hidden mb-16">
         <Image
-          src="/images/pages/collections-hero.webp"
+          src="/images/collections/collections-hero.webp"
           alt="MythRealms crystal and pearl bracelet collection — hand-selected gemstone jewelry"
           fill
           sizes="(max-width:768px) 100vw, 1280px"

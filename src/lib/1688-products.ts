@@ -3,10 +3,10 @@ export interface Product { id: string; name: string; slug: string; category: str
 export interface Category { name: string; slug: string; description: string; image?: string; }
 
 export const CATEGORIES: Category[] = [
-  { name: 'The Serenity Collection', slug: 'pearl-series', description: 'Luminous freshwater and saltwater pearls for emotional balance', image: '/images/products/1688-shop/pearl-series/cover.webp' },
-  { name: 'The Intention Stones', slug: 'luxe-collection', description: 'Premium hand-strung bracelets. Each stone holds a singular purpose.', image: '/images/products/1688-shop/luxe-collection/cover.webp' },
-  { name: 'Balance & Light', slug: 'pearl-crystal-series', description: 'Where pearl meets crystal — pieces for those who hold both at once', image: '/images/products/1688-shop/pearl-crystal-series/cover.webp' },
-  { name: 'The Archetypes', slug: 'curated-singles', description: 'Six stones. Six intentions. No two alike. Find the one that names what you are becoming.', image: '/images/products/1688-shop/curated-singles/cover.webp' },
+  { name: 'The Serenity Collection', slug: 'pearl-series', description: 'Luminous freshwater and saltwater pearls for emotional balance', image: '/images/collections/collections封面1.webp' },
+  { name: 'The Intention Stones', slug: 'luxe-collection', description: 'Premium hand-strung bracelets. Each stone holds a singular purpose.', image: '/images/collections/collections封面2.webp' },
+  { name: 'Balance & Light', slug: 'pearl-crystal-series', description: 'Where pearl meets crystal — pieces for those who hold both at once', image: '/images/collections/collections封面3.webp' },
+  { name: 'The Archetypes', slug: 'curated-singles', description: 'Six stones. Six intentions. No two alike. Find the one that names what you are becoming.', image: '/images/collections/collections封面4.webp' },
 ];
 export const PRODUCTS: Product[] = [
 
