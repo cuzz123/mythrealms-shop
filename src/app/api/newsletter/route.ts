@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          from: "MythRealms <mythrealms@outlook.com>",
+          from: "MythRealms <onboarding@resend.dev>",
           to: email,
           subject: "Welcome to MythRealms — Your Curated Gemstone Collection Awaits",
           html: `<!DOCTYPE html><html><body style="background:#0F0D0E;color:#E8E0D5;font-family:Georgia,serif;padding:40px;max-width:600px;margin:0 auto"><h1 style="color:#D4A84B;font-size:28px">MythRealms</h1><p style="font-size:16px;line-height:1.7">Welcome to the realm of handcrafted gemstone jewelry.</p><p style="font-size:16px;line-height:1.7">As a thank you for joining, enjoy <strong style="color:#D4A84B">15% off your first order</strong> with code:</p><p style="font-size:24px;font-weight:bold;color:#D4A84B;letter-spacing:4px;text-align:center;padding:20px;border:2px solid #D4A84B;border-radius:8px">MYTH15</p><p style="font-size:16px;line-height:1.7"><a href="${baseUrl}/collections/curated-singles" style="color:#D4A84B;font-weight:bold">Browse Curated Singles →</a></p><hr style="border-color:#2A2520;margin:30px 0"><p style="font-size:12px;color:#8A7D6E">MythRealms · Handcrafted Gemstone Jewelry<br><a href="${baseUrl}" style="color:#D4A84B">${baseUrl}</a></p></body></html>`,

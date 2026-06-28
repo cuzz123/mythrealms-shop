@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from: "MythRealms Returns <returns@mythrealms-shop.vercel.app>",
+            from: "MythRealms <onboarding@resend.dev>",
             to: "mythrealms@outlook.com",
             subject: `Return Request — Order ${orderId}`,
             html: `
