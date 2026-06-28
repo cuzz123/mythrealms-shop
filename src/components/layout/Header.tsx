@@ -98,7 +98,10 @@ export function Header() {
   const iconColor = isScrolled ? "text-gray-600 hover:text-gray-900" : "text-white/80 hover:text-white";
 
   return (
-    <header className={`${headerBg} left-0 right-0 z-40 h-[64px] transition-all duration-300`}>
+    <header
+      className={`${headerBg} left-0 right-0 z-40 h-[64px] transition-all duration-300`}
+      style={isHome && !isScrolled ? { top: "calc(28px + env(safe-area-inset-top, 0px))" } : undefined}
+    >
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
         {/* Left — Logo */}
         <Link

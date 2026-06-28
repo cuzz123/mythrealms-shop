@@ -25,6 +25,7 @@ export function AnnouncementBar() {
     <Link
       href="/collections/curated-singles"
       className={`block ${isHome ? "absolute bg-black z-50" : "relative bg-black z-40"} top-0 left-0 right-0 text-[var(--announcement-text)]`}
+      style={isHome ? { paddingTop: "env(safe-area-inset-top, 0px)" } : undefined}
       role="region"
       aria-label="Announcement"
     >
