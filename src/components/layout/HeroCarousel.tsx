@@ -37,7 +37,7 @@ export function HeroCarousel() {
     if (isPaused || prefersReducedMotion) return;
     const timer = setInterval(goNext, 5000);
     return () => clearInterval(timer);
-  }, [isPaused, goNext, prefersReducedMotion]);
+  }, [isPaused, goNext, prefersReducedMotion, current]);
 
   // Touch swipe handlers
   useEffect(() => {
