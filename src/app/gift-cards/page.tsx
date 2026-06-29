@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Gift, CheckCircle, ArrowRight, Loader2 } from "lucide-react";
 
 const amountOptions = [25, 50, 100] as const;
@@ -115,17 +116,15 @@ export default function GiftCardsPage() {
         <span className="text-[var(--text)]">Gift Cards</span>
       </nav>
 
-      <div className="text-center mb-10">
-        <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-3">
-          Digital Gift Card
-        </span>
-        <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">
-          Give the Gift of Intention
-        </h1>
-        <p className="text-[var(--text-muted)] max-w-md mx-auto leading-relaxed">
-          A MythRealms gift card lets someone choose the stone that speaks to them.
-          Sent instantly via email — perfect for last-minute gifts.
-        </p>
+      {/* Hero */}
+      <div className="relative rounded-2xl overflow-hidden mb-12 h-[300px] md:h-[360px]">
+        <Image src="/images/gifts/gift-hero.webp" alt="MythRealms Gift Cards" fill sizes="(max-width:768px) 100vw, 896px" className="object-cover" priority />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 text-center py-20 px-6">
+          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-3">Digital Gift Card</span>
+          <h1 className="font-serif text-3xl font-bold text-white mb-3">Give the Gift of Intention</h1>
+          <p className="text-white/70 max-w-md mx-auto leading-relaxed">A MythRealms gift card lets someone choose the stone that speaks to them. Sent instantly via email — perfect for last-minute gifts.</p>
+        </div>
       </div>
 
       <form
