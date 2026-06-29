@@ -42,16 +42,16 @@ export async function POST(request: NextRequest) {
 
     // Calculate totals
     let subtotal = 0;
-    const productIds = [...new Set(items.map((i: any) => i.productId))] as string[];
-    const products = await db.product.findMany({
+    const productIds = [...new Set(items.map((i: any) => i.productId).filter(Boolean))] as string[];
+    const products = productIds.length > 0 ? await db.product.findMany({
       where: { id: { in: productIds } },
       include: { variants: true },
-    });
+    }) : [];
     const productMap = new Map(products.map((p) => [p.id, p]));
     for (const item of items) {
-      const product = productMap.get(item.productId);
+      const product = item.productId ? productMap.get(item.productId) : null;
       const variant = product?.variants.find((v: any) => v.id === item.variantId);
-      subtotal += Number(variant?.price || 0) * (item.quantity || 1);
+      subtotal += Number(variant?.price || item.price || 0) * (item.quantity || 1);
     }
 
     const discountAmount = discount?.amount || 0;
@@ -72,8 +72,8 @@ export async function POST(request: NextRequest) {
         status: "PENDING",
         items: {
           create: items.map((i: any) => ({
-            productId: i.productId,
-            variantId: i.variantId,
+            productId: i.productId || undefined,
+            variantId: i.variantId || undefined,
             quantity: i.quantity,
             price: i.price || 0,
             productSnapshot: JSON.stringify(i),
