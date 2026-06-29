@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Crown, Shield, Sparkles, ArrowRight, Star } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -55,20 +56,14 @@ export default function LoyaltyPage() {
       </nav>
 
       {/* Hero */}
-      <div className="text-center mb-12">
-        <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center">
-          <Crown className="w-7 h-7 text-[var(--accent)]" strokeWidth={1.5} />
+      <div className="relative rounded-2xl overflow-hidden mb-12 h-[300px] md:h-[360px]">
+        <Image src="/images/gifts/loyalty-hero.webp" alt="MythRealms Loyalty Program" fill sizes="(max-width:768px) 100vw, 896px" className="object-cover" priority />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 text-center py-20 px-6">
+          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-3">Loyalty Program</span>
+          <h1 className="font-serif text-3xl font-bold text-white mb-3">Earn Points. Unlock Rewards.</h1>
+          <p className="text-white/70 max-w-md mx-auto leading-relaxed">1 point per $1 spent. 100 points = $5 off. Climb the tiers for exclusive benefits.</p>
         </div>
-        <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-3">
-          Loyalty Program
-        </span>
-        <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">
-          Earn Points. Unlock Rewards.
-        </h1>
-        <p className="text-[var(--text-muted)] max-w-md mx-auto leading-relaxed">
-          1 point per $1 spent. 100 points = $5 off. Stack your points and
-          climb the tiers for exclusive benefits.
-        </p>
       </div>
 
       {/* Points Overview */}

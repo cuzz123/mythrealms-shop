@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Copy, CheckCheck, Mail, ArrowRight, Users, Gift, Share2 } from "lucide-react";
 
 function generateReferralCode(): string {
@@ -55,21 +56,14 @@ export default function ReferralPage() {
       </nav>
 
       {/* Hero */}
-      <div className="text-center mb-10">
-        <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center">
-          <Gift className="w-7 h-7 text-[var(--accent)]" strokeWidth={1.5} />
+      <div className="relative rounded-2xl overflow-hidden mb-12 h-[300px] md:h-[360px]">
+        <Image src="/images/gifts/referral-hero.webp" alt="MythRealms Referral Program" fill sizes="(max-width:768px) 100vw, 896px" className="object-cover" priority />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 text-center py-20 px-6">
+          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-3">Referral Program</span>
+          <h1 className="font-serif text-3xl font-bold text-white mb-3">Give $10, Get $10</h1>
+          <p className="text-white/70 max-w-md mx-auto leading-relaxed">Share MythRealms with someone you care about. When they make their first purchase, you both get $10 off.</p>
         </div>
-        <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-3">
-          Referral Program
-        </span>
-        <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">
-          Give $10, Get $10
-        </h1>
-        <p className="text-[var(--text-muted)] max-w-md mx-auto leading-relaxed">
-          Share MythRealms with someone you care about. When they make their first
-          purchase using your link, they get $10 off and you get $10 off your
-          next order.
-        </p>
       </div>
 
       {/* Referral Link Card */}
