@@ -22,7 +22,7 @@ export default async function CheckoutSuccessPage({
     : null;
   const trackValue = order?.total ?? 0;
   const trackItems = (order?.items ?? []).map((i) => ({
-    id: i.productId,
+    id: i.productId || "",
     name: safeJsonParse<{ name?: string }>(i.productSnapshot, { name: "Product" }).name || "Product",
     quantity: i.quantity,
     price: i.price,

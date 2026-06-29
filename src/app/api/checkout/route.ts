@@ -80,8 +80,8 @@ export async function POST(request: NextRequest) {
         status: "PENDING",
         items: {
           create: items.map((i: any) => ({
-            productId: i.productId,
-            variantId: i.variantId,
+            productId: i.productId || undefined,
+            variantId: i.variantId || undefined,
             quantity: i.quantity,
             price: i.price || 0,
             productSnapshot: JSON.stringify(i),

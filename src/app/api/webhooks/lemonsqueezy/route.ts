@@ -80,11 +80,14 @@ export async function POST(request: NextRequest) {
           // Send confirmation email
           try {
             const { sendOrderConfirmation } = await import("@/lib/email");
-            const emailItems = order.items.map((item) => ({
-              name: item.product.name,
-              quantity: item.quantity,
-              price: item.price,
-            }));
+            const emailItems = order.items.map((item) => {
+              const snapshot = item.productSnapshot ? JSON.parse(item.productSnapshot) : {};
+              return {
+                name: item.product?.name || snapshot.name || "Product",
+                quantity: item.quantity,
+                price: item.price,
+              };
+            });
             await sendOrderConfirmation(order.email, order.id, order.total, emailItems);
           } catch (e) { console.error("Email failed:", e); }
         }
