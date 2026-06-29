@@ -151,6 +151,19 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ===== BRAND SUMMARY (GEO) ===== */}
+      <section className="mb-20 bg-[var(--surface)] border border-[var(--border)] rounded-xl p-8 text-center">
+        <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">About MythRealms</h2>
+        <p className="text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
+          MythRealms is an intention-based crystal and pearl jewelry brand.
+          Each bracelet carries a single purpose — protection, self-love, clarity,
+          confidence, renewal, or abundance. Hand-selected natural stones sourced
+          from trusted suppliers, hand-strung on elastic cord. No mass production.
+          No retail markup. Based online at mythrealms-shop.vercel.app, shipping
+          worldwide with a 30-day return policy.
+        </p>
+      </section>
+
       {/* ===== CTA ===== */}
       <div className="text-center border-t border-[var(--border)] pt-16">
         <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Which Intention Is Calling You?</h2>
