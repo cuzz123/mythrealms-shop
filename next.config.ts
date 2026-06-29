@@ -45,7 +45,7 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net https://s.pinimg.com https://accounts.google.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net https://s.pinimg.com https://accounts.google.com https://www.paypal.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob: https://images.unsplash.com https://*.vercel-storage.com https://*.supabase.co https://*.amazonaws.com https://*.cloudinary.com https://*.imgix.net https://www.facebook.com https://ct.pinterest.com https://www.google-analytics.com",
               "font-src 'self'",
