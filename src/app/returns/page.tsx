@@ -9,7 +9,7 @@ export default function ReturnsPage() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ orderId: "", email: "", reason: "", description: "" });
 
-  const inputClass = "w-full px-4 py-3 border border-gray-200 rounded-lg text-sm bg-white text-gray-900 placeholder:text-gray-400 focus:border-[var(--accent)] outline-none";
+  const inputClass = "w-full px-4 py-3 border border-[var(--border)] rounded-lg text-sm bg-[var(--surface)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] outline-none";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -22,7 +22,9 @@ export default function ReturnsPage() {
         body: JSON.stringify(form),
       });
       setSubmitted(true);
-    } catch {}
+    } catch {
+      setLoading(false);
+    }
 
     setLoading(false);
   }

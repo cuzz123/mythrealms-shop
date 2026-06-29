@@ -210,10 +210,10 @@ export default function LoyaltyPage() {
           href="/account"
           className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition"
         >
-          Sign Up / View Your Points <ArrowRight className="w-4 h-4" />
+          Sign Up to Earn Points <ArrowRight className="w-4 h-4" />
         </Link>
         <p className="mt-4 text-sm text-[var(--text-muted)]">
-          Points program coming soon — sign up to be notified when it launches.
+          
         </p>
       </div>
     </div>

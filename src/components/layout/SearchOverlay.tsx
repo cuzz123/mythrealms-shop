@@ -56,7 +56,7 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
     // Search local 1688 products immediately (synchronous, no loading state)
     const q = query.toLowerCase();
     const localMatches: SearchResult[] = PRODUCTS
-      .filter(p => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q))
+      .filter(p => p.name.toLowerCase().includes(q) || p.description?.toLowerCase().includes(q))
       .slice(0, 8)
       .map(p => ({
         id: p.id,
