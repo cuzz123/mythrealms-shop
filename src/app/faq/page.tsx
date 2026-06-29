@@ -24,7 +24,7 @@ const faqs = [
   { q:"Can I wear multiple intention bracelets at once?", a:"Absolutely. Many people stack two or three intentions — protection on one wrist, abundance on the other. The practice is personal. Wear what feels right.", cat:"products" },
   { q:"Are there physical stores?", a:"MythRealms is an online-only atelier, which allows us to offer handcrafted accessories at accessible prices — no retail markup, no middlemen. Every dollar goes into materials and quality.", cat:"order" },
   { q:"What if my piece breaks or needs repair?", a:"We offer complimentary repairs for manufacturing defects within one year of purchase. For wear-and-tear repairs after one year, contact us for a quote. We believe jewelry should last generations.", cat:"returns" },
-  { q:"Do you have a physical store?", a:"MythRealms is an online-only atelier, which allows us to offer handcrafted luxury at accessible prices — no retail markup, no middlemen. Every dollar goes into materials and craftsmanship.", cat:"order" },
+  { q:"Are there physical stores?", a:"MythRealms is online-only, which allows us to offer handcrafted accessories at accessible prices — no retail markup, no middlemen.", cat:"order" },
 ];
 
 export default function FAQPage() {

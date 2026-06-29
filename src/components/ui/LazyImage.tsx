@@ -31,7 +31,7 @@ export function LazyImage({
       />
       {/* Dark overlay covers image while loading, fades out on ready */}
       <div
-        className={`absolute inset-0 bg-[#1A1816] transition-opacity duration-300 pointer-events-none ${ready ? "opacity-0" : "opacity-100"}`}
+        className={`absolute inset-0 bg-[var(--bg)] transition-opacity duration-300 pointer-events-none ${ready ? "opacity-0" : "opacity-100"}`}
       />
     </div>
   );

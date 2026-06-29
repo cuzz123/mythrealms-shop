@@ -38,6 +38,8 @@ export function SocialProof() {
       className={`fixed bottom-20 left-4 z-50 max-w-xs transition-all duration-500 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       }`}
+      role="status"
+      aria-live="polite"
     >
       <div className="bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-lg text-sm">
         <p className="text-gray-500 text-xs">Someone from <span className="font-semibold text-gray-700">{popup.city}</span></p>

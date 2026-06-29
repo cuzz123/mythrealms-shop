@@ -127,6 +127,7 @@ export function HeroCarousel() {
           <button
             key={i}
             onClick={() => setCurrent(i)}
+            aria-label={`Go to slide ${i + 1}`}
             className="flex-1 h-[6px] bg-white/10 cursor-pointer relative overflow-hidden"
           >
             <div

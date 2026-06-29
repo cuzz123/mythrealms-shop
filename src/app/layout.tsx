@@ -46,14 +46,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MythRealms — Stones With Intention. Wear Your Becoming.",
     description: "Intention-based crystal and pearl jewelry. Protection, clarity, love, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
+    url: process.env.NEXT_PUBLIC_APP_URL,
     type: "website",
     siteName: "MythRealms",
+    images: [{ url: `${process.env.NEXT_PUBLIC_APP_URL}/images/1688-hero/轮播图1.webp`, width: 1792, height: 1008 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "MythRealms — Stones With Intention. Wear Your Becoming.",
     description: "Intention-based crystal and pearl jewelry. Protection, clarity, love, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
+    images: [`${process.env.NEXT_PUBLIC_APP_URL}/images/1688-hero/轮播图1.webp`],
   },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
