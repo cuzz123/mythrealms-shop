@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
         status: "PENDING",
         items: {
           create: items.map((i: any) => ({
-            ...(i.productId ? { productId: i.productId } : {}),
+            ...(i.productId && !String(i.productId).startsWith("1688-") ? { productId: i.productId } : {}),
             ...(i.variantId ? { variantId: i.variantId } : {}),
             quantity: i.quantity,
             price: i.price || 0,
