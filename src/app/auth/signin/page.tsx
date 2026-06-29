@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useCartStore } from "@/lib/cart";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -26,6 +27,7 @@ export default function SignInPage() {
       setError("Invalid email or password");
       setLoading(false);
     } else {
+      useCartStore.getState().clearCart();
       router.push("/account");
     }
   }

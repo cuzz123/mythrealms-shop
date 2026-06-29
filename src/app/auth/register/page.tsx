@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useCartStore } from "@/lib/cart";
 import Link from "next/link";
 
 export default function RegisterPage() {
@@ -25,6 +26,7 @@ export default function RegisterPage() {
     });
 
     if (res.ok) {
+      useCartStore.getState().clearCart();
       await signIn("credentials", { email, password, callbackUrl: "/account" });
     } else {
       const data = await res.json();
