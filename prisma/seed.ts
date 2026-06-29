@@ -2,32 +2,6 @@ import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 const db = new PrismaClient()
 
-// All product images are now CSS-gradient generated via ProductImage component.
-// Empty string triggers the gradient fallback.
-const IMG = {
-  ninefox:    '/images/products/nine-tailed-fox.png',
-  qilin:      '/images/products/qilin.png',
-  azuredragon:'/images/products/azure-dragon.png',
-  phoenix:    '/images/products/phoenix.png',
-  whitetiger: '/images/products/white-tiger.png',
-  blacktortoise:'/images/products/black-tortoise.png',
-  baize:      '/images/products/bai-ze.png',
-  kunpeng:    '/images/products/kun-peng.png',
-  fourset:    '/images/products/four-symbols-set.png',
-  mansions:   '/images/products/28-mansions-scroll.png',
-  taotie:     '/images/products/taotie.png',
-  yinglong:   '/images/products/yinglong.png',
-  fallback:   '/images/products/nine-tailed-fox.png',
-}
-const CAT = {
-  beasts:      '/images/categories/beast-pendants.png',
-  stars:       '/images/categories/star-bracelets.png',
-  foursymbols: '/images/categories/four-symbols.png',
-  talismans:   '/images/categories/talismans.png',
-  constart:    '/images/categories/constellation-art.png',
-  mythdecor:   '/images/categories/mythic-decor.png',
-}
-
 async function main() {
   console.log('Seeding MythRealms database...')
   await db.cartItem.deleteMany(); await db.orderItem.deleteMany(); await db.order.deleteMany()
@@ -35,44 +9,39 @@ async function main() {
   await db.category.deleteMany(); await db.blogPost.deleteMany(); await db.user.deleteMany()
 
   const admin = await db.user.create({ data:{ name:'Admin', email:'admin@mythrealms.com', password: await bcrypt.hash('admin123',12), role:'ADMIN' }})
-  const cats = await Promise.all([
-    db.category.create({ data:{ name:'Mythical Beasts · 山海神兽', slug:'beast-pendants', description:'Rings, pendants, bracelets, and talismans inspired by the mythical creatures of Shan Hai Jing.', image:CAT.beasts, sortOrder:1 }}),
-    db.category.create({ data:{ name:'Star Bracelets · 星宿手串', slug:'star-bracelets', description:'Bracelets aligned with the Chinese constellation system.', image:CAT.stars, sortOrder:2 }}),
-    db.category.create({ data:{ name:'Four Symbols · 四象', slug:'four-symbols', description:'Azure Dragon, Vermillion Bird, White Tiger, Black Tortoise.', image:CAT.foursymbols, sortOrder:3 }}),
-    db.category.create({ data:{ name:'Ancient Talismans · 上古护符', slug:'talismans', description:'Protective talismans from ancient Chinese lore.', image:CAT.beasts, sortOrder:4 }}),
-    db.category.create({ data:{ name:'Constellation Art · 星图', slug:'constellation-art', description:'Star maps and celestial artwork of the 28 Mansions.', image:CAT.stars, sortOrder:5 }}),
-    db.category.create({ data:{ name:'Mythic Decor · 神话摆件', slug:'mythic-decor', description:'Decorative pieces inspired by Shan Hai Jing legends.', image:CAT.foursymbols, sortOrder:6 }}),
-  ])
-  const bc = cats[0]
 
-  const prods = [
-    { name:'Nine-Tailed Fox · 九尾狐 — Sterling Silver Pendant', slug:'nine-tailed-fox-pendant', description:'She was called a demon. A seductress. A bad omen. But the Classic of Mountains and Seas tells a different story: she only appeared when peace was coming. If you\'ve ever been misunderstood, if you\'ve ever been told you\'re too much or not enough — this is your guardian. Sterling silver. 925. Handcrafted.', details:JSON.stringify({beastProperties:[{beast:'Nine-Tailed Fox',benefit:'Wisdom, charm, transformation'}],specs:{itemType:'Pendant',material:'925 Sterling Silver'}}), comparePrice:72.00, images:JSON.stringify([IMG.ninefox, IMG.qilin, IMG.fallback]), stone:'Silver',material:'925 Sterling Silver',intention:'Wisdom & Transformation',isFeatured:true,categoryId:bc.id, variants:[{name:'Silver / 45cm chain',price:54.99,stock:6}] },
-    { name:'Qilin · 麒麟 — Jade Protection Bracelet', slug:'qilin-protection-bracelet', description:'500 years before the unicorn was dreamed into being, the Qilin walked the earth. It refused to step on living grass. It appeared only when a just ruler took the throne. Confucius\' mother saw one. Then gave birth to the wisest man in history. You choose peace when everyone around you fights. This jade-and-bronze bracelet is your reminder that peace is not weakness — it\'s the rarest form of power.', details:JSON.stringify({beastProperties:[{beast:'Qilin',benefit:'Peace, protection, justice'}],specs:{itemType:'Beaded Bracelet',material:'Jade & Bronze'}}), comparePrice:68.00, images:JSON.stringify([IMG.qilin, IMG.ninefox]), stone:'Jade',material:'Jade & Bronze',intention:'Peace & Protection',isFeatured:true,categoryId:bc.id, variants:[{name:'Jade / 16-18cm',price:49.99,stock:5}] },
-    { name:'Azure Dragon · 青龙 — Constellation Ring Set', slug:'azure-dragon-ring', description:'He rules the eastern sky. Seven constellations bow to him. Spring begins when he breathes. But the Azure Dragon has not been seen in 800 years — because he chose to guard the horizon alone rather than ask for help. If you\'ve ever been the one everyone leans on, the one who carries it all in silence — this ring is for you. 925 silver. Engraved with his constellation.', details:JSON.stringify({beastProperties:[{beast:'Azure Dragon',benefit:'Power, protection, vitality'}],specs:{itemType:'Ring',material:'925 Silver'}}), comparePrice:58.00, images:JSON.stringify([IMG.azuredragon, IMG.ninefox]), stone:'Silver',material:'925 Silver',intention:'Power & Vitality',isFeatured:true,categoryId:bc.id, variants:[{name:'Silver / Size 7',price:42.99,stock:8}] },
-    { name:'Phoenix · 凤凰 — Vermillion Bird Rebirth Necklace', slug:'phoenix-rebirth-necklace', description:'She did not fall. She burned. Not as a tragedy — as a choice. Because the old version of her could not hold what was coming. The Phoenix of the South does not wait for permission to rise. If you\'ve ever had to burn your old life to the ground and start over — you already know her. Gold-plated. Vermillion crystals. Wear her and remember: every ending is fuel.', details:JSON.stringify({beastProperties:[{beast:'Phoenix',benefit:'Rebirth, renewal, passion'}],specs:{itemType:'Pendant Necklace',material:'Gold-plated & Crystal'}}), comparePrice:82.00, images:JSON.stringify([IMG.phoenix, IMG.ninefox]), stone:'Crystal',material:'Gold-plated & Crystal',intention:'Rebirth & Renewal',isFeatured:true,categoryId:bc.id, variants:[{name:'Gold / 45cm chain',price:62.99,stock:4}] },
-    { name:'White Tiger · 白虎 — Guardian Cuff Bracelet', slug:'white-tiger-guardian-cuff', description:'He has guarded the western sky for 2000 years. Alone. In the snow. He does not ask for thanks. He does not seek recognition. He protects because it is who he is. If you have ever been the one holding the line while everyone else slept — the White Tiger sees you. Wide silver cuff. Embossed. Adjustable. Wear him on your wrist and remember: you are someone\'s guardian too.', details:JSON.stringify({beastProperties:[{beast:'White Tiger',benefit:'Courage, strength, guardianship'}],specs:{itemType:'Cuff Bracelet',material:'925 Silver'}}), comparePrice:65.00, images:JSON.stringify([IMG.whitetiger]), stone:'Silver',material:'925 Silver',intention:'Courage & Strength',isFeatured:true,categoryId:bc.id, variants:[{name:'Silver / Adjustable',price:48.99,stock:5}] },
-    { name:'Black Tortoise · 玄武 — Endurance Stone Bracelet', slug:'black-tortoise-endurance-bracelet', description:'The Black Tortoise has been holding up the sky for two millennia. It does not complain. It does not falter. It does not ask how much longer. If you have ever been the one who just kept going when everyone else stopped — you already know this beast. Black onyx and hematite. Heavy. Grounded. Unbreakable. Just like you.', details:JSON.stringify({beastProperties:[{beast:'Black Tortoise',benefit:'Endurance, longevity, stability'}],specs:{itemType:'Beaded Bracelet',material:'Onyx & Hematite'}}), comparePrice:54.00, images:JSON.stringify([IMG.blacktortoise]), stone:'Onyx',material:'Onyx & Hematite',intention:'Endurance & Stability',isFeatured:true,categoryId:bc.id, variants:[{name:'Black / 16-18cm',price:39.99,stock:10}] },
-    { name:'Bai Ze · 白泽 — Wisdom & Knowledge Talisman', slug:'bai-ze-wisdom-talisman', description:'He knows 11,520 species of supernatural creatures. Every mountain. Every river. Every ghost and god. The Yellow Emperor begged him for his knowledge. Bai Ze gave it freely — because wisdom shared is wisdom multiplied. If you see things others miss, if your intuition has always been your sharpest weapon — Bai Ze is your guardian. Antiqued silver. Leather cord. Ancient protection for a modern mind.', details:JSON.stringify({beastProperties:[{beast:'Bai Ze',benefit:'Knowledge, wisdom, protection from evil'}],specs:{itemType:'Talisman Pendant',material:'Antiqued Silver'}}), comparePrice:48.00, images:JSON.stringify([IMG.baize]), stone:'Silver',material:'Antiqued Silver',intention:'Wisdom & Knowledge',isFeatured:false,categoryId:bc.id, variants:[{name:'Silver / Leather cord',price:35.99,stock:8}] },
-    { name:'Kun Peng · 鲲鹏 — Transformation Pendant Set', slug:'kun-peng-transformation-set', description:'In the northern ocean lives a fish named Kun. Thousands of miles wide. And one day — it becomes a bird. Wings that stretch from horizon to horizon. The Kun Peng is not a myth. It is a promise. That you are not stuck. That the version of you that exists today is not the final form. If you are in the middle of becoming — this dual pendant set is yours. Bronze and silver. Fish and bird. Who you were and who you will be.', details:JSON.stringify({beastProperties:[{beast:'Kun Peng',benefit:'Transformation, ambition, limitless potential'}],specs:{itemType:'Dual Pendant Set',material:'Bronze & Silver'}}), comparePrice:78.00, images:JSON.stringify([IMG.kunpeng]), stone:'Bronze',material:'Bronze & Silver',intention:'Transformation & Potential',isFeatured:true,categoryId:bc.id, variants:[{name:'Bronze/Silver / 50cm chain',price:58.99,stock:3}] },
-    { name:'Four Symbols · 四象 — Complete Guardian Collection', slug:'four-symbols-complete-collection', description:'Four directions. Four guardians. 2000 years of protection. Azure Dragon of the East. Vermillion Bird of the South. White Tiger of the West. Black Tortoise of the North. Together, they hold the sky in place. Some people carry one guardian. You were born to carry all four. Complete ring set. 925 silver and bronze. One for each direction of your life.', details:JSON.stringify({beastProperties:[{beast:'Four Symbols',benefit:'Complete directional protection'}],specs:{itemType:'Ring Set (4pc)',material:'925 Silver & Bronze'}}), comparePrice:185.00, images:JSON.stringify([IMG.fourset]), stone:'Multi',material:'Silver & Bronze',intention:'Complete Protection',isFeatured:true,categoryId:bc.id, variants:[{name:'Set of 4 / Various sizes',price:139.99,stock:2}] },
-    { name:'Twenty-Eight Mansions · 二十八宿 — Star Map Wall Scroll', slug:'28-mansions-star-map-scroll', description:'Long before Western astrology divided the sky into 12 signs, the Chinese mapped it into 28 lunar mansions. Each mansion guards a different destiny. Each star tells a different story. This silk wall scroll contains all 28 — hung in meditation rooms, studies, and sacred spaces across the world. Find your mansion. Find your place in the universe.', details:JSON.stringify({beastProperties:[{beast:'28 Mansions',benefit:'Cosmic harmony, celestial guidance'}],specs:{itemType:'Wall Scroll',material:'Silk'}}), comparePrice:65.00, images:JSON.stringify([IMG.mansions]), stone:'Silk',material:'Silk',intention:'Cosmic Harmony',isFeatured:true,categoryId:bc.id, variants:[{name:'Medium / 40x80cm',price:48.99,stock:6}] },
-    { name:'Taotie · 饕餮 — Ancient Bronze Amulet', slug:'taotie-bronze-amulet', description:'The most feared face in ancient China. Cast into bronze vessels. Stamped onto weapons of kings. The Taotie is not a monster — it is a warning. Greed devours everything. The Taotie reminds us to take what we need and leave what we must. If you have ever struggled to say "enough," if you have ever wanted more but needed less — wear this amulet. Bronze. Heavy. Ancient. A guardian against excess.', details:JSON.stringify({beastProperties:[{beast:'Taotie',benefit:'Protection from greed, strength'}],specs:{itemType:'Amulet',material:'Bronze'}}), comparePrice:52.00, images:JSON.stringify([IMG.taotie]), stone:'Bronze',material:'Bronze',intention:'Protection & Strength',isFeatured:false,categoryId:bc.id, variants:[{name:'Bronze / Leather cord',price:38.99,stock:7}] },
-    { name:'Yinglong · 应龙 — Winged Dragon Cufflinks', slug:'yinglong-winged-dragon-cufflinks', description:'All dragons command respect. Only one commands the sky. The Yinglong is the only dragon in Chinese mythology with wings. He helped the Yellow Emperor defeat the demon Chi You. He carved rivers into the earth. When he flies, kings kneel. When he roars, heaven answers. If you are destined for something greater — these bronze cufflinks are your seal. Power. Authority. Divine favor. Wear them.', details:JSON.stringify({beastProperties:[{beast:'Yinglong',benefit:'Power, authority, divine favor'}],specs:{itemType:'Cufflinks (Pair)',material:'Bronze'}}), comparePrice:45.00, images:JSON.stringify([IMG.yinglong]), stone:'Bronze',material:'Bronze',intention:'Power & Authority',isFeatured:false,categoryId:bc.id, variants:[{name:'Bronze / Standard',price:32.99,stock:12}] },
+  // 1688 product categories
+  const cats = await Promise.all([
+    db.category.create({ data:{ name:'The Serenity Collection', slug:'pearl-series', description:'Luminous freshwater and saltwater pearls for emotional balance', sortOrder:1 }}),
+    db.category.create({ data:{ name:'The Intention Stones', slug:'luxe-collection', description:'Premium hand-strung bracelets. Each stone holds a singular purpose.', sortOrder:2 }}),
+    db.category.create({ data:{ name:'Balance & Light', slug:'pearl-crystal-series', description:'Where pearl meets crystal — pieces for those who hold both at once', sortOrder:3 }}),
+    db.category.create({ data:{ name:'The Archetypes', slug:'curated-singles', description:'Six stones. Six intentions. No two alike.', sortOrder:4 }}),
+  ])
+
+  // Seed 6 Archetypes as DB products (for the full product page experience)
+  const archetypes = cats[3]
+  const archetypeProducts = [
+    { name:'The Watchman · Bracelet', slug:'curated-singles-01', description:'Black obsidian — the stone of protection. Absorbs what you cannot carry and returns only strength. Hand-strung on elastic cord.', stone:'Black Obsidian', material:'Natural stone, elastic cord', intention:'Protection', isFeatured:true, categoryId:archetypes.id, variants:[{name:'One Size / 16-19cm',price:44.99,stock:15}] },
+    { name:'The Heart Opener · Bracelet', slug:'curated-singles-02', description:'Rose quartz — the stone of unconditional self-love. Soft pink, gentle energy. Opens the heart inward and quiets the inner critic.', stone:'Rose Quartz', material:'Natural stone, elastic cord', intention:'Self-Love', isFeatured:true, categoryId:archetypes.id, variants:[{name:'One Size / 16-19cm',price:47.99,stock:12}] },
+    { name:'The Seer · Bracelet', slug:'curated-singles-03', description:'Amethyst — the stone of intuition and inner sight. Quiets the noise and lets you hear your own voice.', stone:'Amethyst', material:'Natural stone, elastic cord', intention:'Intuition', isFeatured:true, categoryId:archetypes.id, variants:[{name:'One Size / 16-19cm',price:49.99,stock:10}] },
+    { name:'The Phoenix · Bracelet', slug:'curated-singles-04', description:'Moonstone — the stone of new beginnings. New moons, clean slates, and the courage to begin again.', stone:'Moonstone', material:'Natural stone, elastic cord', intention:'Renewal', isFeatured:true, categoryId:archetypes.id, variants:[{name:'One Size / 16-19cm',price:52.99,stock:8}] },
+    { name:'The Strategist · Bracelet', slug:'curated-singles-05', description:'Tiger\'s eye — the stone of steady nerve and focused will. Quiet confidence that does not need to announce itself.', stone:'Tiger\'s Eye', material:'Natural stone, elastic cord', intention:'Confidence', isFeatured:true, categoryId:archetypes.id, variants:[{name:'One Size / 16-19cm',price:52.99,stock:10}] },
+    { name:'The Lion\'s Share · Bracelet', slug:'curated-singles-06', description:'Green aventurine — the stone of opportunity and abundance. For those ready to receive.', stone:'Green Aventurine', material:'Natural stone, elastic cord', intention:'Abundance', isFeatured:true, categoryId:archetypes.id, variants:[{name:'One Size / 16-19cm',price:54.99,stock:8}] },
   ]
 
-  for (const data of prods) {
+  for (const data of archetypeProducts) {
     const { variants, ...rest } = data
     const minPrice = Math.min(...variants.map((v: any) => v.price))
     const p = await db.product.create({ data: { ...rest, minPrice, variants: { create: variants } } })
     if (data.isFeatured) {
       await db.review.createMany({ data: [
-        { productId:p.id, rating:5, content:'Absolutely stunning piece. The craftsmanship captures the ancient legend beautifully.', images:JSON.stringify([JSON.parse(data.images)[0]]), isVerified:true },
-        { productId:p.id, rating:5, content:'As a mythology lover, this exceeded my expectations. The details are incredible.', isVerified:true },
-        { productId:p.id, rating:4, content:'Beautiful design. The story card that comes with it really brings the myth to life.', isVerified:true },
+        { productId:p.id, rating:5, content:'Beautiful stone. The intention behind it makes it more than just a bracelet.', isVerified:true },
+        { productId:p.id, rating:5, content:'Wear it every day. The quality is excellent and it holds its energy.', isVerified:true },
+        { productId:p.id, rating:4, content:'Love the meaning behind each stone. Great conversation starter.', isVerified:true },
       ]})
     }
   }
-  console.log(`Created ${prods.length} products`)
+  console.log(`Created ${archetypeProducts.length} products`)
 
   const posts = [
     { title:'Crystal Intentions 101: How to Choose Your First Stone', slug:'crystal-intentions-101', excerpt:'Not sure which crystal is calling you? A practical guide to choosing your first intention bracelet based on what you need most right now.', content:'# Crystal Intentions 101\n\nChoosing your first crystal is not about what looks pretty — it is about what you need.\n\n## Start with one question\nWhat do you need most right now? Protection. Clarity. Love. Confidence. Renewal. Abundance. Answer that, and your stone chooses itself.\n\n## The Six Archetypes\n- **The Watchman** (Black Obsidian): For when you need boundaries. Absorption. Protection from energy that is not yours.\n- **The Heart Opener** (Rose Quartz): For when you are learning softness. Self-love that does not need permission.\n- **The Seer** (Amethyst): For when you need to hear your own voice. Intuition. Dreams that arrive fully formed.\n- **The Phoenix** (Moonstone): For new beginnings. The courage to start over. New moons and clean slates.\n- **The Strategist** (Tiger\'s Eye): For confidence. Steady nerve. The quiet decision to trust yourself.\n- **The Lion\'s Share** (Green Aventurine): For abundance. Receiving. Saying yes more than you say no.\n\n## How to wear your intention\nHold the bracelet each morning. Name one thing you are releasing. One thing you are inviting. Put it on. Wear it through your day.', category:'Crystal Wellness', image:'/images/blog/crystal-intentions-101.webp', authorId:admin.id },
