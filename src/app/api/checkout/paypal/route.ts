@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     const order = await db.order.create({
       data: {
         email: email || session?.user?.email || "guest@example.com",
-        userId: session?.user?.id || undefined,
+        ...(session?.user?.id ? { userId: session.user.id } : {}),
         subtotal,
         shipping: shippingCost,
         discount: discountAmount,
@@ -72,8 +72,8 @@ export async function POST(request: NextRequest) {
         status: "PENDING",
         items: {
           create: items.map((i: any) => ({
-            productId: i.productId || undefined,
-            variantId: i.variantId || undefined,
+            ...(i.productId ? { productId: i.productId } : {}),
+            ...(i.variantId ? { variantId: i.variantId } : {}),
             quantity: i.quantity,
             price: i.price || 0,
             productSnapshot: JSON.stringify(i),
