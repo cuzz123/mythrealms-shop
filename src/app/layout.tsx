@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
@@ -9,13 +8,11 @@ import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { Providers } from "./providers";
 import { Analytics } from "@/components/layout/Analytics";
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+import { CookieConsent } from "@/components/layout/CookieConsent";
 import { OrganizationJsonLd } from "@/components/ui/JsonLd";
 import { BackToTop } from "@/components/layout/BackToTop";
-
-// Lazy-load non-critical components to reduce initial JS bundle
-const CookieConsent = dynamic(() => import("@/components/layout/CookieConsent").then(m => ({ default: m.CookieConsent })), { ssr: false });
-const SocialProof = dynamic(() => import("@/components/ui/SocialProof").then(m => ({ default: m.SocialProof })), { ssr: false });
-const MobileBottomNav = dynamic(() => import("@/components/layout/MobileBottomNav").then(m => ({ default: m.MobileBottomNav })), { ssr: false });
+import { SocialProof } from "@/components/ui/SocialProof";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
