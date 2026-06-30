@@ -311,6 +311,12 @@ export function Product1688({ slug }: { slug: string }) {
             </div>
           </div>
 
+          {/* Eco-friendly badge */}
+          <div className="flex items-center gap-2 mt-3 text-xs text-[var(--success)]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />
+            Natural stones · Elastic cord · Plastic-free packaging
+          </div>
+
           {/* Social proof: X people viewing */}
           <p className="mt-1.5 text-xs text-[#C8944A] font-medium">
             {viewers} {viewers === 1 ? 'person is' : 'people are'} viewing this right now

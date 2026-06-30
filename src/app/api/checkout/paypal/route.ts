@@ -82,6 +82,14 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // --- Add loyalty points (1 point per $1) ---
+    if (session?.user?.id) {
+      const points = Math.floor(total);
+      await db.loyaltyPoint.create({
+        data: { userId: session.user.id, points, source: "purchase", orderId: order.id },
+      });
+    }
+
     // Return order details for PayPal SDK
     const baseUrl = process.env.AUTH_URL || request.nextUrl.origin;
     // Create PayPal order via REST API

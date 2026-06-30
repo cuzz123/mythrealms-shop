@@ -27,6 +27,7 @@ model User {
   posts    BlogPost[]
   accounts Account[]
   sessions Session[]
+  points   LoyaltyPoint[]
 }
 
 model Account {
@@ -217,4 +218,15 @@ model DiscountCode {
   expiresAt   DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model LoyaltyPoint {
+  id        String   @id @default(cuid())
+  userId    String
+  points    Int
+  source    String   @default("purchase")
+  orderId   String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

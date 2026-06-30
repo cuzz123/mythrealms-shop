@@ -33,6 +33,7 @@ export default function AccountPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
   const [ordersError, setOrdersError] = useState("");
+  const [points, setPoints] = useState(0);
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -46,6 +47,11 @@ export default function AccountPage() {
         .then((data) => setOrders(data.orders || []))
         .catch((err) => setOrdersError(err.message || "Failed to load orders"))
         .finally(() => setOrdersLoading(false));
+      // Fetch loyalty points
+      fetch("/api/account/loyalty")
+        .then((res) => res.json())
+        .then((data) => setPoints(data.points || 0))
+        .catch(() => {});
     }
   }, [status]);
 
@@ -132,6 +138,23 @@ export default function AccountPage() {
           </button>
         </div>
       </div>
+
+      {/* Loyalty Points */}
+      {points > 0 && (
+        <div className="mt-8 bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs text-[var(--text-muted)] uppercase tracking-wider">Loyalty Points</p>
+              <p className="font-serif text-3xl font-bold text-[var(--accent)]">{points} pts</p>
+              <p className="text-xs text-[var(--text-muted)] mt-1">{Math.floor(points / 100) * 5 > 0 ? `= $${Math.floor(points / 100) * 5} off your next order` : "100 pts = $5 off"}</p>
+            </div>
+            <Link href="/loyalty" className="text-sm text-[var(--accent)] hover:underline">View Tiers →</Link>
+          </div>
+          <div className="mt-3 h-1.5 bg-[var(--surface-alt)] rounded-full overflow-hidden">
+            <div className="h-full bg-[var(--accent)] rounded-full transition-all" style={{ width: `${Math.min(100, (points / 500) * 100)}%` }} />
+          </div>
+        </div>
+      )}
 
       {/* Order History */}
       <div className="mt-10">
