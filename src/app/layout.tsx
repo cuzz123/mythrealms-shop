@@ -50,7 +50,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <head>
-        <link rel="preload" as="image" href="/images/1688-hero/轮播图1.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/1688-hero-mobile/手机hero1.webp" fetchPriority="high" media="(max-width: 767px)" />
+        <link rel="preload" as="image" href="/images/1688-hero/轮播图1.webp" fetchPriority="high" media="(min-width: 768px)" />
         <OrganizationJsonLd />
       </head>
       <body className="antialiased">
