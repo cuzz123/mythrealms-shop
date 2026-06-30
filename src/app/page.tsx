@@ -62,7 +62,7 @@ export default function HomePage() {
                   <LazyImage src={p.image} alt={p.name} fill sizes="96px" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
                 </div>
                 <div className="flex flex-col justify-center min-w-0">
-                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1">{p.name}</h4>
+                  <h3 className="text-sm font-medium text-[var(--text)] line-clamp-1">{p.name}</h3>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.categoryName} · {formatPrice(p.price)}{p.compareAt && p.compareAt > p.price ? <span className="line-through ml-1.5">{formatPrice(p.compareAt)}</span> : null}</p>
                   {p.images.length > 1 && <p className="text-[10px] text-[var(--accent)] mt-1">{p.images.length} detail photos</p>}
                 </div>

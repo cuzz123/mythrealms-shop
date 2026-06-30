@@ -504,7 +504,7 @@ export default function CheckoutPage() {
                   type="button"
                   onClick={handleApplyDiscount}
                   disabled={discountLoading || !discountCode.trim()}
-                  className="px-4 py-2 bg-[var(--accent)] text-white rounded-lg text-sm font-medium hover:bg-[var(--accent-hover)] disabled:opacity-50 transition"
+                  className="px-4 py-2 bg-[var(--accent)] text-[var(--bg)] rounded-lg text-sm font-medium hover:bg-[var(--accent-hover)] disabled:opacity-50 transition"
                 >
                   {discountLoading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />

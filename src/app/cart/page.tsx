@@ -57,7 +57,7 @@ export default function CartPage() {
         </div>
         <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Your cart is waiting</h1>
         <p className="text-[var(--text-muted)] mb-8 max-w-sm mx-auto leading-relaxed">Fill it with hand-selected stones — each piece is individually chosen for its unique character and energy.</p>
-        <Link href="/collections/curated-singles" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all">
+        <Link href="/collections/curated-singles" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] text-[var(--bg)] font-semibold text-sm hover:brightness-110 transition-all">
           <ShoppingBag className="w-4 h-4" />
           Browse Curated Singles
         </Link>

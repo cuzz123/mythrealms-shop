@@ -9,7 +9,7 @@ const variantStyles = {
   ghost:
     "bg-transparent text-[var(--text-secondary)] border border-transparent hover:bg-[var(--border-light)] hover:text-[var(--text)]",
   accent:
-    "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] shadow-sm border border-transparent",
+    "bg-[var(--accent)] text-[var(--bg)] hover:bg-[var(--accent-hover)] shadow-sm border border-transparent",
 } as const
 
 const sizeStyles = {

@@ -100,7 +100,7 @@ export default function CollectionsPage() {
         <p className="text-[var(--text-muted)] mb-4 text-sm">Not sure where to start?</p>
         <Link
           href="/guardian-quiz"
-          className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
+          className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
         >
           Take the Crystal Intention Quiz
           <ArrowRight className="w-4 h-4" />

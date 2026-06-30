@@ -208,7 +208,7 @@ export default function LoyaltyPage() {
       <div className="text-center">
         <Link
           href="/account"
-          className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition"
+          className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition"
         >
           Sign Up to Earn Points <ArrowRight className="w-4 h-4" />
         </Link>

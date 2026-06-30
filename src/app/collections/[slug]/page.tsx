@@ -30,7 +30,7 @@ function StoneQuickFilters({ slug, currentStone }: { slug: string; currentStone:
             href={href}
             className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
               isActive
-                ? "bg-[var(--accent)] text-white border-[var(--accent)]"
+                ? "bg-[var(--accent)] text-[var(--bg)] border-[var(--accent)]"
                 : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent)]/40 hover:text-[var(--text)]"
             }`}
           >
@@ -210,7 +210,7 @@ export default async function CollectionPage({
         <div className="flex flex-wrap gap-2 pb-6 border-b border-[var(--border)] mb-6">
           <Link
             href={`/collections/${slug}`}
-            className="px-4 py-2 rounded-full text-sm font-medium bg-[var(--accent)] text-white border border-[var(--accent)]"
+            className="px-4 py-2 rounded-full text-sm font-medium bg-[var(--accent)] text-[var(--bg)] border border-[var(--accent)]"
           >
             All
           </Link>

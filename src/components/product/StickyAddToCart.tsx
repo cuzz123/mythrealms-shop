@@ -46,7 +46,7 @@ export function StickyAddToCart({ productId, productName, productSlug, image, pr
             <p className="text-sm font-bold text-[var(--accent)]">{formatPrice(price)}</p>
           </div>
         </div>
-        <button onClick={handleAdd} className="flex-shrink-0 inline-flex items-center gap-1.5 px-5 py-2.5 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
+        <button onClick={handleAdd} className="flex-shrink-0 inline-flex items-center gap-1.5 px-5 py-2.5 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
           <ShoppingBag className="w-4 h-4" />
           Add to Cart
         </button>

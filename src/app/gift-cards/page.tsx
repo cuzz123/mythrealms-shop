@@ -97,7 +97,7 @@ export default function GiftCardsPage() {
           <div className="mt-8">
             <Link
               href="/collections/curated-singles"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition"
             >
               Shop The Archetypes <ArrowRight className="w-4 h-4" />
             </Link>
@@ -264,7 +264,7 @@ export default function GiftCardsPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3.5 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+          className="w-full py-3.5 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
         >
           {loading ? (
             <>

@@ -276,7 +276,7 @@ export default function ShippingPage() {
           <div className="flex justify-center gap-4">
             <Link
               href="/collections/curated-singles"
-              className="px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
+              className="px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
             >
               Shop Curated Singles
             </Link>

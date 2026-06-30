@@ -55,7 +55,7 @@ export function CookieConsent() {
                 <p className="text-[var(--text)] font-medium mb-0.5">
                   This website uses cookies
                 </p>
-                <p className="text-[var(--text-muted)] leading-relaxed">
+                <p className="text-[var(--text-secondary)] leading-relaxed">
                   We use cookies to enhance your browsing experience, analyze
                   site traffic, and personalize content. By clicking
                   &ldquo;Accept All&rdquo;, you consent to our use of cookies.
@@ -83,7 +83,7 @@ export function CookieConsent() {
               <button
                 type="button"
                 onClick={acceptAll}
-                className="px-5 py-2 text-sm font-semibold text-white bg-[var(--accent)] rounded-lg hover:bg-[var(--accent-hover)] transition flex items-center gap-1.5"
+                className="px-5 py-2 text-sm font-semibold text-[var(--bg)] bg-[var(--accent)] rounded-lg hover:bg-[var(--accent-hover)] transition flex items-center gap-1.5"
               >
                 <ShieldCheck className="w-4 h-4" />
                 Accept All

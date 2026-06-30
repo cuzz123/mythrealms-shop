@@ -18,7 +18,7 @@ export default function UnsubscribePage() {
       </p>
       <Link
         href="/"
-        className="inline-block px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition"
+        className="inline-block px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition"
       >
         Back to Home
       </Link>

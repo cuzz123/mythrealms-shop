@@ -102,7 +102,7 @@ export function Collection1688({ slug }: { slug: string }) {
               onClick={() => setPriceRange(val)}
               className={`px-3 py-1.5 text-xs rounded-full border transition ${
                 priceRange === val
-                  ? "bg-[var(--accent)] text-white border-[var(--accent)]"
+                  ? "bg-[var(--accent)] text-[var(--bg)] border-[var(--accent)]"
                   : "border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--text-muted)]"
               }`}
             >

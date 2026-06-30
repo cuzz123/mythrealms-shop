@@ -122,7 +122,7 @@ export function GuardianTeaser() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <Link
                 href="/guardian-quiz"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] magnetic-glow"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] magnetic-glow"
               >
                 <Sparkles className="w-4 h-4" />
                 Take the Full Quiz

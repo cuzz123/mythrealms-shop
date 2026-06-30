@@ -129,7 +129,7 @@ export function GuardianQuizClient() {
           <p className="text-[var(--text-secondary)] leading-relaxed mb-8 max-w-md mx-auto">{r.description}</p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href={r.slug} className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
+            <Link href={r.slug} className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
               Wear Your Intention <ArrowRight className="w-4 h-4" />
             </Link>
             <button onClick={reset} className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-[var(--border)] text-[var(--text-secondary)] rounded-full font-semibold text-sm hover:border-[var(--text)] transition">

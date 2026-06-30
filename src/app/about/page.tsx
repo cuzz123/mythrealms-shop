@@ -169,7 +169,7 @@ export default function AboutPage() {
         <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Which Intention Is Calling You?</h2>
         <p className="text-[var(--text-muted)] mb-8 max-w-md mx-auto">Six archetypes. One is yours. Take the quiz or browse the collection.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link href="/guardian-quiz" className="px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition inline-flex items-center justify-center gap-2">
+          <Link href="/guardian-quiz" className="px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition inline-flex items-center justify-center gap-2">
             Take the Quiz <ArrowRight className="w-4 h-4" />
           </Link>
           <Link href="/collections/curated-singles" className="px-8 py-3 border border-[var(--border)] text-[var(--text)] rounded-full font-semibold hover:border-[var(--accent)] transition">

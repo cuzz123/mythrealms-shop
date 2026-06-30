@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
@@ -82,11 +83,11 @@ export function HeroCarousel() {
             <div className={`absolute inset-0 overflow-hidden ${isActive ? "animate-kenburns" : ""}`}>
                 {/* Desktop: landscape */}
                 <div className="hidden md:block absolute inset-0">
-                  <img src={s.image} alt={s.title} className="absolute inset-0 w-full h-full object-cover" />
+                  <Image src={s.image} alt={s.title} fill sizes="100vw" className="object-cover" priority={i === 0} />
                 </div>
                 {/* Mobile: portrait */}
                 <div className="block md:hidden absolute inset-0">
-                  <img src={s.mobileImage || s.image} alt={s.title} className="absolute inset-0 w-full h-full object-cover" />
+                  <Image src={s.mobileImage || s.image} alt={s.title} fill sizes="100vw" className="object-cover" priority={i === 0} />
                 </div>
             </div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent z-[2]" />
@@ -112,7 +113,7 @@ export function HeroCarousel() {
               <span>Rated 4.8/5 by 500+ customers</span>
             </p>
             <div className="flex flex-wrap gap-3 pointer-events-auto">
-              <Link href={slides[current].href} className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
+              <Link href={slides[current].href} className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
                 {slides[current].cta}<ChevronRight className="w-4 h-4" />
               </Link>
             </div>
@@ -122,22 +123,24 @@ export function HeroCarousel() {
 
 
       {/* Progress bar — subtle grey track, white fill on active */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-[8px]">
+      <div className="absolute bottom-0 left-0 right-0 z-30 flex gap-[8px] px-[8px] pb-2">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
             aria-label={`Go to slide ${i + 1}`}
-            className="flex-1 h-[6px] bg-white/10 cursor-pointer relative overflow-hidden"
+            className="flex-1 py-2 cursor-pointer group"
           >
-            <div
-              key={`progress-${current}`}
-              className="absolute inset-0 bg-white"
-              style={{
-                width: i === current ? "100%" : "0%",
-                animation: i === current ? "progressFill 5s linear forwards" : "none",
-              }}
-            />
+            <div className="h-[6px] bg-white/10 relative overflow-hidden rounded-full">
+              <div
+                key={`progress-${current}`}
+                className="absolute inset-0 bg-white rounded-full"
+                style={{
+                  width: i === current ? "100%" : "0%",
+                  animation: i === current ? "progressFill 5s linear forwards" : "none",
+                }}
+              />
+            </div>
           </button>
         ))}
       </div>

@@ -95,7 +95,7 @@ export default function FAQPage() {
               <p className="text-sm font-semibold text-[var(--text)]">Still have questions?</p>
               <p className="text-xs text-[var(--text-muted)]">Our support team typically responds within 24 hours</p>
             </div>
-            <Link href="/contact" className="shrink-0 px-5 py-2 bg-[var(--accent)] text-white rounded-full text-sm font-semibold hover:bg-[var(--accent-hover)] transition">
+            <Link href="/contact" className="shrink-0 px-5 py-2 bg-[var(--accent)] text-[var(--bg)] rounded-full text-sm font-semibold hover:bg-[var(--accent-hover)] transition">
               Contact Us
             </Link>
           </div>

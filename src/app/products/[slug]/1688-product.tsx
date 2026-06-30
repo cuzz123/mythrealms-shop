@@ -76,7 +76,7 @@ export function Product1688({ slug }: { slug: string }) {
     <div className="max-w-7xl mx-auto px-6 py-20 text-center">
       <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-4">Product Not Found</h1>
       <p className="text-[var(--text-muted)] mb-6">This product does not exist or may have been removed.</p>
-      <a href="/collections" className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">Browse Collections</a>
+      <a href="/collections" className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">Browse Collections</a>
     </div>
   );
   const p = product; // TS narrowing for closure below
@@ -403,7 +403,7 @@ export function Product1688({ slug }: { slug: string }) {
                       <button
                         type="submit"
                         disabled={notifyState === "submitting"}
-                        className="px-5 py-2.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 whitespace-nowrap"
+                        className="px-5 py-2.5 rounded-lg bg-[var(--accent)] text-[var(--bg)] font-semibold text-sm hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 whitespace-nowrap"
                       >
                         {notifyState === "submitting" ? (
                           <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</>
@@ -451,7 +451,7 @@ export function Product1688({ slug }: { slug: string }) {
               <button
                 onClick={handleAddToCart}
                 disabled={addToCartState !== "idle"}
-                className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-[var(--bg)] font-semibold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {addToCartState === "adding" ? (
                   <><Loader2 className="w-4 h-4 animate-spin" /> Adding...</>
@@ -618,7 +618,7 @@ export function Product1688({ slug }: { slug: string }) {
                 <button
                   type="submit"
                   disabled={reviewState === "submitting"}
-                  className="px-5 py-2 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
+                  className="px-5 py-2 rounded-lg bg-[var(--accent)] text-[var(--bg)] font-semibold text-sm hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   {reviewState === "submitting" ? (
                     <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
@@ -663,7 +663,7 @@ export function Product1688({ slug }: { slug: string }) {
                   )}
                 </div>
                 <div className="mt-2.5 px-1">
-                  <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{rp.name}</h4>
+                  <h3 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{rp.name}</h3>
                   <div className="flex items-baseline gap-2 mt-0.5">
                     <span className="text-xs font-semibold text-[var(--text)]">{formatPrice(rp.price)}</span>
                     {rp.compareAt && rp.compareAt > rp.price && (

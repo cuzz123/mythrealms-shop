@@ -34,7 +34,7 @@ export default function ReturnsPage() {
       <div className="max-w-lg mx-auto px-6 py-20 text-center">
         <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-4">Return Request Received</h1>
         <p className="text-[var(--text-muted)] mb-6">We will review your request and respond within 24 hours. No need to ship anything yet — wait for our confirmation email with return instructions.</p>
-        <Link href="/" className="px-6 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Back to Home</Link>
+        <Link href="/" className="px-6 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Back to Home</Link>
       </div>
     );
   }

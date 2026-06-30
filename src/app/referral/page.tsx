@@ -80,7 +80,7 @@ export default function ReferralPage() {
             className={`shrink-0 flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm transition-all ${
               copied
                 ? "bg-green-500/10 border border-green-500/30 text-green-400"
-                : "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]"
+                : "bg-[var(--accent)] text-[var(--bg)] hover:bg-[var(--accent-hover)]"
             }`}
           >
             {copied ? (
@@ -171,7 +171,7 @@ export default function ReferralPage() {
       <div className="mt-10 text-center">
         <Link
           href="/collections/curated-singles"
-          className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent)] text-white rounded-full font-semibold hover:bg-[var(--accent-hover)] transition"
+          className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition"
         >
           Browse the Collections <ArrowRight className="w-4 h-4" />
         </Link>

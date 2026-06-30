@@ -133,7 +133,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
 
       {/* Quick add button — outside the Link to avoid nested interactive elements */}
       <button onClick={handleQuickAdd}
-        className="absolute bottom-[72px] right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[var(--text)] shadow-md opacity-0 translate-y-2 transition-[opacity,transform] duration-200 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-white hover:text-[var(--primary)] backdrop-blur-sm cursor-pointer max-sm:opacity-100 max-sm:translate-y-0 max-sm:bg-[var(--accent)] max-sm:text-white max-sm:hover:bg-[var(--accent-hover)]"
+        className="absolute bottom-[72px] right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[var(--text)] shadow-md opacity-0 translate-y-2 transition-[opacity,transform] duration-200 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-white hover:text-[var(--primary)] backdrop-blur-sm cursor-pointer max-sm:opacity-100 max-sm:translate-y-0 max-sm:bg-[var(--accent)] max-sm:text-[var(--bg)] max-sm:hover:bg-[var(--accent-hover)]"
         aria-label={`Add ${product.name} to cart`}>
         <ShoppingBag className="h-4 w-4" />
       </button>

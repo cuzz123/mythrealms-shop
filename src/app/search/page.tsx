@@ -142,7 +142,7 @@ export default async function SearchPage({
             </p>
             <Link
               href="/collections"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
             >
               Browse All Collections
             </Link>

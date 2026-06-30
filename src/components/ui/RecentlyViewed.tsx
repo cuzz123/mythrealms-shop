@@ -39,7 +39,7 @@ export function RecentlyViewed() {
                 <LazyImage src={rp.image} alt={rp.name} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
               </div>
               <div className="mt-2.5 px-1">
-                <h4 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{rp.name}</h4>
+                <h3 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{rp.name}</h3>
                 <div className="flex items-baseline gap-2 mt-0.5">
                   <span className="text-xs font-semibold text-[var(--text)]">{formatPrice(rp.price)}</span>
                   {rp.compareAt && rp.compareAt > rp.price && (
