@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* System font stacks — no Google Fonts dependency, builds anywhere */
+@theme {
+  --font-serif: Georgia, "Times New Roman", ui-serif, serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
 }
