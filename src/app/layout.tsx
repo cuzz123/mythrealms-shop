@@ -58,6 +58,7 @@ export const metadata: Metadata = {
     images: [`${process.env.NEXT_PUBLIC_APP_URL}/images/1688-hero/轮播图1.webp`],
   },
   robots: { index: true, follow: true },
+  alternates: { canonical: process.env.NEXT_PUBLIC_APP_URL },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
