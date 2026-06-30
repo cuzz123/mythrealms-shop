@@ -43,7 +43,7 @@ export function SocialProof() {
     >
       <div className="bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-lg text-sm">
         <p className="text-gray-500 text-xs">Someone from <span className="font-semibold text-gray-700">{popup.city}</span></p>
-        <p className="text-gray-900 font-medium mt-0.5">bought <span className="text-[var(--accent)]">{popup.product}</span></p>
+        <p className="text-gray-900 font-medium mt-0.5">bought <span className="text-[var(--primary)]">{popup.product}</span></p>
         <p className="text-gray-400 text-[11px] mt-1">{popup.timeAgo}</p>
       </div>
     </div>

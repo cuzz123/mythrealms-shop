@@ -83,11 +83,11 @@ export function HeroCarousel() {
             <div className={`absolute inset-0 overflow-hidden ${isActive ? "animate-kenburns" : ""}`}>
                 {/* Desktop: landscape */}
                 <div className="hidden md:block absolute inset-0">
-                  <Image src={s.image} alt={s.title} fill sizes="100vw" className="object-cover" priority={i === 0} />
+                  <Image src={s.image} alt={s.title} fill sizes="100vw" className="object-cover" priority={i === 0} unoptimized={i === 0} />
                 </div>
                 {/* Mobile: portrait */}
                 <div className="block md:hidden absolute inset-0">
-                  <Image src={s.mobileImage || s.image} alt={s.title} fill sizes="100vw" className="object-cover" priority={i === 0} />
+                  <Image src={s.mobileImage || s.image} alt={s.title} fill sizes="100vw" className="object-cover" priority={i === 0} unoptimized={i === 0} />
                 </div>
             </div>
             <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent z-[2]" />
