@@ -1,0 +1,1726 @@
+{
+  "generatedAt": "2026-07-01T06:27:04.096Z",
+  "total": 43,
+  "scripts": [
+    {
+      "productSlug": "pearl-series-11",
+      "productName": "The Gentle Tide  Bracelet",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? Gentleness is not weakness. It is discipline �?the discipline of not hardening when the world asks you to, of choosing s...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Gentle Tide  Bracelet"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Emotional Balance"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$44.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Gentle Tide  Bracelet - Emotional Balance. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. Gentleness is not weakness. It is discipline �?the discipline of not hardening when the world asks you to, of choosing s #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "pearl-series-04",
+      "productName": "The Deep Peace  Bracelet & Necklace Set",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Deep Peace  Bracelet & Necklace Set from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Deep Peace  Bracelet & Necklace Set"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Emotional Balance | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$69.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Deep Peace  Bracelet & Necklace Set from MythRealms. Emotional Balance. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "pearl-series-15",
+      "productName": "The Water's Edge  Earrings",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Water's Edge  Earrings!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$39.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "pearl-series-19",
+      "productName": "The Light Keeper  Necklace",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? Every circle needs someone who tends the fire �?who stays up late, who checks in, who makes sure everyone got home safe....",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Light Keeper  Necklace"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Emotional Balance"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$54.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Light Keeper  Necklace - Emotional Balance. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. Every circle needs someone who tends the fire �?who stays up late, who checks in, who makes sure everyone got home safe. #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "pearl-series-01",
+      "productName": "The Calm Tide  Ring",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Calm Tide  Ring from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Calm Tide  Ring"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Emotional Balance | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$29.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Calm Tide  Ring from MythRealms. Emotional Balance. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "pearl-series-02",
+      "productName": "The Still Point  Ring",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Still Point  Ring!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$32.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "pearl-series-03",
+      "productName": "The Quiet Centre  Ring",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? Not every power announces itself. Some wait in the hush between heartbeats. This is the pearl for those who lead from wi...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Quiet Centre  Ring"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Emotional Balance"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$34.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Quiet Centre  Ring - Emotional Balance. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. Not every power announces itself. Some wait in the hush between heartbeats. This is the pearl for those who lead from wi #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "pearl-series-05",
+      "productName": "The First Light  Bracelet",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The First Light  Bracelet from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The First Light  Bracelet"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Emotional Balance | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$32.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The First Light  Bracelet from MythRealms. Emotional Balance. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "pearl-series-06",
+      "productName": "The Inner Tide  Bracelet",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Inner Tide  Bracelet!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$34.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "pearl-series-07",
+      "productName": "The Silver Hour  Bracelet",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? There is an hour �?usually late, often alone �?when the light turns silver and everything softens. This is the pearl for...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Silver Hour  Bracelet"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Emotional Balance"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$36.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Silver Hour  Bracelet - Emotional Balance. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. There is an hour �?usually late, often alone �?when the light turns silver and everything softens. This is the pearl for #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "pearl-series-08",
+      "productName": "The Clear Blue  Bracelet",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Clear Blue  Bracelet from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Clear Blue  Bracelet"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Emotional Balance | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$38.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Clear Blue  Bracelet from MythRealms. Emotional Balance. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "pearl-series-09",
+      "productName": "The Keeper  Bracelet",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Keeper  Bracelet!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$40.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "pearl-series-10",
+      "productName": "The Steady Light  Bracelet",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? Not a blaze. Not a flicker. A steady, quiet glow that does not need to prove anything to anyone. This is the pearl that ...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Steady Light  Bracelet"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Emotional Balance"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$42.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Steady Light  Bracelet - Emotional Balance. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. Not a blaze. Not a flicker. A steady, quiet glow that does not need to prove anything to anyone. This is the pearl that  #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "pearl-series-12",
+      "productName": "The Horizon Line  Bracelet",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Horizon Line  Bracelet from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Horizon Line  Bracelet"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Emotional Balance | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$46.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Horizon Line  Bracelet from MythRealms. Emotional Balance. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "pearl-series-13",
+      "productName": "The Soft Return  Earrings",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Soft Return  Earrings!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$34.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "pearl-series-14",
+      "productName": "The Morning Pearl  Earrings",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? Put them on before coffee. Before the first notification. Before the world asks anything of you �?while the day still be...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Morning Pearl  Earrings"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Emotional Balance"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$37.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Morning Pearl  Earrings - Emotional Balance. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. Put them on before coffee. Before the first notification. Before the world asks anything of you �?while the day still be #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "pearl-series-16",
+      "productName": "The Listening Stone  Earrings",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Listening Stone  Earrings from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Listening Stone  Earrings"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Emotional Balance | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$42.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Listening Stone  Earrings from MythRealms. Emotional Balance. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "pearl-series-17",
+      "productName": "The Inner Glow  Necklace",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Inner Glow  Necklace!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$42.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "pearl-series-18",
+      "productName": "The Open Gate  Necklace",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? A gate that opens inward. A necklace that rests at the threshold �?the place where who you were meets who you are becomi...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Open Gate  Necklace"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Emotional Balance"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$49.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Open Gate  Necklace - Emotional Balance. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. A gate that opens inward. A necklace that rests at the threshold �?the place where who you were meets who you are becomi #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "pearl-series-20",
+      "productName": "The Deep Breath  Necklace",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Deep Breath  Necklace from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Deep Breath  Necklace"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Emotional Balance | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$59.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Deep Breath  Necklace from MythRealms. Emotional Balance. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "luxe-collection-01",
+      "productName": "The Watchman  Bracelet",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Watchman  Bracelet!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$42.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "luxe-collection-07",
+      "productName": "The Lion's Share  Bracelet",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? Abundance is not a number. It is not a threshold you cross once and stay across. It is a posture �?the daily willingness...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Lion's Share  Bracelet"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Abundance"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$49.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Lion's Share  Bracelet - Abundance. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. Abundance is not a number. It is not a threshold you cross once and stay across. It is a posture �?the daily willingness #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "luxe-collection-03",
+      "productName": "The Seer  Bracelet",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Seer  Bracelet from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Seer  Bracelet"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Intuition | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$46.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Seer  Bracelet from MythRealms. Intuition. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "luxe-collection-04",
+      "productName": "The Strategist  Bracelet",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Strategist  Bracelet!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$48.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "luxe-collection-05",
+      "productName": "The Phoenix  Bracelet",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? You have burned down and rebuilt more times than anyone knows. You have ended things. You have walked away. You have sto...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Phoenix  Bracelet"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Renewal"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$49.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Phoenix  Bracelet - Renewal. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. You have burned down and rebuilt more times than anyone knows. You have ended things. You have walked away. You have sto #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "luxe-collection-06",
+      "productName": "The Creator  Bracelet",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Creator  Bracelet from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Creator  Bracelet"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Manifestation | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$52.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Creator  Bracelet from MythRealms. Manifestation. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "luxe-collection-02",
+      "productName": "The Heart Opener  Bracelet",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Heart Opener  Bracelet!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$44.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "luxe-collection-08",
+      "productName": "The Anchor  Earrings",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? Some days you float away �?scattered by notifications, fragmented by demands, pulled in six directions by people who nee...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Anchor  Earrings"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Grounding"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$44.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Anchor  Earrings - Grounding. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. Some days you float away �?scattered by notifications, fragmented by demands, pulled in six directions by people who nee #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "luxe-collection-09",
+      "productName": "The Muse  Earrings",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Muse  Earrings from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Muse  Earrings"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Creativity | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$47.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Muse  Earrings from MythRealms. Creativity. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "luxe-collection-10",
+      "productName": "The Sage  Earrings",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Sage  Earrings!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$49.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "luxe-collection-11",
+      "productName": "The North Star  Earrings",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? When you do not know which way to go �?when every path looks the same and every option feels wrong �?you need a fixed po...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The North Star  Earrings"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Direction"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$52.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The North Star  Earrings - Direction. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. When you do not know which way to go �?when every path looks the same and every option feels wrong �?you need a fixed po #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "luxe-collection-12",
+      "productName": "The Lightkeeper  Necklace",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Lightkeeper  Necklace from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Lightkeeper  Necklace"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Clarity | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$64.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Lightkeeper  Necklace from MythRealms. Clarity. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "pearl-crystal-series-01",
+      "productName": "The Bridge  Bracelet",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Bridge  Bracelet!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$38.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "pearl-crystal-series-02",
+      "productName": "The Threshold  Bracelet",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? Every doorway asks a question: are you ready to become someone new? The Threshold is for the moment before the step �?th...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Threshold  Bracelet"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Transformation"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$42.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Threshold  Bracelet - Transformation. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. Every doorway asks a question: are you ready to become someone new? The Threshold is for the moment before the step �?th #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "pearl-crystal-series-03",
+      "productName": "The Double Knot  Bracelet",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Double Knot  Bracelet from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Double Knot  Bracelet"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Integration | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$44.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Double Knot  Bracelet from MythRealms. Integration. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "pearl-crystal-series-04",
+      "productName": "The Keeper of Light  Bracelet",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Keeper of Light  Bracelet!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$46.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "curated-singles-01",
+      "productName": "The Watchman  Bracelet",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? The Watchman is a black obsidian crystal bracelet designed for protection and grounding. Black obsidian is a volcanic gl...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Watchman  Bracelet"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Protection"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$44.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Watchman  Bracelet - Protection. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. The Watchman is a black obsidian crystal bracelet designed for protection and grounding. Black obsidian is a volcanic gl #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "curated-singles-02",
+      "productName": "The Heart Opener  Bracelet",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Heart Opener  Bracelet from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Heart Opener  Bracelet"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Self-Love | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$47.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Heart Opener  Bracelet from MythRealms. Self-Love. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "curated-singles-03",
+      "productName": "The Seer  Bracelet",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Seer  Bracelet!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$49.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "curated-singles-04",
+      "productName": "The Phoenix  Bracelet",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? The Phoenix is a moonstone crystal bracelet designed for new beginnings and renewal. Moonstone has been associated with ...",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of The Phoenix  Bracelet"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Renewal"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$52.99 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "The Phoenix  Bracelet - Renewal. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. The Phoenix is a moonstone crystal bracelet designed for new beginnings and renewal. Moonstone has been associated with  #chinesemythology #mythicaljewelry"
+    },
+    {
+      "productSlug": "curated-singles-05",
+      "productName": "The Strategist  Bracelet",
+      "format": "unboxing",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "15-20s",
+      "hook": "ASMR Unboxing The Strategist  Bracelet from MythRealms",
+      "scenes": [
+        {
+          "time": "0-3s",
+          "visual": "Opening jewelry box slowly",
+          "audio": "Soft paper rustling",
+          "textOverlay": "The Strategist  Bracelet"
+        },
+        {
+          "time": "3-8s",
+          "visual": "Reveal jewelry piece in natural light",
+          "audio": "Gentle chime",
+          "textOverlay": "Confidence | Handcrafted"
+        },
+        {
+          "time": "8-13s",
+          "visual": "Macro shot of gemstone",
+          "audio": "Ambient music",
+          "textOverlay": "$52.99"
+        },
+        {
+          "time": "13-15s",
+          "visual": "Product on model",
+          "audio": "Music fades",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Unboxing the The Strategist  Bracelet from MythRealms. Confidence. Handcrafted in 14k gold and sterling silver. #mythicaljewelry #unboxing"
+    },
+    {
+      "productSlug": "curated-singles-06",
+      "productName": "The Lion's Share  Bracelet",
+      "format": "quiz",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "25-35s",
+      "hook": "Which mythical guardian protects YOU? Take the quiz ->",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Screen recording of guardian-quiz page",
+          "audio": "Upbeat music",
+          "textOverlay": "Which Guardian Matches Your Spirit?"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Quick cuts through quiz questions",
+          "audio": "Music continues",
+          "textOverlay": "Answer 5 questions..."
+        },
+        {
+          "time": "15-25s",
+          "visual": "Reveal of quiz result with product",
+          "audio": "Music swells",
+          "textOverlay": "You got: The Lion's Share  Bracelet!"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Product beauty shot",
+          "audio": "Music resolves",
+          "textOverlay": "$54.99 | Link in bio"
+        }
+      ],
+      "caption": "Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou"
+    },
+    {
+      "productSlug": "test-product",
+      "productName": "Test Product  PayPal Test",
+      "format": "story",
+      "hashtags": [
+        "mythicaljewelry",
+        "chinesemythology",
+        "handcrafted",
+        "intentionjewelry"
+      ],
+      "duration": "30-45s",
+      "hook": "Did you know? This is a $1 test product to verify the PayPal payment flow. Delete after testing....",
+      "scenes": [
+        {
+          "time": "0-5s",
+          "visual": "Text on screen with mystical background",
+          "audio": "Storytelling voice",
+          "textOverlay": "The Legend of Test Product  PayPal Test"
+        },
+        {
+          "time": "5-15s",
+          "visual": "Product on natural textures",
+          "audio": "Voiceover: Inspired by ancient mythology...",
+          "textOverlay": "Shan Hai Jing | Testing"
+        },
+        {
+          "time": "15-25s",
+          "visual": "Close-up of gemstone details",
+          "audio": "Voiceover continues",
+          "textOverlay": "$1 | 14k Gold & Sterling Silver"
+        },
+        {
+          "time": "25-30s",
+          "visual": "Model wearing the piece",
+          "audio": "Soft resolve",
+          "textOverlay": "MythRealms | Link in bio"
+        }
+      ],
+      "caption": "Test Product  PayPal Test - Testing. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. This is a $1 test product to verify the PayPal payment flow. Delete after testing. #chinesemythology #mythicaljewelry"
+    }
+  ]
+}
