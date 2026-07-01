@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Plus, Pencil, ExternalLink } from "lucide-react";
 import { DeleteButton } from "./DeleteButton";
+import { safeJsonParse } from "@/lib/utils";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { PRODUCTS, CATEGORIES } from "@/lib/1688-products";
