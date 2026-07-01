@@ -7,7 +7,7 @@ export const CATEGORIES: Category[] = [
   { name: 'The Intention Stones', slug: 'luxe-collection', description: 'Premium hand-strung bracelets. Each stone holds a singular purpose.', image: '/images/collections/collections封面2.webp' },
   { name: 'Balance & Light', slug: 'pearl-crystal-series', description: 'Where pearl meets crystal �?pieces for those who hold both at once', image: '/images/collections/collections封面3.webp' },
   { name: 'The Archetypes', slug: 'curated-singles', description: 'Six stones. Six intentions. No two alike. Find the one that names what you are becoming.', image: '/images/collections/collections封面4.webp' },
-},
+];
 export const PRODUCTS: Product[] = [
 
   // ===== THE SERENITY COLLECTION �?Pearl Series (20 SKUs) =====
