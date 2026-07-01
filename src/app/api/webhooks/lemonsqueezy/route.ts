@@ -69,12 +69,18 @@ export async function POST(request: NextRequest) {
             }
           }
 
-          // Increment discount code usedCount
+          // Increment discount code usedCount — only codes actually used on this order
           if (order.discount > 0) {
-            await db.discountCode.updateMany({
-              where: { isActive: true },
-              data: { usedCount: { increment: 1 } },
-            });
+            const codesStr = customData.discountCodes;
+            if (codesStr) {
+              const usedCodes = String(codesStr).split(",").map((c: string) => c.trim()).filter(Boolean);
+              if (usedCodes.length > 0) {
+                await db.discountCode.updateMany({
+                  where: { code: { in: usedCodes } },
+                  data: { usedCount: { increment: 1 } },
+                });
+              }
+            }
           }
 
           // Send confirmation email

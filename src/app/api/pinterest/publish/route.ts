@@ -1,63 +1,116 @@
-// GET /api/pinterest/publish — Batch publish 28 mansion pins (runs from Vercel server)
+﻿// GET /api/pinterest/publish — Auto-publish pins from current product data
+// Supports ?limit=N (default 5) to control how many pins per run
+// Supports ?offset=N to skip already-published products
 
 import { imageUrl } from "@/lib/images";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { PRODUCTS } from "@/lib/1688-products";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+function sanitize(text: string, max: number): string {
+  return text
+    .replace(/[^\x20-\x7E\s]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, max);
+}
+
+function buildPinData(product: typeof PRODUCTS[0], base: string) {
+  const name = sanitize(product.name, 60);
+  const intention = sanitize(product.intention || "Crystal Intention", 30);
+  const title = `${name} — ${intention} | MythRealms`;
+
+  const triple = sanitize(product.benefitTriplet || "", 80);
+  const descRaw = product.description.replace(/\s+/g, " ").trim().slice(0, 250);
+  const desc = `${triple}. ${descRaw} Shop MythRealms. Free shipping over $69.99.`;
+
+  const imagePath = product.image.startsWith("/")
+    ? product.image
+    : `/images/products/1688-shop/${product.category}/${product.slug}-main.webp`;
+
+  return {
+    title: sanitize(title, 100),
+    description: sanitize(desc, 500),
+    link: `${base}/products/${product.slug}`,
+    media_source: {
+      source_type: "image_url",
+      url: `${base}${imagePath}`,
+    },
+  };
+}
+
+export async function GET(request: NextRequest) {
   const TOKEN = process.env.PINTEREST_API_TOKEN || "";
   const BOARD_ID = process.env.PINTEREST_BOARD_ID || "";
   const BASE = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
 
   if (!TOKEN || !BOARD_ID) {
-    return NextResponse.json({ error: "Pinterest API not configured" }, { status: 500 });
+    return NextResponse.json({
+      error: "Pinterest API not configured. Set PINTEREST_API_TOKEN and PINTEREST_BOARD_ID in env.",
+      hint: "Get token: https://developers.pinterest.com/docs/getting-started/authentication/"
+    }, { status: 500 });
   }
 
-  const pins = [
-    { title:"The Watchman Bracelet — Black Obsidian Protection Stone", desc:"Protection — Grounding — Clarity. Black obsidian beads with sterling silver spacers. When you need a shield against negativity and chaos. Wear your Watcher.", img:imageUrl("/images/pins/pin-cs-watchman.png"), link:"/products/curated-singles-01" },
-    { title:"The Heart Opener — Rose Quartz Self-Love Bracelet", desc:"Love — Tenderness — Acceptance. Soft pink rose quartz beads with rose gold heart spacers. Open yourself to giving and receiving love. Every heart deserves this.", img:imageUrl("/images/pins/pin-cs-heart.png"), link:"/products/curated-singles-02" },
-    { title:"The Seer Bracelet — Amethyst Crystal for Intuition", desc:"Intuition — Calm — Insight. Deep purple amethyst beads with silver lotus spacers. For those who trust their inner voice before the world's noise.", img:imageUrl("/images/pins/pin-cs-seer.png"), link:"/products/curated-singles-03" },
-    { title:"The Phoenix Bracelet — Moonstone for New Beginnings", desc:"Renewal — Hope — Transformation. Rainbow moonstone beads with gold crescent spacers. Rise from where you were into who you are becoming.", img:imageUrl("/images/pins/pin-cs-phoenix.png"), link:"/products/curated-singles-04" },
-    { title:"The Strategist Bracelet — Tiger's Eye Confidence Stone", desc:"Confidence — Focus — Courage. Tiger's eye beads with brushed gold spacers. For the boardroom, the pitch, and every room where you need to own your power.", img:imageUrl("/images/pins/pin-cs-strategist.png"), link:"/products/curated-singles-05" },
-    { title:"The Lion's Share — Green Aventurine Abundance Bracelet", desc:"Abundance — Opportunity — Growth. Green aventurine beads with gold coin spacers. Wear the frequency of prosperity and watch doors open.", img:imageUrl("/images/pins/pin-cs-lion.png"), link:"/products/curated-singles-06" },
-    { title:"Serenity Collection — Freshwater Pearl Emotional Balance", desc:"Calm — Purity — Grace. Freshwater pearls hand-knotted on silk. The original intention stone — formed layer by layer, a meditation in material form.", img:imageUrl("/images/pins/pin-pearl-serenity.png"), link:"/collections/pearl-series" },
-    { title:"The Bridge Bracelet — Pearl & Crystal Balance Piece", desc:"Balance — Harmony — Connection. Freshwater pearls paired with your choice of crystal. Where ocean meets earth, where soft meets strong.", img:imageUrl("/images/pins/pin-bridge.png"), link:"/collections/pearl-crystal-series" },
-    { title:"The Keeper — Freshwater Pearl Wisdom Bracelet", desc:"Wisdom — Integrity — Stillness. Baroque freshwater pearls with gold knot spacers. For those who hold space for others — and finally, for themselves.", img:imageUrl("/images/pins/pin-cs-keeper.png"), link:"/products/curated-singles-02" },
-    { title:"The Anchor Earrings — Grounding Stone Jewelry", desc:"Stability — Presence — Strength. Natural stone drops on sterling silver hooks. When the world spins, wear your center.", img:imageUrl("/images/pins/pin-cs-anchor.png"), link:"/products/curated-singles-01" },
-    { title:"The Creator Bracelet — Clear Quartz Manifestation Stone", desc:"Clarity — Focus — Creation. Clear quartz beads with silver intention spacers. The master amplifier — program it with what you are calling in.", img:imageUrl("/images/pins/pin-cs-creator.png"), link:"/products/curated-singles-03" },
-    { title:"The Lightkeeper Necklace — Crystal Clarity Jewelry", desc:"Clarity — Guidance — Truth. Pendant necklace with a single faceted crystal. A compass point over your heart — wear it and remember who you are.", img:imageUrl("/images/pins/pin-cs-lightkeeper.png"), link:"/products/curated-singles-04" },
-    { title:"Crystal Intention Jewelry — Hand-Selected Stone Bracelets", desc:"Protection · Love · Clarity · Abundance · Confidence · Balance. Each bracelet carries its own purpose. Hand-selected stones. Artisan-finished. Free shipping over $69.99. Shop the intention collection.", img:imageUrl("/images/pins/pin-brand-intention.png"), link:"/collections/curated-singles" },
-  ];
+  const url = new URL(request.url);
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "5"), 20);
+  const offset = parseInt(url.searchParams.get("offset") || "0");
 
-  const results: string[] = [];
-  let count = 0;
+  const activeProducts = PRODUCTS.filter(p => p.isActive && p.inStock);
+  const batch = activeProducts.slice(offset, offset + limit);
 
-  for (const pin of pins) {
+  const results: { product: string; status: string; error?: string; pin_id?: string }[] = [];
+
+  for (const product of batch) {
     try {
+      const pinData = buildPinData(product, BASE);
+
       const r = await fetch("https://api.pinterest.com/v5/pins", {
         method: "POST",
-        headers: { Authorization: `Bearer ${TOKEN}`, "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          title: pin.title,
-          description: pin.desc,
-          link: `${BASE}${pin.link}`,
+          title: pinData.title,
+          description: pinData.description,
+          link: pinData.link,
           board_id: BOARD_ID,
-          media_source: { source_type: "image_url", url: `${BASE}${pin.img}` },
+          media_source: pinData.media_source,
         }),
       });
 
+      const body = await r.json();
+
       if (r.status === 201) {
-        count++;
-        results.push(`✅ ${pin.title.slice(0, 40)}`);
+        results.push({ product: product.name, status: "published", pin_id: body.id });
+      } else if (r.status === 429) {
+        results.push({ product: product.name, status: "rate_limited", error: body.message });
+        break; // stop on rate limit, resume later
       } else {
-        const err = await r.text();
-        results.push(`❌ ${r.status} ${err.slice(0, 80)}`);
+        results.push({ product: product.name, status: "failed", error: body.message || JSON.stringify(body).slice(0, 200) });
       }
     } catch (e: any) {
-      results.push(`⚡ ${e.message.slice(0, 60)}`);
+      results.push({ product: product.name, status: "error", error: e.message?.slice(0, 200) });
     }
+
+    await new Promise(r => setTimeout(r, 1100));
   }
 
-  return NextResponse.json({ published: count, total: pins.length, results });
+  const published = results.filter(r => r.status === "published").length;
+  const failed = results.filter(r => r.status !== "published").length;
+
+  return NextResponse.json({
+    summary: {
+      published,
+      failed,
+      total_active: activeProducts.length,
+      batch: { offset, limit: batch.length },
+      has_more: offset + batch.length < activeProducts.length,
+    },
+    results,
+    next: offset + batch.length < activeProducts.length
+      ? `/api/pinterest/publish?limit=${limit}&offset=${offset + batch.length}`
+      : null,
+  });
 }

@@ -93,13 +93,16 @@ export async function POST(request: NextRequest) {
     // --- Increment discount code usedCount ---
     if (discountAmount > 0 && discount?.codes?.length) {
       const codeLabels = discount.codes.map((c: string) => c.trim().toUpperCase());
-      await db.discountCode.updateMany({
-        where: { code: { in: codeLabels } },
-        data: { usedCount: { increment: 1 } },
+      const discountCodesStr = JSON.stringify({ discountCodes: codeLabels });
+      await db.order.update({
+        where: { id: order.id },
+        data: { notes: discountCodesStr },
       });
     }
 
     // --- Add loyalty points (1 point per $1) ---
+    // Build discount codes string for LS custom_data
+    const discountCodesForLS = discount?.codes?.map((c: string) => c.trim().toUpperCase()).join(",") || "";
     if (session?.user?.id) {
       const points = Math.floor(total);
       await db.loyaltyPoint.create({
@@ -147,9 +150,10 @@ export async function POST(request: NextRequest) {
               checkout_data: {
                 email: email || "",
                 custom: {
-                  orderId: order.id,
-                  itemCount: String(items.length),
-                  subtotal: String(subtotal),
+                 orderId: order.id,
+                 itemCount: String(items.length),
+                 subtotal: String(subtotal),
+                  discountCodes: discountCodesForLS,
                 },
               },
               product_options: {

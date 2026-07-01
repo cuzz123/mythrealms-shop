@@ -11,13 +11,13 @@ async function seedCartItem(page: any) {
         items: [
           {
             product: {
-              id: 'test-prod-1',
-              name: 'Nine-Tailed Fox Pendant',
-              slug: 'nine-tailed-fox-pendant',
-              image: '/images/products/beast-pendant-nine-tailed-fox.png',
-              price: 128.99,
-              variantId: 'test-var-1',
-              variantName: 'Sterling Silver',
+              id: '1688-001',
+              name: 'The Calm Tide · Ring',
+              slug: 'pearl-series-01',
+              image: '/images/products/1688-shop/pearl-series/pearl-series-01-main.webp',
+              price: 29.99,
+              variantId: '',
+              variantName: '',
             },
             quantity: 2,
           },
@@ -106,7 +106,7 @@ test.describe('Core Flows', () => {
   // ─── 4. Add to cart — drawer opens and count updates ─────────────
   test('add to cart — cart drawer opens and item count badge updates', async ({ page }) => {
     // Navigate to a known product directly
-    await page.goto(`${BASE_URL}/products/nine-tailed-fox-pendant`);
+    await page.goto(`${BASE_URL}/products/pearl-series-01`);
 
     // Wait for the page to load (product name or add-to-cart button)
     const addToCartBtn = page.getByRole('button', { name: /add to cart/i }).first();
@@ -129,7 +129,7 @@ test.describe('Core Flows', () => {
       }
     } catch {
       // If the product page doesn't exist, fall back to collections
-      await page.goto(`${BASE_URL}/collections/beast-pendants`);
+      await page.goto(`${BASE_URL}/collections/curated-singles`);
       const firstProduct = page.locator('a[href^="/products/"]').first();
       if (await firstProduct.isVisible({ timeout: 5000 })) {
         await firstProduct.click();
@@ -156,7 +156,7 @@ test.describe('Core Flows', () => {
     await expect(page.getByRole('heading', { name: /Shopping Cart/i })).toBeVisible();
 
     // Items should be listed (the test item we seeded)
-    await expect(page.getByText('Nine-Tailed Fox Pendant')).toBeVisible({ timeout: 5000 });
+    await expect(page.getByText('The Calm Tide')).toBeVisible({ timeout: 5000 });
 
     // Free shipping progress message is visible
     const freeShippingMsg = page.getByText(/away from free shipping|earned free shipping/i);
@@ -293,7 +293,7 @@ test.describe('Core Flows', () => {
     await expect(page.getByText('Popular Searches')).toBeVisible({ timeout: 2000 });
 
     // Type a search query
-    await searchInput.fill('Nine-Tailed Fox');
+    await searchInput.fill('Calm Tide');
 
     // Wait for results to load (debounced API call)
     await page.waitForTimeout(1000);
