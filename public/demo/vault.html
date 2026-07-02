@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MythRealms — The Vault</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+  :root{--gold:#D4A84B;--gold-dim:#8B7340;--void:#050505;--ash:#1A1816;--smoke:#8A7D6E;--text:#E8E0D5}
+  body{font-family:"Cormorant Garamond",Georgia,serif;background:var(--void);color:var(--text);-webkit-font-smoothing:antialiased}
+  header{padding:24px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(212,168,75,.1)}
+  header .logo{font-size:18px;letter-spacing:3px;font-weight:600}
+  header a{color:var(--text);text-decoration:none;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+  .container{max-width:800px;margin:0 auto;padding:80px 24px;text-align:center}
+  .vaulth1{font-size:clamp(32px,6vw,56px);font-weight:700;letter-spacing:3px;margin-bottom:12px}
+  .vaulth2{font-size:14px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:48px}
+  .relic-preview{background:var(--ash);border:1px solid rgba(212,168,75,.15);padding:32px;margin-bottom:48px;text-align:center}
+  .relic-preview .name{font-size:24px;font-weight:600;margin-bottom:8px}
+  .relic-preview .id{font-size:12px;letter-spacing:4px;color:var(--gold);margin-bottom:16px}
+  .relic-preview .price{font-size:28px;color:var(--gold);font-weight:600}
+  .ritual{text-align:center;margin-bottom:40px}
+  .ritual p{font-size:16px;color:var(--smoke);line-height:2;font-style:italic;max-width:500px;margin:0 auto 12px}
+  .ritual .sigil{font-size:32px;color:var(--gold);margin:24px 0;letter-spacing:12px}
+  form{text-align:left;max-width:500px;margin:0 auto}
+  label{display:block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;margin-top:20px}
+  input,select{width:100%;padding:14px 16px;background:transparent;border:1px solid rgba(212,168,75,.2);color:var(--text);font-family:inherit;font-size:16px;transition:border-color .3s}
+  input:focus,select:focus{outline:none;border-color:var(--gold)}
+  select{appearance:none;background:transparent;cursor:pointer}
+  .btn{display:inline-block;padding:18px 56px;border:1px solid var(--gold);color:var(--void);text-decoration:none;letter-spacing:4px;font-size:15px;text-transform:uppercase;background:var(--gold);cursor:pointer;transition:all .4s;width:100%;font-family:inherit;margin-top:32px}
+  .btn:hover{opacity:.85}
+  .btn-outline{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+  .btn-outline:hover{background:rgba(212,168,75,.1)}
+  .trust{text-align:center;margin-top:32px;font-size:12px;color:var(--smoke);letter-spacing:1px}
+  .trust span{color:var(--gold);margin:0 12px}
+  @media(max-width:768px){.container{padding:40px 20px}}
+</style></head><body>
+
+<header><span class="logo">MythRealms</span><a href="/demo/product.html">← Back</a></header>
+
+<div class="container">
+  <p class="vaulth2">You are about to enter</p>
+  <h1 class="vaulth1">The Vault</h1>
+
+  <div class="relic-preview">
+    <p class="id">Relic MR-07</p>
+    <p class="name">The Watcher of Silent Thrones</p>
+    <p class="price">$44.99</p>
+  </div>
+
+  <div class="ritual">
+    <p>"This is not a purchase.<br>This is a binding.<br>The relic chooses its keeper."</p>
+    <div class="sigil">◈ ◈ ◈</div>
+  </div>
+
+  <form>
+    <label>Seeker'`s Name</label>
+    <input type="text" placeholder="As written in the old records">
+
+    <label>Sacred Contact</label>
+    <input type="email" placeholder="Email for the binding confirmation">
+
+    <label>Domain of Residence</label>
+    <select><option>United States</option><option>United Kingdom</option><option>Canada</option><option>Australia</option><option>Other Domains</option></select>
+
+    <button type="button" class="btn" onclick="alert('The Relic awaits. Binding ritual initiated.')">Bind This Relic</button>
+    <button type="button" class="btn btn-outline" style="margin-top:12px" onclick="alert('Entering the Vault with PayPal.')">Enter via PayPal</button>
+  </form>
+
+  <p class="trust">
+    <span>✦</span> Sealed and bound in silence <span>✦</span> No duplicate relics <span>✦</span> One keeper only
+  </p>
+</div>
+
+</body></html>

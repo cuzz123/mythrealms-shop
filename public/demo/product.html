@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MythRealms — MR-07 The Watcher of Silent Thrones</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+  :root {
+    --gold:#D4A84B;--gold-dim:#8B7340;--obsidian:#0A0808;
+    --void:#050505;--ash:#1A1816;--smoke:#8A7D6E;--text:#E8E0D5;
+  }
+  html{scroll-behavior:smooth}
+  body {
+    font-family:"Cormorant Garamond",Georgia,serif;background:var(--void);color:var(--text);
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  .hero {
+    position:relative;height:100vh;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(ellipse at 50% 30%,#1a1208 0%,#0a0808 40%,#020202 100%);
+    overflow:hidden;
+  }
+  .hero::before {
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(2px 2px at 20% 50%,rgba(212,168,75,.6),transparent),
+      radial-gradient(1px 1px at 80% 30%,rgba(212,168,75,.4),transparent);
+    animation:twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{0%{opacity:.6}100%{opacity:1}}
+  .hero-content{z-index:2;text-align:center;padding:0 24px;animation:fadeIn 2.5s ease-out}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+  .hero-eyebrow{font-size:12px;letter-spacing:8px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:24px}
+  .hero-title{font-size:clamp(36px,7vw,80px);font-weight:700;line-height:1;margin-bottom:16px}
+  .hero-sub{font-size:clamp(14px,2vw,20px);color:var(--smoke);font-style:italic;letter-spacing:3px;margin-bottom:40px}
+  .btn {
+    display:inline-block;padding:16px 48px;border:1px solid var(--gold);color:var(--gold);
+    text-decoration:none;letter-spacing:4px;font-size:14px;text-transform:uppercase;
+    background:transparent;cursor:pointer;position:relative;overflow:hidden;transition:all .4s;
+  }
+  .btn::before{content:"";position:absolute;inset:0;background:var(--gold);opacity:0;transition:opacity .4s;z-index:-1}
+  .btn:hover{color:var(--void)}.btn:hover::before{opacity:1}
+  .btn-solid{background:var(--gold);color:var(--void);border:none}.btn-solid:hover{opacity:.85}
+  .scroll-ind {
+    position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:3;
+    display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeIn 3.5s ease-out;
+  }
+  .scroll-line{width:1px;height:40px;background:linear-gradient(var(--gold-dim),transparent)}
+  .scroll-text{font-size:10px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase}
+  section{padding:100px 24px;position:relative}
+  .container{max-width:1000px;margin:0 auto}
+  .section-title{font-size:clamp(24px,4vw,36px);font-weight:600;letter-spacing:2px;margin-bottom:8px}
+  .section-sub{font-size:12px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:40px}
+
+  /* Identity */
+  .identity{padding-top:80px}
+  .identity-grid {
+    display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;
+  }
+  .id-tag {
+    border:1px solid rgba(212,168,75,.2);padding:12px 24px;
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .id-tag .label{font-size:10px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase}
+  .id-tag .value{font-size:18px;font-weight:600;letter-spacing:1px}
+
+  /* Lore */
+  .lore{background:linear-gradient(var(--void),var(--ash),var(--void))}
+  .lore p{font-size:18px;line-height:2;color:var(--smoke);max-width:720px;margin:0 auto 24px;text-align:center;font-style:italic}
+  .lore-divider{text-align:center;margin:32px 0;color:var(--gold);letter-spacing:8px;font-size:14px}
+
+  /* Materials */
+  .materials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;margin-top:32px}
+  .mat-item{text-align:center;padding:24px}
+  .mat-item h4{font-size:16px;letter-spacing:2px;margin-bottom:8px}
+  .mat-item p{font-size:13px;color:var(--smoke);line-height:1.6}
+
+  /* Sensation */
+  .sensation{background:linear-gradient(var(--ash),var(--void))}
+  .sensation blockquote{font-size:clamp(18px,3vw,28px);font-style:italic;text-align:center;max-width:700px;margin:0 auto;line-height:1.7;color:var(--smoke)}
+
+  /* Social */
+  .social .vid-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:32px}
+  .vid-placeholder{aspect-ratio:9/16;background:var(--ash);display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,168,75,.1);font-size:13px;color:var(--smoke);letter-spacing:2px}
+
+  /* Final CTA */
+  .final-cta{text-align:center;padding:120px 24px;background:radial-gradient(ellipse at 50% 50%,#1a1610 0%,var(--void) 60%)}
+  .final-cta p{color:var(--smoke);margin-bottom:12px;font-size:16px;font-style:italic}
+  .final-cta .btn-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+
+  @media(max-width:768px){section{padding:60px 20px}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Artifact · Domain of Mythic Relics</p>
+    <h1 class="hero-title">Not Jewelry</h1>
+    <p class="hero-sub">A relic from the mythic domain.</p>
+    <a href="#identity" class="btn">Claim the Artifact</a>
+  </div>
+  <div class="scroll-ind"><div class="scroll-line"></div><span class="scroll-text">Discover</span></div>
+</section>
+
+<section class="identity" id="identity">
+  <div class="container">
+    <p class="section-sub">Relic Identity</p>
+    <h2 class="section-title">The Watcher of Silent Thrones</h2>
+    <div class="identity-grid">
+      <div class="id-tag"><span class="label">Relic No.</span><span class="value">MR-07</span></div>
+      <div class="id-tag"><span class="label">Origin Domain</span><span class="value">Mythic Relics</span></div>
+      <div class="id-tag"><span class="label">Status</span><span class="value">Active Relic</span></div>
+      <div class="id-tag"><span class="label">Era</span><span class="value">Pre-Silence</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="lore">
+  <div class="container">
+    <p class="section-sub">The Myth</p>
+    <h2 class="section-title" style="text-align:center">A Legend Forged in Stillness</h2>
+    <div class="lore-divider">✦ ✦ ✦</div>
+    <p>Before language, before thrones, before the first kingdom drew its borders — there was a queen who ruled not through conquest, but through the weight of her silence.</p>
+    <p>Her subjects did not kneel because they feared her. They knelt because her stillness made the world make sense. When she entered a room, the air itself grew quiet. When she wore this relic upon her wrist, entire wars paused.</p>
+    <p>For four centuries, this obsidian band lay sealed beneath the oldest cathedral — not buried, but waiting. The chamber held no dust, no decay. Only silence. Only the relic.<p>
+    <p>It is said that whoever wears it can hear the echo of her final command: a whisper so quiet it becomes part of your own thoughts.</p>
+  </div>
+</section>
+
+<section class="materials">
+  <div class="container">
+    <p class="section-sub">Composition</p>
+    <h2 class="section-title">Forged from Earth & Shadow</h2>
+    <div class="materials-grid">
+      <div class="mat-item"><h4>Black Obsidian</h4><p>Volcanic glass sourced from sealed chambers. Each piece selected for depth of darkness.</p></div>
+      <div class="mat-item"><h4>Monastic Brass</h4><p>Forged using techniques recovered from 14th-century manuscripts. Oxidized to a mute gold.</p></div>
+      <div class="mat-item"><h4>Artisan Cord</h4><p>Hand-braided silk cord. Midnight black. Imperceptible on the skin.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sensation">
+  <div class="container">
+    <p class="section-sub">Sensation</p>
+    <h2 class="section-title" style="text-align:center">The Weight of Silence</h2>
+    <div class="lore-divider">✦</div>
+    <blockquote>"When worn, presence becomes palpable in stillness. Others will sense something has shifted — not in you, but in the room."</blockquote>
+  </div>
+</section>
+
+<section class="social">
+  <div class="container">
+    <p class="section-sub">Witnessed in the Real World</p>
+    <h2 class="section-title">As Seen By Seekers</h2>
+    <div class="vid-grid">
+      <div class="vid-placeholder">→ TikTok Video<br>@seeker.of.realms</div>
+      <div class="vid-placeholder">→ TikTok Video<br>@dark.luxury.edit</div>
+      <div class="vid-placeholder">→ TikTok Video<br>@artefact.unboxing</div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <p>This relic does not wait.</p>
+  <h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;letter-spacing:2px;margin-bottom:8px">It binds to one keeper only.</h2>
+  <p>No duplicates. No mass production. One relic. One keeper.</p>
+  <div class="btn-group">
+    <a href="/demo/vault.html" class="btn btn-solid">Bind This Relic</a>
+    <a href="/demo/vault.html" class="btn">Enter the Vault</a>
+  </div>
+</section>
+
+</body>
+</html>
