@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Package, ShoppingCart, FileText, Tag, ClipboardList, Image, LogOut, ChevronLeft } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingCart, FileText, Tag, ClipboardList, Image, ChevronLeft, Search } from "lucide-react";
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/admin" },
@@ -12,6 +12,7 @@ const navItems = [
   { icon: Image, label: "Assets", href: "/admin/assets" },
   { icon: ClipboardList, label: "Ops Tasks", href: "/admin/social-tasks" },
   { icon: FileText, label: "Blog", href: "/admin/blog" },
+  { icon: Search, label: "SEO", href: "/admin/seo" },
   { icon: Tag, label: "Discounts", href: "/admin/discounts" },
 ];
 
