@@ -2,176 +2,184 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, RotateCcw, Sparkles } from "lucide-react";
 import { PRODUCTS } from "@/lib/1688-products";
+import { productDisplayName } from "@/lib/brand";
+
+type Archetype = "phoenix" | "moon-rabbit" | "white-tiger" | "azure-dragon" | "nine-tailed-fox" | "black-tortoise";
 
 const questions = [
   {
-    id: 1,
-    text: "What do you need most right now?",
+    text: "What kind of season are you entering?",
     options: [
-      { label: "Protection. I'm holding too much and need a boundary.", intentions: ["protection"] },
-      { label: "Love. I'm learning to be softer with myself.", intentions: ["self-love"] },
-      { label: "Clarity. I need to hear my own voice over the noise.", intentions: ["intuition", "confidence"] },
+      { label: "A fresh start after an ending.", archetypes: ["phoenix", "azure-dragon"] as Archetype[] },
+      { label: "A quieter season where I need to protect my peace.", archetypes: ["white-tiger", "black-tortoise"] as Archetype[] },
+      { label: "A softer, more magnetic version of myself.", archetypes: ["moon-rabbit", "nine-tailed-fox"] as Archetype[] },
     ],
   },
   {
-    id: 2,
-    text: "How do you want to feel when you wake up tomorrow?",
+    text: "What do you need your jewelry to remind you of?",
     options: [
-      { label: "Grounded. Steady. Like nothing can shake me.", intentions: ["protection", "grounding"] },
-      { label: "Renewed. Like I've turned a page and started fresh.", intentions: ["renewal", "self-love"] },
-      { label: "Powerful. Ready to take action and own my space.", intentions: ["confidence", "abundance"] },
+      { label: "I can begin again before I feel ready.", archetypes: ["phoenix", "azure-dragon"] as Archetype[] },
+      { label: "My boundaries are allowed to be beautiful.", archetypes: ["white-tiger", "black-tortoise"] as Archetype[] },
+      { label: "Softness can still be power.", archetypes: ["moon-rabbit", "nine-tailed-fox"] as Archetype[] },
     ],
   },
   {
-    id: 3,
-    text: "Which statement is most true right now?",
+    text: "Which material feels closest to you today?",
     options: [
-      { label: "\"I've been through something and I'm still standing.\"", intentions: ["protection", "renewal"] },
-      { label: "\"I'm at the start of something new and I need courage.\"", intentions: ["renewal", "confidence", "abundance"] },
-      { label: "\"I'm ready to receive — love, opportunities, whatever comes.\"", intentions: ["self-love", "abundance", "intuition"] },
+      { label: "Pearl: calm water, moonlight, quiet strength.", archetypes: ["moon-rabbit", "phoenix"] as Archetype[] },
+      { label: "Dark stone: protection, grounding, clear limits.", archetypes: ["white-tiger", "black-tortoise"] as Archetype[] },
+      { label: "Crystal: clarity, direction, visible becoming.", archetypes: ["azure-dragon", "nine-tailed-fox"] as Archetype[] },
     ],
   },
 ];
 
-const results: Record<string, { archetype: string; intention: string; triplet: string; slug: string; description: string }> = {
-  protection: {
-    archetype: "The Watchman",
-    intention: "Protection",
-    triplet: "Protection — Grounding — Clarity",
-    slug: "/products/curated-singles-01",
-    description: "You carry more than anyone knows — the weight of other people's expectations, the residue of hard conversations, the invisible labor of holding everything together. The Watchman is black obsidian, the stone that absorbs what you cannot carry and returns only strength. Hold it each morning. Set your perimeter. Nothing enters unless you permit it. This is not jewelry. This is armor you chose.",
+const results: Record<Archetype, {
+  title: string;
+  theme: string;
+  description: string;
+  productSlugs: string[];
+}> = {
+  phoenix: {
+    title: "Phoenix",
+    theme: "Renewal / Rebirth / New Beginnings",
+    description:
+      "Your season is about beginning again without waiting for perfect certainty. Choose luminous pearls and light-toned pieces that feel like first light after a long night.",
+    productSlugs: ["pearl-crystal-series-02", "pearl-series-05", "pearl-series-12"],
   },
-  "self-love": {
-    archetype: "The Heart Opener",
-    intention: "Self-Love",
-    triplet: "Love — Healing — Softness",
-    slug: "/products/curated-singles-02",
-    description: "You are learning to let people in again. Or learning to let yourself be enough — without anyone else's permission. The Heart Opener is rose quartz, the stone of unconditional self-love. Wear it on your left wrist, the receiving side. Let it teach you this: softness is not surrender. Softness is the hardest thing you will ever learn — and the most important.",
+  "moon-rabbit": {
+    title: "Moon Rabbit",
+    theme: "Softness / Healing / Quiet Luck",
+    description:
+      "Your strength is subtle. Pearl, pink tones, and gentle silhouettes keep you close to softness without making you feel fragile.",
+    productSlugs: ["pearl-series-01", "pearl-series-13", "curated-singles-02"],
   },
-  intuition: {
-    archetype: "The Seer",
-    intention: "Intuition",
-    triplet: "Calm — Vision — Connection",
-    slug: "/products/curated-singles-03",
-    description: "You already know. You have always known. The answer arrived weeks ago — you just haven't trusted yourself enough to act on it. The Seer is amethyst, the stone of the third eye, of dreams that arrive fully formed, of clarity that comes when you stop chasing it. Wear it to bed. Let it work while you sleep. When you wake, trust what you already knew.",
+  "white-tiger": {
+    title: "White Tiger",
+    theme: "Boundaries / Courage / Protection",
+    description:
+      "You are learning where your energy ends and everyone else's begins. Dark stones and clean lines help this archetype feel grounded and decisive.",
+    productSlugs: ["curated-singles-01", "curated-singles-05", "luxe-collection-08"],
   },
-  renewal: {
-    archetype: "The Phoenix",
-    intention: "Renewal",
-    triplet: "Renewal — Intuition — Feminine Power",
-    slug: "/products/curated-singles-04",
-    description: "You have ended things — jobs, relationships, versions of yourself that no longer fit. You have stood in the ashes of what was and decided, again and again, to become. The Phoenix is moonstone, the stone of new moons and clean slates and the courage to begin again before you feel ready. Put it on after the ending. Wear it into the beginning.",
+  "azure-dragon": {
+    title: "Azure Dragon",
+    theme: "Growth / Vision / Direction",
+    description:
+      "This archetype belongs to movement, leadership, and the next horizon. Choose pieces with cool light, blue undertones, and a sense of direction.",
+    productSlugs: ["luxe-collection-11", "luxe-collection-12", "pearl-crystal-series-01"],
   },
-  confidence: {
-    archetype: "The Strategist",
-    intention: "Confidence",
-    triplet: "Focus — Courage — Will",
-    slug: "/products/curated-singles-05",
-    description: "Confidence is not the loudest voice in the room. It is the quiet decision — made in private, tested in silence — to trust yourself before the evidence shows up. The Strategist is tiger's eye, the stone of steady nerve and focused will. Wear it into the meeting. Wear it onto the stage. Wear it when the moment arrives and you need to be the version of yourself that acts.",
+  "nine-tailed-fox": {
+    title: "Nine-Tailed Fox",
+    theme: "Magnetism / Self-Worth / Charm",
+    description:
+      "Your current lesson is not to chase attention, but to inhabit your own value. Pearls, rose tones, and warm details carry this quiet magnetism well.",
+    productSlugs: ["curated-singles-02", "pearl-series-14", "pearl-series-19"],
   },
-  abundance: {
-    archetype: "The Lion's Share",
-    intention: "Abundance",
-    triplet: "Luck — Opportunity — Prosperity",
-    slug: "/products/curated-singles-06",
-    description: "You are not greedy for wanting more. You are not taking anything from anyone. You are simply awake — awake to what is already yours, to the opportunities you used to walk past, to the abundance that was always there but that you were too tired or too polite or too unsure to reach for. The Lion's Share is green aventurine, the stone of luck and opportunity. Wear it with open hands. Say yes more than you say no.",
+  "black-tortoise": {
+    title: "Black Tortoise",
+    theme: "Stability / Patience / Grounding",
+    description:
+      "You are building something that needs steadiness more than speed. Choose grounded pieces that feel calm, durable, and easy to wear every day.",
+    productSlugs: ["curated-singles-01", "pearl-series-09", "luxe-collection-08"],
   },
 };
 
-function getProductImage(slug: string): string {
-  const product = PRODUCTS.find(p => p.slug === slug);
-  return product?.image || "/images/products/1688-shop/curated-singles/curated-singles-01-main.jpg";
+function getProduct(slug: string) {
+  return PRODUCTS.find((product) => product.slug === slug);
 }
 
 export function GuardianQuizClient() {
   const [step, setStep] = useState(0);
-  const [scores, setScores] = useState<Record<string, number>>({});
-  const [result, setResult] = useState<string | null>(null);
+  const [scores, setScores] = useState<Record<Archetype, number>>({} as Record<Archetype, number>);
+  const [result, setResult] = useState<Archetype | null>(null);
 
-  function handleAnswer(option: (typeof questions)[0]["options"][0]) {
-    const newScores = { ...scores };
-    option.intentions.forEach((int) => {
-      newScores[int] = (newScores[int] || 0) + 1;
+  function handleAnswer(option: (typeof questions)[number]["options"][number]) {
+    const nextScores = { ...scores };
+    option.archetypes.forEach((archetype) => {
+      nextScores[archetype] = (nextScores[archetype] || 0) + 1;
     });
-    setScores(newScores);
+    setScores(nextScores);
 
     if (step < questions.length - 1) {
       setStep(step + 1);
-    } else {
-      const winner = Object.entries(newScores).sort((a, b) => b[1] - a[1])[0][0];
-      setResult(winner);
+      return;
     }
+
+    const winner = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0]?.[0] as Archetype;
+    setResult(winner || "moon-rabbit");
   }
 
   function reset() {
     setStep(0);
-    setScores({});
+    setScores({} as Record<Archetype, number>);
     setResult(null);
   }
 
-  if (result && results[result]) {
-    const r = results[result];
-    const image = getProductImage(r.slug);
+  if (result) {
+    const archetype = results[result];
+    const products = archetype.productSlugs.map(getProduct).filter(Boolean);
+
     return (
-      <div className="min-h-[80vh] flex items-center justify-center px-4 py-20">
-        <div className="max-w-lg w-full text-center animate-slide-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-xs text-[var(--accent)] font-semibold">
-            <Sparkles className="w-3 h-3" /> Your Intention Has Been Found
+      <div className="min-h-[80vh] px-4 py-20">
+        <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-2xl text-center animate-slide-up">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/20 bg-[var(--accent)]/10 px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+              <Sparkles className="h-3 w-3" /> Your Guardian Archetype
+            </div>
+            <h1 className="font-serif text-4xl font-bold text-[var(--text)]">{archetype.title}</h1>
+            <p className="mt-2 text-sm font-medium text-[var(--accent)]">{archetype.theme}</p>
+            <p className="mx-auto mt-6 max-w-xl text-[var(--text-secondary)] leading-relaxed">{archetype.description}</p>
           </div>
 
-          <img src={image} alt={r.archetype} className="w-48 h-48 rounded-full object-cover mx-auto mb-6 border-2 border-[var(--accent)] shadow-[0_0_40px_rgba(212,168,75,0.2)]" />
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {products.map((product) => product && (
+              <Link key={product.slug} href={`/products/${product.slug}`} className="group rounded-lg border border-[var(--border)] bg-[var(--surface)] p-3 transition hover:border-[var(--accent)]/50">
+                <img src={product.image} alt={productDisplayName(product)} className="aspect-square w-full rounded-lg object-cover" />
+                <h2 className="mt-3 line-clamp-1 font-serif text-base font-semibold text-[var(--text)]">{productDisplayName(product)}</h2>
+                <p className="mt-1 text-xs text-[var(--text-muted)]">{product.intention || "Everyday Intention"}</p>
+              </Link>
+            ))}
+          </div>
 
-          <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-1">{r.archetype}</h1>
-          <p className="text-sm text-[var(--accent)] mb-1 font-medium">{r.triplet}</p>
-          <p className="text-xs text-[var(--text-muted)] mb-6">Intention: {r.intention}</p>
-          <p className="text-[var(--text-secondary)] leading-relaxed mb-8 max-w-md mx-auto">{r.description}</p>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href={r.slug} className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
-              Wear Your Intention <ArrowRight className="w-4 h-4" />
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link href="/collections/pearl-series" className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-8 py-3 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]">
+              Shop the Pearl Realms <ArrowRight className="h-4 w-4" />
             </Link>
-            <button onClick={reset} className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-[var(--border)] text-[var(--text-secondary)] rounded-full font-semibold text-sm hover:border-[var(--text)] transition">
-              Retake Quiz
+            <button onClick={reset} className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] px-8 py-3 text-sm font-semibold text-[var(--text-secondary)] transition hover:border-[var(--text)]">
+              <RotateCcw className="h-4 w-4" /> Retake Quiz
             </button>
           </div>
-
-          <p className="mt-8 text-xs text-[var(--text-muted)]">
-            Share your result — tag <span className="text-[var(--accent)]">@mythrealms.shop</span>
-          </p>
         </div>
       </div>
     );
   }
 
-  const q = questions[step];
+  const question = questions[step];
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-20">
       <div className="max-w-lg w-full">
         <div className="text-center mb-10">
           <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-4">
-            Crystal Intention Quiz · Question {step + 1}/3
+            Guardian Archetype Quiz - Question {step + 1}/3
           </span>
-          <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-2">
-            {q.text}
-          </h1>
+          <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-2">{question.text}</h1>
           <div className="flex justify-center gap-1 mt-4">
-            {questions.map((_, i) => (
-              <div key={i} className={`h-1 w-12 rounded-full ${i <= step ? "bg-[var(--accent)]" : "bg-[var(--border)]"}`} />
+            {questions.map((_, index) => (
+              <div key={index} className={`h-1 w-12 rounded-full ${index <= step ? "bg-[var(--accent)]" : "bg-[var(--border)]"}`} />
             ))}
           </div>
         </div>
 
         <div className="space-y-3">
-          {q.options.map((opt, i) => (
+          {question.options.map((option) => (
             <button
-              key={i}
-              onClick={() => handleAnswer(opt)}
-              className="w-full text-left p-5 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--accent)] hover:bg-[var(--accent)]/5 transition-all group"
+              key={option.label}
+              onClick={() => handleAnswer(option)}
+              className="group w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 text-left transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/5"
             >
-              <span className="text-[var(--text)] font-medium group-hover:text-[var(--accent)] transition-colors">{opt.label}</span>
+              <span className="font-medium text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">{option.label}</span>
             </button>
           ))}
         </div>

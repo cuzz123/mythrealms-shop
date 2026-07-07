@@ -18,6 +18,15 @@ interface SearchResult {
   category: string;
 }
 
+interface ApiSearchProduct {
+  id: string;
+  name: string;
+  slug: string;
+  images: string[];
+  variants: { price: number }[];
+  category?: { name?: string };
+}
+
 export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -85,7 +94,8 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
           { signal: controller.signal }
         );
         const data = await res.json();
-        const apiResults: SearchResult[] = data.products.map((p: any) => ({
+        const apiProducts: ApiSearchProduct[] = Array.isArray(data.products) ? data.products : [];
+        const apiResults: SearchResult[] = apiProducts.map((p) => ({
           id: p.id,
           name: p.name,
           slug: p.slug,
@@ -98,8 +108,8 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
         const merged = [...localMatches, ...apiResults.filter((r: SearchResult) => !localSlugs.has(r.slug))];
         setResults(merged);
         setSearchError(false);
-      } catch (err: any) {
-        if (err.name === "AbortError") return; // silently ignore cancelled requests
+      } catch (err: unknown) {
+        if (err instanceof Error && err.name === "AbortError") return;
         // Keep local results on API error
         if (localMatches.length === 0) {
           setResults([]);

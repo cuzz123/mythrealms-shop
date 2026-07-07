@@ -10,34 +10,39 @@ import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 
 const shopLinks = [
-  { label: "Serenity Collection", href: "/collections/pearl-series" },
-  { label: "Intention Stones", href: "/collections/luxe-collection" },
+  { label: "Pearl Realms", href: "/collections/pearl-series" },
+  { label: "Guardian Archetypes", href: "/collections/curated-singles" },
   { label: "Balance & Light", href: "/collections/pearl-crystal-series" },
-  { label: "The Archetypes", href: "/collections/curated-singles" },
+  { label: "Celestial Intention", href: "/collections/luxe-collection" },
+];
+
+const intentionLinks = [
+  { label: "Calm & Clarity", href: "/collections/pearl-series" },
+  { label: "Protection & Boundaries", href: "/collections/curated-singles" },
+  { label: "Renewal", href: "/collections/pearl-crystal-series" },
+  { label: "Soft Power", href: "/collections/pearl-series" },
 ];
 
 const navLinks = [
-  { label: "Home", href: "/" },
   { label: "Shop", href: "#", children: shopLinks },
-  { label: "Collections", href: "/collections" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-  { label: "Gift Cards", href: "/gift-cards" },
+  { label: "Intention", href: "#", children: intentionLinks },
+  { label: "Pearls", href: "/collections/pearl-series" },
+  { label: "Quiz", href: "/guardian-quiz", title: "Find Your Guardian" },
+  { label: "Story", href: "/about" },
 ];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [shopOpen, setShopOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const shopTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const shopRef = useRef<HTMLDivElement>(null);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const openShop = () => {
-    if (shopTimeout.current) clearTimeout(shopTimeout.current);
-    setShopOpen(true);
+  const openMenu = (label: string) => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setOpenDropdown(label);
   };
-  const closeShop = () => {
-    shopTimeout.current = setTimeout(() => setShopOpen(false), 150);
+  const closeMenu = () => {
+    dropdownTimeout.current = setTimeout(() => setOpenDropdown(null), 150);
   };
   const { data: session } = useSession();
   const pathname = usePathname();
@@ -84,10 +89,10 @@ export function Header() {
     };
   }, [mobileMenuOpen]);
 
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    if (href === "#") return shopLinks.some((l) => pathname.startsWith(l.href));
-    return pathname.startsWith(href);
+  const isActive = (link: (typeof navLinks)[number]) => {
+    if (link.href === "/") return pathname === "/";
+    if (link.children) return link.children.some((child) => pathname.startsWith(child.href));
+    return pathname.startsWith(link.href);
   };
 
   const headerBg = isScrolled
@@ -95,9 +100,6 @@ export function Header() {
     : isHome
     ? "absolute top-[28px] bg-transparent text-white"
     : "sticky top-0 bg-black/80 backdrop-blur-md text-white z-[60]";
-
-  const linkHover = isScrolled ? "hover:bg-gray-100 hover:text-gray-900" : "hover:bg-white/10 hover:text-white";
-  const iconColor = isScrolled ? "text-gray-600 hover:text-gray-900" : "text-white/80 hover:text-white";
 
   return (
     <header
@@ -139,31 +141,33 @@ export function Header() {
 
         {/* Center — Desktop navigation */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
-          {navLinks.map((link) =>
-            link.children ? (
-              <div key={link.href} ref={shopRef} className="relative" onMouseEnter={openShop} onMouseLeave={closeShop}>
+          {navLinks.map((link) => {
+            const isDropdownOpen = openDropdown === link.label;
+            return link.children ? (
+              <div key={link.label} className="relative" onMouseEnter={() => openMenu(link.label)} onMouseLeave={closeMenu}>
                 <button
                   type="button"
-                  onClick={() => setShopOpen(!shopOpen)}
-                  className={`text-[16px] tracking-wide px-3 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
-                    shopOpen
+                  onClick={() => setOpenDropdown(isDropdownOpen ? null : link.label)}
+                  className={`text-[15px] tracking-wide px-3 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
+                    isDropdownOpen
                       ? "bg-white text-gray-900"
                       : isScrolled
-                      ? isActive(link.href) ? "text-gray-900" : "text-gray-700 hover:text-gray-900"
-                      : isActive(link.href) ? "text-white" : "text-white/80 hover:text-white"
+                      ? isActive(link) ? "text-gray-900" : "text-gray-700 hover:text-gray-900"
+                      : isActive(link) ? "text-white" : "text-white/80 hover:text-white"
                   }`}
+                  aria-expanded={isDropdownOpen}
                 >
                   <span className="nav-underline inline-block">{link.label}</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${shopOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
-                {shopOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[560px] max-w-[90vw] bg-white shadow-lg z-50 animate-slide-down" style={{borderRadius: 0}}>
+                {isDropdownOpen && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[440px] max-w-[90vw] bg-white shadow-lg z-50 animate-slide-down" style={{borderRadius: 0}}>
                     <div className="grid grid-cols-2 gap-0 p-6">
                       {link.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
-                          onClick={() => setShopOpen(false)}
+                          onClick={() => setOpenDropdown(null)}
                           className={`block px-4 py-3 text-[14px] transition-colors hover:bg-gray-50 ${
                             pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : "text-gray-900"
                           }`}
@@ -179,14 +183,15 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-[16px] tracking-wide px-3 py-2.5 font-medium transition-all ${
-                  isActive(link.href) ? (isScrolled ? "text-gray-900" : "text-white") : isScrolled ? "text-gray-700 hover:text-gray-900" : "text-white/80 hover:bg-white hover:text-gray-900"
+                title={link.title}
+                className={`text-[15px] tracking-wide px-3 py-2.5 font-medium transition-all ${
+                  isActive(link) ? (isScrolled ? "text-gray-900" : "text-white") : isScrolled ? "text-gray-700 hover:text-gray-900" : "text-white/80 hover:bg-white hover:text-gray-900"
                 }`}
               >
                 <span className="nav-underline inline-block">{link.label}</span>
               </Link>
-            )
-          )}
+            );
+          })}
         </nav>
 
         {/* Right — Icon buttons */}
@@ -197,7 +202,7 @@ export function Header() {
           {/* Account */}
           <Link
             href="/account"
-            aria-label={user ? `${user.name || "My account"} — View account` : "My account — Sign in"}
+            aria-label={user ? `${user.name || "My account"} - View account` : "My account - Sign in"}
             className={`flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
           >
             {user?.image ? (
@@ -275,7 +280,7 @@ export function Header() {
           <nav className="flex flex-col gap-2 px-6 pt-4" aria-label="Mobile navigation">
             {navLinks.map((link) =>
               link.children ? (
-                <div key={link.href} className="py-2">
+                <div key={link.label} className="py-2">
                   <div className="px-3 py-2 text-sm font-semibold text-[#B0A590] uppercase tracking-wider">
                     {link.label}
                   </div>

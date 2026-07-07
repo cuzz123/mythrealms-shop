@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PRODUCTS, CATEGORIES } from "@/lib/1688-products";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/Button";
+import { categoryMessaging, productDisplayName } from "@/lib/brand";
 
 type SortMode = "featured" | "price-asc" | "price-desc" | "name-asc";
 type PriceRange = "all" | "under40" | "40to50" | "over50";
@@ -13,6 +14,7 @@ export function Collection1688({ slug }: { slug: string }) {
   const [priceRange, setPriceRange] = useState<PriceRange>("all");
 
   const cat = CATEGORIES.find(c => c.slug === slug);
+  const messaging = categoryMessaging[slug];
   const products = useMemo(() => {
     let list = PRODUCTS.filter(p => p.category === slug);
 
@@ -55,8 +57,8 @@ export function Collection1688({ slug }: { slug: string }) {
   if (products.length === 0 && priceRange === "all") {
     return (
       <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-        <h1 className="font-serif text-3xl lg:text-4xl font-bold text-[var(--text)] mb-3">{cat.name}</h1>
-        <p className="text-[var(--text-muted)] mb-2">{cat.description}</p>
+        <h1 className="font-serif text-3xl lg:text-4xl font-bold text-[var(--text)] mb-3">{messaging?.name || cat.name}</h1>
+        <p className="text-[var(--text-muted)] mb-2">{messaging?.description || cat.description}</p>
         <div className="mt-8 py-10 border border-dashed border-[var(--border)] rounded-xl">
           <p className="text-[var(--text-muted)] text-sm mb-2">This collection is being curated. Check back soon.</p>
           <Link href="/collections" className="text-sm text-[var(--accent)] hover:underline">
@@ -69,10 +71,20 @@ export function Collection1688({ slug }: { slug: string }) {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
-      <div className="mb-10">
-        <h1 className="font-serif text-3xl lg:text-4xl font-bold text-[var(--text)]">{cat.name}</h1>
-        <p className="mt-2 text-[var(--text-muted)] max-w-2xl">{cat.description}</p>
-        <p className="mt-1 text-sm text-[var(--accent)]">{products.length} styles</p>
+      <div className="mb-10 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--accent)]">
+          {messaging?.realm || "MythRealms Collection"}
+        </p>
+        <h1 className="font-serif text-3xl lg:text-4xl font-bold text-[var(--text)]">{messaging?.name || cat.name}</h1>
+        <p className="mt-3 text-[var(--text-muted)] max-w-3xl">{messaging?.description || cat.description}</p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {["Made to order", "Free shipping over $69.99", "30-day returns"].map((signal) => (
+            <span key={signal} className="rounded-full border border-[var(--border)] px-3 py-1 text-xs text-[var(--text-secondary)]">
+              {signal}
+            </span>
+          ))}
+        </div>
+        <p className="mt-4 text-sm text-[var(--accent)]">{products.length} styles</p>
       </div>
 
       {/* Controls: Sort + Price Filter */}
@@ -128,7 +140,7 @@ export function Collection1688({ slug }: { slug: string }) {
             <div key={p.slug} className="animate-slide-up" style={{ animationDelay: `${i * 50}ms`, animationFillMode: "backwards" }}>
               <ProductCard product={{
                 id: p.id,
-                name: p.name,
+                name: productDisplayName(p),
                 slug: p.slug,
                 images: p.images,
                 variants: [{ price: p.price }],

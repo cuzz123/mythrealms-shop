@@ -1,30 +1,105 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Minus, HelpCircle } from "lucide-react";
+import { HelpCircle, Minus, Plus } from "lucide-react";
 
 const faqs = [
-  { q:"How long does shipping take?", a:"Standard shipping takes 7-20 business days. Express shipping via DHL takes 6-8 business days. US orders typically arrive within 8-14 business days.", cat:"shipping" },
-  { q:"Do you ship internationally?", a:"Yes! We ship to 36 countries including US, UK, Canada, Australia, all EU countries, Japan, Singapore, and more. See the full list at checkout.", cat:"shipping" },
-  { q:"What is your return policy?", a:"30-day money-back guarantee. Items must be unused and in original packaging. Start a return at /returns or contact us.", cat:"returns" },
-  { q:"How do I track my order?", a:"You will receive a confirmation email with a tracking number once your order ships. You can also check your order status at /track-order.", cat:"shipping" },
-  { q:"What payment methods do you accept?", a:"We accept Visa, Mastercard, American Express, and Discover — all processed securely through LemonSqueezy. We also offer PayPal checkout directly on our site.", cat:"order" },
-  { q:"How do I use a discount code?", a:"Enter your code at checkout in the Discount Code field and click Apply. First-time customers can use MYTH15 for 15% off.", cat:"order" },
-  { q:"Are the gemstones genuine?", a:"Yes. We use authentic natural gemstones — black obsidian, rose quartz, amethyst, tiger's eye, moonstone, green aventurine, and freshwater pearls. Each stone is hand-selected for quality and character. Natural variations in color and pattern confirm authenticity.", cat:"products" },
-  { q:"How do I care for my piece?", a:"Remove before swimming, showering, or exercising. Avoid contact with perfumes, lotions, and hairspray. Store in the provided soft pouch away from direct sunlight. Clean gently with the included polishing cloth.", cat:"products" },
-  { q:"Why does it take 7-20 business days to deliver?", a:"Each bracelet is individually hand-strung and quality-checked before shipping. We do not mass-produce or warehouse thousands of units. Your piece is inspected, packaged, and shipped with care — this is not fast fashion. It is worth the wait.", cat:"products" },
-  { q:"What size bracelet should I order?", a:"Our bracelets are designed to fit most wrists — one size with an elastic cord that comfortably fits wrist sizes 6.5 to 7.5 inches (16.5-19 cm). For specific sizing questions, see our Size Guide or email us.", cat:"products" },
-  { q:"Can I change or cancel my order?", a:"Orders can be modified or cancelled within 4 hours of placement. Contact us immediately with your order number.", cat:"order" },
-  { q:"How do I know which crystal intention is right for me?", a:"Trust what draws you. The stone you keep looking at — the one you click on and come back to — is usually the one. If you're unsure, take our Crystal Intention Quiz. It asks three questions and matches you to one of six archetypes: The Watchman (protection), The Heart Opener (self-love), The Seer (intuition), The Phoenix (renewal), The Strategist (confidence), or The Lion's Share (abundance).", cat:"products" },
-  { q:"Do you offer gift wrapping?", a:"Every order arrives carefully packaged in a MythRealms box, ready to gift. No price tags are included.", cat:"order" },
-  { q:"My item arrived damaged. What now?", a:"Email mythrealms@outlook.com within 48 hours of delivery with photos. We will arrange a free replacement or full refund immediately — no return shipping cost to you.", cat:"returns" },
-  { q:"Do you offer wholesale or bulk orders?", a:"We offer wholesale pricing for orders of 10+ pieces. Ideal for boutiques, museum shops, and wellness studios. Email mythrealms@outlook.com for our catalog and pricing guide.", cat:"order" },
-  { q:"Are your products ethically sourced?", a:"Yes. We work directly with trusted suppliers who guarantee fair labor practices and safe working conditions. Our gemstones and pearls are sourced from established markets with verified supply chains. We visit our suppliers and inspect every batch personally.", cat:"products" },
-  { q:"Can I wear multiple intention bracelets at once?", a:"Absolutely. Many people stack two or three intentions — protection on one wrist, abundance on the other. The practice is personal. Wear what feels right.", cat:"products" },
-  { q:"Are there physical stores?", a:"MythRealms is an online-only atelier, which allows us to offer handcrafted accessories at accessible prices — no retail markup, no middlemen. Every dollar goes into materials and quality.", cat:"order" },
-  { q:"What if my piece breaks or needs repair?", a:"We offer complimentary repairs for manufacturing defects within one year of purchase. For wear-and-tear repairs after one year, contact us for a quote. We believe jewelry should last generations.", cat:"returns" },
-  { q:"Are there physical stores?", a:"MythRealms is online-only, which allows us to offer handcrafted accessories at accessible prices — no retail markup, no middlemen.", cat:"order" },
+  {
+    q: "How long does shipping take?",
+    a: "Standard shipping usually takes 7-20 business days. Express shipping, when available, usually takes 6-8 business days. You will receive tracking once your order ships.",
+    cat: "shipping",
+  },
+  {
+    q: "Do you ship internationally?",
+    a: "Yes. We ship to many major markets including the United States, United Kingdom, Canada, Australia, EU countries, Japan, Singapore, and more. Available destinations are shown at checkout.",
+    cat: "shipping",
+  },
+  {
+    q: "Why does delivery take longer than a big marketplace?",
+    a: "MythRealms is a lean launch, so we do not hold deep inventory for every style. Many pieces are prepared after ordering through trusted jewelry suppliers and partner workshops. This keeps the collection focused and avoids over-ordering before demand is proven.",
+    cat: "shipping",
+  },
+  {
+    q: "What is your return policy?",
+    a: "We offer a 30-day return window. Items must be unused and in original packaging. Start a return through the returns page or contact mythrealms@outlook.com.",
+    cat: "returns",
+  },
+  {
+    q: "My item arrived damaged. What should I do?",
+    a: "Email mythrealms@outlook.com within 48 hours of delivery with your order number and clear photos. We will review it quickly and help with a replacement or refund.",
+    cat: "returns",
+  },
+  {
+    q: "Can I change or cancel my order?",
+    a: "Orders can usually be modified or cancelled within 4 hours of purchase. Contact us as soon as possible with your order number.",
+    cat: "order",
+  },
+  {
+    q: "What payment methods do you accept?",
+    a: "We accept major cards and PayPal checkout. Payment options may vary slightly by country and are shown at checkout.",
+    cat: "order",
+  },
+  {
+    q: "How do I use a discount code?",
+    a: "Enter your code at checkout in the discount code field and apply it before payment. First-time customers can try MYTH15 for 15% off.",
+    cat: "order",
+  },
+  {
+    q: "Are your pearls and gemstones natural?",
+    a: "Product pages describe the available material information for each piece. Natural pearls and gemstones can vary in tone, size, surface texture, and luster, so small differences are expected and part of the character of the piece.",
+    cat: "products",
+  },
+  {
+    q: "Why are some product photos supplier-style images?",
+    a: "We are launching lean, so some early product images are supplier-provided while we test demand and replace key styles with in-house creative over time. We keep the product page focused on the actual piece, color family, and styling expectation.",
+    cat: "products",
+  },
+  {
+    q: "How do I choose the right intention?",
+    a: "Start with the feeling you want to carry: calm, renewal, boundaries, clarity, soft power, or balance. If you are unsure, take the Guardian Archetype Quiz and use the result as a starting point.",
+    cat: "products",
+  },
+  {
+    q: "Are the guardian archetypes literal product shapes?",
+    a: "No. The guardian is the story layer and personality match behind the piece. Most products are wearable pearl and gemstone jewelry, not literal animal or mythical creature designs.",
+    cat: "products",
+  },
+  {
+    q: "Do the stones have healing effects?",
+    a: "Our intention language is symbolic and emotional. It is meant for personal ritual, styling, and meaning, not medical, spiritual, or guaranteed outcome claims.",
+    cat: "products",
+  },
+  {
+    q: "How do I care for my jewelry?",
+    a: "Remove your piece before swimming, showering, exercising, or sleeping. Avoid perfume, lotion, and hairspray. Store it in a pouch or jewelry box and clean gently with a soft cloth.",
+    cat: "products",
+  },
+  {
+    q: "What size bracelet should I order?",
+    a: "Many bracelets are designed to fit most wrists with an elastic or adjustable structure. Check each product page for details, and contact us before ordering if you need help with sizing.",
+    cat: "products",
+  },
+  {
+    q: "Can I wear multiple intentions at once?",
+    a: "Yes. Many customers stack calm with protection, renewal with clarity, or pearls with darker stones. The practice is personal, so choose what feels natural to wear.",
+    cat: "products",
+  },
+  {
+    q: "Do you offer gift wrapping?",
+    a: "Orders arrive carefully packaged and ready to gift. No price tags are included.",
+    cat: "order",
+  },
+  {
+    q: "Are there physical stores?",
+    a: "MythRealms is online-only for now. This lets us keep the launch focused, test demand style by style, and avoid unnecessary retail markup.",
+    cat: "order",
+  },
+  {
+    q: "Do you offer wholesale or bulk orders?",
+    a: "For boutique, studio, or event inquiries, email mythrealms@outlook.com with the styles and quantities you are considering.",
+    cat: "order",
+  },
 ];
 
 export default function FAQPage() {
@@ -32,7 +107,6 @@ export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [showStickyBar, setShowStickyBar] = useState(false);
 
-  // Show sticky contact bar after scrolling past first few FAQs
   useEffect(() => {
     const onScroll = () => setShowStickyBar(window.scrollY > 400);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -40,69 +114,106 @@ export default function FAQPage() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const filtered = activeCat === "all" ? faqs : faqs.filter(f => f.cat === activeCat);
+  const filtered = activeCat === "all" ? faqs : faqs.filter((f) => f.cat === activeCat);
   const categories = ["all", "order", "shipping", "returns", "products"];
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10">
-      <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-4">
-        <Link href="/" className="hover:text-[var(--text)]">Home</Link><span>/</span><span className="text-[var(--text)]">FAQs</span>
+    <div className="mx-auto max-w-3xl px-6 py-10">
+      <nav className="mb-4 flex items-center gap-2 text-sm text-[var(--text-muted)]">
+        <Link href="/" className="hover:text-[var(--text)]">
+          Home
+        </Link>
+        <span>/</span>
+        <span className="text-[var(--text)]">FAQs</span>
       </nav>
 
-      <div className="text-center mb-10">
-        <h1 className="font-serif text-4xl font-bold text-[var(--text)] mb-3">Frequently Asked Questions</h1>
-        <p className="text-[var(--text-muted)]">Find answers to common questions about our intention pieces and crystals, shipping, returns, and more</p>
+      <div className="mb-10 text-center">
+        <h1 className="mb-3 font-serif text-4xl font-bold text-[var(--text)]">
+          Frequently Asked Questions
+        </h1>
+        <p className="text-[var(--text-muted)]">
+          Answers about pearl and gemstone pieces, guardian archetypes, shipping, and returns.
+        </p>
       </div>
 
-      <div className="flex justify-center gap-2 mb-8 flex-wrap">
-        {categories.map(cat => (
-          <button key={cat} onClick={() => { setActiveCat(cat); setOpenIndex(null); }}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition border ${activeCat===cat?'bg-[var(--accent)] text-[var(--bg)] border-[var(--accent)]':'border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--text-muted)]'}`}>
-            {cat.charAt(0).toUpperCase()+cat.slice(1)}
+      <div className="mb-8 flex flex-wrap justify-center gap-2">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            type="button"
+            onClick={() => {
+              setActiveCat(cat);
+              setOpenIndex(null);
+            }}
+            className={`rounded-full border px-5 py-2 text-sm font-medium transition ${
+              activeCat === cat
+                ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--bg)]"
+                : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--text-muted)]"
+            }`}
+          >
+            {cat.charAt(0).toUpperCase() + cat.slice(1)}
           </button>
         ))}
       </div>
 
       <div className="space-y-3">
         {filtered.map((faq, i) => (
-          <div key={i} className="bg-[var(--surface)] border border-[var(--border)] rounded-lg overflow-hidden">
-            <button onClick={() => setOpenIndex(openIndex===i?null:i)} className="w-full flex items-center justify-between p-5 text-left font-semibold text-[var(--text)] hover:bg-[var(--bg)] transition">
+          <div key={faq.q} className="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)]">
+            <button
+              type="button"
+              onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              className="flex w-full items-center justify-between p-5 text-left font-semibold text-[var(--text)] transition hover:bg-[var(--bg)]"
+            >
               {faq.q}
-              {openIndex===i ? <Minus className="w-4 h-4 text-[var(--text-muted)] flex-shrink-0" /> : <Plus className="w-4 h-4 text-[var(--text-muted)] flex-shrink-0" />}
+              {openIndex === i ? (
+                <Minus className="h-4 w-4 flex-shrink-0 text-[var(--text-muted)]" />
+              ) : (
+                <Plus className="h-4 w-4 flex-shrink-0 text-[var(--text-muted)]" />
+              )}
             </button>
-            {openIndex===i && <div className="px-5 pb-5 text-sm text-[var(--text-secondary)] leading-relaxed">{faq.a}</div>}
+            {openIndex === i && (
+              <div className="px-5 pb-5 text-sm leading-relaxed text-[var(--text-secondary)]">
+                {faq.a}
+              </div>
+            )}
           </div>
         ))}
         {filtered.length === 0 && (
-          <div className="text-center py-12">
-            <HelpCircle className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-3" />
+          <div className="py-12 text-center">
+            <HelpCircle className="mx-auto mb-3 h-10 w-10 text-[var(--text-muted)]" />
             <p className="text-[var(--text-muted)]">No FAQs match this filter.</p>
           </div>
         )}
       </div>
 
-      <div className="text-center mt-16 pt-12 border-t border-[var(--border)]">
-        <h3 className="font-serif text-2xl font-bold text-[var(--text)] mb-2">Still have questions?</h3>
-        <p className="text-sm text-[var(--text-muted)] mb-4">Our support team typically responds within 24 hours</p>
-        <a href="mailto:mythrealms@outlook.com" className="inline-block px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition">Contact Us</a>
+      <div className="mt-16 border-t border-[var(--border)] pt-12 text-center">
+        <h3 className="mb-2 font-serif text-2xl font-bold text-[var(--text)]">Still have questions?</h3>
+        <p className="mb-4 text-sm text-[var(--text-muted)]">We usually respond within 24 hours.</p>
+        <a
+          href="mailto:mythrealms@outlook.com"
+          className="inline-block rounded-full bg-[var(--accent)] px-8 py-3 font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]"
+        >
+          Contact Us
+        </a>
       </div>
 
-      {/* Sticky contact bar — appears after scrolling past first few FAQs */}
       {showStickyBar && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-[var(--surface)] border-t border-[var(--border)] shadow-[0_-4px_20px_rgba(0,0,0,0.5)] animate-slide-up">
-          <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+        <div className="fixed bottom-0 left-0 right-0 z-50 animate-slide-up border-t border-[var(--border)] bg-[var(--surface)] shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+          <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-6 py-3">
             <div>
               <p className="text-sm font-semibold text-[var(--text)]">Still have questions?</p>
-              <p className="text-xs text-[var(--text-muted)]">Our support team typically responds within 24 hours</p>
+              <p className="text-xs text-[var(--text-muted)]">We usually respond within 24 hours.</p>
             </div>
-            <Link href="/contact" className="shrink-0 px-5 py-2 bg-[var(--accent)] text-[var(--bg)] rounded-full text-sm font-semibold hover:bg-[var(--accent-hover)] transition">
+            <Link
+              href="/contact"
+              className="shrink-0 rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]"
+            >
               Contact Us
             </Link>
           </div>
         </div>
       )}
 
-      {/* FAQPage Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

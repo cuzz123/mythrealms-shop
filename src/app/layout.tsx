@@ -7,9 +7,9 @@ import { LayoutShell } from "@/components/layout/LayoutShell";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app"),
-  title: "MythRealms · Stones With Intention. Wear Your Becoming.",
-  description: "Intention-based crystal and pearl jewelry. Protection, clarity, love, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
-  keywords: ["intention bracelet", "crystal healing bracelet", "spiritual wellness jewelry", "protection bracelet", "self-love jewelry", "gemstone bracelet", "pearl bracelet", "amethyst", "rose quartz", "black obsidian", "moonstone", "tigers eye"],
+  title: "MythRealms · Pearl & Gemstone Jewelry for Modern Guardians",
+  description: "Pearl and gemstone jewelry inspired by ancient Chinese celestial lore. Find your guardian archetype and shop pieces for calm, renewal, boundaries, and soft power.",
+  keywords: ["pearl jewelry", "gemstone jewelry", "intention jewelry", "pearl bracelet", "pearl necklace", "guardian quiz", "celestial jewelry", "soft power jewelry", "moonstone", "rose quartz", "black obsidian"],
   icons: {
     icon: "/icon.svg",
     apple: "/apple-icon.png",
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     "p:domain_verify": "f7403d777d8595e4acf712c703023325",
   },
   openGraph: {
-    title: "MythRealms · Stones With Intention. Wear Your Becoming.",
-    description: "Intention-based crystal and pearl jewelry. Protection, clarity, love, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
+    title: "MythRealms · Pearl & Gemstone Jewelry for Modern Guardians",
+    description: "Pearl and gemstone jewelry inspired by ancient Chinese celestial lore. Find your guardian archetype and wear your intention.",
     url: process.env.NEXT_PUBLIC_APP_URL,
     type: "website",
     siteName: "MythRealms",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MythRealms · Stones With Intention. Wear Your Becoming.",
-    description: "Intention-based crystal and pearl jewelry. Protection, clarity, love, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
+    title: "MythRealms · Pearl & Gemstone Jewelry for Modern Guardians",
+    description: "Pearl and gemstone jewelry inspired by ancient Chinese celestial lore. Find your guardian archetype and wear your intention.",
     images: [`${process.env.NEXT_PUBLIC_APP_URL}/images/1688-hero/hero-1.webp`],
   },
   robots: { index: true, follow: true },

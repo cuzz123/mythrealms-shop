@@ -4,7 +4,7 @@ import { memo, useState } from "react";
 import { Handle, Position, type NodeProps, type Node } from "@xyflow/react";
 import { ImageIcon, Video, X, Download, Loader2 } from "lucide-react";
 
-export interface MediaNodeData {
+export interface MediaNodeData extends Record<string, unknown> {
   type: "image" | "video";
   src: string;
   prompt: string;

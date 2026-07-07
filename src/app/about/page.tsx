@@ -1,182 +1,260 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Gem, Sparkles, Clock, User, ArrowRight, Quote } from "lucide-react";
-import { PRODUCTS } from "@/lib/1688-products";
+import { ArrowRight, Gem, Moon, ShieldCheck, Sparkles } from "lucide-react";
+import { categoryMessaging } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "About MythRealms — Stones With Intention. Wear Your Becoming.",
-  description: "We create intention pieces — wearable reminders of who you are becoming. Each stone carries a singular purpose. Protection, love, clarity, abundance — choose yours.",
+  title: "About MythRealms | Pearl & Gemstone Jewelry for Modern Guardians",
+  description:
+    "MythRealms creates pearl and gemstone jewelry around intention, modern ritual, and Chinese celestial-inspired guardian archetypes.",
 };
 
-const stoneIntents = [
-  { stone: "Black Obsidian", intention: "Protection", desc: "Absorbs and protects. Your invisible perimeter.", slug: "curated-singles-01" },
-  { stone: "Rose Quartz", intention: "Self-Love", desc: "Opens and softens. The heart that keeps choosing.", slug: "curated-singles-02" },
-  { stone: "Amethyst", intention: "Intuition", desc: "Quiets and clarifies. The answers already within.", slug: "curated-singles-03" },
-  { stone: "Moonstone", intention: "Renewal", desc: "Transforms and rebirths. The courage to begin again.", slug: "curated-singles-04" },
-  { stone: "Tiger's Eye", intention: "Confidence", desc: "Steadies and focuses. The nerve to act.", slug: "curated-singles-05" },
-  { stone: "Green Aventurine", intention: "Abundance", desc: "Attracts and receives. The audacity to say yes.", slug: "curated-singles-06" },
+const realms = [
+  {
+    ...categoryMessaging["pearl-series"],
+    href: "/collections/pearl-series",
+    image: "/images/collections/collections封面1.webp",
+  },
+  {
+    ...categoryMessaging["pearl-crystal-series"],
+    href: "/collections/pearl-crystal-series",
+    image: "/images/collections/collections封面3.webp",
+  },
+  {
+    ...categoryMessaging["curated-singles"],
+    href: "/collections/curated-singles",
+    image: "/images/collections/collections封面4.webp",
+  },
+  {
+    ...categoryMessaging["luxe-collection"],
+    href: "/collections/luxe-collection",
+    image: "/images/collections/collections封面2.webp",
+  },
+];
+
+const principles = [
+  {
+    icon: Gem,
+    title: "Pearls First",
+    text: "Pearls are the center of the world here: luminous, quiet, and emotionally readable on camera. Gemstones add color, contrast, and intention.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Guardians, Not Costumes",
+    text: "The guardian is an archetype you choose, not a literal creature attached to the product. The jewelry stays wearable; the story gives it gravity.",
+  },
+  {
+    icon: Moon,
+    title: "Small Runs",
+    text: "We keep the collection edited and test demand before expanding. Fewer pieces, clearer meanings, less inventory pressure.",
+  },
+  {
+    icon: Sparkles,
+    title: "Ritual Language",
+    text: "Our intention notes are emotional anchors and styling cues. They are not medical, spiritual, or guaranteed outcome claims.",
+  },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-12">
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-10">
-        <Link href="/" className="hover:text-[var(--text)]">Home</Link><span>/</span>
+    <main className="mx-auto max-w-6xl px-6 py-12">
+      <nav className="mb-8 flex items-center gap-2 text-sm text-[var(--text-muted)]">
+        <Link href="/" className="hover:text-[var(--text)]">
+          Home
+        </Link>
+        <span>/</span>
         <span className="text-[var(--text)]">About MythRealms</span>
       </nav>
 
-      {/* ===== HERO ===== */}
-      <div className="relative rounded-2xl overflow-hidden mb-20">
+      <section className="relative mb-16 min-h-[520px] overflow-hidden rounded-lg">
         <Image
           src="/images/about/hero.webp"
-          alt="Hand wearing a crystal bracelet, morning light — MythRealms intention jewelry"
+          alt="MythRealms pearl and gemstone jewelry in warm light"
           fill
-          sizes="(max-width:768px) 100vw, 1120px"
+          sizes="(max-width: 768px) 100vw, 1152px"
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/55" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-black/20 to-transparent" />
-        <div className="relative z-10 text-center py-24 px-6">
-          <span className="inline-block text-xs font-semibold tracking-[0.1em] text-[var(--accent)] uppercase mb-4">Our Philosophy</span>
-          <h1 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-4">Stones With Intention.<br />Wear Your Becoming.</h1>
-          <p className="text-white/60 max-w-xl mx-auto text-lg leading-relaxed">
-            You are not just wearing a bracelet. You are wearing a practice — a daily, tactile
-            reminder of who you are choosing to become.
-          </p>
-        </div>
-      </div>
-
-      {/* ===== STONE INTENTIONS GRID ===== */}
-      <section className="mb-20">
-        <div className="text-center mb-12">
-          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-3">Our Stones</span>
-          <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Six Stones. Six Intentions.</h2>
-          <p className="text-[var(--text-muted)] max-w-lg mx-auto">Each MythRealms piece carries a singular purpose. Find the stone that speaks to where you are right now.</p>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {stoneIntents.map((s) => {
-            const product = PRODUCTS.find(p => p.slug === s.slug);
-            return (
-              <Link
-                key={s.slug}
-                href={`/products/${s.slug}`}
-                className="group bg-[var(--surface-alt)] border border-[var(--border)] rounded-xl p-5 hover:border-[var(--accent)]/40 transition-all duration-300 text-center"
-              >
-                {product && (
-                  <div className="relative w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden">
-                    <Image
-                      src={product.image}
-                      alt={s.stone}
-                      fill
-                      sizes="64px"
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                )}
-                <h3 className="font-serif text-base font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">{s.stone}</h3>
-                <p className="text-xs text-[var(--accent)] font-semibold uppercase tracking-wider mt-1">{s.intention}</p>
-                <p className="text-xs text-[var(--text-muted)] mt-2 leading-relaxed">{s.desc}</p>
-              </Link>
-            );
-          })}
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+        <div className="relative z-10 flex min-h-[520px] items-end px-6 pb-10 md:px-12 md:pb-14">
+          <div className="max-w-2xl">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+              Modern Talismans
+            </p>
+            <h1 className="font-serif text-4xl font-bold leading-tight text-white md:text-6xl">
+              Pearls for calm. Gemstones for becoming.
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/72 md:text-lg">
+              MythRealms makes jewelry for people who want the feeling of a talisman without
+              losing the polish of an everyday piece. The shapes are wearable. The story is
+              celestial. The choice is personal.
+            </p>
+          </div>
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto"><div className="h-px bg-[var(--border)] mb-20" /></div>
-
-      {/* ===== FOUR PILLARS ===== */}
-      <section className="mb-20">
-        <div className="text-center mb-12">
-          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-3">How It Works</span>
-          <h2 className="font-serif text-3xl font-bold text-[var(--text)]">The Practice</h2>
+      <section className="mb-16 grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+        <div>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">
+            The Story
+          </p>
+          <h2 className="font-serif text-3xl font-bold text-[var(--text)] md:text-4xl">
+            The guardian is the meaning you wear into the day.
+          </h2>
         </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          {[
-            { icon: Gem, title: "Choose Your Intention", desc: "Protection. Love. Clarity. Confidence. Renewal. Abundance. One is calling to you right now. That is the one you start with — not because it matches your outfit, but because it names something true." },
-            { icon: Sparkles, title: "Set It Each Morning", desc: "Hold your bracelet. Close your eyes. Name one thing you are releasing. One thing you are inviting. Put it on your left wrist — the receiving side. This is not jewelry. This is showing up for yourself." },
-            { icon: Clock, title: "Wear It Through Your Day", desc: "Let the stone rest against your skin. When you notice it — a glint in the light, a brush against your desk — let it pull you back to the intention you set when the day was new. A tiny anchor. A quiet constant." },
-            { icon: User, title: "Watch What Shifts", desc: "One day you notice you are softer. Less reactive. More grounded. The stone did not do the work — you did. But it held the reminder. It kept the intention visible when the world tried to make you forget." },
-          ].map((p) => (
-            <div key={p.title} className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 group hover:border-[var(--accent)]/30 transition-colors">
-              <div className="w-10 h-10 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center mb-4 group-hover:bg-[var(--accent)]/20 transition-colors">
-                <p.icon className="w-5 h-5 text-[var(--accent)]" strokeWidth={1.5} />
+        <div className="space-y-5 text-sm leading-relaxed text-[var(--text-secondary)] md:text-base">
+          <p>
+            We started from a simple tension: jewelry can be beautiful, but it can also feel
+            generic. MythRealms gives each piece a role. A pearl ring can be a quiet center.
+            A bracelet can be a boundary. A gemstone can mark a fresh start.
+          </p>
+          <p>
+            The inspiration comes from Chinese celestial imagery, moonlight, protection myths,
+            and the language of personal intention. The products do not need animal shapes to
+            carry that world. A clean pearl necklace can still feel like a guardian when the
+            name, color, ritual, and styling all point in the same direction.
+          </p>
+          <p>
+            That is why the collection is organized by intention instead of only by product
+            type. Customers can shop by what they need to feel: calm, renewal, protection,
+            soft power, clarity, or balance.
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-16">
+        <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">
+              The Realms
+            </p>
+            <h2 className="font-serif text-3xl font-bold text-[var(--text)]">
+              Four ways into the collection
+            </h2>
+          </div>
+          <Link
+            href="/collections"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] hover:text-[var(--accent-hover)]"
+          >
+            Shop all collections <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="grid gap-4 md:grid-cols-4">
+          {realms.map((realm) => (
+            <Link
+              key={realm.href}
+              href={realm.href}
+              className="group overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)]"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden bg-[var(--border-light)]">
+                <Image
+                  src={realm.image}
+                  alt={`${realm.name} collection`}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 280px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
-              <h3 className="font-serif text-lg font-bold text-[var(--text)] mb-2">{p.title}</h3>
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.desc}</p>
+              <div className="p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+                  {realm.realm}
+                </p>
+                <h3 className="mt-2 font-serif text-lg font-bold text-[var(--text)]">
+                  {realm.name}
+                </h3>
+                <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-[var(--text-muted)]">
+                  {realm.description}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-16 border-y border-[var(--border)] py-14">
+        <div className="mb-8 max-w-2xl">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">
+            How We Build
+          </p>
+          <h2 className="font-serif text-3xl font-bold text-[var(--text)]">
+            Luxury feeling, lean operating logic.
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
+            MythRealms is intentionally early and intentionally edited. We focus on a few
+            pieces that can carry a strong story, then expand only when the audience tells us
+            what deserves to stay.
+          </p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-4">
+          {principles.map((principle) => (
+            <div key={principle.title} className="rounded-lg bg-[var(--surface)] p-5">
+              <principle.icon className="mb-4 h-6 w-6 text-[var(--accent)]" strokeWidth={1.5} />
+              <h3 className="font-serif text-lg font-bold text-[var(--text)]">
+                {principle.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+                {principle.text}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== FOUNDER QUOTE ===== */}
-      <div className="relative rounded-2xl overflow-hidden mb-20 bg-[var(--surface)] border border-[var(--border)]">
-        <div className="absolute top-6 left-6 text-[var(--accent)]/20">
-          <Quote className="w-16 h-16" />
-        </div>
-        <div className="relative z-10 p-12 lg:p-16 text-center">
-          <p className="font-serif text-2xl lg:text-3xl text-[var(--text)] leading-relaxed italic mb-8 max-w-2xl mx-auto">
-            &ldquo;I put on a bracelet to test the fit. A week later, I noticed I was softer with myself.
-            Less reactive. More grounded. The stone did not do the work — but it kept the reminder
-            against my skin when I needed it most. That is what MythRealms makes: tangible intentions
-            for the moments you forget who you are becoming.&rdquo;
+      <section className="mb-16 grid gap-8 rounded-lg bg-[var(--surface)] p-8 md:grid-cols-[1fr_1.2fr] md:p-10">
+        <div>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">
+            Our Promise
           </p>
-          <p className="text-sm text-[var(--text-muted)]">
-            <span className="text-[var(--text)] font-semibold">The Founder</span> — MythRealms
+          <h2 className="font-serif text-3xl font-bold text-[var(--text)]">
+            Clear story. Clear expectations.
+          </h2>
+        </div>
+        <div className="space-y-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+          <p>
+            Natural pearls and gemstones vary in tone, size, and surface character. That
+            variation is part of the piece, not a defect.
           </p>
-        </div>
-      </div>
-
-      {/* ===== COMMITMENT ===== */}
-      <section className="mb-20">
-        <div className="text-center mb-12">
-          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[var(--accent)] uppercase mb-3">Our Commitments</span>
-          <h2 className="font-serif text-3xl font-bold text-[var(--text)]">How We Work</h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          {[
-            { icon: Gem, title: "Sourced with Intention", text: "Every stone individually selected — not by the kilo, not by the lot. We know where each piece comes from and the hands that shaped it." },
-            { icon: Sparkles, title: "Hand-Finished, Small Batches", text: "No warehouses. No mass production. Every bracelet is strung, knotted, and inspected by hand after you order. The stone waited millions of years. We can take a week to finish it right." },
-            { icon: Clock, title: "Ethical & Transparent", text: "Fair wages. Safe conditions. Clean supply chains. A stone worn with intention should not arrive through suffering." },
-            { icon: User, title: "One Founder, Every Piece", text: "No investors. No board. One person who selects every stone, oversees every design, and inspects every finished piece before it ships." },
-          ].map((p) => (
-            <div key={p.title} className="bg-[var(--surface-alt)] border border-[var(--border)] rounded-xl p-6">
-              <p.icon className="w-6 h-6 text-[var(--accent)] mb-3" strokeWidth={1.5} />
-              <h3 className="font-serif text-lg font-bold text-[var(--text)] mb-2">{p.title}</h3>
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.text}</p>
-            </div>
-          ))}
+          <p>
+            Many pieces are prepared after ordering through trusted jewelry suppliers and
+            partner workshops. This keeps inventory lean and lets us test what people actually
+            love before holding deeper stock.
+          </p>
+          <p>
+            The brand world is cinematic, but the product promise stays practical: clear
+            product pages, visible shipping expectations, free shipping over $69.99, and a
+            30-day return window.
+          </p>
         </div>
       </section>
 
-      {/* ===== BRAND SUMMARY (GEO) ===== */}
-      <section className="mb-20 bg-[var(--surface)] border border-[var(--border)] rounded-xl p-8 text-center">
-        <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">About MythRealms</h2>
-        <p className="text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-          MythRealms is an intention-based crystal and pearl jewelry brand.
-          Each bracelet carries a single purpose — protection, self-love, clarity,
-          confidence, renewal, or abundance. Hand-selected natural stones sourced
-          from trusted suppliers, hand-strung on elastic cord. No mass production.
-          No retail markup. Based online at mythrealms-shop.vercel.app, shipping
-          worldwide with a 30-day return policy.
+      <section className="text-center">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">
+          Start Here
         </p>
-      </section>
-
-      {/* ===== CTA ===== */}
-      <div className="text-center border-t border-[var(--border)] pt-16">
-        <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Which Intention Is Calling You?</h2>
-        <p className="text-[var(--text-muted)] mb-8 max-w-md mx-auto">Six archetypes. One is yours. Take the quiz or browse the collection.</p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link href="/guardian-quiz" className="px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold hover:bg-[var(--accent-hover)] transition inline-flex items-center justify-center gap-2">
-            Take the Quiz <ArrowRight className="w-4 h-4" />
+        <h2 className="font-serif text-3xl font-bold text-[var(--text)]">
+          Find the intention that fits this season.
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[var(--text-muted)]">
+          Take the quiz for a guardian archetype, or begin with pearls if you want the cleanest
+          first purchase path.
+        </p>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <Link
+            href="/guardian-quiz"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-7 py-3 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]"
+          >
+            Take the Quiz <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link href="/collections/curated-singles" className="px-8 py-3 border border-[var(--border)] text-[var(--text)] rounded-full font-semibold hover:border-[var(--accent)] transition">
-            Shop The Archetypes
+          <Link
+            href="/collections/pearl-series"
+            className="inline-flex items-center justify-center rounded-full border border-[var(--border)] px-7 py-3 text-sm font-semibold text-[var(--text)] transition hover:border-[var(--accent)]"
+          >
+            Shop Pearl Realms
           </Link>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

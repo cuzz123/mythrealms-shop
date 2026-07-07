@@ -1,9 +1,15 @@
-// GET /api/automation/generate-tiktok-script — Generate TikTok video scripts from product data
-// If ?all=true, generates scripts for all active products and saves to content/tiktok/
-// Otherwise, pass ?slug=xxx for a single product
+// GET /api/automation/generate-tiktok-script
+// Generate TikTok video scripts from product data.
+// Use ?slug=xxx for one product, ?all=true for the full product library.
 
 import { NextRequest, NextResponse } from "next/server";
 import { PRODUCTS } from "@/lib/1688-products";
+import {
+  productBenefitTriplet,
+  productDisplayName,
+  productShortDescription,
+  realmForProduct,
+} from "@/lib/brand";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -23,12 +29,14 @@ interface TiktokScript {
   caption: string;
 }
 
+const formatPrice = (price: number) => `$${price.toFixed(2).replace(/\.00$/, "")}`;
+
 function buildScript(product: (typeof PRODUCTS)[0], format: ScriptFormat): TiktokScript {
-  const name = product.name.replace(/[^\x20-\x7E\s]/g, "").trim();
-  const intention = product.intention || "Crystal Intention";
-  const descClean = product.description.replace(/\s+/g, " ").trim();
-  const shortDesc = descClean.slice(0, 120);
-  const price = product.price;
+  const name = productDisplayName(product);
+  const intention = realmForProduct(product);
+  const benefit = productBenefitTriplet(product);
+  const shortDesc = productShortDescription(product).replace(/\s+/g, " ").slice(0, 120);
+  const price = formatPrice(product.price);
 
   if (format === "unboxing") {
     return {
@@ -38,13 +46,40 @@ function buildScript(product: (typeof PRODUCTS)[0], format: ScriptFormat): Tikto
       duration: "15-20s",
       hook: `[ASMR] Unboxing ${name} from MythRealms`,
       scenes: [
-        { time: "0-3s", visual: "Close-up of packaging box being opened slowly", audio: "Soft rustling paper sound, ambient instrumental", textOverlay: `${name}` },
-        { time: "3-8s", visual: "Slow reveal of jewelry piece, natural light catching the stone", audio: "Gentle chime or harp note", textOverlay: `${intention} \u2022 Handcrafted` },
-        { time: "8-13s", visual: "Macro shot of gemstone texture, rotating slowly", audio: "Soft ambient music continues", textOverlay: `$${price}` },
-        { time: "13-15s", visual: "Product on hand/model shot", audio: "Music fades", textOverlay: "MythRealms \u2022 Link in bio" },
+        {
+          time: "0-3s",
+          visual: "Close-up of the parcel and pouch being opened slowly.",
+          audio: "Soft paper and pouch sounds, minimal ambient music.",
+          textOverlay: name,
+        },
+        {
+          time: "3-8s",
+          visual: "Slow reveal of the pearl or gemstone piece in natural window light.",
+          audio: "Gentle chime, no spoken words yet.",
+          textOverlay: benefit,
+        },
+        {
+          time: "8-13s",
+          visual: "Macro detail shot: luster, texture, clasp, and how it catches light.",
+          audio: "Whisper voiceover: 'A piece for this season of you.'",
+          textOverlay: price,
+        },
+        {
+          time: "13-20s",
+          visual: "Try-on shot on wrist, neckline, or ear; end on the quiz URL.",
+          audio: "Music resolves softly.",
+          textOverlay: "Find your guardian - Link in bio",
+        },
       ],
-      hashtags: ["mythicaljewelry", "unboxing", "crystaljewelry", "asmr", "handcrafted", "luxuryjewelry"],
-      caption: `Unboxing the ${name} from MythRealms. ${intention}. Handcrafted in 14k gold and sterling silver. ${shortDesc.slice(0, 100)} #mythicaljewelry #unboxing`,
+      hashtags: [
+        "pearljewelry",
+        "gemstonejewelry",
+        "jewelryunboxing",
+        "jewelrytok",
+        "intentionjewelry",
+        "quietluxury",
+      ],
+      caption: `Unboxing ${name} from MythRealms. ${intention}. ${shortDesc.slice(0, 100)} #pearljewelry #jewelryunboxing #intentionjewelry`,
     };
   }
 
@@ -54,33 +89,87 @@ function buildScript(product: (typeof PRODUCTS)[0], format: ScriptFormat): Tikto
       productName: name,
       format: "quiz",
       duration: "25-35s",
-      hook: "Which mythical guardian protects YOU? Take the quiz to find out \u2193",
+      hook: "Which guardian archetype matches this season of you?",
       scenes: [
-        { time: "0-5s", visual: "Screen recording of guardian-quiz page, showing first question", audio: "Upbeat curiosity-driven music", textOverlay: "Which Guardian Matches Your Spirit?" },
-        { time: "5-15s", visual: "Quick cuts through quiz questions, text overlays", audio: "Music continues, soft typing sounds", textOverlay: "Answer 5 questions..." },
-        { time: "15-25s", visual: "Dramatic reveal animation of result with product shown", audio: "Music swells, reveal sound effect", textOverlay: `You got: ${name}!` },
-        { time: "25-30s", visual: "Product beauty shot with price", audio: "Music resolves", textOverlay: `$${price} \u2022 Link in bio` },
+        {
+          time: "0-5s",
+          visual: "Screen recording of the guardian quiz, showing the first question.",
+          audio: "Curiosity-driven music with soft taps.",
+          textOverlay: "Find your guardian",
+        },
+        {
+          time: "5-15s",
+          visual: "Quick cuts through the three quiz questions.",
+          audio: "Music continues, soft typing sounds.",
+          textOverlay: "Calm, renewal, boundaries, or soft power?",
+        },
+        {
+          time: "15-25s",
+          visual: "Result reveal followed by a product detail shot.",
+          audio: "Music swells, gentle reveal sound.",
+          textOverlay: `Your match: ${intention}`,
+        },
+        {
+          time: "25-35s",
+          visual: "Final product beauty shot and URL overlay.",
+          audio: "Music resolves.",
+          textOverlay: `${price} - Take the quiz`,
+        },
       ],
-      hashtags: ["mythologyquiz", "whichguardianareyou", "chinesemythology", "personalityquiz", "mythicaljewelry", "fyp"],
-      caption: `Which Chinese guardian matches your spirit? Take the quiz at mythrealms-shop.vercel.app/guardian-quiz and discover your mythical protector. #mythologyquiz #whichguardianareyou`,
+      hashtags: [
+        "guardianquiz",
+        "jewelryquiz",
+        "pearljewelry",
+        "personalityquiz",
+        "intentionjewelry",
+        "jewelrytok",
+      ],
+      caption:
+        "Which guardian archetype matches your current season? Take the MythRealms quiz and find the pearl or gemstone piece that fits. #guardianquiz #jewelrytok",
     };
   }
 
-  // Default: story format
   return {
     productSlug: product.slug,
     productName: name,
     format: "story",
     duration: "30-45s",
-    hook: `Did you know? ${shortDesc.slice(0, 80)}...`,
+    hook: `A jewelry piece for ${intention.toLowerCase()}.`,
     scenes: [
-      { time: "0-5s", visual: "Text on screen with mystical background", audio: "Deep storytelling voice: 'What if your jewelry carried an ancient story?'", textOverlay: `The Legend of the ${name}` },
-      { time: "5-15s", visual: "Product shown against natural textures (wood, stone, silk)", audio: "Voiceover: 'Inspired by the Classic of Mountains and Seas...'", textOverlay: `Shan Hai Jing \u2022 ${intention}` },
-      { time: "15-25s", visual: "Close-up of the stone/gemstone, zoom in on details", audio: "Voiceover continues describing meaning", textOverlay: `$${price} \u2022 14k Gold & Sterling Silver` },
-      { time: "25-30s", visual: "Model wearing the piece, lifestyle shot", audio: "Soft resolve: 'Wear your story.'", textOverlay: "MythRealms \u2022 Link in bio" },
+      {
+        time: "0-5s",
+        visual: "Pearl or gemstone close-up over silk, water, or dark wood.",
+        audio: "Voiceover: 'Not every kind of power has to announce itself.'",
+        textOverlay: name,
+      },
+      {
+        time: "5-15s",
+        visual: "Slow cinematic product movements and hand detail shots.",
+        audio: `Voiceover: '${benefit}. A reminder you can wear.'`,
+        textOverlay: benefit,
+      },
+      {
+        time: "15-25s",
+        visual: "Model wearing the piece in a simple outfit, clean framing.",
+        audio: "Voiceover explains the intention without making healing claims.",
+        textOverlay: `${intention} - ${price}`,
+      },
+      {
+        time: "25-35s",
+        visual: "Show guardian quiz or product page on phone, then final beauty shot.",
+        audio: "Soft resolve: 'Find the one that fits this season.'",
+        textOverlay: "MythRealms - Link in bio",
+      },
     ],
-    hashtags: ["chinesemythology", "mythicaljewelry", "shanhaijing", "storytime", "handcraftedjewelry", "crystalhealing", "fyp"],
-    caption: `${name} \u2014 ${intention}. Inspired by ancient Chinese mythology. Handcrafted in 14k gold and sterling silver. ${shortDesc.slice(0, 80)} #chinesemythology #mythicaljewelry #shanhaijing`,
+    hashtags: [
+      "pearljewelry",
+      "gemstonejewelry",
+      "intentionjewelry",
+      "quietluxury",
+      "jewelrytok",
+      "storytime",
+    ],
+    caption: `${name} - ${intention}. ${shortDesc.slice(0, 90)} #pearljewelry #gemstonejewelry #jewelrytok`,
   };
 }
 
@@ -100,11 +189,11 @@ export async function GET(request: NextRequest) {
     if (all) {
       const formats: ScriptFormat[] = ["story", "unboxing", "quiz"];
       const active = PRODUCTS.filter((p) => p.isActive && p.inStock);
-
-      // Assign format rotation across products
       const scripts = active.map((p, i) => buildScript(p, formats[i % formats.length]));
 
-      const outputPath = path.join(process.cwd(), "content", "tiktok", "scripts.json");
+      const outputDir = path.join(process.cwd(), "content", "tiktok");
+      await fs.mkdir(outputDir, { recursive: true });
+      const outputPath = path.join(outputDir, "scripts.json");
       const manifest = {
         generatedAt: new Date().toISOString(),
         total: scripts.length,
@@ -116,17 +205,23 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         generated: true,
         total: scripts.length,
-        formats: { story: scripts.filter((s) => s.format === "story").length, unboxing: scripts.filter((s) => s.format === "unboxing").length, quiz: scripts.filter((s) => s.format === "quiz").length },
+        formats: {
+          story: scripts.filter((s) => s.format === "story").length,
+          unboxing: scripts.filter((s) => s.format === "unboxing").length,
+          quiz: scripts.filter((s) => s.format === "quiz").length,
+        },
         path: outputPath,
         sample: scripts.slice(0, 2),
       });
     }
 
-    // Return first product as default
     const first = PRODUCTS.find((p) => p.isActive);
     if (!first) return NextResponse.json({ error: "No active products" }, { status: 404 });
     return NextResponse.json(buildScript(first, format));
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+  } catch (e: unknown) {
+    return NextResponse.json(
+      { error: e instanceof Error ? e.message : "Failed to generate TikTok script" },
+      { status: 500 }
+    );
   }
 }

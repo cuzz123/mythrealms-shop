@@ -1,70 +1,132 @@
 import Link from "next/link";
 import Image from "next/image";
-import { NewsletterForm } from "@/components/layout/NewsletterForm";
+import { ArrowRight, Gem, Moon, ShieldCheck, Sparkles } from "lucide-react";
 import { HeroCarousel } from "@/components/layout/HeroCarousel";
-import { ArrowRight, Gem, Leaf, ShieldCheck } from "lucide-react";
-import { formatPrice } from "@/lib/utils";
-import { PRODUCTS, CATEGORIES } from "@/lib/1688-products";
-import { LazyImage } from "@/components/ui/LazyImage";
+import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { RecentlyViewed } from "@/components/ui/RecentlyViewed";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { PRODUCTS } from "@/lib/1688-products";
+import { formatPrice } from "@/lib/utils";
+import { brandPositioning, categoryMessaging, intentionRealms, productBenefitTriplet, productDisplayName } from "@/lib/brand";
 
 export const dynamic = "force-static";
 
+const featuredSlugs = [
+  "pearl-series-01",
+  "pearl-series-02",
+  "pearl-series-03",
+  "pearl-series-05",
+  "pearl-crystal-series-01",
+  "curated-singles-01",
+];
+
 export default function HomePage() {
-  const featured = PRODUCTS.filter(p => p.category === 'curated-singles' && p.isBestSeller).slice(0, 6);
-  const categories = CATEGORIES;
+  const featured = featuredSlugs
+    .map((slug) => PRODUCTS.find((product) => product.slug === slug))
+    .filter(Boolean)
+    .slice(0, 6);
 
   return (
     <>
-      {/* ===== HERO ===== */}
       <HeroCarousel />
 
-      {/* ===== SHOP BY COLLECTION ===== */}
       <ScrollReveal as="section" className="py-14 bg-[var(--surface-alt)]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-8">
-            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">New Collection</span>
-            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Shop by Intention</h2>
+            <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">
+              Shop by Intention
+            </span>
+            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">
+              Choose the Realm You Need Now
+            </h2>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {categories.slice(0, 4).map((cat, i) => {
-              const first = PRODUCTS.filter(p => p.category === cat.slug)[0];
-              const coverImage = cat.image || first?.image;
-              return (
-                <Link key={cat.slug} href={`/collections/${cat.slug}`} className="group relative aspect-square rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                  {coverImage && <LazyImage src={coverImage} alt={cat.name} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="font-serif text-lg font-semibold text-white">{cat.name}</h3>
-                    <p className="text-xs text-white/60 mt-0.5">{PRODUCTS.filter(p => p.category === cat.slug).length} styles</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {intentionRealms.map((realm) => (
+              <Link
+                key={realm.slug}
+                href={realm.href}
+                className="group flex min-h-[210px] flex-col justify-between rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 transition hover:border-[var(--accent)]/50"
+              >
+                <div>
+                  <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 text-[var(--accent)]">
+                    {realm.slug === "protection-boundaries" ? <ShieldCheck className="h-5 w-5" /> : realm.slug === "renewal" ? <Moon className="h-5 w-5" /> : <Sparkles className="h-5 w-5" />}
                   </div>
-                </Link>
-              );
-            })}
+                  <h3 className="font-serif text-xl font-semibold text-[var(--text)]">{realm.name}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{realm.description}</p>
+                </div>
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)]">
+                  Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </ScrollReveal>
 
-      <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
-
-      {/* ===== FEATURED SINGLES ===== */}
       <ScrollReveal as="section" className="py-14 bg-[var(--bg)]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-end justify-between mb-8">
-            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">Best Sellers</h2>
-            <Link href="/collections/curated-singles" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">View All <ArrowRight className="w-4 h-4" /></Link>
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">
+                The Pearl Realms
+              </span>
+              <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[#E8E0D5]">
+                Moonlit pearls for calm, renewal, and quiet strength.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                {categoryMessaging["pearl-series"].description}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/collections/pearl-series" className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]">
+                  {brandPositioning.secondaryCta} <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link href="/guardian-quiz" className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-5 py-2.5 text-sm font-semibold text-[var(--text)] transition hover:border-[var(--accent)]/50">
+                  {brandPositioning.primaryCta}
+                </Link>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {PRODUCTS.filter((product) => product.category === "pearl-series").slice(0, 4).map((product) => (
+                <Link key={product.slug} href={`/products/${product.slug}`} className="group relative aspect-[4/5] overflow-hidden rounded-lg border border-[var(--border)]">
+                  <LazyImage src={product.image} alt={productDisplayName(product)} fill sizes="(max-width:1024px) 50vw, 25vw" className="object-cover transition duration-500 group-hover:scale-105" containerClassName="absolute inset-0" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3">
+                    <p className="font-serif text-sm font-semibold text-white">{productDisplayName(product)}</p>
+                    <p className="mt-0.5 text-[11px] text-white/70">{productBenefitTriplet(product)}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal as="section" className="py-14 bg-[var(--surface-alt)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">
+                First Pieces to Test
+              </span>
+              <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5]">
+                Start with the Pieces That Tell the Story Fast
+              </h2>
+            </div>
+            <Link href="/collections/pearl-series" className="hidden sm:flex items-center gap-1 text-sm text-[var(--accent)] hover:underline whitespace-nowrap">
+              View Pearls <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featured.map((p, i) => (
-              <Link key={p.slug} href={`/products/${p.slug}`} className="group flex gap-4 bg-[var(--surface)] rounded-xl p-3 border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                <div className="relative w-24 h-24 rounded-lg overflow-hidden shrink-0">
-                  <LazyImage src={p.image} alt={p.name} fill sizes="96px" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
+            {featured.map((product) => product && (
+              <Link key={product.slug} href={`/products/${product.slug}`} className="group flex gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-3 transition hover:border-[var(--accent)]/40">
+                <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg">
+                  <LazyImage src={product.image} alt={productDisplayName(product)} fill sizes="96px" className="object-cover transition duration-500 group-hover:scale-105" containerClassName="absolute inset-0" />
                 </div>
-                <div className="flex flex-col justify-center min-w-0">
-                  <h3 className="text-sm font-medium text-[var(--text)] line-clamp-1">{p.name}</h3>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{p.categoryName} · {formatPrice(p.price)}{p.compareAt && p.compareAt > p.price ? <span className="line-through ml-1.5">{formatPrice(p.compareAt)}</span> : null}</p>
-                  {p.images.length > 1 && <p className="text-[10px] text-[var(--accent)] mt-1">{p.images.length} detail photos</p>}
+                <div className="flex min-w-0 flex-col justify-center">
+                  <h3 className="line-clamp-1 text-sm font-medium text-[var(--text)]">{productDisplayName(product)}</h3>
+                  <p className="mt-0.5 text-xs text-[var(--text-muted)]">{productBenefitTriplet(product)}</p>
+                  <p className="mt-2 text-sm font-semibold text-[var(--accent)]">{formatPrice(product.price)}</p>
                 </div>
               </Link>
             ))}
@@ -72,90 +134,59 @@ export default function HomePage() {
         </div>
       </ScrollReveal>
 
-      <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
-
-      {/* ===== WHY MYTHREALMS ===== */}
-      <ScrollReveal as="section" className="py-14 bg-[var(--surface-alt)]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Our Promise</span>
-          <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5] mb-10">Crafted with Intention</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            <div className="flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-full bg-[#1A1816] border border-[#2A2520] flex items-center justify-center mb-4">
-                <Gem className="w-6 h-6 text-[#D4A84B]" />
-              </div>
-              <h3 className="font-serif text-lg font-semibold text-[#E8E0D5] mb-2">Hand-Selected</h3>
-              <p className="text-sm text-[#8A7D6E] leading-relaxed">Each stone individually chosen for its unique energy and character. No mass production — every piece is one of a kind, hand-strung with purpose.</p>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-full bg-[#1A1816] border border-[#2A2520] flex items-center justify-center mb-4">
-                <Leaf className="w-6 h-6 text-[#D4A84B]" />
-              </div>
-              <h3 className="font-serif text-lg font-semibold text-[#E8E0D5] mb-2">Ethically Sourced</h3>
-              <p className="text-sm text-[#8A7D6E] leading-relaxed">Direct supply chains. Fair labor practices. Every stone has a clean origin — we know where each piece comes from and the hands that shaped it.</p>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-full bg-[#1A1816] border border-[#2A2520] flex items-center justify-center mb-4">
-                <ShieldCheck className="w-6 h-6 text-[#D4A84B]" />
-              </div>
-              <h3 className="font-serif text-lg font-semibold text-[#E8E0D5] mb-2">30-Day Trial</h3>
-              <p className="text-sm text-[#8A7D6E] leading-relaxed">Wear it. Connect with it. If it doesn't feel like yours within 30 days, return it — no questions asked.</p>
-            </div>
+      <ScrollReveal as="section" className="bg-[var(--bg)] py-16">
+        <div className="mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+          <div>
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--accent)]">
+              <Gem className="h-4 w-4" /> Find Your Guardian
+            </span>
+            <h2 className="mt-3 font-serif text-[clamp(2rem,4vw,3rem)] font-bold text-[var(--text)]">
+              A 60-second quiz that turns TikTok curiosity into a product path.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+              Your guardian is an archetype, not a costume. Take the quiz to discover whether this season calls for calm, renewal, soft power, or stronger boundaries.
+            </p>
+            <Link href="/guardian-quiz" className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]">
+              Take the Quiz <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
-        </div>
-      </ScrollReveal>
-
-      <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
-
-      {/* ===== STYLED BY YOU ===== */}
-      <ScrollReveal as="section" className="py-14 bg-[var(--surface-alt)]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="inline-block text-xs font-semibold tracking-[0.08em] text-[#D4A84B] uppercase mb-2">Coming Soon — Share Your Look</span>
-          <h2 className="font-serif text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-[#E8E0D5] mb-2">Share Your Look</h2>
-          <p className="text-[#8A7D6E] text-sm mb-8">Tag @mythrealms.shop on Instagram or TikTok to be featured here</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {['/images/share/Share1.webp', '/images/share/Share2.webp', '/images/share/Share3.webp', '/images/share/Share4.webp'].map((src, i) => (
-              <a key={i} href="https://instagram.com/mythrealms.shop" target="_blank" rel="noopener noreferrer" className="group relative aspect-[4/5] rounded-xl overflow-hidden border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                <LazyImage src={src} alt={`MythRealms — share your look`} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-end justify-center pb-3">
-                  <span className="text-white/80 text-[10px] font-medium opacity-0 group-hover:opacity-100 transition-opacity">Tag @mythrealms.shop</span>
-                </div>
-              </a>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
+            {["Phoenix - Renewal", "Moon Rabbit - Softness", "White Tiger - Boundaries", "Nine-Tailed Fox - Magnetism"].map((item) => (
+              <div key={item} className="flex items-center justify-between border-b border-[var(--border)] py-4 last:border-b-0">
+                <span className="font-serif text-lg text-[var(--text)]">{item}</span>
+                <span className="text-xs text-[var(--accent)]">Matched pieces</span>
+              </div>
             ))}
           </div>
         </div>
       </ScrollReveal>
 
-      <div className="max-w-7xl mx-auto px-6"><div className="h-px bg-[var(--border)]" /></div>
-
-      {/* ===== NEWSLETTER ===== */}
-      <ScrollReveal as="section" className="py-12 bg-[var(--surface)]">
-        <div className="max-w-[540px] mx-auto px-6 text-center">
+      <ScrollReveal as="section" className="py-14 bg-[var(--surface)]">
+        <div className="max-w-[600px] mx-auto px-6 text-center">
           <h2 className="font-serif text-2xl font-bold text-[#E8E0D5] mb-2">Stay Connected</h2>
-          <p className="text-[#A89880] text-sm mb-6">New intentions, stone stories, and exclusive subscriber-only offers. No spam — just the good stuff.</p>
+          <p className="text-[#A89880] text-sm mb-6">New pearl realms, guardian archetypes, and quiet offers. No spam, just the good stuff.</p>
           <NewsletterForm />
-          <div className="flex justify-center gap-6 mt-6 text-xs text-[#8A7D6E]">
-            <span>Hand-Selected</span><span className="text-[#3A3220]">|</span>
-            <span>Ethically Sourced</span><span className="text-[#3A3220]">|</span>
-            <span>30-Day Returns</span>
+          <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-[#8A7D6E]">
+            <span>Made to order</span>
+            <span>Free shipping over $69.99</span>
+            <span>30-day returns</span>
           </div>
         </div>
       </ScrollReveal>
 
-      {/* ===== FOOTER BANNER ===== */}
-      <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
+      <div className="relative h-[300px] w-full overflow-hidden md:h-[400px]">
         <Image
           src="/images/under/footer-banner.webp"
-          alt="MythRealms — crystal bracelets, meditation, intention"
+          alt="MythRealms pearl and gemstone jewelry"
           fill
           sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <p className="font-serif text-2xl md:text-3xl text-white text-center px-6 leading-relaxed">
-            Every stone holds a purpose.<br />
-            <span className="text-[var(--accent)]">Which one is calling you?</span>
+          <p className="px-6 text-center font-serif text-2xl leading-relaxed text-white md:text-3xl">
+            Find your guardian.<br />
+            <span className="text-[var(--accent)]">Wear your intention.</span>
           </p>
         </div>
       </div>

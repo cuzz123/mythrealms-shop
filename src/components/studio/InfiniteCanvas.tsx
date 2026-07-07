@@ -9,8 +9,8 @@ import {
   Controls,
   Background,
   BackgroundVariant,
+  SelectionMode,
   Panel,
-  type Node,
   type NodeChange,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
@@ -24,15 +24,15 @@ const nodeTypes = { media: MediaNode };
 const defaultViewport = { x: 0, y: 0, zoom: 0.8 };
 
 function CanvasInner() {
-  const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
-  const { addNodes, deleteElements } = useReactFlow();
+  const [nodes, setNodes, onNodesChange] = useNodesState<MediaNodeType>([]);
+  const { addNodes, deleteElements } = useReactFlow<MediaNodeType>();
   const generatingRef = useRef(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const { setGenerating, setLastPrompt, isGenerating } = useStudioStore();
 
   const onNodesChangeFiltered = useCallback(
-    (changes: NodeChange[]) => {
+    (changes: NodeChange<MediaNodeType>[]) => {
       onNodesChange(changes);
     },
     [onNodesChange]
@@ -146,7 +146,7 @@ function CanvasInner() {
         nodesConnectable={false}
         elementsSelectable
         selectNodesOnDrag={false}
-        selectionMode="partial"
+        selectionMode={SelectionMode.Partial}
         deleteKeyCode={["Delete", "Backspace"]}
         className="bg-[#0A0A0B]"
       >

@@ -1,6 +1,7 @@
-import { db } from "@/lib/db";
+﻿import { db } from "@/lib/db";
 import Link from "next/link";
 import type { Metadata } from "next";
+import type { Prisma } from "@prisma/client";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { CollectionFilters } from "@/components/product/CollectionFilters";
 import { CollectionToolbar } from "./CollectionToolbar";
@@ -9,6 +10,7 @@ import { Suspense } from "react";
 import { safeJsonParse } from "@/lib/utils";
 import { Collection1688 } from "./1688-collection";
 import { CATEGORIES } from "@/lib/1688-products";
+import { categoryMessaging } from "@/lib/brand";
 
 // Quick stone filter chips for Curated Stones collection
 const CURATED_STONES = ["Amethyst", "Rose Quartz", "Black Obsidian", "Moonstone", "Tiger's Eye"];
@@ -51,13 +53,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // Check 1688 static categories first
   const cat1688 = CATEGORIES.find(c => c.slug === slug);
   if (cat1688) {
-    const desc = cat1688.description?.slice(0, 155) || `Shop handcrafted ${cat1688.name} — gemstone crystal bracelets for the modern mystic.`;
+    const messaging = categoryMessaging[slug];
+    const title = messaging?.name || cat1688.name;
+    const desc = (messaging?.description || cat1688.description || `Shop ${title} at MythRealms.`).slice(0, 155);
     return {
-      title: `${cat1688.name} — Crystal Bracelets | MythRealms`,
+      title: `${title} | MythRealms`,
       description: desc,
       alternates: { canonical: `${SITE_URL}/collections/${slug}` },
       openGraph: {
-        title: `${cat1688.name} — MythRealms`,
+        title: `${title} | MythRealms`,
         description: desc,
         url: `${SITE_URL}/collections/${slug}`,
         type: "website",
@@ -66,21 +70,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const category = await db.category.findUnique({ where: { slug } });
-  if (!category) return { title: "Collection Not Found — MythRealms" };
-  const desc = category.description?.slice(0, 155) || `Shop handcrafted ${category.name} — gemstone crystal bracelets for the modern mystic.`;
+  if (!category) return { title: "Collection Not Found | MythRealms" };
+  const desc = category.description?.slice(0, 155) || `Shop handcrafted ${category.name} at MythRealms.`;
   return {
-    title: `${category.name} — ${slug === "curated-stones" ? "Natural Stone Bracelets" : "Crystal Bracelets"} | MythRealms`,
+    title: `${category.name} | MythRealms`,
     description: desc,
     alternates: { canonical: `${SITE_URL}/collections/${slug}` },
     openGraph: {
-      title: `${category.name} — MythRealms`,
+      title: `${category.name} | MythRealms`,
       description: desc,
       url: `${SITE_URL}/collections/${slug}`,
       type: "website",
     },
   };
 }
-
 export default async function CollectionPage({
   params,
   searchParams,
@@ -124,7 +127,7 @@ export default async function CollectionPage({
 
   // Price sorting is done in JS after fetch — SQLite cannot sort by related variant prices
   // Use DB-level price sorting via minPrice field
-  let orderBy: any = { createdAt: "desc" };
+  let orderBy: Prisma.ProductOrderByWithRelationInput = { createdAt: "desc" };
   switch (sort) {
     case "price-low": orderBy = { minPrice: "asc" }; break;
     case "price-high": orderBy = { minPrice: "desc" }; break;
@@ -133,13 +136,15 @@ export default async function CollectionPage({
     case "z-a": orderBy = { name: "desc" }; break;
   }
 
-  const where: any = { categoryId: { in: categoryIds }, isActive: true };
+  const where: Prisma.ProductWhereInput = { categoryId: { in: categoryIds }, isActive: true };
   if (stones.length > 0) where.stone = { in: stones };
   if (intentions.length > 0) where.intention = { in: intentions };
   if (materials.length > 0) where.material = { in: materials };
   // Apply price filter at DB level so pagination stays correct
-  if (priceMin !== undefined) where.minPrice = { ...(where.minPrice || {}), gte: priceMin };
-  if (priceMax !== undefined) where.minPrice = { ...(where.minPrice || {}), lte: priceMax };
+  const minPriceFilter: Prisma.FloatNullableFilter = {};
+  if (priceMin !== undefined) minPriceFilter.gte = priceMin;
+  if (priceMax !== undefined) minPriceFilter.lte = priceMax;
+  if (Object.keys(minPriceFilter).length > 0) where.minPrice = minPriceFilter;
 
   const [products, total, stoneCounts, intentionCounts, materialCounts] = await Promise.all([
     db.product.findMany({
@@ -161,7 +166,7 @@ export default async function CollectionPage({
     materials: Object.fromEntries(materialCounts.filter(m => m.material).map(m => [m.material!, m._count])),
   };
 
-  let productsParsed = products.map((p) => ({
+  const productsParsed = products.map((p) => ({
     ...p,
     images: safeJsonParse<string[]>(p.images as string, []),
     avgRating: p.reviews.length ? p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length : 0,
@@ -187,7 +192,7 @@ export default async function CollectionPage({
         mainEntity: {
           "@type": "ItemList",
           numberOfItems: total,
-          itemListElement: finalProducts.slice(0, 24).map((p: any, i: number) => ({
+          itemListElement: finalProducts.slice(0, 24).map((p, i) => ({
             "@type": "ListItem",
             position: i + 1,
             url: `${SITE_URL}/products/${p.slug}`,
@@ -293,3 +298,4 @@ export default async function CollectionPage({
     </div>
   );
 }
+

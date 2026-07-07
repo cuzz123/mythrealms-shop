@@ -15,13 +15,57 @@ import { StarRating } from "@/components/ui/StarRating";
 import { StickyAddToCart } from "@/components/product/StickyAddToCart";
 import { Product1688 } from "./1688-product";
 import { PRODUCTS as P1688 } from "@/lib/1688-products";
-import { Star, Play, ShieldCheck } from "lucide-react";
+import { Play, ShieldCheck } from "lucide-react";
 import { imageUrl, absoluteImageUrl } from "@/lib/images";
+import { productDisplayName, productShortDescription } from "@/lib/brand";
+
+type PropertyDetail = {
+  stone?: string;
+  name?: string;
+  beast?: string;
+  benefit?: string;
+  property?: string;
+};
+
+const toPropertyDetails = (value: unknown): PropertyDetail[] => {
+  if (!Array.isArray(value)) return [];
+
+  return value.flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const record = item as Record<string, unknown>;
+    return {
+      stone: typeof record.stone === "string" ? record.stone : undefined,
+      name: typeof record.name === "string" ? record.name : undefined,
+      beast: typeof record.beast === "string" ? record.beast : undefined,
+      benefit: typeof record.benefit === "string" ? record.benefit : undefined,
+      property: typeof record.property === "string" ? record.property : undefined,
+    };
+  });
+};
 
 export const revalidate = 3600
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+  const staticProduct = P1688.find(p => p.slug === slug);
+  if (staticProduct) {
+    const name = productDisplayName(staticProduct);
+    const description = productShortDescription(staticProduct).slice(0, 155);
+    return {
+      title: `${name} | MythRealms Pearl & Gemstone Jewelry`,
+      description,
+      openGraph: {
+        title: name,
+        description,
+        images: [{ url: absoluteImageUrl(staticProduct.image) }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: name,
+        description,
+      },
+    };
+  }
   const product = await db.product.findUnique({ where: { slug }, select: { name: true, description: true, images: true, category: { select: { name: true } }, stone: true, variants: { select: { price: true }, orderBy: { price: "asc" } } } });
   if (!product) return { title: "Product Not Found — MythRealms" };
   const images = safeJsonParse<string[]>(product.images as string, []);
@@ -92,6 +136,8 @@ export default async function ProductPage({
   // Parse details for beast properties or stone properties
   const details = safeJsonParse<Record<string, unknown> | null>(product.details as string, null);
   const isCuratedStones = product.category?.slug === "curated-stones";
+  const stoneProperties = toPropertyDetails(details?.stoneProperties);
+  const mixedProperties = toPropertyDetails(details?.beastProperties ?? details?.stoneProperties);
 
   // Stone care instructions by type
   const stoneCare: Record<string, string> = {
@@ -126,11 +172,11 @@ export default async function ProductPage({
           )}
         </div>
       )}
-      {isCuratedStones && details?.stoneProperties ? (
+      {isCuratedStones && stoneProperties.length > 0 ? (
         <div>
           <h4 className="font-semibold text-[var(--text)] mb-2">Metaphysical Properties</h4>
           <ul className="space-y-2">
-            {(details.stoneProperties as any[]).map((sp: any, i: number) => (
+            {stoneProperties.map((sp, i) => (
               <li key={i} className="text-sm text-[var(--text-secondary)]">
                 <strong className="text-[var(--text)]">{sp.stone || sp.name}</strong> — {sp.benefit || sp.property}
               </li>
@@ -138,12 +184,12 @@ export default async function ProductPage({
           </ul>
         </div>
       ) : null}
-      {!isCuratedStones && (details?.beastProperties || details?.stoneProperties) ? (
+      {!isCuratedStones && mixedProperties.length > 0 ? (
         <div>
           <h4 className="font-semibold text-[var(--text)] mb-2">Stone Properties</h4>
           <ul className="space-y-2">
-            {((details.beastProperties || details.stoneProperties) as any[]).map(
-              (sp: any, i: number) => (
+            {mixedProperties.map(
+              (sp, i) => (
                 <li key={i} className="text-sm text-[var(--text-secondary)]">
                   <strong className="text-[var(--text)]">{sp.beast || sp.stone}</strong> — {sp.benefit}
                 </li>
@@ -296,7 +342,7 @@ export default async function ProductPage({
             label: "Refund Policy",
             content: (
               <div className="space-y-4 text-sm text-[var(--text-secondary)]">
-                <p>30-day money-back guarantee. Items must be unused and in original packaging. Return shipping at customer's expense unless due to our error.</p>
+                <p>30-day money-back guarantee. Items must be unused and in original packaging. Return shipping at customer&apos;s expense unless due to our error.</p>
                 <p>Contact: <strong>mythrealms@outlook.com</strong></p>
               </div>
             ),

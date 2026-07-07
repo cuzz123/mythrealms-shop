@@ -1,4 +1,4 @@
-// JSON-LD Structured Data for SEO Rich Snippets
+// JSON-LD structured data for SEO rich snippets.
 
 interface ProductSchemaProps {
   name: string;
@@ -17,10 +17,20 @@ interface ProductSchemaProps {
 }
 
 export function ProductJsonLd({
-  name, description, images, price, comparePrice, currency = "USD",
-  sku, availability = "InStock", ratingValue, reviewCount, url, brand = "MythRealms", category,
+  name,
+  description,
+  images,
+  price,
+  currency = "USD",
+  sku,
+  availability = "InStock",
+  ratingValue,
+  reviewCount,
+  url,
+  brand = "MythRealms",
+  category,
 }: ProductSchemaProps) {
-  const data: any = {
+  const data: Record<string, unknown> = {
     "@context": "https://schema.org/",
     "@type": "Product",
     name,
@@ -77,10 +87,9 @@ export function OrganizationJsonLd() {
     "@type": "Organization",
     name: "MythRealms",
     url: "https://mythrealms-shop.vercel.app",
-    description: "Intention-based crystal and pearl jewelry. Protection, love, clarity, abundance — each stone holds a purpose. Hand-selected. Artisan-finished. Wear your becoming.",
-    sameAs: [
-      "https://instagram.com/mythrealms.shop",
-    ],
+    description:
+      "Pearl and gemstone jewelry shaped around modern guardian archetypes, everyday intention, calm, renewal, boundaries, and soft power.",
+    sameAs: ["https://instagram.com/mythrealms.shop"],
     contactPoint: {
       "@type": "ContactPoint",
       email: "mythrealms@outlook.com",

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { PRODUCTS } from "@/lib/1688-products";
@@ -9,6 +9,7 @@ import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import toast from "react-hot-toast";
+import { productBenefitTriplet, productDisplayName, productShortDescription, realmForProduct } from "@/lib/brand";
 
 export function Product1688({ slug }: { slug: string }) {
   const product = PRODUCTS.find(p => p.slug === slug);
@@ -76,10 +77,14 @@ export function Product1688({ slug }: { slug: string }) {
     <div className="max-w-7xl mx-auto px-6 py-20 text-center">
       <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-4">Product Not Found</h1>
       <p className="text-[var(--text-muted)] mb-6">This product does not exist or may have been removed.</p>
-      <a href="/collections" className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">Browse Collections</a>
+      <Link href="/collections" className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">Browse Collections</Link>
     </div>
   );
   const p = product; // TS narrowing for closure below
+  const displayName = productDisplayName(p);
+  const displayDescription = productShortDescription(p);
+  const benefitTriplet = productBenefitTriplet(p);
+  const realm = realmForProduct(p);
   const images = p.images;
   const mainImg = images[activeIdx] || p.image;
   const hasCompare = p.compareAt && p.compareAt > p.price;
@@ -88,7 +93,7 @@ export function Product1688({ slug }: { slug: string }) {
     setAddToCartState("adding");
     addItem({
       id: p.id,
-      name: p.name,
+      name: displayName,
       slug: p.slug,
       image: p.image,
       price: p.price,
@@ -115,7 +120,7 @@ export function Product1688({ slug }: { slug: string }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           productId: p.id,
-          productName: p.name,
+          productName: displayName,
           email: notifyEmail.trim(),
         }),
       });
@@ -181,7 +186,7 @@ export function Product1688({ slug }: { slug: string }) {
   function handleShare() {
     const url = window.location.href;
     if (navigator.share) {
-      navigator.share({ title: p.name, url }).catch(() => {});
+      navigator.share({ title: displayName, url }).catch(() => {});
     } else {
       navigator.clipboard.writeText(url).then(
         () => toast.success("Link copied!"),
@@ -193,7 +198,7 @@ export function Product1688({ slug }: { slug: string }) {
   function handleToggleWishlist() {
     toggleWishlistItem({
       id: p.id,
-      name: p.name,
+      name: displayName,
       slug: p.slug,
       image: p.image,
       price: p.price,
@@ -222,8 +227,8 @@ export function Product1688({ slug }: { slug: string }) {
     <div className="max-w-7xl mx-auto px-6 py-10">
       {/* JSON-LD Structured Data */}
       <ProductJsonLd
-        name={p.name}
-        description={p.description}
+        name={displayName}
+        description={displayDescription}
         images={[p.image]}
         price={p.price}
         currency="USD"
@@ -233,7 +238,7 @@ export function Product1688({ slug }: { slug: string }) {
         items={[
           { name: "Home", url: "/" },
           { name: p.categoryName, url: `/collections/${p.category}` },
-          { name: p.name, url: `${siteUrl}/products/${p.slug}` },
+          { name: displayName, url: `${siteUrl}/products/${p.slug}` },
         ]}
       />
 
@@ -243,14 +248,14 @@ export function Product1688({ slug }: { slug: string }) {
         <span className="mx-2">/</span>
         <Link href={`/collections/${p.category}`} className="hover:text-[var(--accent)]">{p.categoryName}</Link>
         <span className="mx-2">/</span>
-        <span className="text-[var(--text)]">{p.name}</span>
+        <span className="text-[var(--text)]">{displayName}</span>
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         {/* Gallery */}
         <div>
           <div className="relative aspect-square rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
-            <LazyImage src={mainImg} alt={p.name} fill sizes="(max-width:1024px) 100vw, 50vw" priority className="object-cover" containerClassName="absolute inset-0" />
+            <LazyImage src={mainImg} alt={displayName} fill sizes="(max-width:1024px) 100vw, 50vw" priority className="object-cover" containerClassName="absolute inset-0" />
             {images.length > 1 && (
               <>
                 <button onClick={() => setActiveIdx(i => i > 0 ? i-1 : images.length-1)} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors">
@@ -267,7 +272,7 @@ export function Product1688({ slug }: { slug: string }) {
             <div className="grid grid-cols-6 gap-2 mt-3">
               {images.map((img, i) => (
                 <button key={i} onClick={() => setActiveIdx(i)} className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-colors ${i === activeIdx ? 'border-[var(--accent)]' : 'border-transparent hover:border-[var(--border)]'}`}>
-                  <LazyImage src={img} alt={`${p.name} ${i+1}`} fill sizes="80px" className="object-cover" containerClassName="absolute inset-0" />
+                  <LazyImage src={img} alt={`${displayName} ${i+1}`} fill sizes="80px" className="object-cover" containerClassName="absolute inset-0" />
                 </button>
               ))}
             </div>
@@ -276,9 +281,9 @@ export function Product1688({ slug }: { slug: string }) {
 
         {/* Product Info */}
         <div>
-          <p className="text-xs text-[var(--accent)] uppercase tracking-wider font-medium">{p.categoryName}</p>
+          <p className="text-xs text-[var(--accent)] uppercase tracking-wider font-medium">{realm}</p>
           <div className="flex items-start gap-2 mt-1.5">
-            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-[var(--text)] flex-1">{p.name}</h1>
+            <h1 className="font-serif text-2xl lg:text-3xl font-bold text-[var(--text)] flex-1">{displayName}</h1>
             <button
               onClick={handleToggleWishlist}
               className={`shrink-0 mt-1 w-9 h-9 flex items-center justify-center rounded-full border transition-all duration-200 ${
@@ -314,7 +319,7 @@ export function Product1688({ slug }: { slug: string }) {
           {/* Eco-friendly badge */}
           <div className="flex items-center gap-2 mt-3 text-xs text-[var(--success)]">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />
-            Natural stones · Elastic cord · Plastic-free packaging
+            Pearl & gemstone pieces - Gift-ready packaging - Everyday intention
           </div>
 
           {/* Social proof: X people viewing */}
@@ -330,7 +335,7 @@ export function Product1688({ slug }: { slug: string }) {
 
           {/* Delivery estimate */}
           <p className="mt-1.5 text-xs text-[var(--text-muted)]">
-            Free shipping over $69.99 · Delivered in 7-20 business days
+            Made to order - Free shipping over $69.99 - Ships in 7-15 business days
           </p>
 
           {/* Discount code badge */}
@@ -353,12 +358,13 @@ export function Product1688({ slug }: { slug: string }) {
           </div>
 
           <div className="mt-5 space-y-3 text-sm text-[var(--text-muted)] leading-relaxed">
-            <p>{p.description}</p>
-            <p>Material: Natural stone · Elastic fit · One size fits most</p>
-            <p>Hand-selected. Each piece is unique — natural stone variations are part of its character.</p>
+            <p>{displayDescription}</p>
+            <p className="text-[var(--accent)]">{benefitTriplet}</p>
+            <p>Material: Pearl, gemstone, or alloy components as shown - finished for everyday wear.</p>
+            <p>Each piece may vary slightly in tone and texture. That variation is part of its character.</p>
             {p.category !== "curated-singles" && (
               <p className="text-[var(--accent)]/80 italic">
-                From the {p.categoryName} — each piece in this collection is individually hand-finished.
+                From the {p.categoryName} - chosen for the {realm.toLowerCase()} realm.
               </p>
             )}
           </div>
@@ -368,7 +374,7 @@ export function Product1688({ slug }: { slug: string }) {
             <Info className="w-4 h-4 text-[#C8944A] mt-0.5 shrink-0" />
             <p className="text-xs text-[#A89880] leading-relaxed">
               <span className="font-semibold text-[#C8944A]">Care: </span>
-              Avoid water exposure. Store in a dry place. Clean with a soft cloth. Natural stones may vary slightly in color — this is a sign of authenticity, not a flaw.
+              Avoid water exposure. Store in a dry place. Clean with a soft cloth. Pearls and stones may vary slightly in color and luster.
             </p>
           </div>
 
@@ -387,7 +393,7 @@ export function Product1688({ slug }: { slug: string }) {
                 {notifyState === "submitted" ? (
                   <div className="flex items-center gap-2 text-sm text-[var(--success)]">
                     <Check className="w-4 h-4" />
-                    <span>You'll be notified when this item is back in stock!</span>
+                    <span>You&apos;ll be notified when this item is back in stock!</span>
                   </div>
                 ) : (
                   <form onSubmit={handleNotifyMe} className="space-y-2">
@@ -498,23 +504,23 @@ export function Product1688({ slug }: { slug: string }) {
               <div className="px-5 pb-5 space-y-4 border-t border-[var(--border)] pt-4">
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Materials</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Natural stone beads, elastic cord. Each bead is hand-selected for quality and character. Slight variations in color, pattern, and texture are expected and confirm the authenticity of natural gemstones.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Pearl, gemstone, or alloy components as shown in the product photography. Slight variations in color, pattern, and texture are expected in natural materials.</p>
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Sizing</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">One size fits most — designed for wrist sizes 6.5 to 7.5 inches (16.5–19 cm). The elastic cord provides a comfortable, flexible fit that adapts to your wrist. For custom sizing inquiries, contact us.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Bracelets are designed for most wrist sizes. Necklaces, earrings, and rings follow the size details shown in product imagery. Contact us before ordering if you need help choosing a fit.</p>
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Care Instructions</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Avoid prolonged water exposure — remove before swimming, showering, or bathing. Store in a dry place away from direct sunlight. Clean gently with a soft, dry cloth. Avoid contact with perfumes, lotions, and harsh chemicals.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Avoid prolonged water exposure. Remove before swimming, showering, or bathing. Store in a dry place away from direct sunlight. Clean gently with a soft, dry cloth.</p>
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">How to Wear Your Intention</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Hold your bracelet each morning. Close your eyes. Name one thing you are releasing — a fear, a worry, a story that no longer serves you. Name one thing you are inviting — a quality, a shift, a new way of being. Put the bracelet on your left wrist, the receiving side. When you notice it during the day — a brush against your desk, a glint in the light — let it remind you of the intention you set. This is not jewelry. This is practice.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Choose one word for the day: calm, renewal, boundaries, or soft power. Put the piece on before you leave. When you notice it in the light, let it bring you back to that word.</p>
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Shipping Info</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Free standard shipping on orders over $69.99. US delivery in 7–20 business days. International delivery in 14–21 business days. Each order is carefully packaged in a MythRealms gift box with a story card.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Free standard shipping on orders over $69.99. Most made-to-order pieces ship in 7-15 business days. Delivery timing can vary by destination and carrier.</p>
                 </div>
               </div>
             )}
@@ -653,9 +659,9 @@ export function Product1688({ slug }: { slug: string }) {
           <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-6">You May Also Like</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {related.map((rp) => (
-              <Link key={rp.slug} href={`/products/${rp.slug}`} className="group" aria-label={`View ${rp.name}`}>
+              <Link key={rp.slug} href={`/products/${rp.slug}`} className="group" aria-label={`View ${productDisplayName(rp)}`}>
                 <div className="aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
-                  <LazyImage src={rp.image} alt={rp.name} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
+                  <LazyImage src={rp.image} alt={productDisplayName(rp)} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
                   {rp.tag && (
                     <span className={`absolute top-3 left-3 text-[10px] font-semibold px-2 py-0.5 rounded-full ${rp.tag === 'New' ? 'bg-[var(--accent)]/20 text-[var(--accent)]' : 'bg-[var(--surface)]/80 text-[var(--text)]'}`}>
                       {rp.tag}
@@ -663,7 +669,7 @@ export function Product1688({ slug }: { slug: string }) {
                   )}
                 </div>
                 <div className="mt-2.5 px-1">
-                  <h3 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{rp.name}</h3>
+                  <h3 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{productDisplayName(rp)}</h3>
                   <div className="flex items-baseline gap-2 mt-0.5">
                     <span className="text-xs font-semibold text-[var(--text)]">{formatPrice(rp.price)}</span>
                     {rp.compareAt && rp.compareAt > rp.price && (
@@ -679,3 +685,4 @@ export function Product1688({ slug }: { slug: string }) {
     </div>
   );
 }
+

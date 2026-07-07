@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    let videoUrl: string;
+    let videoUrl = "";
     let taskId: string | undefined;
 
     switch (PROVIDER) {

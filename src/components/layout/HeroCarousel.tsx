@@ -1,32 +1,29 @@
-"use client";
+﻿"use client";
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 const slides = [
-  { image: "/images/1688-hero/轮播图1.webp", mobileImage: "/images/1688-hero-mobile/手机hero1.webp", title: "The Serenity Collection", subtitle: "Luminous freshwater & saltwater pearls for emotional balance · 20 styles", cta: "Shop Serenity", href: "/collections/pearl-series" },
-  { image: "/images/1688-hero/轮播图2.webp", mobileImage: "/images/1688-hero-mobile/手机hero2.webp", title: "The Archetypes", subtitle: "Six stones. Six intentions. No two alike. · 6 styles", cta: "Shop Archetypes", href: "/collections/curated-singles" },
-  { image: "/images/1688-hero/轮播图3.webp", mobileImage: "/images/1688-hero-mobile/手机hero3.webp", title: "Balance & Light", subtitle: "Where pearl meets crystal — pieces for those who hold both at once · 4 styles", cta: "Shop Balance", href: "/collections/pearl-crystal-series" },
-  { image: "/images/1688-hero/轮播图4.webp", mobileImage: "/images/1688-hero-mobile/手机hero4.webp", title: "The Archetypes", subtitle: "Six stones. Six intentions. No two alike. · 6 styles", cta: "Shop Archetypes", href: "/collections/curated-singles" },
+  { image: "/images/1688-hero/轮播图1.webp", mobileImage: "/images/1688-hero-mobile/手机hero1.webp", title: "Jewelry for the version of you you're becoming.", subtitle: "Pearl and gemstone pieces inspired by ancient Chinese celestial lore.", cta: "Find Your Guardian", href: "/guardian-quiz" },
+  { image: "/images/1688-hero/轮播图2.webp", mobileImage: "/images/1688-hero-mobile/手机hero2.webp", title: "The Pearl Realms", subtitle: "Moonlit pearls for calm, renewal, and quiet strength.", cta: "Shop Pearls", href: "/collections/pearl-series" },
+  { image: "/images/1688-hero/轮播图3.webp", mobileImage: "/images/1688-hero-mobile/手机hero3.webp", title: "Balance & Light", subtitle: "Where pearl meets crystal for thresholds, transitions, and new chapters.", cta: "Shop Balance", href: "/collections/pearl-crystal-series" },
+  { image: "/images/1688-hero/轮播图4.webp", mobileImage: "/images/1688-hero-mobile/手机hero4.webp", title: "Guardian Archetypes", subtitle: "Take the quiz. Find the intention that fits this season of you.", cta: "Take the Quiz", href: "/guardian-quiz" },
 ];
 
 const SWIPE_THRESHOLD = 50;
 
 export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [direction, setDirection] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
 
   const goNext = useCallback(() => {
-    setDirection(1);
     setCurrent((prev) => (prev + 1) % slides.length);
   }, []);
   const goPrev = useCallback(() => {
-    setDirection(-1);
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
   }, []);
 
@@ -110,7 +107,7 @@ export function HeroCarousel() {
                   <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                 ))}
               </span>
-              <span>Rated 4.8/5 by 500+ customers</span>
+              <span>Made for calm, renewal, boundaries, and soft power</span>
             </p>
             <div className="flex flex-wrap gap-3 pointer-events-auto">
               <Link href={slides[current].href} className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">
@@ -148,3 +145,4 @@ export function HeroCarousel() {
     </div>
   );
 }
+
