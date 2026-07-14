@@ -60,6 +60,7 @@ except Exception:
     traceback.print_exc()
     sys.stderr.flush()
     sys.stdout.flush()
+    # Blender background mode may return 0 after exceptions or sys.exit; os._exit exposes failure to CI.
     os._exit(1)
 
 print("RIGHT2_GOLD_MOTION_VALIDATION_OK")
