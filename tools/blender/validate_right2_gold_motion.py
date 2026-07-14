@@ -46,6 +46,31 @@ def sample_action(action_name, camera_name, start, end):
     return rows
 
 
+def check_head_yaw_monotonic(action_name, camera_name, start, end, max_decrease_deg=0.01):
+    scene = bpy.context.scene
+    rig = bpy.data.objects[RIG]
+    bpy.data.objects[camera_name]
+    rig.animation_data_create()
+    rig.animation_data.action = bpy.data.actions[action_name]
+    samples = []
+    for frame in range(start, end + 1):
+        scene.frame_set(frame)
+        yaw_deg = math.degrees(rig.pose.bones["head"].rotation_euler[1])
+        samples.append((frame, yaw_deg))
+    decreases = []
+    for i in range(1, len(samples)):
+        _, prev_yaw = samples[i - 1]
+        curr_frame, curr_yaw = samples[i]
+        delta = curr_yaw - prev_yaw
+        if delta < -max_decrease_deg:
+            decreases.append((curr_frame, delta))
+    if decreases:
+        details = ", ".join(f"frame {f}: Δ={d:.4f}°" for f, d in decreases)
+        raise AssertionError(
+            f"Head yaw decreased on {len(decreases)} frame(s) (expected monotonic increasing): {details}"
+        )
+
+
 def find_limit_failures(rows, bone_deg=2.0, camera_m=0.06, camera_deg=2.0, lens_mm=3.0):
     return [row for row in rows if row["bone_deg"] > bone_deg or row["camera_m"] > camera_m or row["camera_deg"] > camera_deg or row["lens_mm"] > lens_mm]
 
@@ -73,6 +98,10 @@ try:
         proto_bad = find_limit_failures(proto_rows, 1.25, 0.03, 1.0, 1.0)
         if proto_bad:
             failures.append(f"PROTOTYPE exceeded limits: {proto_bad[:10]}")
+        try:
+            check_head_yaw_monotonic(PROTOTYPE_ACTION, PROTOTYPE_CAMERA, 1, 72)
+        except AssertionError as e:
+            failures.append(str(e))
 
     if failures:
         raise AssertionError("\n".join(failures))

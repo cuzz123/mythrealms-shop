@@ -355,30 +355,50 @@ def create_motion_assets(rig):
             rig,
             "ACT_RIGHT2_GOLD_EARRING_REVEAL_01",
             [
-                {"frame": 1},
-                {"frame": 12},
-                {"frame": 28, "rotations": {
+                {"frame": 1, "rotations": {
                     "chest": (0.0, -0.018, 0.006),
                     "neck": (0.0, -0.045, 0.008),
                     "head": (-0.008, -0.09, 0.014),
                     "clavicle.L": (0.0, 0.0, -0.008),
                     "clavicle.R": (0.0, 0.0, 0.006),
                 }},
+                {"frame": 12, "rotations": {
+                    "chest": (0.0, -0.018, 0.006),
+                    "neck": (0.0, -0.045, 0.008),
+                    "head": (-0.008, -0.09, 0.014),
+                    "clavicle.L": (0.0, 0.0, -0.008),
+                    "clavicle.R": (0.0, 0.0, 0.006),
+                }},
+                {"frame": 28, "rotations": {
+                    "chest": (0.0, -0.009, 0.003),
+                    "neck": (0.004, -0.022, 0.004),
+                    "head": (0.004, -0.045, 0.007),
+                    "clavicle.L": (0.0, 0.0, -0.007),
+                    "clavicle.R": (0.0, 0.0, 0.005),
+                }},
                 {"frame": 44, "rotations": {
+                    "chest": (0.0, 0.002, -0.001),
+                    "neck": (0.008, 0.004, -0.001),
+                    "head": (0.012, 0.01, -0.002),
+                    "clavicle.L": (0.0, 0.0, -0.006),
+                    "clavicle.R": (0.0, 0.0, 0.004),
+                }},
+                {"frame": 56, "rotations": {
+                    "chest": (0.0, 0.009, -0.003),
+                    "neck": (0.009, 0.02, -0.004),
+                    "head": (0.014, 0.055, -0.009),
+                    "clavicle.L": (0.0, 0.0, -0.005),
+                    "clavicle.R": (0.0, 0.0, 0.0035),
+                }},
+                {"frame": 72, "rotations": {
                     "chest": (0.0, 0.012, -0.004),
                     "neck": (0.012, 0.025, -0.006),
                     "head": (0.018, 0.07, -0.012),
                     "clavicle.L": (0.0, 0.0, -0.004),
                     "clavicle.R": (0.0, 0.0, 0.003),
                 }},
-                {"frame": 56, "rotations": {
-                    "chest": (0.0, 0.009, -0.003),
-                    "neck": (0.009, 0.02, -0.004),
-                    "head": (0.014, 0.055, -0.009),
-                }},
-                {"frame": 72},
             ],
-            "Slow three-quarter turn that reveals the near earring and settles without a pose pop.",
+            "Monotonic one-direction turn ending in a held reveal pose.",
         )
     )
     return assets
