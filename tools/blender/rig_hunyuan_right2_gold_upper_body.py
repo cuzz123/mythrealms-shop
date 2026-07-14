@@ -11,6 +11,9 @@ MESH_NAME = "node_0"
 RIG_NAME = "RIG_RIGHT2_GOLD_UPPER_BODY"
 CAMERA_NAME = "CAM_RIGHT2_GOLD_UPPER_BODY_SHOWREEL"
 FOCUS_NAME = "DOF_RIGHT2_GOLD_UPPER_BODY"
+PROTO_CAM_NAME = "CAM_RIGHT2_GOLD_EARRING_REVEAL_TEST"
+PROTO_FOCUS_NAME = "FOCUS_RIGHT2_GOLD_EARRING_REVEAL_TEST"
+PROTO_ACTION_NAME = "ACT_RIGHT2_GOLD_EARRING_REVEAL_01"
 OUTPUT = Path(
     r"D:\mythrealms-shop\video-pipeline\asset-library\05-characters"
     r"\CHAR_HUNYUAN_RIGHT2_GOLD_001\RIGHT2_GOLD_RIGGED_UPPER_BODY_v1.blend"
@@ -405,16 +408,21 @@ def create_showreel_action(rig):
             "head": (0.0, -0.16, 0.0),
         }},
         {"frame": 68, "rotations": {
+            "chest": (0.0, -0.01, 0.0),
+            "neck": (0.0, -0.025, 0.0),
+            "head": (0.0, -0.05, 0.0),
+        }},
+        {"frame": 76, "rotations": {
             "chest": (0.0, 0.015, 0.0),
             "neck": (0.0, 0.03, 0.0),
             "head": (0.0, 0.06, 0.0),
         }},
-        {"frame": 80, "rotations": {
+        {"frame": 84, "rotations": {
             "chest": (0.0, 0.009, 0.0),
             "neck": (0.0, 0.018, 0.0),
             "head": (0.0, 0.035, 0.0),
         }},
-        {"frame": 88},
+        {"frame": 92},
         {"frame": 100, "rotations": {
             "neck": (-0.018, 0.0, 0.0),
             "head": (-0.06, 0.0, 0.0),
@@ -447,7 +455,7 @@ def create_showreel_action(rig):
     )
 
 
-def key_camera(camera, frame, location, target, lens):
+def key_camera(camera, frame, location, target, lens, fstop=None):
     location = Vector(location)
     target = Vector(target)
     camera.matrix_world = Matrix.LocRotScale(
@@ -459,6 +467,9 @@ def key_camera(camera, frame, location, target, lens):
     camera.keyframe_insert(data_path="rotation_euler", frame=frame)
     camera.data.lens = lens
     camera.data.keyframe_insert(data_path="lens", frame=frame)
+    if fstop is not None:
+        camera.data.dof.aperture_fstop = fstop
+        camera.data.dof.keyframe_insert(data_path="aperture_fstop", frame=frame)
 
 
 def create_camera_showreel():
@@ -505,6 +516,47 @@ def create_camera_showreel():
     return camera
 
 
+def create_prototype_camera():
+    """Earring-reveal prototype camera with separate focus empty and auto-clamped curves."""
+    remove_object(PROTO_CAM_NAME)
+    remove_object(PROTO_FOCUS_NAME)
+    cam_data = bpy.data.cameras.new(f"{PROTO_CAM_NAME}_DATA")
+    proto_cam = bpy.data.objects.new(PROTO_CAM_NAME, cam_data)
+    bpy.context.collection.objects.link(proto_cam)
+    proto_cam.rotation_mode = "XYZ"
+    cam_data.sensor_width = 36.0
+    cam_data.dof.use_dof = True
+    cam_data.dof.aperture_fstop = 2.2
+    cam_data.dof.aperture_blades = 9
+
+    proto_focus = bpy.data.objects.new(PROTO_FOCUS_NAME, None)
+    bpy.context.collection.objects.link(proto_focus)
+    proto_focus.empty_display_type = "SPHERE"
+    proto_focus.empty_display_size = 0.035
+    cam_data.dof.focus_object = proto_focus
+
+    keys = [
+        (1, (0.42, -1.52, 0.86), (0.04, 0.0, 0.94), 78.0, 2.2),
+        (24, (0.38, -1.47, 0.88), (0.055, 0.0, 0.97), 81.0, 2.0),
+        (48, (0.33, -1.41, 0.90), (0.07, 0.0, 0.99), 85.0, 1.8),
+        (72, (0.31, -1.39, 0.90), (0.07, 0.0, 0.99), 86.0, 1.8),
+    ]
+    for frame, location, target, lens, fstop in keys:
+        key_camera(proto_cam, frame, location, target, lens, fstop)
+        proto_focus.location = target
+        proto_focus.keyframe_insert(data_path="location", frame=frame)
+
+    # Clamp all fcurve handles via clamp_action_curves for Blender 5.1 layered actions support
+    for animated_id in (proto_cam, proto_focus, cam_data):
+        ad = animated_id.animation_data
+        if ad and ad.action:
+            clamp_action_curves(ad.action)
+
+    proto_cam["asset_id"] = ASSET_ID
+    proto_cam["shot_scope"] = "earring_reveal_prototype"
+    return proto_cam
+
+
 def configure_scene(camera):
     scene = bpy.context.scene
     scene.camera = camera
@@ -548,6 +600,14 @@ def main():
     rig.animation_data.action = showreel
     camera = create_camera_showreel()
     configure_scene(camera)
+    proto_cam = create_prototype_camera()
+    proto_action = bpy.data.actions.get(PROTO_ACTION_NAME)
+    if not proto_action:
+        raise RuntimeError(f"Missing prototype action {PROTO_ACTION_NAME}")
+    bpy.context.scene.camera = proto_cam
+    rig.animation_data.action = proto_action
+    bpy.context.scene.frame_start = 1
+    bpy.context.scene.frame_end = 72
     bpy.context.scene.frame_set(1)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     bpy.ops.wm.save_as_mainfile(filepath=str(OUTPUT))
@@ -555,7 +615,8 @@ def main():
     print("RIG", rig.name, "BONES", len(rig.data.bones))
     print("VERTICES", len(mesh_obj.data.vertices), "GROUPS", len(mesh_obj.vertex_groups))
     print("ACTIONS", [action.name for action in actions] + [showreel.name])
-    print("CAMERA", camera.name, "FRAMES", bpy.context.scene.frame_start, bpy.context.scene.frame_end)
+    print("CAMERA", proto_cam.name, "FRAMES", bpy.context.scene.frame_start, bpy.context.scene.frame_end)
+    print("LEGACY_CAMERA", camera.name, "LEGACY_FRAMES 1-240 STILL_PRESENT")
 
 
 if __name__ == "__main__":

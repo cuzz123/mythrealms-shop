@@ -1,0 +1,80 @@
+{
+  "id": "CHAR_HUNYUAN_RIGHT2_GOLD_001",
+  "status": "available_limited",
+  "role": "female_editorial_character_midshot_unrigged",
+  "format": ["blend", "glb", "obj_zip", "png"],
+  "source": {
+    "reference": "User-provided 右2 front / right-front / back contact sheet",
+    "generator": "Tencent Hunyuan 3D Pro 3.1",
+    "generation": {
+      "job_id": "1468535638567149568",
+      "model": "3.1",
+      "generate_type": "Normal",
+      "pbr": true,
+      "views": ["front", "right_front", "back"],
+      "credit_consumed": 40,
+      "credit_details": {
+        "GenerateType-Normal": 20,
+        "MultiViewImages": 10,
+        "Pbr": 10
+      }
+    }
+  },
+  "license": {
+    "type": "generated_from_user_reference",
+    "commercial_review_required": true,
+    "library_rule": "Retain the user-supplied reference and Hunyuan job record. Confirm source-image rights and Tencent service terms before external commercial release."
+  },
+  "geometry": {
+    "generated_bbox_m": {
+      "min": [-0.1889, -0.1629, 0.0],
+      "max": [0.2012, 0.1853, 1.1349]
+    },
+    "height_m": 1.1349,
+    "coverage": "head through above-knee gold dress silhouette; lower legs and shoes are not present",
+    "up_axis": "Z",
+    "forward_axis": "not yet normalized"
+  },
+  "rig": {
+    "status": "source_unrigged_with_upper_body_previs_variant",
+    "target_standard": "CHAR_HUMAN_MASTER_RIG_001",
+    "rigged_variant": {
+      "file": "RIGHT2_GOLD_RIGGED_UPPER_BODY_v1.blend",
+      "armature": "RIG_RIGHT2_GOLD_UPPER_BODY",
+      "bones": 15,
+      "scope": "upper_body_previs",
+      "actions": [
+        "ACT_RIGHT2_GOLD_IDLE_BREATH_01",
+        "ACT_RIGHT2_GOLD_SNAP_GLANCE_01",
+        "ACT_RIGHT2_GOLD_CHIN_LIFT_01",
+        "ACT_RIGHT2_GOLD_EDITORIAL_ARM_01",
+        "ACT_RIGHT2_GOLD_SIDE_LEAN_01",
+        "ACT_RIGHT2_GOLD_UPPER_BODY_SHOWREEL_01",
+        "ACT_RIGHT2_GOLD_EARRING_REVEAL_01"
+      ],
+      "camera": "CAM_RIGHT2_GOLD_UPPER_BODY_SHOWREEL",
+      "prototype_camera": "CAM_RIGHT2_GOLD_EARRING_REVEAL_TEST",
+      "prototype_action": "ACT_RIGHT2_GOLD_EARRING_REVEAL_01",
+      "prototype_frame_range": [1, 72],
+      "frame_range": [1, 240],
+      "fps": 24
+    },
+    "required_before_motion_use": [
+      "Create or generate full lower-body geometry",
+      "Retopology and A-pose alignment",
+      "Bind to CHAR_HUMAN_MASTER_RIG_001",
+      "Validate shoulders, elbows, neck and facial silhouette at shot distance"
+    ]
+  },
+  "files": {
+    "preview_blend": "RIGHT2_GOLD.blend",
+    "thumbnail": "Thumbnail.png",
+    "hunyuan_preview": "source/hunyuan-raw/HunyuanPreview.png",
+    "source_glb": "source/hunyuan-raw/RIGHT2_GOLD.glb",
+    "source_obj_zip": "source/hunyuan-raw/RIGHT2_GOLD.obj.zip",
+    "job_record": "job.json",
+    "rigged_upper_body": "RIGHT2_GOLD_RIGGED_UPPER_BODY_v1.blend",
+    "rigging_report": "Rigging.md"
+  },
+  "quality_boundary": "A high-fidelity, textured gold-dress character for close and medium previs. The rigged variant supports restrained head, neck, spine, shoulder and arm motion. It is not a full-body animation asset: lower legs and shoes are absent, and the source mesh has no production retopology."
+}
