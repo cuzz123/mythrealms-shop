@@ -56,4 +56,6 @@ in the file for validation runs.
 
 The Hunyuan source is a single 320k-vertex mesh without production retopology and ends above the knees. The armature is intentionally limited to restrained upper-body previs. Do not use it for walking, full-body staging, large elbow raises, cloth simulation, or final commercial character delivery without retopology and corrective weight work.
 
-Validation renders are stored under `preview/rig_v3_final/`.
+Latest earring-reveal validation renders are stored under
+`preview/rig_v5_earring_reveal/`. The H.264 preview is
+`preview/rig_v5_earring_reveal/RIGHT2_GOLD_EARRING_REVEAL_PREVIEW.mp4`.
