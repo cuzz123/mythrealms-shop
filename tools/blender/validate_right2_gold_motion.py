@@ -46,16 +46,36 @@ def sample_action(action_name, camera_name, start, end):
     return rows
 
 
+def find_limit_failures(rows, bone_deg=2.0, camera_m=0.06, camera_deg=2.0, lens_mm=3.0):
+    return [row for row in rows if row["bone_deg"] > bone_deg or row["camera_m"] > camera_m or row["camera_deg"] > camera_deg or row["lens_mm"] > lens_mm]
+
+
 def assert_limits(rows, bone_deg=2.0, camera_m=0.06, camera_deg=2.0, lens_mm=3.0):
-    failures = [row for row in rows if row["bone_deg"] > bone_deg or row["camera_m"] > camera_m or row["camera_deg"] > camera_deg or row["lens_mm"] > lens_mm]
+    failures = find_limit_failures(rows, bone_deg, camera_m, camera_deg, lens_mm)
     assert not failures, failures[:10]
 
 
 try:
-    assert_limits(sample_action(LEGACY_ACTION, "CAM_RIGHT2_GOLD_UPPER_BODY_SHOWREEL", 1, 240))
-    assert PROTOTYPE_ACTION in bpy.data.actions, f"Missing {PROTOTYPE_ACTION}"
-    assert PROTOTYPE_CAMERA in bpy.data.objects, f"Missing {PROTOTYPE_CAMERA}"
-    assert_limits(sample_action(PROTOTYPE_ACTION, PROTOTYPE_CAMERA, 1, 72), bone_deg=1.25, camera_m=0.03, camera_deg=1.0, lens_mm=1.0)
+    failures = []
+
+    if PROTOTYPE_ACTION not in bpy.data.actions:
+        failures.append(f"Missing {PROTOTYPE_ACTION}")
+    if PROTOTYPE_CAMERA not in bpy.data.objects:
+        failures.append(f"Missing {PROTOTYPE_CAMERA}")
+
+    legacy_rows = sample_action(LEGACY_ACTION, "CAM_RIGHT2_GOLD_UPPER_BODY_SHOWREEL", 1, 240)
+    legacy_bad = find_limit_failures(legacy_rows)
+    if legacy_bad:
+        failures.append(f"LEGACY_ACTION exceeded limits: {legacy_bad[:10]}")
+
+    if PROTOTYPE_ACTION in bpy.data.actions and PROTOTYPE_CAMERA in bpy.data.objects:
+        proto_rows = sample_action(PROTOTYPE_ACTION, PROTOTYPE_CAMERA, 1, 72)
+        proto_bad = find_limit_failures(proto_rows, 1.25, 0.03, 1.0, 1.0)
+        if proto_bad:
+            failures.append(f"PROTOTYPE exceeded limits: {proto_bad[:10]}")
+
+    if failures:
+        raise AssertionError("\n".join(failures))
 except Exception:
     traceback.print_exc()
     sys.stderr.flush()
