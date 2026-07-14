@@ -1,69 +1,69 @@
-# Operations Hub Design
+# 运营中枢设计
 
-## Goal
+## 目标
 
-Build an admin-only operating hub for MythRealms that turns manually submitted 1688 product candidates, Outlook inbox activity, storefront operations, Pinterest publishing state, and optional GA4 metrics into actionable daily work.
+为 MythRealms 建立仅管理员可用的运营中枢，将手动提交的 1688 选品候选、Outlook 收件箱活动、独立站运营数据、Pinterest 发布状态和可选的 GA4 指标转化为每天可执行的运营动作。
 
-## Scope
+## 范围
 
-The first release contains three independent modules that share the existing admin authentication and Prisma database.
+第一期包含三个独立模块，共用现有管理员认证和 Prisma 数据库。
 
-### 1688 Candidate Review
+### 1688 候选审核
 
-An administrator creates a candidate by pasting a 1688 product URL and entering procurement price in CNY, minimum order quantity, estimated shipping cost in CNY, material and specification notes, supplier name, and whether the supplier supports dropshipping.
+管理员粘贴 1688 商品链接，并填写人民币采购单价、起订量、人民币预估运费、材质和规格备注、供应商名称，以及供应商是否支持一件代发。
 
-The system calculates a deterministic score from margin, MOQ, dropshipping support, source-data completeness, and material-risk flags. It displays an estimated landed cost in USD and a suggested selling price. Candidates remain internal review records with `PENDING`, `SAVED`, or `REJECTED` status. The system does not scrape 1688 or publish candidates as storefront products.
+系统根据毛利、起订量、一件代发能力、源数据完整度和材质风险标记计算确定性评分，并展示预估美元落地成本和建议零售价。候选只作为内部审核记录，状态为 `PENDING`、`SAVED` 或 `REJECTED`。系统不抓取 1688，也不会将候选自动发布为独立站商品。
 
-### Outlook Inbox Automation
+### Outlook 收件箱自动化
 
-Microsoft Graph change notifications deliver new inbox activity to a protected webhook. The system retrieves the email, deduplicates it, classifies it, records an audit event, and takes one of two actions.
+Microsoft Graph 变更通知会将新的收件箱活动送到受保护的 Webhook。系统随后读取邮件、去重、分类、写入审计事件，并执行以下两类动作。
 
-- A known order-status or tracked-shipping inquiry receives a template reply only when the matched order data is sufficient.
-- A common FAQ receives one template reply per conversation in a 24-hour period.
-- Refunds, cancellations, address changes, product-quality complaints, payment disputes, supplier negotiations, and uncertain messages create a high-priority review item and reply draft only.
+- 已匹配订单且物流信息足够的订单状态或物流查询，会收到模板自动回复。
+- 常见问题会收到模板自动回复，同一会话 24 小时内最多自动回复一次。
+- 退款、取消订单、改地址、产品质量投诉、支付争议、供应商议价和无法确定意图的邮件，只生成高优先级审核项和回复草稿。
 
-The system never automatically refunds, cancels orders, edits shipping addresses, or sends marketing campaigns. Microsoft refresh credentials are encrypted before database storage. Webhook validation, client-state verification, idempotency, and failures are recorded.
+系统绝不自动退款、取消订单或修改收货地址。Microsoft Refresh Token 会加密后保存；Webhook 验证、`clientState` 验证、幂等控制和错误信息都会记录。
 
-### Daily Operating Report
+### 每日运营日报
 
-At 09:00 Asia/Shanghai time, the daily Cron generates an operations report containing orders, low-stock signals, Pinterest draft and publish activity, candidate-review counts, email exceptions, and optional GA4 traffic and ecommerce funnel metrics. The report is stored in the database, displayed in the admin hub, and delivered to `mythrealms@outlook.com`.
+每天 Asia/Shanghai 时区 09:00，Cron 生成运营日报，内容包括订单、低库存信号、Pinterest 草稿与发布活动、选品候选数量、邮箱异常，以及可选的 GA4 流量和电商漏斗指标。日报保存到数据库、显示在运营中枢后台，并发送到 `mythrealms@outlook.com`。
 
-GA4 is an optional integration. A missing GA4 configuration produces an explicit unconfigured section without failing the report.
+GA4 是可选集成。缺失 GA4 配置时，日报会明确显示该部分尚未配置，但整份日报仍会正常生成。
 
-## Architecture
+## 架构
 
-The admin route `/admin/operations` presents three tabs: Daily Report, 1688 Candidates, and Inbox Queue. Each tab reads only from internal APIs protected by the existing `ADMIN` role check.
+管理员路由 `/admin/operations` 使用三个标签页：每日日报、1688 候选和收件箱队列。各标签只调用现有 `ADMIN` 角色保护下的内部 API。
 
-Server-side integrations are isolated behind focused modules:
+服务端集成分为职责单一的模块：
 
-- `operations/candidate-scoring` owns candidate validation, deterministic costs, and scoring.
-- `operations/reporting` assembles daily report sections from orders, inventory, Pinterest drafts, candidate state, mailbox activity, and the optional GA4 adapter.
-- `operations/outlook` owns Graph authentication, subscription handling, message retrieval, classification, templates, and sending rules.
+- `operations/candidate-scoring`：候选验证、确定性成本计算和评分。
+- `operations/reporting`：从订单、库存、Pinterest 草稿、候选状态、邮箱活动和可选 GA4 适配器组装日报。
+- `operations/outlook`：Graph 授权、订阅处理、邮件读取、分类、模板和发送规则。
 
-The current daily Pinterest Cron is moved to 01:00 UTC, which is 09:00 in Asia/Shanghai, and invokes the daily operating report after its Pinterest tasks. A separate Graph subscription renewal job runs with the daily Cron. Inbox replies are event-driven through Graph notifications rather than daily polling.
+现有 Pinterest 每日 Cron 调整为 `01:00 UTC`，即 Asia/Shanghai 时间 09:00，并在 Pinterest 任务完成后生成运营日报。每日 Cron 也负责续订 Graph 订阅。收件箱回复通过 Graph 通知事件实时处理，不依赖每天轮询。
 
-## Data Model
+## 数据模型
 
-`SourcingCandidate` stores supplier input, calculated costs, recommendation score, score explanation, review status, and review timestamps.
+`SourcingCandidate` 保存供应商输入、计算后的成本、推荐评分、评分说明、审核状态和审核时间。
 
-`OperationsReport` stores the report date, serialized sections, email-delivery result, and generation timestamps. A unique date key makes daily generation idempotent.
+`OperationsReport` 保存日期、序列化后的报告区块、邮件发送结果和生成时间。唯一日期键保证同一天的日报幂等。
 
-`MailboxAutomationEvent` stores the Graph message and conversation identifiers, classification, selected action, automated-send result, draft identifier, error details, and timestamps. A unique Graph message ID prevents repeated processing.
+`MailboxAutomationEvent` 保存 Graph 邮件和会话标识、分类、选定动作、自动发送结果、草稿标识、错误信息和时间。唯一 Graph 邮件 ID 防止重复处理。
 
-`MicrosoftGraphCredential` stores the encrypted refresh token, token expiry, subscription identifier, subscription expiry, and mailbox address. Only one enabled mailbox is supported in this release.
+`MicrosoftGraphCredential` 保存加密的 Refresh Token、Token 过期时间、订阅标识、订阅过期时间和邮箱地址。第一期仅支持一个启用的邮箱。
 
-## Configuration
+## 配置
 
-The release requires Microsoft Graph app credentials and a 32-byte application encryption key. It optionally accepts GA4 property and service-account credentials. All values are server-only environment variables and are never exposed through `NEXT_PUBLIC_` variables.
+该版本需要 Microsoft Graph 应用凭据和 32 字节应用加密密钥；GA4 Property 和服务账号凭据为可选配置。所有值都是仅服务端环境变量，绝不使用 `NEXT_PUBLIC_` 前缀暴露。
 
-## Error Handling
+## 错误处理
 
-An unavailable external provider does not make candidate review or the rest of the operations dashboard unavailable. The corresponding section reports a configuration or delivery failure. Message processing retries only for transient Graph failures and does not send a second reply after a completed automation event.
+外部服务不可用时，不能使候选审核或运营后台其他部分不可用；对应区块会显示配置或发送失败。邮件处理只对临时性 Graph 错误重试，并且对已完成的自动化事件绝不发送第二次回复。
 
-## Verification
+## 验证
 
-Unit tests cover CNY-to-USD calculation, margin scoring, incomplete-candidate handling, classifier outcomes, and the no-auto-send rules. Route tests cover admin authorization, webhook verification, duplicate-message handling, and daily report idempotency. The completed feature also requires Prisma validation, targeted linting, production build, and browser checks for the admin flow.
+单元测试覆盖 CNY 到 USD 计算、毛利评分、候选信息不完整处理、邮件分类结果和禁止自动发送的规则。路由测试覆盖管理员认证、Webhook 验证、重复邮件处理和日报幂等。完成后还需运行 Prisma 校验、针对性 lint、生产构建，以及后台流程的浏览器验证。
 
-## Out of Scope
+## 不在第一期范围内
 
-This release excludes 1688 scraping, 1688 official API synchronization, automatic storefront publishing, automatic refunds, address modifications, marketing-email campaigns, multiple inboxes, and a user-facing Outlook connection wizard.
+第一期不包含 1688 抓取、1688 官方 API 同步、自动发布独立站商品、自动退款、自动改地址、营销邮件群发、多邮箱支持，以及面向用户的 Outlook 连接向导。
