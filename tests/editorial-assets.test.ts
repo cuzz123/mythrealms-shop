@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { isAbsolute, relative, resolve, sep } from "node:path";
 import test from "node:test";
 import manifest from "../assets/product-imagery/pilot-manifest.json";
 import {
@@ -15,6 +15,32 @@ const PILOT_SLUGS = [
   "new-series-pearl-dreamcatcher-lariat",
   "new-series-pearl-glasses-chain",
 ];
+
+function styleReferencePath(styleReferenceRoot: string, reference: string): string {
+  assert.equal(isAbsolute(reference), false, `style reference must be relative: ${reference}`);
+  assert.equal(reference.split(/[\\/]+/).includes(".."), false, `style reference may not traverse: ${reference}`);
+
+  const resolvedPath = resolve(styleReferenceRoot, reference);
+  const pathWithinRoot = relative(styleReferenceRoot, resolvedPath);
+  assert.notEqual(pathWithinRoot, "", `style reference must resolve to a file: ${reference}`);
+  assert.equal(isAbsolute(pathWithinRoot), false, `style reference escapes the local pack: ${reference}`);
+  assert.equal(pathWithinRoot.startsWith(`..${sep}`), false, `style reference escapes the local pack: ${reference}`);
+  return resolvedPath;
+}
+
+function collectStrings(value: unknown): string[] {
+  if (typeof value === "string") return [value];
+  if (Array.isArray(value)) return value.flatMap(collectStrings);
+  if (value === null || typeof value !== "object") return [];
+  return Object.values(value).flatMap(collectStrings);
+}
+
+function assertPortableManifestStrings(value: unknown, generatedImagesRoot: string): void {
+  for (const entry of collectStrings(value)) {
+    assert.doesNotMatch(entry, /C:\\Users/);
+    assert.equal(entry.includes(generatedImagesRoot), false);
+  }
+}
 
 test("pilot manifest defines five representative products and four ordered slots", () => {
   assert.deepEqual(manifest.products.map((product) => product.slug), PILOT_SLUGS);
@@ -37,12 +63,33 @@ test("every manifest style reference is available from the curated local pack", 
 
   for (const product of manifest.products) {
     for (const reference of product.styleReferences) {
-      assert.equal(existsSync(resolve(styleReferenceRoot, reference)), true, `${product.slug}: ${reference}`);
+      assert.equal(existsSync(styleReferencePath(styleReferenceRoot, reference)), true, `${product.slug}: ${reference}`);
     }
   }
 
   const { referenceRoot: _referenceRoot, ...portableManifest } = manifest;
-  assert.doesNotMatch(JSON.stringify(portableManifest), /C:\\Users/);
+  assertPortableManifestStrings(portableManifest, manifest.referenceRoot);
+});
+
+test("style reference path guard rejects traversal segments", () => {
+  const styleReferenceRoot = resolve(process.cwd(), "assets/product-imagery/style-references");
+
+  assert.throws(() => styleReferencePath(styleReferenceRoot, "../escape.png"));
+});
+
+test("style reference path guard rejects absolute Windows paths", () => {
+  const styleReferenceRoot = resolve(process.cwd(), "assets/product-imagery/style-references");
+
+  assert.throws(() => styleReferencePath(styleReferenceRoot, "C:\\Users\\11458\\escape.png"));
+});
+
+test("portable manifest check rejects nested source-machine paths", () => {
+  assert.throws(() =>
+    assertPortableManifestStrings(
+      { nested: { generatedSource: `${manifest.referenceRoot}\\escape.png` } },
+      manifest.referenceRoot,
+    ),
+  );
 });
 
 test("review generator renders missing outputs as visible empty states", async () => {
