@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "referenceRoot": "C:\\Users\\11458\\.codex\\generated_images\\019f4467-ba2f-7870-96c2-66c210cfcd72",
+  "products": [
+    {
+      "slug": "pearl-series-01",
+      "kind": "ring",
+      "sourceReferences": [
+        "public/images/products/1688-shop/pearl-series/pearl-series-01-main.webp",
+        "public/images/products/1688-shop/pearl-series/pearl-series-01-detail1.webp",
+        "public/images/products/1688-shop/pearl-series/pearl-series-01-detail3.webp"
+      ],
+      "styleReferences": ["product-warm-linen-ring.png", "pose-empty-hand-linen.png", "scene-cafe-terrace.png"],
+      "outputs": {
+        "main": "public/images/products/editorial-v2/pearl-series-01/01-main.webp",
+        "on-model": "public/images/products/editorial-v2/pearl-series-01/02-on-model.webp",
+        "macro": "public/images/products/editorial-v2/pearl-series-01/03-macro.webp",
+        "lifestyle": "public/images/products/editorial-v2/pearl-series-01/04-lifestyle.webp"
+      },
+      "status": "draft"
+    },
+    {
+      "slug": "new-series-round-shell-disc-drops",
+      "kind": "earrings",
+      "sourceReferences": [
+        "public/images/products/new-series/new-series-round-shell-disc-drops/main.jpg",
+        "public/images/products/new-series/new-series-round-shell-disc-drops/detail-02.jpg",
+        "public/images/products/new-series/new-series-round-shell-disc-drops/detail-06.jpg",
+        "public/images/products/new-series/new-series-round-shell-disc-drops/detail-07.jpg"
+      ],
+      "styleReferences": ["product-warm-white-earrings.png", "model-mediterranean-earring-sun.png", "scene-olive-courtyard.png"],
+      "outputs": {
+        "main": "public/images/products/editorial-v2/new-series-round-shell-disc-drops/01-main.webp",
+        "on-model": "public/images/products/editorial-v2/new-series-round-shell-disc-drops/02-on-model.webp",
+        "macro": "public/images/products/editorial-v2/new-series-round-shell-disc-drops/03-macro.webp",
+        "lifestyle": "public/images/products/editorial-v2/new-series-round-shell-disc-drops/04-lifestyle.webp"
+      },
+      "status": "draft"
+    },
+    {
+      "slug": "new-series-shell-twist-pearl-cuff",
+      "kind": "bracelet",
+      "sourceReferences": [
+        "public/images/products/new-series/new-series-shell-twist-pearl-cuff/main.jpg",
+        "public/images/products/new-series/new-series-shell-twist-pearl-cuff/detail-01.jpg",
+        "public/images/products/new-series/new-series-shell-twist-pearl-cuff/detail-02.jpg",
+        "public/images/products/new-series/new-series-shell-twist-pearl-cuff/detail-05.jpg"
+      ],
+      "styleReferences": ["product-baroque-bracelet-cream.png", "model-bracelet-cafe.png", "scene-seaside-stairs.png"],
+      "outputs": {
+        "main": "public/images/products/editorial-v2/new-series-shell-twist-pearl-cuff/01-main.webp",
+        "on-model": "public/images/products/editorial-v2/new-series-shell-twist-pearl-cuff/02-on-model.webp",
+        "macro": "public/images/products/editorial-v2/new-series-shell-twist-pearl-cuff/03-macro.webp",
+        "lifestyle": "public/images/products/editorial-v2/new-series-shell-twist-pearl-cuff/04-lifestyle.webp"
+      },
+      "status": "draft"
+    },
+    {
+      "slug": "new-series-pearl-dreamcatcher-lariat",
+      "kind": "necklace",
+      "sourceReferences": [
+        "public/images/products/new-series/new-series-pearl-dreamcatcher-lariat/main.jpg",
+        "public/images/products/new-series/new-series-pearl-dreamcatcher-lariat/detail-01.jpg"
+      ],
+      "styleReferences": ["product-pearl-necklace-linen.png", "model-black-necklace-pool.png", "scene-pool-courtyard.png"],
+      "outputs": {
+        "main": "public/images/products/editorial-v2/new-series-pearl-dreamcatcher-lariat/01-main.webp",
+        "on-model": "public/images/products/editorial-v2/new-series-pearl-dreamcatcher-lariat/02-on-model.webp",
+        "macro": "public/images/products/editorial-v2/new-series-pearl-dreamcatcher-lariat/03-macro.webp",
+        "lifestyle": "public/images/products/editorial-v2/new-series-pearl-dreamcatcher-lariat/04-lifestyle.webp"
+      },
+      "status": "draft"
+    },
+    {
+      "slug": "new-series-pearl-glasses-chain",
+      "kind": "eyewear-chain",
+      "sourceReferences": [
+        "public/images/products/new-series/new-series-pearl-glasses-chain/main.jpg",
+        "public/images/products/new-series/new-series-pearl-glasses-chain/detail-01.jpg",
+        "public/images/products/new-series/new-series-pearl-glasses-chain/detail-02.jpg",
+        "public/images/products/new-series/new-series-pearl-glasses-chain/detail-03.jpg"
+      ],
+      "styleReferences": ["product-eyewear-chain-dark.png", "model-short-bob-blue-linen.png", "scene-flower-storefront.png"],
+      "outputs": {
+        "main": "public/images/products/editorial-v2/new-series-pearl-glasses-chain/01-main.webp",
+        "on-model": "public/images/products/editorial-v2/new-series-pearl-glasses-chain/02-on-model.webp",
+        "macro": "public/images/products/editorial-v2/new-series-pearl-glasses-chain/03-macro.webp",
+        "lifestyle": "public/images/products/editorial-v2/new-series-pearl-glasses-chain/04-lifestyle.webp"
+      },
+      "status": "draft"
+    }
+  ]
+}
