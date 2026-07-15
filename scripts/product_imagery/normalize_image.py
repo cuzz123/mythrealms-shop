@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from PIL import Image
@@ -9,6 +10,11 @@ RATIO_TOLERANCE = 0.01
 
 
 def normalize_image(source: Path, destination: Path) -> None:
+    if source.resolve(strict=False) == destination.resolve(strict=False) or (
+        source.exists() and destination.exists() and os.path.samefile(source, destination)
+    ):
+        raise ValueError("source and destination must not reference the same file")
+
     with Image.open(source) as image:
         ratio = image.width / image.height
         if abs(ratio - TARGET_RATIO) > RATIO_TOLERANCE:

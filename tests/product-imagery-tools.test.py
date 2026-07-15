@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -45,6 +46,32 @@ class NormalizeImageTest(unittest.TestCase):
 
             with self.assertRaisesRegex(ValueError, "4:5"):
                 normalize_image(source, root / "output.webp")
+
+    def test_rejects_an_identical_source_and_destination_without_mutating_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "source.png"
+            Image.new("RGB", (800, 1000), "white").save(source)
+            source_bytes = source.read_bytes()
+
+            with self.assertRaisesRegex(ValueError, "source and destination"):
+                normalize_image(source, source)
+
+            self.assertEqual(source.read_bytes(), source_bytes)
+
+    def test_rejects_a_hard_link_destination_without_mutating_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source.png"
+            destination = root / "source-alias.png"
+            Image.new("RGB", (800, 1000), "white").save(source)
+            os.link(source, destination)
+            source_bytes = source.read_bytes()
+
+            with self.assertRaisesRegex(ValueError, "source and destination"):
+                normalize_image(source, destination)
+
+            self.assertEqual(source.read_bytes(), source_bytes)
+            self.assertEqual(destination.read_bytes(), source_bytes)
 
 
 class ProductImageryRepositoryTestCase(unittest.TestCase):
@@ -169,10 +196,11 @@ class PackageValidationTest(ProductImageryRepositoryTestCase):
 
         self.assertEqual(validate_manifest(self.manifest_path, require_outputs=True), [])
 
-    def test_draft_package_permits_missing_outputs(self):
-        self.write_manifest(status="draft")
+    def test_draft_package_permits_missing_output_files_with_complete_mappings(self):
+        outputs = self.write_manifest(status="draft")
         self.write_hashes()
 
+        self.assertEqual(set(outputs), set(EXPECTED_OUTPUTS))
         self.assertEqual(validate_manifest(self.manifest_path, require_outputs=True), [])
 
     def test_rejects_an_invalid_slot_filename(self):
