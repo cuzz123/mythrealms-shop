@@ -427,7 +427,7 @@ def configure_scene(camera):
         scene.timeline_markers.new(name, frame=frame)
 
 
-def main():
+def build_retired_proxy_validation():
     bpy.ops.wm.open_mainfile(filepath=str(SOURCE))
     scene = bpy.context.scene
     rig = bpy.data.objects[RIG_NAME]
@@ -447,6 +447,15 @@ def main():
     scene.frame_set(1)
     bpy.ops.wm.save_as_mainfile(filepath=str(OUTPUT))
     print(f"RIGHT2_JEWELRY_VALIDATION_BLEND_CREATED={OUTPUT}")
+
+
+def main():
+    raise RuntimeError(
+        "This proxy-arm validator is retired because the fragmented RIGHT2 mesh "
+        "cannot provide anatomical motion validation. Use "
+        "build_jewelry_motion_makehuman_validation.py until RIGHT2 has clean "
+        "topology and production skin weights."
+    )
 
 
 if __name__ == "__main__":
