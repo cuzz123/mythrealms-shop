@@ -154,7 +154,7 @@ export default function RefundPage() {
             <li>Original shipping charges are <strong>non-refundable</strong> (except in cases where the return is due to our error)</li>
           </ul>
           <p>
-            If you have not received your refund within 15 business days of approval, please first check with your bank or credit card company, then contact us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a>.
+            If you have not received your refund within 15 business days of approval, please first check with PayPal or your financial institution, then contact us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a>.
           </p>
         </section>
 
@@ -196,7 +196,7 @@ export default function RefundPage() {
           </p>
           <ul className="list-disc pl-6 space-y-2 mb-4">
             <li>Check your bank account again — processing times vary by institution</li>
-            <li>Contact your credit card company or bank — they may have a holding period before posting the refund</li>
+            <li>Contact PayPal or your financial institution; they may have a holding period before posting the refund</li>
             <li>If you still have not received it, contact us at <a href="mailto:mythrealms@outlook.com" className="text-[var(--accent)] hover:underline">mythrealms@outlook.com</a></li>
           </ul>
         </section>

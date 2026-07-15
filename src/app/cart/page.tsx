@@ -147,12 +147,9 @@ export default function CartPage() {
           <Link href="/checkout">
             <Button variant="primary" size="lg" className="w-full mt-6">Proceed to Checkout</Button>
           </Link>
-          <div className="flex justify-center gap-3 mt-4">
-            <span className="text-[10px] text-[var(--text-muted)] font-semibold">VISA</span>
-            <span className="text-[10px] text-[var(--text-muted)] font-semibold">MC</span>
-            <span className="text-[10px] text-[var(--text-muted)] font-semibold">AMEX</span>
-            <span className="text-[10px] text-[var(--text-muted)] font-semibold">PayPal</span>
-          </div>
+          <p className="mt-4 text-center text-xs font-semibold text-[var(--text-muted)]">
+            Checkout securely with PayPal
+          </p>
           <Link href="/collections/curated-singles" className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mt-6 justify-center"><ArrowLeft className="w-4 h-4" /> Continue Shopping</Link>
         </div>
       </div>

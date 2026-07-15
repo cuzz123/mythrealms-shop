@@ -37,7 +37,7 @@ const faqs = [
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept major cards and PayPal checkout. Payment options may vary slightly by country and are shown at checkout.",
+    a: "We currently accept PayPal checkout. Funding options shown inside PayPal vary by account and country.",
     cat: "order",
   },
   {

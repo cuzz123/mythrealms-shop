@@ -82,7 +82,7 @@ export default function PrivacyPage() {
           <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">4. How We Share Your Information</h2>
           <p className="mb-3">We may share your information with trusted third-party service providers who help us operate our business, including:</p>
           <ul className="list-disc pl-6 space-y-2 mb-4">
-            <li><strong>Payment Processors:</strong> To securely process your payments (e.g., Stripe, PayPal)</li>
+            <li><strong>Payment Processor:</strong> PayPal processes payments. Payment credentials are handled by PayPal and are not stored by MythRealms.</li>
             <li><strong>Shipping Carriers:</strong> To deliver your orders (e.g., DHL, FedEx, local postal services)</li>
             <li><strong>Email Service Providers:</strong> To send transactional and marketing emails</li>
             <li><strong>Analytics Providers:</strong> To understand how visitors use our website (e.g., Google Analytics)</li>
@@ -122,7 +122,6 @@ export default function PrivacyPage() {
             <li>Secure, encrypted storage of sensitive data</li>
             <li>Regular security audits and vulnerability assessments</li>
             <li>Strict access controls limiting employee access to personal data</li>
-            <li>PCI-DSS compliant payment processing (we never store full credit card numbers)</li>
           </ul>
           <p>
             However, no method of electronic transmission or storage is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.

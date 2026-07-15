@@ -93,7 +93,7 @@ export default function TermsPage() {
             All prices are listed in US Dollars (USD) unless otherwise stated. Prices are subject to change without notice. We are not responsible for pricing errors or inaccuracies displayed on the Website.
           </p>
           <p className="mb-3">
-            We accept Visa, Mastercard, American Express, Discover, PayPal, Google Pay, and Apple Pay. By providing payment information, you represent and warrant that you are authorized to use the payment method. You agree to pay all charges incurred at the prices in effect when such charges are incurred, including any applicable taxes and shipping fees.
+            We currently accept PayPal. PayPal controls the funding options available to each buyer. By completing payment through PayPal, you represent and warrant that you are authorized to use the selected funding option. You agree to pay all charges incurred at the prices in effect when such charges are incurred, including any applicable taxes and shipping fees.
           </p>
           <p>
             For international orders, you are responsible for any customs duties, import taxes, or other fees imposed by your country&apos;s customs authority. These charges are not included in our prices or shipping costs.

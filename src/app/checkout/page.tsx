@@ -7,7 +7,7 @@ import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
 import { LazyImage } from "@/components/ui/LazyImage";
 import Link from "next/link";
-import { Loader2, Tag, Check, AlertCircle, CreditCard } from "lucide-react";
+import { Loader2, Tag, Check, AlertCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
 const COUNTRY_NAMES: Record<string, string> = { US:"United States",GB:"United Kingdom",CA:"Canada",AU:"Australia",DE:"Germany",FR:"France",JP:"Japan",SG:"Singapore",IT:"Italy",ES:"Spain",NL:"Netherlands",SE:"Sweden",NO:"Norway",DK:"Denmark",FI:"Finland",CH:"Switzerland",AT:"Austria",BE:"Belgium",IE:"Ireland",NZ:"New Zealand",KR:"South Korea",HK:"Hong Kong",TW:"Taiwan",MY:"Malaysia",TH:"Thailand",PH:"Philippines",ID:"Indonesia",IN:"India",BR:"Brazil",MX:"Mexico",AE:"United Arab Emirates",SA:"Saudi Arabia",IL:"Israel",PT:"Portugal",PL:"Poland" };
@@ -37,7 +37,6 @@ interface DiscountInfo {
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCartStore();
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -60,9 +59,6 @@ export default function CheckoutPage() {
   const shipping = subtotal() >= 69.99 ? 0 : 4.99;
   const discountedSubtotal = Math.max(0, subtotal() - (discountInfo?.discount ?? 0));
   const total = discountedSubtotal + shipping;
-
-  // Payment method
-  const [paymentMethod, setPaymentMethod] = useState<"ls" | "paypal">("ls");
 
   // Re-validate discounts whenever the cart contents change so totals stay correct
   const itemsKey = items.map((i) => `${i.product.id}:${i.product.variantId ?? ""}:${i.quantity}`).join("|");
@@ -242,55 +238,6 @@ export default function CheckoutPage() {
     if (type === "code") setDiscountCode("");
   }
 
-  // --- Checkout ---
-  async function handleCheckout(e: React.FormEvent) {
-    e.preventDefault();
-
-    if (!validateAll()) {
-      toast.error("Please fix the errors below");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          items: items.map((item) => ({
-            productId: item.product.id,
-            variantId: item.product.variantId,
-            quantity: item.quantity,
-            price: item.product.price,
-            name: item.product.name,
-            image: item.product.image,
-          })),
-          email,
-          shippingAddress: { name, phone, address, city, state, country, zip },
-          discount: discountInfo
-            ? {
-                amount: discountInfo.discount,
-                codes: discountInfo.appliedDiscounts.map((d) => d.label),
-              }
-            : undefined,
-        }),
-      });
-
-      const data = await res.json();
-      if (data.url) {
-        clearCart();
-        window.location.href = data.url;
-      } else {
-        toast.error(data.error || "Checkout failed");
-      }
-    } catch {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   const inputClass =
     "w-full px-4 py-3 border rounded-lg text-sm bg-[var(--bg)] text-[var(--text)] placeholder:text-[var(--text-muted)] transition-colors";
   const inputErrorClass = "border-[var(--sale)]";
@@ -387,7 +334,7 @@ export default function CheckoutPage() {
         updates at every stage.
       </div>
 
-      <form onSubmit={handleCheckout} noValidate>
+      <form onSubmit={(event) => event.preventDefault()} noValidate>
         <div className="grid lg:grid-cols-[1fr_380px] gap-10 items-start">
           {/* Left Column — Contact + Shipping */}
           <div className="space-y-6">
@@ -598,50 +545,15 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {/* Payment Method Selector */}
+            {/* Payment */}
             <div className="mt-6">
-              <label className="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-3">
-                Payment Method
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setPaymentMethod("ls")}
-                  className={`flex items-center justify-center gap-2 p-3 rounded-lg border text-sm font-medium transition ${
-                    paymentMethod === "ls"
-                      ? "border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]"
-                      : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--text-muted)]"
-                  }`}
-                >
-                  <CreditCard className="w-4 h-4" />
-                  Card
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setPaymentMethod("paypal")}
-                  className={`flex items-center justify-center gap-2 p-3 rounded-lg border text-sm font-medium transition ${
-                    paymentMethod === "paypal"
-                      ? "border-[#0070BA] bg-[#0070BA]/10 text-[#0070BA]"
-                      : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--text-muted)]"
-                  }`}
-                >
-                  <span className="font-bold italic">P</span>
-                  PayPal
-                </button>
+              <p className="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-3">
+                Payment
+              </p>
+              <div className="rounded-lg border border-[#0070BA]/30 bg-[#0070BA]/5 p-3 text-center text-sm text-[#0070BA]">
+                PayPal
               </div>
-
-              {/* Accepted payment methods */}
-              <div className="mt-3 flex items-center justify-center gap-3 text-[var(--text-muted)]">
-                <svg className="h-5 w-8" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="#1A1F71" stroke="var(--border)"/><text x="24" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="700" fontFamily="Arial">VISA</text></svg>
-                <svg className="h-5 w-8" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="#EB001B" stroke="var(--border)"/><circle cx="19" cy="16" r="7" fill="#F79E1B"/><circle cx="29" cy="16" r="7" fill="#FF5F00"/><path fillRule="evenodd" clipRule="evenodd" d="M24 20.5c1.6-1.2 2.5-2.8 2.5-4.5s-0.9-3.3-2.5-4.5c1.6-1.2 3.7-1.5 5.5-0.8 2.7 1.1 4 4.1 2.9 6.8s-4.1 4-6.8 2.9c-1.8-0.7-2.9-2.2-3.1-3.9z" fill="#EB001B"/></svg>
-                <svg className="h-5 w-8" viewBox="0 0 48 32" fill="none"><rect x="0.5" y="0.5" width="47" height="31" rx="3.5" fill="#016FD0" stroke="var(--border)"/><text x="24" y="20" textAnchor="middle" fill="white" fontSize="12" fontWeight="700" fontFamily="Arial">AMEX</text></svg>
-                <span className="text-[10px]">+ more</span>
-              </div>
-              {/* BNPL badges */}
-              <div className="mt-2 flex items-center justify-center gap-2 text-[10px] text-[var(--text-muted)]">
-                <span className="px-2 py-0.5 rounded-full bg-[var(--surface)] border border-[var(--border)] font-semibold text-[var(--text)]">Afterpay</span>
-                <span className="px-2 py-0.5 rounded-full bg-[var(--surface)] border border-[var(--border)] font-semibold text-[var(--text)]">Klarna</span>
-              </div>
+              <div id="paypal-button-container" className="mt-4" />
             </div>
 
             {/* Processing fee note */}
@@ -658,28 +570,6 @@ export default function CheckoutPage() {
               <span className="text-[var(--success)]">30-Day Returns</span>
             </div>
 
-            {/* Pay Button */}
-            {paymentMethod === "paypal" ? (
-              <div id="paypal-button-container" className="mt-4" />
-            ) : (
-              <Button
-                variant="primary"
-                size="lg"
-                type="submit"
-                className="w-full mt-4"
-                disabled={loading}
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Processing...
-                  </>
-                ) : (
-                  `Pay ${formatPrice(total)}`
-                )}
-              </Button>
-            )}
-
             {/* Trust signals */}
             <div className="mt-4 flex items-center justify-center gap-2 text-xs text-[var(--text-muted)]">
               <Check className="w-3 h-3 text-[var(--success)]" />
@@ -693,26 +583,21 @@ export default function CheckoutPage() {
       </form>
 
       {/* PayPal SDK — loaded via useEffect for reliable popup */}
-      {paymentMethod === "paypal" && (
-        <PayPalButton
-          paymentMethod={paymentMethod}
-          items={items}
-          email={email}
-          shippingAddress={{ name, phone, address, city, state, country, zip }}
-          discountInfo={discountInfo}
-          total={total}
-          onSuccess={() => {
-            clearCart();
-          }}
-        />
-      )}
+      <PayPalButton
+        items={items}
+        email={email}
+        shippingAddress={{ name, phone, address, city, state, country, zip }}
+        discountInfo={discountInfo}
+        total={total}
+        onSuccess={clearCart}
+      />
     </div>
   );
 }
 
 // Separate PayPal button component to manage SDK lifecycle
 function PayPalButton({
-  items, email, shippingAddress, discountInfo, total, onSuccess, paymentMethod,
+  items, email, shippingAddress, discountInfo, total, onSuccess,
 }: {
   items: any[];
   email: string;
@@ -720,7 +605,6 @@ function PayPalButton({
   discountInfo: any;
   total: number;
   onSuccess: () => void;
-  paymentMethod: string;
 }) {
   const [sdkReady, setSdkReady] = useState(false);
   const buttonsRef = useRef<any>(null);
@@ -728,7 +612,6 @@ function PayPalButton({
 
   useEffect(() => {
     if (!paypalClientId) return;
-    if (paymentMethod !== "paypal") return;
     if (document.getElementById("paypal-sdk")) {
       setSdkReady(true);
       return;
@@ -738,10 +621,10 @@ function PayPalButton({
     script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=USD&intent=capture`;
     script.async = true;
     script.onload = () => setSdkReady(true);
-    script.onerror = () => toast.error("Failed to load PayPal. Please try Card payment.");
+    script.onerror = () => toast.error("Please try PayPal again later.");
     document.body.appendChild(script);
     return () => { script.remove(); };
-  }, []);
+  }, [paypalClientId]);
 
   useEffect(() => {
     if (!paypalClientId) return;
@@ -753,6 +636,7 @@ function PayPalButton({
     if (container.children.length > 0) return;
 
     (window as any).paypal.Buttons({
+      fundingSource: (window as any).paypal.FUNDING.PAYPAL,
       // createOrder calls POST /api/checkout/paypal which sets
       // PayPal's purchase_units[0].custom_id = order.id so the
       // webhook can map incoming payments back to our DB orders.
@@ -812,7 +696,7 @@ function PayPalButton({
   if (!paypalClientId) {
     return (
       <p className="mt-4 text-sm text-[var(--text-muted)]">
-        PayPal is temporarily unavailable. Please use Card.
+        Please try PayPal again later.
       </p>
     );
   }
