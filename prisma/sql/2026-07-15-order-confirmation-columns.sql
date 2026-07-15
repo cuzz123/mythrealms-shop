@@ -1,0 +1,5 @@
+ALTER TABLE "Order"
+  ADD COLUMN IF NOT EXISTS "confirmationClaimedAt" TIMESTAMP(3);
+
+ALTER TABLE "Order"
+  ADD COLUMN IF NOT EXISTS "confirmationSentAt" TIMESTAMP(3);
