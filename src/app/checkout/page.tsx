@@ -48,6 +48,7 @@ export default function CheckoutPage() {
 
   // Discount
   const [discountCode, setDiscountCode] = useState("");
+  const [appliedDiscountCode, setAppliedDiscountCode] = useState("");
   const [discountInfo, setDiscountInfo] = useState<DiscountInfo | null>(null);
   const [discountLoading, setDiscountLoading] = useState(false);
   const [discountError, setDiscountError] = useState("");
@@ -64,7 +65,7 @@ export default function CheckoutPage() {
   const itemsKey = items.map((i) => `${i.product.id}:${i.product.variantId ?? ""}:${i.quantity}`).join("|");
   useEffect(() => {
     if (items.length > 0) {
-      validateDiscount(""); // recompute B2G1 + discount totals for the current cart
+      validateDiscount(appliedDiscountCode);
     } else {
       setDiscountInfo(null);
     }
@@ -203,6 +204,7 @@ export default function CheckoutPage() {
       }
 
       setDiscountInfo(data);
+      setAppliedDiscountCode(codeToUse.trim().toUpperCase());
       if (data.appliedDiscounts?.length > 0) {
         toast.success(
           `${data.appliedDiscounts.length} discount${data.appliedDiscounts.length > 1 ? "s" : ""} applied!`
@@ -231,11 +233,13 @@ export default function CheckoutPage() {
     if (remaining.length === 0) {
       setDiscountInfo(null);
       setDiscountCode("");
+      setAppliedDiscountCode("");
     } else {
       // Recalculate with remaining discounts
       validateDiscount(type === "code" ? "" : discountCode);
     }
     if (type === "code") setDiscountCode("");
+    if (type === "code") setAppliedDiscountCode("");
   }
 
   const inputClass =
@@ -587,8 +591,8 @@ export default function CheckoutPage() {
         items={items}
         email={email}
         shippingAddress={{ name, phone, address, city, state, country, zip }}
-        discountInfo={discountInfo}
-        total={total}
+        discountCode={appliedDiscountCode}
+        validateForm={validateAll}
         onSuccess={clearCart}
       />
     </div>
@@ -597,18 +601,22 @@ export default function CheckoutPage() {
 
 // Separate PayPal button component to manage SDK lifecycle
 function PayPalButton({
-  items, email, shippingAddress, discountInfo, total, onSuccess,
+  items, email, shippingAddress, discountCode, validateForm, onSuccess,
 }: {
   items: any[];
   email: string;
   shippingAddress: any;
-  discountInfo: any;
-  total: number;
+  discountCode: string;
+  validateForm: () => boolean;
   onSuccess: () => void;
 }) {
   const [sdkReady, setSdkReady] = useState(false);
   const buttonsRef = useRef<any>(null);
   const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "";
+  const payloadRef = useRef({ items, email, shippingAddress, discountCode });
+  const validateRef = useRef(validateForm);
+  payloadRef.current = { items, email, shippingAddress, discountCode };
+  validateRef.current = validateForm;
 
   useEffect(() => {
     if (!paypalClientId) return;
@@ -641,17 +649,22 @@ function PayPalButton({
       // PayPal's purchase_units[0].custom_id = order.id so the
       // webhook can map incoming payments back to our DB orders.
       createOrder: async () => {
+        if (!validateRef.current()) {
+          toast.error("Please complete your contact and shipping information");
+          throw new Error("Checkout form is incomplete");
+        }
+        const latest = payloadRef.current;
         const res = await fetch("/api/checkout/paypal", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            items: items.map((item) => ({
-              productId: item.product.id, variantId: item.product.variantId,
-              quantity: item.quantity, price: item.product.price, name: item.product.name,
+            items: latest.items.map((item) => ({
+              productId: item.product.id,
+              quantity: item.quantity,
             })),
-            email,
-            shippingAddress,
-            discount: discountInfo ? { amount: discountInfo.discount } : undefined,
+            email: latest.email,
+            shippingAddress: latest.shippingAddress,
+            discountCode: latest.discountCode.trim() || undefined,
           }),
         });
         const data = await res.json();

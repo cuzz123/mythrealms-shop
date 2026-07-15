@@ -19,6 +19,27 @@ test("public checkout exposes PayPal only", () => {
   assert.match(cart, /Checkout securely with PayPal/);
 });
 
+test("PayPal checkout validates the form and sends only server-owned pricing inputs", () => {
+  const checkout = source("src/app/checkout/page.tsx");
+  assert.match(checkout, /discountCode=\{appliedDiscountCode\}/);
+  assert.match(checkout, /validateForm=\{validateAll\}/);
+  assert.doesNotMatch(checkout, /discountInfo=\{discountInfo\}|total=\{total\}/);
+
+  const createOrderStart = checkout.indexOf("createOrder: async () => {");
+  const onApproveStart = checkout.indexOf("onApprove: async", createOrderStart);
+  assert.notEqual(createOrderStart, -1);
+  assert.notEqual(onApproveStart, -1);
+  const createOrder = checkout.slice(createOrderStart, onApproveStart);
+  const validation = createOrder.indexOf("validateRef.current()");
+  const request = createOrder.indexOf('fetch("/api/checkout/paypal"');
+  assert.ok(validation >= 0 && validation < request);
+  assert.match(
+    createOrder,
+    /discountCode:\s*latest\.discountCode\.trim\(\)\s*\|\|\s*undefined/,
+  );
+  assert.doesNotMatch(createOrder, /variantId:|\bprice:|\bdiscount:/);
+});
+
 test("legacy checkout fails closed before creating an order", () => {
   const route = source("src/app/api/checkout/route.ts");
   assert.match(route, /This checkout endpoint is disabled/);
