@@ -1,0 +1,25 @@
+{
+  "ACT_JEWELRY_TOUCH_EARRING_LEFT_001": {
+    "name_zh": "左手轻触左耳饰",
+    "frames": 72,
+    "fps": 24,
+    "beats": [
+      {"frame": 1, "phase": "start_hold"},
+      {"frame": 12, "phase": "start_hold"},
+      {"frame": 24, "phase": "anticipation"},
+      {
+        "frame": 52,
+        "phase": "touch",
+        "hand_target": "ear_left",
+        "head_response": "meet_hand_subtle"
+      },
+      {"frame": 60, "phase": "settle"},
+      {"frame": 61, "phase": "final_hold"},
+      {"frame": 72, "phase": "final_hold"}
+    ],
+    "targets": {
+      "hand": "ear_left"
+    },
+    "paired_camera_id": "CAM_JEWELRY_EARRING_TOUCH_LEFT_ARC_85MM_001"
+  }
+}
