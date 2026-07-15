@@ -7,6 +7,14 @@ function source(relativePath: string): string {
   return readFileSync(path.join(process.cwd(), relativePath), "utf8");
 }
 
+function discountValidationSource(checkout: string): string {
+  const validationStart = checkout.indexOf("async function validateDiscount");
+  const applyStart = checkout.indexOf("function handleApplyDiscount", validationStart);
+  assert.notEqual(validationStart, -1);
+  assert.notEqual(applyStart, -1);
+  return checkout.slice(validationStart, applyStart);
+}
+
 test("public checkout exposes PayPal only", () => {
   const checkout = source("src/app/checkout/page.tsx");
   const cart = source("src/app/cart/page.tsx");
@@ -19,7 +27,7 @@ test("public checkout exposes PayPal only", () => {
   assert.match(cart, /Checkout securely with PayPal/);
 });
 
-test("PayPal checkout validates the form and sends only server-owned pricing inputs", () => {
+test("PayPal checkout validates the form and sends identity without client-owned pricing", () => {
   const checkout = source("src/app/checkout/page.tsx");
   assert.match(checkout, /discountCode=\{appliedDiscountCode\}/);
   assert.match(checkout, /validateForm=\{validateAll\}/);
@@ -37,7 +45,35 @@ test("PayPal checkout validates the form and sends only server-owned pricing inp
     createOrder,
     /discountCode:\s*latest\.discountCode\.trim\(\)\s*\|\|\s*undefined/,
   );
-  assert.doesNotMatch(createOrder, /variantId:|\bprice:|\bdiscount:/);
+  assert.match(createOrder, /variantId:\s*item\.product\.variantId/);
+  assert.doesNotMatch(createOrder, /\bprice:|\btotal:|\bdiscount:/);
+});
+
+test("non-2xx cart discount revalidation clears the stale applied code", () => {
+  const checkout = source("src/app/checkout/page.tsx");
+  assert.match(checkout, /validateDiscount\(appliedDiscountCode\)/);
+  const validation = discountValidationSource(checkout);
+
+  const nonOkStart = validation.indexOf("if (!res.ok) {");
+  const nonOkReturn = validation.indexOf("return;", nonOkStart);
+  assert.ok(nonOkStart >= 0 && nonOkReturn > nonOkStart);
+  assert.match(
+    validation.slice(nonOkStart, nonOkReturn),
+    /setAppliedDiscountCode\(""\)/,
+  );
+});
+
+test("thrown cart discount revalidation clears the stale applied code", () => {
+  const validation = discountValidationSource(
+    source("src/app/checkout/page.tsx"),
+  );
+  const catchStart = validation.indexOf("catch");
+  const finallyStart = validation.indexOf("finally", catchStart);
+  assert.ok(catchStart >= 0 && finallyStart > catchStart);
+  assert.match(
+    validation.slice(catchStart, finallyStart),
+    /setAppliedDiscountCode\(""\)/,
+  );
 });
 
 test("legacy checkout fails closed before creating an order", () => {

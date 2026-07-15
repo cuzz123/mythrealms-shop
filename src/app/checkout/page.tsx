@@ -195,6 +195,7 @@ export default function CheckoutPage() {
 
       const data = await res.json();
       if (!res.ok) {
+        setAppliedDiscountCode("");
         setDiscountError(data.error || "Invalid discount code");
         // Keep B2G1 auto discounts even if manual code fails
         if (data.appliedDiscounts) {
@@ -211,6 +212,7 @@ export default function CheckoutPage() {
         );
       }
     } catch (err: any) {
+      setAppliedDiscountCode("");
       console.error("Discount validation error:", err);
       setDiscountError(err?.message || "Failed to validate discount. Please try again.");
     } finally {
@@ -660,6 +662,7 @@ function PayPalButton({
           body: JSON.stringify({
             items: latest.items.map((item) => ({
               productId: item.product.id,
+              variantId: item.product.variantId,
               quantity: item.quantity,
             })),
             email: latest.email,
