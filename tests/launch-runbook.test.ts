@@ -3,25 +3,185 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 
-test("PayPal launch runbook contains every safety gate", () => {
-  const runbook = readFileSync(
-    path.join(process.cwd(), "docs/runbooks/paypal-only-launch.md"),
-    "utf8",
+const runbook = readFileSync(
+  path.join(process.cwd(), "docs/runbooks/paypal-only-launch.md"),
+  "utf8",
+);
+
+const headings = [
+  "# PayPal-Only Production Launch",
+  "## Authority Boundary",
+  "## 1. Record And Back Up",
+  "## 2. Read-Only Gate",
+  "## 3. Additive Database Change",
+  "## 4. Provider And Sender",
+  "## 5. Pre-Money Smoke Test",
+  "## 6. Authorized Live Probe",
+  "## 7. Rollback And Reconciliation",
+] as const;
+
+function section(candidate: string, heading: (typeof headings)[number]) {
+  const headingIndex = headings.indexOf(heading);
+  const start = candidate.indexOf(heading) + heading.length;
+  const nextHeading = headings[headingIndex + 1];
+  const end = nextHeading ? candidate.indexOf(nextHeading, start) : candidate.length;
+  return candidate.slice(start, end).trim();
+}
+
+function assertSafeRunbook(candidate: string) {
+  const normalized = candidate.replace(/\r\n/g, "\n");
+  assert.deepEqual(normalized.match(/^#{1,6}\s+.+$/gm) ?? [], headings);
+
+  const allowedPushWarning = "Never use `prisma db push`.";
+  assert.equal(normalized.split(allowedPushWarning).length - 1, 1);
+  const forbiddenSurface = normalized.replace(allowedPushWarning, "");
+  assert.doesNotMatch(forbiddenSurface, /\b(?:npx\s+)?prisma\s+db\s+push\b/i);
+  assert.doesNotMatch(normalized, /\bdrop\s+column\b/i);
+  assert.doesNotMatch(normalized, /\bPAYPAL_CLIENT_SECRET\s*=/i);
+
+  assert.equal(
+    section(normalized, "## Authority Boundary"),
+    "This document does not authorize database writes, deployment, PayPal webhook changes, a charge, or a refund. Obtain explicit user authorization before each production mutation and before the live-money probe.",
   );
-  for (const required of [
-    "Record the production database backup",
-    "Record the current deployment ID",
-    "npm run launch:check",
-    "prisma/sql/2026-07-15-order-confirmation-columns.sql",
-    "PAYMENT.CAPTURE.COMPLETED",
-    "PAYMENT.CAPTURE.REFUNDED",
-    "explicit user authorization",
-    "PENDING",
-    "PAID",
-    "REFUNDED",
-    "never capture the order a second time",
-  ]) {
-    assert.match(runbook, new RegExp(required.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+
+  const recordAndBackup = section(normalized, "## 1. Record And Back Up");
+  assert.match(recordAndBackup, /Record the production database backup/);
+  assert.match(recordAndBackup, /Record the current deployment ID/);
+
+  const readOnlyGate = section(normalized, "## 2. Read-Only Gate");
+  assert.match(readOnlyGate, /Run `npm run launch:check`\. Stop on any failure\./);
+
+  const databaseChange = section(normalized, "## 3. Additive Database Change");
+  assert.match(
+    databaseChange,
+    /^`npx prisma db execute --file prisma\/sql\/2026-07-15-order-confirmation-columns\.sql --schema prisma\/schema\.prisma`$/m,
+  );
+  assert.match(databaseChange, /Run `npm run launch:check` again\./);
+
+  const providerAndSender = section(normalized, "## 4. Provider And Sender");
+  assert.match(providerAndSender, /PAYMENT\.CAPTURE\.COMPLETED/);
+  assert.match(providerAndSender, /PAYMENT\.CAPTURE\.REFUNDED/);
+  assert.match(providerAndSender, /RESEND_FROM_EMAIL/);
+
+  const smokeTest = section(normalized, "## 5. Pre-Money Smoke Test");
+  assert.match(smokeTest, /Checkout shows PayPal only\./);
+  assert.match(smokeTest, /Disabled legacy checkout returns 410 without creating an order\./);
+  assert.match(smokeTest, /Admin renders a static snapshot item and current shipping address\./);
+  assert.match(smokeTest, /Admin cannot mark `PAID` or `REFUNDED`\./);
+  assert.match(smokeTest, /An unsigned PayPal webhook is rejected\./);
+
+  const liveProbe = section(normalized, "## 6. Authorized Live Probe");
+  assert.equal(
+    liveProbe,
+    "After separate explicit user authorization, make one small real purchase. Verify `PENDING -> PAID`, the brand-sender email, and the exact admin item/address. Initiate the refund in PayPal, never in admin. A partial refund must not claim `REFUNDED`; cumulative/full refund confirmation must produce `REFUNDED`.",
+  );
+
+  const rollback = section(normalized, "## 7. Rollback And Reconciliation");
+  assert.equal(
+    rollback,
+    "Before capture, restore the prior deployment if smoke tests fail. After a capture/app-write failure, never capture the order a second time; query PayPal by provider order/custom ID and reconcile manually. Keep the two nullable confirmation columns during application rollback. Do not use a destructive down migration.",
+  );
+}
+
+function replace(candidate: string, expected: string, replacement: string) {
+  assert.ok(candidate.includes(expected), `fixture source is missing: ${expected}`);
+  return candidate.replace(expected, replacement);
+}
+
+test("PayPal launch runbook contains every safety gate", () => {
+  assertSafeRunbook(runbook);
+});
+
+test("rejects runbooks with reordered safety sections", () => {
+  const reordered = replace(
+    replace(
+      replace(runbook, "## 1. Record And Back Up", "## TEMP"),
+      "## 2. Read-Only Gate",
+      "## 1. Record And Back Up",
+    ),
+    "## TEMP",
+    "## 2. Read-Only Gate",
+  );
+
+  assert.throws(() => assertSafeRunbook(reordered));
+});
+
+test("rejects runbooks that weaken authorization or live-money semantics", () => {
+  const unsafeVariants = [
+    replace(
+      runbook,
+      "This document does not authorize database writes, deployment, PayPal webhook changes, a charge, or a refund. Obtain explicit user authorization before each production mutation and before the live-money probe.",
+      "This document authorizes production mutations. A later appendix mentions explicit user authorization.",
+    ),
+    replace(
+      runbook,
+      "After separate explicit user authorization, make one small real purchase.",
+      "After separate explicit user authorization, make two small real purchases.",
+    ),
+    replace(
+      runbook,
+      "After separate explicit user authorization, make one small real purchase.",
+      "After separate explicit user authorization, make one small real purchase. Then make another real purchase.",
+    ),
+    replace(runbook, "`PENDING -> PAID`", "`PAID -> PENDING`"),
+    replace(
+      runbook,
+      "A partial refund must not claim `REFUNDED`; cumulative/full refund confirmation must produce `REFUNDED`.",
+      "A partial refund may claim `REFUNDED`; cumulative/full refund confirmation may also produce `REFUNDED`.",
+    ),
+    replace(
+      runbook,
+      "`npx prisma db execute --file prisma/sql/2026-07-15-order-confirmation-columns.sql --schema prisma/schema.prisma`",
+      "`echo prisma/sql/2026-07-15-order-confirmation-columns.sql`",
+    ),
+  ];
+
+  for (const unsafe of unsafeVariants) {
+    assert.throws(() => assertSafeRunbook(unsafe));
   }
-  assert.doesNotMatch(runbook, /(?:^|\n)\s*prisma db push\b|DROP COLUMN|PAYPAL_CLIENT_SECRET=/);
+});
+
+test("rejects runbooks that weaken rollback and reconciliation", () => {
+  const unsafeVariants = [
+    replace(
+      runbook,
+      "Before capture, restore the prior deployment if smoke tests fail.",
+      "Before capture, keep the failed deployment active.",
+    ),
+    replace(
+      runbook,
+      "After a capture/app-write failure, never capture the order a second time; query PayPal by provider order/custom ID and reconcile manually.",
+      "The phrase never capture the order a second time is historical; retry capture without PayPal reconciliation.",
+    ),
+    replace(
+      runbook,
+      "Keep the two nullable confirmation columns during application rollback.",
+      "Remove the two nullable confirmation columns during application rollback.",
+    ),
+    replace(
+      runbook,
+      "Do not use a destructive down migration.",
+      "Use a destructive down migration.",
+    ),
+    replace(
+      runbook,
+      "Do not use a destructive down migration.",
+      "Do not use a destructive down migration. A destructive down migration is nevertheless allowed.",
+    ),
+  ];
+
+  for (const unsafe of unsafeVariants) {
+    assert.throws(() => assertSafeRunbook(unsafe));
+  }
+});
+
+test("rejects disguised destructive commands and secret assignments", () => {
+  for (const forbidden of [
+    "- `nPx PrIsMa Db PuSh`",
+    "> `Prisma Db Push`",
+    "`DrOp CoLuMn confirmationSentAt`",
+    "`paypal_client_secret = unsafe`",
+  ]) {
+    assert.throws(() => assertSafeRunbook(`${runbook}\n${forbidden}\n`));
+  }
 });
