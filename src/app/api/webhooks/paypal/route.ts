@@ -1,19 +1,45 @@
-// POST /api/webhooks/paypal — Handle PayPal payment events
-
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
 
-async function verifyPayPalWebhook(request: NextRequest, body: string): Promise<boolean> {
+import { db } from "@/lib/db";
+import {
+  FulfillmentError,
+  fulfillPaidOrder,
+} from "@/lib/payments/fulfillment";
+import {
+  getPayPalRefundOrderPatch,
+  PaymentVerificationError,
+  verifyPayPalCapture,
+  verifyPayPalRefund,
+} from "@/lib/payments/paypal-verification";
+
+const PAYPAL_API = process.env.PAYPAL_API_BASE || "https://api-m.paypal.com";
+
+function asRecord(value: unknown): Record<string, unknown> {
+  return typeof value === "object" && value !== null
+    ? (value as Record<string, unknown>)
+    : {};
+}
+
+function relatedOrderId(resource: Record<string, unknown>): string | null {
+  const supplementaryData = asRecord(resource.supplementary_data);
+  const relatedIds = asRecord(supplementaryData.related_ids);
+  return typeof relatedIds.order_id === "string" ? relatedIds.order_id : null;
+}
+
+function relatedCaptureId(resource: Record<string, unknown>): string | null {
+  const supplementaryData = asRecord(resource.supplementary_data);
+  const relatedIds = asRecord(supplementaryData.related_ids);
+  return typeof relatedIds.capture_id === "string" ? relatedIds.capture_id : null;
+}
+
+async function verifyPayPalWebhook(request: NextRequest, rawEvent: string): Promise<boolean> {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   const secret = process.env.PAYPAL_CLIENT_SECRET;
   const webhookId = process.env.PAYPAL_WEBHOOK_ID;
-  if (!clientId || !secret || !webhookId) {
-    console.error("PayPal webhook: missing credentials/webhook id for verification");
-    return false;
-  }
+  if (!clientId || !secret || !webhookId) return false;
+
   try {
-    // Get access token
-    const authRes = await fetch("https://api-m.paypal.com/v1/oauth2/token", {
+    const authResponse = await fetch(`${PAYPAL_API}/v1/oauth2/token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -21,110 +47,116 @@ async function verifyPayPalWebhook(request: NextRequest, body: string): Promise<
       },
       body: "grant_type=client_credentials",
     });
-    if (!authRes.ok) return false;
-    const authData = await authRes.json();
+    if (!authResponse.ok) return false;
+    const authPayload = await authResponse.json();
+    if (typeof authPayload?.access_token !== "string") return false;
 
-    // Verify webhook signature
-    const verifyRes = await fetch("https://api-m.paypal.com/v1/notifications/verify-webhook-signature", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authData.access_token}`,
-      },
-      body: JSON.stringify({
-        auth_algo: request.headers.get("paypal-auth-algo") || "",
-        cert_url: request.headers.get("paypal-cert-url") || "",
-        transmission_id: request.headers.get("paypal-transmission-id") || "",
-        transmission_sig: request.headers.get("paypal-transmission-sig") || "",
-        transmission_time: request.headers.get("paypal-transmission-time") || "",
-        webhook_id: webhookId,
-        webhook_event: JSON.parse(body),
-      }),
+    const verificationFields = JSON.stringify({
+      auth_algo: request.headers.get("paypal-auth-algo") || "",
+      cert_url: request.headers.get("paypal-cert-url") || "",
+      transmission_id: request.headers.get("paypal-transmission-id") || "",
+      transmission_sig: request.headers.get("paypal-transmission-sig") || "",
+      transmission_time: request.headers.get("paypal-transmission-time") || "",
+      webhook_id: webhookId,
     });
-    if (!verifyRes.ok) return false;
-    const verifyData = await verifyRes.json();
-    return verifyData.verification_status === "SUCCESS";
-  } catch (e) {
-    console.error("PayPal webhook verification error:", e);
+    const verificationBody = `${verificationFields.slice(0, -1)},"webhook_event":${rawEvent}}`;
+
+    const verifyResponse = await fetch(
+      `${PAYPAL_API}/v1/notifications/verify-webhook-signature`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authPayload.access_token}`,
+        },
+        body: verificationBody,
+      },
+    );
+    if (!verifyResponse.ok) return false;
+    const verifyPayload = await verifyResponse.json();
+    return verifyPayload?.verification_status === "SUCCESS";
+  } catch (error) {
+    console.error("PayPal webhook verification error:", error);
     return false;
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.text();
-    const event = JSON.parse(body);
-
-    // Verify webhook signature
-    const verified = await verifyPayPalWebhook(request, body);
-    if (!verified) {
-      console.warn("PayPal webhook: signature verification failed");
+    const rawBody = await request.text();
+    const event = JSON.parse(rawBody) as unknown;
+    if (!(await verifyPayPalWebhook(request, rawBody))) {
       return NextResponse.json({ error: "Verification failed" }, { status: 400 });
     }
 
-    const eventType = event.event_type;
-    console.log(`PayPal webhook: ${eventType}`);
+    const eventRecord = asRecord(event);
+    const eventType = eventRecord.event_type;
+    const resource = asRecord(eventRecord.resource);
+    const providerOrderId = relatedOrderId(resource);
 
     if (eventType === "PAYMENT.CAPTURE.COMPLETED") {
-      const resource = event.resource;
-      const customId = resource?.custom_id; // order ID we passed
-      const paypalOrderId = resource?.id;
-
-      if (customId) {
-        const order = await db.order.findUnique({ where: { id: customId } });
-        if (order && order.status !== "PAID") {
-          await db.order.update({
-            where: { id: customId },
-            data: {
-              status: "PAID",
-              stripeSessionId: paypalOrderId,
-              stripePaymentStatus: "paid",
-            },
-          });
-
-          // Decrease stock
-          const orderWithItems = await db.order.findUnique({
-            where: { id: customId },
-            include: { items: true },
-          });
-          if (orderWithItems) {
-            for (const item of orderWithItems.items) {
-              if (item.variantId) {
-                await db.$executeRawUnsafe(
-                  `UPDATE "Variant" SET stock = stock - $1 WHERE id = $2 AND stock >= $1`,
-                  item.quantity, item.variantId
-                );
-              }
-            }
-          }
-
-          // Send confirmation email
-          try {
-            const { sendOrderConfirmation } = await import("@/lib/email");
-            const emailItems = orderWithItems!.items.map((item) => ({
-              name: item.productSnapshot ? JSON.parse(item.productSnapshot).name || "Product" : "Product",
-              quantity: item.quantity,
-              price: item.price,
-            }));
-            await sendOrderConfirmation(order.email, order.id, order.total, emailItems);
-          } catch (e) { console.error("Email failed:", e); }
-        }
+      if (!providerOrderId) {
+        throw new PaymentVerificationError("PayPal provider order is missing");
       }
+      const order = await db.order.findUnique({
+        where: { stripeSessionId: providerOrderId },
+        select: { id: true, total: true, stripeSessionId: true },
+      });
+      if (!order?.stripeSessionId) {
+        return NextResponse.json({ error: "Order was not found" }, { status: 404 });
+      }
+
+      const payment = verifyPayPalCapture(
+        {
+          id: providerOrderId,
+          status: "COMPLETED",
+          purchase_units: [
+            {
+              custom_id: resource.custom_id,
+              payments: { captures: [resource] },
+            },
+          ],
+        },
+        {
+          id: order.id,
+          providerOrderId: order.stripeSessionId,
+          totalCents: Math.round(order.total * 100),
+        },
+      );
+      await fulfillPaidOrder(order.id, payment);
     }
 
-    if (eventType === "PAYMENT.CAPTURE.REFUNDED") {
-      const customId = event.resource?.custom_id;
-      if (customId) {
-        await db.order.update({
-          where: { id: customId },
-          data: { status: "REFUNDED" },
+    if (eventType === "PAYMENT.CAPTURE.REFUNDED" && providerOrderId) {
+      const captureId = relatedCaptureId(resource);
+      const order = await db.order.findUnique({
+        where: { stripeSessionId: providerOrderId },
+        select: { id: true, total: true, stripePaymentStatus: true },
+      });
+      if (
+        order &&
+        captureId &&
+        order.stripePaymentStatus?.endsWith(`:${captureId}`)
+      ) {
+        const refund = verifyPayPalRefund(resource, {
+          totalCents: Math.round(order.total * 100),
+        });
+        const patch = getPayPalRefundOrderPatch(refund, captureId);
+        await db.order.updateMany({
+          where: {
+            id: order.id,
+            status: { in: ["PAID", "SHIPPED", "DELIVERED"] },
+          },
+          data: patch,
         });
       }
     }
 
     return NextResponse.json({ received: true });
-  } catch (e: any) {
-    console.error("PayPal webhook error:", e);
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+  } catch (error) {
+    if (error instanceof PaymentVerificationError || error instanceof FulfillmentError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
+    console.error("PayPal webhook error:", error);
+    return NextResponse.json({ error: "Webhook failed" }, { status: 500 });
   }
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useCartStore } from "@/lib/cart";
+import { buildDiscountPreviewRequest } from "@/lib/checkout/discount-preview";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
@@ -21,6 +22,7 @@ interface ValidationErrors {
   city?: string;
   state?: string;
   zip?: string;
+  country?: string;
 }
 
 interface DiscountInfo {
@@ -33,6 +35,49 @@ interface DiscountInfo {
     amount: number;
     description: string;
   }>;
+}
+
+type CheckoutItem = ReturnType<typeof useCartStore.getState>["items"][number];
+
+interface ShippingAddress {
+  name: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  zip: string;
+}
+
+interface PayPalApprovalData {
+  orderID: string;
+}
+
+interface PayPalButtonsComponent {
+  render: (selector: string) => Promise<void>;
+  close?: () => void;
+}
+
+interface PayPalNamespace {
+  FUNDING: { PAYPAL: string };
+  Buttons: (options: {
+    fundingSource: string;
+    createOrder: () => Promise<string>;
+    onApprove: (data: PayPalApprovalData) => Promise<void>;
+    onCancel: () => void;
+    onError: (error: unknown) => void;
+    style: {
+      color: string;
+      shape: string;
+      label: string;
+      height: number;
+    };
+  }) => PayPalButtonsComponent;
+}
+
+interface MythRealmsWindow extends Window {
+  paypal?: PayPalNamespace;
+  __mythrealmsOrderId?: string;
 }
 
 export default function CheckoutPage() {
@@ -78,7 +123,7 @@ export default function CheckoutPage() {
         <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-4">
           Your cart is empty
         </h1>
-        <Link href="/collections/curated-singles">
+        <Link href="/collections/pearl-series">
           <Button variant="primary">Shop Now</Button>
         </Link>
       </div>
@@ -117,6 +162,9 @@ export default function CheckoutPage() {
         if (!/^[A-Za-z0-9\s\-]{3,10}$/.test(value))
           return "Please enter a valid postal code";
         return "";
+      case "country":
+        if (!COUNTRY_NAMES[value]) return "Please select a valid country";
+        return "";
       default:
         return "";
     }
@@ -139,6 +187,8 @@ export default function CheckoutPage() {
         ? state
         : field === "zip"
         ? zip
+        : field === "country"
+        ? country
         : "";
     const error = validateField(field, value);
     setErrors((prev) => ({ ...prev, [field]: error }));
@@ -153,6 +203,7 @@ export default function CheckoutPage() {
       city,
       state,
       zip,
+      country,
     };
     const newErrors: ValidationErrors = {};
     let valid = true;
@@ -180,27 +231,16 @@ export default function CheckoutPage() {
       const res = await fetch("/api/discounts/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          code: codeToUse || undefined,
-          items: items.map((item) => ({
-            productId: item.product.id,
-            variantId: item.product.variantId,
-            quantity: item.quantity,
-            price: item.product.price,
-            name: item.product.name,
-          })),
-          email: email || undefined,
-        }),
+        body: JSON.stringify(
+          buildDiscountPreviewRequest(items, codeToUse, email),
+        ),
       });
 
       const data = await res.json();
       if (!res.ok) {
         setAppliedDiscountCode("");
+        setDiscountInfo(null);
         setDiscountError(data.error || "Invalid discount code");
-        // Keep B2G1 auto discounts even if manual code fails
-        if (data.appliedDiscounts) {
-          setDiscountInfo(data);
-        }
         return;
       }
 
@@ -211,10 +251,15 @@ export default function CheckoutPage() {
           `${data.appliedDiscounts.length} discount${data.appliedDiscounts.length > 1 ? "s" : ""} applied!`
         );
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       setAppliedDiscountCode("");
+      setDiscountInfo(null);
       console.error("Discount validation error:", err);
-      setDiscountError(err?.message || "Failed to validate discount. Please try again.");
+      setDiscountError(
+        err instanceof Error
+          ? err.message
+          : "Failed to validate discount. Please try again.",
+      );
     } finally {
       setDiscountLoading(false);
     }
@@ -256,7 +301,7 @@ export default function CheckoutPage() {
     required: boolean = true,
     placeholder?: string,
     autoComplete?: string,
-    inputMode?: string,
+    inputMode?: React.InputHTMLAttributes<HTMLInputElement>["inputMode"],
   ) {
     const valueMap: Record<string, string> = {
       email,
@@ -266,6 +311,7 @@ export default function CheckoutPage() {
       city,
       state,
       zip,
+      country,
     };
     const setterMap: Record<string, (v: string) => void> = {
       email: setEmail,
@@ -275,6 +321,7 @@ export default function CheckoutPage() {
       city: setCity,
       state: setState,
       zip: setZip,
+      country: setCountry,
     };
 
     const hasError = touched[field] && errors[field];
@@ -300,7 +347,7 @@ export default function CheckoutPage() {
           onBlur={() => handleBlur(field)}
           placeholder={placeholder || label}
           autoComplete={autoComplete}
-          inputMode={inputMode as any}
+          inputMode={inputMode}
           aria-invalid={!!hasError}
           aria-describedby={hasError ? `${field}-error` : undefined}
           className={`${inputClass} ${hasError ? inputErrorClass : inputNormalClass}`}
@@ -378,9 +425,21 @@ export default function CheckoutPage() {
                         const code = COUNTRY_CODES[e.target.value] || e.target.value;
                         setCountry(code);
                       }}
+                      onBlur={() => handleBlur("country")}
                       placeholder="Type to search..."
-                      className={`${inputClass} ${inputNormalClass}`}
+                      aria-invalid={!!(touched.country && errors.country)}
+                      aria-describedby={errors.country ? "country-error" : undefined}
+                      className={`${inputClass} ${
+                        touched.country && errors.country
+                          ? inputErrorClass
+                          : inputNormalClass
+                      }`}
                     />
+                    {touched.country && errors.country && (
+                      <p id="country-error" className="mt-1 text-xs text-[var(--sale)]">
+                        {errors.country}
+                      </p>
+                    )}
                     <datalist id="country-list">
                       {Object.entries(COUNTRY_NAMES).map(([code, name]) => (
                         <option key={code} value={name}>{code}</option>
@@ -603,17 +662,22 @@ export default function CheckoutPage() {
 
 // Separate PayPal button component to manage SDK lifecycle
 function PayPalButton({
-  items, email, shippingAddress, discountCode, validateForm, onSuccess,
+  items,
+  email,
+  shippingAddress,
+  discountCode,
+  validateForm,
+  onSuccess,
 }: {
-  items: any[];
+  items: CheckoutItem[];
   email: string;
-  shippingAddress: any;
+  shippingAddress: ShippingAddress;
   discountCode: string;
   validateForm: () => boolean;
   onSuccess: () => void;
 }) {
   const [sdkReady, setSdkReady] = useState(false);
-  const buttonsRef = useRef<any>(null);
+  const buttonsRef = useRef<PayPalButtonsComponent | null>(null);
   const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "";
   const payloadRef = useRef({ items, email, shippingAddress, discountCode });
   const validateRef = useRef(validateForm);
@@ -640,13 +704,15 @@ function PayPalButton({
     if (!paypalClientId) return;
     if (!sdkReady) return;
     const container = document.getElementById("paypal-button-container");
-    if (!container || !(window as any).paypal) return;
+    const paypalWindow = window as MythRealmsWindow;
+    const paypal = paypalWindow.paypal;
+    if (!container || !paypal) return;
 
     // Skip re-render if buttons already exist (prevents flash on re-renders)
     if (container.children.length > 0) return;
 
-    (window as any).paypal.Buttons({
-      fundingSource: (window as any).paypal.FUNDING.PAYPAL,
+    const buttons = paypal.Buttons({
+      fundingSource: paypal.FUNDING.PAYPAL,
       // createOrder calls POST /api/checkout/paypal which sets
       // PayPal's purchase_units[0].custom_id = order.id so the
       // webhook can map incoming payments back to our DB orders.
@@ -672,11 +738,11 @@ function PayPalButton({
         });
         const data = await res.json();
         if (data.error) { toast.error(data.error); throw new Error(data.error); }
-        (window as any).__mythrealmsOrderId = data.dbOrderId;
+        paypalWindow.__mythrealmsOrderId = data.dbOrderId;
         return data.orderId;
       },
-      onApprove: async (data: any) => {
-        const dbOrderId = (window as any).__mythrealmsOrderId || data.orderID;
+      onApprove: async (data: PayPalApprovalData) => {
+        const dbOrderId = paypalWindow.__mythrealmsOrderId || data.orderID;
         try {
           const res = await fetch("/api/checkout/paypal/capture", {
             method: "POST",
@@ -695,11 +761,11 @@ function PayPalButton({
         }
       },
       onCancel: () => { toast.error("Payment cancelled."); },
-      onError: (err: any) => { toast.error("Payment failed. Please try again."); console.error("PayPal error:", err); },
+      onError: (err: unknown) => { toast.error("Payment failed. Please try again."); console.error("PayPal error:", err); },
       style: { color: "gold", shape: "rect", label: "paypal", height: 48 },
-    }).render("#paypal-button-container").then((instance: any) => {
-      buttonsRef.current = instance;
     });
+    buttonsRef.current = buttons;
+    void buttons.render("#paypal-button-container");
 
     return () => {
       if (buttonsRef.current && typeof buttonsRef.current.close === "function") {
@@ -707,7 +773,7 @@ function PayPalButton({
         buttonsRef.current = null;
       }
     };
-  }, [sdkReady]);
+  }, [sdkReady, paypalClientId, onSuccess]);
 
   if (!paypalClientId) {
     return (

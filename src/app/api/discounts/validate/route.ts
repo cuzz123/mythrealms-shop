@@ -1,192 +1,68 @@
-// POST /api/discounts/validate — Validate discount codes from database and calculate savings
-//
-// Rate limiting note: This endpoint is called on every cart change (add, remove,
-// quantity update) and on every checkout field keystroke (the cart-items effect
-// re-validates). That can fire dozens of requests in a single checkout session.
-// The validateDiscount() caller on the frontend debounces implicitly via React
-// batching, but there is no explicit debounce here. If DB load becomes a concern:
-//   1. Add a short in-memory debounce per session (e.g. 500ms) in this route.
-//   2. Or move the B2G1 calculation fully to the client and only call this route
-//      when a manual discount code is entered.
-//   3. Or apply the existing generic rate limiter from @/lib/server/rate-limit.
-
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
 
-// B2G1: Buy 2 Get 1 Free on Pendants (auto-detected, no code needed)
-const B2G1_CATEGORY_SLUG = "curated-singles";
+import { prismaDiscountRepository } from "@/lib/checkout/discount";
+import { CheckoutQuoteError, quoteCheckout } from "@/lib/checkout/quote";
+import {
+  CheckoutInputError,
+  validateCheckoutLines,
+} from "@/lib/checkout/validation";
+import { applyRateLimit } from "@/lib/server/rate-limit";
 
 export async function POST(request: NextRequest) {
+  const rateLimitResponse = await applyRateLimit(request, {
+    windowMs: 60_000,
+    maxRequests: 30,
+  });
+  if (rateLimitResponse) return rateLimitResponse;
+
   try {
     const body = await request.json();
-    const { code, items, email } = body;
-
-    if (!items?.length) {
-      return NextResponse.json(
-        { error: "Cart is empty" },
-        { status: 400 }
-      );
+    const items = validateCheckoutLines(body?.items);
+    const email =
+      typeof body?.email === "string" &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim())
+        ? body.email.trim().toLowerCase()
+        : "guest@mythrealms.invalid";
+    const discountCode =
+      typeof body?.discountCode === "string" && body.discountCode.trim()
+        ? body.discountCode.trim().toUpperCase()
+        : undefined;
+    if (discountCode && discountCode.length > 64) {
+      throw new CheckoutInputError("Discount code is too long");
     }
 
-    // Track all applicable discounts
-    const appliedDiscounts: Array<{
-      type: string;
-      label: string;
-      amount: number;
-      description: string;
-    }> = [];
-
-    let totalDiscount = 0;
-    const subtotal = items.reduce(
-      (sum: number, item: any) => sum + (item.price || 0) * (item.quantity || 1),
-      0
+    const quote = await quoteCheckout(
+      { items, email, ...(discountCode ? { discountCode } : {}) },
+      prismaDiscountRepository,
     );
-
-    // --- 1. Check manual discount code from database ---
-    if (code) {
-      const normalizedCode = code.trim().toUpperCase();
-      const discount = await db.discountCode.findUnique({
-        where: { code: normalizedCode },
-      });
-
-      if (!discount || !discount.isActive) {
-        return NextResponse.json(
-          { error: "Invalid discount code" },
-          { status: 400 }
-        );
-      }
-
-      // Check expiration
-      if (discount.expiresAt && new Date() > discount.expiresAt) {
-        return NextResponse.json(
-          { error: "This discount code has expired" },
-          { status: 400 }
-        );
-      }
-
-      // Check max uses
-      if (discount.maxUses > 0 && discount.usedCount >= discount.maxUses) {
-        return NextResponse.json(
-          { error: "This discount code has reached its usage limit" },
-          { status: 400 }
-        );
-      }
-
-      // Check min subtotal
-      if (discount.minSubtotal > 0 && subtotal < discount.minSubtotal) {
-        return NextResponse.json(
-          {
-            error: `Minimum order of $${discount.minSubtotal.toFixed(2)} required`,
-          },
-          { status: 400 }
-        );
-      }
-
-      // Check first order restriction
-      if (discount.firstOrderOnly && email) {
-        const existingOrders = await db.order.count({
-          where: {
-            email,
-            status: { in: ["PAID", "SHIPPED", "DELIVERED"] },
-          },
-        });
-        if (existingOrders > 0) {
-          return NextResponse.json(
-            { error: `${discount.label} is only valid for first-time orders` },
-            { status: 400 }
-          );
-        }
-      }
-
-      let codeDiscount = 0;
-      if (discount.type === "percentage") {
-        codeDiscount = subtotal * (discount.value / 100);
-      } else if (discount.type === "fixed") {
-        codeDiscount = Math.min(discount.value, subtotal);
-      }
-
-      totalDiscount += codeDiscount;
-      appliedDiscounts.push({
-        type: "code",
-        label: discount.label,
-        amount: codeDiscount,
-        description: discount.description || "",
-      });
-    }
-
-    // --- 2. Auto-detect B2G1 (Buy 2 Get 1 Free on pendants) ---
-    const pendantCategory = await db.category.findUnique({
-      where: { slug: B2G1_CATEGORY_SLUG },
-    });
-
-    if (pendantCategory) {
-      // Batch-fetch all product categories in one query
-      const productIds = [...new Set(items.map((i: any) => i.productId))] as string[];
-      const products = await db.product.findMany({
-        where: { id: { in: productIds } },
-        select: { id: true, categoryId: true },
-      });
-      const productCatMap = new Map(products.map((p) => [p.id, p.categoryId]));
-
-      // Get all pendant items in cart with their category info
-      const pendantItems = [];
-      for (const item of items) {
-        if (productCatMap.get(item.productId) === pendantCategory.id) {
-          pendantItems.push(item);
-        }
-      }
-
-      // B2G1: For every 3 pendants, the cheapest one is free
-      const totalPendants = pendantItems.reduce(
-        (sum: number, item: any) => sum + (item.quantity || 1),
-        0
-      );
-      const freeCount = Math.floor(totalPendants / 3);
-
-      if (freeCount > 0) {
-        // Find the cheapest pendant items and apply discount
-        const sortedByPrice = [...pendantItems].sort(
-          (a, b) => (a.price || 0) - (b.price || 0)
-        );
-
-        let remainingFree = freeCount;
-        let b2g1Discount = 0;
-
-        for (const item of sortedByPrice) {
-          if (remainingFree <= 0) break;
-          const qty = item.quantity || 1;
-          const freeFromThisItem = Math.min(qty, remainingFree);
-          b2g1Discount += (item.price || 0) * freeFromThisItem;
-          remainingFree -= freeFromThisItem;
-        }
-
-        if (b2g1Discount > 0) {
-          totalDiscount += b2g1Discount;
-          appliedDiscounts.push({
-            type: "b2g1",
-            label: "Buy 2 Get 1 Free",
-            amount: b2g1Discount,
-            description: `Automatic: ${freeCount} free pendant${freeCount > 1 ? "s" : ""}`,
-          });
-        }
-      }
-    }
-
-    // --- Response ---
-    const finalSubtotal = Math.max(0, subtotal - totalDiscount);
 
     return NextResponse.json({
       valid: true,
-      subtotal: Math.round(subtotal * 100) / 100,
-      discount: Math.round(totalDiscount * 100) / 100,
-      discountedSubtotal: Math.round(finalSubtotal * 100) / 100,
-      appliedDiscounts,
+      subtotal: quote.subtotalCents / 100,
+      shipping: quote.shippingCents / 100,
+      discount: quote.discountCents / 100,
+      discountedSubtotal: (quote.subtotalCents - quote.discountCents) / 100,
+      total: quote.totalCents / 100,
+      appliedDiscounts: quote.appliedDiscounts.map((discount) => ({
+        type: "code",
+        label: discount.label,
+        code: discount.code,
+        amount: discount.amountCents / 100,
+        description: "",
+      })),
     });
-  } catch (e: any) {
-    console.error("Discount validation error:", e);
+  } catch (error) {
+    if (error instanceof CheckoutInputError || error instanceof CheckoutQuoteError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
+    if (error instanceof SyntaxError) {
+      return NextResponse.json({ error: "Invalid discount request" }, { status: 400 });
+    }
+
+    console.error("Discount validation error:", error);
     return NextResponse.json(
-      { error: e?.message || "Failed to validate discount" },
-      { status: 500 }
+      { error: "Failed to validate discount. Please try again." },
+      { status: 500 },
     );
   }
 }

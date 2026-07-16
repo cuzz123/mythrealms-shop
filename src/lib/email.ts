@@ -1,47 +1,73 @@
-import { Resend } from 'resend';
+import {
+  Resend,
+  type CreateEmailOptions,
+  type CreateEmailRequestOptions,
+  type CreateEmailResponse,
+} from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { readResendConfig } from "./server/resend-config";
+
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
 
 const BRAND_COLOR = "#1A1814";
 const ACCENT = "#D4A84B";
 const MUTED = "#8B7E6B";
 
+export interface OrderEmailTransport {
+  send(
+    payload: CreateEmailOptions,
+    options?: CreateEmailRequestOptions,
+  ): Promise<CreateEmailResponse>;
+}
+
+export interface OrderEmailOptions {
+  apiKey?: string;
+  fromEmail?: string;
+  transport?: OrderEmailTransport;
+}
+
 export async function sendOrderConfirmation(
   email: string,
   orderId: string,
   total: number,
-  items: { name: string; quantity: number; price: number }[]
+  items: { name: string; quantity: number; price: number }[],
+  idempotencyKey = `order-confirmation/${orderId}`,
+  options: OrderEmailOptions = {},
 ) {
-  if (!process.env.RESEND_API_KEY) {
-    console.log("Email skipped (no RESEND_API_KEY): order confirmation", orderId);
-    return;
-  }
+  const { apiKey, from } = readResendConfig({
+    RESEND_API_KEY: options.apiKey ?? process.env.RESEND_API_KEY,
+    RESEND_FROM_EMAIL: options.fromEmail ?? process.env.RESEND_FROM_EMAIL,
+  });
+  const transport = options.transport ?? new Resend(apiKey).emails;
 
   try {
-    const { data, error } = await resend.emails.send({
-      from: "MythRealms <onboarding@resend.dev>",
-      to: email,
-      subject: `Order Confirmed — #${orderId.slice(-8)}`,
-      html: OrderConfirmationTemplate(orderId, total, items),
-    });
+    const { data, error } = await transport.send(
+      {
+        from,
+        to: email,
+        subject: `Order Confirmed — #${orderId.slice(-8)}`,
+        html: OrderConfirmationTemplate(orderId, total, items),
+      },
+      { idempotencyKey },
+    );
 
     if (error) {
-      console.error("Resend API error (order confirmation):", error);
+      throw new Error(`Resend order confirmation failed: ${error.message}`);
     } else {
       console.log("Order confirmation email sent:", data?.id);
     }
   } catch (e) {
     console.error("Email send failed (order confirmation):", e);
+    throw e;
   }
 }
 
 export async function sendAbandonedCart(email: string, cartUrl: string) {
-  if (!process.env.RESEND_API_KEY) return;
-
   try {
+    const { apiKey, from } = readResendConfig();
+    const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
-      from: "MythRealms <onboarding@resend.dev>",
+      from,
       to: email,
       subject: "Your cart is waiting — complete your order",
       html: AbandonedCartTemplate(cartUrl),
@@ -96,7 +122,7 @@ function OrderConfirmationTemplate(
       MythRealms
     </h1>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:${MUTED};margin:0;letter-spacing:0.5px;">
-      Stones With Intention. Wear Your Becoming.
+      The Pearl Edit. Everyday light.
     </p>
   </div>
 
@@ -150,7 +176,7 @@ function OrderConfirmationTemplate(
       A shipping confirmation with tracking information will follow once your order ships.
     </p>
     <p style="font-family:Arial,sans-serif;font-size:11px;color:#b0a69a;margin:0;line-height:1.6;">
-      MythRealms — Hand-selected stones. Artisan-finished. Shipping worldwide.<br/>
+      MythRealms - Pearl jewelry from The Pearl Edit.<br/>
       <a href="${APP_URL}/returns" style="color:${ACCENT};text-decoration:none;">Returns Policy</a> &middot;
       <a href="${APP_URL}/contact" style="color:${ACCENT};text-decoration:none;">Contact Us</a>
     </p>
@@ -178,7 +204,7 @@ function AbandonedCartTemplate(cartUrl: string): string {
       MythRealms
     </h1>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:${MUTED};margin:0;">
-      Stones With Intention. Wear Your Becoming.
+      The Pearl Edit. Everyday light.
     </p>
   </div>
 
@@ -193,7 +219,7 @@ function AbandonedCartTemplate(cartUrl: string): string {
       Complete Your Order
     </a>
     <p style="font-family:Arial,sans-serif;font-size:11px;color:#b0a69a;margin:20px 0 0;">
-      <a href="${APP_URL}/collections/curated-singles" style="color:${ACCENT};text-decoration:none;">Browse more stones</a> if these aren't calling to you.
+      <a href="${APP_URL}/collections/pearl-series" style="color:${ACCENT};text-decoration:none;">Browse The Pearl Edit</a> if you want to compare another piece.
     </p>
   </div>
 

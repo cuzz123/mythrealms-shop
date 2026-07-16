@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useCartStore, CartProduct } from "@/lib/cart";
+import { useCartStore } from "@/lib/cart";
+import {
+  buildDiscountPreviewRequest,
+  parseDiscountPreviewResponse,
+} from "@/lib/checkout/discount-preview";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
@@ -31,18 +35,22 @@ export default function CartPage() {
       const res = await fetch("/api/discounts/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, subtotal: subtotal() }),
+        body: JSON.stringify(buildDiscountPreviewRequest(items, code)),
       });
       const data = await res.json();
       if (data.valid) {
+        const preview = parseDiscountPreviewResponse(data);
         setDiscountApplied(true);
-        setDiscountValue(data.discountValue ?? subtotal() * 0.15);
-        setDiscountLabel(data.label || code);
+        setDiscountValue(preview.discount);
+        setDiscountLabel(preview.label);
       } else {
         setDiscountApplied(false);
         setDiscountError(data.error || "Invalid discount code");
       }
     } catch {
+      setDiscountApplied(false);
+      setDiscountValue(0);
+      setDiscountLabel("");
       setDiscountError("Unable to validate code. Please try again.");
     } finally {
       setValidating(false);
@@ -56,10 +64,10 @@ export default function CartPage() {
           <ShoppingBag className="w-9 h-9 text-[var(--accent)]" />
         </div>
         <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Your cart is waiting</h1>
-        <p className="text-[var(--text-muted)] mb-8 max-w-sm mx-auto leading-relaxed">Fill it with hand-selected stones — each piece is individually chosen for its unique character and energy.</p>
-        <Link href="/collections/curated-singles" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] text-[var(--bg)] font-semibold text-sm hover:brightness-110 transition-all">
+        <p className="text-[var(--text-muted)] mb-8 max-w-sm mx-auto leading-relaxed">Browse the full Pearl Edit and use the complete product galleries to choose your next design.</p>
+        <Link href="/collections/pearl-series" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] text-[var(--bg)] font-semibold text-sm hover:brightness-110 transition-all">
           <ShoppingBag className="w-4 h-4" />
-          Browse Curated Singles
+          Browse The Pearl Edit
         </Link>
       </div>
     );
@@ -68,7 +76,7 @@ export default function CartPage() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
       <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-6">
-        <a href="/" className="hover:text-[var(--text)]">Home</a><span>/</span><span className="text-[var(--text)]">Shopping Cart</span>
+        <Link href="/" className="hover:text-[var(--text)]">Home</Link><span>/</span><span className="text-[var(--text)]">Shopping Cart</span>
       </nav>
 
       <h1 className="font-serif text-4xl font-bold text-[var(--text)] mb-8">Shopping Cart</h1>
@@ -86,13 +94,13 @@ export default function CartPage() {
                 <p className="text-xs text-[var(--text-muted)] mt-1">{formatPrice(item.product.price)} each</p>
               </div>
               <div className="flex items-center border border-[var(--border)] rounded-full">
-                <button onClick={() => updateQuantity(item.product.id, item.product.variantId, item.quantity - 1)} className="w-8 h-8 flex items-center justify-center hover:bg-[var(--border-light)] rounded-l-full text-[var(--text)]"><Minus className="w-3 h-3" /></button>
+                <button aria-label={`Decrease quantity for ${item.product.name}`} onClick={() => updateQuantity(item.product.id, item.product.variantId, item.quantity - 1)} className="w-8 h-8 flex items-center justify-center hover:bg-[var(--border-light)] rounded-l-full text-[var(--text)]"><Minus className="w-3 h-3" /></button>
                 <span className="w-10 text-center text-sm font-semibold text-[var(--text)]">{item.quantity}</span>
-                <button onClick={() => updateQuantity(item.product.id, item.product.variantId, item.quantity + 1)} className="w-8 h-8 flex items-center justify-center hover:bg-[var(--border-light)] rounded-r-full text-[var(--text)]"><Plus className="w-3 h-3" /></button>
+                <button aria-label={`Increase quantity for ${item.product.name}`} onClick={() => updateQuantity(item.product.id, item.product.variantId, item.quantity + 1)} className="w-8 h-8 flex items-center justify-center hover:bg-[var(--border-light)] rounded-r-full text-[var(--text)]"><Plus className="w-3 h-3" /></button>
               </div>
               <div className="text-right min-w-[70px]">
                 <p className="font-bold text-[var(--text)]">{formatPrice(item.product.price * item.quantity)}</p>
-                <button onClick={() => removeItem(item.product.id, item.product.variantId)} className="text-[var(--text-muted)] hover:text-red-400 mt-1"><Trash2 className="w-4 h-4" /></button>
+                <button aria-label={`Remove ${item.product.name} from cart`} onClick={() => removeItem(item.product.id, item.product.variantId)} className="text-[var(--text-muted)] hover:text-red-400 mt-1"><Trash2 className="w-4 h-4" /></button>
               </div>
             </div>
           ))}
@@ -115,9 +123,9 @@ export default function CartPage() {
                 variant="outline"
                 size="sm"
                 onClick={handleApplyDiscount}
-                disabled={discountApplied}
+                disabled={discountApplied || validating}
               >
-                {discountApplied ? "Applied" : "Apply"}
+                {discountApplied ? "Applied" : validating ? "Checking..." : "Apply"}
               </Button>
             </div>
             {discountApplied && (
@@ -150,7 +158,7 @@ export default function CartPage() {
           <p className="mt-4 text-center text-xs font-semibold text-[var(--text-muted)]">
             Checkout securely with PayPal
           </p>
-          <Link href="/collections/curated-singles" className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mt-6 justify-center"><ArrowLeft className="w-4 h-4" /> Continue Shopping</Link>
+          <Link href="/collections/pearl-series" className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mt-6 justify-center"><ArrowLeft className="w-4 h-4" /> Continue Shopping</Link>
         </div>
       </div>
     </div>

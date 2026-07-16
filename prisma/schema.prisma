@@ -147,6 +147,8 @@ model Order {
   // Stores checkout session IDs from Stripe, LemonSqueezy, and PayPal orders
   stripeSessionId     String?  @unique
   stripePaymentStatus String?
+  confirmationClaimedAt DateTime?
+  confirmationSentAt    DateTime?
   trackingNumber      String?
   notes               String?
   createdAt           DateTime @default(now())
