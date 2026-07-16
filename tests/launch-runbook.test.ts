@@ -28,16 +28,20 @@ function section(candidate: string, heading: (typeof headings)[number]) {
   return candidate.slice(start, end).trim();
 }
 
-function assertSafeRunbook(candidate: string) {
+function assertNoForbiddenSurface(candidate: string) {
   const normalized = candidate.replace(/\r\n/g, "\n");
-  assert.deepEqual(normalized.match(/^#{1,6}\s+.+$/gm) ?? [], headings);
-
   const allowedPushWarning = "Never use `prisma db push`.";
   assert.equal(normalized.split(allowedPushWarning).length - 1, 1);
   const forbiddenSurface = normalized.replace(allowedPushWarning, "");
   assert.doesNotMatch(forbiddenSurface, /\b(?:npx\s+)?prisma\s+db\s+push\b/i);
   assert.doesNotMatch(normalized, /\bdrop\s+column\b/i);
   assert.doesNotMatch(normalized, /\bPAYPAL_CLIENT_SECRET\s*=/i);
+}
+
+function assertSafeRunbook(candidate: string) {
+  const normalized = candidate.replace(/\r\n/g, "\n");
+  assert.deepEqual(normalized.match(/^#{1,6}\s+.+$/gm) ?? [], headings);
+  assertNoForbiddenSurface(normalized);
 
   assert.equal(
     section(normalized, "## Authority Boundary"),
@@ -176,12 +180,14 @@ test("rejects runbooks that weaken rollback and reconciliation", () => {
 });
 
 test("rejects disguised destructive commands and secret assignments", () => {
+  assert.doesNotThrow(() => assertNoForbiddenSurface(runbook));
+
   for (const forbidden of [
     "- `nPx PrIsMa Db PuSh`",
     "> `Prisma Db Push`",
     "`DrOp CoLuMn confirmationSentAt`",
     "`paypal_client_secret = unsafe`",
   ]) {
-    assert.throws(() => assertSafeRunbook(`${runbook}\n${forbidden}\n`));
+    assert.throws(() => assertNoForbiddenSurface(`${runbook}\n${forbidden}\n`));
   }
 });
