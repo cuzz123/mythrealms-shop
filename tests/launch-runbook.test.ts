@@ -92,6 +92,15 @@ function replace(candidate: string, expected: string, replacement: string) {
   return candidate.replace(expected, replacement);
 }
 
+function assertInOrder(candidate: string, expected: readonly RegExp[]) {
+  let offset = 0;
+  for (const pattern of expected) {
+    const match = pattern.exec(candidate.slice(offset));
+    assert.ok(match, `missing ordered runbook step: ${pattern}`);
+    offset += match.index + match[0].length;
+  }
+}
+
 test("PayPal launch runbook contains every safety gate", () => {
   assertSafeRunbook(runbook);
 });
@@ -190,4 +199,37 @@ test("rejects disguised destructive commands and secret assignments", () => {
   ]) {
     assert.throws(() => assertNoForbiddenSurface(`${runbook}\n${forbidden}\n`));
   }
+});
+
+test("the first complete read-only gate stops deployment without authorizing remediation", () => {
+  const readOnlyGate = section(runbook, "## 2. Read-Only Gate");
+
+  assert.match(readOnlyGate, /complete read-only gate/i);
+  assert.match(readOnlyGate, /stop deployment on any failure/i);
+  assert.match(readOnlyGate, /does not authorize remediation/i);
+});
+
+test("database remediation is a separately authorized additive branch followed by the complete gate", () => {
+  const databaseChange = section(runbook, "## 3. Additive Database Change");
+
+  assertInOrder(databaseChange, [
+    /database-schema failure/i,
+    /separate database-write authorization/i,
+    /^`npx prisma db execute --file prisma\/sql\/2026-07-15-order-confirmation-columns\.sql --schema prisma\/schema\.prisma`$/m,
+    /rerun the complete read-only gate/i,
+  ]);
+});
+
+test("provider and sender remediations require separate authority and a fresh complete gate", () => {
+  const providerAndSender = section(runbook, "## 4. Provider And Sender");
+
+  assertInOrder(providerAndSender, [
+    /PayPal webhook mismatch/i,
+    /separate provider-configuration authorization/i,
+    /rerun the complete read-only gate/i,
+    /Resend sender mismatch/i,
+    /separate email-configuration authorization/i,
+    /rerun the complete read-only gate/i,
+    /proceed to .*Pre-Money Smoke Test.* only after every check passes/i,
+  ]);
 });

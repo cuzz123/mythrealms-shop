@@ -12,21 +12,23 @@ This document does not authorize database writes, deployment, PayPal webhook cha
 
 ## 2. Read-Only Gate
 
-Run `npm run launch:check`. Stop on any failure. Do not print or paste secrets.
+Run `npm run launch:check`. Stop on any failure. Treat this as the complete read-only gate: stop deployment on any failure. This first gate does not authorize remediation. Do not print or paste secrets.
 
 ## 3. Additive Database Change
 
-After database-write authorization, run:
+Only when the complete read-only gate reports a database-schema failure, and only after separate database-write authorization, run:
 
 `npx prisma db execute --file prisma/sql/2026-07-15-order-confirmation-columns.sql --schema prisma/schema.prisma`
 
-Run `npm run launch:check` again. Never use `prisma db push`.
+Run `npm run launch:check` again. Rerun the complete read-only gate and stop deployment on any remaining failure. Never use `prisma db push`.
 
 ## 4. Provider And Sender
 
-- Verify the PayPal live webhook URL ends in `/api/webhooks/paypal`.
-- Require `PAYMENT.CAPTURE.COMPLETED` and `PAYMENT.CAPTURE.REFUNDED`.
-- Verify `RESEND_FROM_EMAIL` is a sender verified inside Resend.
+- If the complete read-only gate reports a PayPal webhook mismatch, stop. Only after separate provider-configuration authorization, correct the live webhook URL so it ends in `/api/webhooks/paypal` and require `PAYMENT.CAPTURE.COMPLETED` and `PAYMENT.CAPTURE.REFUNDED`.
+- After that authorized correction, rerun the complete read-only gate and stop on any failure.
+- If the complete read-only gate reports a Resend sender mismatch, stop. Only after separate email-configuration authorization, correct `RESEND_FROM_EMAIL` to a sender verified inside Resend.
+- After that authorized correction, rerun the complete read-only gate and stop on any failure.
+- Proceed to the Pre-Money Smoke Test only after every check passes.
 
 ## 5. Pre-Money Smoke Test
 
