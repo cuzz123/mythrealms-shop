@@ -11,6 +11,41 @@ type ResendEnvironment = Partial<
   Pick<NodeJS.ProcessEnv, "RESEND_API_KEY" | "RESEND_FROM_EMAIL">
 >;
 
+function isValidSender(from: string): boolean {
+  let address = from;
+  const displayMailbox = /^([^<>]+)<([^<>]+)>$/.exec(from);
+  if (displayMailbox) {
+    if (!displayMailbox[1].trim()) return false;
+    address = displayMailbox[2].trim();
+  } else if (/[<>]/.test(from)) {
+    return false;
+  }
+
+  const at = address.indexOf("@");
+  if (at <= 0 || at !== address.lastIndexOf("@") || at === address.length - 1) {
+    return false;
+  }
+
+  const local = address.slice(0, at);
+  const domain = address.slice(at + 1);
+  if (
+    local.startsWith(".") ||
+    local.endsWith(".") ||
+    local.includes("..") ||
+    /[\s<>]/.test(local)
+  ) {
+    return false;
+  }
+
+  const labels = domain.split(".");
+  return (
+    labels.length >= 2 &&
+    labels.every((label) =>
+      /^[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?$/.test(label),
+    )
+  );
+}
+
 export function readResendConfig(
   env: ResendEnvironment = {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
@@ -18,12 +53,17 @@ export function readResendConfig(
   },
 ): { apiKey: string; from: string } {
   const apiKey = env.RESEND_API_KEY?.trim();
-  const from = env.RESEND_FROM_EMAIL?.trim();
+  const rawFrom = env.RESEND_FROM_EMAIL;
   if (!apiKey) throw new ResendConfigError("RESEND_API_KEY is missing");
-  if (!from) throw new ResendConfigError("RESEND_FROM_EMAIL is missing");
-  const senderPattern =
-    /^(?:[^<>]+<[^@\s<>]+@[^@\s<>]+\.[^@\s<>]+>|[^@\s<>]+@[^@\s<>]+\.[^@\s<>]+)$/;
-  if (/onboarding@resend\.dev/i.test(from) || !senderPattern.test(from)) {
+  if (!rawFrom?.trim()) {
+    throw new ResendConfigError("RESEND_FROM_EMAIL is missing");
+  }
+  const from = rawFrom.trim();
+  if (
+    /[\u0000-\u001F\u007F]/.test(rawFrom) ||
+    /onboarding@resend\.dev/i.test(from) ||
+    !isValidSender(from)
+  ) {
     throw new ResendConfigError("RESEND_FROM_EMAIL must be a verified sender");
   }
   return { apiKey, from };

@@ -43,6 +43,49 @@ test("rejects malformed sender syntax", () => {
   );
 });
 
+test("rejects control characters and header injection in sender values", () => {
+  for (const from of [
+    "MythRealms\nInjected <orders@example.com>",
+    "MythRealms\r\nBcc: attacker@example.com <orders@example.com>",
+    "MythRealms\u0000 <orders@example.com>",
+  ]) {
+    assert.throws(
+      () => readResendConfig({ RESEND_API_KEY: "key", RESEND_FROM_EMAIL: from }),
+      (error: unknown) =>
+        error instanceof ResendConfigError &&
+        error.status === 503 &&
+        /verified sender/i.test(error.message),
+    );
+  }
+});
+
+test("rejects leading, trailing, and consecutive dots in the local part", () => {
+  for (const from of [
+    ".orders@example.com",
+    "orders.@example.com",
+    "orders..team@example.com",
+  ]) {
+    assert.throws(
+      () => readResendConfig({ RESEND_API_KEY: "key", RESEND_FROM_EMAIL: from }),
+      /verified sender/i,
+    );
+  }
+});
+
+test("rejects empty, invalid-character, and hyphen-bounded domain labels", () => {
+  for (const from of [
+    "orders@example..com",
+    "orders@-example.com",
+    "orders@example-.com",
+    "orders@exa_mple.com",
+  ]) {
+    assert.throws(
+      () => readResendConfig({ RESEND_API_KEY: "key", RESEND_FROM_EMAIL: from }),
+      /verified sender/i,
+    );
+  }
+});
+
 test("reads the supplied environment on every call", () => {
   const env = {
     RESEND_API_KEY: "first-key",
