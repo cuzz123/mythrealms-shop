@@ -44,6 +44,28 @@ function event() {
   };
 }
 
+function refundEvent(
+  status: "refunded" | "partial_refund",
+  refundedAmount: number,
+) {
+  const payload = event();
+  return {
+    ...payload,
+    meta: {
+      ...payload.meta,
+      event_name: "order_refunded",
+    },
+    data: {
+      ...payload.data,
+      attributes: {
+        ...payload.data.attributes,
+        status,
+        refunded_amount: refundedAmount,
+      },
+    },
+  };
+}
+
 function assertRejected(payload: unknown, pattern: RegExp) {
   assert.throws(
     () => verifyLemonSqueezyOrder(payload, binding),
@@ -105,19 +127,13 @@ test("public Lemon Squeezy checkout is retired while verification remains", () =
 });
 
 test("distinguishes full and partial Lemon Squeezy refunds", () => {
-  const full: any = event();
-  full.meta.event_name = "order_refunded";
-  full.data.attributes.status = "refunded";
-  full.data.attributes.refunded_amount = 3198;
+  const full = refundEvent("refunded", 3198);
   assert.deepEqual(verifyLemonSqueezyRefund(full, binding), {
     transactionId: "lemon-order-789",
     outcome: "full",
   });
 
-  const partial: any = event();
-  partial.meta.event_name = "order_refunded";
-  partial.data.attributes.status = "partial_refund";
-  partial.data.attributes.refunded_amount = 1000;
+  const partial = refundEvent("partial_refund", 1000);
   assert.deepEqual(verifyLemonSqueezyRefund(partial, binding), {
     transactionId: "lemon-order-789",
     outcome: "partial",
@@ -125,10 +141,7 @@ test("distinguishes full and partial Lemon Squeezy refunds", () => {
 });
 
 test("rejects inconsistent Lemon Squeezy refund totals", () => {
-  const payload: any = event();
-  payload.meta.event_name = "order_refunded";
-  payload.data.attributes.status = "partial_refund";
-  payload.data.attributes.refunded_amount = 3198;
+  const payload = refundEvent("partial_refund", 3198);
   assert.throws(
     () => verifyLemonSqueezyRefund(payload, binding),
     (error: unknown) =>

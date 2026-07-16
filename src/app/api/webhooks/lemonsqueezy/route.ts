@@ -47,7 +47,6 @@ export async function POST(request: NextRequest) {
     const root = asRecord(event);
     const meta = asRecord(root.meta);
     const customData = asRecord(meta.custom_data);
-    const data = asRecord(root.data);
     const orderId =
       typeof customData.orderId === "string" ? customData.orderId : null;
 
