@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MythRealms 珍珠戒指 15 秒导演画板</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: #0d0c0b;
+      color: #f5f0e8;
+      letter-spacing: 0;
+      --panel: #171411;
+      --line: #443b31;
+      --muted: #aa9988;
+      --gold: #caa776;
+      --lime: #b8ee5c;
+      --cyan: #18b9e8;
+      --pink: #ec8ec0;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0d0c0b; }
+    button { font: inherit; }
+    main { width: min(1540px, 100%); margin: 0 auto; padding: 24px; }
+    h1, h2, h3, p { margin: 0; }
+    .masthead {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      padding: 10px 0 22px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow { color: var(--gold); font-size: 12px; text-transform: uppercase; }
+    h1 { margin-top: 7px; font-size: 30px; line-height: 1.2; }
+    .subtitle { margin-top: 8px; color: var(--muted); line-height: 1.6; }
+    .meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 14px; color: var(--muted); font-size: 13px; }
+    .meta strong { color: #fff; font-weight: 600; }
+    .section-title { margin: 24px 0 12px; font-size: 16px; color: #e5d7c7; }
+    .assets {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .asset, .shot { border: 1px solid var(--line); background: var(--panel); border-radius: 4px; overflow: hidden; }
+    .asset img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .asset-body { padding: 15px 16px 17px; }
+    .asset-label { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+    .dot.product { background: var(--pink); }
+    .dot.model { background: var(--lime); }
+    .dot.scene { background: var(--cyan); }
+    .asset h3 { margin-top: 10px; font-size: 20px; }
+    .path { margin-top: 14px; color: var(--gold); font-family: Consolas, monospace; font-size: 12px; overflow-wrap: anywhere; line-height: 1.5; }
+    .role { margin-top: 10px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .shot { position: relative; }
+    .shot-head { min-height: 210px; padding: 18px; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: space-between; isolation: isolate; }
+    .shot-head::before { content: ""; position: absolute; inset: 0; background: rgba(8, 7, 6, 0.42); z-index: -1; }
+    .shot:nth-child(1) .shot-head { background-image: url("./director-board-assets/pearl-ring-15s/scene-cafe-terrace.png"); }
+    .shot:nth-child(2) .shot-head { background-image: url("./director-board-assets/pearl-ring-15s/model-hand-linen.png"); }
+    .shot:nth-child(3) .shot-head { background-image: url("./director-board-assets/pearl-ring-15s/product-pearl-ring.webp"); }
+    .timecode { width: max-content; padding: 5px 7px; border: 1px solid rgba(255,255,255,.6); background: rgba(0,0,0,.45); font-family: Consolas, monospace; font-size: 12px; }
+    .shot h2 { font-size: 23px; text-shadow: 0 1px 8px #000; }
+    .shot-body { padding: 16px 17px 19px; }
+    .contract { display: grid; grid-template-columns: 92px 1fr; gap: 8px 10px; margin-bottom: 17px; font-size: 13px; line-height: 1.5; }
+    .contract dt { color: var(--muted); }
+    .contract dd { margin: 0; }
+    .prompt-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 15px; border-top: 1px solid var(--line); }
+    .prompt-title h3 { font-size: 14px; }
+    .copy { min-height: 34px; padding: 0 10px; border: 1px solid var(--gold); border-radius: 3px; background: transparent; color: #f5dfbf; cursor: pointer; }
+    .copy:hover { background: #2b241c; }
+    .prompt { margin-top: 10px; max-height: 260px; overflow: auto; color: #d9cfc3; font-size: 13px; line-height: 1.65; white-space: pre-wrap; }
+    .locks { margin-top: 24px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .locks h2 { font-size: 18px; }
+    .lock-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+    .lock-item { padding-left: 12px; border-left: 3px solid var(--gold); color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .lock-item strong { display: block; color: #fff; }
+    .footer { display: flex; justify-content: space-between; gap: 20px; padding-top: 18px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 980px) {
+      .assets, .timeline { grid-template-columns: 1fr; }
+      .asset img { aspect-ratio: 16 / 9; }
+      .lock-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 620px) {
+      main { padding: 14px; }
+      .masthead { grid-template-columns: 1fr; }
+      .meta { justify-content: flex-start; }
+      h1 { font-size: 25px; }
+      .lock-grid { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">MythRealms / Director Board 001</p>
+        <h1>珍珠戒指：暖阳露台 15 秒品牌短片</h1>
+        <p class="subtitle">一个产品、一个手模、一个场景。三个 5 秒 I2V 镜头分别生成，后期硬切。</p>
+      </div>
+      <div class="meta">
+        <span>画幅 <strong>9:16</strong></span>
+        <span>时长 <strong>15s</strong></span>
+        <span>镜头 <strong>3</strong></span>
+        <span>模式 <strong>I2V</strong></span>
+      </div>
+    </header>
+
+    <h2 class="section-title">固定资产 / 每个分镜按相同顺序上传</h2>
+    <section class="assets" aria-label="固定资产">
+      <article class="asset">
+        <img src="./director-board-assets/pearl-ring-15s/product-pearl-ring.webp" alt="珍珠戒指产品身份源">
+        <div class="asset-body">
+          <p class="asset-label"><span class="dot product"></span>@图1 / 产品身份</p>
+          <h3>珍珠枝线戒指</h3>
+          <p class="path">D:\mythrealms-shop-worktrees\product-imagery\public\preview\director-board-assets\pearl-ring-15s\product-pearl-ring.webp</p>
+          <p class="role">只传递珍珠簇、金属枝线、缠绕结、密绕环体、材质和比例，不传递原背景。</p>
+        </div>
+      </article>
+      <article class="asset">
+        <img src="./director-board-assets/pearl-ring-15s/model-hand-linen.png" alt="深肤色手模身份源">
+        <div class="asset-body">
+          <p class="asset-label"><span class="dot model"></span>@图2 / 模特身份</p>
+          <h3>深肤色左手与亚麻袖口</h3>
+          <p class="path">D:\mythrealms-shop-worktrees\product-imagery\public\preview\director-board-assets\pearl-ring-15s\model-hand-linen.png</p>
+          <p class="role">只传递同一只手、肤色、指甲和白色亚麻袖口；画板全程不露脸、不换手。</p>
+        </div>
+      </article>
+      <article class="asset">
+        <img src="./director-board-assets/pearl-ring-15s/scene-cafe-terrace.png" alt="咖啡露台场景身份源">
+        <div class="asset-body">
+          <p class="asset-label"><span class="dot scene"></span>@图3 / 场景身份</p>
+          <h3>常春藤咖啡露台</h3>
+          <p class="path">D:\mythrealms-shop-worktrees\product-imagery\public\preview\director-board-assets\pearl-ring-15s\scene-cafe-terrace.png</p>
+          <p class="role">只传递石灰石桌面、陶瓷杯、常春藤、下午暖阳与叶影，不传递其他人物或产品。</p>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">15 秒时间线 / 三个独立生成镜头</h2>
+    <section class="timeline" aria-label="三分镜时间线">
+      <article class="shot">
+        <div class="shot-head">
+          <span class="timecode">00:00 - 00:05</span>
+          <h2>01 环境建立与产品发现</h2>
+        </div>
+        <div class="shot-body">
+          <dl class="contract">
+            <dt>叙事任务</dt><dd>先让观众相信场景，再发现戒指</dd>
+            <dt>镜头</dt><dd>35mm 中近景，稳定推近 12cm</dd>
+            <dt>模特动作</dt><dd>手指静止，仅有自然呼吸和袖口微动</dd>
+            <dt>结束状态</dt><dd>戒指仍在无名指近节，进入中近景</dd>
+          </dl>
+          <div class="prompt-title">
+            <h3>关键帧提示词</h3>
+            <button class="copy" type="button" data-copy="prompt-1">复制</button>
+          </div>
+          <div class="prompt" id="prompt-1">@图1严格锁定珍珠戒指的完整结构、珍珠簇相对位置、金属枝线、缠绕结和密绕环体；@图2锁定同一只深肤色左手、自然指甲和白色亚麻袖口，只参考模特身份，不带入图中的任何首饰；@图3锁定同一处常春藤咖啡露台、石灰石圆桌、陶瓷杯和下午暖阳。9:16竖屏真实时尚摄影，中近景，模特坐在同一张桌边，左手自然搭在桌面，戒指正确环绕左手无名指近节，珍珠枝位于手背，只包围一根手指。陶瓷杯在后方轻微虚化，叶影落在桌面和袖口，皮肤保留毛孔与细纹，产品与手部共用同一光线、焦点和颗粒。禁止改变戒指、跨两根手指、戴在指尖、增加其他首饰、换手、换肤色、换袖口、换场景、塑料皮肤、文字、水印、UI。</div>
+        </div>
+      </article>
+
+      <article class="shot">
+        <div class="shot-head">
+          <span class="timecode">00:05 - 00:10</span>
+          <h2>02 单指佩戴揭示</h2>
+        </div>
+        <div class="shot-body">
+          <dl class="contract">
+            <dt>叙事任务</dt><dd>清楚证明戒指的正确佩戴方式</dd>
+            <dt>镜头</dt><dd>50mm 手部近景，横向滑轨 8cm</dd>
+            <dt>模特动作</dt><dd>手腕只向光源转动约 3°</dd>
+            <dt>结束状态</dt><dd>环体仅包围无名指一根手指</dd>
+          </dl>
+          <div class="prompt-title">
+            <h3>关键帧提示词</h3>
+            <button class="copy" type="button" data-copy="prompt-2">复制</button>
+          </div>
+          <div class="prompt" id="prompt-2">继续使用同一组@图1、@图2、@图3。@图1只锁定戒指本体，@图2只锁定同一只深肤色左手、指甲和白色亚麻袖口，@图3只锁定同一咖啡露台与暖阳。9:16竖屏真实商业摄影，50mm手部近景，左手保持与上一镜头相同的桌面方向，无名指位于画面中心。戒指只环绕无名指近节，环体两侧贴合手指，珍珠枝完整落在手背一侧，不能跨到中指。背景仍是同一石灰石桌面和虚化陶瓷杯，叶影方向、色温和下午时间与上一镜头一致。真实皮肤纹理、自然指甲、真实金属反光和珍珠虹彩。禁止重新设计戒指、珍珠增减、枝线合并、环体简化、跨两指、悬浮、换手、换模特、换场景、其他首饰、文字、水印、UI。</div>
+        </div>
+      </article>
+
+      <article class="shot">
+        <div class="shot-head">
+          <span class="timecode">00:10 - 00:15</span>
+          <h2>03 结构微距与收尾</h2>
+        </div>
+        <div class="shot-body">
+          <dl class="contract">
+            <dt>叙事任务</dt><dd>看清珍珠、枝线、缠绕结和环体</dd>
+            <dt>镜头</dt><dd>85mm 微距，推近 6cm 后停住</dd>
+            <dt>模特动作</dt><dd>手部与产品完全静止</dd>
+            <dt>结束状态</dt><dd>珍珠合焦，最后 0.8 秒定住</dd>
+          </dl>
+          <div class="prompt-title">
+            <h3>关键帧提示词</h3>
+            <button class="copy" type="button" data-copy="prompt-3">复制</button>
+          </div>
+          <div class="prompt" id="prompt-3">继续使用同一组@图1、@图2、@图3，所有身份与空间连续。9:16竖屏85mm真实微距摄影，同一枚戒指仍正确戴在同一只左手无名指近节，不摘下、不换手。画面紧贴手背一侧，珍珠簇占画面约三分之一，能同时看见珍珠虹彩、细金属枝线、缠绕结和密绕环体；皮肤、白色亚麻袖口、石灰石桌面和绿色叶影形成柔和背景虚化。光线仍来自同一下午方向，珍珠与金属反光真实克制。禁止减少或增加珍珠、改变枝线连接、把环体变成光滑圆环、跨两指、漂浮、锐化边缘、换模特、换场景、增加文字、Logo、水印或UI。</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="locks">
+      <h2>全片连续性锁</h2>
+      <div class="lock-grid">
+        <p class="lock-item"><strong>产品锁</strong>珍珠簇、枝线、缠绕结和密绕环体不得增减或重排。</p>
+        <p class="lock-item"><strong>佩戴锁</strong>只戴左手无名指近节，珍珠枝始终位于手背。</p>
+        <p class="lock-item"><strong>模特锁</strong>同一深肤色左手、同一指甲、同一白色亚麻袖口。</p>
+        <p class="lock-item"><strong>场景锁</strong>同一露台、桌面、杯子、暖阳方向和叶影节奏。</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>完整小云雀视频提示词与返工规则见配套 Markdown 文件。</span>
+      <span>D:\mythrealms-shop-worktrees\product-imagery\assets\video\pearl-ring-15s\xiaoyunque-keyframe-prompts-zh.md</span>
+    </footer>
+  </main>
+  <script>
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.copy);
+        if (!target) return;
+        const value = target.textContent.trim();
+        try {
+          await navigator.clipboard.writeText(value);
+        } catch {
+          const area = document.createElement("textarea");
+          area.value = value;
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand("copy");
+          area.remove();
+        }
+        const original = button.textContent;
+        button.textContent = "已复制";
+        window.setTimeout(() => { button.textContent = original; }, 1200);
+      });
+    });
+  </script>
+</body>
+</html>

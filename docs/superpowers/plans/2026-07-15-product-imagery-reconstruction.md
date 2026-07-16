@@ -289,7 +289,7 @@ if __name__ == "__main__":
 
 - [ ] **Step 2: Run the test and verify import failure**
 
-Run: `python -m unittest tests/product-imagery-tools.test.py -v`
+Run: `python tests/product-imagery-tools.test.py -v`
 
 Expected: FAIL because `scripts.product_imagery.normalize_image` does not exist.
 
@@ -351,7 +351,7 @@ Create temporary valid and invalid packages and assert that invalid slot filenam
 
 - [ ] **Step 7: Run Python tests and lock pilot source hashes**
 
-Run: `python -m unittest tests/product-imagery-tools.test.py -v`
+Run: `python tests/product-imagery-tools.test.py -v`
 
 Expected: all tests PASS.
 
