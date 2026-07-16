@@ -21,6 +21,8 @@ function isValidSender(from: string): boolean {
     return false;
   }
 
+  if (address.length > 254) return false;
+
   const at = address.indexOf("@");
   if (at <= 0 || at !== address.lastIndexOf("@") || at === address.length - 1) {
     return false;
@@ -29,19 +31,22 @@ function isValidSender(from: string): boolean {
   const local = address.slice(0, at);
   const domain = address.slice(at + 1);
   if (
-    local.startsWith(".") ||
-    local.endsWith(".") ||
-    local.includes("..") ||
-    /[\s<>]/.test(local)
+    local.length > 64 ||
+    !/^[A-Za-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+\/=?^_`{|}~-]+)*$/.test(
+      local,
+    )
   ) {
     return false;
   }
 
+  if (domain.length > 253) return false;
   const labels = domain.split(".");
   return (
     labels.length >= 2 &&
-    labels.every((label) =>
-      /^[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?$/.test(label),
+    labels.every(
+      (label) =>
+        label.length <= 63 &&
+        /^[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?$/.test(label),
     )
   );
 }

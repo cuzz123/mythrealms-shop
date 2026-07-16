@@ -72,6 +72,64 @@ test("rejects leading, trailing, and consecutive dots in the local part", () => 
   }
 });
 
+test("rejects punctuation outside unquoted ASCII dot-atom local parts", () => {
+  for (const from of [
+    "orders,team@example.com",
+    "orders:team@example.com",
+    'orders"team@example.com',
+    '"orders.team"@example.com',
+    "orders\\team@example.com",
+  ]) {
+    assert.throws(
+      () => readResendConfig({ RESEND_API_KEY: "key", RESEND_FROM_EMAIL: from }),
+      (error: unknown) =>
+        error instanceof ResendConfigError &&
+        error.status === 503 &&
+        /verified sender/i.test(error.message),
+    );
+  }
+});
+
+test("accepts a valid plus-addressed dot-atom sender", () => {
+  assert.deepEqual(
+    readResendConfig({
+      RESEND_API_KEY: "key",
+      RESEND_FROM_EMAIL: "MythRealms <orders.team+receipts@example.com>",
+    }),
+    {
+      apiKey: "key",
+      from: "MythRealms <orders.team+receipts@example.com>",
+    },
+  );
+});
+
+test("rejects senders that exceed mailbox component length limits", () => {
+  const overlongDomain = [63, 63, 63, 62]
+    .map((length) => "d".repeat(length))
+    .join(".");
+  const mailboxOverflowDomain = [63, 63, 62]
+    .map((length) => "d".repeat(length))
+    .join(".");
+  const senders = [
+    `${"l".repeat(65)}@example.com`,
+    `orders@${"d".repeat(64)}.com`,
+    `orders@${overlongDomain}`,
+    `${"l".repeat(64)}@${mailboxOverflowDomain}`,
+  ];
+
+  assert.equal(overlongDomain.length, 254);
+  assert.equal(`${"l".repeat(64)}@${mailboxOverflowDomain}`.length, 255);
+  for (const from of senders) {
+    assert.throws(
+      () => readResendConfig({ RESEND_API_KEY: "key", RESEND_FROM_EMAIL: from }),
+      (error: unknown) =>
+        error instanceof ResendConfigError &&
+        error.status === 503 &&
+        /verified sender/i.test(error.message),
+    );
+  }
+});
+
 test("rejects empty, invalid-character, and hyphen-bounded domain labels", () => {
   for (const from of [
     "orders@example..com",
