@@ -33,6 +33,14 @@ interface Order {
   stripeSessionId?: string;
 }
 
+async function fetchAdminOrder(id: string): Promise<Order> {
+  const response = await fetch(`/api/admin/orders/${id}`);
+  if (!response.ok) {
+    throw new Error((await response.json()).error || "Order not found");
+  }
+  return response.json();
+}
+
 const STATUS_LABELS: Record<string, string> = {
   PENDING: "Pending Payment",
   PAID: "Paid",
@@ -51,11 +59,7 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
   const [trackingInput, setTrackingInput] = useState("");
 
   useEffect(() => {
-    fetch(`/api/admin/orders/${id}`)
-      .then(async (r) => {
-        if (!r.ok) throw new Error((await r.json()).error || "Order not found");
-        return r.json();
-      })
+    fetchAdminOrder(id)
       .then((data) => {
         setOrder(data);
         setTrackingInput(data.trackingNumber || "");
@@ -77,9 +81,9 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
         body: JSON.stringify(body),
       });
       if (!res.ok) throw new Error((await res.json()).error || "Update failed");
-      const updated = await res.json();
-      setOrder(updated);
-      setTrackingInput(updated.trackingNumber || "");
+      const refreshedOrder = await fetchAdminOrder(id);
+      setOrder(refreshedOrder);
+      setTrackingInput(refreshedOrder.trackingNumber || "");
       toast.success(`Order marked as ${STATUS_LABELS[newStatus] || newStatus}`);
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : "Update failed");

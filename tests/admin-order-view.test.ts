@@ -108,3 +108,19 @@ test("admin page never dereferences a nullable product relation", () => {
   assert.doesNotMatch(page, /item\.product\.(slug|name)/);
   assert.match(page, /item\.slug/);
 });
+
+test("PATCH success refreshes normalized detail before replacing order state", () => {
+  const page = readFileSync(
+    path.join(process.cwd(), "src/app/admin/orders/[id]/page.tsx"),
+    "utf8",
+  );
+  const updateStatus = page.slice(
+    page.indexOf("async function updateStatus"),
+    page.indexOf("const statusBadge"),
+  );
+  assert.doesNotMatch(updateStatus, /setOrder\(updated\)/);
+  assert.match(
+    updateStatus,
+    /if \(!res\.ok\)[\s\S]*await fetchAdminOrder\(id\)[\s\S]*setOrder\(/,
+  );
+});
