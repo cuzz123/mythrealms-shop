@@ -16,6 +16,8 @@ const PILOT_SLUGS = [
   "new-series-pearl-glasses-chain",
 ];
 
+const APPROVED_PILOT_SLUGS = new Set(["pearl-series-01"]);
+
 function styleReferencePath(styleReferenceRoot: string, reference: string): string {
   assert.equal(isAbsolute(reference), false, `style reference must be relative: ${reference}`);
   assert.equal(reference.split(/[\\/]+/).includes(".."), false, `style reference may not traverse: ${reference}`);
@@ -42,12 +44,12 @@ function assertPortableManifestStrings(value: unknown, generatedImagesRoot: stri
   }
 }
 
-test("pilot manifest defines five representative products and four ordered slots", () => {
+test("pilot manifest defines five representative products, ordered slots, and review states", () => {
   assert.deepEqual(manifest.products.map((product) => product.slug), PILOT_SLUGS);
   assert.deepEqual(EDITORIAL_SLOTS, ["main", "on-model", "macro", "lifestyle"]);
   for (const product of manifest.products) {
     assert.equal(Object.keys(product.outputs).length, 4);
-    assert.equal(product.status, "draft");
+    assert.equal(product.status, APPROVED_PILOT_SLUGS.has(product.slug) ? "approved" : "draft");
     assert.equal(product.sourceReferences.length >= 2, true);
   }
 });
