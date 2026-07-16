@@ -92,6 +92,26 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
     }
   }
 
+  async function updateTracking() {
+    setUpdating(true);
+    try {
+      const res = await fetch(`/api/admin/orders/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ trackingNumber: trackingInput }),
+      });
+      if (!res.ok) throw new Error((await res.json()).error || "Update failed");
+      const refreshedOrder = await fetchAdminOrder(id);
+      setOrder(refreshedOrder);
+      setTrackingInput(refreshedOrder.trackingNumber || "");
+      toast.success("Tracking updated");
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : "Update failed");
+    } finally {
+      setUpdating(false);
+    }
+  }
+
   const statusBadge = (s: string) => {
     const colors: Record<string, string> = {
       PAID: "bg-green-900/30 text-green-400",
@@ -215,7 +235,7 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
                 <button
                   onClick={() => {
                     if (trackingInput !== order.trackingNumber) {
-                      updateStatus(order.status);
+                      updateTracking();
                     }
                   }}
                   disabled={updating || trackingInput === order.trackingNumber}
@@ -309,6 +329,13 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
             <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
               <h2 className="font-semibold text-[var(--text)] mb-3">Actions</h2>
               <div className="space-y-2">
+                {(["PAID", "SHIPPED", "DELIVERED"] as const).includes(
+                  order.status as "PAID" | "SHIPPED" | "DELIVERED",
+                ) && (
+                  <p className="rounded-lg border border-orange-900/30 bg-orange-900/10 p-3 text-xs leading-relaxed text-orange-300">
+                    Issue refunds in PayPal. This order will update automatically after PayPal confirms a full refund.
+                  </p>
+                )}
                 {order.status === "PAID" && (
                   <button
                     onClick={() => updateStatus("SHIPPED")}
@@ -329,7 +356,7 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
                     Mark as Delivered
                   </button>
                 )}
-                {(order.status === "PENDING" || order.status === "PAID") && (
+                {order.status === "PENDING" && (
                   <button
                     onClick={() => updateStatus("CANCELLED")}
                     disabled={updating}
@@ -337,15 +364,6 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
                   >
                     <XCircle className="w-4 h-4" />
                     Cancel Order
-                  </button>
-                )}
-                {(order.status === "PAID" || order.status === "SHIPPED" || order.status === "DELIVERED") && (
-                  <button
-                    onClick={() => updateStatus("REFUNDED")}
-                    disabled={updating}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium bg-orange-900/20 text-orange-400 hover:bg-orange-900/40 border border-orange-900/30 disabled:opacity-50 transition"
-                  >
-                    Refund Order
                   </button>
                 )}
               </div>
