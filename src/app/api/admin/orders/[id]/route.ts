@@ -3,6 +3,10 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import {
+  parseAdminShippingAddress,
+  toAdminOrderItemView,
+} from "@/lib/orders/admin-order-view";
 import { auth } from "@/lib/auth";
 
 const VALID_TRANSITIONS: Record<string, string[]> = {
@@ -25,7 +29,11 @@ export async function GET(
     where: { id },
     include: {
       items: {
-        include: {
+        select: {
+          id: true,
+          quantity: true,
+          price: true,
+          productSnapshot: true,
           product: { select: { name: true, slug: true, images: true } },
           variant: { select: { name: true } },
         },
@@ -33,7 +41,12 @@ export async function GET(
     },
   });
   if (!order) return NextResponse.json({ error: "Order not found" }, { status: 404 });
-  return NextResponse.json(order);
+  const { items, shippingAddress, ...rest } = order;
+  return NextResponse.json({
+    ...rest,
+    shippingAddress: parseAdminShippingAddress(shippingAddress),
+    items: items.map(toAdminOrderItemView),
+  });
 }
 
 export async function PATCH(

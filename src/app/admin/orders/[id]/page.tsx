@@ -4,29 +4,34 @@ import { useState, useEffect, use } from "react";
 import Link from "next/link";
 import { ArrowLeft, Truck, CheckCircle, XCircle, Loader2, Package, Mail, Calendar, Hash } from "lucide-react";
 import toast from "react-hot-toast";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { imageUrl } from "@/lib/images";
 
 interface OrderItem {
   id: string; quantity: number; price: number;
-  product: { name: string; slug: string; images: string };
-  variant?: { name: string } | null;
+  name: string; slug: string | null; image: string | null;
+  variantName: string | null;
+}
+
+interface ShippingAddress {
+  name: string | null;
+  address: string | null;
+  line2: string | null;
+  city: string | null;
+  state: string | null;
+  zip: string | null;
+  country: string | null;
 }
 
 interface Order {
   id: string; email: string; items: OrderItem[];
   subtotal: number; shipping: number; discount: number; total: number;
   status: string; createdAt: string;
-  shippingAddress?: string;
+  shippingAddress: ShippingAddress | null;
   trackingNumber?: string;
   notes?: string;
   stripeSessionId?: string;
 }
-
-const VALID_TRANSITIONS: Record<string, string[]> = {
-  PENDING: ["PAID", "CANCELLED"],
-  PAID: ["SHIPPED", "REFUNDED", "CANCELLED"],
-  SHIPPED: ["DELIVERED", "REFUNDED"],
-  DELIVERED: ["REFUNDED"],
-};
 
 const STATUS_LABELS: Record<string, string> = {
   PENDING: "Pending Payment",
@@ -62,7 +67,7 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
   async function updateStatus(newStatus: string) {
     setUpdating(true);
     try {
-      const body: any = { status: newStatus };
+      const body: { status: string; trackingNumber?: string } = { status: newStatus };
       if (trackingInput && trackingInput !== order?.trackingNumber) {
         body.trackingNumber = trackingInput;
       }
@@ -76,8 +81,8 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
       setOrder(updated);
       setTrackingInput(updated.trackingNumber || "");
       toast.success(`Order marked as ${STATUS_LABELS[newStatus] || newStatus}`);
-    } catch (e: any) {
-      toast.error(e.message || "Update failed");
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : "Update failed");
     } finally {
       setUpdating(false);
     }
@@ -114,7 +119,7 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
     );
   }
 
-  const address = order.shippingAddress ? (() => { try { return JSON.parse(order.shippingAddress); } catch { return null; } })() : null;
+  const address = order.shippingAddress;
 
   return (
     <div>
@@ -153,12 +158,33 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
                 {order.items.map((item) => (
                   <tr key={item.id} className="border-b border-[var(--border)] last:border-0">
                     <td className="py-3 px-6">
-                      <Link href={`/products/${item.product.slug}`} className="text-[var(--accent)] hover:underline font-medium">
-                        {item.product.name}
-                      </Link>
+                      <div className="flex items-center gap-3">
+                        {item.image && (
+                          <div className="relative h-10 w-10 overflow-hidden rounded-md">
+                            <LazyImage
+                              src={imageUrl(item.image)}
+                              alt=""
+                              fill
+                              sizes="40px"
+                              className="object-cover"
+                              containerClassName="absolute inset-0"
+                            />
+                          </div>
+                        )}
+                        {item.slug ? (
+                          <Link
+                            href={`/products/${item.slug}`}
+                            className="font-medium text-[var(--accent)] hover:underline"
+                          >
+                            {item.name}
+                          </Link>
+                        ) : (
+                          <span className="font-medium text-[var(--text)]">{item.name}</span>
+                        )}
+                      </div>
                     </td>
                     <td className="py-3 px-6 text-[var(--text-muted)]">
-                      {item.variant?.name || "-"}
+                      {item.variantName || "-"}
                     </td>
                     <td className="py-3 px-6 text-center text-[var(--text)]">{item.quantity}</td>
                     <td className="py-3 px-6 text-right text-[var(--text)]">${item.price.toFixed(2)}</td>
@@ -266,7 +292,7 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
               <h2 className="font-semibold text-[var(--text)] mb-3">Shipping Address</h2>
               <div className="text-sm text-[var(--text-secondary)] leading-relaxed space-y-0.5">
                 <p className="font-medium text-[var(--text)]">{address.name}</p>
-                {address.line1 && <p>{address.line1}</p>}
+                {address.address && <p>{address.address}</p>}
                 {address.line2 && <p>{address.line2}</p>}
                 <p>{[address.city, address.state, address.zip].filter(Boolean).join(", ")}</p>
                 <p>{address.country}</p>
