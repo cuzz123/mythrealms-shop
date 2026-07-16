@@ -114,6 +114,31 @@ test("applies percentage and fixed discounts in integer cents", async () => {
   assert.equal(fixed.totalCents, 499);
 });
 
+test("fails closed for discounts that require reservation semantics", async () => {
+  for (const record of [
+    discount({ maxUses: 5, usedCount: 0 }),
+    discount({ firstOrderOnly: true }),
+  ]) {
+    await assert.rejects(
+      () =>
+        quoteCheckout(
+          checkoutRequest({ discountCode: record.code }),
+          repository(record, 0),
+          NOW,
+        ),
+      (error: unknown) => {
+        assert.ok(error instanceof CheckoutQuoteError);
+        assert.equal(error.status, 400);
+        assert.equal(
+          error.message,
+          "Limited and first-order promotions are temporarily unavailable",
+        );
+        return true;
+      },
+    );
+  }
+});
+
 test("rejects unusable discount codes", async () => {
   const cases: Array<[DiscountRecord | null, number]> = [
     [null, 0],

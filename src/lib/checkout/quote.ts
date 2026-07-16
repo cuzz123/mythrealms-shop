@@ -9,6 +9,8 @@ import type {
 
 const FREE_SHIPPING_THRESHOLD_CENTS = 6999;
 const STANDARD_SHIPPING_CENTS = 499;
+const RESERVATION_REQUIRED_DISCOUNT_MESSAGE =
+  "Limited and first-order promotions are temporarily unavailable";
 
 export interface DiscountRecord {
   code: string;
@@ -87,8 +89,8 @@ function validateDiscount(
   if (discount.expiresAt && discount.expiresAt <= now) {
     throw new CheckoutQuoteError("This discount code has expired");
   }
-  if (discount.maxUses > 0 && discount.usedCount >= discount.maxUses) {
-    throw new CheckoutQuoteError("This discount code has reached its usage limit");
+  if (discount.firstOrderOnly || discount.maxUses > 0) {
+    throw new CheckoutQuoteError(RESERVATION_REQUIRED_DISCOUNT_MESSAGE);
   }
   if (subtotalCents < Math.round(discount.minSubtotal * 100)) {
     throw new CheckoutQuoteError(
@@ -129,15 +131,6 @@ export async function quoteCheckout(
     baseQuote.subtotalCents,
     now,
   );
-  if (
-    discount.firstOrderOnly &&
-    (await repository.countPaidOrdersByEmail(input.email)) > 0
-  ) {
-    throw new CheckoutQuoteError(
-      `${discount.label} is only valid for first-time orders`,
-    );
-  }
-
   const discountCents = calculateDiscountCents(discount, baseQuote.subtotalCents);
   return {
     ...baseQuote,
