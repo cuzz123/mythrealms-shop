@@ -1,0 +1,34 @@
+{
+  "project_id": "MR_PEARL_TRIO_15S_001",
+  "purpose": "Three fixed-reference, 15-second vertical jewelry director boards for Xiaoyunque.",
+  "reference_upload_order": ["@图1 产品身份", "@图2 模特身份", "@图3 场景身份"],
+  "boards": [
+    {
+      "id": "ring-cafe",
+      "product": "references/ring-product.png",
+      "model": "references/ring-model.png",
+      "scene": "references/ring-scene.png",
+      "product_lock": "Keep the wrapped gold ring, pearl cluster count, wire branches, and ring geometry unchanged.",
+      "model_lock": "Keep the same short-haired freckled adult model and blue linen shirt; ignore the existing earrings in the model reference.",
+      "scene_lock": "Keep the same ivy cafe terrace, marble table, cup, and warm afternoon light."
+    },
+    {
+      "id": "earrings-olive-courtyard",
+      "product": "references/earrings-product.png",
+      "model": "references/earrings-model.png",
+      "scene": "references/earrings-scene.png",
+      "product_lock": "Keep the matched pair, oval gold loops, pearl cluster, wrapped-wire collar, shell discs, and proportions unchanged.",
+      "model_lock": "Keep the same short-haired freckled adult model; ignore the unrelated earrings already visible in the model reference.",
+      "scene_lock": "Keep the same olive and lemon courtyard, plaster wall, terracotta urn, and leaf-shadow direction."
+    },
+    {
+      "id": "necklace-pool-courtyard",
+      "product": "references/necklace-product.png",
+      "model": "references/necklace-model.png",
+      "scene": "references/necklace-scene.png",
+      "product_lock": "Keep the exact gold chain, small pearl distribution, central drop pearl, material, and length unchanged.",
+      "model_lock": "Keep the same dark-skinned adult model, cropped hair, white linen shirt, and facial identity; ignore the necklace already visible in the model reference.",
+      "scene_lock": "Keep the same pool courtyard, green tile water, cream stone, lounge chair, and palm-shadow direction."
+    }
+  ]
+}

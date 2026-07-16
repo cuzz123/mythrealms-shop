@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "slug": "pearl-series-01",
+  "method": "source-anchored-photo-restyle",
+  "reviewedAt": "2026-07-15",
+  "approved": true,
+  "sourceHashes": {
+    "public/images/products/1688-shop/pearl-series/pearl-series-01-detail1.webp": "b14334d823ed371757292155a4e196d95774de3ea9c7b48403852c47110bb0e6",
+    "public/images/products/1688-shop/pearl-series/pearl-series-01-detail3.webp": "1f493df4bb3410c92ef09f55dc8a49c7dc3ee6bb40bded132e75404ae3dd8648"
+  },
+  "slots": {
+    "main": {
+      "source": "public/images/products/1688-shop/pearl-series/pearl-series-01-detail1.webp",
+      "attempt": 2,
+      "nativeOutput": "exec-373b1c95-3ba5-4c59-bf4a-a38390710fdb.png",
+      "outputSha256": "25088fe83a5c442faabfa6d8bcc224587a3d8cbc55494d23c6b3bf4a7a60a5e2",
+      "checks": {
+        "sourceClusterPatternPreserved": true,
+        "wireTopologyPreserved": true,
+        "coiledBandPreserved": true,
+        "continuousLightingAndFocus": true,
+        "naturalSurfaceContact": true,
+        "noCutoutHalo": true,
+        "noTextLogoOrWatermark": true
+      },
+      "notes": "Full ring remains readable on one continuous linen photograph with coherent contact shadow and no detached product edge."
+    },
+    "on-model": {
+      "source": "public/images/products/1688-shop/pearl-series/pearl-series-01-detail3.webp",
+      "attempt": 2,
+      "nativeOutput": "exec-72ea4f48-1001-451d-9f3d-e100dd15fdc8.png",
+      "outputSha256": "3f37aca4906c24904a3117a78c366aeeea78fdd3e45d1b95b40cc1ccc282a48b",
+      "checks": {
+        "tenPearlsCountable": true,
+        "wireTopologyPreserved": true,
+        "coiledBandPreserved": true,
+        "exactlyOneFingerEncircled": true,
+        "pearlBranchOnBackOfHand": true,
+        "naturalAnatomyAndContact": true,
+        "noTextLogoOrWatermark": true
+      },
+      "notes": "The ring encircles one proximal finger and the ten-pearl branch rests on the back of the hand without spanning adjacent fingers."
+    },
+    "macro": {
+      "source": "public/images/products/1688-shop/pearl-series/pearl-series-01-detail1.webp",
+      "attempt": 1,
+      "nativeOutput": "exec-03bb8a70-eb46-4076-b616-a26d9be8b303.png",
+      "outputSha256": "db9163f377939d47810dacf08e9ca5c6dca3224c9fd0b3d8a0efee03246f8bb9",
+      "checks": {
+        "sourceClusterPatternPreserved": true,
+        "wireTopologyPreserved": true,
+        "wrappedJunctionReadable": true,
+        "coiledBandPreserved": true,
+        "coherentMacroFocus": true,
+        "noCutoutHalo": true,
+        "noTextLogoOrWatermark": true
+      },
+      "notes": "Macro framing keeps the wrapped junction, fine branch wires, nacre surfaces, and coiled band construction legible."
+    },
+    "lifestyle": {
+      "source": "public/images/products/1688-shop/pearl-series/pearl-series-01-detail1.webp",
+      "styleReference": "assets/product-imagery/style-references/scene-cafe-terrace.png",
+      "attempt": 2,
+      "nativeOutput": "exec-947c747b-5f78-448f-be82-ff18651a9dbb.png",
+      "outputSha256": "cc0f7484d7824f31eff17dfa116bdcc67c45bfaaf27250175a138054d088e795",
+      "checks": {
+        "sourceClusterPatternPreserved": true,
+        "wireTopologyPreserved": true,
+        "coiledBandPreserved": true,
+        "realisticRingToCupScale": true,
+        "fullySupportedByTable": true,
+        "continuousLightingFocusAndShadow": true,
+        "noCutoutHalo": true,
+        "noTextLogoOrWatermark": true
+      },
+      "notes": "Close cafe-table framing keeps the ring prominent at plausible scale with one depth of field and an immediate contact shadow."
+    }
+  },
+  "packageChecks": {
+    "allOutputs1600x2000Webp": true,
+    "allOutputsUnder900Kb": true,
+    "supplierSourcesUnchanged": true,
+    "hardCutoutMethodRejected": true,
+    "readyForPilotReview": true
+  }
+}
