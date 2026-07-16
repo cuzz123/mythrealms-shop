@@ -1,4 +1,3 @@
-import { db } from "../src/lib/db";
 import {
   inspectPaymentSchema,
   type RawQuery,
@@ -9,21 +8,33 @@ import {
   runLaunchReadiness,
 } from "../src/lib/launch/readiness";
 
-async function main() {
-  const report = await runLaunchReadiness(process.env, {
-    inspectDatabase: () =>
-      inspectPaymentSchema(db.$queryRaw.bind(db) as unknown as RawQuery),
-    fetch,
-  });
-  console.log(formatReadinessReport(report));
-  process.exitCode = readinessExitCode(report);
-}
+async function run(): Promise<void> {
+  let db: (typeof import("../src/lib/db"))["db"] | undefined;
 
-main()
-  .catch(() => {
+  try {
+    ({ db } = await import("../src/lib/db"));
+    const report = await runLaunchReadiness(process.env, {
+      inspectDatabase: () =>
+        inspectPaymentSchema(db!.$queryRaw.bind(db) as unknown as RawQuery),
+      fetch,
+    });
+    console.log(formatReadinessReport(report));
+    process.exitCode = readinessExitCode(report);
+  } catch {
     console.error("[FAIL] launch-check: readiness check could not complete.");
     process.exitCode = 1;
-  })
-  .finally(async () => {
-    await db.$disconnect();
-  });
+  } finally {
+    if (db) {
+      try {
+        await db.$disconnect();
+      } catch {
+        console.error(
+          "[FAIL] launch-check: database cleanup could not complete.",
+        );
+        process.exitCode = 1;
+      }
+    }
+  }
+}
+
+void run();

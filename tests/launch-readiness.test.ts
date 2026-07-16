@@ -30,8 +30,8 @@ function dependencies(
     id: "sentinel-webhook",
     url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
     event_types: [
-      { name: "PAYMENT.CAPTURE.COMPLETED" },
-      { name: "PAYMENT.CAPTURE.REFUNDED" },
+      { name: "PAYMENT.CAPTURE.COMPLETED", status: "ENABLED" },
+      { name: "PAYMENT.CAPTURE.REFUNDED", status: "ENABLED" },
     ],
   },
   options: {
@@ -42,14 +42,18 @@ function dependencies(
     errorMessage?: string;
   } = {},
 ) {
-  const calls: Array<{ url: string; method: string }> = [];
+  const calls: Array<{
+    url: string;
+    method: string;
+    redirect: RequestRedirect | undefined;
+  }> = [];
   const value: ReadinessDependencies = {
     inspectDatabase:
       options.inspectDatabase ?? (async () => ({ ok: true, missing: [] })),
     fetch: async (input, init) => {
       const url = String(input);
       const method = init?.method ?? "GET";
-      calls.push({ url, method });
+      calls.push({ url, method, redirect: init?.redirect });
       if (options.throwOnCall === calls.length) {
         throw new Error(options.errorMessage ?? "sentinel-provider-error");
       }
@@ -121,6 +125,29 @@ test("every required environment variable rejects placeholders", async (t) => {
   }
 });
 
+test("rejects common launch placeholders before provider access", async (t) => {
+  for (const placeholder of [
+    "example.com",
+    "changeme",
+    "change-me",
+    "replace-me",
+    "replace_me",
+    "todo",
+    "tbd",
+  ]) {
+    await t.test(placeholder, async () => {
+      const deps = dependencies();
+      const report = await runLaunchReadiness(
+        { ...env, PAYPAL_CLIENT_SECRET: placeholder },
+        deps.value,
+      );
+
+      assert.equal(report.ok, false);
+      assert.deepEqual(deps.calls, []);
+    });
+  }
+});
+
 test("rejects unsafe origins without making provider calls", async (t) => {
   const cases: Array<[string, Partial<NodeJS.ProcessEnv>]> = [
     ["PayPal sandbox", { PAYPAL_API_BASE: "https://api-m.sandbox.paypal.com" }],
@@ -162,33 +189,102 @@ test("rejects unsafe origins without making provider calls", async (t) => {
   }
 });
 
+test("rejects canonicalization and loopback origin bypasses", async (t) => {
+  for (const [name, unsafeOrigin] of [
+    ["localhost subdomain", "https://shop.localhost"],
+    ["localhost trailing dot", "https://localhost."],
+    ["IPv4 127/8", "https://127.23.45.67"],
+    ["IPv4-mapped IPv6 loopback", "https://[::ffff:127.0.0.1]"],
+    ["canonical IPv4-mapped IPv6 loopback", "https://[::ffff:7f00:1]"],
+    ["approved Vercel host trailing dot", "https://mythrealms-shop.vercel.app."],
+    ["encoded dot path", "https://mythrealms-shop.vercel.app/%2e"],
+    ["default HTTPS port", "https://mythrealms-shop.vercel.app:443"],
+  ] as const) {
+    await t.test(name, async () => {
+      const deps = dependencies();
+      const report = await runLaunchReadiness(
+        {
+          ...env,
+          NEXT_PUBLIC_APP_URL: unsafeOrigin,
+          AUTH_URL: unsafeOrigin,
+        },
+        deps.value,
+      );
+
+      assert.equal(
+        report.checks.find((item) => item.id === "app-url")?.status,
+        "fail",
+      );
+      assert.deepEqual(deps.calls, []);
+    });
+  }
+});
+
+test("requires the raw PayPal live base without canonical variants", async (t) => {
+  for (const [name, paypalBase] of [
+    ["trailing slash", "https://api-m.paypal.com/"],
+    ["default HTTPS port", "https://api-m.paypal.com:443"],
+    ["encoded dot path", "https://api-m.paypal.com/%2e"],
+  ] as const) {
+    await t.test(name, async () => {
+      const deps = dependencies();
+      const report = await runLaunchReadiness(
+        { ...env, PAYPAL_API_BASE: paypalBase },
+        deps.value,
+      );
+
+      assert.equal(
+        report.checks.find((item) => item.id === "paypal-webhook")?.status,
+        "fail",
+      );
+      assert.deepEqual(deps.calls, []);
+    });
+  }
+});
+
 test("fails independently on webhook ID, URL, or event mismatch", async (t) => {
   for (const [name, webhook] of [
     ["ID", {
       id: "other",
       url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
       event_types: [
-        { name: "PAYMENT.CAPTURE.COMPLETED" },
-        { name: "PAYMENT.CAPTURE.REFUNDED" },
+        { name: "PAYMENT.CAPTURE.COMPLETED", status: "ENABLED" },
+        { name: "PAYMENT.CAPTURE.REFUNDED", status: "ENABLED" },
       ],
     }],
     ["URL", {
       id: "sentinel-webhook",
       url: "https://wrong.example.com/api/webhooks/paypal",
       event_types: [
-        { name: "PAYMENT.CAPTURE.COMPLETED" },
-        { name: "PAYMENT.CAPTURE.REFUNDED" },
+        { name: "PAYMENT.CAPTURE.COMPLETED", status: "ENABLED" },
+        { name: "PAYMENT.CAPTURE.REFUNDED", status: "ENABLED" },
       ],
     }],
     ["refunded event", {
       id: "sentinel-webhook",
       url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
-      event_types: [{ name: "PAYMENT.CAPTURE.COMPLETED" }],
+      event_types: [{ name: "PAYMENT.CAPTURE.COMPLETED", status: "ENABLED" }],
     }],
     ["completed event", {
       id: "sentinel-webhook",
       url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
-      event_types: [{ name: "PAYMENT.CAPTURE.REFUNDED" }],
+      event_types: [{ name: "PAYMENT.CAPTURE.REFUNDED", status: "ENABLED" }],
+    }],
+    ["completed event disabled", {
+      id: "sentinel-webhook",
+      url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
+      event_types: [
+        { name: "PAYMENT.CAPTURE.COMPLETED", status: "DISABLED" },
+        { name: "PAYMENT.CAPTURE.REFUNDED", status: "ENABLED" },
+      ],
+    }],
+    ["refunded event missing status", {
+      id: "sentinel-webhook",
+      url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
+      event_types: [
+        { name: "PAYMENT.CAPTURE.COMPLETED", status: "ENABLED" },
+        { name: "PAYMENT.CAPTURE.REFUNDED" },
+      ],
     }],
   ] as const) {
     await t.test(name, async () => {
@@ -320,10 +416,12 @@ test("uses only the OAuth POST and the exact webhook GET", async () => {
     {
       url: "https://api-m.paypal.com/v1/oauth2/token",
       method: "POST",
+      redirect: "error",
     },
     {
       url: "https://api-m.paypal.com/v1/notifications/webhooks/sentinel-webhook",
       method: "GET",
+      redirect: "error",
     },
   ]);
   assert.equal(
@@ -331,6 +429,46 @@ test("uses only the OAuth POST and the exact webhook GET", async () => {
       ["PATCH", "DELETE", "PUT"].includes(call.method.toUpperCase()),
     ),
     false,
+  );
+});
+
+test("missing database and Resend configuration does not suppress PayPal verification", async () => {
+  const deps = dependencies();
+  const report = await runLaunchReadiness(
+    {
+      ...env,
+      DATABASE_URL: "",
+      RESEND_API_KEY: "",
+      RESEND_FROM_EMAIL: "",
+    },
+    deps.value,
+  );
+
+  assert.equal(report.ok, false);
+  assert.equal(
+    report.checks.find((item) => item.id === "environment")?.status,
+    "fail",
+  );
+  assert.equal(
+    report.checks.find((item) => item.id === "resend-sender")?.status,
+    "fail",
+  );
+  assert.equal(
+    report.checks.find((item) => item.id === "paypal-webhook")?.status,
+    "pass",
+  );
+  assert.deepEqual(
+    deps.calls.map(({ url, method }) => ({ url, method })),
+    [
+      {
+        url: "https://api-m.paypal.com/v1/oauth2/token",
+        method: "POST",
+      },
+      {
+        url: "https://api-m.paypal.com/v1/notifications/webhooks/sentinel-webhook",
+        method: "GET",
+      },
+    ],
   );
 });
 
@@ -420,18 +558,25 @@ test("the report never contains environment, provider, database, or response sec
   }
 });
 
-test("CLI is raw-read-only, uses global fetch, disconnects, and sets exitCode", () => {
+test("CLI dynamically loads the raw DB adapter and handles cleanup failures", () => {
   const source = readFileSync(
     path.join(process.cwd(), "scripts/launch-check.ts"),
     "utf8",
   );
 
   assert.match(source, /inspectPaymentSchema\(/);
-  assert.match(source, /db\.\$queryRaw\.bind\(db\)/);
+  assert.match(source, /db!?\.\$queryRaw\.bind\(db\)/);
+  assert.match(source, /await import\(["']\.\.\/src\/lib\/db["']\)/);
   assert.match(source, /\bfetch,?\s*\n?\s*}/);
-  assert.match(source, /\.finally\(async \(\) =>/);
+  assert.match(source, /void run\(\)/);
   assert.match(source, /await db\.\$disconnect\(\)/);
   assert.match(source, /process\.exitCode\s*=/);
+  assert.match(
+    source,
+    /\[FAIL\] launch-check: database cleanup could not complete\./,
+  );
+  assert.doesNotMatch(source, /^import\s+\{\s*db\s*}\s+from/m);
+  assert.doesNotMatch(source, /\.finally\(/);
   assert.doesNotMatch(source, /process\.exit\s*\(/);
   assert.doesNotMatch(source, /\.message\b|PATCH|DELETE|\/v1\/notifications\/webhooks\s*["'`]/);
 });

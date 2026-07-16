@@ -41,9 +41,22 @@ function configured(value: string | undefined): value is string {
   const trimmed = value?.trim();
   return Boolean(
     trimmed &&
-      !/your-|placeholder|postgresql:\/\/user:password|\.example\b/i.test(
-        trimmed,
-      ),
+      !/your-|placeholder|postgresql:\/\/user:password|\.example\b|example\.com|change[-_]?me|replace[-_]?me|\btodo\b|\btbd\b/i.test(trimmed),
+  );
+}
+
+function isLoopbackHostname(hostname: string): boolean {
+  const normalized = hostname
+    .toLowerCase()
+    .replace(/^\[/, "")
+    .replace(/]$/, "");
+
+  return (
+    normalized === "localhost" ||
+    normalized.endsWith(".localhost") ||
+    /^127(?:\.\d{1,3}){3}$/.test(normalized) ||
+    normalized === "::1" ||
+    /^::ffff:7f[0-9a-f]{2}:/i.test(normalized)
   );
 }
 
@@ -53,15 +66,20 @@ function safeOrigin(
 ): URL | null {
   try {
     if (!configured(value)) return null;
-    const url = new URL(value);
+    const raw = value.trim();
+    const url = new URL(raw);
+    const isCanonicalOrigin =
+      raw === url.origin || raw === `${url.origin}/`;
     if (
+      !isCanonicalOrigin ||
       url.protocol !== "https:" ||
       url.username ||
       url.password ||
       url.pathname !== "/" ||
       url.search ||
       url.hash ||
-      ["localhost", "127.0.0.1", "::1", "[::1]"].includes(url.hostname)
+      url.hostname.endsWith(".") ||
+      isLoopbackHostname(url.hostname)
     ) {
       return null;
     }
@@ -170,10 +188,10 @@ export async function runLaunchReadiness(
     "Configure a sender verified by the email provider.",
   );
 
-  const paypalBase = safeOrigin(env.PAYPAL_API_BASE);
+  const paypalBase = env.PAYPAL_API_BASE?.trim();
   const paypalStaticReady =
     appUrlsMatch &&
-    paypalBase?.origin === "https://api-m.paypal.com" &&
+    paypalBase === "https://api-m.paypal.com" &&
     [
       env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
       env.PAYPAL_CLIENT_SECRET,
@@ -203,6 +221,7 @@ export async function runLaunchReadiness(
               ).toString("base64"),
           },
           body: "grant_type=client_credentials",
+          redirect: "error",
         },
       );
       const tokenPayload = tokenResponse.ok
@@ -222,27 +241,28 @@ export async function runLaunchReadiness(
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
+          redirect: "error",
         },
       );
       if (!webhookResponse.ok) throw new Error("provider-webhook");
       const webhook = (await webhookResponse.json()) as Record<string, unknown>;
       const events = Array.isArray(webhook.event_types)
         ? webhook.event_types
-            .map((event) =>
-              typeof event === "object" &&
-              event !== null &&
-              typeof (event as Record<string, unknown>).name === "string"
-                ? String((event as Record<string, unknown>).name)
-                : "",
-            )
-            .filter(Boolean)
         : [];
+      const hasEnabledEvent = (requiredName: string) =>
+        events.some(
+          (event) =>
+            typeof event === "object" &&
+            event !== null &&
+            (event as Record<string, unknown>).name === requiredName &&
+            (event as Record<string, unknown>).status === "ENABLED",
+        );
       const expectedUrl = new URL("/api/webhooks/paypal", appUrl).href;
       const webhookReady =
         webhook.id === env.PAYPAL_WEBHOOK_ID &&
         webhook.url === expectedUrl &&
-        events.includes("PAYMENT.CAPTURE.COMPLETED") &&
-        events.includes("PAYMENT.CAPTURE.REFUNDED");
+        hasEnabledEvent("PAYMENT.CAPTURE.COMPLETED") &&
+        hasEnabledEvent("PAYMENT.CAPTURE.REFUNDED");
       addCheck(
         checks,
         "paypal-webhook",
