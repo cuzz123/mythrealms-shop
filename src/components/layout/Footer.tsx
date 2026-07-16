@@ -4,14 +4,13 @@ import Link from "next/link";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 
 const exploreLinks = [
-  { label: "Serenity Collection", href: "/collections/pearl-series" },
-  { label: "The Intention Stones", href: "/collections/luxe-collection" },
-  { label: "Balance & Light", href: "/collections/pearl-crystal-series" },
-  { label: "The Archetypes", href: "/collections/curated-singles" },
+  { label: "The Pearl Edit", href: "/collections/pearl-series" },
+  { label: "Pearl Rings", href: "/collections/pearl-series?type=rings" },
+  { label: "Pearl Earrings", href: "/collections/pearl-series?type=earrings" },
+  { label: "Pearl Necklaces", href: "/collections/pearl-series?type=necklaces" },
+  { label: "Pearl Bracelets", href: "/collections/pearl-series?type=bracelets" },
+  { label: "Pearl Eyewear Chains", href: "/collections/pearl-series?type=eyewear-chains" },
   { label: "About Us", href: "/about" },
-  { label: "Gift Cards", href: "/gift-cards" },
-  { label: "Blog", href: "/blog" },
-  { label: "Loyalty", href: "/loyalty" },
 ];
 
 const supportLinks = [
@@ -19,6 +18,10 @@ const supportLinks = [
   { label: "Track Order", href: "/track-order" },
   { label: "Returns", href: "/returns" },
   { label: "FAQs", href: "/faq" },
+  { label: "Shipping", href: "/shipping" },
+  { label: "Refund Policy", href: "/refund" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
 ];
 
 const socialLinks = [
@@ -91,8 +94,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-[#B0A590]">
-              Stones with intention. Artisan finishes. Each piece holds a purpose
-              — find the one that names what you are becoming.
+              An edited collection of pearl rings, bracelets, earrings, and necklaces
+              for everyday light and easy styling.
             </p>
             {/* Social icons */}
             <div className="flex items-center gap-3">
@@ -118,7 +121,7 @@ export function Footer() {
             </h3>
             <ul className="space-y-3">
               {exploreLinks.map(({ label, href }) => (
-                <li key={href}>
+                <li key={label}>
                   <Link
                     href={href}
                     className="block py-2 text-sm text-[#B0A590] transition-colors hover:text-white"
@@ -137,7 +140,7 @@ export function Footer() {
             </h3>
             <ul className="space-y-3">
               {supportLinks.map(({ label, href }) => (
-                <li key={href}>
+                <li key={label}>
                   <Link
                     href={href}
                     className="block py-2 text-sm text-[#B0A590] transition-colors hover:text-white"
@@ -156,8 +159,7 @@ export function Footer() {
             </h3>
             <div className="space-y-4 text-sm text-[#B0A590]">
               <p>
-                New intentions, stone stories, and subscriber-only offers
-                — no spam, just the good stuff.
+                New pearl pieces, styling notes, and subscriber-only offers.
               </p>
               <NewsletterForm />
               <div className="pt-2 space-y-2">
@@ -182,7 +184,7 @@ export function Footer() {
             reserved.
           </p>
           <p>
-            We accept: VISA &bull; Mastercard &bull; AMEX &bull; PayPal
+            Secure checkout in USD
           </p>
         </div>
       </div>

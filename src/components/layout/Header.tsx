@@ -8,42 +8,26 @@ import { User, ShoppingBag, Heart, Menu, X, ChevronDown } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
+import { useDialogFocus } from "@/lib/client/use-dialog-focus";
 
 const shopLinks = [
-  { label: "Pearl Realms", href: "/collections/pearl-series" },
-  { label: "Guardian Archetypes", href: "/collections/curated-singles" },
-  { label: "Balance & Light", href: "/collections/pearl-crystal-series" },
-  { label: "Celestial Intention", href: "/collections/luxe-collection" },
-];
-
-const intentionLinks = [
-  { label: "Calm & Clarity", href: "/collections/pearl-series" },
-  { label: "Protection & Boundaries", href: "/collections/curated-singles" },
-  { label: "Renewal", href: "/collections/pearl-crystal-series" },
-  { label: "Soft Power", href: "/collections/pearl-series" },
+  { label: "All Pearl Jewelry", href: "/collections/pearl-series" },
+  { label: "Pearl Rings", href: "/collections/pearl-series?type=rings" },
+  { label: "Pearl Bracelets", href: "/collections/pearl-series?type=bracelets" },
+  { label: "Pearl Earrings", href: "/collections/pearl-series?type=earrings" },
+  { label: "Pearl Necklaces", href: "/collections/pearl-series?type=necklaces" },
+  { label: "Pearl Eyewear Chains", href: "/collections/pearl-series?type=eyewear-chains" },
 ];
 
 const navLinks = [
   { label: "Shop", href: "#", children: shopLinks },
-  { label: "Intention", href: "#", children: intentionLinks },
   { label: "Pearls", href: "/collections/pearl-series" },
-  { label: "Quiz", href: "/guardian-quiz", title: "Find Your Guardian" },
   { label: "Story", href: "/about" },
 ];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const openMenu = (label: string) => {
-    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
-    setOpenDropdown(label);
-  };
-  const closeMenu = () => {
-    dropdownTimeout.current = setTimeout(() => setOpenDropdown(null), 150);
-  };
   const { data: session } = useSession();
   const pathname = usePathname();
   const itemCount = useCartStore((s) => s.itemCount());
@@ -51,6 +35,16 @@ export function Header() {
   const wishlistCount = useWishlistStore((s) => s.count());
   const user = session?.user;
   const isHome = pathname === "/";
+  const useLightHeader = isHome || isScrolled;
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileCloseRef = useRef<HTMLButtonElement>(null);
+
+  useDialogFocus({
+    isOpen: mobileMenuOpen,
+    onClose: () => setMobileMenuOpen(false),
+    containerRef: mobileMenuRef,
+    initialFocusRef: mobileCloseRef,
+  });
 
   // Scroll detection
   useEffect(() => {
@@ -77,43 +71,26 @@ export function Header() {
     };
   }, [itemCount]);
 
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
-  }, [mobileMenuOpen]);
-
   const isActive = (link: (typeof navLinks)[number]) => {
     if (link.href === "/") return pathname === "/";
     if (link.children) return link.children.some((child) => pathname.startsWith(child.href));
     return pathname.startsWith(link.href);
   };
 
-  const headerBg = isScrolled
-    ? "fixed top-0 bg-white shadow-md text-gray-900"
-    : isHome
-    ? "absolute top-[28px] bg-transparent text-white"
-    : "sticky top-0 bg-black/80 backdrop-blur-md text-white z-[60]";
+  const headerBg = "sticky top-0 bg-[var(--bg)]/95 text-[var(--text)] shadow-sm backdrop-blur-md";
 
   return (
     <header
       className={`${headerBg} left-0 right-0 z-40 h-[64px] transition-all duration-300`}
-      style={isHome && !isScrolled ? { top: "calc(28px + env(safe-area-inset-top, 0px))" } : undefined}
     >
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6">
         {/* Left — Logo */}
         <Link
           href="/"
           className="flex shrink-0 items-center gap-2.5"
           aria-label="MythRealms home"
         >
-          {/* Gemstone SVG */}
+          {/* Brand mark */}
           <svg
             viewBox="0 0 28 28"
             fill="none"
@@ -134,7 +111,7 @@ export function Header() {
             <circle cx="14" cy="5" r="1.5" fill="var(--accent)" />
           </svg>
 
-          <span className={`font-serif text-[22px] font-semibold tracking-tight ${isScrolled ? "text-gray-900" : "text-white"}`}>
+          <span className="font-serif text-[19px] font-semibold tracking-tight text-[var(--text)] sm:text-[22px]">
             MythRealms
           </span>
         </Link>
@@ -142,50 +119,38 @@ export function Header() {
         {/* Center — Desktop navigation */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
           {navLinks.map((link) => {
-            const isDropdownOpen = openDropdown === link.label;
             return link.children ? (
-              <div key={link.label} className="relative" onMouseEnter={() => openMenu(link.label)} onMouseLeave={closeMenu}>
-                <button
-                  type="button"
-                  onClick={() => setOpenDropdown(isDropdownOpen ? null : link.label)}
-                  className={`text-[15px] tracking-wide px-3 py-2.5 font-medium transition-all inline-flex items-center gap-1 ${
-                    isDropdownOpen
-                      ? "bg-white text-gray-900"
-                      : isScrolled
-                      ? isActive(link) ? "text-gray-900" : "text-gray-700 hover:text-gray-900"
-                      : isActive(link) ? "text-white" : "text-white/80 hover:text-white"
-                  }`}
-                  aria-expanded={isDropdownOpen}
+              <details key={link.label} name="desktop-navigation" className="group relative">
+                <summary
+                  className={`inline-flex cursor-pointer list-none items-center gap-1 px-3 py-2.5 text-[15px] font-medium tracking-wide transition-all [&::-webkit-details-marker]:hidden ${
+                    isActive(link) ? "text-[var(--text)]" : "text-[var(--text-secondary)] hover:text-[var(--text)]"
+                  } group-open:bg-[var(--surface-alt)] group-open:text-[var(--text)]`}
                 >
                   <span className="nav-underline inline-block">{link.label}</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
-                </button>
-                {isDropdownOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[440px] max-w-[90vw] bg-white shadow-lg z-50 animate-slide-down" style={{borderRadius: 0}}>
-                    <div className="grid grid-cols-2 gap-0 p-6">
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          onClick={() => setOpenDropdown(null)}
-                          className={`block px-4 py-3 text-[14px] transition-colors hover:bg-gray-50 ${
-                            pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : "text-gray-900"
-                          }`}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
+                  <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
+                </summary>
+                <div className="absolute left-1/2 top-full z-50 w-[440px] max-w-[90vw] -translate-x-1/2 bg-[var(--surface)] shadow-lg animate-slide-down" style={{ borderRadius: 0 }}>
+                  <div className="grid grid-cols-2 gap-0 p-6">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.label}
+                        href={child.href}
+                        className={`block px-4 py-3 text-[14px] transition-colors hover:bg-[var(--surface-alt)] ${
+                          pathname.startsWith(child.href) ? "text-[var(--accent)] font-medium" : "text-[var(--text)]"
+                        }`}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
                   </div>
-                )}
-              </div>
+                </div>
+              </details>
             ) : (
               <Link
                 key={link.href}
                 href={link.href}
-                title={link.title}
                 className={`text-[15px] tracking-wide px-3 py-2.5 font-medium transition-all ${
-                  isActive(link) ? (isScrolled ? "text-gray-900" : "text-white") : isScrolled ? "text-gray-700 hover:text-gray-900" : "text-white/80 hover:bg-white hover:text-gray-900"
+                  isActive(link) ? "text-[var(--text)]" : "text-[var(--text-secondary)] hover:text-[var(--text)]"
                 }`}
               >
                 <span className="nav-underline inline-block">{link.label}</span>
@@ -197,13 +162,13 @@ export function Header() {
         {/* Right — Icon buttons */}
         <div className="flex items-center gap-1">
           {/* Search */}
-          <SearchOverlay isScrolled={isScrolled} />
+          <SearchOverlay isScrolled={useLightHeader} />
 
           {/* Account */}
           <Link
             href="/account"
             aria-label={user ? `${user.name || "My account"} - View account` : "My account - Sign in"}
-            className={`flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
+            className="hidden h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-alt)] hover:text-[var(--text)] sm:flex"
           >
             {user?.image ? (
               <img
@@ -220,7 +185,7 @@ export function Header() {
           <Link
             href="/wishlist"
             aria-label={`Wishlist, ${wishlistCount} items`}
-            className={`relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
+            className="relative hidden h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-alt)] hover:text-[var(--text)] sm:flex"
           >
             <Heart size={20} strokeWidth={1.8} />
             {wishlistCount > 0 && (
@@ -235,7 +200,7 @@ export function Header() {
             type="button"
             onClick={openCart}
             aria-label={`Shopping cart, ${itemCount} items`}
-            className={`relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
+            className="relative flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-alt)] hover:text-[var(--text)]"
           >
             <ShoppingBag size={20} strokeWidth={1.8} className={justAdded ? "cart-slide-up" : ""} />
             {itemCount > 0 && (
@@ -249,7 +214,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className={`ml-1 flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"} lg:hidden`}
+            className="ml-1 flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-alt)] hover:text-[var(--text)] lg:hidden"
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -264,13 +229,20 @@ export function Header() {
 
       {/* Mobile navigation — full overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[var(--surface-raised)] animate-slide-down lg:hidden">
+        <div
+          ref={mobileMenuRef}
+          className="fixed inset-0 z-50 bg-[var(--surface)] animate-slide-down lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+        >
           {/* Top bar with X button */}
           <div className="flex items-center justify-end px-4 h-[72px]">
             <button
+              ref={mobileCloseRef}
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className={`flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors ${isScrolled ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
+              className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-alt)] hover:text-[var(--text)]"
               aria-label="Close navigation menu"
             >
               <X size={28} strokeWidth={1.8} />
@@ -281,15 +253,15 @@ export function Header() {
             {navLinks.map((link) =>
               link.children ? (
                 <div key={link.label} className="py-2">
-                  <div className="px-3 py-2 text-sm font-semibold text-[#B0A590] uppercase tracking-wider">
+                  <div className="px-3 py-2 text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                     {link.label}
                   </div>
                   {link.children.map((child) => (
                     <Link
-                      key={child.href}
+                      key={child.label}
                       href={child.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block rounded-[var(--radius-sm)] px-6 py-3.5 text-base font-medium text-white transition-colors hover:bg-white/10"
+                      className="block rounded-[var(--radius-sm)] px-6 py-3.5 text-base font-medium text-[var(--text)] transition-colors hover:bg-[var(--surface-alt)]"
                     >
                       {child.label}
                     </Link>
@@ -300,7 +272,7 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="rounded-[var(--radius-sm)] px-3 py-3.5 text-base font-medium text-white transition-colors hover:bg-white/10"
+                  className="rounded-[var(--radius-sm)] px-3 py-3.5 text-base font-medium text-[var(--text)] transition-colors hover:bg-[var(--surface-alt)]"
                 >
                   {link.label}
                 </Link>
@@ -310,7 +282,7 @@ export function Header() {
 
           {/* Bottom branding */}
           <div className="absolute bottom-10 left-0 right-0 flex justify-center">
-            <span className="font-serif text-lg font-semibold tracking-tight text-white/30">
+            <span className="font-serif text-lg font-semibold tracking-tight text-[var(--text-muted)]">
               MythRealms
             </span>
           </div>

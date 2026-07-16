@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { CheckCircle2, Circle, ChevronDown, ChevronRight } from "lucide-react";
+import { PinterestDraftQueue } from "@/components/admin/PinterestDraftQueue";
 
 // ====== TASK DEFINITIONS ======
 interface Task {
@@ -145,6 +146,8 @@ export default function SocialTasksPage() {
         <h1 className="font-serif text-3xl font-bold text-[var(--text)]">Operations Dashboard</h1>
         <span className="text-sm text-[var(--text-muted)]">{today}</span>
       </div>
+
+      <PinterestDraftQueue />
 
       {/* Progress bar */}
       <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-5 mb-6">

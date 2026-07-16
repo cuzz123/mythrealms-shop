@@ -31,7 +31,7 @@ async function main() {
 
   for (const data of archetypeProducts) {
     const { variants, ...rest } = data
-    const minPrice = Math.min(...variants.map((v: any) => v.price))
+    const minPrice = Math.min(...variants.map((variant) => variant.price))
     const p = await db.product.create({ data: { ...rest, minPrice, variants: { create: variants } } })
     if (data.isFeatured) {
       await db.review.createMany({ data: [

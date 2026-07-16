@@ -1,3 +1,5 @@
+import { siteUrl } from "@/lib/site";
+
 /**
  * Resolve image URLs — local path in dev, Vercel Blob CDN in production.
  *
@@ -8,7 +10,6 @@
  */
 
 const BLOB_BASE = process.env.NEXT_PUBLIC_MEDIA_BASE || "";
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "";
 
 export function imageUrl(path: string): string {
   if (BLOB_BASE && path.startsWith("/images/")) {
@@ -21,6 +22,6 @@ export function imageUrl(path: string): string {
 export function absoluteImageUrl(path: string): string {
   const resolved = imageUrl(path);
   if (resolved.startsWith("http")) return resolved;
-  if (resolved.startsWith("/") && APP_URL) return `${APP_URL}${resolved}`;
+  if (resolved.startsWith("/")) return `${siteUrl}${resolved}`;
   return resolved;
 }

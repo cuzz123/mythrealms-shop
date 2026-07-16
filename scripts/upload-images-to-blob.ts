@@ -93,9 +93,10 @@ async function main() {
       const rate = uploaded / ((Date.now() - startTime) / 1000);
       const remaining = ((toUpload.length - uploaded) / rate).toFixed(0);
       process.stdout.write(`\r  [${pct}%] ${uploaded}/${toUpload.length} | ${(size/1024).toFixed(0)}KB ${rel.slice(0, 60)} | 剩余约 ${remaining}s  `);
-    } catch (e: any) {
+    } catch (error: unknown) {
       skipped++;
-      console.log(`\n  ⚠️  跳过 ${rel}: ${e.message?.slice(0, 80)}`);
+      const message = error instanceof Error ? error.message : "Unknown error";
+      console.log(`\n  ⚠️  跳过 ${rel}: ${message.slice(0, 80)}`);
     }
   }
 

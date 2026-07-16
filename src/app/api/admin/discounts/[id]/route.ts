@@ -2,33 +2,49 @@
 // DELETE /api/admin/discounts/[id] — Delete discount code
 
 import { NextRequest, NextResponse } from "next/server";
+import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
-import { auth } from "@/lib/auth";
+import { requireAdminApi } from "@/lib/server/admin-auth";
+import { getErrorMessage } from "@/lib/error-message";
+
+const allowedDiscountUpdateFields = [
+  "label",
+  "description",
+  "isActive",
+  "minSubtotal",
+  "maxUses",
+  "firstOrderOnly",
+  "expiresAt",
+  "type",
+  "value",
+] as const;
+
+type AllowedDiscountUpdate = Pick<
+  Prisma.DiscountCodeUpdateInput,
+  (typeof allowedDiscountUpdateFields)[number]
+>;
 
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
   try {
     const { id } = await params;
     const body = await request.json();
     // Whitelist allowed fields
-    const allowed = ["label", "description", "isActive", "minSubtotal", "maxUses", "firstOrderOnly", "expiresAt", "type", "value"];
-    const data: any = {};
-    for (const key of allowed) {
+    const data: Partial<AllowedDiscountUpdate> = {};
+    for (const key of allowedDiscountUpdateFields) {
       if (body[key] !== undefined) data[key] = body[key];
     }
     const updated = await db.discountCode.update({
       where: { id },
-      data: body,
+      data,
     });
     return NextResponse.json(updated);
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+  } catch (error: unknown) {
+    return NextResponse.json({ error: getErrorMessage(error, "Failed to update discount code") }, { status: 500 });
   }
 }
 
@@ -36,15 +52,13 @@ export async function DELETE(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
   try {
     const { id } = await params;
     await db.discountCode.delete({ where: { id } });
     return NextResponse.json({ success: true });
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+  } catch (error: unknown) {
+    return NextResponse.json({ error: getErrorMessage(error, "Failed to delete discount code") }, { status: 500 });
   }
 }

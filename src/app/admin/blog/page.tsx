@@ -2,10 +2,12 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Plus, Pencil } from "lucide-react";
+import { requireAdminPage } from "@/lib/server/admin-auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminBlogPage() {
+  await requireAdminPage();
   const posts = await db.blogPost.findMany({
     orderBy: { publishedAt: "desc" },
     include: { author: { select: { name: true } } },

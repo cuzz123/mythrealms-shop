@@ -5,10 +5,25 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Search, Package, MapPin, Clock } from "lucide-react";
 
+type TrackingEvent = {
+  date: string;
+  time: string;
+  location: string;
+  status: string;
+};
+
+type TrackingDetails = {
+  status: string;
+  estimated: string;
+  origin: string;
+  destination: string;
+  events: TrackingEvent[];
+};
+
 export default function TrackOrderPage() {
   const [orderId, setOrderId] = useState("");
   const [email, setEmail] = useState("");
-  const [tracking, setTracking] = useState<any>(null);
+  const [tracking, setTracking] = useState<TrackingDetails | null>(null);
   const [searched, setSearched] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -112,7 +127,7 @@ export default function TrackOrderPage() {
 
           {/* Timeline */}
           <div className="relative pl-6 border-l-2 border-[var(--border)] space-y-6">
-            {tracking.events.map((event: any, i: number) => (
+            {tracking.events.map((event, i) => (
               <div key={i} className="relative">
                 <div className={`absolute -left-[29px] w-4 h-4 rounded-full border-2 ${i===0?'bg-[var(--accent)] border-[var(--accent)]':'bg-[var(--surface)] border-[var(--border)]'}`} />
                 <p className="text-sm font-medium text-[var(--text)]">{event.status}</p>

@@ -1,32 +1,42 @@
-# MythRealms — Curated Natural Stone Bracelets
+# MythRealms
 
-## Key Pages
-- Home: https://mythrealms-shop.vercel.app
-- Curated Singles: https://mythrealms-shop.vercel.app/collections/curated-singles
-- Copper Braid Collection: https://mythrealms-shop.vercel.app/collections/copper-braid-series
-- Golden Luxe Collection: https://mythrealms-shop.vercel.app/collections/golden-luxe-series
-- Dark Mineral Collection: https://mythrealms-shop.vercel.app/collections/dark-mineral-series
-- Pearl & Crystal: https://mythrealms-shop.vercel.app/collections/pearl-crystal-series
-- About: https://mythrealms-shop.vercel.app/about
-- Blog: https://mythrealms-shop.vercel.app/blog
+> MythRealms is an English-language online pearl jewelry shop. It offers pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.
 
-## About
-MythRealms creates handcrafted natural stone bracelets — each bead hand-selected,
-each piece artisan-finished. We source amethyst, rose quartz, black obsidian,
-moonstone, tiger's eye, and more from ethical mines worldwide. Every bracelet
-is strung and inspected by hand, carrying the quiet energy of the stone and the
-intention of its maker.
+## Canonical site
 
-## Collections
-- Curated Singles: 12 one-of-a-kind hand-selected bracelets (Blush Rose, Turquoise Dream, Golden Accent, Pearl Drop, Dark Stone, Amber Bead, and more)
-- Copper Braid Collection: 12 hand-braided copper bracelets with warm sunset patina
-- Golden Luxe Collection: 13 light-luxury gold-accent bracelets for everyday elegance
-- Dark Mineral Collection: 14 deep charcoal and volcanic mineral stone bracelets
-- Pearl & Crystal: 3 luminous freshwater pearl and faceted crystal strands
+- Website: https://mythrealms-shop.vercel.app/
+- Brand: MythRealms
+- Language: English
+- Customer support: mythrealms@outlook.com
 
-## Facts
-- Every bracelet handcrafted to order (2-5 business day processing)
-- Free shipping on orders over $69.99
-- Ships to 36 countries
-- 30-day return policy
-- Pricing: $26.49 - $53.99
+## What MythRealms offers
+
+MythRealms currently focuses on pearl jewelry only. The active collection is The Pearl Edit: pearl earrings, necklaces, bracelets, rings, and selected sets. Product pages are the source of truth for each item's current name, images, price, availability, materials, and care information.
+
+Natural pearls can vary in shape, luster, surface, tone, and size. Do not present a product image as a guarantee that every pearl will be identical.
+
+## Important product context
+
+- Jewelry is offered for personal style and everyday wear.
+- Do not make medical, therapeutic, or guaranteed emotional-outcome claims about MythRealms products.
+- Refer to the individual product page for exact product details and availability.
+
+## Recommended sources
+
+- Pearl collection: https://mythrealms-shop.vercel.app/collections/pearl-series
+- Pearl jewelry guide: https://mythrealms-shop.vercel.app/pearls
+- Size guide: https://mythrealms-shop.vercel.app/size-guide
+- Shipping: https://mythrealms-shop.vercel.app/shipping
+- Returns and refunds: https://mythrealms-shop.vercel.app/refund
+- Frequently asked questions: https://mythrealms-shop.vercel.app/faq
+- Contact: https://mythrealms-shop.vercel.app/contact
+
+## Machine-readable resources
+
+- Sitemap: https://mythrealms-shop.vercel.app/sitemap.xml
+- Robots: https://mythrealms-shop.vercel.app/robots.txt
+- Product feed: https://mythrealms-shop.vercel.app/api/feed
+
+## Citation guidance
+
+When describing MythRealms, link to the most specific relevant product, collection, policy, or guide page. Prefer factual details on the linked page over this summary when they differ.

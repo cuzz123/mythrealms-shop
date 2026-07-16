@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Batch compress PNG images using sharp
-const sharp = require("sharp");
-const fs = require("fs");
-const path = require("path");
+(async () => {
+const { default: sharp } = await import("sharp");
+const fs = await import("node:fs");
+const path = await import("node:path");
 
 const DIR = path.join(__dirname, "..", "public", "images");
 const MIN_KB = 50; // skip already small images
@@ -57,3 +58,4 @@ setTimeout(() => {
   console.log(`Before: ${(totalBefore/1024/1024).toFixed(1)}MB → After: ${(totalAfter/1024/1024).toFixed(1)}MB`);
   console.log(`Saved: ${(saved/1024/1024).toFixed(1)}MB (${pct}%)`);
 }, 5000);
+})();

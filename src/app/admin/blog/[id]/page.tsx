@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Save, ArrowLeft, Loader2, Eye } from "lucide-react";
 import Link from "next/link";
 import { slugify } from "@/lib/utils";
+import { getErrorMessage } from "@/lib/error-message";
 import ReactMarkdown from "react-markdown";
 
 const BLOG_CATEGORIES = [
@@ -17,6 +18,15 @@ const BLOG_CATEGORIES = [
   "Lifestyle",
   "News",
 ];
+
+type BlogPostPayload = {
+  title?: string;
+  slug?: string;
+  category?: string;
+  excerpt?: string;
+  content?: string;
+  image?: string;
+};
 
 export default function EditBlogPostPage() {
   const router = useRouter();
@@ -51,7 +61,7 @@ export default function EditBlogPostPage() {
     load();
   }, [postId]);
 
-  function fillPost(post: any) {
+  function fillPost(post: BlogPostPayload) {
     setTitle(post.title || "");
     setSlug(post.slug || "");
     setCategory(post.category || "");
@@ -107,8 +117,8 @@ export default function EditBlogPostPage() {
 
       router.push("/admin/blog");
       router.refresh();
-    } catch (err: any) {
-      setError(err.message || "Something went wrong.");
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, "Something went wrong."));
     } finally {
       setSaving(false);
     }

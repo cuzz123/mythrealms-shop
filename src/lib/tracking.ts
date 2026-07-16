@@ -2,9 +2,9 @@
 
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
-    fbq: (...args: any[]) => void;
-    dataLayer: any[];
+    gtag: (...args: unknown[]) => void;
+    fbq: (...args: unknown[]) => void;
+    dataLayer: unknown[];
   }
 }
 

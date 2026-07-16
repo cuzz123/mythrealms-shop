@@ -1,15 +1,20 @@
 // GET /api/automation/low-stock-alert — Check stock levels & send alert email
 // Intended for Vercel Cron: every day at 09:00
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { requireCron } from "@/lib/automation-auth";
+import { getErrorMessage } from "@/lib/error-message";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "zheng111321@gmail.com";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const unauthorized = requireCron(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const lowStockVariants = await db.variant.findMany({
       where: { stock: { lte: 5 } },
@@ -103,7 +108,7 @@ export async function GET() {
         stock: v.stock,
       })),
     });
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+  } catch (error: unknown) {
+    return NextResponse.json({ error: getErrorMessage(error, "Failed to load low-stock items") }, { status: 500 });
   }
 }

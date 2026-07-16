@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Save, ArrowLeft, Loader2, Eye } from "lucide-react";
 import Link from "next/link";
 import { slugify } from "@/lib/utils";
+import { getErrorMessage } from "@/lib/error-message";
 import ReactMarkdown from "react-markdown";
 
 const BLOG_CATEGORIES = [
@@ -79,8 +80,8 @@ export default function NewBlogPostPage() {
 
       router.push("/admin/blog");
       router.refresh();
-    } catch (err: any) {
-      setError(err.message || "Something went wrong.");
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, "Something went wrong."));
     } finally {
       setSaving(false);
     }

@@ -10,6 +10,14 @@ import {
   type ProductFormData,
   emptyFormData,
 } from "@/components/admin/ProductFormCore";
+import { getErrorMessage } from "@/lib/error-message";
+
+type AdminProductVariant = {
+  id?: string;
+  name?: string;
+  price?: number;
+  stock?: number;
+};
 
 export default function EditProductPage() {
   const router = useRouter();
@@ -44,7 +52,7 @@ export default function EditProductPage() {
             isFeatured: !!product.isFeatured,
             isActive: !!product.isActive,
             variants: product.variants?.length
-              ? product.variants.map((v: any) => ({
+              ? product.variants.map((v: AdminProductVariant) => ({
                   key: v.id || Math.random().toString(36).slice(2, 8),
                   name: v.name || "",
                   price: String(v.price || ""),
@@ -133,8 +141,8 @@ export default function EditProductPage() {
       }
       router.push("/admin/products");
       router.refresh();
-    } catch (err: any) {
-      setError(err.message || "Something went wrong.");
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, "Something went wrong."));
     } finally {
       setSaving(false);
     }

@@ -1,12 +1,46 @@
-import { BlogPostJsonLd } from '@/components/ui/SeoJsonLd';
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Markdown from "react-markdown"
 import { ArrowLeft } from "lucide-react";
+import { absoluteImageUrl } from "@/lib/images";
+import { absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-dynamic"
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await db.blogPost.findUnique({
+    where: { slug },
+    select: { title: true, excerpt: true, image: true },
+  });
+
+  if (!post) {
+    return { title: "Article Not Found | MythRealms", robots: { index: false, follow: false } };
+  }
+
+  const url = absoluteUrl(`/blog/${slug}`);
+  return {
+    title: `${post.title} | MythRealms`,
+    description: post.excerpt,
+    robots: { index: false, follow: false },
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title: post.title,
+      description: post.excerpt,
+      images: post.image ? [{ url: absoluteImageUrl(post.image) }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: post.image ? [absoluteImageUrl(post.image)] : [],
+    },
+  };
+}
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

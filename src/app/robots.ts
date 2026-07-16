@@ -1,15 +1,29 @@
 import { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site";
+
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  const disallow = [
+    "/api/feed/blog",
+    "/api/feed/google",
+    "/api/",
+    "/admin/",
+    "/account/",
+    "/auth/",
+    "/checkout/",
+    "/studio/",
+  ];
+  const allow = ["/", "/api/feed$"];
+
   return {
     rules: [
-      { userAgent: "GPTBot", allow: "/" },
-      { userAgent: "ClaudeBot", allow: "/" },
-      { userAgent: "PerplexityBot", allow: "/" },
-      { userAgent: "Google-Extended", allow: "/" },
-      { userAgent: "OAI-SearchBot", allow: "/" },
-      { userAgent: "*", allow: "/" },
+      {
+        userAgent: ["GPTBot", "OAI-SearchBot", "OAI-AdsBot", "ClaudeBot", "Claude-SearchBot", "PerplexityBot", "Google-Extended"],
+        allow,
+        disallow,
+      },
+      { userAgent: "*", allow, disallow },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }

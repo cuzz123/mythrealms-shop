@@ -11,7 +11,7 @@ export function MobileBottomNav() {
 
   const links = [
     { href: "/", label: "Home", icon: Home },
-    { href: "/collections/curated-singles", label: "Shop", icon: Compass },
+    { href: "/collections/pearl-series", label: "Shop", icon: Compass },
     { label: "Cart", icon: ShoppingBag, onClick: () => openCart() },
     { href: "/wishlist", label: "Saved", icon: Heart },
     { href: "/account", label: "Account", icon: User },

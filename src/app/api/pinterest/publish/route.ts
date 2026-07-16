@@ -2,9 +2,9 @@
 // Supports ?limit=N (default 5) to control how many pins per run
 // Supports ?offset=N to skip already-published products
 
-import { imageUrl } from "@/lib/images";
 import { NextRequest, NextResponse } from "next/server";
 import { PRODUCTS } from "@/lib/1688-products";
+import { requireCron } from "@/lib/automation-auth";
 
 export const dynamic = "force-dynamic";
 
@@ -41,6 +41,9 @@ function buildPinData(product: typeof PRODUCTS[0], base: string) {
 }
 
 export async function GET(request: NextRequest) {
+  const unauthorized = requireCron(request);
+  if (unauthorized) return unauthorized;
+
   const TOKEN = process.env.PINTEREST_API_TOKEN || "";
   const BOARD_ID = process.env.PINTEREST_BOARD_ID || "";
   const BASE = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
@@ -90,8 +93,12 @@ export async function GET(request: NextRequest) {
       } else {
         results.push({ product: product.name, status: "failed", error: body.message || JSON.stringify(body).slice(0, 200) });
       }
-    } catch (e: any) {
-      results.push({ product: product.name, status: "error", error: e.message?.slice(0, 200) });
+    } catch (error) {
+      results.push({
+        product: product.name,
+        status: "error",
+        error: error instanceof Error ? error.message.slice(0, 200) : "Pinterest publishing failed",
+      });
     }
 
     await new Promise(r => setTimeout(r, 1100));

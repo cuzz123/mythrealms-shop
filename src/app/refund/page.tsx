@@ -1,10 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
 import { RotateCcw, Package, AlertCircle, Gift, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Refund & Return Policy — MythRealms",
   description: "30-day return policy for MythRealms products. Learn about our refund process, return conditions, and how to initiate a return.",
+  alternates: { canonical: absoluteUrl("/refund") },
 };
 
 export default function RefundPage() {

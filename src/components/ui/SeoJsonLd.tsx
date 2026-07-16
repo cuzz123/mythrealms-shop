@@ -1,5 +1,6 @@
 // SEO/GEO — BreadcrumbList JSON-LD
-import React from "react";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { absoluteUrl } from "@/lib/site";
 
 export function BreadcrumbJsonLd({ items }: { items: { name: string; url: string }[] }) {
   if (items.length === 0) return null;
@@ -13,16 +14,11 @@ export function BreadcrumbJsonLd({ items }: { items: { name: string; url: string
       item: item.url,
     })),
   };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
+  return <JsonLd data={jsonLd} />;
 }
 
-export function BlogPostJsonLd({ title, excerpt, image, datePublished, author, url }: {
-  title: string; excerpt: string; image?: string; datePublished: string; author: string; url: string;
+export function BlogPostJsonLd({ title, excerpt, image, datePublished, dateModified, author, url }: {
+  title: string; excerpt: string; image?: string; datePublished: string; dateModified?: string; author: string; url: string;
 }) {
   const jsonLd = {
     "@context": "https://schema.org",
@@ -31,18 +27,17 @@ export function BlogPostJsonLd({ title, excerpt, image, datePublished, author, u
     description: excerpt,
     ...(image ? { image } : {}),
     datePublished,
+    ...(dateModified ? { dateModified } : {}),
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
     author: { "@type": "Person", name: author },
     url,
+    inLanguage: "en",
     publisher: {
       "@type": "Organization",
       name: "MythRealms",
-      url: process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app",
+      url: absoluteUrl("/"),
+      logo: { "@type": "ImageObject", url: absoluteUrl("/apple-icon.png") },
     },
   };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
+  return <JsonLd data={jsonLd} />;
 }

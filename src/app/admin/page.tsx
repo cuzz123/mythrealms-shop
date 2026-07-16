@@ -1,9 +1,11 @@
 import { db } from "@/lib/db";
 import { Package, ShoppingCart, FileText, TrendingUp } from "lucide-react";
+import { requireAdminPage } from "@/lib/server/admin-auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
+  await requireAdminPage();
   const [productCount, orderCount, postCount, recentOrders] = await Promise.all([
     db.product.count(),
     db.order.count(),

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Upload, Loader2, Check, ExternalLink, ImageOff } from "lucide-react";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "@/lib/error-message";
 
 interface Asset {
   id: string;
@@ -30,8 +31,8 @@ export default function AssetsPage() {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/png,image/jpeg,image/webp";
-    input.onchange = async (e: any) => {
-      const file = e.target?.files?.[0];
+    input.onchange = async (event: Event) => {
+      const file = (event.target as HTMLInputElement | null)?.files?.[0];
       if (!file) return;
       setUploading(asset.id);
       try {
@@ -53,8 +54,8 @@ export default function AssetsPage() {
         // Step 3: Update local state
         setAssets((prev) => prev.map((a) => (a.id === asset.id ? { ...a, image: uploadData.url } : a)));
         toast.success("Image updated");
-      } catch (err: any) {
-        toast.error(err.message || "Failed to update");
+      } catch (error: unknown) {
+        toast.error(getErrorMessage(error, "Failed to update"));
       } finally {
         setUploading(null);
       }

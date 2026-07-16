@@ -26,9 +26,9 @@ export function NewsletterForm() {
         throw new Error(data.error || "Something went wrong");
       }
       setStatus("success");
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("error");
-      setError(err.message || "Failed to subscribe");
+      setError(err instanceof Error ? err.message : "Failed to subscribe");
     }
   }
 
@@ -36,13 +36,13 @@ export function NewsletterForm() {
     return (
       <div className="flex items-center gap-3 justify-center py-4 px-6 bg-[var(--success)]/10 border border-[var(--success)]/20 rounded-lg">
         <Check className="w-5 h-5 text-[var(--success)]" />
-        <span className="text-[var(--success)] font-medium">Welcome to the circle. Check your inbox.</span>
+        <span className="text-[var(--success)] font-medium">You&apos;re on the list.</span>
       </div>
     );
   }
 
   return (
-    <form className="flex gap-3" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-3 sm:flex-row" onSubmit={handleSubmit}>
       <input
         type="email"
         value={email}
@@ -50,13 +50,13 @@ export function NewsletterForm() {
         placeholder="Your email address"
         required
         disabled={status === "loading"}
-        className="flex-1 h-12 px-4 text-sm bg-[var(--bg)] border border-[#2A2520] rounded-lg text-[#E8E0D5] placeholder:text-[#6B5F50] outline-none focus:border-[#D4A84B] focus:shadow-[0_0_0_3px_rgba(212,168,75,0.25)] transition-all"
+        className="h-12 w-full min-w-0 flex-1 rounded-lg border border-[#2A2520] bg-[var(--bg)] px-4 text-sm text-[#E8E0D5] outline-none transition-all placeholder:text-[#6B5F50] focus:border-[#D4A84B] focus:shadow-[0_0_0_3px_rgba(212,168,75,0.25)]"
       />
       <Button
         variant="accent"
         size="lg"
         type="submit"
-        className="h-12 px-8"
+        className="h-12 w-full px-8 sm:w-auto"
         disabled={status === "loading"}
       >
         {status === "loading" ? (

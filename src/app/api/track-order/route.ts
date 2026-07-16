@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
     createdAt: createdAt.toISOString(),
     estimatedDelivery: estimatedDelivery.toISOString(),
     destination: city,
-    items: order.items.map((i: any) => {
+    items: order.items.map((i) => {
       try {
         const snap = JSON.parse(i.productSnapshot || "{}");
         return { name: snap.name || "Product", quantity: i.quantity };

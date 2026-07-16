@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "MythRealms — Intention-Based Crystal Wellness Jewelry";
+export const alt = "MythRealms - The Pearl Edit";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -25,10 +25,10 @@ export default function Image() {
           MYTHREALMS
         </div>
         <div style={{ marginTop: 28, fontSize: 34, color: "#E8DEC8", maxWidth: 900, textAlign: "center" }}>
-          Stones With Intention · Wear Your Becoming
+          The Pearl Edit
         </div>
         <div style={{ marginTop: 36, fontSize: 25, color: "#B9A77E" }}>
-          Protection · Love · Clarity · Abundance · Courage
+          Pearl earrings - necklaces - bracelets - rings
         </div>
       </div>
     ),

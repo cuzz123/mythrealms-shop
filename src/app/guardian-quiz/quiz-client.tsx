@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, RotateCcw, Sparkles } from "lucide-react";
-import { PRODUCTS } from "@/lib/1688-products";
+import { getStorefrontProductBySlug } from "@/lib/storefront/catalog";
 import { productDisplayName } from "@/lib/brand";
 
 type Archetype = "phoenix" | "moon-rabbit" | "white-tiger" | "azure-dragon" | "nine-tailed-fox" | "black-tortoise";
@@ -29,8 +29,8 @@ const questions = [
     text: "Which material feels closest to you today?",
     options: [
       { label: "Pearl: calm water, moonlight, quiet strength.", archetypes: ["moon-rabbit", "phoenix"] as Archetype[] },
-      { label: "Dark stone: protection, grounding, clear limits.", archetypes: ["white-tiger", "black-tortoise"] as Archetype[] },
-      { label: "Crystal: clarity, direction, visible becoming.", archetypes: ["azure-dragon", "nine-tailed-fox"] as Archetype[] },
+      { label: "Cool pearl: clear lines, composure, quiet focus.", archetypes: ["white-tiger", "black-tortoise"] as Archetype[] },
+      { label: "Sculptural pearl: movement, direction, visible becoming.", archetypes: ["azure-dragon", "nine-tailed-fox"] as Archetype[] },
     ],
   },
 ];
@@ -46,47 +46,47 @@ const results: Record<Archetype, {
     theme: "Renewal / Rebirth / New Beginnings",
     description:
       "Your season is about beginning again without waiting for perfect certainty. Choose luminous pearls and light-toned pieces that feel like first light after a long night.",
-    productSlugs: ["pearl-crystal-series-02", "pearl-series-05", "pearl-series-12"],
+    productSlugs: ["pearl-series-05", "pearl-series-12", "pearl-series-18"],
   },
   "moon-rabbit": {
     title: "Moon Rabbit",
-    theme: "Softness / Healing / Quiet Luck",
+    theme: "Softness / Restoration / Quiet Luck",
     description:
       "Your strength is subtle. Pearl, pink tones, and gentle silhouettes keep you close to softness without making you feel fragile.",
-    productSlugs: ["pearl-series-01", "pearl-series-13", "curated-singles-02"],
+    productSlugs: ["pearl-series-01", "pearl-series-13", "pearl-series-17"],
   },
   "white-tiger": {
     title: "White Tiger",
     theme: "Boundaries / Courage / Protection",
     description:
-      "You are learning where your energy ends and everyone else's begins. Dark stones and clean lines help this archetype feel grounded and decisive.",
-    productSlugs: ["curated-singles-01", "curated-singles-05", "luxe-collection-08"],
+      "You are learning where your energy ends and everyone else's begins. Cool-toned pearls and clean lines give this archetype a grounded, decisive feel.",
+    productSlugs: ["pearl-series-03", "pearl-series-07", "pearl-series-16"],
   },
   "azure-dragon": {
     title: "Azure Dragon",
     theme: "Growth / Vision / Direction",
     description:
-      "This archetype belongs to movement, leadership, and the next horizon. Choose pieces with cool light, blue undertones, and a sense of direction.",
-    productSlugs: ["luxe-collection-11", "luxe-collection-12", "pearl-crystal-series-01"],
+      "This archetype belongs to movement, leadership, and the next horizon. Choose pearls with cool light and silhouettes that carry a sense of direction.",
+    productSlugs: ["pearl-series-08", "pearl-series-12", "pearl-series-20"],
   },
   "nine-tailed-fox": {
     title: "Nine-Tailed Fox",
     theme: "Magnetism / Self-Worth / Charm",
     description:
       "Your current lesson is not to chase attention, but to inhabit your own value. Pearls, rose tones, and warm details carry this quiet magnetism well.",
-    productSlugs: ["curated-singles-02", "pearl-series-14", "pearl-series-19"],
+    productSlugs: ["pearl-series-02", "pearl-series-14", "pearl-series-19"],
   },
   "black-tortoise": {
     title: "Black Tortoise",
     theme: "Stability / Patience / Grounding",
     description:
-      "You are building something that needs steadiness more than speed. Choose grounded pieces that feel calm, durable, and easy to wear every day.",
-    productSlugs: ["curated-singles-01", "pearl-series-09", "luxe-collection-08"],
+      "You are building something that needs steadiness more than speed. Choose balanced pearl pieces that feel calm and easy to wear every day.",
+    productSlugs: ["pearl-series-04", "pearl-series-09", "pearl-series-11"],
   },
 };
 
 function getProduct(slug: string) {
-  return PRODUCTS.find((product) => product.slug === slug);
+  return getStorefrontProductBySlug(slug);
 }
 
 export function GuardianQuizClient() {
@@ -144,7 +144,7 @@ export function GuardianQuizClient() {
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/collections/pearl-series" className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-8 py-3 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]">
-              Shop the Pearl Realms <ArrowRight className="h-4 w-4" />
+              Shop The Pearl Edit <ArrowRight className="h-4 w-4" />
             </Link>
             <button onClick={reset} className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] px-8 py-3 text-sm font-semibold text-[var(--text-secondary)] transition hover:border-[var(--text)]">
               <RotateCcw className="h-4 w-4" /> Retake Quiz

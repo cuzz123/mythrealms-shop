@@ -1,4 +1,4 @@
-// GET /api/automation/generate-tiktok-script
+// POST /api/automation/generate-tiktok-script
 // Generate TikTok video scripts from product data.
 // Use ?slug=xxx for one product, ?all=true for the full product library.
 
@@ -12,6 +12,7 @@ import {
 } from "@/lib/brand";
 import { promises as fs } from "fs";
 import path from "path";
+import { requireAdminMutation } from "@/lib/server/admin-auth";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -173,7 +174,10 @@ function buildScript(product: (typeof PRODUCTS)[0], format: ScriptFormat): Tikto
   };
 }
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
+  const unauthorized = await requireAdminMutation(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const url = new URL(request.url);
     const all = url.searchParams.get("all") === "true";

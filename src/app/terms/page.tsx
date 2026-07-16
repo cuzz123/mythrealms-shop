@@ -1,9 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms of Service — MythRealms",
   description: "Read the terms and conditions for using the MythRealms website and purchasing our products. Understand your rights and obligations.",
+  alternates: { canonical: absoluteUrl("/terms") },
 };
 
 export default function TermsPage() {
@@ -72,7 +74,7 @@ export default function TermsPage() {
 
           <h3 className="font-serif text-lg font-bold text-[var(--text)] mb-2">Natural Variations</h3>
           <p className="mb-3">
-            Our products are crafted from natural stones, crystals, and materials. Natural variations in color, pattern, texture, and size are inherent characteristics and not defects. No two pieces are exactly alike — this uniqueness is part of their beauty.
+            Product pages and galleries describe the information currently available for each piece. Color, finish, and scale may appear different across lighting and screens. Review the complete gallery and contact us before ordering if a specific detail is essential to your purchase.
           </p>
 
           <h3 className="font-serif text-lg font-bold text-[var(--text)] mb-2">Order Acceptance</h3>

@@ -3,15 +3,14 @@ import { Button } from "@/components/ui/Button";
 import { Plus, Pencil, ExternalLink } from "lucide-react";
 import { DeleteButton } from "./DeleteButton";
 import { safeJsonParse } from "@/lib/utils";
-import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { PRODUCTS, CATEGORIES } from "@/lib/1688-products";
+import { requireAdminPage } from "@/lib/server/admin-auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminProductsPage() {
-  const session = await auth();
-  const isAdmin = session && (session.user as any)?.role === "ADMIN";
+  await requireAdminPage();
 
   // Fetch DB products
   const products = await db.product.findMany({

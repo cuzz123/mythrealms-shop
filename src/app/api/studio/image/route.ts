@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminApi } from "@/lib/server/admin-auth";
 
 const IMAGE_API_URL = process.env.IMAGE_GEN_API_URL || "https://api.openai.com/v1/images/generations";
 const IMAGE_API_KEY = process.env.IMAGE_GEN_API_KEY || "";
 const PROVIDER = process.env.IMAGE_GEN_PROVIDER || "openai";
 
 export async function POST(req: NextRequest) {
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
+
   try {
     const body = await req.json();
     const {

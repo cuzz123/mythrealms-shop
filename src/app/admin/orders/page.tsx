@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Truck, CheckCircle, XCircle, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "@/lib/error-message";
 
 interface OrderItem {
   id: string; quantity: number; price: number;
@@ -40,8 +41,8 @@ export default function AdminOrdersPage() {
         prev.map((o) => (o.id === orderId ? { ...o, status } : o))
       );
       toast.success(`Order ${status.toLowerCase()}`);
-    } catch (e: any) {
-      toast.error(e.message || "Update failed");
+    } catch (error: unknown) {
+      toast.error(getErrorMessage(error, "Update failed"));
     } finally {
       setUpdating(null);
     }

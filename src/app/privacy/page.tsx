@@ -1,9 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — MythRealms",
   description: "Learn how MythRealms collects, uses, and protects your personal information. Our commitment to your privacy and data security.",
+  alternates: { canonical: absoluteUrl("/privacy") },
 };
 
 export default function PrivacyPage() {

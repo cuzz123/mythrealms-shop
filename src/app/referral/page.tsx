@@ -39,9 +39,9 @@ export default function ReferralPage() {
     }
   };
 
-  const emailBody = `I found MythRealms, a pearl and gemstone jewelry shop built around guardian archetypes and everyday intention. Use this link to get $10 off your first order:\n\n${referralLink}\n\nTake the quiz or start with the pearl collection.`;
+  const emailBody = `I found MythRealms, a pearl jewelry shop built around The Pearl Edit and guardian archetypes. Use this link to get $10 off your first order:\n\n${referralLink}\n\nTake the quiz or browse the pearl collection.`;
   const shareEmailLink = `mailto:?subject=${encodeURIComponent("Join MythRealms - Get $10 off your first order")}&body=${encodeURIComponent(emailBody)}`;
-  const shareWhatsAppLink = `https://wa.me/?text=${encodeURIComponent(`I found MythRealms: pearl and gemstone jewelry for calm, renewal, boundaries, and soft power. Use my referral link to get $10 off your first order: ${referralLink}`)}`;
+  const shareWhatsAppLink = `https://wa.me/?text=${encodeURIComponent(`I found MythRealms and The Pearl Edit. Use my referral link to get $10 off your first pearl jewelry order: ${referralLink}`)}`;
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-12">
@@ -69,7 +69,7 @@ export default function ReferralPage() {
           </span>
           <h1 className="mb-3 font-serif text-3xl font-bold text-white">Give $10, Get $10</h1>
           <p className="mx-auto max-w-md leading-relaxed text-white/70">
-            Share MythRealms with someone who loves pearl and gemstone jewelry. When they make
+            Share MythRealms with someone who loves pearl jewelry. When they make
             their first purchase, you both get $10 off.
           </p>
         </div>

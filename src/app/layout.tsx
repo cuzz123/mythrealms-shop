@@ -2,14 +2,15 @@
 import "./globals.css";
 import { Providers } from "./providers";
 import { Analytics } from "@/components/layout/Analytics";
-import { OrganizationJsonLd } from "@/components/ui/JsonLd";
+import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/ui/JsonLd";
 import { LayoutShell } from "@/components/layout/LayoutShell";
+import { absoluteUrl, siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app"),
-  title: "MythRealms · Pearl & Gemstone Jewelry for Modern Guardians",
-  description: "Pearl and gemstone jewelry inspired by ancient Chinese celestial lore. Find your guardian archetype and shop pieces for calm, renewal, boundaries, and soft power.",
-  keywords: ["pearl jewelry", "gemstone jewelry", "intention jewelry", "pearl bracelet", "pearl necklace", "guardian quiz", "celestial jewelry", "soft power jewelry", "moonstone", "rose quartz", "black obsidian"],
+  metadataBase: new URL(siteUrl),
+  title: "MythRealms | Pearl Jewelry for Everyday Light",
+  description: "MythRealms curates pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view. Explore the Pearl Edit.",
+  keywords: ["pearl jewelry", "pearl earrings", "pearl necklace", "pearl bracelet", "pearl ring", "freshwater pearl jewelry", "everyday pearl jewelry", "baroque pearl jewelry"],
   icons: {
     icon: "/icon.svg",
     apple: "/apple-icon.png",
@@ -21,30 +22,38 @@ export const metadata: Metadata = {
     "p:domain_verify": "f7403d777d8595e4acf712c703023325",
   },
   openGraph: {
-    title: "MythRealms · Pearl & Gemstone Jewelry for Modern Guardians",
-    description: "Pearl and gemstone jewelry inspired by ancient Chinese celestial lore. Find your guardian archetype and wear your intention.",
-    url: process.env.NEXT_PUBLIC_APP_URL,
+    title: "MythRealms | Pearl Jewelry for Everyday Light",
+    description: "Pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.",
     type: "website",
     siteName: "MythRealms",
-    images: [{ url: `${process.env.NEXT_PUBLIC_APP_URL}/images/1688-hero/hero-1.webp`, width: 1792, height: 1008 }],
+    images: [{ url: absoluteUrl("/images/brand/hero/pearl-earrings-editorial.png"), width: 1024, height: 1024, alt: "MythRealms pearl jewelry" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MythRealms · Pearl & Gemstone Jewelry for Modern Guardians",
-    description: "Pearl and gemstone jewelry inspired by ancient Chinese celestial lore. Find your guardian archetype and wear your intention.",
-    images: [`${process.env.NEXT_PUBLIC_APP_URL}/images/1688-hero/hero-1.webp`],
+    title: "MythRealms | Pearl Jewelry for Everyday Light",
+    description: "Pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.",
+    images: [absoluteUrl("/images/brand/hero/pearl-earrings-editorial.png")],
   },
-  robots: { index: true, follow: true },
-  alternates: { canonical: process.env.NEXT_PUBLIC_APP_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <head>
-        <link rel="preload" as="image" href="/images/1688-hero-mobile/phone-hero1.webp" fetchPriority="high" media="(max-width: 767px)" />
-        <link rel="preload" as="image" href="/images/1688-hero/hero-1.webp" fetchPriority="high" media="(min-width: 768px)" />
+        <link rel="preload" as="image" href="/images/brand/hero/pearl-earrings-editorial.png" fetchPriority="high" />
         <OrganizationJsonLd />
+        <WebSiteJsonLd />
       </head>
       <body className="antialiased">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--accent)] focus:text-white focus:rounded">Skip to main content</a>

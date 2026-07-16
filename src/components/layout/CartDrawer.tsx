@@ -1,201 +1,103 @@
 "use client";
 
-import { useEffect, useCallback, useState, useRef } from "react";
+import { useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { X, Minus, Plus, Trash2, Mail } from "lucide-react";
+import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
-import { cn, formatPrice } from "@/lib/utils";
-import { PRODUCTS } from "@/lib/1688-products";
+import { formatPrice } from "@/lib/utils";
+import { getStorefrontProducts } from "@/lib/storefront/catalog";
+import { productDisplayName } from "@/lib/brand";
 import { imageUrl } from "@/lib/images";
+import { useDialogFocus } from "@/lib/client/use-dialog-focus";
 
 const FREE_SHIPPING_THRESHOLD = 69.99;
 
 export function CartDrawer() {
-  const isOpen = useCartUIStore((s) => s.isOpen);
-  const closeCart = useCartUIStore((s) => s.closeCart);
+  const isOpen = useCartUIStore((state) => state.isOpen);
+  const closeCart = useCartUIStore((state) => state.closeCart);
+  const items = useCartStore((state) => state.items);
+  const itemCount = useCartStore((state) => state.itemCount());
+  const subtotal = useCartStore((state) => state.subtotal());
+  const updateQuantity = useCartStore((state) => state.updateQuantity);
+  const removeItem = useCartStore((state) => state.removeItem);
+  const panelRef = useRef<HTMLElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
-  const items = useCartStore((s) => s.items);
-  const itemCount = useCartStore((s) => s.itemCount());
-  const subtotal = useCartStore((s) => s.subtotal());
-  const updateQuantity = useCartStore((s) => s.updateQuantity);
-  const removeItem = useCartStore((s) => s.removeItem);
+  useDialogFocus({
+    isOpen,
+    onClose: closeCart,
+    containerRef: panelRef,
+    initialFocusRef: closeRef,
+  });
 
-  // Abandoned cart save
-  const [showSave, setShowSave] = useState(false);
-  const [saveEmail, setSaveEmail] = useState("");
-  const [saved, setSaved] = useState(false);
+  const recommended = useMemo(() => {
+    const cartIds = new Set(items.map((item) => item.product.id));
+    return getStorefrontProducts()
+      .filter((product) => !cartIds.has(product.id))
+      .slice(0, 3);
+  }, [items]);
 
-  // Focus management: return focus to cart button on close
-  const previousFocusRef = useRef<HTMLElement | null>(null);
+  if (!isOpen) return null;
 
-  // Close on Escape key — prompt save when cart has items
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        if (items.length > 0 && !saved && !sessionStorage.getItem("mr_cart_save_shown")) {
-          setShowSave(true);
-        } else {
-          closeCart();
-          setShowSave(false);
-        }
-      }
-    },
-    [closeCart, items.length, saved],
-  );
-
-  useEffect(() => {
-    if (isOpen) {
-      // Save the currently focused element (the cart toggle button)
-      previousFocusRef.current = document.activeElement as HTMLElement;
-      document.addEventListener("keydown", handleKeyDown);
-      // Prevent body scroll while drawer is open
-      document.body.style.overflow = "hidden";
-    } else {
-      // Return focus to the cart button when drawer closes
-      if (previousFocusRef.current) {
-        setTimeout(() => previousFocusRef.current?.focus(), 0);
-        previousFocusRef.current = null;
-      }
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
-    };
-  }, [isOpen, handleKeyDown]);
-
-  // Free shipping calculation
-  const remaining = FREE_SHIPPING_THRESHOLD - subtotal;
-  const progressPercent = Math.min(
-    (subtotal / FREE_SHIPPING_THRESHOLD) * 100,
-    100,
-  );
-  const hasFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
-
-  // Recommended — use static 1688 products (shuffled curated singles), exclude cart items
-  const [recommended, setRecommended] = useState<any[]>([]);
-  useEffect(() => {
-    if (!isOpen || recommended.length > 0) return;
-    const cartProductIds = new Set(items.map(i => i.product.id));
-    const singles = PRODUCTS.filter(p => p.category === "curated-singles" && !cartProductIds.has(p.id));
-    const shuffled = [...singles].sort(() => Math.random() - 0.5);
-    setRecommended(shuffled.slice(0, 3));
-  }, [isOpen, recommended.length, items]);
-
-  // ── Abandoned cart handlers ──
-  function handleClose() {
-    if (items.length > 0 && !saved && !sessionStorage.getItem("mr_cart_save_shown")) {
-      setShowSave(true);
-    } else {
-      closeCart();
-      setShowSave(false);
-    }
-  }
-
-  async function handleSave() {
-    if (!saveEmail) return;
-    try {
-      await fetch("/api/email/abandoned-cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: saveEmail,
-          cartItems: items.map((i) => ({
-            name: i.product.name,
-            price: i.product.price,
-            quantity: i.quantity,
-          })),
-          stage: "1h",
-        }),
-      });
-    } catch {
-      /* silent — best effort save */
-    }
-    setSaved(true);
-    setShowSave(false);
-    sessionStorage.setItem("mr_cart_save_shown", "1");
-    setTimeout(() => {
-      closeCart();
-      setSaved(false);
-    }, 1200);
-  }
+  const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
+  const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
 
   return (
     <>
-      {/* Overlay */}
       <div
-        className={cn(
-          "fixed inset-0 z-50 bg-[var(--overlay)] transition-opacity duration-300",
-          isOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0",
-        )}
-        onClick={handleClose}
+        className="fixed inset-0 z-50 bg-[var(--overlay)]"
+        onClick={closeCart}
         aria-hidden="true"
       />
-
-      {/* Drawer panel */}
       <aside
-        className={cn(
-          "fixed top-0 right-0 z-50 flex h-full w-full flex-col bg-[var(--surface-raised)] shadow-[var(--shadow-xl)] transition-transform duration-400 ease-out sm:w-[420px]",
-          isOpen ? "translate-x-0" : "translate-x-full",
-        )}
+        ref={panelRef}
+        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-[420px] flex-col bg-[var(--surface-raised)] shadow-[var(--shadow-xl)]"
         role="dialog"
         aria-modal="true"
         aria-label={`Shopping cart with ${itemCount} items`}
       >
-        {/* Header */}
-        <div className="px-5 py-4">
-          <div className="flex items-center justify-between">
-            <h2 className="font-serif text-lg font-semibold text-[var(--text)]">
-              Your Cart ({itemCount})
-            </h2>
-            <button
-              type="button"
-              onClick={closeCart}
-              className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-muted)] transition-colors hover:bg-[var(--border-light)] hover:text-[var(--text)]"
-              aria-label="Close cart"
-            >
-              <X size={20} strokeWidth={1.8} />
-            </button>
-          </div>
-          <div className="mt-3 border-b border-[var(--border)] mx-2" />
+        <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
+          <h2 className="font-serif text-lg font-semibold text-[var(--text)]">
+            Your Cart ({itemCount})
+          </h2>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={closeCart}
+            className="flex h-9 w-9 items-center justify-center text-[var(--text-muted)] transition hover:bg-[var(--border-light)] hover:text-[var(--text)]"
+            aria-label="Close cart"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
-        {/* Body — cart items or empty state */}
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 px-5 py-12 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--border-light)]">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--text-muted)"
-                strokeWidth="1.5"
-                className="h-7 w-7"
-              >
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-              </svg>
-            </div>
-            <p className="text-[var(--text-muted)]">Your cart is empty</p>
+          <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+            <ShoppingBag className="mb-4 h-9 w-9 text-[var(--text-muted)]" />
+            <p className="text-sm text-[var(--text-muted)]">Your cart is empty.</p>
             <button
               type="button"
               onClick={closeCart}
-              className="mt-2 rounded-[var(--radius-md)] bg-[var(--primary)] px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--primary-hover)]"
+              className="mt-6 bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--bg)]"
             >
               Continue Shopping
             </button>
           </div>
         ) : (
           <>
-            {/* Item list */}
-            <div className="flex-1 overflow-y-auto px-5 py-4">
+            <div className="flex-1 overflow-y-auto px-5">
               <ul className="divide-y divide-[var(--border)]">
                 {items.map((item) => (
-                  <li key={`${item.product.id}-${item.product.variantId ?? "default"}`} className="flex gap-3 py-4">
-                    {/* Product image */}
-                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-[var(--radius-md)] bg-[var(--border-light)]">
+                  <li
+                    key={`${item.product.id}-${item.product.variantId ?? "default"}`}
+                    className="flex gap-3 py-4"
+                  >
+                    <Link
+                      href={`/products/${item.product.slug}`}
+                      onClick={closeCart}
+                      className="relative h-20 w-20 shrink-0 overflow-hidden bg-[var(--border-light)]"
+                    >
                       <Image
                         src={imageUrl(item.product.image)}
                         alt={item.product.name}
@@ -203,31 +105,20 @@ export function CartDrawer() {
                         sizes="80px"
                         className="object-cover"
                       />
-                    </div>
-
-                    {/* Product details */}
-                    <div className="flex min-w-0 flex-1 flex-col justify-between">
-                      <div>
-                        <Link
-                          href={`/products/${item.product.slug}`}
-                          onClick={closeCart}
-                          className="block truncate text-sm font-medium text-[var(--text)] transition-colors hover:text-[var(--primary)]"
-                        >
-                          {item.product.name}
-                        </Link>
-                        {item.product.variantName && (
-                          <p className="mt-0.5 text-xs text-[var(--text-muted)]">
-                            {item.product.variantName}
-                          </p>
-                        )}
-                        <p className="mt-0.5 text-sm font-medium text-[var(--text)]">
-                          {formatPrice(item.product.price)}
-                        </p>
-                      </div>
-
-                      {/* Quantity controls + remove */}
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center rounded-[var(--radius-sm)] border border-[var(--border)]">
+                    </Link>
+                    <div className="min-w-0 flex-1">
+                      <Link
+                        href={`/products/${item.product.slug}`}
+                        onClick={closeCart}
+                        className="line-clamp-2 text-sm font-medium text-[var(--text)]"
+                      >
+                        {item.product.name}
+                      </Link>
+                      <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                        {formatPrice(item.product.price)}
+                      </p>
+                      <div className="mt-3 flex items-center gap-3">
+                        <div className="flex items-center border border-[var(--border)]">
                           <button
                             type="button"
                             onClick={() =>
@@ -237,12 +128,12 @@ export function CartDrawer() {
                                 item.quantity - 1,
                               )
                             }
-                            className="flex h-7 w-7 items-center justify-center text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
+                            className="flex h-8 w-8 items-center justify-center"
                             aria-label={`Decrease quantity of ${item.product.name}`}
                           >
-                            <Minus size={13} strokeWidth={2} />
+                            <Minus className="h-3.5 w-3.5" />
                           </button>
-                          <span className="flex h-7 w-8 items-center justify-center text-xs font-medium text-[var(--text)] tabular-nums">
+                          <span className="w-8 text-center text-xs tabular-nums">
                             {item.quantity}
                           </span>
                           <button
@@ -254,180 +145,90 @@ export function CartDrawer() {
                                 item.quantity + 1,
                               )
                             }
-                            className="flex h-7 w-7 items-center justify-center text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
+                            className="flex h-8 w-8 items-center justify-center"
                             aria-label={`Increase quantity of ${item.product.name}`}
                           >
-                            <Plus size={13} strokeWidth={2} />
+                            <Plus className="h-3.5 w-3.5" />
                           </button>
                         </div>
-
                         <button
                           type="button"
                           onClick={() =>
-                            removeItem(
-                              item.product.id,
-                              item.product.variantId,
-                            )
+                            removeItem(item.product.id, item.product.variantId)
                           }
-                          className="flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-muted)] transition-colors hover:bg-red-900/20 hover:text-red-400"
+                          className="flex h-8 w-8 items-center justify-center text-[var(--text-muted)] hover:text-[var(--sale)]"
                           aria-label={`Remove ${item.product.name} from cart`}
                         >
-                          <Trash2 size={15} strokeWidth={1.8} />
+                          <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
                     </div>
                   </li>
                 ))}
               </ul>
-            </div>
 
-            {/* Abandoned Cart Save Prompt */}
-            {showSave && !saved && (
-              <div className="mx-5 mb-4 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--border-light)] px-4 py-3">
-                <p className="text-sm font-semibold text-[var(--text)] mb-1">
-                  Save your cart?
-                </p>
-                <p className="text-xs text-[var(--text-muted)] mb-3">
-                  We'll email you a link to pick up where you left off.
-                </p>
-                <div className="flex gap-2">
-                  <input
-                    type="email"
-                    value={saveEmail}
-                    onChange={(e) => setSaveEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    className="flex-1 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none focus:border-[var(--primary)]"
-                  />
-                  <button
-                    onClick={handleSave}
-                    className="flex items-center gap-1.5 rounded-[var(--radius-sm)] bg-[var(--primary)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--primary-hover)]"
-                  >
-                    <Mail size={14} />
-                    Save
-                  </button>
-                </div>
-                <button
-                  onClick={() => {
-                    sessionStorage.setItem("mr_cart_save_shown", "1");
-                    closeCart();
-                    setShowSave(false);
-                  }}
-                  className="mt-2 text-xs text-[var(--text-muted)] hover:underline"
-                >
-                  No thanks
-                </button>
-              </div>
-            )}
-            {saved && (
-              <div className="mx-5 mb-4 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--border-light)] px-4 py-3 text-center text-sm font-semibold text-[var(--text)]">
-                Check your inbox!
-              </div>
-            )}
-
-            {/* Footer */}
-            <div className="border-t border-[var(--border)] px-5 py-4">
-              {/* Free shipping progress */}
-              {hasFreeShipping ? (
-                <div className="mb-4 flex items-center gap-2 rounded-[var(--radius-md)] bg-[#1A2E1A] px-3 py-2.5 text-sm text-[var(--success)]">
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="h-4 w-4 shrink-0"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span className="font-medium">
-                    Congratulations! You have earned free shipping.
-                  </span>
-                </div>
-              ) : (
-                <div className="mb-4">
-                  <div className="mb-1.5 flex items-center justify-between text-xs text-[var(--text-secondary)]">
-                    <span>
-                      You are {formatPrice(remaining)} away from free shipping
-                    </span>
-                    <span className="font-medium">{Math.round(progressPercent)}%</span>
-                  </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-[var(--border-light)]">
-                    <div
-                      className="h-full rounded-full bg-[var(--accent)] transition-all duration-500"
-                      style={{ width: `${progressPercent}%` }}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* Subtotal */}
-              <div className="mb-4 flex items-center justify-between border-t border-[var(--border)] pt-3">
-                <span className="text-sm font-medium text-[var(--text)]">
-                  Subtotal
-                </span>
-                <span className="font-serif text-lg font-semibold text-[var(--text)]">
-                  {formatPrice(subtotal)}
-                </span>
-              </div>
-
-              {/* You May Also Like */}
               {recommended.length > 0 && (
-                <div className="mb-4 border-t border-[var(--border)] pt-3">
-                  <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-3">
+                <section className="border-t border-[var(--border)] py-4" aria-labelledby="cart-recommendations">
+                  <h3 id="cart-recommendations" className="mb-3 text-xs font-semibold uppercase text-[var(--text-muted)]">
                     You May Also Like
-                  </p>
-                  <div className="flex gap-3 overflow-x-auto">
-                    {recommended.map((p: any) => (
+                  </h3>
+                  <div className="grid grid-cols-3 gap-3">
+                    {recommended.map((product) => (
                       <Link
-                        key={p.id}
-                        href={`/products/${p.slug}`}
+                        key={product.id}
+                        href={`/products/${product.slug}`}
                         onClick={closeCart}
-                        className="flex-shrink-0 w-[90px] group"
+                        className="min-w-0"
                       >
-                        <div className="w-[90px] h-[90px] rounded-[var(--radius-md)] overflow-hidden bg-[var(--border-light)] mb-1.5">
+                        <div className="relative aspect-square overflow-hidden bg-[var(--border-light)]">
                           <Image
-                            src={imageUrl(Array.isArray(p.images) ? p.images[0] : (typeof p.images === "string" ? JSON.parse(p.images)[0] : ""))}
-                            alt={p.name}
-                            width={90}
-                            height={90}
-                            className="object-cover w-full h-full transition-transform group-hover:scale-105"
+                            src={imageUrl(product.image)}
+                            alt={productDisplayName(product)}
+                            fill
+                            sizes="120px"
+                            className="object-cover"
                           />
                         </div>
-                        <p className="text-[11px] text-[var(--text)] line-clamp-2 leading-tight mb-0.5">
-                          {p.name}
-                        </p>
-                        <p className="text-[11px] font-medium text-[var(--text-secondary)]">
-                          {formatPrice(p.price || p.variants?.[0]?.price || 0)}
+                        <p className="mt-2 line-clamp-2 text-[11px] leading-tight text-[var(--text)]">
+                          {productDisplayName(product)}
                         </p>
                       </Link>
                     ))}
                   </div>
-                </div>
+                </section>
               )}
+            </div>
 
-              {/* Actions */}
+            <div className="border-t border-[var(--border)] px-5 py-4">
+              <p className="mb-2 text-xs text-[var(--text-secondary)]">
+                {remaining === 0
+                  ? "You have earned free shipping."
+                  : `${formatPrice(remaining)} away from free shipping.`}
+              </p>
+              <div className="mb-4 h-1.5 overflow-hidden bg-[var(--border-light)]">
+                <div
+                  className="h-full bg-[var(--accent)]"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <div className="mb-4 flex items-center justify-between text-sm">
+                <span>Subtotal</span>
+                <strong>{formatPrice(subtotal)}</strong>
+              </div>
               <Link
                 href="/cart"
                 onClick={closeCart}
-                className="flex h-11 w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--primary)] text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--primary-hover)]"
+                className="flex h-11 items-center justify-center bg-[var(--primary)] text-sm font-semibold text-white"
               >
                 View Cart
               </Link>
               <Link
                 href="/checkout"
                 onClick={closeCart}
-                className="mt-2 flex h-11 w-full items-center justify-center rounded-[var(--radius-md)] border border-[var(--accent)] text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/10"
+                className="mt-2 flex h-11 items-center justify-center border border-[var(--accent)] text-sm font-semibold text-[var(--accent)]"
               >
                 Checkout
               </Link>
-              <button
-                type="button"
-                onClick={closeCart}
-                className="mt-3 w-full text-center text-sm text-[var(--text-secondary)] underline-offset-2 transition-colors hover:text-[var(--text)] hover:underline"
-              >
-                Continue Shopping
-              </button>
             </div>
           </>
         )}

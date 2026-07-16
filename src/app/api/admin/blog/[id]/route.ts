@@ -2,16 +2,14 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { auth } from "@/lib/auth";
+import { requireAdminApi } from "@/lib/server/admin-auth";
 
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session || session.user?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
 
   const { id } = await params;
   const post = await db.blogPost.findUnique({ where: { id } });
@@ -27,10 +25,8 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session || session.user?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
 
   const { id } = await params;
   const body = await request.json();

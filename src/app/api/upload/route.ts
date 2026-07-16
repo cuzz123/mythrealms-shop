@@ -1,13 +1,11 @@
 // POST /api/upload — Simple file upload (base64, no external service needed)
 
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { requireAdminApi } from "@/lib/server/admin-auth";
 
 export async function POST(request: NextRequest) {
-  const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
 
   try {
     const formData = await request.formData();
@@ -37,7 +35,7 @@ export async function POST(request: NextRequest) {
       filename: file.name,
       size: file.size,
     });
-  } catch (e: any) {
+  } catch {
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 }

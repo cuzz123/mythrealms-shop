@@ -32,6 +32,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
   const image = product.images[0] || "";
   const secondImage = product.images[1] || "";
   const hasSecondImage = product.images.length >= 2;
+  const hasWearImage = secondImage.includes("-worn.");
   const isValidImage = image && (image.startsWith("http") || image.startsWith("/"));
   const firstVariant = product.variants[0];
   const price = Number(firstVariant?.price ?? 0);
@@ -77,12 +78,12 @@ export function ProductCard({ product, className }: ProductCardProps) {
   return (
     <div className={cn("group relative", className)}>
       <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative aspect-square overflow-hidden rounded-[var(--radius-lg)] bg-[var(--border-light)]">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] bg-[var(--border-light)]">
           {isValidImage ? (
             <>
               <Image
                 src={imageUrl(image)}
-                alt={`${product.name} - MythRealms pearl and gemstone jewelry`}
+                alt={`${product.name} - MythRealms pearl jewelry`}
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 loading="lazy"
@@ -107,6 +108,11 @@ export function ProductCard({ product, className }: ProductCardProps) {
           {hasSale && (
             <span className="absolute left-3 top-3 inline-flex items-center rounded-full bg-[var(--sale)] px-2.5 py-0.5 text-xs font-semibold text-white">
               Sale
+            </span>
+          )}
+          {hasWearImage && (
+            <span className="absolute bottom-3 left-3 bg-[var(--surface)]/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--text)]">
+              On model
             </span>
           )}
         </div>
@@ -143,6 +149,9 @@ export function ProductCard({ product, className }: ProductCardProps) {
               <span className="h-1.5 w-1.5 rounded-full bg-red-400 animate-pulse" />
               Only {firstVariant.stock} left
             </div>
+          )}
+          {hasWearImage && (
+            <p className="text-[10px] font-semibold uppercase tracking-[0.07em] text-[var(--accent)]">Product view + on-model view</p>
           )}
         </div>
       </Link>

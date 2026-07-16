@@ -9,6 +9,12 @@ interface TrackItem {
   price: number;
 }
 
+type MarketingWindow = Window & {
+  gtag?: (...args: unknown[]) => void;
+  fbq?: (...args: unknown[]) => void;
+  pintrk?: (...args: unknown[]) => void;
+};
+
 export function SuccessTracker({
   orderId,
   value,
@@ -20,7 +26,7 @@ export function SuccessTracker({
 }) {
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const w = window as any;
+    const w = window as MarketingWindow;
 
     if (w.gtag) {
       w.gtag("event", "purchase", {

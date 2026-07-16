@@ -3,11 +3,12 @@ import fs from "fs";
 import path from "path";
 
 type Format = "story" | "unboxing" | "quiz";
+type Product = (typeof PRODUCTS)[number];
 const formats: Format[] = ["story", "unboxing", "quiz"];
 
-const active = PRODUCTS.filter((p: any) => p.isActive && p.inStock);
+const active = PRODUCTS.filter((p) => p.isActive && p.inStock);
 
-function buildScript(p: any, fmt: Format) {
+function buildScript(p: Product, fmt: Format) {
   const name = p.name.replace(/[^\x20-\x7E\s]/g, "").trim();
   const intention = p.intention || "Crystal Intention";
   const desc = p.description.replace(/\s+/g, " ").trim();
@@ -66,12 +67,12 @@ function buildScript(p: any, fmt: Format) {
   };
 }
 
-const scripts = active.map((p: any, i: number) => buildScript(p, formats[i % formats.length]));
+const scripts = active.map((p, i) => buildScript(p, formats[i % formats.length]));
 
 const outDir = path.join(process.cwd(), "content", "tiktok");
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(path.join(outDir, "scripts.json"), JSON.stringify({ generatedAt: new Date().toISOString(), total: scripts.length, scripts }, null, 2));
 console.log("Generated " + scripts.length + " TikTok scripts into content/tiktok/scripts.json");
 const fmtCount: Record<string, number> = {};
-scripts.forEach((s: any) => { fmtCount[s.format] = (fmtCount[s.format] || 0) + 1; });
+scripts.forEach((script) => { fmtCount[script.format] = (fmtCount[script.format] || 0) + 1; });
 console.log("Formats: " + JSON.stringify(fmtCount));

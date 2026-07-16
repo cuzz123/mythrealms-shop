@@ -2,16 +2,15 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { auth } from "@/lib/auth";
+import { requireAdminApi } from "@/lib/server/admin-auth";
+import { getErrorMessage } from "@/lib/error-message";
 
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
 
   try {
     const { id } = await params;
@@ -35,7 +34,7 @@ export async function PATCH(
     }
 
     return NextResponse.json({ success: true });
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+  } catch (error: unknown) {
+    return NextResponse.json({ error: getErrorMessage(error, "Failed to update asset") }, { status: 500 });
   }
 }

@@ -1,4 +1,4 @@
-// GET /api/automation/generate-all-pins
+// POST /api/automation/generate-all-pins
 // Batch-generate Pinterest copy for all active products.
 
 import { NextResponse } from "next/server";
@@ -6,6 +6,7 @@ import { PRODUCTS } from "@/lib/1688-products";
 import { productBenefitTriplet, productDisplayName, productShortDescription, realmForProduct } from "@/lib/brand";
 import { promises as fs } from "fs";
 import path from "path";
+import { requireAdminMutation } from "@/lib/server/admin-auth";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -41,7 +42,10 @@ function buildPin(product: (typeof PRODUCTS)[0], base: string) {
   };
 }
 
-export async function GET() {
+export async function POST(request: Request) {
+  const unauthorized = await requireAdminMutation(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const base = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
     const active = PRODUCTS.filter((p) => p.isActive && p.inStock);

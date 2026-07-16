@@ -1,11 +1,9 @@
-import { db } from "@/lib/db";
 import Link from "next/link";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { Search } from "lucide-react";
 import type { Metadata } from "next";
-import { PRODUCTS as P1688 } from "@/lib/1688-products";
-
-export const dynamic = "force-dynamic";
+import { getProductType, getStorefrontProducts } from "@/lib/storefront/catalog";
+import { productDisplayName, productShortDescription } from "@/lib/brand";
 
 export async function generateMetadata({
   searchParams,
@@ -14,12 +12,21 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { q } = await searchParams;
   return {
-    title: q ? `Search: ${q} — MythRealms` : "Search — MythRealms",
+    title: q ? `Search: ${q} | MythRealms` : "Search | MythRealms",
     description: q
-      ? `Search results for "${q}" — discover intention-based crystal jewelry and spiritual wellness pieces`
-      : "Search our collection of intention-based crystal and pearl jewelry",
+      ? `Search MythRealms pearl jewelry for "${q}".`
+      : "Search the MythRealms Pearl Edit for rings, bracelets, earrings, and necklaces.",
   };
 }
+
+const popularSearches = [
+  "Pearl Earrings",
+  "Pearl Necklace",
+  "Pearl Bracelet",
+  "Pearl Ring",
+  "Everyday Pearl",
+  "Gift",
+];
 
 export default async function SearchPage({
   searchParams,
@@ -28,166 +35,80 @@ export default async function SearchPage({
 }) {
   const { q } = await searchParams;
   const query = q?.trim() || "";
+  const normalizedQuery = query.toLowerCase();
 
-  let products: any[] = [];
-  let total = 0;
-
-  if (query) {
-    const results = await db.product.findMany({
-      where: {
-        isActive: true,
-        OR: [
-          { name: { contains: query, mode: "insensitive" } },
-          { description: { contains: query, mode: "insensitive" } },
-          { stone: { contains: query, mode: "insensitive" } },
-          { material: { contains: query, mode: "insensitive" } },
-          { intention: { contains: query, mode: "insensitive" } },
-          { category: { name: { contains: query, mode: "insensitive" } } },
-        ],
-      },
-      include: {
-        variants: true,
-        category: { select: { name: true, slug: true } },
-        reviews: { select: { rating: true } },
-      },
-      take: 48,
-      orderBy: { sortOrder: "asc" },
-    });
-
-    // Merge 1688 static products
-    const q = query.toLowerCase();
-    const p1688Matches = P1688.filter(
-      p => p.isActive && (
-        p.name.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        p.categoryName.toLowerCase().includes(q)
+  const matches = normalizedQuery
+    ? getStorefrontProducts().filter((product) =>
+        [
+          productDisplayName(product),
+          productShortDescription(product),
+          product.categoryName,
+          product.intention || "",
+          `pearl ${getProductType(product)}`,
+        ].some((value) => value.toLowerCase().includes(normalizedQuery)),
       )
-    ).map(p => ({
-      ...p,
-      category: { name: p.categoryName, slug: p.category },
-      variants: [{ price: p.price }],
-      avgRating: p.rating,
-      reviewCount: p.reviewCount,
-      images: p.images,
-      id: p.id,
-      slug: p.slug,
-      name: p.name,
-      description: p.description,
-      isActive: p.isActive,
-      inStock: p.inStock,
-      isBestSeller: p.isBestSeller,
-      isNew: p.isNew,
-      tag: p.tag,
-      comparePrice: p.compareAt,
-    }));
+    : [];
 
-    const merged = [...results.map((p) => ({
-      ...p,
-      images: JSON.parse(p.images as string),
-      avgRating: p.reviews.length
-        ? p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length
-        : 0,
-      reviewCount: p.reviews.length,
-    })), ...p1688Matches];
-
-    total = merged.length;
-
-    products = merged;
-  }
-
-  const popularSearches = [
-    "Protection",
-    "Rose Quartz",
-    "Self-Love",
-    "Amethyst",
-    "Confidence",
-    "Black Obsidian",
-    "Abundance",
-    "Clarity",
-  ];
+  const products = matches.map((product) => ({
+    id: product.id,
+    name: productDisplayName(product),
+    slug: product.slug,
+    images: product.images,
+    variants: [{ price: product.price }],
+    comparePrice: product.compareAt ?? null,
+  }));
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10">
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-8">
+    <div className="mx-auto max-w-7xl px-6 py-10">
+      <nav className="mb-8 flex items-center gap-2 text-sm text-[var(--text-muted)]" aria-label="Breadcrumb">
         <Link href="/" className="hover:text-[var(--text)]">Home</Link>
         <span>/</span>
         <span className="text-[var(--text)]">Search</span>
       </nav>
 
-      {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="font-serif text-4xl font-bold text-[var(--text)] mb-3">
+      <div className="mb-12 text-center">
+        <h1 className="mb-3 font-serif text-4xl font-bold text-[var(--text)]">
           {query ? `Search: "${query}"` : "Search MythRealms"}
         </h1>
-        <p className="text-[var(--text-muted)] max-w-lg mx-auto">
+        <p className="mx-auto max-w-lg text-[var(--text-muted)]">
           {query
-            ? `${total} result${total !== 1 ? "s" : ""} found`
-            : "Find your intention among the stones"}
+            ? `${products.length} result${products.length === 1 ? "" : "s"} found`
+            : "Find pearl rings, bracelets, earrings, and necklaces."}
         </p>
       </div>
 
-      {/* Results */}
-      {query ? (
-        products.length > 0 ? (
-          <ProductGrid products={products} />
-        ) : (
-          <div className="text-center py-20">
-            <Search className="w-12 h-12 text-[var(--text-muted)] mx-auto mb-4" />
-            <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-2">
-              No Results Found
-            </h2>
-            <p className="text-[var(--text-muted)] max-w-md mx-auto mb-8">
-              We couldn&apos;t find anything matching &ldquo;{query}&rdquo;. Try a different term or browse our collections.
-            </p>
-            <Link
-              href="/collections"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
-            >
-              Browse All Collections
-            </Link>
-
-            {/* Popular searches fallback */}
-            <div className="mt-12">
-              <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-3">
-                Popular Searches
-              </p>
-              <div className="flex flex-wrap justify-center gap-2">
-                {popularSearches.map((term) => (
-                  <Link
-                    key={term}
-                    href={`/search?q=${encodeURIComponent(term)}`}
-                    className="px-3 py-1.5 text-sm border border-[var(--border)] rounded-full text-[var(--text-secondary)] hover:border-[var(--accent)] hover:text-[var(--text)] hover:bg-[var(--accent)]/5 transition"
-                  >
-                    {term}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        )
+      {query && products.length > 0 ? (
+        <ProductGrid products={products} />
       ) : (
-        /* Empty state — no query yet */
-        <div className="text-center py-20">
-          <Search className="w-16 h-16 text-[var(--text-muted)] mx-auto mb-6" />
-          <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-3">
-            What Are You Looking For?
+        <div className="py-20 text-center">
+          <Search className="mx-auto mb-4 h-12 w-12 text-[var(--text-muted)]" />
+          <h2 className="mb-2 font-serif text-2xl font-bold text-[var(--text)]">
+            {query ? "No Results Found" : "What Are You Looking For?"}
           </h2>
-          <p className="text-[var(--text-muted)] max-w-md mx-auto mb-8">
-            Search for crystals, intentions, gemstones, or purposes. Use the search bar above or try a suggestion below.
+          <p className="mx-auto mb-8 max-w-md text-[var(--text-muted)]">
+            {query
+              ? `We could not find a pearl piece matching "${query}". Try another term or browse the full edit.`
+              : "Use the search field in the header or start with one of these suggestions."}
           </p>
-
-          <div className="flex flex-wrap justify-center gap-2 max-w-lg mx-auto">
+          <div className="mx-auto flex max-w-2xl flex-wrap justify-center gap-2">
             {popularSearches.map((term) => (
               <Link
                 key={term}
                 href={`/search?q=${encodeURIComponent(term)}`}
-                className="px-4 py-2 text-sm border border-[var(--border)] rounded-full text-[var(--text-secondary)] hover:border-[var(--accent)] hover:text-[var(--text)] hover:bg-[var(--accent)]/5 transition"
+                className="rounded-full border border-[var(--border)] px-4 py-2 text-sm text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
               >
                 {term}
               </Link>
             ))}
           </div>
+          {query && (
+            <Link
+              href="/collections/pearl-series"
+              className="mt-8 inline-flex bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]"
+            >
+              Browse the Pearl Edit
+            </Link>
+          )}
         </div>
       )}
     </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { getErrorMessage } from "@/lib/error-message";
 import {
   ProductFormCore,
   type Category,
@@ -90,8 +91,8 @@ export default function NewProductPage() {
       }
       router.push("/admin/products");
       router.refresh();
-    } catch (err: any) {
-      setError(err.message || "Something went wrong.");
+    } catch (error: unknown) {
+      setError(getErrorMessage(error, "Something went wrong."));
     } finally {
       setSaving(false);
     }

@@ -1,9 +1,12 @@
 ﻿"use client";
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { PRODUCTS } from "@/lib/1688-products";
+import {
+  getStorefrontProducts,
+  type StorefrontProduct,
+} from "@/lib/storefront/catalog";
 import { formatPrice } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info, Heart, Copy, Check, Star, MessageSquare, Loader2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info, Heart, Check, Loader2 } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
@@ -11,16 +14,14 @@ import { useWishlistStore } from "@/lib/wishlist";
 import toast from "react-hot-toast";
 import { productBenefitTriplet, productDisplayName, productShortDescription, realmForProduct } from "@/lib/brand";
 
-export function Product1688({ slug }: { slug: string }) {
-  const product = PRODUCTS.find(p => p.slug === slug);
+export function Product1688({ product }: { product: StorefrontProduct }) {
+  const slug = product.slug;
   const [activeIdx, setActiveIdx] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
   const openCart = useCartUIStore((s) => s.openCart);
-  const [viewers] = useState(() => Math.floor(Math.random() * 13) + 3); // 3-15
   const [quantity, setQuantity] = useState(1);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [justToggledWishlist, setJustToggledWishlist] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [addToCartState, setAddToCartState] = useState<"idle" | "adding" | "added">("idle");
   const [pulseWishlist, setPulseWishlist] = useState(false);
 
@@ -29,37 +30,16 @@ export function Product1688({ slug }: { slug: string }) {
   const [notifyState, setNotifyState] = useState<"idle" | "submitting" | "submitted">("idle");
   const [notifyError, setNotifyError] = useState("");
 
-  // Review form
-  const [reviewRating, setReviewRating] = useState(0);
-  const [reviewContent, setReviewContent] = useState("");
-  const [reviewImageUrl, setReviewImageUrl] = useState("");
-  const [reviewState, setReviewState] = useState<"idle" | "reviewed" | "submitting" | "submitted" | "error">("idle");
-  const [reviewError, setReviewError] = useState("");
-
-  // Check localStorage for previously reviewed products
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("mythrealms-reviewed-products");
-      if (raw) {
-        const reviewed: string[] = JSON.parse(raw);
-        if (reviewed.includes(product?.id || "")) {
-          setReviewState("reviewed");
-        }
-      }
-    } catch { /* localStorage not available */ }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   // Wishlist
   const toggleWishlistItem = useWishlistStore((s) => s.toggleItem);
   const isWishlisted = useWishlistStore((s) => s.isWishlisted);
-  const wishlisted = product ? isWishlisted(product.id) : false;
+  const wishlisted = isWishlisted(product.id);
 
-  // Related products: 4 random singles excluding current
+  // Related products stay stable so hydration and merchandising are predictable.
   const related = useMemo(() => {
-    const singles = PRODUCTS.filter(p => p.category === 'curated-singles' && p.slug !== slug);
-    const shuffled = [...singles].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 4);
+    return getStorefrontProducts()
+      .filter((candidate) => candidate.slug !== slug)
+      .slice(0, 4);
   }, [slug]);
 
   // Save to recently viewed
@@ -73,14 +53,7 @@ export function Product1688({ slug }: { slug: string }) {
     } catch { /* localStorage not available */ }
   }, [slug]);
 
-  if (!product) return (
-    <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-      <h1 className="font-serif text-3xl font-bold text-[var(--text)] mb-4">Product Not Found</h1>
-      <p className="text-[var(--text-muted)] mb-6">This product does not exist or may have been removed.</p>
-      <Link href="/collections" className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition">Browse Collections</Link>
-    </div>
-  );
-  const p = product; // TS narrowing for closure below
+  const p = product;
   const displayName = productDisplayName(p);
   const displayDescription = productShortDescription(p);
   const benefitTriplet = productBenefitTriplet(p);
@@ -138,51 +111,6 @@ export function Product1688({ slug }: { slug: string }) {
     }
   }
 
-  async function handleSubmitReview(e: React.FormEvent) {
-    e.preventDefault();
-    if (reviewRating === 0) {
-      setReviewError("Please select a rating");
-      return;
-    }
-    if (reviewContent.trim().length < 5) {
-      setReviewError("Review must be at least 5 characters");
-      return;
-    }
-    setReviewState("submitting");
-    setReviewError("");
-    try {
-      const res = await fetch("/api/reviews", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          productId: p.id,
-          rating: reviewRating,
-          content: reviewContent.trim(),
-          images: reviewImageUrl.trim() || undefined,
-        }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setReviewState("submitted");
-        // Persist to localStorage so we show "reviewed" state on revisit
-        try {
-          const raw = localStorage.getItem("mythrealms-reviewed-products");
-          const reviewed: string[] = raw ? JSON.parse(raw) : [];
-          if (!reviewed.includes(p.id)) {
-            reviewed.push(p.id);
-            localStorage.setItem("mythrealms-reviewed-products", JSON.stringify(reviewed));
-          }
-        } catch { /* localStorage not available */ }
-      } else {
-        setReviewError(data.error || "Failed to submit review");
-        setReviewState("idle");
-      }
-    } catch {
-      setReviewError("Something went wrong. Please try again.");
-      setReviewState("idle");
-    }
-  }
-
   function handleShare() {
     const url = window.location.href;
     if (navigator.share) {
@@ -210,18 +138,7 @@ export function Product1688({ slug }: { slug: string }) {
     toast.success(wishlisted ? "Removed from wishlist" : "Added to wishlist!");
   }
 
-  function handleCopyCode() {
-    navigator.clipboard.writeText("MYTH15").then(
-      () => {
-        setCopied(true);
-        toast.success("Code copied!");
-        setTimeout(() => setCopied(false), 2000);
-      },
-      () => toast.error("Could not copy code"),
-    );
-  }
-
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mythrealms-shop.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -229,15 +146,16 @@ export function Product1688({ slug }: { slug: string }) {
       <ProductJsonLd
         name={displayName}
         description={displayDescription}
-        images={[p.image]}
+        images={p.images.map((image) => image.startsWith("http") ? image : `${siteUrl}${image}`)}
         price={p.price}
         currency="USD"
+        category={p.categoryName}
         url={`${siteUrl}/products/${p.slug}`}
       />
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", url: "/" },
-          { name: p.categoryName, url: `/collections/${p.category}` },
+          { name: "Home", url: `${siteUrl}/` },
+          { name: p.categoryName, url: `${siteUrl}/collections/${p.category}` },
           { name: displayName, url: `${siteUrl}/products/${p.slug}` },
         ]}
       />
@@ -258,10 +176,10 @@ export function Product1688({ slug }: { slug: string }) {
             <LazyImage src={mainImg} alt={displayName} fill sizes="(max-width:1024px) 100vw, 50vw" priority className="object-cover" containerClassName="absolute inset-0" />
             {images.length > 1 && (
               <>
-                <button onClick={() => setActiveIdx(i => i > 0 ? i-1 : images.length-1)} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors">
+                <button type="button" aria-label={`Previous product image, ${activeIdx + 1} of ${images.length}`} onClick={() => setActiveIdx(i => i > 0 ? i-1 : images.length-1)} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors">
                   <ChevronLeft className="w-5 h-5" />
                 </button>
-                <button onClick={() => setActiveIdx(i => i < images.length-1 ? i+1 : 0)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors">
+                <button type="button" aria-label={`Next product image, ${activeIdx + 1} of ${images.length}`} onClick={() => setActiveIdx(i => i < images.length-1 ? i+1 : 0)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors">
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </>
@@ -271,7 +189,7 @@ export function Product1688({ slug }: { slug: string }) {
           {images.length > 1 && (
             <div className="grid grid-cols-6 gap-2 mt-3">
               {images.map((img, i) => (
-                <button key={i} onClick={() => setActiveIdx(i)} className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-colors ${i === activeIdx ? 'border-[var(--accent)]' : 'border-transparent hover:border-[var(--border)]'}`}>
+                <button key={i} type="button" aria-label={`View image ${i + 1} of ${images.length}`} aria-current={i === activeIdx ? "true" : undefined} onClick={() => setActiveIdx(i)} className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-colors ${i === activeIdx ? 'border-[var(--accent)]' : 'border-transparent hover:border-[var(--border)]'}`}>
                   <LazyImage src={img} alt={`${displayName} ${i+1}`} fill sizes="80px" className="object-cover" containerClassName="absolute inset-0" />
                 </button>
               ))}
@@ -319,49 +237,19 @@ export function Product1688({ slug }: { slug: string }) {
           {/* Eco-friendly badge */}
           <div className="flex items-center gap-2 mt-3 text-xs text-[var(--success)]">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />
-            Pearl & gemstone pieces - Gift-ready packaging - Everyday intention
-          </div>
-
-          {/* Social proof: X people viewing */}
-          <p className="mt-1.5 text-xs text-[#C8944A] font-medium">
-            {viewers} {viewers === 1 ? 'person is' : 'people are'} viewing this right now
-          </p>
-
-          {/* BNPL Badge */}
-          <div className="flex items-center gap-2 mt-2 text-xs text-[var(--text-muted)]">
-            <span>or 4 interest-free payments of {formatPrice(p.price / 4)} with</span>
-            <span className="font-semibold text-[var(--text)]">Afterpay</span>
+            Pearl jewelry - Gift-ready packaging - Everyday styling
           </div>
 
           {/* Delivery estimate */}
           <p className="mt-1.5 text-xs text-[var(--text-muted)]">
-            Made to order - Free shipping over $69.99 - Ships in 7-15 business days
+            Free shipping over $69.99 - Delivery estimate shown at checkout
           </p>
-
-          {/* Discount code badge */}
-          <div className="mt-3 inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20">
-            <span className="text-xs text-[var(--accent)] font-medium">
-              Use code <span className="font-bold tracking-wider">MYTH15</span> for 15% off
-            </span>
-            <button
-              onClick={handleCopyCode}
-              className="shrink-0 flex items-center justify-center w-6 h-6 rounded transition-colors hover:bg-[var(--accent)]/20"
-              aria-label="Copy discount code MYTH15"
-              title="Copy code"
-            >
-              {copied ? (
-                <Check className="w-3.5 h-3.5 text-[var(--success)]" />
-              ) : (
-                <Copy className="w-3.5 h-3.5 text-[var(--accent)]" />
-              )}
-            </button>
-          </div>
 
           <div className="mt-5 space-y-3 text-sm text-[var(--text-muted)] leading-relaxed">
             <p>{displayDescription}</p>
             <p className="text-[var(--accent)]">{benefitTriplet}</p>
-            <p>Material: Pearl, gemstone, or alloy components as shown - finished for everyday wear.</p>
-            <p>Each piece may vary slightly in tone and texture. That variation is part of its character.</p>
+            <p>See the product photography for finish, construction, and scale details.</p>
+            <p>Use the full gallery to compare shape, setting, scale, and finish before ordering.</p>
             {p.category !== "curated-singles" && (
               <p className="text-[var(--accent)]/80 italic">
                 From the {p.categoryName} - chosen for the {realm.toLowerCase()} realm.
@@ -374,13 +262,13 @@ export function Product1688({ slug }: { slug: string }) {
             <Info className="w-4 h-4 text-[#C8944A] mt-0.5 shrink-0" />
             <p className="text-xs text-[#A89880] leading-relaxed">
               <span className="font-semibold text-[#C8944A]">Care: </span>
-              Avoid water exposure. Store in a dry place. Clean with a soft cloth. Pearls and stones may vary slightly in color and luster.
+              Avoid water exposure. Store in a dry place. Clean gently with a soft cloth.
             </p>
           </div>
 
           {p.images.length > 1 && (
             <div className="mt-5 p-3 rounded-lg bg-[var(--surface)] border border-[var(--border)]">
-              <p className="text-xs text-[var(--accent)] font-medium">{p.images.length} detail photos — use arrows to explore every angle</p>
+              <p className="text-xs text-[var(--accent)] font-medium">{p.images.length} product photos - use the controls to explore each view</p>
             </div>
           )}
 
@@ -475,7 +363,7 @@ export function Product1688({ slug }: { slug: string }) {
             <span>·</span>
             <span>30-day returns</span>
             <span>·</span>
-            <span>Hand-selected</span>
+            <span>Gift-ready packaging</span>
           </div>
 
           {/* Story link */}
@@ -484,7 +372,7 @@ export function Product1688({ slug }: { slug: string }) {
             className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group"
           >
             <span className="text-sm font-medium text-[var(--text)]">
-              Stones with intention —{" "}
+              The story behind The Pearl Edit -{" "}
               <span className="text-[var(--accent)] group-hover:underline">
                 Read Our Story
               </span>
@@ -494,7 +382,9 @@ export function Product1688({ slug }: { slug: string }) {
           {/* ===== PRODUCT DETAILS ACCORDION ===== */}
           <div className="mt-6 border border-[var(--border)] rounded-lg overflow-hidden">
             <button
+              type="button"
               onClick={() => setDetailsOpen(!detailsOpen)}
+              aria-expanded={detailsOpen}
               className="w-full flex items-center justify-between px-5 py-4 text-sm font-semibold text-[var(--text)] hover:bg-[var(--surface)] transition-colors"
             >
               <span>Product Details</span>
@@ -504,11 +394,11 @@ export function Product1688({ slug }: { slug: string }) {
               <div className="px-5 pb-5 space-y-4 border-t border-[var(--border)] pt-4">
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Materials</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Pearl, gemstone, or alloy components as shown in the product photography. Slight variations in color, pattern, and texture are expected in natural materials.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">See the product photography for finish and construction details. Pearl tone and surface texture may vary slightly between pieces.</p>
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Sizing</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Bracelets are designed for most wrist sizes. Necklaces, earrings, and rings follow the size details shown in product imagery. Contact us before ordering if you need help choosing a fit.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Use the scale shown in the product photography as a guide. Contact us before ordering if you need help choosing a fit.</p>
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Care Instructions</h4>
@@ -520,135 +410,10 @@ export function Product1688({ slug }: { slug: string }) {
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Shipping Info</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Free standard shipping on orders over $69.99. Most made-to-order pieces ship in 7-15 business days. Delivery timing can vary by destination and carrier.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Free standard shipping on orders over $69.99. Delivery timing is shown at checkout and can vary by destination and carrier.</p>
                 </div>
               </div>
             )}
-          </div>
-
-          {/* ===== REVIEWS SECTION ===== */}
-          <div className="mt-6 border border-[var(--border)] rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-3">
-              <MessageSquare className="w-4 h-4 text-[var(--accent)]" />
-              <h3 className="font-serif text-base font-semibold text-[var(--text)]">Reviews</h3>
-            </div>
-            {p.reviewCount > 0 ? (
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="flex items-center gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => {
-                      const filled = i < Math.floor(p.rating);
-                      const half = !filled && i < Math.ceil(p.rating);
-                      return (
-                        <Star
-                          key={i}
-                          className={`w-4 h-4 ${
-                            filled
-                              ? "fill-[var(--accent)] text-[var(--accent)]"
-                              : half
-                              ? "fill-[var(--accent)]/50 text-[var(--accent)]"
-                              : "text-[var(--border)]"
-                          }`}
-                        />
-                      );
-                    })}
-                  </div>
-                  <span className="text-sm font-semibold text-[var(--text)]">{p.rating}</span>
-                  <span className="text-xs text-[var(--text-muted)]">({p.reviewCount} {p.reviewCount === 1 ? "review" : "reviews"})</span>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <p className="text-sm text-[var(--text-muted)] mb-3">
-                  Be the first to review this piece. Your words help others discover their perfect stone.
-                </p>
-              </div>
-            )}
-
-            {/* Review Form */}
-            {reviewState === "reviewed" ? (
-              <div className="flex items-center gap-2 text-xs text-[var(--success)] mt-3 pt-3 border-t border-[var(--border)]">
-                <Check className="w-3.5 h-3.5" />
-                <span>You reviewed this product</span>
-              </div>
-            ) : reviewState === "submitted" ? (
-              <div className="flex items-center gap-2 text-xs text-[var(--success)] mt-3 pt-3 border-t border-[var(--border)]">
-                <Check className="w-3.5 h-3.5" />
-                <span>Review submitted! Thank you for sharing your experience.</span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmitReview} className="mt-3 pt-3 border-t border-[var(--border)] space-y-3">
-                <p className="text-xs font-semibold text-[var(--text)]">Write a Review</p>
-                {/* Star rating */}
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => setReviewRating(star)}
-                      className="transition-colors"
-                      aria-label={`${star} star${star !== 1 ? "s" : ""}`}
-                    >
-                      <Star
-                        className={`w-5 h-5 ${
-                          star <= reviewRating
-                            ? "fill-[var(--accent)] text-[var(--accent)]"
-                            : "text-[var(--border)] hover:text-[var(--accent)]/60"
-                        }`}
-                      />
-                    </button>
-                  ))}
-                </div>
-                {/* Content textarea */}
-                <textarea
-                  value={reviewContent}
-                  onChange={(e) => { setReviewContent(e.target.value); setReviewError(""); }}
-                  placeholder="Share your experience with this piece..."
-                  rows={3}
-                  minLength={5}
-                  className="w-full px-3 py-2.5 rounded-lg border border-[var(--border)] bg-[var(--bg)] text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] resize-none focus:outline-none focus:border-[var(--accent)]/50 transition-colors"
-                />
-                {/* Image URL */}
-                <input
-                  type="url"
-                  value={reviewImageUrl}
-                  onChange={(e) => setReviewImageUrl(e.target.value)}
-                  placeholder="Image URL (optional)"
-                  className="w-full px-3 py-2 rounded-lg border border-[var(--border)] bg-[var(--bg)] text-xs text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]/50 transition-colors"
-                />
-                {/* Error */}
-                {reviewError && (
-                  <p className="text-xs text-[var(--sale)]">{reviewError}</p>
-                )}
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={reviewState === "submitting"}
-                  className="px-5 py-2 rounded-lg bg-[var(--accent)] text-[var(--bg)] font-semibold text-sm hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
-                >
-                  {reviewState === "submitting" ? (
-                    <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
-                  ) : (
-                    <><MessageSquare className="w-3.5 h-3.5" /> Submit Review</>
-                  )}
-                </button>
-              </form>
-            )}
-            {/* Review highlights — trust-building even without real reviews */}
-            <div className="mt-4 pt-4 border-t border-[var(--border)] grid grid-cols-3 gap-3">
-              <div className="text-center">
-                <p className="text-xs font-semibold text-[var(--accent)]">Hand-Selected</p>
-                <p className="text-[10px] text-[var(--text-muted)] mt-0.5">Every stone inspected</p>
-              </div>
-              <div className="text-center">
-                <p className="text-xs font-semibold text-[var(--accent)]">30-Day Returns</p>
-                <p className="text-[10px] text-[var(--text-muted)] mt-0.5">No questions asked</p>
-              </div>
-              <div className="text-center">
-                <p className="text-xs font-semibold text-[var(--accent)]">Gift Boxed</p>
-                <p className="text-[10px] text-[var(--text-muted)] mt-0.5">With story card</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

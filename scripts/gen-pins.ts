@@ -2,10 +2,12 @@
 import fs from "fs";
 import path from "path";
 
-const base = "https://mythrealms-shop.vercel.app";
-const active = PRODUCTS.filter((p: any) => p.isActive && p.inStock);
+type Product = (typeof PRODUCTS)[number];
 
-const lib = active.map((p: any) => {
+const base = "https://mythrealms-shop.vercel.app";
+const active = PRODUCTS.filter((p) => p.isActive && p.inStock);
+
+const lib = active.map((p: Product) => {
   const name = p.name.replace(/[^\x20-\x7E\s]/g, "").trim();
   const intention = p.intention || "Crystal Intention";
   const triplet = p.benefitTriplet ? p.benefitTriplet.replace(/[^\x20-\x7E\s]/g, "").trim() : "";
@@ -23,7 +25,7 @@ const lib = active.map((p: any) => {
 });
 
 const byCategory: Record<string, typeof lib> = {};
-lib.forEach((p: any) => { if (!byCategory[p.category]) byCategory[p.category] = []; byCategory[p.category].push(p); });
+lib.forEach((p) => { if (!byCategory[p.category]) byCategory[p.category] = []; byCategory[p.category].push(p); });
 
 const outDir = path.join(process.cwd(), "content", "pin-library");
 fs.mkdirSync(outDir, { recursive: true });

@@ -11,6 +11,21 @@ const CAT_BASE = '/images/categories'
 const P = (name: string) => `${IMG_BASE}/${name}.png`
 const C = (name: string) => `${CAT_BASE}/${name}.png`
 
+type ProductSeed = {
+  name: string
+  slug: string
+  description: string
+  details: string
+  comparePrice: number
+  images: string
+  stone: string
+  material: string
+  intention: string
+  isFeatured: boolean
+  categoryId: string
+  variants: Array<{ name: string; price: number; stock: number }>
+}
+
 // Mansion names in order
 const MANSIONS = {
   dragon: [
@@ -82,7 +97,7 @@ async function main() {
 
   // ---- 28 Mansions (28 products) ----
   console.log('\n📿 28 Mansions...')
-  const mansionEntries: any[] = []
+  const mansionEntries: ProductSeed[] = []
   const allMansions = [...MANSIONS.dragon, ...MANSIONS.bird, ...MANSIONS.tiger, ...MANSIONS.tortoise]
 
   for (const [slug, name, en, desc] of allMansions) {
@@ -108,14 +123,14 @@ async function main() {
 
   // ---- 5 Elements (5 products) ----
   console.log('🪨 5 Elements...')
-  const elements = [
+  const elements: Array<[string, string, string, string, string]> = [
     ['wood', 'Wood · 木', 'Forest green jade with wood grain silver charm. Symbol of growth, creativity, and new beginnings in the Wu Xing cycle.', 'Jade', 'Growth & Vitality'],
     ['fire', 'Fire · 火', 'Blazing red carnelian with flame-shaped bronze charm. Symbol of passion, transformation, and the inner fire that drives you.', 'Carnelian', 'Passion & Transformation'],
     ['earth', 'Earth · 土', 'Warm yellow tiger eye with square mountain charm. Symbol of stability, nourishment, and the grounded wisdom of the earth.', 'Tiger Eye', 'Stability & Nourishment'],
     ['metal', 'Metal · 金', 'White moonstone with circular coin charm in polished silver. Symbol of precision, clarity, and the cutting edge of truth.', 'Moonstone', 'Clarity & Precision'],
     ['water', 'Water · 水', 'Deep blue sodalite with flowing wave charm. Symbol of wisdom, adaptability, and the quiet power that shapes canyons.', 'Sodalite', 'Wisdom & Adaptability'],
   ]
-  const elementEntries: any[] = []
+  const elementEntries: ProductSeed[] = []
   for (const [slug, en, desc, stone, intention] of elements) {
     elementEntries.push({
       name: `${en} — Five Elements Bracelet`,
@@ -138,7 +153,7 @@ async function main() {
 
   // ---- 4 Seasons (12 products) ----
   console.log('🌸 4 Seasons...')
-  const seasons = [
+  const seasons: Array<[string, string, string, string, string, string, number, number]> = [
     ['spring-cherry-necklace', 'Spring Cherry Blossom Necklace', 'Delicate rose gold necklace with pink tourmaline cherry blossom petals and freshwater pearl centers. Each blossom captures the fleeting beauty of spring — a reminder that the most beautiful things bloom in their own time.', 'Tourmaline', 'Rose Gold', 'Renewal & Beauty', 62.99, 52.99],
     ['spring-plum-earrings', 'Spring Plum Blossom Earrings', 'Polished silver plum blossom earrings with tiny ruby centers, dangling on a delicate chain. The plum blooms in winter\'s last chill — the first sign that warmth is coming.', 'Ruby', 'Silver', 'Hope & Resilience', 48.99, 39.99],
     ['spring-green-bracelet', 'Spring Green Jade Bracelet', 'Vibrant green jadeite bracelet with sprouting leaf charms in 18k gold. Each leaf represents a new beginning — the courage to push through the soil toward the sun.', 'Jadeite', 'Jade & Gold', 'Growth & Courage', 58.99, 48.99],
@@ -152,7 +167,7 @@ async function main() {
     ['winter-pine-bracelet', 'Winter Pine Bracelet', 'Dark green jade and oxidized silver pine branch bracelet. The pine stays green when the world freezes — resilience is not about avoiding hardship, but enduring it with grace.', 'Jade', 'Silver & Jade', 'Resilience & Endurance', 46.99, 36.99],
     ['winter-crane-brooch', 'Winter Crane Brooch', 'Red-crowned crane brooch in carved white jade with red coral accents. In the deepest snow, the crane dances — a promise that grace survives every winter. Museum-quality craftsmanship.', 'Jade & Coral', 'Jade & Silver', 'Grace & Longevity', 82.99, 66.99],
   ]
-  const seasonEntries: any[] = []
+  const seasonEntries: ProductSeed[] = []
   for (const entry of seasons) {
     const slug = entry[0] as string
     const name = entry[1] as string
@@ -183,7 +198,7 @@ async function main() {
 
   // ---- 12 Zodiac (12 products) ----
   console.log('🐀 12 Zodiac...')
-  const zodiacs = [
+  const zodiacs: Array<[string, string, string, string, string, string, number]> = [
     ['rat', 'Rat · 鼠', 'Clever and resourceful — the Rat opens the 12-year cycle with wit and adaptability. Sterling silver amulet with intricate detailing.', 'Silver', '925 Sterling Silver', 'Wit & Resourcefulness', 44.99],
     ['ox', 'Ox · 牛', 'Strong and dependable — the Ox carries the weight of the world without complaint. Bronze amulet with powerful horn curve design.', 'Bronze', 'Bronze', 'Strength & Perseverance', 42.99],
     ['tiger', 'Tiger · 虎', 'Fierce and courageous — the Tiger commands respect in any room. Gold-plated amulet with majestic stripe detailing.', 'Gold', 'Gold-Plated', 'Courage & Authority', 48.99],
@@ -197,7 +212,7 @@ async function main() {
     ['dog', 'Dog · 狗', 'Loyal and protective — the Dog guards what matters most. Bronze amulet with steadfast guardian stance.', 'Bronze', 'Bronze', 'Loyalty & Protection', 42.99],
     ['pig', 'Pig · 猪', 'Generous and fortunate — the Pig attracts abundance and joy. Rose gold amulet with prosperity symbols.', 'Rose Gold', 'Rose Gold-Plated', 'Abundance & Joy', 46.99],
   ]
-  const zodiacEntries: any[] = []
+  const zodiacEntries: ProductSeed[] = []
   for (const [slug, name, desc, stone, material, intention, price] of zodiacs) {
     zodiacEntries.push({
       name: `Year of the ${name} — Zodiac Guardian Amulet`,
@@ -220,13 +235,13 @@ async function main() {
 
   // ---- 4 Artist Collabs ----
   console.log('🎨 4 Artist Collabs...')
-  const collabs = [
+  const collabs: Array<[string, string, string, string, string, string, number]> = [
     ['inkwash-dragon', 'Inkwash Dragon · 水墨青龙', 'Deconstructed Azure Dragon pendant in abstract Chinese ink wash style. Splattered ink textures on brushed silver — where 2000-year-old mythology meets contemporary gallery art. Limited edition of 100.', 'Silver', 'Brushed Silver', 'Art & Abstraction', 128.99],
     ['bronze-beast', 'Bronze Beast · 青铜饕餮', 'Raw textured Taotie ring in deliberately imperfect brutalist bronze. Ancient bronze casting technique reimagined for the modern age — every imperfection is intentional. Limited edition of 50.', 'Bronze', 'Raw Bronze', 'Brutalist Power', 148.99],
     ['porcelain-phoenix', 'Porcelain Phoenix · 青花凤凰', 'Ming dynasty porcelain aesthetic reimagined as earrings. White porcelain with cobalt blue underglaze, delicate crackle finish — the Phoenix reborn in blue and white. Limited edition of 75.', 'Porcelain', 'Porcelain & Silver', 'Tradition Reborn', 138.99],
     ['jade-minimal', 'Jade Minimal · 原石麒麟', 'Single piece of raw uncut jade with one polished facet, set in minimalist silver. Wabi-sabi meets the Qilin — beauty in the unfinished, power in the natural. Limited edition of 30.', 'Raw Jade', 'Raw Jade & Silver', 'Wabi-Sabi Spirit', 188.99],
   ]
-  const collabEntries: any[] = []
+  const collabEntries: ProductSeed[] = []
   for (const [slug, name, desc, stone, material, intention, price] of collabs) {
     collabEntries.push({
       name: `${name} — Artist Collaboration`,
@@ -259,7 +274,7 @@ async function main() {
       continue
     }
     const { variants, ...rest } = data
-    const minPrice = Math.min(...variants.map((v: any) => v.price))
+    const minPrice = Math.min(...variants.map((variant) => variant.price))
     await db.product.create({ data: { ...rest, minPrice, variants: { create: variants } } })
     created++
     if (created % 10 === 0) console.log(`  ... ${created}/${allProducts.length}`)

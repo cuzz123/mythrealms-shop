@@ -232,3 +232,163 @@ model LoyaltyPoint {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+enum PinterestDraftStatus {
+  DRAFT
+  APPROVED
+  PUBLISHING
+  PUBLISHED
+  REJECTED
+  FAILED
+}
+
+enum SupplierCandidateStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum MailboxConnectionStatus {
+  DISCONNECTED
+  CONNECTED
+  ERROR
+  DISABLED
+}
+
+enum MailboxEventCategory {
+  ORDER_STATUS
+  SHIPPING
+  FAQ
+  PRODUCT_CARE
+  REFUND
+  CANCEL
+  ADDRESS_CHANGE
+  QUALITY
+  PAYMENT_DISPUTE
+  SUPPLIER
+  MARKETING
+  UNKNOWN
+}
+
+enum MailboxAutomationDecision {
+  AUTO_REPLY
+  DRAFT_HIGH_PRIORITY
+  IGNORE
+}
+
+enum MailboxAutomationAction {
+  RECEIVED
+  AUTO_REPLIED
+  DRAFTED
+  SENT
+  IGNORED
+  FAILED
+}
+
+enum MailboxEventPriority {
+  LOW
+  NORMAL
+  HIGH
+}
+
+enum MailboxAutomationStatus {
+  PENDING
+  PROCESSING
+  PROCESSED
+  FAILED
+  IGNORED
+}
+
+model PinterestContentDraft {
+  id           String               @id @default(cuid())
+  status       PinterestDraftStatus @default(DRAFT)
+  productSlug  String
+  productName  String
+  imageUrl     String
+  link         String
+  title        String
+  description  String
+  tags         String               @default("[]")
+  dateKey      String?              @unique
+  scheduledFor DateTime?
+  publishedAt  DateTime?
+  remotePinId  String?
+  error        String?
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+
+  @@index([status, scheduledFor])
+  @@index([productSlug, createdAt])
+}
+
+model SupplierCandidate {
+  id                        String                  @id @default(cuid())
+  candidateUrl              String                  @unique
+  supplierName              String
+  material                  String
+  specification             String?
+  purchasePriceCents        Int
+  moq                       Int
+  estimatedShippingCents    Int                     @default(0)
+  dropshipAvailable         Boolean                 @default(false)
+  score                     Int                     @default(0)
+  scoreReasons              String                  @default("[]")
+  suggestedRetailPriceCents Int                     @default(0)
+  status                    SupplierCandidateStatus @default(PENDING)
+  reviewNotes               String?
+  createdAt                 DateTime                @default(now())
+  updatedAt                 DateTime                @updatedAt
+
+  @@index([status, score])
+}
+
+model MailboxConnection {
+  id                      String                  @id @default(cuid())
+  email                   String                  @unique
+  refreshTokenEncrypted   String
+  accessTokenExpiresAt    DateTime?
+  subscriptionId          String?
+  subscriptionExpiresAt   DateTime?
+  status                  MailboxConnectionStatus @default(DISCONNECTED)
+  createdAt               DateTime                @default(now())
+  updatedAt               DateTime                @updatedAt
+  automationEvents        MailboxAutomationEvent[]
+}
+
+model MailboxAutomationEvent {
+  id                  String                     @id @default(cuid())
+  mailboxConnectionId String?
+  graphMessageId      String                     @unique
+  category            MailboxEventCategory
+  decision            MailboxAutomationDecision
+  action              MailboxAutomationAction
+  priority            MailboxEventPriority       @default(NORMAL)
+  status              MailboxAutomationStatus    @default(PENDING)
+  orderId             String?
+  senderEmail         String?
+  senderName          String?
+  subject             String?
+  bodyPreview         String?
+  receivedAt          DateTime?
+  draftBody           String?
+  sentBody            String?
+  errorMessage        String?
+  createdAt           DateTime                   @default(now())
+  updatedAt           DateTime                   @updatedAt
+  processedAt         DateTime?
+
+  mailboxConnection MailboxConnection? @relation(fields: [mailboxConnectionId], references: [id], onDelete: SetNull)
+
+  @@index([status, priority, createdAt])
+  @@index([orderId])
+}
+
+model OperationsReport {
+  id             String   @id @default(cuid())
+  reportDate     DateTime @unique
+  sectionsJson   String
+  deliveryResult String?
+  generatedAt    DateTime @default(now())
+
+  @@index([reportDate])
+}

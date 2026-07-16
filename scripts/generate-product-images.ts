@@ -192,7 +192,6 @@ async function main() {
   console.log(`Generating ${ALL_PRODUCTS.length} product images in Cartier/Pinterest style...\n`);
 
   let success = 0;
-  let skipped = 0;
 
   for (let i = 0; i < ALL_PRODUCTS.length; i++) {
     const product = ALL_PRODUCTS[i];
@@ -213,8 +212,8 @@ async function main() {
       await downloadImage(imageUrl, filepath);
       console.log(`      ✅ ${(fs.statSync(filepath).size / 1024).toFixed(0)}KB`);
       success++;
-    } catch (e: any) {
-      console.log(`      ❌ ${e.message}`);
+    } catch (error: unknown) {
+      console.log(`      ❌ ${error instanceof Error ? error.message : "Unknown error"}`);
     }
 
     if (i < ALL_PRODUCTS.length - 1) {

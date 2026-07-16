@@ -1,41 +1,32 @@
-// GET /api/products/[slug] — Get single product with variants + reviews
-import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { NextResponse } from "next/server";
+import {
+  getProductType,
+  getStorefrontProductBySlug,
+} from "@/lib/storefront/catalog";
+import { productDisplayName, productShortDescription } from "@/lib/brand";
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: Promise<{ slug: string }> }
+  _request: Request,
+  { params }: { params: Promise<{ slug: string }> },
 ) {
-  const { slug } = await params
-  const product = await db.product.findUnique({
-    where: { slug: slug },
-    include: {
-      variants: true,
-      category: { select: { name: true, slug: true } },
-      reviews: {
-        include: {
-          user: { select: { name: true } },
-        },
-        orderBy: { createdAt: "desc" },
-      },
-    },
-  });
+  const { slug } = await params;
+  const product = getStorefrontProductBySlug(slug);
 
   if (!product) {
     return NextResponse.json({ error: "Product not found" }, { status: 404 });
   }
 
-  const avgRating =
-    product.reviews.length > 0
-      ? product.reviews.reduce((sum, r) => sum + r.rating, 0) /
-        product.reviews.length
-      : 0;
-
   return NextResponse.json({
-    ...product,
-    images: JSON.parse(product.images as string),
-    details: product.details,
-    avgRating: Math.round(avgRating * 10) / 10,
-    reviewCount: product.reviews.length,
+    id: product.id,
+    name: productDisplayName(product),
+    slug: product.slug,
+    description: productShortDescription(product),
+    images: product.images,
+    image: product.image,
+    variants: [{ price: product.price }],
+    comparePrice: product.compareAt ?? null,
+    category: { name: "The Pearl Edit", slug: product.category },
+    productType: getProductType(product),
+    inStock: product.inStock,
   });
 }

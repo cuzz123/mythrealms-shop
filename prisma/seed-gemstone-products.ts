@@ -304,7 +304,7 @@ async function main() {
       continue
     }
     const { variants, ...rest } = data
-    const minPrice = Math.min(...variants.map((v: any) => v.price))
+    const minPrice = Math.min(...variants.map((variant) => variant.price))
     const product = await db.product.create({ data: { ...rest, minPrice, variants: { create: variants } } })
 
     // Add reviews for featured products

@@ -1,89 +1,30 @@
-import { MetadataRoute } from "next";
-import { db } from "@/lib/db";
-import { PRODUCTS, CATEGORIES } from "@/lib/1688-products";
+import type { MetadataRoute } from "next";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+import { siteUrl } from "@/lib/site";
+import { getStorefrontProducts } from "@/lib/storefront/catalog";
 
-  const staticPages = [
-    "", "/about", "/faq", "/blog", "/contact", "/cart", "/checkout",
-    "/track-order", "/shipping", "/refund", "/privacy", "/terms", "/size-guide",
-    "/auth/signin", "/auth/register", "/wishlist", "/search",
-    "/guardian-quiz", "/collections",
-  ].map((path) => ({
-    url: `${baseUrl}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : path === "/collections" ? 0.9 : 0.8,
-  }));
+export default function sitemap(): MetadataRoute.Sitemap {
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: siteUrl, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteUrl}/collections/pearl-series`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/pearls`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/about`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${siteUrl}/faq`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${siteUrl}/contact`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${siteUrl}/size-guide`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${siteUrl}/shipping`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${siteUrl}/refund`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${siteUrl}/privacy`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${siteUrl}/terms`, changeFrequency: "yearly", priority: 0.3 },
+  ];
 
-  // Dynamic pages with error fallback
-  async function safeProductUrls() {
-    try {
-      const products = await db.product.findMany({ where: { isActive: true }, select: { slug: true, updatedAt: true } });
-      return products.map((p) => ({
-        url: `${baseUrl}/products/${p.slug}`,
-        lastModified: p.updatedAt,
-        changeFrequency: "monthly" as const,
-        priority: 0.7,
-      }));
-    } catch (err) {
-      console.warn("[sitemap] Failed to load products for sitemap:", err);
-      return [];
-    }
-  }
-
-  async function safeCollectionUrls() {
-    try {
-      const categories = await db.category.findMany({ select: { slug: true } });
-      return categories.map((c) => ({
-        url: `${baseUrl}/collections/${c.slug}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly" as const,
-        priority: 0.9,
-      }));
-    } catch (err) {
-      console.warn("[sitemap] Failed to load collections for sitemap:", err);
-      return [];
-    }
-  }
-
-  async function safeBlogUrls() {
-    try {
-      const posts = await db.blogPost.findMany({ select: { slug: true, updatedAt: true } });
-      return posts.map((p) => ({
-        url: `${baseUrl}/blog/${p.slug}`,
-        lastModified: p.updatedAt,
-        changeFrequency: "monthly" as const,
-        priority: 0.6,
-      }));
-    } catch (err) {
-      console.warn("[sitemap] Failed to load blog posts for sitemap:", err);
-      return [];
-    }
-  }
-
-  // Static 1688 product entries
-  const staticProducts = PRODUCTS
-    .filter(p => p.isActive)
-    .map((p) => ({
-      url: `${baseUrl}/products/${p.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
+  const products: MetadataRoute.Sitemap = getStorefrontProducts().map(
+    (product) => ({
+      url: `${siteUrl}/products/${product.slug}`,
+      changeFrequency: "monthly",
       priority: 0.7,
-    }));
+    }),
+  );
 
-  // Static 1688 collection entries
-  const staticCollections = CATEGORIES.map((c) => ({
-    url: `${baseUrl}/collections/${c.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.9,
-  }));
-
-  const [productUrls, collectionUrls, blogUrls] = await Promise.all([
-    safeProductUrls(), safeCollectionUrls(), safeBlogUrls(),
-  ]);
-
-  return [...staticPages, ...staticCollections, ...collectionUrls, ...staticProducts, ...productUrls, ...blogUrls];
+  return [...staticPages, ...products];
 }

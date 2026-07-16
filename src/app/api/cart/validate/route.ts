@@ -2,6 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { getErrorMessage } from "@/lib/error-message";
 
 export async function POST(request: NextRequest) {
   try {
@@ -72,9 +73,9 @@ export async function POST(request: NextRequest) {
       valid: issues.length === 0,
       issues,
     });
-  } catch (e: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: e?.message || "Validation failed" },
+      { error: getErrorMessage(error, "Validation failed") },
       { status: 500 }
     );
   }

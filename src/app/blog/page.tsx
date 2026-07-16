@@ -2,12 +2,26 @@ import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import Image from "next/image";
+import { absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
-  title: "Blog — MythRealms",
-  description: "Explore the wisdom of crystal wellness, intention setting, stone meanings, and spiritual lifestyle inspiration — from the world of MythRealms.",
+  title: "Journal Archive | MythRealms",
+  description: "An archived collection of earlier MythRealms editorial notes.",
+  robots: { index: false, follow: false },
+  alternates: { canonical: absoluteUrl("/blog") },
+  openGraph: {
+    type: "website",
+    url: absoluteUrl("/blog"),
+    title: "MythRealms Journal",
+    description: "An archived collection of earlier MythRealms editorial notes.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MythRealms Journal",
+    description: "An archived collection of earlier MythRealms editorial notes.",
+  },
 };
 
 export default async function BlogPage() {
@@ -23,8 +37,8 @@ export default async function BlogPage() {
       </nav>
 
       <div className="text-center mb-12">
-        <h1 className="font-serif text-5xl font-bold mb-3">MythRealms Blog</h1>
-        <p className="text-[var(--text-muted)] max-w-lg mx-auto">Explore crystal wellness, intention practices, stone meanings, and spiritual lifestyle inspiration</p>
+        <h1 className="font-serif text-5xl font-bold mb-3">Journal Archive</h1>
+        <p className="text-[var(--text-muted)] max-w-lg mx-auto">Earlier editorial notes are kept here while the journal is being rebuilt around The Pearl Edit.</p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
@@ -54,7 +68,7 @@ export default async function BlogPage() {
 
       {posts.length === 0 && (
         <div className="text-center py-20">
-          <p className="text-[var(--text-muted)]">No blog posts yet. Check back soon for spiritual insights and crystal wisdom.</p>
+          <p className="text-[var(--text-muted)]">No archived notes are available.</p>
         </div>
       )}
     </div>

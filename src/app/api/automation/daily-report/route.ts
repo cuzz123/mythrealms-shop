@@ -2,8 +2,13 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { requireCron } from "@/lib/automation-auth";
+import { getErrorMessage } from "@/lib/error-message";
 
 export async function POST(request: NextRequest) {
+  const unauthorized = requireCron(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const [ordersToday, ordersPending, totalOrders, lowStock, totalProducts] = await Promise.all([
       db.order.count({ where: { createdAt: { gte: new Date(Date.now() - 86400000) } } }),
@@ -30,7 +35,7 @@ export async function POST(request: NextRequest) {
       },
       alerts: lowStock > 0 ? [`${lowStock} products low on stock`] : [],
     });
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+  } catch (error: unknown) {
+    return NextResponse.json({ error: getErrorMessage(error, "Failed to build daily report") }, { status: 500 });
   }
 }

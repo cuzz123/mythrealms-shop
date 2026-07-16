@@ -1,6 +1,33 @@
 import type { NextConfig } from "next";
 
+const noIndexHeaders = [
+  { key: "X-Robots-Tag", value: "noindex, follow" },
+];
+
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["127.0.0.1", "localhost"],
+  turbopack: {
+    root: process.cwd(),
+  },
+  async redirects() {
+    return [
+      {
+        source: "/collections/luxe-collection",
+        destination: "/collections/pearl-series",
+        permanent: true,
+      },
+      {
+        source: "/collections/pearl-crystal-series",
+        destination: "/collections/pearl-series",
+        permanent: true,
+      },
+      {
+        source: "/collections/curated-singles",
+        destination: "/collections/pearl-series",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     formats: ["image/webp", "image/avif"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -79,6 +106,20 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      ...[
+        "/account/:path*",
+        "/admin/:path*",
+        "/auth/:path*",
+        "/cart",
+        "/checkout/:path*",
+        "/pinterest/:path*",
+        "/returns",
+        "/search",
+        "/studio/:path*",
+        "/track-order",
+        "/unsubscribe",
+        "/wishlist",
+      ].map((source) => ({ source, headers: noIndexHeaders })),
     ];
   },
 };

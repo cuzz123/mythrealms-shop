@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MythRealms | Pearl Editorial Direction</title>
+    <link rel="preload" as="image" href="/images/brand/products/pearl-earrings-editorial.png" />
+    <style>
+      :root {
+        --ink: #1d2423;
+        --muted: #626b68;
+        --line: #d8d6cf;
+        --paper: #f7f5ef;
+        --chalk: #e9e8df;
+        --sea: #9eb9b2;
+        --sea-deep: #315d58;
+        --gold: #b78b44;
+        --night: #18201f;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      button { font: inherit; }
+      .serif { font-family: Georgia, "Times New Roman", serif; }
+      .wrap { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--sea-deep);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+
+      .topline {
+        display: flex;
+        justify-content: center;
+        padding: 9px 20px;
+        background: var(--night);
+        color: #f5f2e9;
+        font-size: 11px;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 74px;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand { font: 700 25px/1 Georgia, "Times New Roman", serif; letter-spacing: .045em; }
+      nav { display: flex; align-items: center; gap: 27px; font-size: 13px; }
+      nav a { padding: 8px 0; border-bottom: 1px solid transparent; }
+      nav a:hover { border-color: var(--ink); }
+      .actions { display: flex; gap: 16px; font-size: 13px; }
+      .actions a:last-child { font-weight: 700; }
+
+      .hero { display: grid; grid-template-columns: .9fr 1.1fr; min-height: 640px; }
+      .hero-copy { display: flex; flex-direction: column; justify-content: center; padding: 66px max(28px, calc((100vw - 1200px) / 2)); padding-right: 52px; background: var(--chalk); }
+      .hero h1 { max-width: 490px; margin: 0; font: 500 clamp(45px, 5vw, 76px)/.96 Georgia, "Times New Roman", serif; letter-spacing: 0; }
+      .hero p:not(.eyebrow) { max-width: 430px; margin: 25px 0 31px; color: var(--muted); font-size: 15px; line-height: 1.65; }
+      .button { display: inline-flex; align-items: center; justify-content: center; width: fit-content; min-height: 46px; padding: 0 22px; border: 1px solid var(--night); background: var(--night); color: white; font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: .2s ease; }
+      .button:hover { background: transparent; color: var(--night); }
+      .hero-image { position: relative; overflow: hidden; min-height: 420px; background: #9a998f; }
+      .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+      .image-note { position: absolute; right: 18px; bottom: 18px; padding: 9px 11px; background: rgba(247,245,239,.92); color: var(--ink); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
+
+      section { padding: 94px 0; }
+      .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 35px; }
+      h2 { margin: 0; font: 500 clamp(31px, 3.3vw, 47px)/1.06 Georgia, "Times New Roman", serif; }
+      .section-heading p { max-width: 380px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+
+      .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .product { position: relative; }
+      .product-photo { position: relative; aspect-ratio: 4/5; overflow: hidden; background: #e3e2da; }
+      .product-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .35s ease, transform .5s ease; }
+      .product-photo .worn { opacity: 0; }
+      .product:hover .product-photo .main { opacity: 0; transform: scale(1.025); }
+      .product:hover .product-photo .worn { opacity: 1; transform: scale(1.025); }
+      .product-tag { position: absolute; top: 12px; left: 12px; padding: 6px 8px; background: var(--paper); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+      .product-info { display: grid; grid-template-columns: 1fr auto; gap: 6px 15px; padding: 14px 0 2px; }
+      .product-name { margin: 0; font: 500 19px/1.2 Georgia, "Times New Roman", serif; }
+      .product-price { font-size: 14px; font-weight: 700; }
+      .product-meta { grid-column: 1 / -1; color: var(--muted); font-size: 12px; }
+      .product-hint { margin: 8px 0 0; color: var(--sea-deep); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+
+      .feature { background: var(--sea); }
+      .feature-grid { display: grid; grid-template-columns: 1.08fr .92fr; min-height: 605px; }
+      .feature-photo { min-height: 460px; }
+      .feature-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .feature-copy { display: flex; flex-direction: column; justify-content: center; padding: 58px clamp(28px, 6vw, 82px); }
+      .feature-copy h2 { max-width: 420px; }
+      .feature-copy > p:not(.eyebrow) { max-width: 390px; margin: 24px 0 28px; color: #244540; font-size: 15px; line-height: 1.65; }
+      .image-order { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 17px; border-top: 1px solid rgba(24,32,31,.25); }
+      .image-order div { padding: 13px 8px 0 0; color: #244540; font-size: 11px; line-height: 1.3; }
+      .image-order strong { display: block; margin-bottom: 3px; color: var(--night); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+
+      .approach { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+      .approach article { min-height: 210px; padding: 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .approach span { color: var(--gold); font: 500 28px/1 Georgia, "Times New Roman", serif; }
+      .approach h3 { margin: 25px 0 8px; font: 500 23px/1.1 Georgia, "Times New Roman", serif; }
+      .approach p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+      footer { padding: 45px 0; background: var(--night); color: #f4f0e8; }
+      footer .wrap { display: flex; justify-content: space-between; gap: 25px; align-items: end; }
+      footer p { margin: 8px 0 0; color: #b9c1bb; font-size: 12px; }
+      .footer-note { text-align: right; color: #b9c1bb; font-size: 11px; line-height: 1.5; }
+
+      @media (max-width: 780px) {
+        .wrap { width: min(100% - 28px, 1200px); }
+        nav { display: none; }
+        .actions a:first-child { display: none; }
+        .hero, .feature-grid { grid-template-columns: 1fr; }
+        .hero { min-height: 0; }
+        .hero-copy { min-height: 440px; padding: 55px 22px; }
+        .hero-image { min-height: 520px; }
+        section { padding: 62px 0; }
+        .section-heading { display: block; }
+        .section-heading p { margin-top: 14px; }
+        .product-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; }
+        .product:nth-child(3) { grid-column: 1 / -1; }
+        .product-name { font-size: 17px; }
+        .feature-copy { padding: 46px 22px; }
+        .approach { grid-template-columns: 1fr; }
+        footer .wrap { display: block; }
+        .footer-note { margin-top: 25px; text-align: left; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topline">Free tracked shipping on orders over $69</div>
+    <header class="wrap">
+      <a class="brand" href="#top">MYTHREALMS</a>
+      <nav aria-label="Primary navigation">
+        <a href="#shop">Shop</a>
+        <a href="#pearls">Pearls</a>
+        <a href="#story">Our approach</a>
+      </nav>
+      <div class="actions"><a href="#">Search</a><a href="#">Bag (0)</a></div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="Pearl collection">
+        <div class="hero-copy">
+          <p class="eyebrow">The Pearl Edit / Summer 2026</p>
+          <h1>Jewelry that catches the light, not the noise.</h1>
+          <p>Small-batch pearl pieces with an easy, lived-in point of view. Made for the days you want to remember.</p>
+          <a class="button" href="#shop">Shop the pearl edit</a>
+        </div>
+        <div class="hero-image">
+          <img src="/images/brand/products/pearl-earrings-editorial.png" alt="Model wearing pearl earrings in warm daylight" />
+          <span class="image-note">On her / The Soft Return Earrings</span>
+        </div>
+      </section>
+
+      <section class="wrap" id="shop">
+        <div class="section-heading">
+          <div><p class="eyebrow">Shop the edit</p><h2>Pieces with a real point of view.</h2></div>
+          <p>First image: the exact product. Hover image: how it sits, catches light, and becomes part of an outfit.</p>
+        </div>
+        <div class="product-grid">
+          <a class="product" href="#">
+            <div class="product-photo">
+              <img class="main" src="/images/products/1688-shop/pearl-series/pearl-series-13-main.webp" alt="The Soft Return earrings product view" />
+              <img class="worn" src="/images/products/1688-shop/pearl-series/pearl-series-13-detail4.webp" alt="The Soft Return earrings worn by a model" />
+              <span class="product-tag">New</span>
+            </div>
+            <div class="product-info"><h3 class="product-name">The Soft Return</h3><span class="product-price">$34.99</span><span class="product-meta">Pearl drop earrings</span></div>
+            <p class="product-hint">Hover to see it worn</p>
+          </a>
+          <a class="product" href="#">
+            <div class="product-photo">
+              <img class="main" src="/images/products/1688-shop/pearl-series/pearl-series-14-main.webp" alt="The Morning Pearl earrings product view" />
+              <img class="worn" src="/images/products/1688-shop/pearl-series/pearl-series-14-detail5.webp" alt="The Morning Pearl earrings worn by a model" />
+              <span class="product-tag">Bestseller</span>
+            </div>
+            <div class="product-info"><h3 class="product-name">The Morning Pearl</h3><span class="product-price">$37.99</span><span class="product-meta">Shell disc earrings</span></div>
+            <p class="product-hint">Hover to see it worn</p>
+          </a>
+          <a class="product" href="#">
+            <div class="product-photo">
+              <img class="main" src="/images/products/1688-shop/pearl-series/pearl-series-19-main.webp" alt="Pearl earrings product view" />
+              <img class="worn" src="/images/products/1688-shop/pearl-series/pearl-series-19-detail3.webp" alt="Pearl necklace worn by a model" />
+              <span class="product-tag">Limited edit</span>
+            </div>
+            <div class="product-info"><h3 class="product-name">The Still Hour</h3><span class="product-price">$39.99</span><span class="product-meta">Freshwater pearl earrings</span></div>
+            <p class="product-hint">Hover to see it worn</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="feature" id="pearls">
+        <div class="feature-grid wrap">
+          <div class="feature-photo"><img src="/images/brand/products/pearl-necklace-editorial.png" alt="Model wearing a luminous pearl necklace" /></div>
+          <div class="feature-copy">
+            <p class="eyebrow">A clearer product story</p>
+            <h2>Every product page earns its images.</h2>
+            <p>A polished jewelry store does not ask one picture to do every job. The product stays precise. The on-model image makes the scale and mood tangible.</p>
+            <div class="image-order">
+              <div><strong>01</strong>Exact product</div>
+              <div><strong>02</strong>On model</div>
+              <div><strong>03</strong>Material detail</div>
+              <div><strong>04</strong>Size and clasp</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap" id="story">
+        <div class="section-heading"><div><p class="eyebrow">Design direction</p><h2>Less mystic theatre. More worn beauty.</h2></div></div>
+        <div class="approach">
+          <article><span>01</span><h3>Product first</h3><p>Clean standard photography stays first so every pearl, clasp, and silhouette can be assessed before purchase.</p></article>
+          <article><span>02</span><h3>Human proof</h3><p>Distinct fictional models and real-light styling bring scale, movement, and a believable everyday setting.</p></article>
+          <article><span>03</span><h3>Quiet story</h3><p>MythRealms intention stays as a gentle layer in copy and editing, rather than competing with the jewelry.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap"><div><div class="brand">MYTHREALMS</div><p>Jewelry for the version of you becoming.</p></div><div class="footer-note">Pearl editorial direction demo<br />Not a production storefront</div></div>
+    </footer>
+  </body>
+</html>

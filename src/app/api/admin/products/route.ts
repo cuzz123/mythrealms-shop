@@ -3,14 +3,12 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { auth } from "@/lib/auth";
+import { requireAdminApi } from "@/lib/server/admin-auth";
 import { PRODUCTS as SRC_PRODUCTS, CATEGORIES as SRC_CATEGORIES } from "@/lib/1688-products";
 
 export async function GET() {
-  const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
 
   const dbProducts = await db.product.findMany({
     include: { category: true, variants: true },
@@ -38,10 +36,8 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
 
   const body = await request.json();
   const {

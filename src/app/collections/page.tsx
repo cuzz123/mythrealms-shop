@@ -3,17 +3,27 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { CATEGORIES } from "@/lib/1688-products";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "All Collections — MythRealms",
-  description: "Explore our intention-based crystal and pearl jewelry — Serenity, Intention Stones, Balance & Light, and The Archetypes. Hand-selected. Artisan-finished.",
+  title: "All Collections | MythRealms",
+  description: "Explore MythRealms pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.",
+  alternates: { canonical: absoluteUrl("/collections") },
+  openGraph: {
+    type: "website",
+    url: absoluteUrl("/collections"),
+    title: "Pearl Jewelry Collections | MythRealms",
+    description: "Explore MythRealms pearl earrings, necklaces, bracelets, and rings.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pearl Jewelry Collections | MythRealms",
+    description: "Explore MythRealms pearl earrings, necklaces, bracelets, and rings.",
+  },
 };
 
 const categoryIntents: Record<string, { subtitle: string; cta: string }> = {
-  "pearl-series": { subtitle: "Pearls for calm. For wisdom. For the quiet centre of the storm.", cta: "Explore Serenity" },
-  "luxe-collection": { subtitle: "One stone. One purpose. Twelve ways to wear your intention.", cta: "Explore Intention Stones" },
-  "pearl-crystal-series": { subtitle: "Where stillness meets energy. For those holding both at once.", cta: "Explore Balance & Light" },
-  "curated-singles": { subtitle: "Six archetypes. Six intentions. Which one is calling you?", cta: "Explore The Archetypes" },
+  "pearl-series": { subtitle: "Pearl jewelry for soft light, everyday texture, and the moments worth dressing for.", cta: "Explore the Pearl Edit" },
 };
 
 export default function CollectionsPage() {
@@ -29,7 +39,7 @@ export default function CollectionsPage() {
       <div className="relative rounded-2xl overflow-hidden mb-16">
         <Image
           src="/images/collections/collections-hero.webp"
-          alt="MythRealms crystal and pearl bracelet collection — hand-selected gemstone jewelry"
+          alt="MythRealms pearl jewelry collection"
           fill
           sizes="(max-width:768px) 100vw, 1280px"
           className="object-cover"
@@ -38,11 +48,11 @@ export default function CollectionsPage() {
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-transparent to-transparent" />
         <div className="relative z-10 text-center py-24 px-6">
-          <span className="inline-block text-xs font-semibold tracking-[0.1em] text-[var(--accent)] uppercase mb-4">Four Collections. One Philosophy.</span>
-          <h1 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-3">Find Your Intention</h1>
+          <span className="inline-block text-xs font-semibold tracking-[0.1em] text-[var(--accent)] uppercase mb-4">Pearl Jewelry / The Pearl Edit</span>
+          <h1 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-3">Pearls for everyday light.</h1>
           <p className="text-white/70 max-w-xl mx-auto text-lg leading-relaxed">
-            Every stone carries a purpose. Browse our collections and find the one
-            that names what you are becoming.
+            Explore earrings, necklaces, bracelets, and rings selected for their texture,
+            quiet luster, and easy sense of occasion.
           </p>
         </div>
       </div>
@@ -97,12 +107,12 @@ export default function CollectionsPage() {
 
       {/* Bottom CTA */}
       <div className="text-center mt-20 pt-12 border-t border-[var(--border)]">
-        <p className="text-[var(--text-muted)] mb-4 text-sm">Not sure where to start?</p>
+        <p className="text-[var(--text-muted)] mb-4 text-sm">Want a clearer starting point?</p>
         <Link
-          href="/guardian-quiz"
+          href="/pearls"
           className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
         >
-          Take the Crystal Intention Quiz
+          Read the Pearl Guide
           <ArrowRight className="w-4 h-4" />
         </Link>
       </div>

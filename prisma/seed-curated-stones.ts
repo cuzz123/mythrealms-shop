@@ -126,7 +126,7 @@ async function main() {
 
   for (const data of products) {
     const { variants, ...rest } = data
-    const minPrice = Math.min(...variants.map((v: any) => v.price))
+    const minPrice = Math.min(...variants.map((variant) => variant.price))
     const existing = await db.product.findUnique({ where: { slug: data.slug } })
     if (existing) {
       await db.product.update({ where: { slug: data.slug }, data: { ...rest, minPrice } })

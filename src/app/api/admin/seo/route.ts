@@ -1,16 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { requireAdminApi } from "@/lib/server/admin-auth";
 import { generateSeoArticle, getSeoQueueStatus } from "@/lib/seo-content-engine";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
 
-type AdminUser = {
-  role?: string | null;
-};
-
 export async function GET() {
-  const unauthorized = await requireAdmin();
+  const unauthorized = await requireAdminApi();
   if (unauthorized) return unauthorized;
 
   try {
@@ -25,7 +21,7 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const unauthorized = await requireAdmin();
+  const unauthorized = await requireAdminApi();
   if (unauthorized) return unauthorized;
 
   try {
@@ -39,15 +35,6 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
-}
-
-async function requireAdmin() {
-  const session = await auth();
-  const user = session?.user as AdminUser | undefined;
-  if (user?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-  return null;
 }
 
 async function readJson(req: NextRequest): Promise<Record<string, unknown>> {

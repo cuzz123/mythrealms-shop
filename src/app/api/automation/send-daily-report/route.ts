@@ -1,8 +1,10 @@
 // GET /api/automation/send-daily-report — Fetch metrics & send via Resend email
 // Intended for Vercel Cron: every day at 08:00
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { requireCron } from "@/lib/automation-auth";
+import { getErrorMessage } from "@/lib/error-message";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -10,7 +12,7 @@ export const maxDuration = 60;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "zheng111321@gmail.com";
 const BRAND = "MythRealms";
 
-function buildHtml(date: string, metrics: Record<string, any>, alerts: string[]): string {
+function buildHtml(date: string, metrics: Record<string, unknown>, alerts: string[]): string {
   const itemsHtml = Object.entries(metrics)
     .map(([k, v]) => `<tr>
       <td style="padding:10px 0;border-bottom:1px solid #eee;color:#1A1814;font-size:14px;">${k}</td>
@@ -45,7 +47,10 @@ function buildHtml(date: string, metrics: Record<string, any>, alerts: string[])
 </body></html>`;
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const unauthorized = requireCron(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const [ordersToday, ordersPending, totalOrders, lowStock, totalProducts] = await Promise.all([
       db.order.count({ where: { createdAt: { gte: new Date(Date.now() - 86400000) } } }),
@@ -99,7 +104,7 @@ export async function GET() {
     }
 
     return NextResponse.json({ sent: true, date, metrics, alerts });
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+  } catch (error: unknown) {
+    return NextResponse.json({ error: getErrorMessage(error, "Failed to send daily report") }, { status: 500 });
   }
 }

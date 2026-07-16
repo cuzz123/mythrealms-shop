@@ -46,8 +46,8 @@ const faqs = [
     cat: "order",
   },
   {
-    q: "Are your pearls and gemstones natural?",
-    a: "Product pages describe the available material information for each piece. Natural pearls and gemstones can vary in tone, size, surface texture, and luster, so small differences are expected and part of the character of the piece.",
+    q: "What materials are used in each pearl piece?",
+    a: "Each product page states the material information currently available for that design. Use the complete gallery as the visual reference for shape, setting, scale, and finish, and contact us before ordering if you need a detail confirmed.",
     cat: "products",
   },
   {
@@ -62,12 +62,12 @@ const faqs = [
   },
   {
     q: "Are the guardian archetypes literal product shapes?",
-    a: "No. The guardian is the story layer and personality match behind the piece. Most products are wearable pearl and gemstone jewelry, not literal animal or mythical creature designs.",
+    a: "No. The guardian is a story and styling layer behind the piece. The products themselves are wearable pearl jewelry, not literal animal or mythical creature designs.",
     cat: "products",
   },
   {
-    q: "Do the stones have healing effects?",
-    a: "Our intention language is symbolic and emotional. It is meant for personal ritual, styling, and meaning, not medical, spiritual, or guaranteed outcome claims.",
+    q: "Does the intention language promise a result?",
+    a: "No. Our intention language is a symbolic styling prompt. It does not make medical, therapeutic, spiritual, or guaranteed emotional-outcome claims.",
     cat: "products",
   },
   {
@@ -81,8 +81,8 @@ const faqs = [
     cat: "products",
   },
   {
-    q: "Can I wear multiple intentions at once?",
-    a: "Yes. Many customers stack calm with protection, renewal with clarity, or pearls with darker stones. The practice is personal, so choose what feels natural to wear.",
+    q: "Can I stack multiple pearl pieces?",
+    a: "Yes. Rings and bracelets can be layered, while necklaces and earrings can be combined with pieces you already own. Compare the product galleries for scale before building a stack.",
     cat: "products",
   },
   {
@@ -132,7 +132,7 @@ export default function FAQPage() {
           Frequently Asked Questions
         </h1>
         <p className="text-[var(--text-muted)]">
-          Answers about pearl and gemstone pieces, guardian archetypes, shipping, and returns.
+          Answers about The Pearl Edit, product imagery, guardian archetypes, shipping, and returns.
         </p>
       </div>
 

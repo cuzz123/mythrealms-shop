@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 export default function ReturnsPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({ orderId: "", email: "", reason: "", description: "" });
 
   const inputClass = "w-full px-4 py-3 border border-[var(--border)] rounded-lg text-sm bg-[var(--surface)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] outline-none";
@@ -14,19 +15,25 @@ export default function ReturnsPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
-      await fetch("/api/returns", {
+      const response = await fetch("/api/returns", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        setError(data.error || "Unable to submit your return request.");
+        return;
+      }
       setSubmitted(true);
     } catch {
+      setError("Unable to submit your return request. Please try again.");
+    } finally {
       setLoading(false);
     }
-
-    setLoading(false);
   }
 
   if (submitted) {
@@ -73,6 +80,11 @@ export default function ReturnsPage() {
           <label className="text-sm font-medium text-[var(--text)] mb-1.5 block">Details (optional)</label>
           <textarea rows={3} value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Any additional information..." className={inputClass} />
         </div>
+        {error && (
+          <p role="alert" className="text-sm text-[var(--sale)]">
+            {error}
+          </p>
+        )}
         <Button variant="primary" size="lg" type="submit" className="w-full" disabled={loading}>
           {loading ? "Submitting..." : "Submit Return Request"}
         </Button>

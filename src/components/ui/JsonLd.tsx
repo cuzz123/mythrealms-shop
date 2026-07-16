@@ -1,4 +1,17 @@
-// JSON-LD structured data for SEO rich snippets.
+// JSON-LD structured data for search engines and answer engines.
+
+import { absoluteUrl, siteUrl } from "@/lib/site";
+
+export function JsonLd({ data }: { data: Record<string, unknown> }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
+    />
+  );
+}
 
 interface ProductSchemaProps {
   name: string;
@@ -9,8 +22,6 @@ interface ProductSchemaProps {
   currency?: string;
   sku?: string;
   availability?: "InStock" | "OutOfStock";
-  ratingValue?: number;
-  reviewCount?: number;
   url: string;
   brand?: string;
   category?: string;
@@ -24,8 +35,6 @@ export function ProductJsonLd({
   currency = "USD",
   sku,
   availability = "InStock",
-  ratingValue,
-  reviewCount,
   url,
   brand = "MythRealms",
   category,
@@ -48,19 +57,11 @@ export function ProductJsonLd({
     },
   };
 
-  if (ratingValue && reviewCount) {
-    data.aggregateRating = {
-      "@type": "AggregateRating",
-      ratingValue: (Math.round(ratingValue * 10) / 10).toFixed(1),
-      reviewCount,
-    };
-  }
-
   if (category) {
     data.category = category;
   }
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+  return <JsonLd data={data} />;
 }
 
 interface BreadcrumbSchemaProps {
@@ -78,17 +79,24 @@ export function BreadcrumbJsonLd({ items }: BreadcrumbSchemaProps) {
       item: item.url,
     })),
   };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+  return <JsonLd data={data} />;
 }
 
 export function OrganizationJsonLd() {
   const data = {
     "@context": "https://schema.org/",
-    "@type": "Organization",
+    "@type": ["Organization", "OnlineStore"],
     name: "MythRealms",
-    url: "https://mythrealms-shop.vercel.app",
+    url: siteUrl,
+    logo: absoluteUrl("/apple-icon.png"),
     description:
-      "Pearl and gemstone jewelry shaped around modern guardian archetypes, everyday intention, calm, renewal, boundaries, and soft power.",
+      "An online pearl jewelry shop offering pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.",
+    knowsAbout: [
+      "Pearl jewelry",
+      "Jewelry styling",
+      "Pearl care",
+      "Freshwater pearls",
+    ],
     sameAs: ["https://instagram.com/mythrealms.shop"],
     contactPoint: {
       "@type": "ContactPoint",
@@ -96,5 +104,40 @@ export function OrganizationJsonLd() {
       contactType: "customer service",
     },
   };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+  return <JsonLd data={data} />;
+}
+
+export function FAQPageJsonLd({ questions }: { questions: Array<{ question: string; answer: string }> }) {
+  const data = {
+    "@context": "https://schema.org/",
+    "@type": "FAQPage",
+    mainEntity: questions.map(({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: answer,
+      },
+    })),
+  };
+  return <JsonLd data={data} />;
+}
+
+export function WebSiteJsonLd() {
+  const data = {
+    "@context": "https://schema.org/",
+    "@type": "WebSite",
+    name: "MythRealms",
+    url: siteUrl,
+    inLanguage: "en",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: absoluteUrl("/search?q={search_term_string}"),
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+  return <JsonLd data={data} />;
 }

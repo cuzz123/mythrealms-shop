@@ -2,8 +2,9 @@
 // Publishes up to 5 pins per day, auto-resumes from its last offset.
 // Handles full cycle: when all products are published, resets to 0.
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { PRODUCTS } from "@/lib/1688-products";
+import { requireCron } from "@/lib/automation-auth";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -27,7 +28,10 @@ async function saveProgress(offset: number): Promise<void> {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const unauthorized = requireCron(request);
+  if (unauthorized) return unauthorized;
+
   const TOKEN = process.env.PINTEREST_API_TOKEN || "";
   const BOARD_ID = process.env.PINTEREST_BOARD_ID || "";
 
@@ -49,7 +53,9 @@ export async function GET() {
 
   // Call the publish endpoint
   const publishUrl = `${BASE}/api/pinterest/publish?limit=${limit}&offset=${offset}`;
-  const resp = await fetch(publishUrl);
+  const resp = await fetch(publishUrl, {
+    headers: { authorization: `Bearer ${process.env.CRON_SECRET || ""}` },
+  });
   const data = await resp.json();
 
   const nextOffset = offset + limit;

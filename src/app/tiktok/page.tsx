@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
-import { PRODUCTS } from "@/lib/1688-products";
+import { getStorefrontProductBySlug } from "@/lib/storefront/catalog";
 import { productBenefitTriplet, productDisplayName } from "@/lib/brand";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { formatPrice } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Find Your Guardian | MythRealms",
-  description: "TikTok visitors: take the MythRealms guardian quiz and discover pearl or gemstone jewelry for calm, renewal, boundaries, and soft power.",
+  description: "TikTok visitors: take the MythRealms guardian quiz and discover a pearl jewelry path through The Pearl Edit.",
 };
 
-const starterSlugs = ["pearl-series-01", "pearl-series-05", "pearl-series-13", "pearl-crystal-series-01"];
+const starterSlugs = ["pearl-series-01", "pearl-series-05", "pearl-series-13", "pearl-series-17"];
 
 export default function TikTokLandingPage() {
   const products = starterSlugs
-    .map((slug) => PRODUCTS.find((product) => product.slug === slug))
+    .map(getStorefrontProductBySlug)
     .filter(Boolean);
 
   return (
@@ -29,7 +29,7 @@ export default function TikTokLandingPage() {
             Find your guardian. Wear your intention.
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--text-secondary)]">
-            Take the 60-second quiz to match this season of you with pearl and gemstone pieces chosen for calm, renewal, boundaries, or soft power.
+            Take the 60-second quiz to match this season of you with pearl rings, bracelets, earrings, and necklaces from The Pearl Edit.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Link href="/guardian-quiz" className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-7 py-3 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]">
@@ -40,7 +40,7 @@ export default function TikTokLandingPage() {
             </Link>
           </div>
           <div className="mt-8 grid gap-3 text-sm text-[var(--text-secondary)] sm:grid-cols-3">
-            {["Made to order", "Free shipping over $69.99", "30-day returns"].map((signal) => (
+            {["Pearl-focused edit", "Free shipping over $69.99", "30-day returns"].map((signal) => (
               <span key={signal} className="inline-flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" /> {signal}
               </span>

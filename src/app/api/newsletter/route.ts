@@ -1,7 +1,7 @@
-// POST /api/newsletter — Subscribe to newsletter
-
 import { NextRequest, NextResponse } from "next/server";
+
 import { applyRateLimit } from "@/lib/server/rate-limit";
+import { isSameOriginRequest } from "@/lib/server/admin-auth";
 
 export async function POST(request: NextRequest) {
   const rateLimitResponse = await applyRateLimit(request, {
@@ -10,34 +10,48 @@ export async function POST(request: NextRequest) {
   });
   if (rateLimitResponse) return rateLimitResponse;
 
+  if (!isSameOriginRequest(request.url, request.headers.get("origin"))) {
+    return NextResponse.json({ error: "Invalid request origin" }, { status: 403 });
+  }
+
   try {
-    const { email } = await request.json();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    const body = (await request.json()) as { email?: unknown };
+    const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
     const apiKey = process.env.RESEND_API_KEY;
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+    if (!apiKey || !audienceId) {
+      return NextResponse.json(
+        { error: "Newsletter signup is temporarily unavailable" },
+        { status: 503 },
+      );
+    }
 
-    // Send welcome email via Resend
-    if (apiKey) {
-      await fetch("https://api.resend.com/emails", {
+    const response = await fetch(
+      `https://api.resend.com/audiences/${encodeURIComponent(audienceId)}/contacts`,
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
         },
-        body: JSON.stringify({
-          from: "MythRealms <onboarding@resend.dev>",
-          to: email,
-          subject: "Welcome to MythRealms — Your Intention Awaits",
-          html: `<!DOCTYPE html><html><body style="background:#0A0808;color:#E8E0D5;font-family:Georgia,serif;padding:40px;max-width:600px;margin:0 auto"><h1 style="color:#D4A84B;font-size:28px">MythRealms</h1><p style="font-size:16px;line-height:1.7">Welcome. You are now part of a circle of people who wear their intentions.</p><p style="font-size:16px;line-height:1.7">Each stone carries a purpose. Protection. Love. Clarity. Confidence. Renewal. Abundance. Which one is calling you?</p><p style="font-size:16px;line-height:1.7">As a thank you for joining, enjoy <strong style="color:#D4A84B">15% off your first order</strong> with code:</p><p style="font-size:24px;font-weight:bold;color:#D4A84B;letter-spacing:4px;text-align:center;padding:20px;border:2px solid #D4A84B;border-radius:8px">MYTH15</p><p style="font-size:16px;line-height:1.7"><a href="${baseUrl}/guardian-quiz" style="color:#D4A84B;font-weight:bold">Take the Crystal Intention Quiz →</a></p><p style="font-size:16px;line-height:1.7"><a href="${baseUrl}/collections/curated-singles" style="color:#D4A84B;font-weight:bold">Shop The Archetypes →</a></p><hr style="border-color:#2A241F;margin:30px 0"><p style="font-size:12px;color:#8A7D6E">MythRealms · Stones With Intention<br><a href="${baseUrl}" style="color:#D4A84B">${baseUrl}</a></p></body></html>`,
-        }),
-      });
+        body: JSON.stringify({ email, unsubscribed: false }),
+      },
+    );
+    if (!response.ok) {
+      console.error("Resend contact creation failed:", response.status);
+      return NextResponse.json(
+        { error: "Newsletter signup is temporarily unavailable" },
+        { status: 502 },
+      );
     }
 
     return NextResponse.json({ success: true });
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+  } catch (error: unknown) {
+    console.error("Newsletter signup failed:", error);
+    return NextResponse.json({ error: "Newsletter signup failed" }, { status: 500 });
   }
 }

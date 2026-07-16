@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminApi } from "@/lib/server/admin-auth";
 
 const VIDEO_API_URL = process.env.VIDEO_GEN_API_URL || "";
 const VIDEO_API_KEY = process.env.VIDEO_GEN_API_KEY || "";
 const PROVIDER = process.env.VIDEO_GEN_PROVIDER || "seedance";
 
 export async function POST(req: NextRequest) {
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
+
   try {
     const body = await req.json();
     const {

@@ -1,11 +1,12 @@
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials"
+import type { Provider } from "next-auth/providers"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { db } from "./db"
 import bcrypt from "bcryptjs"
 
-const providers: any[] = [
+const providers: Provider[] = [
   Credentials({
     name: "credentials",
     credentials: {
@@ -59,7 +60,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role
+        token.role = "role" in user && typeof user.role === "string" ? user.role : undefined
         token.id = user.id
         token.sub = user.id
       }
@@ -67,8 +68,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async session({ session, token }) {
       if (session.user) {
-        (session.user as any).role = token.role as string
-        (session.user as any).id = token.id
+        Object.assign(session.user, {
+          role: typeof token.role === "string" ? token.role : undefined,
+          id: typeof token.id === "string" ? token.id : undefined,
+        })
       }
       return session
     },

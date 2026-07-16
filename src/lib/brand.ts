@@ -1,69 +1,58 @@
 import type { Product } from "@/lib/1688-products";
 
 export const brandPositioning = {
-  eyebrow: "Pearl & Gemstone Jewelry",
+  eyebrow: "Pearl Jewelry",
   headline: "Jewelry for the version of you you're becoming.",
   subheadline:
-    "Pearl and gemstone pieces inspired by ancient Chinese celestial lore, chosen for calm, renewal, boundaries, and soft power.",
-  primaryCta: "Find Your Guardian",
+    "Pearl pieces chosen for everyday light, small rituals, and a more personal way to get dressed.",
+  primaryCta: "Explore the Pearl Edit",
   secondaryCta: "Shop Pearls",
 };
 
 export const intentionRealms = [
   {
-    name: "Calm & Clarity",
+    name: "Everyday Pearl",
     slug: "calm-clarity",
     href: "/collections/pearl-series",
-    description: "Pearls and luminous pieces for stillness, focus, and emotional balance.",
+    description: "Easy pearl pieces for mornings, dinners, and the moments in between.",
     keywords: ["calm", "clarity", "wisdom", "peace", "emotional balance", "intuition"],
   },
   {
-    name: "Protection & Boundaries",
-    slug: "protection-boundaries",
-    href: "/collections/curated-singles",
-    description: "Darker stones and grounded silhouettes for clear boundaries and daily steadiness.",
-    keywords: ["protection", "grounding", "stability", "boundaries"],
+    name: "Pearl Earrings",
+    slug: "pearl-earrings",
+    href: "/collections/pearl-series?type=earrings",
+    description: "Small, luminous earrings with an easy sense of movement.",
+    keywords: ["light", "balance", "renewal", "grounding"],
   },
   {
-    name: "Renewal & New Beginnings",
-    slug: "renewal",
-    href: "/collections/pearl-crystal-series",
-    description: "Pearl and crystal pieces for fresh starts, transitions, and becoming.",
+    name: "Pearl Necklaces",
+    slug: "pearl-necklaces",
+    href: "/collections/pearl-series?type=necklaces",
+    description: "Light-catching layers to wear close to the collarbone.",
     keywords: ["renewal", "transition", "transformation", "new beginning", "self-sourcing"],
   },
   {
-    name: "Soft Power",
-    slug: "soft-power",
-    href: "/collections/pearl-series",
-    description: "Soft luster, quiet confidence, and jewelry that does not need to shout.",
+    name: "Pearl Bracelets",
+    slug: "pearl-bracelets",
+    href: "/collections/pearl-series?type=bracelets",
+    description: "Soft luster, quiet confidence, and jewelry that moves with you.",
     keywords: ["self-love", "softness", "confidence", "love", "feminine power"],
+  },
+  {
+    name: "Pearl Eyewear Chains",
+    slug: "pearl-eyewear-chains",
+    href: "/collections/pearl-series?type=eyewear-chains",
+    description: "Functional pearl-led chains that keep glasses close and add a light-catching detail.",
+    keywords: ["eyewear", "glasses", "chain", "functional"],
   },
 ];
 
 export const categoryMessaging: Record<string, { name: string; description: string; realm: string }> = {
   "pearl-series": {
-    name: "The Pearl Realms",
-    realm: "Calm & Clarity",
+    name: "The Pearl Edit",
+    realm: "Everyday Pearl",
     description:
-      "Pearls have long been tied to moonlight, water, patience, and quiet strength. These pieces are chosen for calm, renewal, and soft power.",
-  },
-  "luxe-collection": {
-    name: "Celestial Intention",
-    realm: "Direction & Clarity",
-    description:
-      "Refined gemstone pieces for focus, direction, and the moments when you need one clear signal to follow.",
-  },
-  "pearl-crystal-series": {
-    name: "Balance & Light",
-    realm: "Renewal",
-    description:
-      "Pearl and crystal held together: soft and sharp, rooted and luminous, made for thresholds and new chapters.",
-  },
-  "curated-singles": {
-    name: "Guardian Archetypes",
-    realm: "Protection & Becoming",
-    description:
-      "Six symbolic stones matched to modern guardian archetypes: boundaries, softness, renewal, confidence, intuition, and abundance.",
+      "Pearls have long been tied to moonlight, water, patience, and quiet strength. These pieces are made for everyday light and an unforced sense of occasion.",
   },
 };
 

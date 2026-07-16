@@ -193,8 +193,8 @@ async function main() {
       const sizeKB = (fs.statSync(filepath).size / 1024).toFixed(0);
       console.log(`      ✅ ${sizeKB}KB — ${imageUrl.slice(0, 60)}...`);
       success++;
-    } catch (e: any) {
-      console.log(`      ❌ ${e.message}`);
+    } catch (error: unknown) {
+      console.log(`      ❌ ${error instanceof Error ? error.message : "Unknown error"}`);
     }
 
     // Rate limit: 2-second delay between generations

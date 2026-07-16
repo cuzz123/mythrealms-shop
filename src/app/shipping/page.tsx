@@ -1,10 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Truck, Clock, Globe, Shield, AlertCircle } from "lucide-react";
+import { absoluteUrl } from "@/lib/site";
+import { Truck, Clock, Globe, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Shipping Information — MythRealms",
   description: "Free worldwide shipping on orders over $69.99. View delivery times by country, shipping methods, and tracking information.",
+  alternates: { canonical: absoluteUrl("/shipping") },
 };
 
 export default function ShippingPage() {
@@ -51,10 +53,9 @@ export default function ShippingPage() {
             Processing time includes:
           </p>
           <ul className="list-disc pl-6 space-y-2">
-            <li><strong>Order verification</strong> — We review your order for accuracy and security</li>
-            <li><strong>Quality inspection</strong> — Each piece is hand-inspected before packaging</li>
-            <li><strong>Intention infusion</strong> — Pieces are prepared according to mythic tradition</li>
-            <li><strong>Packaging</strong> — Carefully wrapped and packaged for safe transit</li>
+            <li><strong>Order verification</strong> - We review your order details for accuracy</li>
+            <li><strong>Dispatch preparation</strong> - The order is prepared for its shipping method</li>
+            <li><strong>Packaging</strong> - The parcel is packed for transit</li>
           </ul>
           <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 mt-4 flex gap-3">
             <Clock className="w-5 h-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
@@ -267,18 +268,18 @@ export default function ShippingPage() {
           </div>
         </section>
 
-        {/* Ready to find your stone? */}
+        {/* Collection call to action */}
         <section className="text-center border-t border-[var(--border)] pt-12">
-          <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Ready to find your stone?</h2>
+          <h2 className="font-serif text-3xl font-bold text-[var(--text)] mb-3">Ready to explore The Pearl Edit?</h2>
           <p className="text-[var(--text-secondary)] mb-6 max-w-md mx-auto">
-            Every stone tells a story. Browse our hand-selected collections and find the one that speaks to you.
+            Compare the full Pearl Edit and review each complete product gallery before ordering.
           </p>
           <div className="flex justify-center gap-4">
             <Link
-              href="/collections/curated-singles"
+              href="/collections/pearl-series"
               className="px-8 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition"
             >
-              Shop Curated Singles
+              Shop The Pearl Edit
             </Link>
             <Link
               href="/collections"

@@ -1,90 +1,72 @@
-// GET /api/products — List products with filtering, sorting, pagination
-// POST /api/admin/products — Create product (admin only)
-
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import {
+  getProductType,
+  getStorefrontProducts,
+} from "@/lib/storefront/catalog";
+import { productDisplayName, productShortDescription } from "@/lib/brand";
+
+function positiveInteger(value: string | null, fallback: number, maximum: number) {
+  const parsed = Number.parseInt(value || "", 10);
+  return Number.isFinite(parsed) && parsed > 0 ? Math.min(parsed, maximum) : fallback;
+}
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const page = parseInt(searchParams.get("page") || "1");
-  const limit = parseInt(searchParams.get("limit") || "24");
-  const category = searchParams.get("category");
-  const stone = searchParams.get("stone");
-  const intention = searchParams.get("intention");
-  const material = searchParams.get("material");
+  const page = positiveInteger(searchParams.get("page"), 1, 10_000);
+  const limit = positiveInteger(searchParams.get("limit"), 24, 48);
+  const category = searchParams.get("category")?.trim().toLowerCase();
+  const search = searchParams.get("search")?.trim().toLowerCase();
   const sort = searchParams.get("sort") || "featured";
-  const featured = searchParams.get("featured");
-  const search = searchParams.get("search");
 
-  const where: any = { isActive: true };
+  let products = getStorefrontProducts().filter((product) => {
+    if (category && category !== product.category && category !== getProductType(product)) {
+      return false;
+    }
 
-  if (category) where.category = { slug: category };
-  if (stone) where.stone = stone;
-  if (intention) where.intention = intention;
-  if (material) where.material = material;
-  if (featured === "true") where.isFeatured = true;
-  if (search) {
-    where.OR = [
-      { name: { contains: search, mode: "insensitive" } },
-      { description: { contains: search, mode: "insensitive" } },
-    ];
-  }
+    if (!search) return true;
 
-  let orderBy: any = { createdAt: "desc" };
-  switch (sort) {
-    case "price-low":
-      orderBy = { minPrice: "asc" };
-      break;
-    case "price-high":
-      orderBy = { minPrice: "desc" };
-      break;
-    case "newest":
-      orderBy = { createdAt: "desc" };
-      break;
-    case "oldest":
-      orderBy = { createdAt: "asc" };
-      break;
-    case "a-z":
-      orderBy = { name: "asc" };
-      break;
-    case "z-a":
-      orderBy = { name: "desc" };
-      break;
-  }
-
-  const [products, total] = await Promise.all([
-    db.product.findMany({
-      where,
-      include: {
-        variants: true,
-        category: { select: { name: true, slug: true } },
-        reviews: { select: { rating: true } },
-      },
-      orderBy,
-      skip: (page - 1) * limit,
-      take: limit,
-    }),
-    db.product.count({ where }),
-  ]);
-
-  // Parse images JSON and calculate avg rating
-  const productsWithParsedData = products.map((product) => {
-    const avgRating =
-      product.reviews.length > 0
-        ? product.reviews.reduce((sum, r) => sum + r.rating, 0) /
-          product.reviews.length
-        : 0;
-
-    return {
-      ...product,
-      images: JSON.parse(product.images as string),
-      avgRating: Math.round(avgRating * 10) / 10,
-      reviewCount: product.reviews.length,
-    };
+    return [
+      productDisplayName(product),
+      productShortDescription(product),
+      product.categoryName,
+      product.intention || "",
+      getProductType(product),
+    ].some((value) => value.toLowerCase().includes(search));
   });
 
+  products = [...products].sort((left, right) => {
+    switch (sort) {
+      case "price-low":
+        return left.price - right.price;
+      case "price-high":
+        return right.price - left.price;
+      case "a-z":
+        return productDisplayName(left).localeCompare(productDisplayName(right));
+      case "z-a":
+        return productDisplayName(right).localeCompare(productDisplayName(left));
+      default:
+        return Number(right.isBestSeller) - Number(left.isBestSeller);
+    }
+  });
+
+  const total = products.length;
+  const offset = (page - 1) * limit;
+  const pageProducts = products.slice(offset, offset + limit).map((product) => ({
+    id: product.id,
+    name: productDisplayName(product),
+    slug: product.slug,
+    description: productShortDescription(product),
+    images: product.images,
+    image: product.image,
+    variants: [{ price: product.price }],
+    comparePrice: product.compareAt ?? null,
+    category: { name: "The Pearl Edit", slug: product.category },
+    productType: getProductType(product),
+    inStock: product.inStock,
+  }));
+
   return NextResponse.json({
-    products: productsWithParsedData,
+    products: pageProducts,
     pagination: {
       page,
       limit,

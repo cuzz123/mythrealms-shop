@@ -2,6 +2,7 @@
 // Generate Pinterest pin copy for MythRealms products.
 
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminApi } from "@/lib/server/admin-auth";
 
 const fallbackTags = [
   "pearljewelry",
@@ -12,6 +13,9 @@ const fallbackTags = [
 ];
 
 export async function POST(request: NextRequest) {
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
+
   try {
     const { productSlug, productName, mood } = await request.json();
     const name = productName || "Pearl & Gemstone Jewelry";

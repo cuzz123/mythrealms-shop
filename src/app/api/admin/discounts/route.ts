@@ -3,22 +3,19 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { auth } from "@/lib/auth";
+import { requireAdminApi } from "@/lib/server/admin-auth";
+import { getErrorMessage, hasErrorCode } from "@/lib/error-message";
 
 export async function GET() {
-  const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
   const codes = await db.discountCode.findMany({ orderBy: { createdAt: "desc" } });
   return NextResponse.json(codes);
 }
 
 export async function POST(request: NextRequest) {
-  const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
   try {
     const body = await request.json();
     const { code, type, value, label, description, minSubtotal, maxUses, firstOrderOnly, expiresAt } = body;
@@ -39,10 +36,10 @@ export async function POST(request: NextRequest) {
       },
     });
     return NextResponse.json(created);
-  } catch (e: any) {
-    if (e.code === "P2002") {
+  } catch (error: unknown) {
+    if (hasErrorCode(error, "P2002")) {
       return NextResponse.json({ error: "Code already exists" }, { status: 409 });
     }
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+    return NextResponse.json({ error: getErrorMessage(error, "Failed to create discount code") }, { status: 500 });
   }
 }

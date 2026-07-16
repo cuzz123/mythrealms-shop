@@ -1,10 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
 import { Ruler, Info } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Bracelet Size Guide — MythRealms",
   description: "Find your perfect bracelet size. Learn how to measure your wrist and choose between a snug or loose fit for your MythRealms bracelet.",
+  alternates: { canonical: absoluteUrl("/size-guide") },
 };
 
 export default function SizeGuidePage() {

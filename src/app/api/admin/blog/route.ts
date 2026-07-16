@@ -3,12 +3,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { requireAdminApi } from "@/lib/server/admin-auth";
 
 export async function POST(request: NextRequest) {
   const session = await auth();
-  if (!session || session.user?.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminApi(session);
+  if (unauthorized) return unauthorized;
 
   const body = await request.json();
   const { title, slug, category, excerpt, content, image } = body;
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       excerpt,
       content,
       image: image || null,
-      authorId: session.user?.id,
+      authorId: session?.user?.id,
       publishedAt: new Date(),
     },
     include: {
