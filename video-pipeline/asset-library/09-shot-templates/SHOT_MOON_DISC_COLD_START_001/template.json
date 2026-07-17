@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "id": "SHOT_MOON_DISC_COLD_START_001",
+  "version": "v1",
+  "asset_type": "shot_template",
+  "status": "approved",
+  "title": "The Moon Disc Seaside Spectral Cold Start",
+  "title_zh": "Moon Disc 海光变彩冷启动",
+  "format": "9:16",
+  "campaign": "moon_disc_cold_start",
+  "landing_path": "/products/new-series-round-shell-disc-drops",
+  "thumbnail": "Thumbnail.png",
+  "product": {
+    "name": "The Moon Disc - Earrings",
+    "slug": "new-series-round-shell-disc-drops",
+    "price_usd": 46.99,
+    "source_gallery": "public/images/products/new-series/new-series-round-shell-disc-drops/"
+  },
+  "creative_rhythm": [
+    "01 human visual hook + spectral reveal",
+    "02 exact product proof",
+    "03 model-led wearing/lifestyle identification",
+    "04 scene-led coastal CTA"
+  ],
+  "frames": [
+    {
+      "id": "FF_MOON_DISC_01_IRIDESCENT_HUMAN_HOOK",
+      "role": "human_visual_hook_product_reveal",
+      "role_zh": "真人视觉钩子＋海光变彩揭示",
+      "path": "first-frames/FF_MOON_DISC_01_IRIDESCENT_HUMAN_HOOK-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定短发棕发成年模特、白色亚麻衬衫、海边露台与 Moon Disc 默认款耳饰。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持成年短发棕发模特、自然肤质、白色亚麻衬衫、海边石灰岩露台与 Moon Disc 默认款耳饰不变：细金色鱼钩耳线、钩根一颗小透明石、单一金色连接环、圆形贝壳片顶部的小白珍珠簇，且贝壳片始终为单一正圆。4秒内只有一个主体动作：模特从阴影中把脸和耳侧转向阳光一次，耳饰在转动末端只出现一次绿粉光谱闪彩。只有一个镜头动作：镜头从当前近景做一次克制的横向侧移。第4秒眼神、完整耳饰与一次闪彩共同清晰。禁止增加首饰、复制圆片、改成球形耳钉或多层圆片，不生成文字。声音：轻海风与远处海浪，无对白。",
+      "end_state_zh": "模特完成一次向阳转头，完整默认款耳饰在脸侧给出一次清晰绿粉闪彩。"
+    },
+    {
+      "id": "FF_MOON_DISC_02_SEASIDE_PAIR",
+      "role": "exact_product_proof",
+      "role_zh": "精确双只产品证明",
+      "path": "first-frames/FF_MOON_DISC_02_SEASIDE_PAIR-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，只锁定一对静止的 Moon Disc 默认款耳饰、浅色石灰岩与蓝海负空间。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持一对 Moon Disc 默认款耳饰的数量、相对位置、比例与结构不变：每只均为细金色鱼钩耳线、钩根小透明石、单一金色连接环、圆形贝壳片顶部小白珍珠簇和单一正圆贝壳片。4秒内只有一个主体侧动作：一束淡淡的水面焦散光从左向右只掠过静止耳饰一次；耳饰本体始终静止。只有一个镜头动作：镜头从当前视角做一次缓慢垂直上移。第4秒双只鱼钩、透明石、珍珠簇和绿粉变彩圆片都平行、完整且可读。禁止复制、变形、增加道具或改用球形耳钉、三颗竖珠或多层圆片，不生成文字。声音：海边环境音，无对白。",
+      "end_state_zh": "焦散光离开画面，双只默认款耳饰仍完整、分离、静止并清晰可读。"
+    },
+    {
+      "id": "FF_MOON_DISC_03_SUN_TURN",
+      "role": "model_led_wearing_identification",
+      "role_zh": "模特主导佩戴识别",
+      "path": "first-frames/FF_MOON_DISC_03_SUN_TURN-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定同一成年短发棕发模特、白色亚麻衬衫、三分之四侧后肖像、海边露台深度与单只 Moon Disc 默认款耳饰。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持同一成年短发棕发模特、自然肤质、白色亚麻衬衫、三分之四侧后构图、石灰岩露台、蓝海深度与单只 Moon Disc 默认款耳饰不变。耳饰必须保持细金色鱼钩耳线、钩根小透明石、单一金色连接环、圆片顶部小白珍珠簇和单一正圆绿粉变彩贝壳片。4秒内只有一个主体动作：模特只把下巴朝阳光方向转约10度，肩膀与身体保持稳定。只有一个镜头动作：镜头做一次克制的半圆弧移。第4秒完整圆片在下颌下方捕捉阳光，脸部不被遮挡。禁止增加第二只可见耳饰、改变鱼钩或珍珠结构、复制圆片或生成文字。声音：海风、亚麻布料轻响，无对白。",
+      "end_state_zh": "模特完成约10度向阳转头，单只完整默认款耳饰在下颌下方达到最清晰的受光角度。"
+    },
+    {
+      "id": "FF_MOON_DISC_04_SIDE_PROFILE_COAST_END",
+      "role": "scene_led_emotional_cta",
+      "role_zh": "场景主导海岸CTA",
+      "path": "first-frames/FF_MOON_DISC_04_SIDE_PROFILE_COAST_END-v2.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定低右侧侧脸模特、白色亚麻衬衫、海岸/天空/石灰岩负空间与单只 Moon Disc 默认款耳饰。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持低右侧成年短发棕发模特、白色亚麻衬衫、侧脸构图、蓝海天空、石灰岩露台与单只 Moon Disc 默认款耳饰不变。耳饰必须保持细金色鱼钩耳线、钩根小透明石、单一金色连接环、圆片顶部小白珍珠簇和单一正圆绿粉变彩贝壳片。4秒内只有一个主体动作：一阵轻海风只带动几缕短发一次，模特坐姿和侧脸位置保持稳定。只有一个镜头动作：镜头从远海闪光做一次连续的拉焦到耳侧圆片。海岸、海面、天空与石灰岩始终占画面约60-70%，模特约25-35%，保留广阔蓝色和石灰岩后期文案空间。第4秒完整耳饰是唯一清晰主体；不出现拱门、回望、背肩构图或微距。禁止增加首饰、复制圆片、改变鱼钩结构或生成文字。声音：轻风和海浪，无对白。",
+      "end_state_zh": "海风动作结束，镜头完成从海面闪光到单只完整默认款耳饰的拉焦，耳饰为最终清晰主体。"
+    }
+  ],
+  "credit_plan": {
+    "engine": "Seedance 2.0 Fast I2V",
+    "clip_count": 4,
+    "duration_seconds_each": 4,
+    "recommended_base_cost_credits": 176
+  },
+  "recommended_base_cost_credits": 176,
+  "tiktok_package": {
+    "hook": "The color changes when you move.",
+    "captions": [
+      {
+        "type": "traffic_first",
+        "text": "The color changes when you move. Meet The Moon Disc."
+      },
+      {
+        "type": "engagement",
+        "text": "Sea blue or shell pink: which flash would you catch first?"
+      },
+      {
+        "type": "price_led",
+        "text": "The Moon Disc earrings are $46.99. Tap the link in bio to shop the exact pair."
+      }
+    ],
+    "pinned_comment": "The exact pair shown is The Moon Disc. Tap the link in our bio to see it.",
+    "hashtags": [
+      "#MythRealms",
+      "#MoonDiscEarrings",
+      "#MotherOfPearl",
+      "#CoastalJewelry",
+      "#JewelryTok"
+    ],
+    "urls": {
+      "organic": "/products/new-series-round-shell-disc-drops?utm_source=tiktok&utm_medium=organic&utm_campaign=moon_disc_cold_start&utm_content=spectral_turn_v1",
+      "paid": "/products/new-series-round-shell-disc-drops?utm_source=tiktok&utm_medium=paid_social&utm_campaign=moon_disc_cold_start&utm_content=spectral_turn_v1"
+    },
+    "music_plan": {
+      "library": "TikTok Commercial Music Library",
+      "bpm_range": "102-106",
+      "primary_direction": "Organic house or Balearic instrumental with hand percussion, airy plucks, sunlit coastal lift, and no vocals.",
+      "search_recipe": [
+        "organic house",
+        "Balearic",
+        "hand percussion",
+        "airy plucks",
+        "instrumental",
+        "102-106 BPM"
+      ],
+      "fallback_directions": [
+        "Sunlit Balearic instrumental with nylon guitar fragments, soft shaker, warm bass, no vocals.",
+        "Minimal organic-house instrumental with brushed hand percussion, marimba-like plucks, and no vocals."
+      ]
+    },
+    "edit_plan": {
+      "target_duration_seconds": 11.5,
+      "copy_added_in_post": true,
+      "timeline": [
+        {
+          "timecode": "0.0-2.5",
+          "frame_id": "FF_MOON_DISC_01_IRIDESCENT_HUMAN_HOOK",
+          "source_clip_range": "0.0-2.5",
+          "purpose": "Human visual hook + spectral reveal",
+          "post_copy": "The color changes when you move."
+        },
+        {
+          "timecode": "2.5-4.8",
+          "frame_id": "FF_MOON_DISC_02_SEASIDE_PAIR",
+          "source_clip_range": "0.5-2.8",
+          "purpose": "Exact product proof",
+          "post_copy": "The Moon Disc"
+        },
+        {
+          "timecode": "4.8-7.7",
+          "frame_id": "FF_MOON_DISC_03_SUN_TURN",
+          "source_clip_range": "0.4-3.3",
+          "purpose": "Model-led wearing/lifestyle identification",
+          "post_copy": "Green flash. Pink flash."
+        },
+        {
+          "timecode": "7.7-11.5",
+          "frame_id": "FF_MOON_DISC_04_SIDE_PROFILE_COAST_END",
+          "source_clip_range": "0.2-4.0",
+          "purpose": "Scene-led coastal CTA",
+          "post_copy": "$46.99 · Shop via link in bio"
+        }
+      ]
+    },
+    "test_rules_24h": {
+      "measurement_window_hours": 24,
+      "change_limit_per_iteration": 1,
+      "hold_constant": [
+        "audience",
+        "budget",
+        "bid strategy",
+        "placement",
+        "landing page",
+        "music track"
+      ],
+      "diagnostics": [
+        {
+          "signal": "Opening hold is below the account baseline while downstream CTR is healthy.",
+          "change_only": "Change only the Frame 01 opening trim or hook copy; keep Frames 02-04 unchanged."
+        },
+        {
+          "signal": "Opening hold is healthy but product-page CTR is below the account baseline.",
+          "change_only": "Change only the Frame 04 CTA copy or CTA timing; keep the visual sequence unchanged."
+        },
+        {
+          "signal": "CTR is healthy but add-to-cart rate is below the product-page baseline.",
+          "change_only": "Do not change creative; audit only the product page, price presentation, and mobile load path."
+        },
+        {
+          "signal": "All funnel stages meet or exceed baseline.",
+          "change_only": "Hold the winning creative unchanged for the next measurement window."
+        }
+      ]
+    }
+  }
+}
