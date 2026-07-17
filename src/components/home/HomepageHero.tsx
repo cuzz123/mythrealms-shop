@@ -8,7 +8,7 @@ export function HomepageHero() {
 
   return (
     <section
-      className="relative -mt-16 [--homepage-category-reveal:7rem] min-h-[calc(100svh-2.25rem-var(--homepage-category-reveal))] overflow-hidden bg-[#24312f] text-white"
+      className="relative -mt-16 [--homepage-category-reveal:7rem] lg:[--homepage-category-reveal:15rem] min-h-[calc(100svh-2.25rem-var(--homepage-category-reveal))] overflow-hidden bg-[#24312f] text-white"
       aria-labelledby="homepage-hero-title"
     >
       <Image

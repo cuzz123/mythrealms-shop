@@ -1,11 +1,31 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator } from "@playwright/test";
+
+async function expectImagesLoaded(images: Locator) {
+  for (let index = 0; index < (await images.count()); index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate(
+          (node) =>
+            (node as HTMLImageElement).complete &&
+            (node as HTMLImageElement).naturalWidth > 0,
+        ),
+      )
+      .toBe(true);
+  }
+}
 
 test.describe("storefront release flows", () => {
-  for (const width of [320, 390]) {
+  for (const { width, height } of [
+    { width: 320, height: 800 },
+    { width: 390, height: 844 },
+  ]) {
     test(`homepage fits a ${width}px viewport`, async ({ page }) => {
-      await page.setViewportSize({ width, height: 844 });
+      await page.setViewportSize({ width, height });
       await page.goto("/");
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expectImagesLoaded(page.locator("#main-content img"));
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - window.innerWidth,
       );
@@ -15,6 +35,16 @@ test.describe("storefront release flows", () => {
       ).toBeVisible();
     });
   }
+
+  test("homepage shop by style links use approved pearl filters", async ({ page }) => {
+    await page.goto("/");
+    const styleRegion = page.getByRole("region", { name: "Choose your starting point" });
+    await expect(styleRegion.getByRole("link", { name: "Everyday Pearl" })).toHaveAttribute("href", "/collections/pearl-series");
+    await expect(styleRegion.getByRole("link", { name: "Pearl Earrings" })).toHaveAttribute("href", "/collections/pearl-series?type=earrings");
+    await expect(styleRegion.getByRole("link", { name: "Pearl Necklaces" })).toHaveAttribute("href", "/collections/pearl-series?type=necklaces");
+    await expect(styleRegion.getByRole("link", { name: "Pearl Bracelets" })).toHaveAttribute("href", "/collections/pearl-series?type=bracelets");
+    await expect(styleRegion.getByRole("link", { name: "Pearl Eyewear Chains" })).toHaveAttribute("href", "/collections/pearl-series?type=eyewear-chains");
+  });
 
   test("homepage reveal motion resolves and reduced motion stays visible", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -133,8 +163,7 @@ test.describe("storefront release flows", () => {
       const trigger = page.getByRole("button", { name: menu.triggerName });
       const menuList = page.locator(`#${menu.menuId}`);
 
-      await trigger.focus();
-      await page.keyboard.press("ArrowDown");
+      await trigger.press("ArrowDown");
       await expect(menuList.getByRole("menuitem", { name: menu.firstLink })).toBeFocused();
       await page.keyboard.press("Escape");
       await expect(menuList).toHaveCount(0);

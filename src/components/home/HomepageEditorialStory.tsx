@@ -10,7 +10,7 @@ export function HomepageEditorialStory() {
   return (
     <section className="bg-[var(--surface)]" aria-labelledby="pearl-guide-title">
       <div className="grid lg:grid-cols-2">
-        <div className="relative aspect-[4/3] min-h-[20rem] lg:aspect-auto lg:min-h-[38rem]">
+        <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[38rem]">
           <Image src={seaside.src} alt={seaside.alt} fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />
         </div>
         <div className="flex items-center px-6 py-16 md:px-12 lg:px-16">
@@ -41,7 +41,7 @@ export function HomepageEditorialStory() {
             </Link>
           </div>
         </div>
-        <div className="relative order-1 aspect-[4/3] min-h-[20rem] lg:order-2 lg:aspect-auto lg:min-h-[38rem]">
+        <div className="relative order-1 aspect-[4/3] lg:order-2 lg:aspect-auto lg:min-h-[38rem]">
           <Image src={everyday.src} alt={everyday.alt} fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />
         </div>
       </div>

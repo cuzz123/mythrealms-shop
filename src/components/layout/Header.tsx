@@ -55,6 +55,7 @@ export function Header() {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileCloseRef = useRef<HTMLButtonElement>(null);
   const desktopNavigationRef = useRef<HTMLElement>(null);
+  const previousPathname = useRef(pathname);
   const menuTriggerRefs = useRef<Record<Exclude<DesktopMenu, null>, HTMLButtonElement | null>>({
     shop: null,
     intention: null,
@@ -84,6 +85,9 @@ export function Header() {
   }, [isHome]);
 
   useEffect(() => {
+    if (previousPathname.current === pathname) return;
+
+    previousPathname.current = pathname;
     setDesktopMenu(null);
     setPendingMenuFocus(null);
   }, [pathname]);
