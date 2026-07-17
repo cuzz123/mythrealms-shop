@@ -41,12 +41,14 @@ test.describe("release surfaces", () => {
     expect(positions).toEqual([...positions].sort((left, right) => left - right));
     await expect
       .poll(() =>
-        page.getByText("Shop by Style", { exact: true }).evaluate((label) => {
-          const rect = label.getBoundingClientRect();
+        page
+          .getByRole("heading", { name: "Choose your starting point", exact: true })
+          .evaluate((heading) => {
+          const rect = heading.getBoundingClientRect();
           return Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
         }),
       )
-      .toBeGreaterThan(0);
+      .toBeGreaterThanOrEqual(24);
   });
 
   test("homepage keeps canonical metadata, organization data, and the Pearl Guide without retired claims", async ({ page }) => {

@@ -1,4 +1,4 @@
-import { expect, test, type Locator } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
@@ -16,6 +16,57 @@ async function expectImagesLoaded(images: Locator) {
   }
 }
 
+async function expectHeroContentWithinVisibleBounds(page: Page) {
+  const hero = page.locator('[aria-labelledby="homepage-hero-title"]');
+  const heroContent = [
+    hero.getByText("Editorial / Summer 2026", { exact: true }),
+    hero.getByRole("heading", { name: "Pearls for sunlit days." }),
+    hero.getByText(
+      "Pearl jewelry selected for natural light, everyday movement, and the moments worth keeping.",
+      { exact: true },
+    ),
+    hero.getByRole("link", { name: "Shop the Pearl Edit" }),
+  ];
+
+  for (const content of heroContent) {
+    await expect(content).toBeVisible();
+    const bounds = await content.evaluate((node) => {
+      const rect = node.getBoundingClientRect();
+      const heroRect = node
+        .closest('[aria-labelledby="homepage-hero-title"]')
+        ?.getBoundingClientRect();
+
+      if (!heroRect) {
+        return { hasArea: false, insideHero: false, insideViewport: false };
+      }
+
+      const tolerance = 0.5;
+      const visibleHeroTop = Math.max(heroRect.top, 0);
+      const visibleHeroBottom = Math.min(heroRect.bottom, window.innerHeight);
+
+      return {
+        hasArea: rect.width > 0 && rect.height > 0,
+        insideHero:
+          rect.left >= heroRect.left - tolerance &&
+          rect.right <= heroRect.right + tolerance &&
+          rect.top >= visibleHeroTop - tolerance &&
+          rect.bottom <= visibleHeroBottom + tolerance,
+        insideViewport:
+          rect.left >= -tolerance &&
+          rect.right <= window.innerWidth + tolerance &&
+          rect.top >= -tolerance &&
+          rect.bottom <= window.innerHeight + tolerance,
+      };
+    });
+
+    expect(bounds).toEqual({
+      hasArea: true,
+      insideHero: true,
+      insideViewport: true,
+    });
+  }
+}
+
 test.describe("storefront release flows", () => {
   for (const { width, height } of [
     { width: 320, height: 800 },
@@ -25,6 +76,7 @@ test.describe("storefront release flows", () => {
       await page.setViewportSize({ width, height });
       await page.goto("/");
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expectHeroContentWithinVisibleBounds(page);
       await expectImagesLoaded(page.locator("#main-content img"));
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - window.innerWidth,
