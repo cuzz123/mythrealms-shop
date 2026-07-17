@@ -108,11 +108,14 @@ test.describe("release surfaces", () => {
       await page.goto("/");
       await expect
         .poll(() =>
-          page.locator('section[aria-labelledby="shop-by-style-title"]').evaluate(
-            (section) => section.getBoundingClientRect().top < window.innerHeight,
-          ),
+          page
+            .getByText("Shop by Style", { exact: true })
+            .evaluate((label) => {
+              const rect = label.getBoundingClientRect();
+              return Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+            }),
         )
-        .toBe(true);
+        .toBeGreaterThan(0);
     }
 
     await page.setViewportSize({ width: 1280, height: 720 });
