@@ -98,10 +98,10 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
         aria-label="Search products"
         aria-expanded={isOpen}
         aria-controls="search-overlay"
-        className={`flex items-center gap-1 h-10 px-3 rounded-full transition ${isScrolled ? "text-gray-700 hover:text-gray-900 hover:bg-gray-100" : "text-white/80 hover:text-white hover:bg-white/10"}`}
+        title="Search products"
+        className={`flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${isScrolled ? "text-gray-700 hover:bg-gray-100 hover:text-gray-900" : "text-white/80 hover:bg-white/10 hover:text-white focus-visible:ring-offset-transparent"}`}
       >
         <Search className="w-5 h-5" />
-        <span className="text-xs ml-1 hidden lg:inline">Search</span>
       </button>
 
       {/* Overlay */}

@@ -42,6 +42,7 @@ const navLinks: NavigationLink[] = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenu, setDesktopMenu] = useState<DesktopMenu>(null);
+  const [pendingMenuFocus, setPendingMenuFocus] = useState<DesktopMenu>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const { data: session } = useSession();
   const pathname = usePathname();
@@ -55,6 +56,10 @@ export function Header() {
   const mobileCloseRef = useRef<HTMLButtonElement>(null);
   const desktopNavigationRef = useRef<HTMLElement>(null);
   const menuTriggerRefs = useRef<Record<Exclude<DesktopMenu, null>, HTMLButtonElement | null>>({
+    shop: null,
+    intention: null,
+  });
+  const menuPanelRefs = useRef<Record<Exclude<DesktopMenu, null>, HTMLDivElement | null>>({
     shop: null,
     intention: null,
   });
@@ -80,6 +85,7 @@ export function Header() {
 
   useEffect(() => {
     setDesktopMenu(null);
+    setPendingMenuFocus(null);
   }, [pathname]);
 
   useEffect(() => {
@@ -88,12 +94,20 @@ export function Header() {
     const closeOnPointerOutside = (event: PointerEvent) => {
       if (!desktopNavigationRef.current?.contains(event.target as Node)) {
         setDesktopMenu(null);
+        setPendingMenuFocus(null);
       }
     };
 
     document.addEventListener("pointerdown", closeOnPointerOutside);
     return () => document.removeEventListener("pointerdown", closeOnPointerOutside);
   }, [desktopMenu]);
+
+  useEffect(() => {
+    if (!desktopMenu || pendingMenuFocus !== desktopMenu) return;
+
+    menuPanelRefs.current[desktopMenu]?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
+    setPendingMenuFocus(null);
+  }, [desktopMenu, pendingMenuFocus]);
 
   const [justAdded, setJustAdded] = useState(false);
   const previousItemCount = useRef(itemCount);
@@ -116,6 +130,7 @@ export function Header() {
   const closeDesktopMenu = (restoreFocus = false) => {
     const menuToClose = desktopMenu;
     setDesktopMenu(null);
+    setPendingMenuFocus(null);
     if (restoreFocus && menuToClose) {
       window.requestAnimationFrame(() => menuTriggerRefs.current[menuToClose]?.focus());
     }
@@ -123,9 +138,7 @@ export function Header() {
 
   const openMenuAndFocusFirstItem = (menu: Exclude<DesktopMenu, null>) => {
     setDesktopMenu(menu);
-    window.requestAnimationFrame(() => {
-      document.querySelector<HTMLElement>(`#${menu}-menu [role="menuitem"]`)?.focus();
-    });
+    setPendingMenuFocus(menu);
   };
 
   const overlayControlClass = isOverlay
@@ -200,9 +213,18 @@ export function Header() {
                 </button>
                 {isOpen && (
                   <div
+                    ref={(element) => {
+                      menuPanelRefs.current[menu.id] = element;
+                    }}
                     id={`${menu.id}-menu`}
                     role="menu"
                     aria-label={`${menu.label} links`}
+                    onKeyDown={(event) => {
+                      if (event.key === "Escape") {
+                        event.preventDefault();
+                        closeDesktopMenu(true);
+                      }
+                    }}
                     className="absolute left-1/2 top-full z-50 grid w-[440px] max-w-[90vw] -translate-x-1/2 grid-cols-2 bg-[var(--surface)] p-3 text-[var(--text)] shadow-lg animate-slide-down"
                   >
                     {menu.links.map((link) => (

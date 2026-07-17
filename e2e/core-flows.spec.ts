@@ -71,10 +71,32 @@ test.describe("storefront release flows", () => {
     await expect(page).toHaveURL(/guardian-quiz/);
   });
 
+  test("desktop menu items return focus to their trigger on Escape", async ({ page }) => {
+    for (const menu of [
+      { triggerName: "Shop menu", menuId: "shop-menu", firstLink: "All Pearl Jewelry" },
+      { triggerName: "Intention menu", menuId: "intention-menu", firstLink: "Find Your Guardian" },
+    ]) {
+      await page.goto("/");
+      const trigger = page.getByRole("button", { name: menu.triggerName });
+      const menuList = page.locator(`#${menu.menuId}`);
+
+      await trigger.focus();
+      await page.keyboard.press("ArrowDown");
+      await expect(menuList.getByRole("menuitem", { name: menu.firstLink })).toBeFocused();
+      await page.keyboard.press("Escape");
+      await expect(menuList).toHaveCount(0);
+      await expect(trigger).toBeFocused();
+    }
+  });
+
   test("search, cart and mobile navigation restore keyboard focus", async ({ page }) => {
     await page.goto("/");
 
     const searchTrigger = page.getByRole("button", { name: "Search products" });
+    await expect(searchTrigger).toHaveAttribute("title", "Search products");
+    const searchBounds = await searchTrigger.boundingBox();
+    expect(searchBounds?.width).toBe(40);
+    expect(searchBounds?.height).toBe(40);
     await searchTrigger.click();
     const searchDialog = page.getByRole("dialog", { name: "Search products" });
     await expect(searchDialog).toBeVisible();
