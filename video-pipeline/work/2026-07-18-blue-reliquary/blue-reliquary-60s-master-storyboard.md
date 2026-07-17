@@ -7,6 +7,7 @@ total_duration_seconds: 60
 product_lock_path: D:\mythrealms-shop\public\images\products\1688-shop\pearl-series\pearl-series-04-detail1.webp
 format: 16:9
 generation_mode: Seedance 全能模式，多图引用
+cut_contract_version: 1
 ---
 
 # MythRealms《The Blue Reliquary｜蓝色秘藏》

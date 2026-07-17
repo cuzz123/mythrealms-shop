@@ -21,4 +21,17 @@ foreach ($id in 1..15) {
   if ($section -notmatch [regex]::Escape($productPath)) { throw "Missing product reference in $label" }
 }
 
-'constraints=ok; shots=15'
+if ($text -notmatch 'cut_contract_version: 1') { throw 'Missing cut-contract version' }
+$boundaries = [regex]::Matches($text, '(?m)^\| S(?:0[1-9]|1[0-4])A 03\.[0-9]s -> S(?:0[2-9]|1[0-5])A 00\.0s \|')
+if ($boundaries.Count -ne 14) { throw "Expected 14 edit contracts, got $($boundaries.Count)" }
+foreach ($id in 1..14) {
+  $from = 'S{0:D2}A' -f $id
+  $to = 'S{0:D2}A' -f ($id + 1)
+  if ($text -notmatch "(?m)^\| $from 03\.[0-9]s -> $to 00\.0s \|") { throw "Missing ordered edit contract: $from -> $to" }
+}
+
+$paths = [regex]::Matches($text, '(?m)^\d+\. `(D:\\[^`]+\.(?:png|jpe?g|webp))`') | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique
+if ($paths.Count -eq 0) { throw 'No absolute upload reference paths found' }
+foreach ($path in $paths) { if (-not (Test-Path -LiteralPath $path)) { throw "Missing reference: $path" } }
+
+"constraints=ok; shots=15; boundaries=14; references=$($paths.Count)"
