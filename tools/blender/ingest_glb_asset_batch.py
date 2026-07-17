@@ -22,6 +22,7 @@ from glb_asset_batch_specs import (  # noqa: E402
     REGISTRY,
     asset_dir,
     card_path,
+    merge_registry_rows,
     source_path,
 )
 
@@ -141,35 +142,37 @@ batch: {BATCH_ID}
 
 def update_registry(metadata_rows: list[dict[str, object]]) -> None:
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    existing = {
-        row.get("id"): row
-        for row in registry.get("assets", [])
-        if isinstance(row, dict) and row.get("id")
-    }
+    generated: list[dict] = []
     for metadata in metadata_rows:
         item = next(row for row in ASSETS if row["asset_id"] == metadata["id"])
-        existing[str(metadata["id"])] = {
-            "id": metadata["id"],
-            "name": metadata["name_zh"],
-            "category": metadata["asset_type"],
-            "status": "approved_source",
-            "version": "v1",
-            "source_paths": [
-                f"../{item['library_section']}/{item['asset_id']}/source.glb",
-                f"../{item['library_section']}/{item['asset_id']}/preview/thumbnail.png",
-            ],
-            "tags": ["hunyuan3d", "glb", str(metadata["asset_type"])],
-            "usage": {
-                "default_import": "append",
-                "walk_rig_candidate": bool(item["walk_rig_candidate"]),
+        generated.append(
+            {
+                "id": metadata["id"],
+                "name": metadata["name_zh"],
+                "category": metadata["asset_type"],
+                "status": "approved_source",
+                "version": "v1",
+                "source_paths": [
+                    f"../{item['library_section']}/{item['asset_id']}/source.glb",
+                    f"../{item['library_section']}/{item['asset_id']}/preview/thumbnail.png",
+                ],
+                "tags": ["hunyuan3d", "glb", str(metadata["asset_type"])],
+                "usage": {
+                    "default_import": "append",
+                    "walk_rig_candidate": bool(item["walk_rig_candidate"]),
+                },
+                "quality_gate": [
+                    "preserve original source.glb",
+                    "review generated thumbnail before production use",
+                ],
+                "notes": "2026-07-17 GLB batch import; source geometry is unrigged.",
             },
-            "quality_gate": [
-                "preserve original source.glb",
-                "review generated thumbnail before production use",
-            ],
-            "notes": "2026-07-17 GLB batch import; source geometry is unrigged.",
-        }
-    registry["assets"] = list(existing.values())
+        )
+    registry["assets"] = merge_registry_rows(
+        registry.get("assets", []),
+        generated,
+        {str(item["asset_id"]) for item in ASSETS},
+    )
     registry["updated"] = date.today().isoformat()
     REGISTRY.write_text(
         json.dumps(registry, ensure_ascii=False, indent=2) + "\n",

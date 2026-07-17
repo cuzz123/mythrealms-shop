@@ -113,6 +113,22 @@ def card_path(item: dict[str, object]) -> Path:
     return OBSIDIAN_CARDS / f"{item['asset_id']}｜{item['name_zh']}.md"
 
 
+def merge_registry_rows(
+    existing_rows: list[dict],
+    generated_rows: list[dict],
+    target_ids: set[str],
+) -> list[dict]:
+    generated_ids = [str(row.get("id")) for row in generated_rows]
+    if len(generated_ids) != len(set(generated_ids)):
+        raise RuntimeError("Generated registry rows contain duplicate IDs")
+    if set(generated_ids) != target_ids:
+        raise RuntimeError("Generated registry IDs do not match target GLB batch")
+    preserved = [
+        row for row in existing_rows if str(row.get("id")) not in target_ids
+    ]
+    return preserved + generated_rows
+
+
 def validate_specs() -> None:
     if len(ASSETS) != 9:
         raise RuntimeError(f"Expected 9 GLB assets, got {len(ASSETS)}")
