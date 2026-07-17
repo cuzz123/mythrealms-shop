@@ -143,7 +143,7 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
             <div className="max-h-80 overflow-y-auto">
               {query.length < 2 ? (
                 <div className="p-8 text-center">
-                  <p className="text-[28px] font-serif text-gray-300 animate-search-breathe">
+                  <p className="text-[28px] font-serif text-gray-300">
                     Search pearl rings, bracelets, earrings...
                   </p>
                 </div>

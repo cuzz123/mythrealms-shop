@@ -16,6 +16,39 @@ test.describe("storefront release flows", () => {
     });
   }
 
+  test("homepage reveal motion resolves and reduced motion stays visible", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto("/");
+    const sections = page.locator("[data-reveal-ready]");
+    await expect(sections.first()).toHaveAttribute("data-reveal-ready", "true");
+    await sections.first().scrollIntoViewIfNeeded();
+    await expect(sections.first()).toHaveAttribute("data-reveal-visible", "true");
+
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.reload();
+    await expect(sections.first()).toHaveAttribute("data-reveal-visible", "true");
+    await expect(
+      page.getByRole("heading", { name: "Choose your starting point" }),
+    ).toBeVisible();
+  });
+
+  test("homepage ScrollReveal stays visible without JavaScript", async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+
+    try {
+      await page.goto("/");
+      const reveal = page.locator('[aria-labelledby="noscript-shop-by-style-title"]');
+      await expect(reveal).toHaveAttribute("data-reveal-ready", "false");
+      await expect(reveal).toHaveAttribute("data-reveal-visible", "true");
+      await expect(
+        reveal.getByRole("heading", { name: "Choose your starting point" }),
+      ).toBeVisible();
+    } finally {
+      await context.close();
+    }
+  });
+
   test("homepage header moves from editorial overlay to solid navigation", async ({ page }) => {
     await page.goto("/");
     const header = page.locator("header[data-visual-state]");

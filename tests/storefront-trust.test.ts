@@ -30,6 +30,14 @@ test("homepage category stories defer image motion", () => {
   assert.doesNotMatch(stories, /transition-transform|duration-500|group-hover:scale/);
 });
 
+test("global storefront styles exclude unused decorative motion", () => {
+  const styles = source("src/app/globals.css");
+  assert.doesNotMatch(
+    styles,
+    /(?:@keyframes (?:twinkle1|twinkle2|fadeInUp|pulseDot|bounceDown|slideInContent|subtleZoom|progressFill|zoomFade|heroContentIn|paintAcross|riseUp|modalOpen)|\.animate-(?:slideInContent|subtle-zoom|paint-across|rise-up|modal-open|slide-in-right))/,
+  );
+});
+
 test("product cards never infer wearing media from array position or filename", () => {
   const card = source("src/components/product/ProductCard.tsx");
   assert.doesNotMatch(card, /images\[1\]/);

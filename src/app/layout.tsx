@@ -4,6 +4,8 @@ import { Providers } from "./providers";
 import { Analytics } from "@/components/layout/Analytics";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/ui/JsonLd";
 import { LayoutShell } from "@/components/layout/LayoutShell";
+import { ScrollRevealEnhancer } from "@/components/ui/ScrollRevealEnhancer";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { absoluteUrl, siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -56,7 +58,21 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className="antialiased">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--accent)] focus:text-white focus:rounded">Skip to main content</a>
+        <noscript>
+          <ScrollReveal as="section" className="bg-[var(--surface-alt)] px-6 py-16" aria-labelledby="noscript-shop-by-style-title">
+            <div className="mx-auto max-w-7xl">
+              <p className="text-xs font-semibold uppercase text-[var(--accent)]">Shop by Style</p>
+              <h2 id="noscript-shop-by-style-title" className="mt-3 font-serif text-3xl font-medium text-[var(--text)]">
+                Choose your starting point
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">
+                Explore pearl jewelry made for everyday light.
+              </p>
+            </div>
+          </ScrollReveal>
+        </noscript>
         <Analytics />
+        <ScrollRevealEnhancer />
         <Providers>
           <LayoutShell>{children}</LayoutShell>
         </Providers>

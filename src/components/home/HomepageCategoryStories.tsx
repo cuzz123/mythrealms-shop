@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HOMEPAGE_CATEGORY_LINKS } from "@/lib/homepage-editorial";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function HomepageCategoryStories() {
   const featureLinks = HOMEPAGE_CATEGORY_LINKS.slice(0, 3);
   const indexLinks = HOMEPAGE_CATEGORY_LINKS.slice(3);
 
   return (
-    <section className="bg-[var(--surface-alt)] py-16 md:py-24" aria-labelledby="shop-by-style-title">
+    <ScrollReveal as="section" className="bg-[var(--surface-alt)] py-16 md:py-24" aria-labelledby="shop-by-style-title">
       <div className="mx-auto max-w-7xl px-6">
         <p className="text-xs font-semibold uppercase text-[var(--accent)]">Shop by Style</p>
         <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
@@ -47,6 +48,6 @@ export function HomepageCategoryStories() {
           ))}
         </div>
       </div>
-    </section>
+    </ScrollReveal>
   );
 }
