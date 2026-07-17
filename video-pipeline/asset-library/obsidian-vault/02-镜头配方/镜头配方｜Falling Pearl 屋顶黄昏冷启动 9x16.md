@@ -13,7 +13,7 @@ tags: [Falling Pearl, 屋顶黄昏, TikTok, Seedance, 项链, 冷启动, 9x16]
 
 # 镜头配方｜Falling Pearl 屋顶黄昏冷启动 9x16
 
-屋顶黄昏进入蓝调时刻的四帧 TikTok 冷启动包：真人门洞光界钩子，唯一单件完整产品证明，模特触碰最低珍珠，再以天际线边缘主导的 profile 转向完成 CTA。四帧全部用于 4 秒 Seedance 2.0 Fast I2V，最终剪成 11.5 秒；文字与 CML 音乐只在后期加入。
+屋顶黄昏进入蓝调时刻的四帧 TikTok 冷启动包：真人门洞光界钩子，唯一单件完整产品证明，模特佩戴识别，再以天际线边缘主导的 profile 转向完成 CTA。四帧全部用于 4 秒 Seedance 2.0 Fast I2V，最终剪成 11.5 秒；文字与 CML 音乐只在后期加入。
 
 ![](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_FALLING_PEARL_COLD_START_001/Thumbnail.png)
 
@@ -36,7 +36,7 @@ tags: [Falling Pearl, 屋顶黄昏, TikTok, Seedance, 项链, 冷启动, 9x16]
 |---|---|---|---|
 | 01 | 真人屋顶光界钩子＋项链揭示 | 成年深肤色模特、象牙色开口领口、上方珍珠序列与 Y 形交汇处跨越暖光到蓝调光界 | [FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK-v1.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_FALLING_PEARL_COLD_START_001/first-frames/FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK-v1.png) |
 | 02 | 浅色石灰岩完整单件产品证明 | 完整 Y 形项链竖直摆放；唯一纯产品构图；无胸像、碗、花或其他道具 | [FF_FALLING_PEARL_02_LIMESTONE_FULL_PRODUCT-v1.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_FALLING_PEARL_COLD_START_001/first-frames/FF_FALLING_PEARL_02_LIMESTONE_FULL_PRODUCT-v1.png) |
-| 03 | 模特主导最低珍珠触碰识别 | 成年深肤色模特胸口到下巴；完整 Y 路径可见；一根手指靠近最低终端珍珠 | [FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH-v1.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_FALLING_PEARL_COLD_START_001/first-frames/FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH-v1.png) |
+| 03 | 模特主导最低珍珠佩戴识别 | 成年深肤色模特胸口到下巴；完整 Y 路径可见；一只手从项链下方自然放松开始 | [FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH-v1.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_FALLING_PEARL_COLD_START_001/first-frames/FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH-v1.png) |
 | 04 | 场景主导屋顶行走结束 CTA | 天空、城市纵深与屋顶边缘约 60-70%；模特约 25-35%；三分之四背侧，项链在象牙色服装上可读 | [FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_FALLING_PEARL_COLD_START_001/first-frames/FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png) |
 
 `Thumbnail.png` 与 Frame 04 的 `FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png` 完全相同。
@@ -55,11 +55,11 @@ tags: [Falling Pearl, 屋顶黄昏, TikTok, Seedance, 项链, 冷启动, 9x16]
 
 终点：唯一项链完成一次约2度顺时针轻转后停稳，完整 Y 形轮廓与终端珍珠保持在画面内。
 
-### 03｜模特主导最低珍珠触碰识别
+### 03｜模特主导最低珍珠佩戴识别
 
-@Image1为首帧，严格保持成年深肤色女模特的面部下半部、自然肤质、象牙色开口领口、胸口到下巴构图、单手靠近最低珍珠的姿势与 The Falling Pearl 默认款完整 Y 形项链不变。产品身份锁定为：细金色链条；对称上方双股链条交替排列小型圆形白色珍珠与较大的椭圆形奶油色/巴洛克珍珠并置于金色托座；Y形交汇处仅一个圆形金色花丝花朵连接件；竖直下垂链路依次为小珍珠、较大的椭圆形奶油色珍珠、小珍珠、长段金色链条、最后一颗圆形白色终端珍珠。4秒内只有一个主体动作：模特只用一根手指触碰最低一颗终端珍珠一次，然后释放，另一只手和肩颈保持稳定。只有一个镜头动作：镜头只做一次极轻微的向前推近。第4秒完整 Y 路径清晰，终端珍珠完成一次小幅摆动后停稳。禁止手部变形、额外手势、额外首饰、项链层数变化、改变连接件、改变珍珠顺序、缩短链路、文字、logo或水印。声音：轻微衣料声与屋顶风声，无对白。
+@Image1为首帧，严格保持成年深肤色女模特的面部下半部、自然肤质、象牙色开口领口、胸口到下巴构图、单手从项链下方自然放松开始的姿势与 The Falling Pearl 默认款完整 Y 形项链不变。产品身份锁定为：细金色链条；对称上方双股链条交替排列小型圆形白色珍珠与较大的椭圆形奶油色/巴洛克珍珠并置于金色托座；Y形交汇处仅一个圆形金色花丝花朵连接件；竖直下垂链路依次为小珍珠、较大的椭圆形奶油色珍珠、小珍珠、长段金色链条、最后一颗圆形白色终端珍珠。4秒内只有一个主体动作：模特的手从项链下方自然放松的位置只向上抬一次，朝向最低一颗终端珍珠。只有一个镜头动作：镜头只做一次克制的向前推近。第4秒完整 Y 路径清晰。禁止手部变形、额外手势、额外首饰、项链层数变化、改变连接件、改变珍珠顺序、缩短链路、文字、logo或水印。声音：轻微衣料声与屋顶风声，无对白。
 
-终点：最低终端珍珠被触碰一次并释放，完成一次小幅摆动后停稳，完整项链路径与领口保持清晰。
+终点：手已从项链下方自然放松的位置上移至最低终端珍珠附近，完整项链路径与领口保持清晰。
 
 ### 04｜场景主导屋顶行走结束 CTA
 
@@ -73,7 +73,7 @@ tags: [Falling Pearl, 屋顶黄昏, TikTok, Seedance, 项链, 冷启动, 9x16]
 |---|---|---|---|
 | 0.0-2.5s | Frame 01，源片 0.0-2.5s | 真人屋顶光界钩子 | One line. One falling pearl. |
 | 2.5-4.9s | Frame 02，源片 0.5-2.9s | 唯一完整单件产品证明 | The Falling Pearl |
-| 4.9-7.8s | Frame 03，源片 0.4-3.3s | 模特主导最低珍珠触碰 | A line that falls. |
+| 4.9-7.8s | Frame 03，源片 0.4-3.3s | 模特主导最低珍珠佩戴识别 | A line that falls. |
 | 7.8-11.5s | Frame 04，源片 0.3-4.0s | 屋顶场景 CTA | $59.99 · Shop via link in bio |
 
 ## TikTok 发布包

@@ -18,7 +18,7 @@
   "creative_rhythm": [
     "01 human-led rooftop doorway light-boundary hook",
     "02 exact sole-product limestone proof",
-    "03 model-led lowest-pearl touch",
+    "03 model-led lowest-pearl wearing identification",
     "04 environment-led rooftop walk ending"
   ],
   "frames": [
@@ -51,15 +51,15 @@
     {
       "id": "FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH",
       "role": "model_led_wearing_identification",
-      "role_zh": "模特主导最低珍珠触碰识别",
+      "role_zh": "模特主导最低珍珠佩戴识别",
       "path": "first-frames/FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH-v1.png",
       "approval_status": "approved",
       "animate": true,
       "mode": "I2V",
       "target_duration_seconds": 4,
-      "reference_role_map": "@Image1 为已批准首帧，锁定成年深肤色女模特、自然肤质、象牙色开口领口、胸口到下巴构图、单手靠近最低珍珠的姿势与 The Falling Pearl 默认款完整 Y 形项链。",
-      "seedance_prompt_zh": "@Image1为首帧，严格保持成年深肤色女模特的面部下半部、自然肤质、象牙色开口领口、胸口到下巴构图、单手靠近最低珍珠的姿势与 The Falling Pearl 默认款完整 Y 形项链不变。产品身份锁定为：细金色链条；对称上方双股链条交替排列小型圆形白色珍珠与较大的椭圆形奶油色/巴洛克珍珠并置于金色托座；Y形交汇处仅一个圆形金色花丝花朵连接件；竖直下垂链路依次为小珍珠、较大的椭圆形奶油色珍珠、小珍珠、长段金色链条、最后一颗圆形白色终端珍珠。4秒内只有一个主体动作：模特只用一根手指触碰最低一颗终端珍珠一次，然后释放，另一只手和肩颈保持稳定。只有一个镜头动作：镜头只做一次极轻微的向前推近。第4秒完整 Y 路径清晰，终端珍珠完成一次小幅摆动后停稳。禁止手部变形、额外手势、额外首饰、项链层数变化、改变连接件、改变珍珠顺序、缩短链路、文字、logo或水印。声音：轻微衣料声与屋顶风声，无对白。",
-      "end_state_zh": "最低终端珍珠被触碰一次并释放，完成一次小幅摆动后停稳，完整项链路径与领口保持清晰。"
+      "reference_role_map": "@Image1 为已批准首帧，锁定成年深肤色女模特、自然肤质、象牙色开口领口、胸口到下巴构图、单手从项链下方自然放松开始的姿势与 The Falling Pearl 默认款完整 Y 形项链。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持成年深肤色女模特的面部下半部、自然肤质、象牙色开口领口、胸口到下巴构图、单手从项链下方自然放松开始的姿势与 The Falling Pearl 默认款完整 Y 形项链不变。产品身份锁定为：细金色链条；对称上方双股链条交替排列小型圆形白色珍珠与较大的椭圆形奶油色/巴洛克珍珠并置于金色托座；Y形交汇处仅一个圆形金色花丝花朵连接件；竖直下垂链路依次为小珍珠、较大的椭圆形奶油色珍珠、小珍珠、长段金色链条、最后一颗圆形白色终端珍珠。4秒内只有一个主体动作：模特的手从项链下方自然放松的位置只向上抬一次，朝向最低一颗终端珍珠。只有一个镜头动作：镜头只做一次克制的向前推近。第4秒完整 Y 路径清晰。禁止手部变形、额外手势、额外首饰、项链层数变化、改变连接件、改变珍珠顺序、缩短链路、文字、logo或水印。声音：轻微衣料声与屋顶风声，无对白。",
+      "end_state_zh": "手已从项链下方自然放松的位置上移至最低终端珍珠附近，完整项链路径与领口保持清晰。"
     },
     {
       "id": "FF_FALLING_PEARL_04_ROOFTOP_WALK_END",
@@ -149,7 +149,7 @@
           "timecode": "4.9-7.8",
           "frame_id": "FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH",
           "source_clip_range": "0.4-3.3",
-          "purpose": "Model-led lowest-pearl touch",
+          "purpose": "Model-led lowest-pearl wearing identification",
           "post_copy": "A line that falls."
         },
         {
