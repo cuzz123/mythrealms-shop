@@ -188,7 +188,7 @@ cut_contract_version: 1
 
 **All-mode prompt：** 16:9，4 秒。图 1 只锁定完整产品结构、深蓝矿石、浅粉珍珠、古金纹样和材质。黑曜石台面上的完整首饰 Hero，100mm 极慢推进；左侧产品保持清晰，右侧保留干净黑色负空间，暖金光从宽变窄并停在产品上。无手、无人、无文字、无 logo。避免：改变珠序、过曝金属、镜头抖动、生成可读文字。声音：低频渐弱，最后 0.5 秒安静；后期叠加 MYTHREALMS 标志与文案。
 
-## 剪辑合同与剪辑节拍表
+## Edit Contracts｜剪辑合同与剪辑节拍表
 
 | Boundary | Edit transition | Visual match | Audio bridge | Retiming / post | Retry rule |
 |---|---|---|---|---|---|
