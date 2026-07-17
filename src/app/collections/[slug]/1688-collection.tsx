@@ -166,6 +166,7 @@ export function Collection1688({
                   name: productDisplayName(product),
                   slug: product.slug,
                   images: product.images,
+                  imageRoles: product.imageRoles,
                   variants: [{ price: product.price }],
                   comparePrice: product.compareAt ?? null,
                 }}

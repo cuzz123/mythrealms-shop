@@ -32,6 +32,7 @@ export function HomepagePearlEdit({ products }: HomepagePearlEditProps) {
                 name: productDisplayName(product),
                 slug: product.slug,
                 images: [product.imageRoles?.primary || product.image],
+                imageRoles: product.imageRoles,
                 variants: [{ price: product.price }],
                 comparePrice: product.compareAt ?? null,
               }}

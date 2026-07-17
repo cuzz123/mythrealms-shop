@@ -47,6 +47,26 @@ test.describe("storefront release flows", () => {
     await expect(page.locator('[data-product-type]:not([data-product-type="earrings"])')).toHaveCount(0);
   });
 
+  test("product card media only exposes verified wearing views", async ({ page }) => {
+    await page.goto("/collections/pearl-series");
+
+    const newSeriesImages = page
+      .locator('a[href="/products/new-series-round-shell-disc-drops"]')
+      .locator("img");
+    await newSeriesImages.first().scrollIntoViewIfNeeded();
+    await expect(newSeriesImages).toHaveCount(1);
+    await expect(newSeriesImages.first()).toHaveJSProperty("complete", true);
+    expect(await newSeriesImages.first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
+
+    const sourcePreservedImages = page
+      .locator('a[href="/products/pearl-series-01"]')
+      .locator("img");
+    await sourcePreservedImages.first().scrollIntoViewIfNeeded();
+    await expect(sourcePreservedImages).toHaveCount(2);
+    await expect(sourcePreservedImages.first()).toHaveJSProperty("complete", true);
+    expect(await sourcePreservedImages.first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
+  });
+
   test("desktop menus support keyboard close and focus return", async ({ page }) => {
     await page.goto("/");
 

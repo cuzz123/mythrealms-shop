@@ -30,6 +30,13 @@ test("homepage category stories defer image motion", () => {
   assert.doesNotMatch(stories, /transition-transform|duration-500|group-hover:scale/);
 });
 
+test("product cards never infer wearing media from array position or filename", () => {
+  const card = source("src/components/product/ProductCard.tsx");
+  assert.doesNotMatch(card, /images\[1\]/);
+  assert.doesNotMatch(card, /includes\(["']-worn\./);
+  assert.match(card, /imageRoles\?\.wearing/);
+});
+
 test("the legacy loyalty route is noindex and makes no unimplemented reward promises", () => {
   const loyalty = source("src/app/loyalty/page.tsx");
   assert.match(loyalty, /index:\s*false/);
