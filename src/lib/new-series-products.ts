@@ -34,6 +34,10 @@ function createProduct(input: NewSeriesProductInput): Product {
     price: input.price,
     image: images[0],
     images,
+    imageRoles: {
+      primary: images[0],
+      ...(images[1] ? { detail: images[1] } : {}),
+    },
     tag: "New",
     isBestSeller: false,
     isNew: true,

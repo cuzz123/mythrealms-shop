@@ -69,7 +69,11 @@ function isStorefrontProductSlug(slug: string): slug is StorefrontProductSlug {
 }
 
 function cloneProduct(product: Product): Product {
-  return { ...product, images: [...product.images] };
+  return {
+    ...product,
+    images: [...product.images],
+    imageRoles: product.imageRoles ? { ...product.imageRoles } : undefined,
+  };
 }
 
 export function isCustomerVisibleProduct(

@@ -1,5 +1,32 @@
 // 1688 Products  - MythRealms
-export interface Product { id: string; name: string; slug: string; category: string; categoryName: string; description: string; price: number; compareAt?: number; image: string; images: string[]; tag?: string; isBestSeller: boolean; isNew: boolean; isActive: boolean; inStock: boolean; rating: number; reviewCount: number; intention?: string; benefitTriplet?: string; }
+export type ProductImageRoles = {
+  primary: string;
+  wearing?: string;
+  detail?: string;
+};
+
+export interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  category: string;
+  categoryName: string;
+  description: string;
+  price: number;
+  compareAt?: number;
+  image: string;
+  images: string[];
+  imageRoles?: ProductImageRoles;
+  tag?: string;
+  isBestSeller: boolean;
+  isNew: boolean;
+  isActive: boolean;
+  inStock: boolean;
+  rating: number;
+  reviewCount: number;
+  intention?: string;
+  benefitTriplet?: string;
+}
 export interface Category { name: string; slug: string; description: string; image?: string; }
 
 export const CATEGORIES: Category[] = [
@@ -133,8 +160,15 @@ export const PRODUCTS: Product[] = SOURCE_PRODUCTS.map((sourceProduct) => {
   product.isBestSeller = false;
   product.tag = product.isNew ? "New" : undefined;
   if (images) {
-    product.image = images[0];
+    const [primary, alternate, detail] = images;
+    const hasSupplierWearingImage = product.slug !== "pearl-series-18";
+    product.image = primary;
     product.images = [...images];
+    product.imageRoles = {
+      primary,
+      ...(hasSupplierWearingImage ? { wearing: alternate } : {}),
+      detail: hasSupplierWearingImage ? detail : alternate,
+    };
   }
   return product;
 });
