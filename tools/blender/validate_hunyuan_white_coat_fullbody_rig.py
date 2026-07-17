@@ -170,6 +170,18 @@ def validate() -> list[str]:
                 errors.append(
                     f"upper_leg.{side} neutral IK twist is {neutral_delta:.3f} degrees"
                 )
+        foot = rig.pose.bones.get(f"foot.{side}")
+        if foot is None:
+            continue
+        rotation_constraints = [
+            constraint
+            for constraint in foot.constraints
+            if constraint.type == "COPY_ROTATION"
+            and constraint.target == rig
+            and constraint.subtarget == f"foot_ik.{side}"
+        ]
+        if len(rotation_constraints) != 1:
+            errors.append(f"foot.{side} must copy rotation from foot_ik.{side}")
     return errors
 
 

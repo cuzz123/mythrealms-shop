@@ -1454,12 +1454,15 @@
       "name": "白色长外套全身女模特",
       "category": "character",
       "status": "approved_source",
+      "rig_status": "rigged_candidate",
       "version": "v1",
       "source_paths": [
         "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/source.glb",
         "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/thumbnail.png",
         "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_RIG_v1.blend",
-        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/rig_v1_checkpoints/01_neutral.png"
+        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/rig_v1_checkpoints/01_neutral.png",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_ALL_3_REVIEW.mp4"
       ],
       "tags": [
         "hunyuan3d",
@@ -1471,7 +1474,8 @@
       "usage": {
         "default_import": "append",
         "walk_rig_candidate": true,
-        "rig_object": "RIG_WHITE_COAT_FULLBODY"
+        "rig_object": "RIG_WHITE_COAT_FULLBODY",
+        "walk_pack": "WHITE_COAT_WALK_PACK_001"
       },
       "quality_gate": [
         "preserve original source.glb",
@@ -1479,6 +1483,245 @@
         "validate fullbody rig before building walk actions"
       ],
       "notes": "2026-07-17 fullbody rig v1; 292098-vertex render mesh, 29334-vertex hidden binding proxy, 27-bone rig with foot IK."
+    },
+    {
+      "id": "ACT_WHITE_COAT_RUNWAY_WALK_01",
+      "name": "白色长外套·正面台步",
+      "category": "motion",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/01_ACT_WHITE_COAT_RUNWAY_WALK_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "CAM_WHITE_COAT_RUNWAY_DOLLY_01",
+        "suitable_for": [
+          "全身台步预演",
+          "长外套行走测试",
+          "模特广告走位"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "CAM_WHITE_COAT_RUNWAY_DOLLY_01",
+      "name": "正面全身·同步后移",
+      "category": "camera_rig",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/01_ACT_WHITE_COAT_RUNWAY_WALK_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "ACT_WHITE_COAT_RUNWAY_WALK_01",
+        "suitable_for": [
+          "全身走路跟拍",
+          "模特台步预演",
+          "动作验收"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "ACT_WHITE_COAT_WALK_IN_STOP_01",
+      "name": "白色长外套·走入停下",
+      "category": "motion",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/02_ACT_WHITE_COAT_WALK_IN_STOP_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "CAM_WHITE_COAT_WALK_IN_STOP_01",
+        "suitable_for": [
+          "全身台步预演",
+          "长外套行走测试",
+          "模特广告走位"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "CAM_WHITE_COAT_WALK_IN_STOP_01",
+      "name": "正面全身·落点定格",
+      "category": "camera_rig",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/02_ACT_WHITE_COAT_WALK_IN_STOP_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "ACT_WHITE_COAT_WALK_IN_STOP_01",
+        "suitable_for": [
+          "全身走路跟拍",
+          "模特台步预演",
+          "动作验收"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "ACT_WHITE_COAT_TRACKING_PASS_01",
+      "name": "白色长外套·三分侧跟行",
+      "category": "motion",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/03_ACT_WHITE_COAT_TRACKING_PASS_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "CAM_WHITE_COAT_TRACKING_PASS_01",
+        "suitable_for": [
+          "全身台步预演",
+          "长外套行走测试",
+          "模特广告走位"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "CAM_WHITE_COAT_TRACKING_PASS_01",
+      "name": "右前三分侧·平行跟拍",
+      "category": "camera_rig",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/03_ACT_WHITE_COAT_TRACKING_PASS_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "ACT_WHITE_COAT_TRACKING_PASS_01",
+        "suitable_for": [
+          "全身走路跟拍",
+          "模特台步预演",
+          "动作验收"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "WHITE_COAT_WALK_PACK_001",
+      "name": "白色长外套全身走路动作镜头测试包",
+      "category": "motion_camera_pack",
+      "status": "candidate_review",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/motion_manifest.json",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_ALL_3_REVIEW.mp4"
+      ],
+      "tags": [
+        "motion-pack",
+        "camera-pack",
+        "white-coat",
+        "fullbody",
+        "walk"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "suitable_for": [
+          "全身台步预演",
+          "长外套走路测试",
+          "模特镜头调度"
+        ]
+      },
+      "quality_gate": [
+        "3个动作与3个镜头完整存在",
+        "脚底落点和停步保持数值验证通过",
+        "连续播放由用户验收"
+      ],
+      "notes": "候选测试包；不得在用户动态验收前标记 approved。"
     }
   ]
 }

@@ -1,0 +1,25 @@
+# This is an Asset Catalog Definition file for Blender.
+# Keep this file with the asset library; do not generate a new UUID for an existing catalog.
+VERSION 1
+35fc32ae-26a7-4c86-b2a0-01381e7b00a1:Products:产品
+45fc32ae-26a7-4c86-b2a0-01381e7b00a2:Products/Earrings:产品/耳环
+55fc32ae-26a7-4c86-b2a0-01381e7b00a3:Products/Necklaces:产品/项链
+65fc32ae-26a7-4c86-b2a0-01381e7b00a4:Products/Bracelets:产品/手链
+75fc32ae-26a7-4c86-b2a0-01381e7b00a5:Products/Rings:产品/戒指
+85fc32ae-26a7-4c86-b2a0-01381e7b00a6:Camera_Rigs:镜头
+95fc32ae-26a7-4c86-b2a0-01381e7b00a7:Camera_Rigs/Push_In:镜头/推进
+a5fc32ae-26a7-4c86-b2a0-01381e7b00a8:Camera_Rigs/Orbit:镜头/环绕
+b5fc32ae-26a7-4c86-b2a0-01381e7b00a9:Camera_Rigs/Tracking:镜头/滑轨
+c5fc32ae-26a7-4c86-b2a0-01381e7b00aa:Camera_Rigs/Macro:镜头/微距
+d5fc32ae-26a7-4c86-b2a0-01381e7b00ab:Camera_Rigs/Transition:镜头/转场
+e5fc32ae-26a7-4c86-b2a0-01381e7b00ac:Scenes:场景
+f5fc32ae-26a7-4c86-b2a0-01381e7b00ad:Lighting:灯光
+05fc32ae-26a7-4c86-b2a0-01381e7b00ae:Characters:角色
+15fc32ae-26a7-4c86-b2a0-01381e7b00af:Motions:动作与站位
+25fc32ae-26a7-4c86-b2a0-01381e7b00b0:Styles:风格与后期
+36fc32ae-26a7-4c86-b2a0-01381e7b00b1:FX:特效
+46fc32ae-26a7-4c86-b2a0-01381e7b00b2:Shot_Templates:镜头模板
+5df25c2a-d38b-4c9c-8e5c-911d5cab2cb0:Motions/Jewelry_Model/Right2_Gold:动作与站位/首饰模特/右二金色礼服
+b9688236-7945-4786-b7fa-2d007689e645:Camera_Rigs/Jewelry_Model/Right2_Gold:镜头/首饰模特/右二金色礼服
+8f81454a-f6f3-4f20-8e50-67418c530001:Motions/Model_Walk/White_Coat:动作与站位/模特走路/白色长外套
+8f81454a-f6f3-4f20-8e50-67418c530002:Camera_Rigs/Model_Walk/White_Coat:镜头/模特走路/白色长外套
