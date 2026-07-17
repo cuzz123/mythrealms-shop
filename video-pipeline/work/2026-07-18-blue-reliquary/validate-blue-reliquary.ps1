@@ -34,4 +34,10 @@ $paths = [regex]::Matches($text, '(?m)^\d+\. `(D:\\[^`]+\.(?:png|jpe?g|webp))`')
 if ($paths.Count -eq 0) { throw 'No absolute upload reference paths found' }
 foreach ($path in $paths) { if (-not (Test-Path -LiteralPath $path)) { throw "Missing reference: $path" } }
 
-"constraints=ok; shots=15; boundaries=14; references=$($paths.Count)"
+$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..\..')).Path
+$libraryReadme = Join-Path $repoRoot 'video-pipeline\asset-library\10-storyboard-videos\VID_MR_BLUE_RELIQUARY_001\README.md'
+$vaultDir = Join-Path $repoRoot 'video-pipeline\asset-library\obsidian-vault'
+$vaultCard = Get-ChildItem -LiteralPath $vaultDir -Recurse -File -Filter 'VID_MR_BLUE_RELIQUARY_001*.md' | Select-Object -First 1
+if (-not (Test-Path -LiteralPath $libraryReadme) -or -not $vaultCard) { throw 'Missing archive records' }
+
+"constraints=ok; shots=15; boundaries=14; references=$($paths.Count); archive=ok"
