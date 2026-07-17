@@ -1,0 +1,18 @@
+# CAM_RIGHT2_GOLD_TILT_LEFT_EARRING_01｜左三分侧·微弧靠近
+
+- **状态：** approved（已验收）
+- **内部质检：** 已验收
+- **配套动作：** `ACT_RIGHT2_GOLD_TILT_LEFT_EARRING_01`（左倾耳饰定格）
+- **角色：** `CHAR_HUNYUAN_RIGHT2_GOLD_001`
+- **规格：** 72 帧 @ 24 fps
+
+## 文件
+
+- [完整镜头预览](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/review_clips/07_ACT_RIGHT2_GOLD_TILT_LEFT_EARRING_01/preview.mp4)
+- [镜头缩略图](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/thumbnails/07_ACT_RIGHT2_GOLD_TILT_LEFT_EARRING_01.png)
+- [Blender 整包](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/RIGHT2_GOLD_JEWELRY_SAFE_PACK_v1.blend)
+- [动作与镜头清单](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/motion_manifest.json)
+
+## 调用
+
+从整包 Blend 的 `Object` 中追加 `CAM_RIGHT2_GOLD_TILT_LEFT_EARRING_01` 与对应 `FOCUS_*` 对象，并把场景相机切换到该 Camera。该镜头与 `ACT_RIGHT2_GOLD_TILT_LEFT_EARRING_01` 一一配套。

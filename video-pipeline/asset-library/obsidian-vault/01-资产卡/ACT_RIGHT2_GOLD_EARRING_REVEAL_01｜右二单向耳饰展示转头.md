@@ -11,6 +11,7 @@ armature: RIG_RIGHT2_GOLD_UPPER_BODY
 frames: 72
 fps: 24
 loop: false
+qc_status: approved
 ---
 
 # ACT_RIGHT2_GOLD_EARRING_REVEAL_01｜右二单向耳饰展示转头

@@ -2,7 +2,8 @@
 
 - **动作 ID:** `ACT_RIGHT2_GOLD_EARRING_REVEAL_01`
 - **版本:** v1
-- **状态:** ✅ approved
+- **状态：** approved（已验收）
+- **内部质检：** 已验收
 - **角色:** `CHAR_HUNYUAN_RIGHT2_GOLD_001`
 - **骨架:** `RIG_RIGHT2_GOLD_UPPER_BODY`
 - **可选相机:** `CAM_RIGHT2_GOLD_EARRING_REVEAL_TEST`

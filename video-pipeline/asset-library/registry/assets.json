@@ -696,7 +696,7 @@
       "id": "RIGHT2_GOLD_JEWELRY_SAFE_PACK_001",
       "name": "右二金色礼服·首饰模特安全动作镜头包",
       "category": "motion_camera_pack",
-      "status": "candidate_review",
+      "status": "approved",
       "version": "v1",
       "source_paths": [
         "../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/RIGHT2_GOLD_JEWELRY_SAFE_PACK_v1.blend",
@@ -731,7 +731,7 @@
         "原始高精度混元网格保持可见",
         "2个已验收、28个候选待用户复核"
       ],
-      "notes": "每项72帧、24fps、3秒；双臂锁定，仅使用已验证的头颈胸、脊柱与极小肩线变化。第24项低机位镜头已在全量审片中修正。"
+      "notes": "30 个动作与 30 个镜头已完成内部质检，并于 2026-07-17 由用户批量验收。"
     },
     {
       "id": "CHAR_MR_TALENT_EBONY_LINEN_001",

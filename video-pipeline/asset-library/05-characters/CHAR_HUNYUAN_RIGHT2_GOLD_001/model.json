@@ -2,7 +2,12 @@
   "id": "CHAR_HUNYUAN_RIGHT2_GOLD_001",
   "status": "available_limited",
   "role": "female_editorial_character_midshot_unrigged",
-  "format": ["blend", "glb", "obj_zip", "png"],
+  "format": [
+    "blend",
+    "glb",
+    "obj_zip",
+    "png"
+  ],
   "source": {
     "reference": "User-provided 右2 front / right-front / back contact sheet",
     "generator": "Tencent Hunyuan 3D Pro 3.1",
@@ -11,7 +16,11 @@
       "model": "3.1",
       "generate_type": "Normal",
       "pbr": true,
-      "views": ["front", "right_front", "back"],
+      "views": [
+        "front",
+        "right_front",
+        "back"
+      ],
       "credit_consumed": 40,
       "credit_details": {
         "GenerateType-Normal": 20,
@@ -27,8 +36,16 @@
   },
   "geometry": {
     "generated_bbox_m": {
-      "min": [-0.1889, -0.1629, 0.0],
-      "max": [0.2012, 0.1853, 1.1349]
+      "min": [
+        -0.1889,
+        -0.1629,
+        0.0
+      ],
+      "max": [
+        0.2012,
+        0.1853,
+        1.1349
+      ]
     },
     "height_m": 1.1349,
     "coverage": "head through above-knee gold dress silhouette; lower legs and shoes are not present",
@@ -50,13 +67,48 @@
         "ACT_RIGHT2_GOLD_EDITORIAL_ARM_01",
         "ACT_RIGHT2_GOLD_SIDE_LEAN_01",
         "ACT_RIGHT2_GOLD_UPPER_BODY_SHOWREEL_01",
-        "ACT_RIGHT2_GOLD_EARRING_REVEAL_01"
+        "ACT_RIGHT2_GOLD_EARRING_REVEAL_01",
+        "ACT_RIGHT2_GOLD_JEWELRY_POISE_01"
       ],
       "camera": "CAM_RIGHT2_GOLD_UPPER_BODY_SHOWREEL",
       "prototype_camera": "CAM_RIGHT2_GOLD_EARRING_REVEAL_TEST",
       "prototype_action": "ACT_RIGHT2_GOLD_EARRING_REVEAL_01",
-      "prototype_frame_range": [1, 72],
-      "frame_range": [1, 240],
+      "prototype_frame_range": [
+        1,
+        72
+      ],
+      "approved_jewelry_pose": {
+        "file": "RIGHT2_GOLD_JEWELRY_POSE_v1.blend",
+        "action": "ACT_RIGHT2_GOLD_JEWELRY_POISE_01",
+        "camera": "CAM_RIGHT2_GOLD_JEWELRY_POISE_01",
+        "frame_range": [
+          1,
+          72
+        ],
+        "fps": 24,
+        "scope": "safe_head_neck_chest_motion_with_locked_arms"
+      },
+      "safe_motion_pack": {
+        "id": "RIGHT2_GOLD_JEWELRY_SAFE_PACK_001",
+        "file": "../../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/RIGHT2_GOLD_JEWELRY_SAFE_PACK_v1.blend",
+        "manifest": "../../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/motion_manifest.json",
+        "motion_count": 30,
+        "camera_count": 30,
+        "approved_count": 30,
+        "candidate_count": 0,
+        "internal_qc_status": "approved",
+        "review_clip_count": 30,
+        "frame_range": [
+          1,
+          72
+        ],
+        "fps": 24,
+        "scope": "safe_head_neck_chest_locked_arms"
+      },
+      "frame_range": [
+        1,
+        240
+      ],
       "fps": 24
     },
     "required_before_motion_use": [
@@ -74,6 +126,15 @@
     "source_obj_zip": "source/hunyuan-raw/RIGHT2_GOLD.obj.zip",
     "job_record": "job.json",
     "rigged_upper_body": "RIGHT2_GOLD_RIGGED_UPPER_BODY_v1.blend",
+    "approved_jewelry_pose": "RIGHT2_GOLD_JEWELRY_POSE_v1.blend",
+    "approved_jewelry_pose_preview": "preview/jewelry_pose_v1/RIGHT2_GOLD_JEWELRY_POSE_PREVIEW.mp4",
+    "approved_jewelry_pose_contact_sheet": "preview/jewelry_pose_v1/RIGHT2_GOLD_JEWELRY_POSE_CONTACT_SHEET.png",
+    "safe_motion_pack_blend": "../../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/RIGHT2_GOLD_JEWELRY_SAFE_PACK_v1.blend",
+    "safe_motion_pack_manifest": "../../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/motion_manifest.json",
+    "safe_motion_pack_contact_sheet": "../../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/RIGHT2_GOLD_JEWELRY_SAFE_PACK_CONTACT_SHEET.png",
+    "safe_motion_pack_review_sheet": "../../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/RIGHT2_GOLD_JEWELRY_SAFE_PACK_REVIEW_SHEET.png",
+    "safe_motion_pack_full_review_reel": "../../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/RIGHT2_GOLD_ALL_30_ACTIONS_REVIEW.mp4",
+    "safe_motion_pack_full_review_sheets": "../../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/full_review_sheets",
     "rigging_report": "Rigging.md"
   },
   "quality_boundary": "A high-fidelity, textured gold-dress character for close and medium previs. The rigged variant supports restrained head, neck, spine, shoulder and arm motion. It is not a full-body animation asset: lower legs and shoes are absent, and the source mesh has no production retopology."

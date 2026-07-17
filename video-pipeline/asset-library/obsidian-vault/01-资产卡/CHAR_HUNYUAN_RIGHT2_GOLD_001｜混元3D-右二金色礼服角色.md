@@ -18,6 +18,9 @@ tags: [角色, 右二, 女性, 金色礼服, 耳饰, 混元3D, PBR]
 - [绑定版上半身 Blend](file:///D:/mythrealms-shop/video-pipeline/asset-library/05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/RIGHT2_GOLD_RIGGED_UPPER_BODY_v1.blend)
 - [耳饰展示转头动作预览](file:///D:/mythrealms-shop/video-pipeline/asset-library/05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/rig_v5_earring_reveal/RIGHT2_GOLD_EARRING_REVEAL_PREVIEW.mp4) · [联系表](file:///D:/mythrealms-shop/video-pipeline/asset-library/05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/rig_v5_earring_reveal/RIGHT2_GOLD_EARRING_REVEAL_CONTACT_SHEET.png)
 - [动作卡: ACT_RIGHT2_GOLD_EARRING_REVEAL_01](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/ACT_RIGHT2_GOLD_EARRING_REVEAL_01/Instructions.md)
+- [综合首饰展示动作预览](file:///D:/mythrealms-shop/video-pipeline/asset-library/05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/jewelry_pose_v1/RIGHT2_GOLD_JEWELRY_POSE_PREVIEW.mp4) · [联系表](file:///D:/mythrealms-shop/video-pipeline/asset-library/05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/jewelry_pose_v1/RIGHT2_GOLD_JEWELRY_POSE_CONTACT_SHEET.png)
+- [动作卡: 综合首饰展示·抬颏侧转](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/ACT_RIGHT2_GOLD_JEWELRY_POISE_01/Instructions.md) · [镜头卡: 缓慢推近](file:///D:/mythrealms-shop/video-pipeline/asset-library/02-camera-rigs/CAM_RIGHT2_GOLD_JEWELRY_POISE_01/Instructions.md)
+- [30 动作 + 30 镜头安全资产包](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/Instructions.md) · [总览](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/RIGHT2_GOLD_JEWELRY_SAFE_PACK_CONTACT_SHEET.png) · [动作轨迹](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/RIGHT2_GOLD_JEWELRY_SAFE_PACK_REVIEW_SHEET.png)
 - [GLB 原始模型](file:///D:/mythrealms-shop/video-pipeline/asset-library/05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/source/hunyuan-raw/RIGHT2_GOLD.glb)
 - [混元原始预览](file:///D:/mythrealms-shop/video-pipeline/asset-library/05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/source/hunyuan-raw/HunyuanPreview.png)
 - [调用说明](file:///D:/mythrealms-shop/video-pipeline/asset-library/05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/Instructions.md)
@@ -26,6 +29,10 @@ tags: [角色, 右二, 女性, 金色礼服, 耳饰, 混元3D, PBR]
 ## 动作资产
 
 - [[ACT_RIGHT2_GOLD_EARRING_REVEAL_01｜右二单向耳饰展示转头]] — 3 s 单向转头，骨架 `RIG_RIGHT2_GOLD_UPPER_BODY`，72 帧 @ 24 fps。
+- [[ACT_RIGHT2_GOLD_JEWELRY_POISE_01｜综合首饰展示·抬颏侧转]] — 3 s 低头起势、缓慢抬颏并单向侧转，双臂锁定，已验收。
+- [[CAM_RIGHT2_GOLD_JEWELRY_POISE_01｜综合首饰展示·缓慢推近]] — 配套脸部、耳饰与肩线近景镜头，已验收。
+- [[RIGHT2_GOLD_JEWELRY_SAFE_PACK_001｜右二金色礼服·首饰模特安全动作镜头包]] — 30 个动作与 30 个镜头；30 个已验收，0 个候选。
+- [[右二金色礼服动作与镜头索引]] — 60 张独立资产卡与逐项调用入口。
 
 ## 当前可用范围
 
