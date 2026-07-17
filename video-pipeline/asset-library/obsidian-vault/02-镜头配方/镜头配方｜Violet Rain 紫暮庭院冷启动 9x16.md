@@ -32,7 +32,6 @@ tags: [Violet Rain, 紫暮庭院, TikTok, Seedance, 耳饰, 冷启动, 9x16]
 ## 版本裁决
 
 - `FF_VIOLET_RAIN_01_HUMAN_HOOK-v2.png`：**approved**，唯一允许进入模板、剪辑和投放的 Frame 01。
-- `FF_VIOLET_RAIN_01_MACRO_HOOK-v1.png`：**rejected / unapproved / deleted**。原因：仅耳部产品近景，缺少真实脸部、眼神和真人动作钩子；已从交付资产文件夹删除，不得进入 `template.json`、剪辑时间线或投放素材。
 
 ## 已批准首帧
 
@@ -41,7 +40,7 @@ tags: [Violet Rain, 紫暮庭院, TikTok, Seedance, 耳饰, 冷启动, 9x16]
 | 01 | 真人视觉钩子＋产品揭示 | 脸、眼睛、头肩主导；头发准备离开耳侧；一只完整耳饰可读 | [FF_VIOLET_RAIN_01_HUMAN_HOOK-v2.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_VIOLET_RAIN_COLD_START_001/first-frames/FF_VIOLET_RAIN_01_HUMAN_HOOK-v2.png) |
 | 02 | 精确产品证明 | 双只分离、完整、正面可读；湿石灰岩与单一路径紫色反光 | [FF_VIOLET_RAIN_02_WET_LIMESTONE_PAIR-v1.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_VIOLET_RAIN_COLD_START_001/first-frames/FF_VIOLET_RAIN_02_WET_LIMESTONE_PAIR-v1.png) |
 | 03 | 模特主导佩戴识别 | 模特占约 60-70%；中景肖像；庭院保留深度；耳饰非微距 | [FF_VIOLET_RAIN_03_WEARING_PROFILE-v1.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_VIOLET_RAIN_COLD_START_001/first-frames/FF_VIOLET_RAIN_03_WEARING_PROFILE-v1.png) |
-| 04 | 场景主导情绪 CTA | 环境占约 60-70%；模特占约 25-35%并位于右三分位；左侧留白 | [FF_VIOLET_RAIN_04_ARCH_LOOKBACK_END-v1.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_VIOLET_RAIN_COLD_START_001/first-frames/FF_VIOLET_RAIN_04_ARCH_LOOKBACK_END-v1.png) |
+| 04 | 场景主导情绪 CTA | 环境占约 60-70%；模特占约 25-35%并位于右三分位；左侧留白 | [FF_VIOLET_RAIN_04_ARCH_LOOKBACK_END-v3.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_VIOLET_RAIN_COLD_START_001/first-frames/FF_VIOLET_RAIN_04_ARCH_LOOKBACK_END-v3.png) |
 
 ## Seedance 2.0 Fast｜4 秒 I2V 提示词
 
@@ -53,7 +52,7 @@ tags: [Violet Rain, 紫暮庭院, TikTok, Seedance, 耳饰, 冷启动, 9x16]
 
 ### 02｜精确产品证明
 
-`@Image1为首帧，严格保持两只Violet Rain耳饰的数量、分离位置、比例与全部结构不变，双只始终完整可见。4秒内镜头以当前俯视角做一次缓慢顺时针小弧移；一条狭窄紫色反光只扫过两只耳饰一次，耳饰本体保持静止。第4秒两只不规则白色珍珠、紫色宝石边框、小圆紫色耳钉与单一金色连接环仍清晰可读。禁止变形、复制、增加宝石或道具，不生成文字。声音：轻微雨后庭院环境音，无对白。`
+`@Image1为首帧，严格保持两只Violet Rain耳饰的数量、分离位置、比例与全部结构不变，双只始终完整可见。4秒内仅有一个受控主体侧动作：一条狭窄紫色反射光从左至右只扫过静止的两只耳饰一次，耳饰本体、位置和几何全程静止。仅有一个镜头动作：镜头从当前俯视角做一次缓慢顺时针上方小弧移。第4秒两只不规则白色珍珠、紫色宝石边框、小圆紫色耳钉与单一金色连接环仍清晰可读。禁止变形、复制、增加宝石或道具，不生成文字。声音：轻微雨后庭院环境音，无对白。`
 
 终点：反光离开产品，双只耳饰仍分离、完整、静止并全部在画面内。
 
@@ -65,7 +64,7 @@ tags: [Violet Rain, 紫暮庭院, TikTok, Seedance, 耳饰, 冷启动, 9x16]
 
 ### 04｜场景主导情绪 CTA
 
-`@Image1为首帧，严格保持同一成年模特身份、深梅色服装、右侧三分位构图、石拱门、紫色暮空、湿石灰岩庭院与Violet Rain耳饰不变。4秒内模特向庭院深处走两步，同时完成一次小幅回望；镜头只做一次与她平行的缓慢侧向跟移。建筑、天空和庭院始终占画面约60-70%，模特保持约25-35%，左侧负空间不得被遮挡。第4秒她在右侧停住，脸与耳饰成为最后点缀。禁止人物放大、居中、复制首饰或改变建筑，不生成文字。声音：脚步、水面反射般的湿地声与远处庭院环境音，无对白。`
+`@Image1为首帧，严格保持同一成年模特身份、深梅色服装、右侧三分位构图、石拱门、紫色暮空、湿石灰岩庭院与Violet Rain耳饰不变。4秒内仅有一个模特动作：她站在原地完成一次小幅回望和头部转向，身体与双脚保持静止，不走路、不迈步。仅有一个镜头动作：镜头做一次克制的横向侧滑。建筑、天空和庭院始终占画面约60-70%，模特保持约25-35%，左侧负空间不得被遮挡。第4秒她在右侧停住，脸与耳饰成为最后点缀。禁止人物放大、居中、复制首饰或改变建筑，不生成文字。声音：湿地声与远处庭院环境音，无对白。`
 
 终点：模特在右三分位完成回望，脸与耳饰停住，拱门和暮空保留左侧 CTA 空间。
 
