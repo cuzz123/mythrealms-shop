@@ -1,0 +1,196 @@
+﻿{
+  "schema_version": "1.0",
+  "id": "SHOT_VIOLET_RAIN_COLD_START_001",
+  "version": "v1",
+  "asset_type": "shot_template",
+  "status": "approved",
+  "title": "Violet Rain Purple Dusk Courtyard Cold Start",
+  "title_zh": "Violet Rain 紫暮庭院冷启动",
+  "format": "9:16",
+  "campaign": "violet_rain_cold_start",
+  "landing_path": "/products/new-series-purple-gem-pearl-drops",
+  "thumbnail": "Thumbnail.png",
+  "product": {
+    "name": "The Violet Rain - Earrings",
+    "slug": "new-series-purple-gem-pearl-drops",
+    "price_usd": 42.99,
+    "source_gallery": "public/images/products/new-series/new-series-purple-gem-pearl-drops/"
+  },
+  "creative_rhythm": [
+    "01 human visual hook + product reveal",
+    "02 exact product proof",
+    "03 model-led wearing/lifestyle identification",
+    "04 scene-led emotional CTA"
+  ],
+  "frames": [
+    {
+      "id": "FF_VIOLET_RAIN_01_HUMAN_HOOK",
+      "role": "human_visual_hook_product_reveal",
+      "role_zh": "真人视觉钩子＋产品揭示",
+      "path": "first-frames/FF_VIOLET_RAIN_01_HUMAN_HOOK-v2.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定模特、耳饰、服装、灯光与庭院构图。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持成年模特面部、自然肤质、深色头发、深梅色无袖上衣、庭院构图与Violet Rain耳饰几何不变。4秒内她完成一次把头发从耳侧轻轻拨开的动作，目光保持朝向镜头，耳饰只产生一次自然微摆；镜头从当前构图缓慢推近约5%，第4秒让眼睛与完整耳饰共同清晰。保留不规则白色珍珠、紫色宝石边框、小圆紫色耳钉与单一金色连接环；不新增首饰，不改变耳朵、手指或脸部，不生成文字。声音：低庭院环境音、轻微发丝与布料声，无对白。",
+      "end_state_zh": "眼睛与完整耳饰共同清晰，手停在发后，产品结构未改变。"
+    },
+    {
+      "id": "FF_VIOLET_RAIN_02_WET_LIMESTONE_PAIR",
+      "role": "exact_product_proof",
+      "role_zh": "精确双只产品证明",
+      "path": "first-frames/FF_VIOLET_RAIN_02_WET_LIMESTONE_PAIR-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，只锁定双只耳饰与湿石灰岩场景。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持两只Violet Rain耳饰的数量、分离位置、比例与全部结构不变，双只始终完整可见。4秒内镜头以当前俯视角做一次缓慢顺时针小弧移；一条狭窄紫色反光只扫过两只耳饰一次，耳饰本体保持静止。第4秒两只不规则白色珍珠、紫色宝石边框、小圆紫色耳钉与单一金色连接环仍清晰可读。禁止变形、复制、增加宝石或道具，不生成文字。声音：轻微雨后庭院环境音，无对白。",
+      "end_state_zh": "反光离开产品，双只耳饰仍分离、完整、静止并全部在画面内。"
+    },
+    {
+      "id": "FF_VIOLET_RAIN_03_WEARING_PROFILE",
+      "role": "model_led_wearing_identification",
+      "role_zh": "模特主导佩戴识别",
+      "path": "first-frames/FF_VIOLET_RAIN_03_WEARING_PROFILE-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定同一模特、佩戴耳饰、服装与庭院深度。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持同一成年模特的面部、橄榄肤色、深色头发、深梅色无袖上衣、手在锁骨附近的位置、庭院布局与Violet Rain耳饰不变。4秒内她只把下巴朝暖色壁灯方向转约10度，肩膀与手保持稳定，耳饰随转头产生一次极小自然摆动；镜头做一次克制的缓慢推近。第4秒耳饰停在最亮且完整可读的角度。禁止触碰耳饰、增加第二只可见耳饰、改变珍珠或紫色边框，不生成文字。声音：湿庭院远处环境音、轻微布料声，无对白。",
+      "end_state_zh": "下巴完成10度转动，模特稳定停住，耳饰在暖光边缘达到最清晰角度。"
+    },
+    {
+      "id": "FF_VIOLET_RAIN_04_ARCH_LOOKBACK_END",
+      "role": "scene_led_emotional_cta",
+      "role_zh": "场景主导情绪CTA",
+      "path": "first-frames/FF_VIOLET_RAIN_04_ARCH_LOOKBACK_END-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定同一模特、右三分位、拱门、天空、湿庭院与耳饰。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持同一成年模特身份、深梅色服装、右侧三分位构图、石拱门、紫色暮空、湿石灰岩庭院与Violet Rain耳饰不变。4秒内模特向庭院深处走两步，同时完成一次小幅回望；镜头只做一次与她平行的缓慢侧向跟移。建筑、天空和庭院始终占画面约60-70%，模特保持约25-35%，左侧负空间不得被遮挡。第4秒她在右侧停住，脸与耳饰成为最后点缀。禁止人物放大、居中、复制首饰或改变建筑，不生成文字。声音：脚步、水面反射般的湿地声与远处庭院环境音，无对白。",
+      "end_state_zh": "模特在右三分位完成回望，脸与耳饰停住，拱门和暮空保留左侧CTA空间。"
+    }
+  ],
+  "credit_plan": {
+    "engine": "Seedance 2.0 Fast I2V",
+    "clip_count": 4,
+    "duration_seconds_each": 4,
+    "recommended_base_cost_credits": 176
+  },
+  "recommended_base_cost_credits": 176,
+  "tiktok_package": {
+    "hook": "Pearls don't have to whisper.",
+    "captions": [
+      {
+        "type": "traffic_first",
+        "text": "Pearls don't have to whisper. Meet The Violet Rain."
+      },
+      {
+        "type": "engagement",
+        "text": "Blue hour or candlelight: where would you wear The Violet Rain?"
+      },
+      {
+        "type": "price_led",
+        "text": "The Violet Rain earrings are $42.99. Tap the link in bio to shop the exact pair."
+      }
+    ],
+    "pinned_comment": "The exact pair shown is The Violet Rain. Tap the link in our bio to see it.",
+    "hashtags": [
+      "#MythRealms",
+      "#VioletRainEarrings",
+      "#BaroquePearls",
+      "#StatementEarrings",
+      "#JewelryTok"
+    ],
+    "urls": {
+      "organic": "/products/new-series-purple-gem-pearl-drops?utm_source=tiktok&utm_medium=organic&utm_campaign=violet_rain_cold_start&utm_content=human_hook_v2",
+      "paid": "/products/new-series-purple-gem-pearl-drops?utm_source=tiktok&utm_medium=paid_social&utm_campaign=violet_rain_cold_start&utm_content=scene_led_cta"
+    },
+    "music_plan": {
+      "library": "TikTok Commercial Music Library",
+      "bpm_range": "96-100",
+      "primary_direction": "Nocturnal downtempo instrumental with dry percussion, muted bass, restrained violet-night tension, and no vocals.",
+      "search_recipe": [
+        "downtempo",
+        "night fashion",
+        "dry percussion",
+        "muted bass",
+        "instrumental",
+        "96-100 BPM"
+      ],
+      "fallback_directions": [
+        "Minimal trip-hop instrumental, dry rim clicks, low bass pulse, no vocals.",
+        "Sparse nocturnal electronic instrumental, soft metallic accents, no vocals."
+      ]
+    },
+    "edit_plan": {
+      "target_duration_seconds": 11.5,
+      "copy_added_in_post": true,
+      "timeline": [
+        {
+          "timecode": "0.0-2.4",
+          "frame_id": "FF_VIOLET_RAIN_01_HUMAN_HOOK",
+          "source_clip_range": "0.0-2.4",
+          "purpose": "Human visual hook + product reveal",
+          "post_copy": "Pearls don't have to whisper."
+        },
+        {
+          "timecode": "2.4-4.8",
+          "frame_id": "FF_VIOLET_RAIN_02_WET_LIMESTONE_PAIR",
+          "source_clip_range": "0.6-3.0",
+          "purpose": "Exact product proof",
+          "post_copy": "The Violet Rain"
+        },
+        {
+          "timecode": "4.8-7.9",
+          "frame_id": "FF_VIOLET_RAIN_03_WEARING_PROFILE",
+          "source_clip_range": "0.3-3.4",
+          "purpose": "Model-led wearing/lifestyle identification",
+          "post_copy": "Baroque pearl. Violet light."
+        },
+        {
+          "timecode": "7.9-11.5",
+          "frame_id": "FF_VIOLET_RAIN_04_ARCH_LOOKBACK_END",
+          "source_clip_range": "0.4-4.0",
+          "purpose": "Scene-led emotional CTA",
+          "post_copy": "$42.99 · Shop via link in bio"
+        }
+      ]
+    },
+    "test_rules_24h": {
+      "measurement_window_hours": 24,
+      "change_limit_per_iteration": 1,
+      "hold_constant": [
+        "audience",
+        "budget",
+        "bid strategy",
+        "placement",
+        "landing page",
+        "music track"
+      ],
+      "diagnostics": [
+        {
+          "signal": "Opening hold is below the account baseline while downstream CTR is healthy.",
+          "change_only": "Change only the Frame 01 opening trim or hook copy; keep Frames 02-04 unchanged."
+        },
+        {
+          "signal": "Opening hold is healthy but product-page CTR is below the account baseline.",
+          "change_only": "Change only the Frame 04 CTA copy or CTA timing; keep the visual sequence unchanged."
+        },
+        {
+          "signal": "CTR is healthy but add-to-cart rate is below the product-page baseline.",
+          "change_only": "Do not change creative; audit only the product page, price presentation, and mobile load path."
+        },
+        {
+          "signal": "All funnel stages meet or exceed baseline.",
+          "change_only": "Hold the winning creative unchanged for the next measurement window."
+        }
+      ]
+    }
+  }
+}
