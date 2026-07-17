@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "id": "SHOT_TURQUOISE_LEAF_COLD_START_001",
+  "version": "v1",
+  "asset_type": "shot_template",
+  "status": "approved",
+  "title": "The Turquoise Leaf Pool Courtyard Cold Start",
+  "title_zh": "Turquoise Leaf 泳池庭院冷启动",
+  "format": "9:16",
+  "campaign": "turquoise_leaf_cold_start",
+  "landing_path": "/products/new-series-leaf-turquoise-pearl-cuff",
+  "thumbnail": "Thumbnail.png",
+  "product": {
+    "name": "The Turquoise Leaf - Bracelet",
+    "slug": "new-series-leaf-turquoise-pearl-cuff",
+    "price_usd": 48.99,
+    "source_gallery": "public/images/products/new-series/new-series-leaf-turquoise-pearl-cuff/"
+  },
+  "creative_rhythm": [
+    "01 human-led pool-light sleeve hook",
+    "02 exact sole-product proof",
+    "03 model-led wearing identification",
+    "04 environment-led limestone CTA"
+  ],
+  "frames": [
+    {
+      "id": "FF_TURQUOISE_LEAF_01_POOL_SLEEVE_HOOK",
+      "role": "human_visual_hook_product_reveal",
+      "role_zh": "真人泳池光影钩子＋袖口揭示",
+      "path": "first-frames/FF_TURQUOISE_LEAF_01_POOL_SLEEVE_HOOK-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定成年红发雀斑模特、奶油色亚麻服装、泳池光影、高位广角构图与 Turquoise Leaf 默认款开口手镯。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持成年红发雀斑模特的面部、自然肤质、奶油色亚麻服装、高位广角泳池庭院构图与 Turquoise Leaf 默认款手镯不变：开口扭绞金色线材、中央一块不规则长方形白色贝壳、左右各一颗圆形绿松石、两个开口端各一颗不规则白色珍珠。4秒内只有一个主体动作：模特只完成一次把奶油色袖口向上清开的动作，手腕不翻转，完整手镯始终朝向镜头。只有一个镜头动作：镜头沿手臂方向做一次克制的对角推近。第4秒面部、手势、泳池反光与完整开口手镯共同清晰。禁止细珍珠排、额外小珍珠、额外首饰、闭合圆环、文字、logo 或水印。声音：轻微水声与亚麻布料声，无对白。",
+      "end_state_zh": "袖口完成一次清开，中央白贝壳、两颗绿松石和两颗珍珠端头同时清晰，手腕保持稳定。"
+    },
+    {
+      "id": "FF_TURQUOISE_LEAF_02_POOL_LIMESTONE_PRODUCT",
+      "role": "exact_product_proof",
+      "role_zh": "浅石灰岩单件精确产品证明",
+      "path": "first-frames/FF_TURQUOISE_LEAF_02_POOL_LIMESTONE_PRODUCT-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，只锁定一只静止的 Turquoise Leaf 默认款开口手镯、浅色石灰岩与上方绿松石色池水。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持唯一一只 Turquoise Leaf 默认款开口手镯的数量、位置、比例与结构不变：开口扭绞金色线材、中央一块不规则长方形白色贝壳、左右各一颗圆形绿松石、两个开口端各一颗不规则白色珍珠。4秒内只有一个主体侧动作：一道柔和橄榄叶影从左向右只掠过静止手镯一次，手镯本体全程不动。只有一个镜头动作：镜头从当前产品视角做一次缓慢对角推近。第4秒开口、中央白贝壳、两颗绿松石和两颗珍珠端头仍完整、分离且可读。禁止细珍珠排、额外小珍珠、额外手镯、闭合圆环、道具、文字、logo 或水印。声音：泳池庭院环境音，无对白。",
+      "end_state_zh": "叶影离开产品，唯一手镯仍居中静止，全部默认款结构完整可读。"
+    },
+    {
+      "id": "FF_TURQUOISE_LEAF_03_SLEEVE_REVEAL",
+      "role": "model_led_wearing_identification",
+      "role_zh": "模特主导袖口佩戴识别",
+      "path": "first-frames/FF_TURQUOISE_LEAF_03_SLEEVE_REVEAL-v2.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定同一成年红发雀斑模特、奶油色亚麻服装、平视半身肖像、交叉手臂姿势、泳池庭院与完整开口手镯。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持同一成年红发雀斑模特、自然肤质、奶油色亚麻服装、平视腰部以上构图、交叉手臂姿势、泳池庭院与 Turquoise Leaf 默认款手镯不变。手镯必须保持开口扭绞金色线材、中央一块不规则长方形白色贝壳、左右各一颗圆形绿松石、两个开口端各一颗不规则白色珍珠，开口朝向镜头。4秒内只有一个主体动作：模特的空手只完成一次小幅袖口调整，佩戴手镯的前臂与身体保持稳定。只有一个镜头动作：镜头从当前平视半身肖像做一次轻微推近。第4秒模特仍占画面约60-70%，完整手镯在干净侧光中清晰停住。禁止手腕翻转、额外手势、细珍珠排、额外小珍珠、闭合链状结构、额外首饰、文字、logo 或水印。声音：轻微亚麻布料声与远处水声，无对白。",
+      "end_state_zh": "一次袖口调整完成，模特姿势稳定，开口、中央白贝壳、两颗绿松石和两颗珍珠端头同时清晰。"
+    },
+    {
+      "id": "FF_TURQUOISE_LEAF_04_STAIR_WALL_TRACK_END",
+      "role": "scene_led_environment_cta",
+      "role_zh": "场景主导石阶墙面CTA",
+      "path": "first-frames/FF_TURQUOISE_LEAF_04_STAIR_WALL_TRACK_END-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定同一成年红发雀斑模特、奶油色亚麻服装、左侧石阶站姿、右侧石灰岩墙面、落叶影与贴墙的手镯手。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持同一成年红发雀斑模特、奶油色亚麻服装、左侧石阶位置、右侧大面积石灰岩墙、落叶影、泳池庭院深度与 Turquoise Leaf 默认款手镯不变。手镯保持开口扭绞金色线材、中央不规则长方形白色贝壳、左右各一颗圆形绿松石、两个开口端各一颗不规则白色珍珠。4秒内只有一个主体动作：模特只把佩戴手镯的手沿墙面缓慢滑动一次，身体与双脚全程固定。只有一个镜头动作：镜头贴着手的路径做一次克制的向下跟移。环境始终占画面约60-70%，模特约25-35%，右侧石灰岩留白不被遮挡。第4秒手镯到达明亮日照区并成为最终焦点。禁止迈步、转身、第二个手势、细珍珠排、额外首饰、文字、logo 或水印。声音：轻风、远处水声与手掌轻触石面的摩擦声，无对白。",
+      "end_state_zh": "身体和双脚保持原位，手完成一次沿墙滑动，手镯停在明亮日照区。"
+    }
+  ],
+  "credit_plan": {
+    "engine": "Seedance 2.0 Fast I2V",
+    "clip_count": 4,
+    "duration_seconds_each": 4,
+    "recommended_base_cost_credits": 176
+  },
+  "recommended_base_cost_credits": 176,
+  "tiktok_package": {
+    "hook": "Made for sunlit skin.",
+    "captions": [
+      {
+        "type": "traffic_first",
+        "text": "Made for sunlit skin. Meet The Turquoise Leaf."
+      },
+      {
+        "type": "engagement",
+        "text": "Pool light or golden hour: where would you wear The Turquoise Leaf?"
+      },
+      {
+        "type": "price_led",
+        "text": "The Turquoise Leaf cuff is $48.99. Tap the link in bio to see the exact piece."
+      }
+    ],
+    "pinned_comment": "The exact bracelet shown is The Turquoise Leaf. Tap the link in our bio to see it.",
+    "hashtags": [
+      "#MythRealms",
+      "#TurquoiseLeaf",
+      "#TurquoiseJewelry",
+      "#CuffBracelet",
+      "#JewelryTok"
+    ],
+    "urls": {
+      "organic": "/products/new-series-leaf-turquoise-pearl-cuff?utm_source=tiktok&utm_medium=organic&utm_campaign=turquoise_leaf_cold_start&utm_content=sunlit_skin_v1",
+      "paid": "/products/new-series-leaf-turquoise-pearl-cuff?utm_source=tiktok&utm_medium=paid_social&utm_campaign=turquoise_leaf_cold_start&utm_content=sunlit_skin_v1"
+    },
+    "music_plan": {
+      "library": "TikTok Commercial Music Library",
+      "bpm_range": "108-112",
+      "primary_direction": "Minimal fashion percussion with light rim clicks, warm sub-bass, restrained sunlit pulse, and no vocals.",
+      "search_recipe": [
+        "minimal fashion",
+        "light rim clicks",
+        "warm sub-bass",
+        "instrumental",
+        "no vocals",
+        "108-112 BPM"
+      ],
+      "fallback_directions": [
+        "Dry editorial percussion with soft wood clicks, low warm bass pulse, and no vocals.",
+        "Minimal poolside instrumental with restrained hand percussion, sparse plucks, and no vocals."
+      ]
+    },
+    "edit_plan": {
+      "target_duration_seconds": 11.5,
+      "copy_added_in_post": true,
+      "timeline": [
+        {
+          "timecode": "0.0-2.5",
+          "frame_id": "FF_TURQUOISE_LEAF_01_POOL_SLEEVE_HOOK",
+          "source_clip_range": "0.0-2.5",
+          "purpose": "Human-led pool-light sleeve hook",
+          "post_copy": "Made for sunlit skin."
+        },
+        {
+          "timecode": "2.5-4.9",
+          "frame_id": "FF_TURQUOISE_LEAF_02_POOL_LIMESTONE_PRODUCT",
+          "source_clip_range": "0.5-2.9",
+          "purpose": "Exact sole-product proof",
+          "post_copy": "The Turquoise Leaf"
+        },
+        {
+          "timecode": "4.9-7.8",
+          "frame_id": "FF_TURQUOISE_LEAF_03_SLEEVE_REVEAL",
+          "source_clip_range": "0.4-3.3",
+          "purpose": "Model-led wearing identification",
+          "post_copy": "Shell. Turquoise. Sun."
+        },
+        {
+          "timecode": "7.8-11.5",
+          "frame_id": "FF_TURQUOISE_LEAF_04_STAIR_WALL_TRACK_END",
+          "source_clip_range": "0.3-4.0",
+          "purpose": "Environment-led limestone CTA",
+          "post_copy": "$48.99 · Shop via link in bio"
+        }
+      ]
+    },
+    "test_rules_24h": {
+      "measurement_window_hours": 24,
+      "change_limit_per_iteration": 1,
+      "hold_constant": [
+        "audience",
+        "budget",
+        "bid strategy",
+        "placement",
+        "landing page",
+        "music track"
+      ],
+      "diagnostics": [
+        {
+          "signal": "Opening hold is below the account baseline while downstream CTR is healthy.",
+          "change_only": "Change only the Frame 01 opening trim or hook copy; keep Frames 02-04 unchanged."
+        },
+        {
+          "signal": "Opening hold is healthy but product-page CTR is below the account baseline.",
+          "change_only": "Change only the Frame 04 CTA copy or CTA timing; keep the visual sequence unchanged."
+        },
+        {
+          "signal": "CTR is healthy but add-to-cart rate is below the product-page baseline.",
+          "change_only": "Do not change creative; audit only the product page, price presentation, and mobile load path."
+        },
+        {
+          "signal": "All funnel stages meet or exceed baseline.",
+          "change_only": "Hold the winning creative unchanged for the next measurement window."
+        }
+      ]
+    }
+  }
+}
