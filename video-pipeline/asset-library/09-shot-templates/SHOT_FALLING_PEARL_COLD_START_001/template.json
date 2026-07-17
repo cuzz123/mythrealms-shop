@@ -1,0 +1,195 @@
+{
+  "id": "SHOT_FALLING_PEARL_COLD_START_001",
+  "asset_type": "shot_template",
+  "status": "approved",
+  "version": "v1",
+  "title": "The Falling Pearl Rooftop Blue-Hour Cold Start",
+  "title_zh": "Falling Pearl 屋顶黄昏冷启动",
+  "format": "9:16",
+  "campaign": "falling_pearl_cold_start",
+  "landing_path": "/products/new-series-pearl-y-lariat",
+  "thumbnail": "Thumbnail.png",
+  "product": {
+    "name": "The Falling Pearl - Lariat",
+    "slug": "new-series-pearl-y-lariat",
+    "price_usd": 59.99,
+    "source_gallery": "public/images/products/new-series/new-series-pearl-y-lariat/"
+  },
+  "creative_rhythm": [
+    "01 human-led rooftop doorway light-boundary hook",
+    "02 exact sole-product limestone proof",
+    "03 model-led lowest-pearl touch",
+    "04 environment-led rooftop walk ending"
+  ],
+  "frames": [
+    {
+      "id": "FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK",
+      "role": "human_visual_hook_product_reveal",
+      "role_zh": "真人屋顶光界钩子＋项链揭示",
+      "path": "first-frames/FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定成年深肤色女模特的面部、自然肤质、象牙色开口领口、屋顶门洞、暖光到蓝调的光界，以及 The Falling Pearl 默认款完整 Y 形项链。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持成年深肤色女模特的面部、自然肤质、象牙色开口领口、屋顶门洞、暖光到蓝调的光界与 The Falling Pearl 默认款完整 Y 形项链不变。产品身份锁定为：细金色链条；对称上方双股链条交替排列小型圆形白色珍珠与较大的椭圆形奶油色/巴洛克珍珠并置于金色托座；Y形交汇处仅一个圆形金色花丝花朵连接件；竖直下垂链路依次为小珍珠、较大的椭圆形奶油色珍珠、小珍珠、长段金色链条、最后一颗圆形白色终端珍珠。4秒内只有一个主体动作：模特只把下巴抬入暖光一次，随后保持身体和项链稳定。只有一个镜头动作：镜头只做一次克制的向下倾斜，沿着下垂链路揭示完整落珠线。第4秒面部、上方珍珠序列、Y形交汇处与终端珍珠线共同清晰。禁止额外首饰、项链层数变化、改变连接件、改变珍珠顺序、缩短链路、文字、logo或水印。声音：轻风与远处城市环境音，无对白。",
+      "end_state_zh": "下巴完成一次抬起并停稳，面部与完整可见的终端珍珠线共享清晰开场构图。"
+    },
+    {
+      "id": "FF_FALLING_PEARL_02_LIMESTONE_FULL_PRODUCT",
+      "role": "exact_product_proof",
+      "role_zh": "浅色石灰岩完整单件产品证明",
+      "path": "first-frames/FF_FALLING_PEARL_02_LIMESTONE_FULL_PRODUCT-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，只锁定一条竖直摆放在无纹理浅色石灰岩上的 The Falling Pearl 默认款完整 Y 形项链。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持浅色无纹理石灰岩上的唯一一条 The Falling Pearl 默认款完整 Y 形项链的数量、位置、比例、竖直构图与结构不变。产品身份锁定为：细金色链条；对称上方双股链条交替排列小型圆形白色珍珠与较大的椭圆形奶油色/巴洛克珍珠并置于金色托座；Y形交汇处仅一个圆形金色花丝花朵连接件；竖直下垂链路依次为小珍珠、较大的椭圆形奶油色珍珠、小珍珠、长段金色链条、最后一颗圆形白色终端珍珠。4秒内只有一个产品动作：项链本体仅沿纵向顺时针轻转约2度一次，随后立即停稳。只有一个镜头动作：镜头只做一次缓慢的自上而下推近。第4秒完整 Y 形轮廓、花丝花朵连接件、长链段与最后一颗圆形白色终端珍珠仍全部位于画面内并清晰可读。禁止模特、胸像、碗、花、道具、额外首饰、改变珍珠顺序、缩短链路、文字、logo或水印。声音：微弱屋顶风声，无对白。",
+      "end_state_zh": "唯一项链完成一次约2度顺时针轻转后停稳，完整 Y 形轮廓与终端珍珠保持在画面内。"
+    },
+    {
+      "id": "FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH",
+      "role": "model_led_wearing_identification",
+      "role_zh": "模特主导最低珍珠触碰识别",
+      "path": "first-frames/FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定成年深肤色女模特、自然肤质、象牙色开口领口、胸口到下巴构图、单手靠近最低珍珠的姿势与 The Falling Pearl 默认款完整 Y 形项链。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持成年深肤色女模特的面部下半部、自然肤质、象牙色开口领口、胸口到下巴构图、单手靠近最低珍珠的姿势与 The Falling Pearl 默认款完整 Y 形项链不变。产品身份锁定为：细金色链条；对称上方双股链条交替排列小型圆形白色珍珠与较大的椭圆形奶油色/巴洛克珍珠并置于金色托座；Y形交汇处仅一个圆形金色花丝花朵连接件；竖直下垂链路依次为小珍珠、较大的椭圆形奶油色珍珠、小珍珠、长段金色链条、最后一颗圆形白色终端珍珠。4秒内只有一个主体动作：模特只用一根手指触碰最低一颗终端珍珠一次，然后释放，另一只手和肩颈保持稳定。只有一个镜头动作：镜头只做一次极轻微的向前推近。第4秒完整 Y 路径清晰，终端珍珠完成一次小幅摆动后停稳。禁止手部变形、额外手势、额外首饰、项链层数变化、改变连接件、改变珍珠顺序、缩短链路、文字、logo或水印。声音：轻微衣料声与屋顶风声，无对白。",
+      "end_state_zh": "最低终端珍珠被触碰一次并释放，完成一次小幅摆动后停稳，完整项链路径与领口保持清晰。"
+    },
+    {
+      "id": "FF_FALLING_PEARL_04_ROOFTOP_WALK_END",
+      "role": "scene_led_environment_cta",
+      "role_zh": "场景主导屋顶行走结束 CTA",
+      "path": "first-frames/FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png",
+      "approval_status": "approved",
+      "animate": true,
+      "mode": "I2V",
+      "target_duration_seconds": 4,
+      "reference_role_map": "@Image1 为已批准首帧，锁定屋顶天际线边缘、黄昏到蓝调天空、城市纵深、三分之四背侧构图、象牙色服装与场景尺度下仍可辨认的 The Falling Pearl 默认款完整 Y 形项链。",
+      "seedance_prompt_zh": "@Image1为首帧，严格保持屋顶天际线边缘、黄昏到蓝调天空、城市纵深、三分之四背侧构图、象牙色服装、模特站位与 The Falling Pearl 默认款完整 Y 形项链不变。产品身份锁定为：细金色链条；对称上方双股链条交替排列小型圆形白色珍珠与较大的椭圆形奶油色/巴洛克珍珠并置于金色托座；Y形交汇处仅一个圆形金色花丝花朵连接件；竖直下垂链路依次为小珍珠、较大的椭圆形奶油色珍珠、小珍珠、长段金色链条、最后一颗圆形白色终端珍珠。尽管产品处于场景尺度，必须明确保留并锁定首帧中的最终项链图像，不得替换、缩短、模糊或重绘；第4秒仍以同一完整项链身份作为最终锁定图像。4秒内只有一个主体动作：模特只向侧面转入一次清晰 profile，身体、衣摆与双脚保持稳定。只有一个镜头动作：镜头只做一次克制的向后退。第4秒项链在象牙色领口上捕捉最后的暖光，场景仍占画面约60-70%，模特约25-35%。禁止迈步、第二个手势、额外首饰、改变连接件、改变珍珠顺序、缩短链路、文字、logo或水印。声音：轻风与远处城市环境音，无对白。",
+      "end_state_zh": "模特完成一次 profile 转向并停稳，双脚和衣摆不动；即使项链为场景尺度，也必须保留首帧的最终完整项链锁定图像，并在象牙色领口上清晰接住最后暖光。"
+    }
+  ],
+  "credit_plan": {
+    "engine": "Seedance 2.0 Fast I2V",
+    "clip_count": 4,
+    "duration_seconds_each": 4,
+    "recommended_base_cost_credits": 176
+  },
+  "recommended_base_cost_credits": 176,
+  "tiktok_package": {
+    "hook": "One line. One falling pearl.",
+    "captions": [
+      {
+        "type": "traffic_first",
+        "text": "One line. One falling pearl. Meet The Falling Pearl."
+      },
+      {
+        "type": "engagement",
+        "text": "Would you wear one falling line at golden hour?"
+      },
+      {
+        "type": "price_led",
+        "text": "The Falling Pearl lariat is $59.99. Tap the link in bio to see the exact piece."
+      }
+    ],
+    "pinned_comment": "The exact necklace shown is The Falling Pearl. Tap the link in our bio to see it.",
+    "hashtags": [
+      "#MythRealms",
+      "#TheFallingPearl",
+      "#PearlNecklace",
+      "#LariatNecklace",
+      "#JewelryTok"
+    ],
+    "urls": {
+      "organic": "/products/new-series-pearl-y-lariat?utm_source=tiktok&utm_medium=organic&utm_campaign=falling_pearl_cold_start&utm_content=falling_line_v1",
+      "paid": "/products/new-series-pearl-y-lariat?utm_source=tiktok&utm_medium=paid_social&utm_campaign=falling_pearl_cold_start&utm_content=falling_line_v1"
+    },
+    "music_plan": {
+      "library": "TikTok Commercial Music Library",
+      "bpm_range": "88-92",
+      "primary_direction": "Ambient R&B instrumental with a sparse pulse, soft plucked motif, warm low end, and no vocals.",
+      "search_recipe": [
+        "ambient R&B",
+        "sparse pulse",
+        "soft plucked motif",
+        "instrumental",
+        "no vocals",
+        "88-92 BPM"
+      ],
+      "fallback_directions": [
+        "Minimal ambient R&B with soft brushed percussion, a low warm bass pulse, and no vocals.",
+        "Late-blue-hour instrumental with restrained plucks, airy room tone, and no vocals."
+      ]
+    },
+    "edit_plan": {
+      "target_duration_seconds": 11.5,
+      "copy_added_in_post": true,
+      "timeline": [
+        {
+          "timecode": "0.0-2.5",
+          "frame_id": "FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK",
+          "source_clip_range": "0.0-2.5",
+          "purpose": "Human-led rooftop light-boundary hook",
+          "post_copy": "One line. One falling pearl."
+        },
+        {
+          "timecode": "2.5-4.9",
+          "frame_id": "FF_FALLING_PEARL_02_LIMESTONE_FULL_PRODUCT",
+          "source_clip_range": "0.5-2.9",
+          "purpose": "Exact sole-product proof",
+          "post_copy": "The Falling Pearl"
+        },
+        {
+          "timecode": "4.9-7.8",
+          "frame_id": "FF_FALLING_PEARL_03_LOWEST_PEARL_TOUCH",
+          "source_clip_range": "0.4-3.3",
+          "purpose": "Model-led lowest-pearl touch",
+          "post_copy": "A line that falls."
+        },
+        {
+          "timecode": "7.8-11.5",
+          "frame_id": "FF_FALLING_PEARL_04_ROOFTOP_WALK_END",
+          "source_clip_range": "0.3-4.0",
+          "purpose": "Environment-led rooftop CTA",
+          "post_copy": "$59.99 · Shop via link in bio"
+        }
+      ]
+    },
+    "test_rules_24h": {
+      "measurement_window_hours": 24,
+      "change_limit_per_iteration": 1,
+      "hold_constant": [
+        "audience",
+        "budget",
+        "bid strategy",
+        "placement",
+        "landing page",
+        "music track"
+      ],
+      "diagnostics": [
+        {
+          "signal": "Opening hold is below the account baseline while downstream CTR is healthy.",
+          "change_only": "Change only the Frame 01 opening trim or hook copy; keep Frames 02-04 unchanged."
+        },
+        {
+          "signal": "Opening hold is healthy but product-page CTR is below the account baseline.",
+          "change_only": "Change only the Frame 04 CTA copy or CTA timing; keep the visual sequence unchanged."
+        },
+        {
+          "signal": "CTR is healthy but add-to-cart rate is below the product-page baseline.",
+          "change_only": "Do not change creative; audit only the product page, price presentation, and mobile load path."
+        },
+        {
+          "signal": "All funnel stages meet or exceed baseline.",
+          "change_only": "Hold the winning creative unchanged for the next measurement window."
+        }
+      ]
+    }
+  }
+}
