@@ -26,11 +26,18 @@ generation_clips: 15
 | `preview/` | 单镜预览和剪辑节拍测试。 |
 | `final/` | 调色、配音与 MythRealms Logo 后期完成的 MP4。 |
 
+## Visual reference board
+
+![场景与模特关键分镜](source/blue-reliquary-scene-model-storyboard-v1.png)
+
+这张板锁定六个关键画面：黑曜石与靛蓝丝绒场景、黄铜盒、开盒产品、手腕佩戴、侧脸锁骨与产品 Hero。它用于后续全能模式生成时维持场景、光线、模特和产品的连续性。
+
 ## Acceptance status
 
 - 15 个 4 秒生成合同：已规划
 - 14 个剪辑切点合同：已规划
 - 产品参考路径校验：通过
+- 场景与模特关键分镜板：已生成
 - 已生成视频：未开始
 - 已完成成片：未开始
 
