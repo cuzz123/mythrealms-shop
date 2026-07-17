@@ -101,9 +101,10 @@ test.describe("release surfaces", () => {
 
   test("editorial and utility surfaces stay truthful and use valid landmarks", async ({ page }) => {
     await page.goto("/");
-    await expect(
-      page.locator("#main-content").getByText("Editorial / Summer 2026").first(),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Pearls for sunlit days." })).toBeVisible();
+    await expect(page.getByText("Editorial / Summer 2026", { exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Choose your starting point" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "A pearl point of view." })).toBeVisible();
     await page.waitForTimeout(5500);
     await expect(page.getByText(/Someone from|bought The /i)).toHaveCount(0);
 

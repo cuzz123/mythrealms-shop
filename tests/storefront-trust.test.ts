@@ -13,7 +13,7 @@ test("the storefront does not render fabricated purchase activity", () => {
 });
 
 test("editorial hero imagery is not presented as a specific SKU", () => {
-  const hero = source("src/components/layout/HeroCarousel.tsx");
+  const hero = source("src/components/home/HomepageHero.tsx");
   assert.doesNotMatch(hero, /On her\s*\//i);
   assert.doesNotMatch(hero, /The Soft Return Earrings/i);
   assert.match(hero, /Editorial/i);

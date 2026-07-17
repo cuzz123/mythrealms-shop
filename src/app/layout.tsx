@@ -51,7 +51,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <head>
-        <link rel="preload" as="image" href="/images/brand/hero/pearl-earrings-editorial.png" fetchPriority="high" />
         <OrganizationJsonLd />
         <WebSiteJsonLd />
       </head>

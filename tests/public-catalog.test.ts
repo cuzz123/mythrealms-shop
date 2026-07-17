@@ -14,7 +14,7 @@ const publicFiles = [
   "src/app/tiktok/page.tsx",
   "src/components/ui/RecentlyViewed.tsx",
   "src/app/wishlist/page.tsx",
-  "src/components/layout/HeroCarousel.tsx",
+  "src/components/home/HomepageHero.tsx",
   "src/components/ui/JsonLd.tsx",
 ];
 
