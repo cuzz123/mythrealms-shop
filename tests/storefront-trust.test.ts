@@ -19,6 +19,17 @@ test("editorial hero imagery is not presented as a specific SKU", () => {
   assert.match(hero, /Editorial/i);
 });
 
+test("homepage hero reserves a fixed category-story reveal", () => {
+  const hero = source("src/components/home/HomepageHero.tsx");
+  assert.match(hero, /\[--homepage-category-reveal:4rem\]/);
+  assert.match(hero, /min-h-\[calc\(100svh-2\.25rem-var\(--homepage-category-reveal\)\)\]/);
+});
+
+test("homepage category stories defer image motion", () => {
+  const stories = source("src/components/home/HomepageCategoryStories.tsx");
+  assert.doesNotMatch(stories, /transition-transform|duration-500|group-hover:scale/);
+});
+
 test("the legacy loyalty route is noindex and makes no unimplemented reward promises", () => {
   const loyalty = source("src/app/loyalty/page.tsx");
   assert.match(loyalty, /index:\s*false/);

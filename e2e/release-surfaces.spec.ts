@@ -100,6 +100,22 @@ test.describe("release surfaces", () => {
   });
 
   test("editorial and utility surfaces stay truthful and use valid landmarks", async ({ page }) => {
+    for (const viewport of [
+      { width: 390, height: 844 },
+      { width: 1440, height: 900 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto("/");
+      await expect
+        .poll(() =>
+          page.locator('section[aria-labelledby="shop-by-style-title"]').evaluate(
+            (section) => section.getBoundingClientRect().top < window.innerHeight,
+          ),
+        )
+        .toBe(true);
+    }
+
+    await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1, name: "Pearls for sunlit days." })).toBeVisible();
     await expect(page.getByText("Editorial / Summer 2026", { exact: true })).toBeVisible();

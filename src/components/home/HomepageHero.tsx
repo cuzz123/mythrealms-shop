@@ -8,7 +8,7 @@ export function HomepageHero() {
 
   return (
     <section
-      className="relative -mt-16 min-h-[calc(100svh-2.25rem)] overflow-hidden bg-[#24312f] text-white"
+      className="relative -mt-16 [--homepage-category-reveal:4rem] min-h-[calc(100svh-2.25rem-var(--homepage-category-reveal))] overflow-hidden bg-[#24312f] text-white"
       aria-labelledby="homepage-hero-title"
     >
       <Image
@@ -21,7 +21,7 @@ export function HomepageHero() {
         style={{ objectPosition: hero.objectPosition }}
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,22,21,.74)_0%,rgba(13,22,21,.28)_48%,rgba(13,22,21,.06)_72%)]" />
-      <div className="relative mx-auto flex min-h-[calc(100svh-2.25rem)] max-w-7xl items-end px-6 pb-16 pt-32 md:pb-20">
+      <div className="relative mx-auto flex min-h-[calc(100svh-2.25rem-var(--homepage-category-reveal))] max-w-7xl items-end px-6 pb-16 pt-32 md:pb-20">
         <div className="max-w-xl">
           <p className="text-xs font-semibold uppercase text-white/80">Editorial / Summer 2026</p>
           <h1 id="homepage-hero-title" className="mt-4 max-w-lg font-serif text-5xl font-medium leading-none sm:text-6xl lg:text-7xl">

@@ -21,14 +21,14 @@ export function HomepageCategoryStories() {
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {featureLinks.map(({ label, href, image }) => (
-            <Link key={label} href={href} className="group block">
+            <Link key={label} href={href} className="block">
               <div className="relative aspect-[4/5] overflow-hidden bg-[var(--border-light)]">
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
                   sizes="(max-width: 767px) 100vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover"
                 />
               </div>
               <div className="mt-4 flex items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
