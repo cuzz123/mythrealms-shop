@@ -1,0 +1,39 @@
+{
+  "id": "PROP_WHITE_BED_DRAPED_001",
+  "name_zh": "白色垂布床",
+  "asset_type": "prop",
+  "source_file": "588470d1c1906aa16bad61684fd8e7b7.glb",
+  "source_sha256": "f53bc9d34228bb8dfcf36b0b6d73946641aad56501aeb61a6beac74a07332c07",
+  "geometry": {
+    "mesh_count": 1,
+    "vertex_count": 292487,
+    "polygon_count": 499872,
+    "material_count": 1,
+    "armature_count": 0,
+    "bone_count": 0,
+    "bounds_min": [
+      -0.50945,
+      -0.438894,
+      -0.0
+    ],
+    "bounds_max": [
+      0.386615,
+      0.457007,
+      0.389972
+    ],
+    "dimensions": [
+      0.896065,
+      0.895901,
+      0.389972
+    ],
+    "mesh_names": [
+      "node_0"
+    ],
+    "armature_names": []
+  },
+  "rig": {
+    "armature_count": 0,
+    "walk_rig_candidate": false
+  },
+  "status": "approved_source"
+}

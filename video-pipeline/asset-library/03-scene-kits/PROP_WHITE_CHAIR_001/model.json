@@ -1,0 +1,39 @@
+{
+  "id": "PROP_WHITE_CHAIR_001",
+  "name_zh": "白色休闲椅",
+  "asset_type": "prop",
+  "source_file": "e517b68016fb0ffdcc1b7ac57f742f1c.glb",
+  "source_sha256": "0e403713f92c73e1416fcfc11eb9f4088e755ab8b2b5a96d2f1d093aa30df2ec",
+  "geometry": {
+    "mesh_count": 1,
+    "vertex_count": 303576,
+    "polygon_count": 499046,
+    "material_count": 1,
+    "armature_count": 0,
+    "bone_count": 0,
+    "bounds_min": [
+      -0.23144,
+      -0.567107,
+      -0.0
+    ],
+    "bounds_max": [
+      0.233815,
+      0.44413,
+      0.463857
+    ],
+    "dimensions": [
+      0.465255,
+      1.011237,
+      0.463857
+    ],
+    "mesh_names": [
+      "node_0"
+    ],
+    "armature_names": []
+  },
+  "rig": {
+    "armature_count": 0,
+    "walk_rig_candidate": false
+  },
+  "status": "approved_source"
+}

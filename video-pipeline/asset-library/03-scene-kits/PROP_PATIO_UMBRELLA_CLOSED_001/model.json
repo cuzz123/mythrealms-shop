@@ -1,0 +1,39 @@
+{
+  "id": "PROP_PATIO_UMBRELLA_CLOSED_001",
+  "name_zh": "收拢庭院遮阳伞",
+  "asset_type": "prop",
+  "source_file": "cfe79b6e8550979df70c5ef1135b9dfe.glb",
+  "source_sha256": "447b071336940f78484022fbb87ecd05f84ab07dee4d6d944448d8a0c3508a50",
+  "geometry": {
+    "mesh_count": 1,
+    "vertex_count": 290663,
+    "polygon_count": 500000,
+    "material_count": 1,
+    "armature_count": 0,
+    "bone_count": 0,
+    "bounds_min": [
+      -0.119114,
+      -0.13338,
+      -0.0
+    ],
+    "bounds_max": [
+      0.118638,
+      0.131219,
+      1.176552
+    ],
+    "dimensions": [
+      0.237752,
+      0.264599,
+      1.176552
+    ],
+    "mesh_names": [
+      "node_0"
+    ],
+    "armature_names": []
+  },
+  "rig": {
+    "armature_count": 0,
+    "walk_rig_candidate": false
+  },
+  "status": "approved_source"
+}

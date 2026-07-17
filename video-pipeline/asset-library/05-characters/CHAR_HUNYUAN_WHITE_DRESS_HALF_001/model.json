@@ -1,0 +1,39 @@
+{
+  "id": "CHAR_HUNYUAN_WHITE_DRESS_HALF_001",
+  "name_zh": "白色礼服半身女模特",
+  "asset_type": "character",
+  "source_file": "9102900ee726384b29739ff33aa09e1b.glb",
+  "source_sha256": "c53d867dd3ee504f1adfd6272af5891ffdbad19abac14f158ebddc02ab872bb3",
+  "geometry": {
+    "mesh_count": 1,
+    "vertex_count": 319669,
+    "polygon_count": 483734,
+    "material_count": 1,
+    "armature_count": 0,
+    "bone_count": 0,
+    "bounds_min": [
+      -0.210177,
+      -0.182713,
+      -0.0
+    ],
+    "bounds_max": [
+      0.214684,
+      0.176731,
+      1.106154
+    ],
+    "dimensions": [
+      0.424861,
+      0.359444,
+      1.106154
+    ],
+    "mesh_names": [
+      "node_0"
+    ],
+    "armature_names": []
+  },
+  "rig": {
+    "armature_count": 0,
+    "walk_rig_candidate": false
+  },
+  "status": "approved_source"
+}

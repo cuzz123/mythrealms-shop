@@ -1,0 +1,39 @@
+{
+  "id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+  "name_zh": "白色长外套全身女模特",
+  "asset_type": "character",
+  "source_file": "85848780b48a738fbe785543a8cbb05a.glb",
+  "source_sha256": "65f7db8c815e8435189ec971eeb01407bcb1607c91a5ca1ae8b9f22d802ffbb3",
+  "geometry": {
+    "mesh_count": 1,
+    "vertex_count": 292098,
+    "polygon_count": 494630,
+    "material_count": 1,
+    "armature_count": 0,
+    "bone_count": 0,
+    "bounds_min": [
+      -0.182604,
+      -0.120594,
+      -0.0
+    ],
+    "bounds_max": [
+      0.177357,
+      0.100435,
+      1.183087
+    ],
+    "dimensions": [
+      0.359961,
+      0.221029,
+      1.183087
+    ],
+    "mesh_names": [
+      "node_0"
+    ],
+    "armature_names": []
+  },
+  "rig": {
+    "armature_count": 0,
+    "walk_rig_candidate": true
+  },
+  "status": "approved_source"
+}

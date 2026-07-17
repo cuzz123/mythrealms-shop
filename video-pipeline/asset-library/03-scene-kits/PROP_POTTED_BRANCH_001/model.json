@@ -1,0 +1,39 @@
+{
+  "id": "PROP_POTTED_BRANCH_001",
+  "name_zh": "陶盆枯枝陈设",
+  "asset_type": "prop",
+  "source_file": "b0a70d953d242b065e613b5ba99560bd.glb",
+  "source_sha256": "82ea9516d70fd0d1f7a0bffeba3b1fe186ae3bae921473d3ff74573b49900b8d",
+  "geometry": {
+    "mesh_count": 1,
+    "vertex_count": 307071,
+    "polygon_count": 499604,
+    "material_count": 1,
+    "armature_count": 0,
+    "bone_count": 0,
+    "bounds_min": [
+      -0.297007,
+      -0.303872,
+      -0.0
+    ],
+    "bounds_max": [
+      0.295418,
+      0.292947,
+      1.146441
+    ],
+    "dimensions": [
+      0.592425,
+      0.596819,
+      1.146441
+    ],
+    "mesh_names": [
+      "node_0"
+    ],
+    "armature_names": []
+  },
+  "rig": {
+    "armature_count": 0,
+    "walk_rig_candidate": false
+  },
+  "status": "approved_source"
+}

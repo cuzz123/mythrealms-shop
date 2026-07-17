@@ -1,0 +1,39 @@
+{
+  "id": "PROP_WICKER_STORAGE_BOX_001",
+  "name_zh": "藤编收纳箱",
+  "asset_type": "prop",
+  "source_file": "6442506e913de55fdcc9e68494138d9d.glb",
+  "source_sha256": "627d7060cf9df7771a84f6110139d8a239dfc8a5ccdecc79ded3e20619357885",
+  "geometry": {
+    "mesh_count": 1,
+    "vertex_count": 341086,
+    "polygon_count": 495792,
+    "material_count": 1,
+    "armature_count": 0,
+    "bone_count": 0,
+    "bounds_min": [
+      -0.547524,
+      -0.53442,
+      -0.0
+    ],
+    "bounds_max": [
+      0.538472,
+      0.53957,
+      0.553784
+    ],
+    "dimensions": [
+      1.085996,
+      1.07399,
+      0.553784
+    ],
+    "mesh_names": [
+      "node_0"
+    ],
+    "armature_names": []
+  },
+  "rig": {
+    "armature_count": 0,
+    "walk_rig_candidate": false
+  },
+  "status": "approved_source"
+}

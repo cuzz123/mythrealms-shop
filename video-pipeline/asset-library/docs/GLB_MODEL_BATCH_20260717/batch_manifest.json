@@ -1,0 +1,357 @@
+{
+  "id": "GLB_MODEL_BATCH_20260717",
+  "status": "approved_source",
+  "assets": [
+    {
+      "id": "CHAR_HUNYUAN_WHITE_DRESS_HALF_001",
+      "name_zh": "白色礼服半身女模特",
+      "asset_type": "character",
+      "source_file": "9102900ee726384b29739ff33aa09e1b.glb",
+      "source_sha256": "c53d867dd3ee504f1adfd6272af5891ffdbad19abac14f158ebddc02ab872bb3",
+      "geometry": {
+        "mesh_count": 1,
+        "vertex_count": 319669,
+        "polygon_count": 483734,
+        "material_count": 1,
+        "armature_count": 0,
+        "bone_count": 0,
+        "bounds_min": [
+          -0.210177,
+          -0.182713,
+          -0.0
+        ],
+        "bounds_max": [
+          0.214684,
+          0.176731,
+          1.106154
+        ],
+        "dimensions": [
+          0.424861,
+          0.359444,
+          1.106154
+        ],
+        "mesh_names": [
+          "node_0"
+        ],
+        "armature_names": []
+      },
+      "rig": {
+        "armature_count": 0,
+        "walk_rig_candidate": false
+      },
+      "status": "approved_source"
+    },
+    {
+      "id": "PROP_WHITE_BED_DRAPED_001",
+      "name_zh": "白色垂布床",
+      "asset_type": "prop",
+      "source_file": "588470d1c1906aa16bad61684fd8e7b7.glb",
+      "source_sha256": "f53bc9d34228bb8dfcf36b0b6d73946641aad56501aeb61a6beac74a07332c07",
+      "geometry": {
+        "mesh_count": 1,
+        "vertex_count": 292487,
+        "polygon_count": 499872,
+        "material_count": 1,
+        "armature_count": 0,
+        "bone_count": 0,
+        "bounds_min": [
+          -0.50945,
+          -0.438894,
+          -0.0
+        ],
+        "bounds_max": [
+          0.386615,
+          0.457007,
+          0.389972
+        ],
+        "dimensions": [
+          0.896065,
+          0.895901,
+          0.389972
+        ],
+        "mesh_names": [
+          "node_0"
+        ],
+        "armature_names": []
+      },
+      "rig": {
+        "armature_count": 0,
+        "walk_rig_candidate": false
+      },
+      "status": "approved_source"
+    },
+    {
+      "id": "PROP_NECKLACE_BUST_WHITE_001",
+      "name_zh": "白色项链展示架",
+      "asset_type": "prop",
+      "source_file": "dd50b213d03f54c25d8abe75570bab4a.glb",
+      "source_sha256": "2766f58eae8b57ed386afd58c7082711a17d76ca1d2ee4bb43ea3d2813f038b5",
+      "geometry": {
+        "mesh_count": 1,
+        "vertex_count": 272509,
+        "polygon_count": 500000,
+        "material_count": 1,
+        "armature_count": 0,
+        "bone_count": 0,
+        "bounds_min": [
+          -0.343856,
+          -0.210122,
+          -0.0
+        ],
+        "bounds_max": [
+          0.345035,
+          0.208114,
+          1.129826
+        ],
+        "dimensions": [
+          0.688891,
+          0.418236,
+          1.129826
+        ],
+        "mesh_names": [
+          "node_0"
+        ],
+        "armature_names": []
+      },
+      "rig": {
+        "armature_count": 0,
+        "walk_rig_candidate": false
+      },
+      "status": "approved_source"
+    },
+    {
+      "id": "PROP_POTTED_BRANCH_001",
+      "name_zh": "陶盆枯枝陈设",
+      "asset_type": "prop",
+      "source_file": "b0a70d953d242b065e613b5ba99560bd.glb",
+      "source_sha256": "82ea9516d70fd0d1f7a0bffeba3b1fe186ae3bae921473d3ff74573b49900b8d",
+      "geometry": {
+        "mesh_count": 1,
+        "vertex_count": 307071,
+        "polygon_count": 499604,
+        "material_count": 1,
+        "armature_count": 0,
+        "bone_count": 0,
+        "bounds_min": [
+          -0.297007,
+          -0.303872,
+          -0.0
+        ],
+        "bounds_max": [
+          0.295418,
+          0.292947,
+          1.146441
+        ],
+        "dimensions": [
+          0.592425,
+          0.596819,
+          1.146441
+        ],
+        "mesh_names": [
+          "node_0"
+        ],
+        "armature_names": []
+      },
+      "rig": {
+        "armature_count": 0,
+        "walk_rig_candidate": false
+      },
+      "status": "approved_source"
+    },
+    {
+      "id": "PROP_WHITE_CHAIR_001",
+      "name_zh": "白色休闲椅",
+      "asset_type": "prop",
+      "source_file": "e517b68016fb0ffdcc1b7ac57f742f1c.glb",
+      "source_sha256": "0e403713f92c73e1416fcfc11eb9f4088e755ab8b2b5a96d2f1d093aa30df2ec",
+      "geometry": {
+        "mesh_count": 1,
+        "vertex_count": 303576,
+        "polygon_count": 499046,
+        "material_count": 1,
+        "armature_count": 0,
+        "bone_count": 0,
+        "bounds_min": [
+          -0.23144,
+          -0.567107,
+          -0.0
+        ],
+        "bounds_max": [
+          0.233815,
+          0.44413,
+          0.463857
+        ],
+        "dimensions": [
+          0.465255,
+          1.011237,
+          0.463857
+        ],
+        "mesh_names": [
+          "node_0"
+        ],
+        "armature_names": []
+      },
+      "rig": {
+        "armature_count": 0,
+        "walk_rig_candidate": false
+      },
+      "status": "approved_source"
+    },
+    {
+      "id": "PROP_WICKER_STORAGE_BOX_001",
+      "name_zh": "藤编收纳箱",
+      "asset_type": "prop",
+      "source_file": "6442506e913de55fdcc9e68494138d9d.glb",
+      "source_sha256": "627d7060cf9df7771a84f6110139d8a239dfc8a5ccdecc79ded3e20619357885",
+      "geometry": {
+        "mesh_count": 1,
+        "vertex_count": 341086,
+        "polygon_count": 495792,
+        "material_count": 1,
+        "armature_count": 0,
+        "bone_count": 0,
+        "bounds_min": [
+          -0.547524,
+          -0.53442,
+          -0.0
+        ],
+        "bounds_max": [
+          0.538472,
+          0.53957,
+          0.553784
+        ],
+        "dimensions": [
+          1.085996,
+          1.07399,
+          0.553784
+        ],
+        "mesh_names": [
+          "node_0"
+        ],
+        "armature_names": []
+      },
+      "rig": {
+        "armature_count": 0,
+        "walk_rig_candidate": false
+      },
+      "status": "approved_source"
+    },
+    {
+      "id": "PROP_PATIO_UMBRELLA_CLOSED_001",
+      "name_zh": "收拢庭院遮阳伞",
+      "asset_type": "prop",
+      "source_file": "cfe79b6e8550979df70c5ef1135b9dfe.glb",
+      "source_sha256": "447b071336940f78484022fbb87ecd05f84ab07dee4d6d944448d8a0c3508a50",
+      "geometry": {
+        "mesh_count": 1,
+        "vertex_count": 290663,
+        "polygon_count": 500000,
+        "material_count": 1,
+        "armature_count": 0,
+        "bone_count": 0,
+        "bounds_min": [
+          -0.119114,
+          -0.13338,
+          -0.0
+        ],
+        "bounds_max": [
+          0.118638,
+          0.131219,
+          1.176552
+        ],
+        "dimensions": [
+          0.237752,
+          0.264599,
+          1.176552
+        ],
+        "mesh_names": [
+          "node_0"
+        ],
+        "armature_names": []
+      },
+      "rig": {
+        "armature_count": 0,
+        "walk_rig_candidate": false
+      },
+      "status": "approved_source"
+    },
+    {
+      "id": "PROP_FLOWER_PLANTER_WHITE_001",
+      "name_zh": "白花木箱花架",
+      "asset_type": "prop",
+      "source_file": "65850450fdda91b92b1ff0b9b7fc079b.glb",
+      "source_sha256": "8778b576583a1110b6d6be9f17ff74812d4c9d22571e1de61894880a514cd90e",
+      "geometry": {
+        "mesh_count": 1,
+        "vertex_count": 333776,
+        "polygon_count": 491526,
+        "material_count": 1,
+        "armature_count": 0,
+        "bone_count": 0,
+        "bounds_min": [
+          -0.459273,
+          -0.232545,
+          -0.0
+        ],
+        "bounds_max": [
+          0.473404,
+          0.266428,
+          0.74955
+        ],
+        "dimensions": [
+          0.932677,
+          0.498973,
+          0.74955
+        ],
+        "mesh_names": [
+          "node_0"
+        ],
+        "armature_names": []
+      },
+      "rig": {
+        "armature_count": 0,
+        "walk_rig_candidate": false
+      },
+      "status": "approved_source"
+    },
+    {
+      "id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+      "name_zh": "白色长外套全身女模特",
+      "asset_type": "character",
+      "source_file": "85848780b48a738fbe785543a8cbb05a.glb",
+      "source_sha256": "65f7db8c815e8435189ec971eeb01407bcb1607c91a5ca1ae8b9f22d802ffbb3",
+      "geometry": {
+        "mesh_count": 1,
+        "vertex_count": 292098,
+        "polygon_count": 494630,
+        "material_count": 1,
+        "armature_count": 0,
+        "bone_count": 0,
+        "bounds_min": [
+          -0.182604,
+          -0.120594,
+          -0.0
+        ],
+        "bounds_max": [
+          0.177357,
+          0.100435,
+          1.183087
+        ],
+        "dimensions": [
+          0.359961,
+          0.221029,
+          1.183087
+        ],
+        "mesh_names": [
+          "node_0"
+        ],
+        "armature_names": []
+      },
+      "rig": {
+        "armature_count": 0,
+        "walk_rig_candidate": true
+      },
+      "status": "approved_source"
+    }
+  ]
+}

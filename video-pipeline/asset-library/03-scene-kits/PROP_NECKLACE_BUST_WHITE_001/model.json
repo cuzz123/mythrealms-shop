@@ -1,0 +1,39 @@
+{
+  "id": "PROP_NECKLACE_BUST_WHITE_001",
+  "name_zh": "白色项链展示架",
+  "asset_type": "prop",
+  "source_file": "dd50b213d03f54c25d8abe75570bab4a.glb",
+  "source_sha256": "2766f58eae8b57ed386afd58c7082711a17d76ca1d2ee4bb43ea3d2813f038b5",
+  "geometry": {
+    "mesh_count": 1,
+    "vertex_count": 272509,
+    "polygon_count": 500000,
+    "material_count": 1,
+    "armature_count": 0,
+    "bone_count": 0,
+    "bounds_min": [
+      -0.343856,
+      -0.210122,
+      -0.0
+    ],
+    "bounds_max": [
+      0.345035,
+      0.208114,
+      1.129826
+    ],
+    "dimensions": [
+      0.688891,
+      0.418236,
+      1.129826
+    ],
+    "mesh_names": [
+      "node_0"
+    ],
+    "armature_names": []
+  },
+  "rig": {
+    "armature_count": 0,
+    "walk_rig_candidate": false
+  },
+  "status": "approved_source"
+}

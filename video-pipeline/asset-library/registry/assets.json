@@ -1,29 +1,1478 @@
 {
   "library": "MythRealms_Assets",
   "schema": "asset.schema.json",
-  "updated": "2026-07-15",
+  "updated": "2026-07-17",
   "assets": [
-    {"id":"CHAR_COUTURE_CENTER_001","name":"C位礼服角色","category":"character","status":"draft","version":"v1","source_paths":["../../../c位礼服角色.blend","../../../c位礼服角色_预览.png"],"tags":["female","couture","center-position","9:16"],"usage":{"default_import":"link","suitable_for":["五人C位构图","珠宝人物中景"]},"quality_gate":["确认授权与肖像使用范围","补充正面、侧面和背面预览","补充角色比例和服装锁定规则"],"notes":"现有工作区资产；尚未完成正式入库资料。"},
-    {"id":"CHAR_MR_TALENT_FULL_001","name":"品牌白衬衫全身模特","category":"character","status":"available_unrigged","version":"v1","source_paths":["../05-characters/CHAR_MR_TALENT_FULL_001/MR_TALENT_WHITE_SHIRT.blend","../05-characters/CHAR_MR_TALENT_FULL_001/source/hunyuan-web/MR_TALENT_WHITE_SHIRT.glb","../05-characters/CHAR_MR_TALENT_FULL_001/Thumbnail.png"],"tags":["female","full-body","brand-talent","white-shirt-dress","hunyuan3d"],"usage":{"default_import":"link","suitable_for":["全身构图","生活方式预演","场景尺度测试"]},"quality_gate":["绑定标准人体骨架","检查蒙皮","补充动作预览"],"notes":"全身静态网格，不能直接用于走位或坐姿动画。"},
-    {"id":"CHAR_WEB_LEFT1_MINT_001","name":"左一薄荷礼服全身角色","category":"character","status":"available_unrigged","version":"v1","source_paths":["../05-characters/CHAR_WEB_LEFT1_MINT_001/LEFT1_MINT_FULLBODY.blend","../05-characters/CHAR_WEB_LEFT1_MINT_001/source/hunyuan-web/LEFT1_MINT_FULLBODY.glb","../05-characters/CHAR_WEB_LEFT1_MINT_001/Thumbnail.png"],"tags":["female","full-body","mint-gown","earrings","hunyuan3d"],"usage":{"default_import":"link","suitable_for":["礼服站位","耳饰灯光","多人构图"]},"quality_gate":["确认礼服色彩","绑定标准人体骨架","补充动作预览"],"notes":"全身静态网格；生成结果礼服偏象牙白。"},
-    {"id":"PROP_MR_FLOWER_STAND_001","name":"花艺陈列架","category":"scene_prop","status":"available_static","version":"v1","source_paths":["../03-scene-kits/PROP_MR_FLOWER_STAND_001/MR_FLOWER_STAND.blend","../03-scene-kits/PROP_MR_FLOWER_STAND_001/source/hunyuan-web/MR_FLOWER_STAND.glb","../03-scene-kits/PROP_MR_FLOWER_STAND_001/Thumbnail.png"],"tags":["flower-stand","flower-shop","foreground","scene-module","hunyuan3d"],"usage":{"default_import":"link","suitable_for":["花店场景","前景遮挡","生活方式产品陈列"]},"quality_gate":["近景花瓣检查","拆分可替换花材","补充场景搭配预览"],"notes":"静态单网格道具，花材不可独立替换。"},
-    {"id":"CAM_SLOW_PUSH_MACRO_85MM_001","name":"慢推微距","category":"camera_rig","status":"draft","version":"v1","source_paths":["../02-camera-rigs/CAM_SLOW_PUSH_MACRO_85MM_001/CAM_SLOW_PUSH_MACRO_85MM_001_v1.blend","../02-camera-rigs/CAM_SLOW_PUSH_MACRO_85MM_001/Preview.mp4","../02-camera-rigs/CAM_SLOW_PUSH_MACRO_85MM_001/Thumbnail.png"],"tags":["macro","push-in","85mm","jewelry"],"usage":{"default_import":"append","suitable_for":["耳环","吊坠","Hero收尾"]},"quality_gate":["3种速度版本","35/50/85mm测试","焦点延迟与结尾停顿预览"],"notes":"已生成代理产品版：6秒、30fps、85mm；待替换正式产品并完成多焦距测试后批准。"},
-    {"id":"CAM_ORBIT_PRODUCT_50MM_001","name":"环绕产品揭示","category":"camera_rig","status":"planned","version":"v1","source_paths":[],"tags":["orbit","reveal","50mm"],"usage":{"default_import":"append","suitable_for":["耳环","吊坠","人物佩戴"]},"quality_gate":["环绕80度","曲线含加减速","产品可替换"],"notes":""},
-    {"id":"CAM_MULTI_MODEL_SLIDE_50MM_001","name":"多模特横向滑轨","category":"camera_rig","status":"planned","version":"v1","source_paths":[],"tags":["tracking","slide","multi-model","50mm"],"usage":{"default_import":"append","suitable_for":["四人走位","系列产品"]},"quality_gate":["避免相邻重复构图","C位停顿","站位可替换"],"notes":""},
-    {"id":"CAM_OVERHEAD_DROP_35MM_001","name":"俯拍下降","category":"camera_rig","status":"planned","version":"v1","source_paths":[],"tags":["overhead","drop","35mm"],"usage":{"default_import":"append","suitable_for":["桌面产品","展台"]},"quality_gate":["下降曲线","焦点锁定","构图留白"],"notes":""},
-    {"id":"CAM_MIRROR_REVEAL_50MM_001","name":"镜面反射揭示","category":"camera_rig","status":"planned","version":"v1","source_paths":[],"tags":["mirror","reveal","50mm"],"usage":{"default_import":"append","suitable_for":["戒指","耳环","品牌氛围"]},"quality_gate":["反射不穿帮","产品可读","镜头移动可替换"],"notes":""},
-    {"id":"CAM_FOREGROUND_WIPE_35MM_001","name":"前景遮挡转场","category":"camera_rig","status":"planned","version":"v1","source_paths":[],"tags":["transition","foreground","35mm"],"usage":{"default_import":"append","suitable_for":["场景切换","TikTok钩子"]},"quality_gate":["遮挡物独立Collection","出入点可调","无品牌抄袭元素"],"notes":""},
-    {"id":"LIGHT_MOON_GOLD_001","name":"冷月光与暖金反光","category":"lighting","status":"draft","version":"v1","source_paths":["../04-lighting/LIGHT_MOON_GOLD_001/LIGHT_MOON_GOLD_001_v1.blend","../04-lighting/LIGHT_MOON_GOLD_001/Preview.mp4","../04-lighting/LIGHT_MOON_GOLD_001/Thumbnail.png"],"tags":["moonlight","gold","contrast"],"usage":{"default_import":"link","suitable_for":["玻璃温室","珠宝特写"]},"quality_gate":["灯光独立Collection","材质高光可控","低清预览"],"notes":"已生成独立四灯 Rig：冷月主光、暖金侧反光、暖金轮廓与冷色补光；待在正式产品上确认高光后批准。"},
-    {"id":"LIGHT_MUSEUM_SPOT_001","name":"博物馆单束聚光","category":"lighting","status":"planned","version":"v1","source_paths":[],"tags":["spotlight","gallery","negative-space"],"usage":{"default_import":"link","suitable_for":["展厅","Hero产品"]},"quality_gate":["边缘不过曝","可替换展台","低清预览"],"notes":""},
-    {"id":"LIGHT_JEWELRY_SWEEP_001","name":"珠宝微距扫光","category":"lighting","status":"planned","version":"v1","source_paths":[],"tags":["macro","sweep","sparkle"],"usage":{"default_import":"link","suitable_for":["宝石","金属","产品微距"]},"quality_gate":["扫光动画独立","避免闪烁","宝石高光可读"],"notes":""},
-    {"id":"LIGHT_NIGHT_RIM_001","name":"夜景轮廓光","category":"lighting","status":"planned","version":"v1","source_paths":[],"tags":["night","rim-light","character"],"usage":{"default_import":"link","suitable_for":["夜间住宅","人物佩戴"]},"quality_gate":["人物轮廓清晰","产品不丢失","低清预览"],"notes":""},
-    {"id":"SET_GLASSHOUSE_NIGHT_001","name":"暗调玻璃温室","category":"scene","status":"planned","version":"v1","source_paths":[],"tags":["glasshouse","night","wet-stone"],"usage":{"default_import":"link","suitable_for":["耳环","浪漫奢侈品"]},"quality_gate":["场景不包含固定灯光","产品插槽","9:16预览"],"notes":""},
-    {"id":"SET_MINIMAL_GALLERY_001","name":"极简珠宝展厅","category":"scene","status":"planned","version":"v1","source_paths":[],"tags":["gallery","marble","metal"],"usage":{"default_import":"link","suitable_for":["产品Hero","展台"]},"quality_gate":["大面积负空间","展台插槽","9:16预览"],"notes":""},
-    {"id":"SET_MODERN_NIGHT_HOME_001","name":"高级现代住宅","category":"scene","status":"planned","version":"v1","source_paths":[],"tags":["home","night","velvet"],"usage":{"default_import":"link","suitable_for":["人物佩戴","生活方式广告"]},"quality_gate":["角色插槽","城市灯光可关","9:16预览"],"notes":""},
-    {"id":"BLOCK_SINGLE_PRODUCT_CLOSEUP_001","name":"单人产品特写站位","category":"motion","status":"planned","version":"v1","source_paths":[],"tags":["blocking","single-model","closeup"],"usage":{"default_import":"append","suitable_for":["耳环","手链"]},"quality_gate":["产品始终可读","手部不遮挡","相机节奏匹配"],"notes":""},
-    {"id":"BLOCK_FOUR_MODEL_WALK_001","name":"四人横向走位","category":"motion","status":"planned","version":"v1","source_paths":[],"tags":["blocking","four-model","walk"],"usage":{"default_import":"append","suitable_for":["系列产品","横向滑轨"]},"quality_gate":["人物间距可参数化","C位停顿","节奏预览"],"notes":""},
-    {"id":"ACT_HEAD_TURN_SLOW_001","name":"缓慢回头动作","category":"motion","status":"planned","version":"v1","source_paths":[],"tags":["action","head-turn","slow"],"usage":{"default_import":"append","suitable_for":["耳环","人物肖像"]},"quality_gate":["动作比相机慢半拍","耳部可见","可循环测试"],"notes":""},
-    {"id":"STYLE_MYTHREALMS_LUXURY_001","name":"MythRealms奢侈电影感","category":"style","status":"draft","version":"v1","source_paths":[],"tags":["low-saturation","cool-white","warm-gold","cinematic"],"usage":{"default_import":"append","suitable_for":["所有珠宝广告"]},"quality_gate":["低饱和暗调","冷白环境光与暖金高光","避免AI塑料感","保存LUT与提示词"],"notes":"风格母预设，待补充 LUT、提示词与反向提示词文件。"},
-    {"id":"ACT_RIGHT2_GOLD_EARRING_REVEAL_01","name":"右二单向耳饰展示转头","category":"motion","status":"approved","version":"v1","source_paths":["../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/RIGHT2_GOLD_RIGGED_UPPER_BODY_v1.blend","../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/rig_v5_earring_reveal/RIGHT2_GOLD_EARRING_REVEAL_PREVIEW.mp4","../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/rig_v5_earring_reveal/RIGHT2_GOLD_EARRING_REVEAL_CONTACT_SHEET.png"],"tags":["action","head-turn","earring-reveal","right2","gold","rigged-upper-body"],"usage":{"default_import":"append","suitable_for":["耳饰肖像特写","三分之四侧面揭示","上半身珠宝广告"]},"quality_gate":["头Y轴偏转单调递增无回摆","逐帧连续性","脚本验证通过"],"notes":"上半身预演；源网格到膝部收口，未做生产级拓扑。不可行走、全身或最终商业交付。"}
+    {
+      "id": "CHAR_COUTURE_CENTER_001",
+      "name": "C位礼服角色",
+      "category": "character",
+      "status": "draft",
+      "version": "v1",
+      "source_paths": [
+        "../../../c位礼服角色.blend",
+        "../../../c位礼服角色_预览.png"
+      ],
+      "tags": [
+        "female",
+        "couture",
+        "center-position",
+        "9:16"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "五人C位构图",
+          "珠宝人物中景"
+        ]
+      },
+      "quality_gate": [
+        "确认授权与肖像使用范围",
+        "补充正面、侧面和背面预览",
+        "补充角色比例和服装锁定规则"
+      ],
+      "notes": "现有工作区资产；尚未完成正式入库资料。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_FULL_001",
+      "name": "品牌白衬衫全身模特",
+      "category": "character",
+      "status": "available_unrigged",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_FULL_001/MR_TALENT_WHITE_SHIRT.blend",
+        "../05-characters/CHAR_MR_TALENT_FULL_001/source/hunyuan-web/MR_TALENT_WHITE_SHIRT.glb",
+        "../05-characters/CHAR_MR_TALENT_FULL_001/Thumbnail.png"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "brand-talent",
+        "white-shirt-dress",
+        "hunyuan3d"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "全身构图",
+          "生活方式预演",
+          "场景尺度测试"
+        ]
+      },
+      "quality_gate": [
+        "绑定标准人体骨架",
+        "检查蒙皮",
+        "补充动作预览"
+      ],
+      "notes": "全身静态网格，不能直接用于走位或坐姿动画。"
+    },
+    {
+      "id": "CHAR_WEB_LEFT1_MINT_001",
+      "name": "左一薄荷礼服全身角色",
+      "category": "character",
+      "status": "available_unrigged",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_WEB_LEFT1_MINT_001/LEFT1_MINT_FULLBODY.blend",
+        "../05-characters/CHAR_WEB_LEFT1_MINT_001/source/hunyuan-web/LEFT1_MINT_FULLBODY.glb",
+        "../05-characters/CHAR_WEB_LEFT1_MINT_001/Thumbnail.png"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "mint-gown",
+        "earrings",
+        "hunyuan3d"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "礼服站位",
+          "耳饰灯光",
+          "多人构图"
+        ]
+      },
+      "quality_gate": [
+        "确认礼服色彩",
+        "绑定标准人体骨架",
+        "补充动作预览"
+      ],
+      "notes": "全身静态网格；生成结果礼服偏象牙白。"
+    },
+    {
+      "id": "PROP_MR_FLOWER_STAND_001",
+      "name": "花艺陈列架",
+      "category": "scene_prop",
+      "status": "available_static",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/PROP_MR_FLOWER_STAND_001/MR_FLOWER_STAND.blend",
+        "../03-scene-kits/PROP_MR_FLOWER_STAND_001/source/hunyuan-web/MR_FLOWER_STAND.glb",
+        "../03-scene-kits/PROP_MR_FLOWER_STAND_001/Thumbnail.png"
+      ],
+      "tags": [
+        "flower-stand",
+        "flower-shop",
+        "foreground",
+        "scene-module",
+        "hunyuan3d"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "花店场景",
+          "前景遮挡",
+          "生活方式产品陈列"
+        ]
+      },
+      "quality_gate": [
+        "近景花瓣检查",
+        "拆分可替换花材",
+        "补充场景搭配预览"
+      ],
+      "notes": "静态单网格道具，花材不可独立替换。"
+    },
+    {
+      "id": "CAM_SLOW_PUSH_MACRO_85MM_001",
+      "name": "慢推微距",
+      "category": "camera_rig",
+      "status": "draft",
+      "version": "v1",
+      "source_paths": [
+        "../02-camera-rigs/CAM_SLOW_PUSH_MACRO_85MM_001/CAM_SLOW_PUSH_MACRO_85MM_001_v1.blend",
+        "../02-camera-rigs/CAM_SLOW_PUSH_MACRO_85MM_001/Preview.mp4",
+        "../02-camera-rigs/CAM_SLOW_PUSH_MACRO_85MM_001/Thumbnail.png"
+      ],
+      "tags": [
+        "macro",
+        "push-in",
+        "85mm",
+        "jewelry"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "耳环",
+          "吊坠",
+          "Hero收尾"
+        ]
+      },
+      "quality_gate": [
+        "3种速度版本",
+        "35/50/85mm测试",
+        "焦点延迟与结尾停顿预览"
+      ],
+      "notes": "已生成代理产品版：6秒、30fps、85mm；待替换正式产品并完成多焦距测试后批准。"
+    },
+    {
+      "id": "CAM_ORBIT_PRODUCT_50MM_001",
+      "name": "环绕产品揭示",
+      "category": "camera_rig",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "orbit",
+        "reveal",
+        "50mm"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "耳环",
+          "吊坠",
+          "人物佩戴"
+        ]
+      },
+      "quality_gate": [
+        "环绕80度",
+        "曲线含加减速",
+        "产品可替换"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "CAM_MULTI_MODEL_SLIDE_50MM_001",
+      "name": "多模特横向滑轨",
+      "category": "camera_rig",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "tracking",
+        "slide",
+        "multi-model",
+        "50mm"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "四人走位",
+          "系列产品"
+        ]
+      },
+      "quality_gate": [
+        "避免相邻重复构图",
+        "C位停顿",
+        "站位可替换"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "CAM_OVERHEAD_DROP_35MM_001",
+      "name": "俯拍下降",
+      "category": "camera_rig",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "overhead",
+        "drop",
+        "35mm"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "桌面产品",
+          "展台"
+        ]
+      },
+      "quality_gate": [
+        "下降曲线",
+        "焦点锁定",
+        "构图留白"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "CAM_MIRROR_REVEAL_50MM_001",
+      "name": "镜面反射揭示",
+      "category": "camera_rig",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "mirror",
+        "reveal",
+        "50mm"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "戒指",
+          "耳环",
+          "品牌氛围"
+        ]
+      },
+      "quality_gate": [
+        "反射不穿帮",
+        "产品可读",
+        "镜头移动可替换"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "CAM_FOREGROUND_WIPE_35MM_001",
+      "name": "前景遮挡转场",
+      "category": "camera_rig",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "transition",
+        "foreground",
+        "35mm"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "场景切换",
+          "TikTok钩子"
+        ]
+      },
+      "quality_gate": [
+        "遮挡物独立Collection",
+        "出入点可调",
+        "无品牌抄袭元素"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "LIGHT_MOON_GOLD_001",
+      "name": "冷月光与暖金反光",
+      "category": "lighting",
+      "status": "draft",
+      "version": "v1",
+      "source_paths": [
+        "../04-lighting/LIGHT_MOON_GOLD_001/LIGHT_MOON_GOLD_001_v1.blend",
+        "../04-lighting/LIGHT_MOON_GOLD_001/Preview.mp4",
+        "../04-lighting/LIGHT_MOON_GOLD_001/Thumbnail.png"
+      ],
+      "tags": [
+        "moonlight",
+        "gold",
+        "contrast"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "玻璃温室",
+          "珠宝特写"
+        ]
+      },
+      "quality_gate": [
+        "灯光独立Collection",
+        "材质高光可控",
+        "低清预览"
+      ],
+      "notes": "已生成独立四灯 Rig：冷月主光、暖金侧反光、暖金轮廓与冷色补光；待在正式产品上确认高光后批准。"
+    },
+    {
+      "id": "LIGHT_MUSEUM_SPOT_001",
+      "name": "博物馆单束聚光",
+      "category": "lighting",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "spotlight",
+        "gallery",
+        "negative-space"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "展厅",
+          "Hero产品"
+        ]
+      },
+      "quality_gate": [
+        "边缘不过曝",
+        "可替换展台",
+        "低清预览"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "LIGHT_JEWELRY_SWEEP_001",
+      "name": "珠宝微距扫光",
+      "category": "lighting",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "macro",
+        "sweep",
+        "sparkle"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "宝石",
+          "金属",
+          "产品微距"
+        ]
+      },
+      "quality_gate": [
+        "扫光动画独立",
+        "避免闪烁",
+        "宝石高光可读"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "LIGHT_NIGHT_RIM_001",
+      "name": "夜景轮廓光",
+      "category": "lighting",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "night",
+        "rim-light",
+        "character"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "夜间住宅",
+          "人物佩戴"
+        ]
+      },
+      "quality_gate": [
+        "人物轮廓清晰",
+        "产品不丢失",
+        "低清预览"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "SET_GLASSHOUSE_NIGHT_001",
+      "name": "暗调玻璃温室",
+      "category": "scene",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "glasshouse",
+        "night",
+        "wet-stone"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "耳环",
+          "浪漫奢侈品"
+        ]
+      },
+      "quality_gate": [
+        "场景不包含固定灯光",
+        "产品插槽",
+        "9:16预览"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "SET_MINIMAL_GALLERY_001",
+      "name": "极简珠宝展厅",
+      "category": "scene",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "gallery",
+        "marble",
+        "metal"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "产品Hero",
+          "展台"
+        ]
+      },
+      "quality_gate": [
+        "大面积负空间",
+        "展台插槽",
+        "9:16预览"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "SET_MODERN_NIGHT_HOME_001",
+      "name": "高级现代住宅",
+      "category": "scene",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "home",
+        "night",
+        "velvet"
+      ],
+      "usage": {
+        "default_import": "link",
+        "suitable_for": [
+          "人物佩戴",
+          "生活方式广告"
+        ]
+      },
+      "quality_gate": [
+        "角色插槽",
+        "城市灯光可关",
+        "9:16预览"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "BLOCK_SINGLE_PRODUCT_CLOSEUP_001",
+      "name": "单人产品特写站位",
+      "category": "motion",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "blocking",
+        "single-model",
+        "closeup"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "耳环",
+          "手链"
+        ]
+      },
+      "quality_gate": [
+        "产品始终可读",
+        "手部不遮挡",
+        "相机节奏匹配"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "BLOCK_FOUR_MODEL_WALK_001",
+      "name": "四人横向走位",
+      "category": "motion",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "blocking",
+        "four-model",
+        "walk"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "系列产品",
+          "横向滑轨"
+        ]
+      },
+      "quality_gate": [
+        "人物间距可参数化",
+        "C位停顿",
+        "节奏预览"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "ACT_HEAD_TURN_SLOW_001",
+      "name": "缓慢回头动作",
+      "category": "motion",
+      "status": "planned",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "action",
+        "head-turn",
+        "slow"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "耳环",
+          "人物肖像"
+        ]
+      },
+      "quality_gate": [
+        "动作比相机慢半拍",
+        "耳部可见",
+        "可循环测试"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "STYLE_MYTHREALMS_LUXURY_001",
+      "name": "MythRealms奢侈电影感",
+      "category": "style",
+      "status": "draft",
+      "version": "v1",
+      "source_paths": [],
+      "tags": [
+        "low-saturation",
+        "cool-white",
+        "warm-gold",
+        "cinematic"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "所有珠宝广告"
+        ]
+      },
+      "quality_gate": [
+        "低饱和暗调",
+        "冷白环境光与暖金高光",
+        "避免AI塑料感",
+        "保存LUT与提示词"
+      ],
+      "notes": "风格母预设，待补充 LUT、提示词与反向提示词文件。"
+    },
+    {
+      "id": "ACT_RIGHT2_GOLD_EARRING_REVEAL_01",
+      "name": "右二单向耳饰展示转头",
+      "category": "motion",
+      "status": "approved",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/RIGHT2_GOLD_RIGGED_UPPER_BODY_v1.blend",
+        "../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/rig_v5_earring_reveal/RIGHT2_GOLD_EARRING_REVEAL_PREVIEW.mp4",
+        "../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/rig_v5_earring_reveal/RIGHT2_GOLD_EARRING_REVEAL_CONTACT_SHEET.png"
+      ],
+      "tags": [
+        "action",
+        "head-turn",
+        "earring-reveal",
+        "right2",
+        "gold",
+        "rigged-upper-body"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "耳饰肖像特写",
+          "三分之四侧面揭示",
+          "上半身珠宝广告"
+        ]
+      },
+      "quality_gate": [
+        "头Y轴偏转单调递增无回摆",
+        "逐帧连续性",
+        "脚本验证通过"
+      ],
+      "notes": "上半身预演；源网格到膝部收口，未做生产级拓扑。不可行走、全身或最终商业交付。"
+    },
+    {
+      "id": "ACT_RIGHT2_GOLD_JEWELRY_POISE_01",
+      "name": "综合首饰展示·抬颏侧转",
+      "category": "motion",
+      "status": "approved",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/RIGHT2_GOLD_JEWELRY_POSE_v1.blend",
+        "../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/jewelry_pose_v1/RIGHT2_GOLD_JEWELRY_POSE_PREVIEW.mp4",
+        "../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/jewelry_pose_v1/RIGHT2_GOLD_JEWELRY_POSE_CONTACT_SHEET.png"
+      ],
+      "tags": [
+        "action",
+        "chin-lift",
+        "head-turn",
+        "jewelry-poise",
+        "right2",
+        "gold",
+        "rigged-upper-body"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "综合首饰肖像",
+          "耳饰与锁骨展示",
+          "上半身珠宝广告"
+        ]
+      },
+      "quality_gate": [
+        "抬颏与侧转单调递增无回摆",
+        "双臂保持锁定",
+        "72帧逐帧连续性验证通过"
+      ],
+      "notes": "使用原始混元金色礼服网格的安全头颈胸动作；不支持行走、全身动作或大幅手臂动作。"
+    },
+    {
+      "id": "CAM_RIGHT2_GOLD_JEWELRY_POISE_01",
+      "name": "综合首饰展示·缓慢推近",
+      "category": "camera_rig",
+      "status": "approved",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/RIGHT2_GOLD_JEWELRY_POSE_v1.blend",
+        "../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/jewelry_pose_v1/RIGHT2_GOLD_JEWELRY_POSE_PREVIEW.mp4",
+        "../05-characters/CHAR_HUNYUAN_RIGHT2_GOLD_001/preview/jewelry_pose_v1/RIGHT2_GOLD_JEWELRY_POSE_CONTACT_SHEET.png"
+      ],
+      "tags": [
+        "camera",
+        "slow-push",
+        "portrait",
+        "jewelry",
+        "right2",
+        "gold"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "耳饰特写",
+          "脸部与肩线肖像",
+          "综合首饰展示"
+        ]
+      },
+      "quality_gate": [
+        "镜头位移旋转与焦距逐帧连续",
+        "焦点锁定脸部与耳饰",
+        "末段定格"
+      ],
+      "notes": "与ACT_RIGHT2_GOLD_JEWELRY_POISE_01配套；72帧、24fps、3秒。"
+    },
+    {
+      "id": "RIGHT2_GOLD_JEWELRY_SAFE_PACK_001",
+      "name": "右二金色礼服·首饰模特安全动作镜头包",
+      "category": "motion_camera_pack",
+      "status": "candidate_review",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/RIGHT2_GOLD_JEWELRY_SAFE_PACK_v1.blend",
+        "../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/motion_manifest.json",
+        "../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/RIGHT2_GOLD_JEWELRY_SAFE_PACK_CONTACT_SHEET.png",
+        "../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/RIGHT2_GOLD_ALL_30_ACTIONS_REVIEW.mp4",
+        "../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/full_review_sheets/RIGHT2_GOLD_REVIEW_01_10.png",
+        "../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/full_review_sheets/RIGHT2_GOLD_REVIEW_11_20.png",
+        "../06-motions/RIGHT2_GOLD_JEWELRY_SAFE_PACK_001/preview/full_review_sheets/RIGHT2_GOLD_REVIEW_21_30.png"
+      ],
+      "tags": [
+        "motion-pack",
+        "camera-pack",
+        "jewelry-model",
+        "right2",
+        "gold",
+        "locked-arms",
+        "upper-body"
+      ],
+      "usage": {
+        "default_import": "append",
+        "suitable_for": [
+          "耳饰肖像",
+          "项链与锁骨展示",
+          "首饰模特上半身广告"
+        ]
+      },
+      "quality_gate": [
+        "30个动作与30个镜头完整存在",
+        "逐帧关节与镜头数值验证通过",
+        "30段完整动态预览通过内部质检",
+        "原始高精度混元网格保持可见",
+        "2个已验收、28个候选待用户复核"
+      ],
+      "notes": "每项72帧、24fps、3秒；双臂锁定，仅使用已验证的头颈胸、脊柱与极小肩线变化。第24项低机位镜头已在全量审片中修正。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_EBONY_LINEN_001",
+      "name": "深肤色白亚麻全身模特",
+      "category": "character",
+      "status": "reference_ready_for_hunyuan_web",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_EBONY_LINEN_001/source/generated-turnaround/turnaround-sheet.png",
+        "../05-characters/CHAR_MR_TALENT_EBONY_LINEN_001/source/three-view-crops/front.jpg",
+        "../05-characters/CHAR_MR_TALENT_EBONY_LINEN_001/source/three-view-crops/left_front.jpg",
+        "../05-characters/CHAR_MR_TALENT_EBONY_LINEN_001/source/three-view-crops/back.jpg"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "ebony",
+        "white-linen",
+        "pearl-necklace",
+        "hunyuan-input"
+      ],
+      "usage": {
+        "default_import": "image_reference",
+        "suitable_for": [
+          "白色亚麻生活方式",
+          "珍珠项链内容",
+          "模特选角预览"
+        ]
+      },
+      "quality_gate": [
+        "三视图人物与服装一致",
+        "确认手指和背面细节",
+        "混元生成后复查网格"
+      ],
+      "notes": "图像参考资产；未生成 GLB、骨骼或动作。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_BOB_LINEN_001",
+      "name": "短发白亚麻套装全身模特",
+      "category": "character",
+      "status": "reference_ready_for_hunyuan_web",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_BOB_LINEN_001/source/generated-turnaround/turnaround-sheet.png",
+        "../05-characters/CHAR_MR_TALENT_BOB_LINEN_001/source/three-view-crops/front.jpg",
+        "../05-characters/CHAR_MR_TALENT_BOB_LINEN_001/source/three-view-crops/left_front.jpg",
+        "../05-characters/CHAR_MR_TALENT_BOB_LINEN_001/source/three-view-crops/back.jpg"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "short-bob",
+        "white-linen",
+        "lifestyle",
+        "hunyuan-input"
+      ],
+      "usage": {
+        "default_import": "image_reference",
+        "suitable_for": [
+          "白色亚麻生活方式",
+          "项链内容",
+          "全身站位预览"
+        ]
+      },
+      "quality_gate": [
+        "三视图人物与服装一致",
+        "确认手指和背面细节",
+        "混元生成后复查网格"
+      ],
+      "notes": "图像参考资产；未生成 GLB、骨骼或动作。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_CURLY_LINEN_001",
+      "name": "卷发珍珠耳饰亚麻长裙全身模特",
+      "category": "character",
+      "status": "reference_ready_for_hunyuan_web",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_CURLY_LINEN_001/source/generated-turnaround/turnaround-sheet.png",
+        "../05-characters/CHAR_MR_TALENT_CURLY_LINEN_001/source/three-view-crops/front.jpg",
+        "../05-characters/CHAR_MR_TALENT_CURLY_LINEN_001/source/three-view-crops/left_front.jpg",
+        "../05-characters/CHAR_MR_TALENT_CURLY_LINEN_001/source/three-view-crops/back.jpg"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "curly-hair",
+        "pearl-earrings",
+        "linen-dress",
+        "hunyuan-input"
+      ],
+      "usage": {
+        "default_import": "image_reference",
+        "suitable_for": [
+          "耳饰内容",
+          "侧面回头预览",
+          "礼服氛围视频"
+        ]
+      },
+      "quality_gate": [
+        "耳饰与耳朵关系清晰",
+        "三视图服装一致",
+        "混元生成后复查网格"
+      ],
+      "notes": "图像参考资产；未生成 GLB、骨骼或动作。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_AUBURN_SATIN_001",
+      "name": "红发珍珠项链缎面礼服全身模特",
+      "category": "character",
+      "status": "reference_ready_for_hunyuan_web",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_AUBURN_SATIN_001/source/generated-turnaround/turnaround-sheet.png",
+        "../05-characters/CHAR_MR_TALENT_AUBURN_SATIN_001/source/three-view-crops/front.jpg",
+        "../05-characters/CHAR_MR_TALENT_AUBURN_SATIN_001/source/three-view-crops/left_front.jpg",
+        "../05-characters/CHAR_MR_TALENT_AUBURN_SATIN_001/source/three-view-crops/back.jpg"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "auburn",
+        "satin-dress",
+        "pearl-necklace",
+        "hunyuan-input"
+      ],
+      "usage": {
+        "default_import": "image_reference",
+        "suitable_for": [
+          "珍珠项链展示",
+          "礼服慢推",
+          "晚间氛围视频"
+        ]
+      },
+      "quality_gate": [
+        "项链与服装一致",
+        "三视图人物一致",
+        "混元生成后复查网格"
+      ],
+      "notes": "图像参考资产；未生成 GLB、骨骼或动作。"
+    },
+    {
+      "id": "ENV_MR_OLIVE_COURTYARD_001",
+      "name": "橄榄柠檬石灰岩庭院全景",
+      "category": "environment",
+      "status": "available_360_background",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/ENV_MR_OLIVE_COURTYARD_001/panoramas/ENV_MR_OLIVE_COURTYARD_001_360-preview.png"
+      ],
+      "tags": [
+        "environment",
+        "360",
+        "courtyard",
+        "olive",
+        "lemon",
+        "limestone"
+      ],
+      "usage": {
+        "default_import": "world_texture",
+        "suitable_for": [
+          "庭院人像",
+          "自然光珍珠广告",
+          "暖调背景反射"
+        ]
+      },
+      "quality_gate": [
+        "2:1 equirectangular",
+        "无人物和产品",
+        "近景需补几何"
+      ],
+      "notes": "Blender World 环境贴图，不是可游走几何场景。"
+    },
+    {
+      "id": "ENV_MR_POOL_COURTYARD_001",
+      "name": "棕榈水池石灰岩庭院全景",
+      "category": "environment",
+      "status": "available_360_background",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/ENV_MR_POOL_COURTYARD_001/panoramas/ENV_MR_POOL_COURTYARD_001_360-preview.png"
+      ],
+      "tags": [
+        "environment",
+        "360",
+        "pool",
+        "palm",
+        "limestone",
+        "resort"
+      ],
+      "usage": {
+        "default_import": "world_texture",
+        "suitable_for": [
+          "度假珠宝广告",
+          "水面反射",
+          "夏日人像"
+        ]
+      },
+      "quality_gate": [
+        "2:1 equirectangular",
+        "无人物和产品",
+        "近景需补几何"
+      ],
+      "notes": "Blender World 环境贴图，不是可游走几何场景。"
+    },
+    {
+      "id": "ENV_MR_FLOWER_STOREFRONT_001",
+      "name": "暖调花艺石材店面全景",
+      "category": "environment",
+      "status": "available_360_background",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/ENV_MR_FLOWER_STOREFRONT_001/panoramas/ENV_MR_FLOWER_STOREFRONT_001_360-preview.png"
+      ],
+      "tags": [
+        "environment",
+        "360",
+        "flower-shop",
+        "stone",
+        "late-afternoon"
+      ],
+      "usage": {
+        "default_import": "world_texture",
+        "suitable_for": [
+          "花艺前景",
+          "生活方式广告",
+          "暖调耳饰"
+        ]
+      },
+      "quality_gate": [
+        "2:1 equirectangular",
+        "无人物和产品",
+        "近景需补几何"
+      ],
+      "notes": "Blender World 环境贴图，不是可游走几何场景。"
+    },
+    {
+      "id": "ENV_MR_SEASIDE_STAIRS_001",
+      "name": "条纹伞海边石阶全景",
+      "category": "environment",
+      "status": "available_360_background",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/ENV_MR_SEASIDE_STAIRS_001/panoramas/ENV_MR_SEASIDE_STAIRS_001_360-preview.png"
+      ],
+      "tags": [
+        "environment",
+        "360",
+        "seaside",
+        "stairs",
+        "striped-parasol",
+        "summer"
+      ],
+      "usage": {
+        "default_import": "world_texture",
+        "suitable_for": [
+          "海边产品片",
+          "蓝色反射",
+          "夏日穿戴"
+        ]
+      },
+      "quality_gate": [
+        "2:1 equirectangular",
+        "无人物和产品",
+        "近景需补几何"
+      ],
+      "notes": "Blender World 环境贴图，不是可游走几何场景。"
+    },
+    {
+      "id": "ENV_MR_COASTAL_LINEN_ROOM_001",
+      "name": "亚麻帘海景休憩室全景",
+      "category": "environment",
+      "status": "available_360_background",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/ENV_MR_COASTAL_LINEN_ROOM_001/panoramas/ENV_MR_COASTAL_LINEN_ROOM_001_360-preview.png"
+      ],
+      "tags": [
+        "environment",
+        "360",
+        "coastal",
+        "linen",
+        "bedroom",
+        "morning"
+      ],
+      "usage": {
+        "default_import": "world_texture",
+        "suitable_for": [
+          "柔光项链",
+          "卧室生活方式",
+          "自然反射"
+        ]
+      },
+      "quality_gate": [
+        "2:1 equirectangular",
+        "无人物和产品",
+        "近景需补几何"
+      ],
+      "notes": "Blender World 环境贴图，不是可游走几何场景。"
+    },
+    {
+      "id": "ENV_MR_ROOFTOP_OLIVE_SUNSET_001",
+      "name": "橄榄树城市屋顶日落全景",
+      "category": "environment",
+      "status": "available_360_background",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/ENV_MR_ROOFTOP_OLIVE_SUNSET_001/panoramas/ENV_MR_ROOFTOP_OLIVE_SUNSET_001_360-preview.png"
+      ],
+      "tags": [
+        "environment",
+        "360",
+        "rooftop",
+        "olive",
+        "sunset",
+        "city"
+      ],
+      "usage": {
+        "default_import": "world_texture",
+        "suitable_for": [
+          "黄昏珠宝广告",
+          "轮廓光人像",
+          "金色反射"
+        ]
+      },
+      "quality_gate": [
+        "2:1 equirectangular",
+        "无人物和产品",
+        "近景需补几何"
+      ],
+      "notes": "Blender World 环境贴图，不是可游走几何场景。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_MUSE_IVORY_001",
+      "name": "同一模特｜象牙白露肩缎面礼服与 The Soft Return 耳环",
+      "category": "character",
+      "status": "draft",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_MUSE_IVORY_001/source/generated-turnaround/turnaround-sheet.png",
+        "../05-characters/CHAR_MR_TALENT_MUSE_IVORY_001/source/three-view-crops/front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_IVORY_001/source/three-view-crops/left_front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_IVORY_001/source/three-view-crops/back.jpg"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "three-view",
+        "lookbook",
+        "muse-001",
+        "ivory",
+        "pearl-series-13",
+        "耳环"
+      ],
+      "usage": {
+        "default_import": "copy",
+        "suitable_for": [
+          "Lookbook 三视图",
+          "图生 3D 输入",
+          "静态商品视频"
+        ]
+      },
+      "quality_gate": [
+        "同一模特身份一致",
+        "三视图服装一致",
+        "正式投放前核对在售 SKU 与饰品造型"
+      ],
+      "notes": "图像参考资产；展示产品为 pearl-series-13 / The Soft Return。不含 3D 网格、骨骼或动作。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_MUSE_NAVY_001",
+      "name": "同一模特｜午夜海军蓝缎面礼服与 The Morning Pearl 耳环",
+      "category": "character",
+      "status": "draft",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_MUSE_NAVY_001/source/generated-turnaround/turnaround-sheet.png",
+        "../05-characters/CHAR_MR_TALENT_MUSE_NAVY_001/source/three-view-crops/front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_NAVY_001/source/three-view-crops/left_front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_NAVY_001/source/three-view-crops/back.jpg"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "three-view",
+        "lookbook",
+        "muse-001",
+        "navy",
+        "pearl-series-14",
+        "耳环"
+      ],
+      "usage": {
+        "default_import": "copy",
+        "suitable_for": [
+          "Lookbook 三视图",
+          "图生 3D 输入",
+          "静态商品视频"
+        ]
+      },
+      "quality_gate": [
+        "同一模特身份一致",
+        "三视图服装一致",
+        "正式投放前核对在售 SKU 与饰品造型"
+      ],
+      "notes": "图像参考资产；展示产品为 pearl-series-14 / The Morning Pearl。不含 3D 网格、骨骼或动作。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_MUSE_EMERALD_001",
+      "name": "同一模特｜祖母绿单肩缎面礼服与 The Listening Stone 耳环",
+      "category": "character",
+      "status": "draft",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_MUSE_EMERALD_001/source/generated-turnaround/turnaround-sheet.png",
+        "../05-characters/CHAR_MR_TALENT_MUSE_EMERALD_001/source/three-view-crops/front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_EMERALD_001/source/three-view-crops/left_front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_EMERALD_001/source/three-view-crops/back.jpg"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "three-view",
+        "lookbook",
+        "muse-001",
+        "emerald",
+        "pearl-series-16",
+        "耳环"
+      ],
+      "usage": {
+        "default_import": "copy",
+        "suitable_for": [
+          "Lookbook 三视图",
+          "图生 3D 输入",
+          "静态商品视频"
+        ]
+      },
+      "quality_gate": [
+        "同一模特身份一致",
+        "三视图服装一致",
+        "正式投放前核对在售 SKU 与饰品造型"
+      ],
+      "notes": "图像参考资产；展示产品为 pearl-series-16 / The Listening Stone。不含 3D 网格、骨骼或动作。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_MUSE_BLACK_001",
+      "name": "同一模特｜黑色天鹅绒礼服与 The Light Keeper 项链",
+      "category": "character",
+      "status": "draft",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_MUSE_BLACK_001/source/generated-turnaround/turnaround-sheet.png",
+        "../05-characters/CHAR_MR_TALENT_MUSE_BLACK_001/source/three-view-crops/front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_BLACK_001/source/three-view-crops/left_front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_BLACK_001/source/three-view-crops/back.jpg"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "three-view",
+        "lookbook",
+        "muse-001",
+        "black",
+        "pearl-series-19",
+        "项链"
+      ],
+      "usage": {
+        "default_import": "copy",
+        "suitable_for": [
+          "Lookbook 三视图",
+          "图生 3D 输入",
+          "静态商品视频"
+        ]
+      },
+      "quality_gate": [
+        "同一模特身份一致",
+        "三视图服装一致",
+        "正式投放前核对在售 SKU 与饰品造型"
+      ],
+      "notes": "图像参考资产；展示产品为 pearl-series-19 / The Light Keeper。不含 3D 网格、骨骼或动作。"
+    },
+    {
+      "id": "CHAR_MR_TALENT_MUSE_CHAMPAGNE_001",
+      "name": "同一模特｜香槟金挂脖礼服与 The Deep Breath 项链",
+      "category": "character",
+      "status": "draft",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_MR_TALENT_MUSE_CHAMPAGNE_001/source/generated-turnaround/turnaround-sheet.png",
+        "../05-characters/CHAR_MR_TALENT_MUSE_CHAMPAGNE_001/source/three-view-crops/front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_CHAMPAGNE_001/source/three-view-crops/left_front.jpg",
+        "../05-characters/CHAR_MR_TALENT_MUSE_CHAMPAGNE_001/source/three-view-crops/back.jpg"
+      ],
+      "tags": [
+        "female",
+        "full-body",
+        "three-view",
+        "lookbook",
+        "muse-001",
+        "champagne",
+        "pearl-series-20",
+        "项链"
+      ],
+      "usage": {
+        "default_import": "copy",
+        "suitable_for": [
+          "Lookbook 三视图",
+          "图生 3D 输入",
+          "静态商品视频"
+        ]
+      },
+      "quality_gate": [
+        "同一模特身份一致",
+        "三视图服装一致",
+        "正式投放前核对在售 SKU 与饰品造型"
+      ],
+      "notes": "图像参考资产；展示产品为 pearl-series-20 / The Deep Breath。不含 3D 网格、骨骼或动作。"
+    },
+    {
+      "id": "CHAR_HUNYUAN_WHITE_DRESS_HALF_001",
+      "name": "白色礼服半身女模特",
+      "category": "character",
+      "status": "approved_source",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_HUNYUAN_WHITE_DRESS_HALF_001/source.glb",
+        "../05-characters/CHAR_HUNYUAN_WHITE_DRESS_HALF_001/preview/thumbnail.png"
+      ],
+      "tags": [
+        "hunyuan3d",
+        "glb",
+        "character"
+      ],
+      "usage": {
+        "default_import": "append",
+        "walk_rig_candidate": false
+      },
+      "quality_gate": [
+        "preserve original source.glb",
+        "review generated thumbnail before production use"
+      ],
+      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+    },
+    {
+      "id": "PROP_WHITE_BED_DRAPED_001",
+      "name": "白色垂布床",
+      "category": "prop",
+      "status": "approved_source",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/PROP_WHITE_BED_DRAPED_001/source.glb",
+        "../03-scene-kits/PROP_WHITE_BED_DRAPED_001/preview/thumbnail.png"
+      ],
+      "tags": [
+        "hunyuan3d",
+        "glb",
+        "prop"
+      ],
+      "usage": {
+        "default_import": "append",
+        "walk_rig_candidate": false
+      },
+      "quality_gate": [
+        "preserve original source.glb",
+        "review generated thumbnail before production use"
+      ],
+      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+    },
+    {
+      "id": "PROP_NECKLACE_BUST_WHITE_001",
+      "name": "白色项链展示架",
+      "category": "prop",
+      "status": "approved_source",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/PROP_NECKLACE_BUST_WHITE_001/source.glb",
+        "../03-scene-kits/PROP_NECKLACE_BUST_WHITE_001/preview/thumbnail.png"
+      ],
+      "tags": [
+        "hunyuan3d",
+        "glb",
+        "prop"
+      ],
+      "usage": {
+        "default_import": "append",
+        "walk_rig_candidate": false
+      },
+      "quality_gate": [
+        "preserve original source.glb",
+        "review generated thumbnail before production use"
+      ],
+      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+    },
+    {
+      "id": "PROP_POTTED_BRANCH_001",
+      "name": "陶盆枯枝陈设",
+      "category": "prop",
+      "status": "approved_source",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/PROP_POTTED_BRANCH_001/source.glb",
+        "../03-scene-kits/PROP_POTTED_BRANCH_001/preview/thumbnail.png"
+      ],
+      "tags": [
+        "hunyuan3d",
+        "glb",
+        "prop"
+      ],
+      "usage": {
+        "default_import": "append",
+        "walk_rig_candidate": false
+      },
+      "quality_gate": [
+        "preserve original source.glb",
+        "review generated thumbnail before production use"
+      ],
+      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+    },
+    {
+      "id": "PROP_WHITE_CHAIR_001",
+      "name": "白色休闲椅",
+      "category": "prop",
+      "status": "approved_source",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/PROP_WHITE_CHAIR_001/source.glb",
+        "../03-scene-kits/PROP_WHITE_CHAIR_001/preview/thumbnail.png"
+      ],
+      "tags": [
+        "hunyuan3d",
+        "glb",
+        "prop"
+      ],
+      "usage": {
+        "default_import": "append",
+        "walk_rig_candidate": false
+      },
+      "quality_gate": [
+        "preserve original source.glb",
+        "review generated thumbnail before production use"
+      ],
+      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+    },
+    {
+      "id": "PROP_WICKER_STORAGE_BOX_001",
+      "name": "藤编收纳箱",
+      "category": "prop",
+      "status": "approved_source",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/PROP_WICKER_STORAGE_BOX_001/source.glb",
+        "../03-scene-kits/PROP_WICKER_STORAGE_BOX_001/preview/thumbnail.png"
+      ],
+      "tags": [
+        "hunyuan3d",
+        "glb",
+        "prop"
+      ],
+      "usage": {
+        "default_import": "append",
+        "walk_rig_candidate": false
+      },
+      "quality_gate": [
+        "preserve original source.glb",
+        "review generated thumbnail before production use"
+      ],
+      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+    },
+    {
+      "id": "PROP_PATIO_UMBRELLA_CLOSED_001",
+      "name": "收拢庭院遮阳伞",
+      "category": "prop",
+      "status": "approved_source",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/PROP_PATIO_UMBRELLA_CLOSED_001/source.glb",
+        "../03-scene-kits/PROP_PATIO_UMBRELLA_CLOSED_001/preview/thumbnail.png"
+      ],
+      "tags": [
+        "hunyuan3d",
+        "glb",
+        "prop"
+      ],
+      "usage": {
+        "default_import": "append",
+        "walk_rig_candidate": false
+      },
+      "quality_gate": [
+        "preserve original source.glb",
+        "review generated thumbnail before production use"
+      ],
+      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+    },
+    {
+      "id": "PROP_FLOWER_PLANTER_WHITE_001",
+      "name": "白花木箱花架",
+      "category": "prop",
+      "status": "approved_source",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/PROP_FLOWER_PLANTER_WHITE_001/source.glb",
+        "../03-scene-kits/PROP_FLOWER_PLANTER_WHITE_001/preview/thumbnail.png"
+      ],
+      "tags": [
+        "hunyuan3d",
+        "glb",
+        "prop"
+      ],
+      "usage": {
+        "default_import": "append",
+        "walk_rig_candidate": false
+      },
+      "quality_gate": [
+        "preserve original source.glb",
+        "review generated thumbnail before production use"
+      ],
+      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+    },
+    {
+      "id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+      "name": "白色长外套全身女模特",
+      "category": "character",
+      "status": "approved_source",
+      "version": "v1",
+      "source_paths": [
+        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/source.glb",
+        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/thumbnail.png"
+      ],
+      "tags": [
+        "hunyuan3d",
+        "glb",
+        "character"
+      ],
+      "usage": {
+        "default_import": "append",
+        "walk_rig_candidate": true
+      },
+      "quality_gate": [
+        "preserve original source.glb",
+        "review generated thumbnail before production use"
+      ],
+      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+    }
   ]
 }

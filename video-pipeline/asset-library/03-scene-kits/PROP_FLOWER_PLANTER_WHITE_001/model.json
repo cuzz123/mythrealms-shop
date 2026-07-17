@@ -1,0 +1,39 @@
+{
+  "id": "PROP_FLOWER_PLANTER_WHITE_001",
+  "name_zh": "白花木箱花架",
+  "asset_type": "prop",
+  "source_file": "65850450fdda91b92b1ff0b9b7fc079b.glb",
+  "source_sha256": "8778b576583a1110b6d6be9f17ff74812d4c9d22571e1de61894880a514cd90e",
+  "geometry": {
+    "mesh_count": 1,
+    "vertex_count": 333776,
+    "polygon_count": 491526,
+    "material_count": 1,
+    "armature_count": 0,
+    "bone_count": 0,
+    "bounds_min": [
+      -0.459273,
+      -0.232545,
+      -0.0
+    ],
+    "bounds_max": [
+      0.473404,
+      0.266428,
+      0.74955
+    ],
+    "dimensions": [
+      0.932677,
+      0.498973,
+      0.74955
+    ],
+    "mesh_names": [
+      "node_0"
+    ],
+    "armature_names": []
+  },
+  "rig": {
+    "armature_count": 0,
+    "walk_rig_candidate": false
+  },
+  "status": "approved_source"
+}
