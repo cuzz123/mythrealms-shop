@@ -16,12 +16,26 @@ test.describe("storefront release flows", () => {
     });
   }
 
+  test("homepage header moves from editorial overlay to solid navigation", async ({ page }) => {
+    await page.goto("/");
+    const header = page.locator("header[data-visual-state]");
+    await expect(header).toHaveAttribute("data-visual-state", "overlay");
+    await page.evaluate(() => window.scrollTo(0, window.innerHeight));
+    await expect(header).toHaveAttribute("data-visual-state", "solid");
+    await expect(page.getByRole("button", { name: "Shop menu" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Intention menu" })).toBeVisible();
+
+    await page.goto("/about");
+    await expect(page.locator("header[data-visual-state]")).toHaveAttribute(
+      "data-visual-state",
+      "solid",
+    );
+  });
+
   test("shop navigation links to real pearl product-type filters", async ({ page }) => {
     await page.goto("/");
-    await page
-      .getByRole("navigation", { name: "Main navigation" })
-      .getByText("Shop", { exact: true })
-      .click();
+    const shopMenu = page.getByRole("button", { name: "Shop menu" });
+    await shopMenu.click();
     const earringsLink = page.getByRole("link", { name: "Pearl Earrings" }).first();
     await expect(earringsLink).toHaveAttribute(
       "href",
@@ -31,6 +45,30 @@ test.describe("storefront release flows", () => {
     await expect(page).toHaveURL(/type=earrings/);
     await expect(page.locator('[data-product-type="earrings"]')).toHaveCount(12);
     await expect(page.locator('[data-product-type]:not([data-product-type="earrings"])')).toHaveCount(0);
+  });
+
+  test("desktop menus support keyboard close and focus return", async ({ page }) => {
+    await page.goto("/");
+
+    const shopMenu = page.getByRole("button", { name: "Shop menu" });
+    await shopMenu.focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("link", { name: "Pearl Earrings" }).first()).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#shop-menu")).toHaveCount(0);
+    await expect(shopMenu).toBeFocused();
+
+    await shopMenu.click();
+    await expect(page.locator("#shop-menu")).toBeVisible();
+    await page.mouse.click(5, 400);
+    await expect(page.locator("#shop-menu")).toHaveCount(0);
+
+    const intentionMenu = page.getByRole("button", { name: "Intention menu" });
+    await intentionMenu.click();
+    const guardianLink = page.getByRole("link", { name: "Find Your Guardian" });
+    await expect(guardianLink).toBeVisible();
+    await guardianLink.click();
+    await expect(page).toHaveURL(/guardian-quiz/);
   });
 
   test("search, cart and mobile navigation restore keyboard focus", async ({ page }) => {
@@ -90,5 +128,35 @@ test.describe("storefront release flows", () => {
         href,
       );
     }
+  });
+
+  test("newsletter announces a successful subscription", async ({ page }) => {
+    await page.route("**/api/newsletter", async (route) => {
+      await route.fulfill({ status: 200, body: JSON.stringify({ ok: true }) });
+    });
+    await page.goto("/");
+    const footer = page.locator("footer");
+    await footer.getByPlaceholder("Your email address").fill("reader@example.com");
+    await footer.getByRole("button", { name: "Subscribe" }).click();
+    await expect(footer.getByText("You're on the list.")).toHaveAttribute(
+      "aria-live",
+      "polite",
+    );
+  });
+
+  test("newsletter exposes subscription errors as alerts", async ({ page }) => {
+    await page.route("**/api/newsletter", async (route) => {
+      await route.fulfill({
+        status: 400,
+        body: JSON.stringify({ error: "This address is already subscribed." }),
+      });
+    });
+    await page.goto("/");
+    const footer = page.locator("footer");
+    await footer.getByPlaceholder("Your email address").fill("reader@example.com");
+    await footer.getByRole("button", { name: "Subscribe" }).click();
+    await expect(footer.getByRole("alert")).toHaveText(
+      "This address is already subscribed.",
+    );
   });
 });
