@@ -1253,7 +1253,7 @@
       "id": "CHAR_HUNYUAN_WHITE_DRESS_HALF_001",
       "name": "白色礼服半身女模特",
       "category": "character",
-      "status": "approved_source",
+      "status": "rigged_candidate",
       "version": "v1",
       "source_paths": [
         "../05-characters/CHAR_HUNYUAN_WHITE_DRESS_HALF_001/source.glb",
@@ -1457,22 +1457,28 @@
       "version": "v1",
       "source_paths": [
         "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/source.glb",
-        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/thumbnail.png"
+        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/thumbnail.png",
+        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_RIG_v1.blend",
+        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/rig_v1_checkpoints/01_neutral.png"
       ],
       "tags": [
         "hunyuan3d",
         "glb",
-        "character"
+        "character",
+        "fullbody-rig",
+        "foot-ik"
       ],
       "usage": {
         "default_import": "append",
-        "walk_rig_candidate": true
+        "walk_rig_candidate": true,
+        "rig_object": "RIG_WHITE_COAT_FULLBODY"
       },
       "quality_gate": [
         "preserve original source.glb",
-        "review generated thumbnail before production use"
+        "review generated thumbnail before production use",
+        "validate fullbody rig before building walk actions"
       ],
-      "notes": "2026-07-17 GLB batch import; source geometry is unrigged."
+      "notes": "2026-07-17 fullbody rig v1; 292098-vertex render mesh, 29334-vertex hidden binding proxy, 27-bone rig with foot IK."
     }
   ]
 }

@@ -32,8 +32,23 @@
     "armature_names": []
   },
   "rig": {
-    "armature_count": 0,
-    "walk_rig_candidate": true
+    "armature_count": 1,
+    "bone_count": 27,
+    "walk_rig_candidate": true,
+    "rigged_variant": {
+      "file": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_RIG_v1.blend",
+      "rig_object": "RIG_WHITE_COAT_FULLBODY",
+      "high_resolution_mesh": "MESH_WHITE_COAT_HIRES",
+      "high_resolution_vertex_count": 292098,
+      "binding_proxy": "MESH_WHITE_COAT_PROXY",
+      "binding_proxy_vertex_count": 29334,
+      "rig_version": 1,
+      "foot_ik": true,
+      "knee_poles": true,
+      "weight_method": "decimated_proxy_with_procedural_anatomical_fallback_and_data_transfer",
+      "validation_status": "passed",
+      "checkpoint_preview_dir": "preview/rig_v1_checkpoints"
+    }
   },
-  "status": "approved_source"
+  "status": "rigged_candidate"
 }
