@@ -6,7 +6,7 @@
 
 ## 资产包
 
-`D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\10-storyboard-videos\VID_MR_PEARL_SERIES_04_NATURAL_WINDOW_001\asset-pack-manifest.json`
+`D:\mythrealms-shop\video-pipeline\asset-library\10-storyboard-videos\VID_MR_PEARL_SERIES_04_NATURAL_WINDOW_001\asset-pack-manifest.json`
 
 | 段落 | 时长 | 镜头与行为 | 产品 | 连续桥梁 |
 | --- | --- | --- | --- | --- |

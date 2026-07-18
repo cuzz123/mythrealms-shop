@@ -8,7 +8,7 @@
 
 参考图：
 
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：首帧与环境几何唯一依据。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：首帧与环境几何唯一依据。
 
 提示词：
 
@@ -20,9 +20,9 @@
 
 参考图：
 
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：环境。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\turnaround-v1.png`：人物身份、头发、服装。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\motion-contacts-v1.png`：坐读动作。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：环境。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\turnaround-v1.png`：人物身份、头发、服装。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\motion-contacts-v1.png`：坐读动作。
 
 提示词：
 
@@ -34,9 +34,9 @@
 
 参考图：
 
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：环境。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\turnaround-v1.png`：人物身份。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\motion-contacts-v1.png`：起身动作。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：环境。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\turnaround-v1.png`：人物身份。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\motion-contacts-v1.png`：起身动作。
 
 提示词：
 
@@ -48,9 +48,9 @@
 
 参考图：
 
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：环境与椅到窗的通道。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\turnaround-v1.png`：人物身份。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\motion-contacts-v1.png`：走向窗与触帘动作。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：环境与椅到窗的通道。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\turnaround-v1.png`：人物身份。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_CURLY_LINEN_001\source\natural-window-pack\motion-contacts-v1.png`：走向窗与触帘动作。
 
 提示词：
 
@@ -62,8 +62,8 @@
 
 参考图：
 
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：环境与桌面光线。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\PROP_MR_LINEN_BOOK_AND_CERAMIC_001\source\turnaround-v1.png`：书、陶瓷碟与木桌摆放。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：环境与桌面光线。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_LINEN_BOOK_AND_CERAMIC_001\source\turnaround-v1.png`：书、陶瓷碟与木桌摆放。
 
 提示词：
 
@@ -75,9 +75,9 @@
 
 参考图：
 
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：窗光与木桌环境。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\PROP_MR_LINEN_BOOK_AND_CERAMIC_001\source\turnaround-v1.png`：陶瓷碟与桌面。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\public\images\products\1688-shop\pearl-series\pearl-series-04-detail1.webp`：产品结构唯一依据。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001\source\window-apartment-panorama-v1.png`：窗光与木桌环境。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_LINEN_BOOK_AND_CERAMIC_001\source\turnaround-v1.png`：陶瓷碟与桌面。
+- `D:\mythrealms-shop\public\images\products\1688-shop\pearl-series\pearl-series-04-detail1.webp`：产品结构唯一依据。
 
 提示词：
 
@@ -89,8 +89,8 @@
 
 参考图：
 
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\public\images\products\1688-shop\pearl-series\pearl-series-04-detail1.webp`：产品几何、颜色、材质。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\PROP_MR_LINEN_BOOK_AND_CERAMIC_001\source\turnaround-v1.png`：陶瓷碟与浅木桌。
+- `D:\mythrealms-shop\public\images\products\1688-shop\pearl-series\pearl-series-04-detail1.webp`：产品几何、颜色、材质。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_LINEN_BOOK_AND_CERAMIC_001\source\turnaround-v1.png`：陶瓷碟与浅木桌。
 
 提示词：
 
@@ -102,8 +102,8 @@
 
 参考图：
 
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\public\images\products\1688-shop\pearl-series\pearl-series-04-detail1.webp`：产品结构唯一依据。
-- `D:\mythrealms-shop\.worktrees\pearl-series-04-natural-window\video-pipeline\asset-library\03-scene-kits\PROP_MR_LINEN_BOOK_AND_CERAMIC_001\source\turnaround-v1.png`：木桌与陶瓷碟材质。
+- `D:\mythrealms-shop\public\images\products\1688-shop\pearl-series\pearl-series-04-detail1.webp`：产品结构唯一依据。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_LINEN_BOOK_AND_CERAMIC_001\source\turnaround-v1.png`：木桌与陶瓷碟材质。
 
 提示词：
 
