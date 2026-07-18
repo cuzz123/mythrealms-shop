@@ -57,6 +57,22 @@ test("legacy all-only consent fails closed", () => {
   });
 });
 
+test("parser shares strict stored-consent validity", () => {
+  const invalid = [
+    { analytics: true, marketing: true },
+    { necessary: false, analytics: true, marketing: true },
+    { necessary: true, analytics: "true", marketing: true },
+    { necessary: true, analytics: true, marketing: 1 },
+  ];
+
+  for (const value of invalid) {
+    assert.deepEqual(parseConsent(JSON.stringify(value)), {
+      analytics: false,
+      marketing: false,
+    });
+  }
+});
+
 test("stored consent is valid only with necessary and explicit boolean fields", () => {
   const valid = [
     { necessary: true, analytics: false, marketing: false },
@@ -149,6 +165,7 @@ test("consent controller cleanup removes the exact registered callbacks", () => 
 test("serializes all consent with a timestamp", () => {
   const serialized = JSON.parse(serializeConsent("all"));
 
+  assert.equal(hasValidStoredConsent(JSON.stringify(serialized)), true);
   assert.equal(serialized.necessary, true);
   assert.equal(serialized.analytics, true);
   assert.equal(serialized.marketing, true);
@@ -158,6 +175,7 @@ test("serializes all consent with a timestamp", () => {
 test("serializes essential consent with a timestamp", () => {
   const serialized = JSON.parse(serializeConsent("essential"));
 
+  assert.equal(hasValidStoredConsent(JSON.stringify(serialized)), true);
   assert.equal(serialized.necessary, true);
   assert.equal(serialized.analytics, false);
   assert.equal(serialized.marketing, false);

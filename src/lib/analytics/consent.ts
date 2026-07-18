@@ -28,39 +28,37 @@ function noConsent(): ConsentState {
   return { analytics: false, marketing: false };
 }
 
-export function parseConsent(raw: string | null): ConsentState {
-  if (!raw) return noConsent();
+function decodeStoredConsent(raw: string | null): ConsentState | null {
+  if (!raw) return null;
 
   try {
     const value: unknown = JSON.parse(raw);
-    if (!value || typeof value !== "object") return noConsent();
+    if (!value || typeof value !== "object") return null;
 
     const consent = value as Record<string, unknown>;
+    if (
+      consent.necessary !== true ||
+      typeof consent.analytics !== "boolean" ||
+      typeof consent.marketing !== "boolean"
+    ) {
+      return null;
+    }
+
     return {
-      analytics: consent.analytics === true,
-      marketing: consent.marketing === true,
+      analytics: consent.analytics,
+      marketing: consent.marketing,
     };
   } catch {
-    return noConsent();
+    return null;
   }
 }
 
+export function parseConsent(raw: string | null): ConsentState {
+  return decodeStoredConsent(raw) ?? noConsent();
+}
+
 export function hasValidStoredConsent(raw: string | null): boolean {
-  if (!raw) return false;
-
-  try {
-    const value: unknown = JSON.parse(raw);
-    if (!value || typeof value !== "object") return false;
-
-    const consent = value as Record<string, unknown>;
-    return (
-      consent.necessary === true &&
-      typeof consent.analytics === "boolean" &&
-      typeof consent.marketing === "boolean"
-    );
-  } catch {
-    return false;
-  }
+  return decodeStoredConsent(raw) !== null;
 }
 
 export function requiresConsentReload(previous: ConsentState, next: ConsentState): boolean {
