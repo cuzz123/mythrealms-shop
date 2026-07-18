@@ -1,0 +1,15 @@
+{
+  "id": "PROD_FOUNDATION_TURQUOISE_LEAF_001",
+  "asset_type": "editorial_product_reference",
+  "status": "foundation_ready",
+  "version": "v1",
+  "title": "The Turquoise Leaf - Bracelet",
+  "created_at": "2026-07-18",
+  "tags": ["foundation", "mediterranean-editorial", "new-series-leaf-turquoise-pearl-cuff"],
+  "relationships": {
+    "slug": "new-series-leaf-turquoise-pearl-cuff",
+    "character_id": "CHAR_FOUNDATION_TURQUOISE_LEAF_001",
+    "scene_id": "SCENE_FOUNDATION_MEDITERRANEAN_POOL_COURTYARD_001",
+    "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001"
+  }
+}

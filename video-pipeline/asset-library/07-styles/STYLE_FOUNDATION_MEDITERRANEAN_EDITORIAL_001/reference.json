@@ -1,0 +1,29 @@
+{
+  "id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "asset_type": "editorial_style_reference",
+  "status": "foundation_ready",
+  "version": "v1",
+  "title": "Mediterranean Editorial Foundation",
+  "created_at": "2026-07-18",
+  "tags": ["foundation", "mediterranean-editorial"],
+  "relationships": {
+    "character_ids": [
+      "CHAR_FOUNDATION_VIOLET_RAIN_001",
+      "CHAR_FOUNDATION_MOON_DISC_001",
+      "CHAR_FOUNDATION_TURQUOISE_LEAF_001",
+      "CHAR_FOUNDATION_FALLING_PEARL_001"
+    ],
+    "scene_ids": [
+      "SCENE_FOUNDATION_MEDITERRANEAN_COURTYARD_001",
+      "SCENE_FOUNDATION_MEDITERRANEAN_SEA_TERRACE_001",
+      "SCENE_FOUNDATION_MEDITERRANEAN_POOL_COURTYARD_001",
+      "SCENE_FOUNDATION_MEDITERRANEAN_ROOFTOP_001"
+    ],
+    "product_ids": [
+      "PROD_FOUNDATION_VIOLET_RAIN_001",
+      "PROD_FOUNDATION_MOON_DISC_001",
+      "PROD_FOUNDATION_TURQUOISE_LEAF_001",
+      "PROD_FOUNDATION_FALLING_PEARL_001"
+    ]
+  }
+}
