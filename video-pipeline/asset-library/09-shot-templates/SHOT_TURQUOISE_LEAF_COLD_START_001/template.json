@@ -16,6 +16,11 @@
     "price_usd": 48.99,
     "source_gallery": "public/images/products/new-series/new-series-leaf-turquoise-pearl-cuff/"
   },
+  "recommended_scene_assets": [
+    "SCENE_FOUNDATION_POOLSIDE_LOUNGER_EDGE_001",
+    "SCENE_FOUNDATION_WATER_SIDE_STONE_LEDGE_001",
+    "SCENE_FOUNDATION_OLIVE_TREE_BENCH_001"
+  ],
   "creative_rhythm": [
     "01 human-led pool-light sleeve hook",
     "02 exact sole-product proof",

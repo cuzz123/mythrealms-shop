@@ -16,6 +16,11 @@
     "price_usd": 42.99,
     "source_gallery": "public/images/products/new-series/new-series-purple-gem-pearl-drops/"
   },
+  "recommended_scene_assets": [
+    "SCENE_FOUNDATION_LIMESTONE_ARCH_SHADE_001",
+    "SCENE_FOUNDATION_SUNSET_TERRACE_001",
+    "SCENE_FOUNDATION_WHITE_WALL_MOVING_SHADE_001"
+  ],
   "creative_rhythm": [
     "01 human visual hook + product reveal",
     "02 exact product proof",

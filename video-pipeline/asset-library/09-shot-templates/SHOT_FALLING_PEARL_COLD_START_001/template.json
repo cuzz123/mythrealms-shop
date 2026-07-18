@@ -16,6 +16,11 @@
     "price_usd": 59.99,
     "source_gallery": "public/images/products/new-series/new-series-pearl-y-lariat/"
   },
+  "recommended_scene_assets": [
+    "SCENE_FOUNDATION_ROOFTOP_DOORWAY_001",
+    "SCENE_FOUNDATION_LINEN_WINDOW_CHAIR_001",
+    "SCENE_FOUNDATION_PLANTED_COURTYARD_PASSAGE_001"
+  ],
   "creative_rhythm": [
     "01 human-led rooftop doorway light-boundary hook",
     "02 exact sole-product limestone proof",
