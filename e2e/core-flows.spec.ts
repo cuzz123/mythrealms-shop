@@ -138,7 +138,8 @@ test.describe("storefront release flows", () => {
     await page.evaluate(() => window.scrollTo(0, window.innerHeight));
     await expect(header).toHaveAttribute("data-visual-state", "solid");
     await expect(page.getByRole("button", { name: "Shop menu" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Intention menu" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Gifts menu" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Discover menu" })).toBeVisible();
 
     await page.goto("/about");
     await expect(page.locator("header[data-visual-state]")).toHaveAttribute(
@@ -198,8 +199,12 @@ test.describe("storefront release flows", () => {
     await page.mouse.click(5, 400);
     await expect(page.locator("#shop-menu")).toHaveCount(0);
 
-    const intentionMenu = page.getByRole("button", { name: "Intention menu" });
-    await intentionMenu.click();
+    const giftsMenu = page.getByRole("button", { name: "Gifts menu" });
+    await giftsMenu.click();
+    await expect(page.getByRole("menuitem", { name: "All Gifts" })).toBeVisible();
+
+    const discoverMenu = page.getByRole("button", { name: "Discover menu" });
+    await discoverMenu.click();
     const guardianLink = page.getByRole("link", { name: "Find Your Guardian" });
     await expect(guardianLink).toBeVisible();
     await guardianLink.click();
@@ -209,7 +214,8 @@ test.describe("storefront release flows", () => {
   test("desktop menu items return focus to their trigger on Escape", async ({ page }) => {
     for (const menu of [
       { triggerName: "Shop menu", menuId: "shop-menu", firstLink: "All Pearl Jewelry" },
-      { triggerName: "Intention menu", menuId: "intention-menu", firstLink: "Find Your Guardian" },
+      { triggerName: "Gifts menu", menuId: "gifts-menu", firstLink: "All Gifts" },
+      { triggerName: "Discover menu", menuId: "discover-menu", firstLink: "Pearl Knowledge" },
     ]) {
       await page.goto("/");
       const trigger = page.getByRole("button", { name: menu.triggerName });
@@ -269,10 +275,17 @@ test.describe("storefront release flows", () => {
     await expect(thumbnails.nth(1)).toHaveAttribute("aria-current", "true");
   });
 
-  test("footer exposes the customer policy routes", async ({ page }) => {
+  test("footer exposes the centralized discovery and policy routes", async ({ page }) => {
     await page.goto("/");
     const footer = page.locator("footer");
     for (const [name, href] of [
+      ["The Pearl Edit", "/collections/pearl-series"],
+      ["New Arrivals", "/collections/new-arrivals"],
+      ["Pearl Guide", "/pearls"],
+      ["Pearl Care", "/pearls/care"],
+      ["Our Story", "/about"],
+      ["Find Your Guardian", "/guardian-quiz"],
+      ["Contact", "/contact"],
       ["Privacy", "/privacy"],
       ["Terms", "/terms"],
       ["Shipping", "/shipping"],
