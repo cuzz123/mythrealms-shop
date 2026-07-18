@@ -17,6 +17,8 @@ tags:
 
 ![](file:///D:/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_BLUE_RELIQUARY_001/source/blue-reliquary-scene-model-storyboard-v1.png)
 
+![](file:///D:/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_BLUE_RELIQUARY_001/source/blue-reliquary-narrative-first-storyboard-v2.png)
+
 深蓝矿石、浅粉珍珠与古金纹样的午夜典藏广告。整片由 15 个 4 秒生成单元和 14 个剪辑切点组成；人物从不直视镜头，产品从盒中被发现，最终以黑曜石 Hero 镜头收束。
 
 ## 入口
@@ -31,7 +33,7 @@ tags:
 |---|---|
 | 15 个生成镜头 | 已写完，待生成 |
 | 14 个剪辑合同 | 已写完 |
-| 场景与模特关键分镜板 | 已生成 |
+| 场景与模特关键分镜板 | 已生成；V2 为剧情优先、产品后置版本 |
 | 参考图绝对路径 | 已验证 |
 | Seedance 原始片段 | 待导入 `source/` |
 | 剪辑预览 | 待导入 `preview/` |
