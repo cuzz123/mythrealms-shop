@@ -1,38 +1,48 @@
 "use client";
 
 import Script from "next/script";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+  CONSENT_CHANGED_EVENT,
+  CONSENT_STORAGE_KEY,
+  parseConsent,
+  type ConsentState,
+} from "@/lib/analytics/consent";
 
 export function Analytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   const pinterestId = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID;
-
-  // Only load analytics if the user has consented
-  const [consented, setConsented] = useState(false);
+  const [consent, setConsent] = useState<ConsentState>({ analytics: false, marketing: false });
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("cookie-consent");
-      if (raw) {
-        const consent = JSON.parse(raw);
-        // "all" means both analytics and marketing are accepted,
-        // "analytics" means at minimum analytics is accepted
-        if (consent.analytics === true || consent.all === true) {
-          setConsented(true);
-        }
+    const readConsent = () => {
+      try {
+        setConsent(parseConsent(localStorage.getItem(CONSENT_STORAGE_KEY)));
+      } catch {
+        setConsent(parseConsent(null));
       }
-    } catch {
-      // Corrupt consent value — treat as no consent
-    }
+    };
+
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === CONSENT_STORAGE_KEY || event.key === null) readConsent();
+    };
+
+    readConsent();
+    window.addEventListener(CONSENT_CHANGED_EVENT, readConsent);
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener(CONSENT_CHANGED_EVENT, readConsent);
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   if (!gaId && !pixelId && !pinterestId) return null;
-  if (!consented) return null;
 
   return (
     <>
-      {gaId && (
+      {gaId && consent.analytics && (
         <>
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
           <Script id="ga-init" strategy="afterInteractive">
@@ -40,7 +50,7 @@ export function Analytics() {
           </Script>
         </>
       )}
-      {pixelId && (
+      {pixelId && consent.marketing && (
         <>
           <Script id="meta-pixel" strategy="afterInteractive">
             {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${pixelId}');fbq('track','PageView')`}
@@ -50,7 +60,7 @@ export function Analytics() {
           </noscript>
         </>
       )}
-      {pinterestId && (
+      {pinterestId && consent.marketing && (
         <>
           <Script id="pinterest-tag" strategy="afterInteractive">
             {`!function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");pintrk('load','${pinterestId}');pintrk('page');`}

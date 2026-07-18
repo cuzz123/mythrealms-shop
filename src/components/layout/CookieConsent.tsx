@@ -3,6 +3,11 @@
 import { useState, useEffect } from "react";
 import { X, Cookie, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import {
+  CONSENT_CHANGED_EVENT,
+  CONSENT_STORAGE_KEY,
+  serializeConsent,
+} from "@/lib/analytics/consent";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -17,22 +22,14 @@ export function CookieConsent() {
   }, []);
 
   function acceptAll() {
-    localStorage.setItem("cookie-consent", JSON.stringify({
-      necessary: true,
-      analytics: true,
-      marketing: true,
-      timestamp: Date.now(),
-    }));
+    localStorage.setItem(CONSENT_STORAGE_KEY, serializeConsent("all"));
+    window.dispatchEvent(new CustomEvent(CONSENT_CHANGED_EVENT));
     setVisible(false);
   }
 
   function acceptNecessary() {
-    localStorage.setItem("cookie-consent", JSON.stringify({
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      timestamp: Date.now(),
-    }));
+    localStorage.setItem(CONSENT_STORAGE_KEY, serializeConsent("essential"));
+    window.dispatchEvent(new CustomEvent(CONSENT_CHANGED_EVENT));
     setVisible(false);
   }
 
