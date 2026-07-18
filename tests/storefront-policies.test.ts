@@ -52,9 +52,10 @@ test("organization schema emits only verified shipping and return policy facts",
       "https://schema.org/MerchantReturnFiniteReturnWindow",
     merchantReturnDays: 30,
     returnMethod: "https://schema.org/ReturnByMail",
-    returnFees: "https://schema.org/ReturnShippingFees",
+    customerRemorseReturnFees: "https://schema.org/ReturnShippingFees",
     merchantReturnLink: "https://example.com/refund",
   });
+  assert.equal("returnFees" in schema.hasMerchantReturnPolicy, false);
   assert.equal(schema.contactPoint.url, "https://example.com/contact");
 
   const serialized = JSON.stringify(schema);

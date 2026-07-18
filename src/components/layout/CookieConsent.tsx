@@ -1,14 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Cookie, ShieldCheck } from "lucide-react";
+import { Cookie, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import {
+  COOKIE_CONSENT_STORAGE_KEY,
+  saveConsentPreference,
+} from "@/lib/analytics/consent";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookie-consent");
+    let consent: string | null = null;
+    try {
+      consent = localStorage.getItem(COOKIE_CONSENT_STORAGE_KEY);
+    } catch {
+      // Show the choice when browser storage is unavailable.
+    }
     if (!consent) {
       // Small delay so it doesn't flash on page load
       const timer = setTimeout(() => setVisible(true), 800);
@@ -17,22 +26,22 @@ export function CookieConsent() {
   }, []);
 
   function acceptAll() {
-    localStorage.setItem("cookie-consent", JSON.stringify({
+    saveConsentPreference(window, {
       necessary: true,
       analytics: true,
       marketing: true,
       timestamp: Date.now(),
-    }));
+    });
     setVisible(false);
   }
 
   function acceptNecessary() {
-    localStorage.setItem("cookie-consent", JSON.stringify({
+    saveConsentPreference(window, {
       necessary: true,
       analytics: false,
       marketing: false,
       timestamp: Date.now(),
-    }));
+    });
     setVisible(false);
   }
 

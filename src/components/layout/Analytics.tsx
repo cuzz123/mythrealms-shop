@@ -1,10 +1,15 @@
 "use client";
 
 import Script from "next/script";
-import { useState, useEffect } from "react";
-import { classifyReferralSource } from "@/lib/analytics/referral";
-
-const AI_REFERRAL_SESSION_KEY = "mythrealms-ai-referral-tracked";
+import { useEffect, useRef, useState } from "react";
+import {
+  readAnalyticsConsent,
+  subscribeToConsentChanges,
+} from "@/lib/analytics/consent";
+import {
+  reportAiReferralOnce,
+  shouldReportAiReferral,
+} from "@/lib/analytics/referral";
 
 type AnalyticsWindow = Window & {
   gtag?: (...args: unknown[]) => void;
@@ -14,40 +19,34 @@ export function Analytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   const pinterestId = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID;
-
-  // Only load analytics if the user has consented
   const [consented, setConsented] = useState(false);
+  const [gaInitialized, setGaInitialized] = useState(false);
+  const referralDedupe = useRef(false);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("cookie-consent");
-      if (raw) {
-        const consent = JSON.parse(raw);
-        // "all" means both analytics and marketing are accepted,
-        // "analytics" means at minimum analytics is accepted
-        if (consent.analytics === true || consent.all === true) {
-          setConsented(true);
-        }
-      }
-    } catch {
-      // Corrupt consent value — treat as no consent
-    }
+    setConsented(readAnalyticsConsent(window));
+    return subscribeToConsentChanges(window, (preference) => {
+      setConsented(preference.analytics);
+      if (!preference.analytics) setGaInitialized(false);
+    });
   }, []);
 
-  function reportAiReferral() {
-    try {
-      const source = classifyReferralSource(window.location.href);
-      if (!source || sessionStorage.getItem(AI_REFERRAL_SESSION_KEY)) return;
+  useEffect(() => {
+    if (!shouldReportAiReferral(consented, gaInitialized)) return;
 
+    try {
       const gtag = (window as AnalyticsWindow).gtag;
       if (!gtag) return;
-
-      sessionStorage.setItem(AI_REFERRAL_SESSION_KEY, "1");
-      gtag("event", "ai_referral", { source });
+      reportAiReferralOnce({
+        locationHref: window.location.href,
+        sessionStorage: window.sessionStorage,
+        gtag,
+        dedupe: referralDedupe,
+      });
     } catch {
-      // Storage or URL access can be unavailable in privacy-restricted contexts.
+      // Browser APIs can be unavailable in privacy-restricted contexts.
     }
-  }
+  }, [consented, gaInitialized]);
 
   if (!gaId && !pixelId && !pinterestId) return null;
   if (!consented) return null;
@@ -57,7 +56,7 @@ export function Analytics() {
       {gaId && (
         <>
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
-          <Script id="ga-init" strategy="afterInteractive" onReady={reportAiReferral}>
+          <Script id="ga-init" strategy="afterInteractive" onReady={() => setGaInitialized(true)}>
             {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}')`}
           </Script>
         </>

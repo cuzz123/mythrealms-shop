@@ -6,9 +6,11 @@ import { getStorefrontProducts } from "@/lib/storefront/catalog";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: siteUrl, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteUrl}/collections`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteUrl}/collections/pearl-series`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/collections/new-arrivals`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/gifts`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${siteUrl}/guardian-quiz`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${siteUrl}/pearls`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteUrl}/pearls/care`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/pearls/how-to-wear`, changeFrequency: "monthly", priority: 0.7 },
@@ -31,5 +33,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  return [...staticPages, ...products];
+  const entries = [...staticPages, ...products];
+  const seen = new Set<string>();
+  return entries.filter((entry) => {
+    if (seen.has(entry.url)) return false;
+    seen.add(entry.url);
+    return true;
+  });
 }

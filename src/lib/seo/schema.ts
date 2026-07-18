@@ -190,7 +190,7 @@ export function buildOrganizationSchema(input: OrganizationSchemaInput) {
           "https://schema.org/MerchantReturnFiniteReturnWindow",
         merchantReturnDays: input.policyFacts.returnWindowDays,
         returnMethod: input.policyFacts.returnMethod,
-        returnFees: input.policyFacts.defaultReturnFees,
+        customerRemorseReturnFees: input.policyFacts.defaultReturnFees,
         merchantReturnLink: `${baseUrl}/refund`,
       }
     : input.returnPolicy;

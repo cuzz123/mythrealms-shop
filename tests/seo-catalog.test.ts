@@ -20,13 +20,23 @@ const retiredLanguage =
   /\bcrystals?\b|\bgemstones?\b|stones with intention|the serenity collection|balance\s*&\s*light|the intention stones|luxe collection|pearl\s*&\s*crystal|the archetypes|curated singles|emotional balance/i;
 
 const canonicalContentPaths = [
+  "/collections",
+  "/collections/pearl-series",
   "/gifts",
   "/collections/new-arrivals",
+  "/guardian-quiz",
   "/pearls",
   "/pearls/care",
   "/pearls/how-to-wear",
   "/pearls/freshwater-pearls",
   "/about",
+  "/faq",
+  "/contact",
+  "/size-guide",
+  "/shipping",
+  "/refund",
+  "/privacy",
+  "/terms",
 ];
 
 test("the root layout does not force the homepage canonical onto every route", () => {
@@ -60,6 +70,13 @@ test("the authoritative feed is pearl-only and contains every storefront SKU", (
 test("the static sitemap includes all approved products and excludes the blog archive", async () => {
   const entries = await sitemap();
   const urls = new Set(entries.map((entry) => entry.url));
+  const expectedUrls = new Set([
+    siteUrl,
+    ...canonicalContentPaths.map((contentPath) => `${siteUrl}${contentPath}`),
+    ...getStorefrontProducts().map(
+      (product) => `${siteUrl}/products/${product.slug}`,
+    ),
+  ]);
   for (const product of getStorefrontProducts()) {
     assert.equal(urls.has(`${siteUrl}/products/${product.slug}`), true);
   }
@@ -69,6 +86,8 @@ test("the static sitemap includes all approved products and excludes the blog ar
   assert.equal([...urls].filter((url) => url.includes("/products/")).length, 45);
   assert.equal([...urls].some((url) => url.includes("/blog")), false);
   assert.equal([...urls].some((url) => url.includes("?")), false);
+  assert.equal(entries.length, urls.size, "sitemap URLs must be unique");
+  assert.deepEqual(urls, expectedUrls);
 });
 
 test("the legacy blog is explicitly noindex", () => {

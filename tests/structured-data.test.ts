@@ -200,6 +200,16 @@ test("organization schema mirrors optional verified policy objects", () => {
   assert.deepEqual(schema.hasMerchantReturnPolicy, returnPolicy);
 });
 
+test("organization return policy never applies customer-paid fees globally", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/lib/seo/schema.ts"),
+    "utf8",
+  );
+
+  assert.match(source, /customerRemorseReturnFees/);
+  assert.doesNotMatch(source, /\breturnFees:\s*input\.policyFacts/);
+});
+
 test("JsonLd safely escapes less-than characters", () => {
   const html = renderToStaticMarkup(
     createElement(JsonLd, {
