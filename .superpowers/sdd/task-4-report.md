@@ -165,3 +165,29 @@ This verified essential-only script gating, same-page consent activation and one
 - Repository-wide ESLint retains 169 unrelated warnings.
 - The optional TypeScript check retains the unrelated `tests/seo-catalog.test.ts:85` error described above.
 - A separate read-only Claude review was started but did not return promptly and was terminated at the user's status request; Codex completed the documented self-review directly.
+
+## Review Fixes
+
+### RED
+
+```powershell
+npm run test:unit -- tests/analytics-tracking.test.ts tests/analytics-consent.test.ts
+```
+
+Result: exit 1; 31 tests, 28 passed, 3 failed.
+
+- `drops queued events when consent is revoked before platform readiness`: dispatched the queued GA `view_item` after consent was revoked.
+- `keeps a queued event when an identical live dispatch throws`: expected the later flush to dispatch once; received 0 calls.
+- `maps begin checkout to Pinterest checkout`: `trackBeginCheckout` returned `false` with only Pinterest configured.
+
+### GREEN
+
+```powershell
+npm run test:unit -- tests/analytics-tracking.test.ts tests/analytics-consent.test.ts
+```
+
+Result: exit 0; 31 tests, 31 passed, 0 failed.
+
+- Queue flushing rechecks platform consent and clears events revoked before readiness.
+- A queued duplicate remains until its live dispatcher succeeds.
+- `trackBeginCheckout` emits Pinterest's supported `checkout` event.

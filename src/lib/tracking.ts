@@ -137,6 +137,10 @@ function eventKey(args: unknown[]): string {
   return JSON.stringify(args);
 }
 
+function hasPlatformConsent(platform: TrackingPlatform, consent: ConsentState): boolean {
+  return platform === "ga" ? consent.analytics : consent.marketing;
+}
+
 function dispatchOrQueue(
   platform: TrackingPlatform,
   args: unknown[],
@@ -153,9 +157,9 @@ function dispatchOrQueue(
     return true;
   }
 
-  queue.delete(key);
   try {
     dispatcher(...args);
+    queue.delete(key);
     return true;
   } catch {
     return false;
@@ -165,13 +169,19 @@ function dispatchOrQueue(
 export function flushTrackingQueue(
   platform: TrackingPlatform,
   target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
 ): void {
   if (!target) return;
+
+  const queue = pendingQueues[platform];
+  if (!hasPlatformConsent(platform, consent)) {
+    queue.clear();
+    return;
+  }
 
   const dispatcher = target[targetKeys[platform]];
   if (!dispatcher) return;
 
-  const queue = pendingQueues[platform];
   const events = [...queue.values()];
   queue.clear();
 
@@ -326,6 +336,23 @@ export function trackBeginCheckout(
             currency: "USD",
             num_items: items.reduce((sum, item) => sum + item.quantity, 0),
             value,
+          },
+        ],
+        target,
+      ) || accepted;
+  }
+  if (configured.pinterest && consent.marketing) {
+    accepted =
+      dispatchOrQueue(
+        "pinterest",
+        [
+          "track",
+          "checkout",
+          {
+            currency: "USD",
+            value,
+            product_id: items.map((item) => item.id),
+            order_quantity: items.reduce((sum, item) => sum + item.quantity, 0),
           },
         ],
         target,

@@ -47,6 +47,13 @@ type TrackingApi = {
     consent?: ConsentState,
     configured?: ConfiguredPlatforms,
   ) => boolean;
+  trackBeginCheckout: (
+    items: TrackItem[],
+    value: number,
+    target?: TrackingTarget,
+    consent?: ConsentState,
+    configured?: ConfiguredPlatforms,
+  ) => boolean;
   trackPurchase: (
     orderId: string,
     value: number,
@@ -55,7 +62,11 @@ type TrackingApi = {
     consent?: ConsentState,
     configured?: ConfiguredPlatforms,
   ) => boolean;
-  flushTrackingQueue: (platform: "ga" | "meta" | "pinterest", target?: TrackingTarget) => void;
+  flushTrackingQueue: (
+    platform: "ga" | "meta" | "pinterest",
+    target?: TrackingTarget,
+    consent?: ConsentState,
+  ) => void;
   purchaseStorageKey: (orderId: string) => string;
 };
 
@@ -75,9 +86,9 @@ afterEach(() => {
     fbq: () => {},
     pintrk: () => {},
   };
-  tracking.flushTrackingQueue("ga", sink);
-  tracking.flushTrackingQueue("meta", sink);
-  tracking.flushTrackingQueue("pinterest", sink);
+  tracking.flushTrackingQueue("ga", sink, allConsent);
+  tracking.flushTrackingQueue("meta", sink, allConsent);
+  tracking.flushTrackingQueue("pinterest", sink, allConsent);
 });
 
 test("builds an exact GA4 view_item payload for one product", () => {
@@ -227,16 +238,96 @@ test("deduplicates pending events and flushes each platform exactly once", () =>
   const gaCalls: unknown[][] = [];
   const metaCalls: unknown[][] = [];
   const pinterestCalls: unknown[][] = [];
-  tracking.flushTrackingQueue("ga", { gtag: (...args) => gaCalls.push(args) });
-  tracking.flushTrackingQueue("meta", { fbq: (...args) => metaCalls.push(args) });
-  tracking.flushTrackingQueue("pinterest", { pintrk: (...args) => pinterestCalls.push(args) });
-  tracking.flushTrackingQueue("ga", { gtag: (...args) => gaCalls.push(args) });
-  tracking.flushTrackingQueue("meta", { fbq: (...args) => metaCalls.push(args) });
-  tracking.flushTrackingQueue("pinterest", { pintrk: (...args) => pinterestCalls.push(args) });
+  tracking.flushTrackingQueue("ga", { gtag: (...args) => gaCalls.push(args) }, allConsent);
+  tracking.flushTrackingQueue("meta", { fbq: (...args) => metaCalls.push(args) }, allConsent);
+  tracking.flushTrackingQueue(
+    "pinterest",
+    { pintrk: (...args) => pinterestCalls.push(args) },
+    allConsent,
+  );
+  tracking.flushTrackingQueue("ga", { gtag: (...args) => gaCalls.push(args) }, allConsent);
+  tracking.flushTrackingQueue("meta", { fbq: (...args) => metaCalls.push(args) }, allConsent);
+  tracking.flushTrackingQueue(
+    "pinterest",
+    { pintrk: (...args) => pinterestCalls.push(args) },
+    allConsent,
+  );
 
   assert.equal(gaCalls.length, 1);
   assert.equal(metaCalls.length, 1);
   assert.equal(pinterestCalls.length, 1);
+});
+
+test("drops queued events when consent is revoked before platform readiness", () => {
+  const gaOnly: ConfiguredPlatforms = { ga: true, meta: false, pinterest: false };
+  const product = { id: "revoked_queue", name: "Revoked Pearl", price: 15 };
+  const calls: unknown[][] = [];
+
+  assert.equal(tracking.trackViewItem(product, {}, allConsent, gaOnly), true);
+  tracking.flushTrackingQueue(
+    "ga",
+    { gtag: (...args) => calls.push(args) },
+    noConsent,
+  );
+  tracking.flushTrackingQueue(
+    "ga",
+    { gtag: (...args) => calls.push(args) },
+    allConsent,
+  );
+
+  assert.deepEqual(calls, []);
+});
+
+test("keeps a queued event when an identical live dispatch throws", () => {
+  const gaOnly: ConfiguredPlatforms = { ga: true, meta: false, pinterest: false };
+  const product = { id: "retry_queue", name: "Retry Pearl", price: 20 };
+  const calls: unknown[][] = [];
+
+  assert.equal(tracking.trackViewItem(product, {}, allConsent, gaOnly), true);
+  assert.equal(
+    tracking.trackViewItem(
+      product,
+      { gtag: () => { throw new Error("dispatcher unavailable"); } },
+      allConsent,
+      gaOnly,
+    ),
+    false,
+  );
+  tracking.flushTrackingQueue("ga", { gtag: (...args) => calls.push(args) }, allConsent);
+
+  assert.equal(calls.length, 1);
+});
+
+test("maps begin checkout to Pinterest checkout", () => {
+  const pinterestOnly: ConfiguredPlatforms = { ga: false, meta: false, pinterest: true };
+  const calls: unknown[][] = [];
+  const items: TrackItem[] = [
+    { id: "pearl_1", name: "Stillwater Pearl", price: 29.5, quantity: 1 },
+    { id: "pearl_2", name: "Moon Pearl", price: 18.25, quantity: 2 },
+  ];
+
+  assert.equal(
+    tracking.trackBeginCheckout(
+      items,
+      66,
+      { pintrk: (...args) => calls.push(args) },
+      allConsent,
+      pinterestOnly,
+    ),
+    true,
+  );
+  assert.deepEqual(calls, [
+    [
+      "track",
+      "checkout",
+      {
+        currency: "USD",
+        value: 66,
+        product_id: ["pearl_1", "pearl_2"],
+        order_quantity: 3,
+      },
+    ],
+  ]);
 });
 
 test("does not dispatch or queue GA events when analytics consent is denied", () => {
