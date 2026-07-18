@@ -101,6 +101,6 @@ Use `pass`, `fail: <reason>`, or `pending: <reason>` in Result.
 
 | Test date | Tester | Order ID | Result |
 | --- | --- | --- | --- |
-|  |  |  |  |
+| 2026-07-19 | Codex | N/A | pending: `mythrealms.shop` is not attached to the Vercel project; analytics platform IDs are not configured; no live-money test was authorized |
 |  |  |  |  |
 |  |  |  |  |
