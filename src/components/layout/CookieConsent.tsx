@@ -6,6 +6,7 @@ import Link from "next/link";
 import {
   CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
+  hasValidStoredConsent,
   serializeConsent,
 } from "@/lib/analytics/consent";
 
@@ -13,8 +14,14 @@ export function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem(CONSENT_STORAGE_KEY);
-    if (!consent) {
+    let hasValidConsent = false;
+    try {
+      hasValidConsent = hasValidStoredConsent(localStorage.getItem(CONSENT_STORAGE_KEY));
+    } catch {
+      hasValidConsent = false;
+    }
+
+    if (!hasValidConsent) {
       // Small delay so it doesn't flash on page load
       const timer = setTimeout(() => setVisible(true), 800);
       return () => clearTimeout(timer);

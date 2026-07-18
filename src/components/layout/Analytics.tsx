@@ -1,12 +1,11 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
-  parseConsent,
-  requiresConsentReload,
+  createConsentSubscriptionController,
+  type ConsentEventTarget,
   type ConsentState,
 } from "@/lib/analytics/consent";
 
@@ -15,38 +14,21 @@ export function Analytics() {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   const pinterestId = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID;
   const [consent, setConsent] = useState<ConsentState>({ analytics: false, marketing: false });
-  const previousConsent = useRef<ConsentState>({ analytics: false, marketing: false });
 
   useEffect(() => {
-    const readConsent = () => {
-      let nextConsent: ConsentState;
-      let persisted = true;
-
-      try {
-        nextConsent = parseConsent(localStorage.getItem(CONSENT_STORAGE_KEY));
-      } catch {
-        nextConsent = parseConsent(null);
-        persisted = false;
-      }
-
-      const previous = previousConsent.current;
-      previousConsent.current = nextConsent;
-      setConsent(nextConsent);
-      if (persisted && requiresConsentReload(previous, nextConsent)) window.location.reload();
+    const target: ConsentEventTarget = {
+      addEventListener: (type, listener) => window.addEventListener(type, listener as EventListener),
+      removeEventListener: (type, listener) => window.removeEventListener(type, listener as EventListener),
     };
 
-    const handleStorageChange = (event: StorageEvent) => {
-      if (event.key === CONSENT_STORAGE_KEY || event.key === null) readConsent();
-    };
-
-    readConsent();
-    window.addEventListener(CONSENT_CHANGED_EVENT, readConsent);
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener(CONSENT_CHANGED_EVENT, readConsent);
-      window.removeEventListener("storage", handleStorageChange);
-    };
+    const controller = createConsentSubscriptionController({
+      target,
+      readConsent: () => localStorage.getItem(CONSENT_STORAGE_KEY),
+      onConsentChange: setConsent,
+      reload: () => window.location.reload(),
+    });
+    controller.start();
+    return controller.cleanup;
   }, []);
 
   if (!gaId && !pixelId && !pinterestId) return null;
