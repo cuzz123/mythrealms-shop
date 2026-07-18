@@ -1722,6 +1722,53 @@
         "连续播放由用户验收"
       ],
       "notes": "候选测试包；不得在用户动态验收前标记 approved。"
+    },
+    {
+      "id": "ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001",
+      "name": "Natural Window Linen Apartment",
+      "category": "scene_kit",
+      "status": "available",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001/source/window-apartment-panorama-v1.png",
+        "../03-scene-kits/ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001/source/window-apartment-reverse-v1.png"
+      ],
+      "tags": ["photoreal", "window-light", "linen", "lifestyle"],
+      "usage": {"suitable_for": ["natural lifestyle", "window-side performance", "Pearl Series 04"]},
+      "notes": "Forward and reverse environment anchors; no dark-stage styling."
+    },
+    {
+      "id": "PROP_MR_LINEN_BOOK_AND_CERAMIC_001",
+      "name": "Linen Book and Ceramic Dish",
+      "category": "prop",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/PROP_MR_LINEN_BOOK_AND_CERAMIC_001/source/turnaround-v1.png"],
+      "tags": ["linen", "ceramic", "walnut", "supporting-prop"],
+      "usage": {"suitable_for": ["natural lifestyle", "product supporting set"]},
+      "notes": "Use only as low-weight lived-in context; never obscure jewelry."
+    },
+    {
+      "id": "PROD_MR_PEARL_SERIES_04_001",
+      "name": "Pearl Series 04 Cobalt and Blush Pearl Jewelry",
+      "category": "product_lock",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../../public/images/products/1688-shop/pearl-series/pearl-series-04-detail1.webp"],
+      "tags": ["pearl", "cobalt", "blush-pearl", "antique-gold"],
+      "usage": {"suitable_for": ["structure reference", "wearing shot", "macro product shot"]},
+      "notes": "Structure lock: cobalt stones, blush pearl clusters and antique-gold filigree; no redesign."
+    },
+    {
+      "id": "VID_MR_PEARL_SERIES_04_NATURAL_WINDOW_001",
+      "name": "Pearl Series 04 Natural Window Asset Pack",
+      "category": "storyboard_asset_pack",
+      "status": "asset_pack_ready",
+      "version": "v1",
+      "source_paths": ["../10-storyboard-videos/VID_MR_PEARL_SERIES_04_NATURAL_WINDOW_001/asset-pack-manifest.json"],
+      "tags": ["pearl-series-04", "photoreal", "natural-window", "seedance"],
+      "usage": {"suitable_for": ["storyboard generation", "Seedance multi-reference prompts"]},
+      "notes": "Use the manifest role paths; first-frame boards never replace this asset pack."
     }
   ]
 }
