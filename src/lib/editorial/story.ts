@@ -73,7 +73,10 @@ export const STORY_CONTENT = {
     title: "Pearls, edited for real life.",
     description:
       "MythRealms is a focused online pearl edit, bringing pearls into everyday wardrobes, natural light, and the moments between ordinary and dressed up.",
-    image: HOMEPAGE_MEDIA.hero,
+    image: {
+      ...HOMEPAGE_MEDIA.everyday,
+      objectPosition: "center 38%",
+    },
   },
   sections: [
     {
@@ -130,7 +133,7 @@ export const STORY_CONTENT = {
       editorial: {
         title: "Editorial Styling",
         text: "Editorial images show styling context, light, and wardrobe mood. They help express how pearl jewelry can sit within a look, not the exact details of a specific product.",
-        image: HOMEPAGE_MEDIA.necklaces,
+        image: HOMEPAGE_MEDIA.hero,
       },
       disclosure:
         "Some editorial images are digitally created. They provide styling context and are not a substitute for the source-supplied product galleries used to make a purchase decision.",

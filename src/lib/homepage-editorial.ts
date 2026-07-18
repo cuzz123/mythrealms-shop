@@ -7,7 +7,7 @@ export type EditorialImage = {
 export const HOMEPAGE_MEDIA = {
   hero: {
     src: "/images/brand/hero/pearl-earrings-editorial.png",
-    alt: "Model wearing pearl earrings in Mediterranean sunlight",
+    alt: "Model wearing shell-and-pearl drop earrings in warm studio light",
     objectPosition: "center 38%",
   },
   everyday: {
@@ -16,19 +16,19 @@ export const HOMEPAGE_MEDIA = {
   },
   earrings: {
     src: "/images/brand/hero/pearl-earrings-editorial.png",
-    alt: "Pearl earrings worn in warm natural light",
+    alt: "Model wearing shell-and-pearl drop earrings in warm studio light",
   },
   necklaces: {
     src: "/images/brand/hero/pearl-necklace-editorial.png",
-    alt: "Pearl necklace worn with a white linen shirt",
+    alt: "Pearl necklace displayed on a black jewelry stand",
   },
   bracelets: {
     src: "/images/brand/hero/pearl-bracelet-editorial.png",
-    alt: "Pearl bracelet worn in warm cafe light",
+    alt: "Gold wire pearl bracelet displayed on dark fabric",
   },
   eyewear: {
     src: "/images/brand/hero/pearl-eyewear-chain-editorial.png",
-    alt: "Pearl eyewear chain shown against a dark background",
+    alt: "Pearl eyewear chain attached to eyeglasses on a dark background",
   },
   seaside: {
     src: "/images/brand/editorial/scene-seaside-stairs.png",
