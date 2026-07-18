@@ -4,23 +4,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { absoluteUrl } from "@/lib/site";
 
-export const dynamic = "force-dynamic"
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Journal Archive | MythRealms",
-  description: "An archived collection of earlier MythRealms editorial notes.",
-  robots: { index: false, follow: false },
+  title: "Pearl Jewelry Journal | MythRealms",
+  description: "Pearl jewelry guidance on styling, care, gifting, fit, and shipping from MythRealms.",
   alternates: { canonical: absoluteUrl("/blog") },
   openGraph: {
     type: "website",
     url: absoluteUrl("/blog"),
-    title: "MythRealms Journal",
-    description: "An archived collection of earlier MythRealms editorial notes.",
+    title: "Pearl Jewelry Journal | MythRealms",
+    description: "Pearl jewelry guidance on styling, care, gifting, fit, and shipping from MythRealms.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MythRealms Journal",
-    description: "An archived collection of earlier MythRealms editorial notes.",
+    title: "Pearl Jewelry Journal | MythRealms",
+    description: "Pearl jewelry guidance on styling, care, gifting, fit, and shipping from MythRealms.",
   },
 };
 
@@ -37,8 +36,8 @@ export default async function BlogPage() {
       </nav>
 
       <div className="text-center mb-12">
-        <h1 className="font-serif text-5xl font-bold mb-3">Journal Archive</h1>
-        <p className="text-[var(--text-muted)] max-w-lg mx-auto">Earlier editorial notes are kept here while the journal is being rebuilt around The Pearl Edit.</p>
+        <h1 className="font-serif text-5xl font-bold mb-3">Pearl Jewelry Journal</h1>
+        <p className="text-[var(--text-muted)] max-w-lg mx-auto">Practical guides for styling, caring for, gifting, and shopping pearl jewelry.</p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
@@ -68,7 +67,7 @@ export default async function BlogPage() {
 
       {posts.length === 0 && (
         <div className="text-center py-20">
-          <p className="text-[var(--text-muted)]">No archived notes are available.</p>
+          <p className="text-[var(--text-muted)]">New pearl jewelry guidance is on the way.</p>
         </div>
       )}
     </div>
