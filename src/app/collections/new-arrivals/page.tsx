@@ -13,7 +13,10 @@ import { absoluteUrl } from "@/lib/site";
 const title = "New Pearl Jewelry Arrivals | MythRealms";
 const description =
   "Explore recently added pearl jewelry currently active and in stock in the MythRealms catalog.";
-const heroImage = HOMEPAGE_MEDIA.necklaces;
+const heroImage = {
+  ...HOMEPAGE_MEDIA.everyday,
+  objectPosition: "center 38%",
+} as const;
 
 export const metadata: Metadata = {
   title,
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: [absoluteUrl(heroImage.src)],
+    images: [{ url: absoluteUrl(heroImage.src), alt: heroImage.alt }],
   },
 };
 

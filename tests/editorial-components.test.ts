@@ -142,3 +142,18 @@ test("related products omits unavailable storefront records", () => {
 
   assert.equal((html.match(new RegExp(`/products/${product.slug}`, "g")) ?? []).length, 1);
 });
+
+test("related products accepts a unique serializable heading id", () => {
+  const product = getStorefrontProducts()[0];
+  assert.ok(product);
+
+  const html = renderToStaticMarkup(
+    createElement(RelatedProducts, {
+      products: [product],
+      headingId: "under-50-products-title",
+    }),
+  );
+
+  assert.match(html, /aria-labelledby="under-50-products-title"/);
+  assert.equal((html.match(/id="under-50-products-title"/g) ?? []).length, 1);
+});

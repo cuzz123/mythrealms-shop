@@ -5,7 +5,11 @@ import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { RelatedProducts } from "@/components/editorial/RelatedProducts";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { productDisplayName } from "@/lib/brand";
-import { getGiftSections, getUniqueGiftProducts } from "@/lib/editorial/gifts";
+import {
+  type GiftSection,
+  getGiftSections,
+  getUniqueGiftProducts,
+} from "@/lib/editorial/gifts";
 import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
 import { buildCollectionSchema } from "@/lib/seo/schema";
 import { absoluteUrl } from "@/lib/site";
@@ -34,8 +38,54 @@ export const metadata: Metadata = {
   },
 };
 
+export function GiftProductSections({ sections }: { sections: readonly GiftSection[] }) {
+  return sections.map((section) => {
+    const headingId = `${section.id}-products-title`;
+
+    return (
+      <section
+        key={section.id}
+        id={section.id}
+        className="scroll-mt-28"
+        aria-labelledby={headingId}
+      >
+        {section.products.length > 0 ? (
+          <RelatedProducts
+            products={section.products}
+            title={section.title}
+            description={section.description}
+            headingId={headingId}
+          />
+        ) : (
+          <div className="bg-[var(--surface-alt)] py-14 sm:py-16">
+            <div className="mx-auto max-w-7xl px-6">
+              <div className="max-w-2xl">
+                <p className="text-xs font-semibold uppercase text-[var(--accent)]">
+                  The Pearl Edit
+                </p>
+                <h2
+                  id={headingId}
+                  className="mt-3 font-serif text-3xl font-medium text-[var(--text)]"
+                >
+                  {section.title}
+                </h2>
+                <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
+                  {section.description}
+                </p>
+                <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">
+                  There are no pieces available in this edit right now.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+    );
+  });
+}
+
 export default function GiftsPage() {
-  const sections = getGiftSections().filter(({ products }) => products.length > 0);
+  const sections = getGiftSections();
   const products = getUniqueGiftProducts(sections);
 
   return (
@@ -69,15 +119,7 @@ export default function GiftsPage() {
         </div>
       </section>
 
-      {sections.map((section) => (
-        <section key={section.id} id={section.id} className="scroll-mt-28">
-          <RelatedProducts
-            products={section.products}
-            title={section.title}
-            description={section.description}
-          />
-        </section>
-      ))}
+      <GiftProductSections sections={sections} />
 
       <section className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
         <div className="border-y border-[var(--border)] py-9 sm:flex sm:items-center sm:justify-between sm:gap-10">

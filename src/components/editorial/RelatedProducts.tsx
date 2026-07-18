@@ -6,12 +6,14 @@ export type RelatedProductsProps = Readonly<{
   products: readonly StorefrontProduct[];
   title?: string;
   description?: string;
+  headingId?: string;
 }>;
 
 export function RelatedProducts({
   products,
   title = "Related products",
   description,
+  headingId = "related-products-title",
 }: RelatedProductsProps) {
   const availableProducts = products.filter(
     (product) => product.isActive && product.inStock,
@@ -22,12 +24,12 @@ export function RelatedProducts({
   }
 
   return (
-    <section className="bg-[var(--surface-alt)] py-14 sm:py-16" aria-labelledby="related-products-title">
+    <section className="bg-[var(--surface-alt)] py-14 sm:py-16" aria-labelledby={headingId}>
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase text-[var(--accent)]">The Pearl Edit</p>
           <h2
-            id="related-products-title"
+            id={headingId}
             className="mt-3 font-serif text-3xl font-medium text-[var(--text)]"
           >
             {title}
