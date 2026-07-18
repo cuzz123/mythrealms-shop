@@ -122,20 +122,19 @@ test("catalog results cannot mutate the source collection or lookups", () => {
   assert.ok(!freshProduct.images.includes("/tampered.webp"));
 });
 
-test("the calm tide pilot uses its complete editorial gallery without changing other pearl source galleries", () => {
+test("the calm tide pilot leads with source views and retains editorial images as supplements", () => {
   const pilot = getStorefrontProductBySlug("pearl-series-01");
   assert.ok(pilot);
   assert.equal(
     pilot.image,
-    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-01-hero.png",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-main.webp",
   );
-  assert.deepEqual(pilot.images, [
-    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-01-hero.png",
-    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-02-macro.png",
-    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-03-worn.png",
-    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-04-profile.png",
-    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-05-atmosphere.png",
+  assert.deepEqual(pilot.images.slice(0, 3), [
+    "/images/products/1688-shop/pearl-series/pearl-series-01-main.webp",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-detail2.webp",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-detail1.webp",
   ]);
+  assert.ok(pilot.images.some((image) => image.includes("-editorial-v1-")));
 
   const unchanged = getStorefrontProductBySlug("pearl-series-02");
   assert.ok(unchanged);

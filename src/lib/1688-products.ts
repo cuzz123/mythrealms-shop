@@ -86,7 +86,7 @@ const sourceGallery = (
 // Every active product gallery starts with an exact supplier source file. The
 // order is main product view, real supplied wearing view, then product detail.
 const SOURCE_PRESERVED_PRODUCT_IMAGES: Record<string, [string, string, string]> = {
-  "pearl-series-01": sourceGallery("pearl-series-01", "detail3", "detail1"),
+  "pearl-series-01": sourceGallery("pearl-series-01", "detail2", "detail1"),
   "pearl-series-02": sourceGallery("pearl-series-02", "detail2", "detail1"),
   "pearl-series-03": sourceGallery("pearl-series-03", "detail2", "detail1"),
   "pearl-series-04": sourceGallery("pearl-series-04", "detail3", "detail1"),
@@ -147,9 +147,9 @@ export const PRODUCTS: Product[] = SOURCE_PRODUCTS.map((sourceProduct) => {
   product.isBestSeller = false;
   product.tag = product.isNew ? "New" : undefined;
   const editorialImages = EDITORIAL_PILOT_IMAGES[product.slug];
-  if (editorialImages) {
-    product.image = editorialImages[0];
-    product.images = [...editorialImages];
+  if (images && editorialImages) {
+    product.image = images[0];
+    product.images = [...images, ...editorialImages];
   } else if (images) {
     product.image = images[0];
     product.images = [...images];

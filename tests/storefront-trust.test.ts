@@ -19,6 +19,17 @@ test("editorial hero imagery is not presented as a specific SKU", () => {
   assert.match(hero, /Editorial/i);
 });
 
+test("product galleries disclose editorial images and organization data avoids pearl-type expertise claims", () => {
+  const product = source("src/app/products/[slug]/1688-product.tsx");
+  const jsonLd = source("src/components/ui/JsonLd.tsx");
+
+  assert.match(
+    product,
+    /Supplier-supplied product views appear first\. Later editorial scenes may be AI-generated; refer to the first views for product shape and details\./,
+  );
+  assert.doesNotMatch(jsonLd, /Freshwater pearls/);
+});
+
 test("the legacy loyalty route is noindex and makes no unimplemented reward promises", () => {
   const loyalty = source("src/app/loyalty/page.tsx");
   assert.match(loyalty, /index:\s*false/);

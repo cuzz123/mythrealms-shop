@@ -132,7 +132,6 @@ export function OrganizationJsonLd() {
       "Pearl jewelry",
       "Jewelry styling",
       "Pearl care",
-      "Freshwater pearls",
     ],
     sameAs: ["https://instagram.com/mythrealms.shop"],
     contactPoint: {

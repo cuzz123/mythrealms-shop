@@ -195,6 +195,11 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
               ))}
             </div>
           )}
+          {images.some((image) => image.includes("-editorial-")) && (
+            <p className="mt-3 text-xs leading-relaxed text-[var(--text-muted)]">
+              Supplier-supplied product views appear first. Later editorial scenes may be AI-generated; refer to the first views for product shape and details.
+            </p>
+          )}
         </div>
 
         {/* Product Info */}
