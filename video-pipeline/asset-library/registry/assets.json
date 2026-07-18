@@ -1769,6 +1769,61 @@
       "tags": ["pearl-series-04", "photoreal", "natural-window", "seedance"],
       "usage": {"suitable_for": ["storyboard generation", "Seedance multi-reference prompts"]},
       "notes": "Use the manifest role paths; first-frame boards never replace this asset pack."
+    },
+    {
+      "id": "ENV_MR_COASTAL_BREAKFAST_TERRACE_001",
+      "name": "Coastal Breakfast Terrace",
+      "category": "scene_kit",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/ENV_MR_COASTAL_BREAKFAST_TERRACE_001/source/coastal-breakfast-panorama-v1.png", "../03-scene-kits/ENV_MR_COASTAL_BREAKFAST_TERRACE_001/source/coastal-breakfast-reverse-v1.png"],
+      "tags": ["photoreal", "coastal", "breakfast", "linen", "limestone"],
+      "usage": {"suitable_for": ["natural lifestyle", "Mediterranean morning", "product reveal"]},
+      "notes": "Forward and reverse anchors for a real coastal breakfast terrace."
+    },
+    {
+      "id": "CHAR_MR_TALENT_COASTAL_BREAKFAST_001",
+      "name": "Coastal Breakfast Curly Linen Talent",
+      "category": "character",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../05-characters/CHAR_MR_TALENT_COASTAL_BREAKFAST_001/source/turnaround-v1.png", "../05-characters/CHAR_MR_TALENT_COASTAL_BREAKFAST_001/source/expressions-v1.png", "../05-characters/CHAR_MR_TALENT_COASTAL_BREAKFAST_001/source/motion-contacts-v1.png"],
+      "tags": ["photoreal", "female", "curly", "linen", "lifestyle"],
+      "usage": {"suitable_for": ["coastal breakfast", "quiet portrait", "natural lifestyle"]},
+      "notes": "Identity pack; jewelry remains a separate reference role."
+    },
+    {
+      "id": "PROP_MR_COASTAL_BREAKFAST_SET_001",
+      "name": "Coastal Breakfast Table Set",
+      "category": "prop",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/PROP_MR_COASTAL_BREAKFAST_SET_001/source/turnaround-v1.png"],
+      "tags": ["ceramic", "linen", "pale-wood", "breakfast"],
+      "usage": {"suitable_for": ["product table reveal", "lifestyle continuity"]},
+      "notes": "White ceramic dish stays empty before the reveal."
+    },
+    {
+      "id": "PROD_MR_PEARL_JADE_NECKLACE_001",
+      "name": "Baroque Pearl and Mist Jade Necklace",
+      "category": "product_lock",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../../public/images/products/new-series/new-series-pearl-jade-bracelet/main.jpg"],
+      "tags": ["baroque-pearl", "jade", "green", "gold", "necklace"],
+      "usage": {"suitable_for": ["structure reference", "macro product proof", "hero closing"]},
+      "notes": "Structure lock only; original black velvet and product text must not carry into generations."
+    },
+    {
+      "id": "VID_MR_PEARL_JADE_COASTAL_BREAKFAST_001",
+      "name": "Pearl Jade Coastal Breakfast Asset Pack",
+      "category": "storyboard_asset_pack",
+      "status": "asset_pack_ready",
+      "version": "v1",
+      "source_paths": ["../10-storyboard-videos/VID_MR_PEARL_JADE_COASTAL_BREAKFAST_001/asset-pack-manifest.json"],
+      "tags": ["pearl-jade", "coastal", "breakfast", "photoreal", "seedance"],
+      "usage": {"suitable_for": ["storyboard generation", "Seedance multi-reference prompts"]},
+      "notes": "Eight 4-second clips; necklace is reserved until S06."
     }
   ]
 }
