@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "state_revision": 1,
+  "project_id": "VID_MR_PEARL_SERIES_04_NATURAL_WINDOW_001",
+  "project_mode": "sequence_project",
+  "surface": "Seedance 2.0 conservative multi-reference workflow",
+  "clip_budget_sec": 4,
+  "story": {
+    "logline": "A real morning room gradually directs attention from a woman’s ordinary pause to the cobalt-and-pearl jewelry waiting in the same light.",
+    "story_promise": "A believable lifestyle moment, never a dark fantasy set.",
+    "objective": "Reveal Pearl Series 04 late, with its original geometry intact.",
+    "initial_condition": "An empty naturally lit apartment corner; the jewelry is not visible.",
+    "final_outcome": "A clean product hero plate ready for a MythRealms logo overlay in post.",
+    "target_duration_sec": 32,
+    "tone": "quiet, natural, warm-neutral, real",
+    "medium": "live-action lifestyle jewelry ad"
+  },
+  "reference_registry": "D:\\mythrealms-shop\\.worktrees\\pearl-series-04-natural-window\\video-pipeline\\asset-library\\10-storyboard-videos\\VID_MR_PEARL_SERIES_04_NATURAL_WINDOW_001\\asset-pack-manifest.json",
+  "scenes": [
+    {"scene_id":"SC01_ROOM","scene_index":1,"narrative_function":"establish ordinary life","arc_position":"open","location":"natural window linen apartment","time_of_day":"late morning","anchor_source":"environment_forward","max_chain_depth":2,"audio_plan":"room tone, linen and distant city","assigned_clip_ids":["S01","S02","S03","S04"],"transition_out":"intentional cut to table-side discovery","status":"planned"},
+    {"scene_id":"SC02_DISCOVERY","scene_index":2,"narrative_function":"delay then reveal product","arc_position":"turn","location":"same apartment side table","time_of_day":"late morning","anchor_source":"environment_forward + product_structure","max_chain_depth":1,"audio_plan":"room tone, ceramic contact, no score","assigned_clip_ids":["S05","S06"],"transition_out":"macro cut on cobalt highlight","status":"planned"},
+    {"scene_id":"SC03_PRODUCT","scene_index":3,"narrative_function":"material proof and clean finish","arc_position":"release","location":"same pale walnut side table","time_of_day":"late morning","anchor_source":"product_structure + prop_turnaround","max_chain_depth":1,"audio_plan":"soft room tone, one ceramic tick","assigned_clip_ids":["S07","S08"],"transition_out":"textless end plate","status":"planned"}
+  ],
+  "clips": [
+    {"clip_id":"S01","scene_id":"SC01_ROOM","sequence_index":1,"parent_clip_id":null,"generation_mode":"I2V","status":"current","narrative_job":"establish space","felt_intent":"the room feels lived in before anyone enters","planned_start_state":"empty room","planned_end_state":"linen curtain moves once","continuity_locks":["environment geometry","late-morning window light","no product"],"reserved_for_later":["woman","jewelry reveal"],"extension_depth":0},
+    {"clip_id":"S02","scene_id":"SC01_ROOM","sequence_index":2,"parent_clip_id":null,"generation_mode":"R2V","status":"planned","narrative_job":"introduce talent","felt_intent":"she belongs to the room instead of posing for it","planned_start_state":"woman seated reading","planned_end_state":"one quiet page turn","continuity_locks":["talent identity","ivory linen dress","no product"],"reserved_for_later":["jewelry reveal"],"extension_depth":0},
+    {"clip_id":"S03","scene_id":"SC01_ROOM","sequence_index":3,"parent_clip_id":null,"generation_mode":"R2V","status":"planned","narrative_job":"shift attention toward window","felt_intent":"a small change in attention, not drama","planned_start_state":"woman closes book","planned_end_state":"woman rises beside chair","continuity_locks":["same room","same wardrobe","no product"],"reserved_for_later":["jewelry reveal"],"extension_depth":0},
+    {"clip_id":"S04","scene_id":"SC01_ROOM","sequence_index":4,"parent_clip_id":null,"generation_mode":"R2V","status":"planned","narrative_job":"complete a natural walk","felt_intent":"ordinary movement makes the place credible","planned_start_state":"woman steps from chair toward window","planned_end_state":"fingers rest on curtain","continuity_locks":["screen direction chair to window","same daylight","no product"],"reserved_for_later":["jewelry reveal"],"extension_depth":0},
+    {"clip_id":"S05","scene_id":"SC02_DISCOVERY","sequence_index":5,"parent_clip_id":null,"generation_mode":"R2V","status":"planned","narrative_job":"return attention to table","felt_intent":"the room quietly leads the eye back","planned_start_state":"book and ceramic dish on table","planned_end_state":"a hand stops beside the dish","continuity_locks":["prop placement","same daylight","product remains out of frame"],"reserved_for_later":["jewelry reveal","full product reveal"],"extension_depth":0},
+    {"clip_id":"S06","scene_id":"SC02_DISCOVERY","sequence_index":6,"parent_clip_id":null,"generation_mode":"R2V","status":"planned","narrative_job":"first product reveal","felt_intent":"color appears as a discovered object, not an imposed sales shot","planned_start_state":"ceramic dish centered on walnut table","planned_end_state":"Pearl Series 04 rests in the dish, hand held behind it","continuity_locks":["product geometry","ceramic dish","natural light"],"reserved_for_later":["macro hero"],"extension_depth":0},
+    {"clip_id":"S07","scene_id":"SC03_PRODUCT","sequence_index":7,"parent_clip_id":null,"generation_mode":"I2V","status":"planned","narrative_job":"prove material and color","felt_intent":"cobalt, blush pearl and antique gold become readable","planned_start_state":"product on dish","planned_end_state":"cobalt stone catches a stable soft highlight","continuity_locks":["product geometry","no hands","no text"],"reserved_for_later":["end plate"],"extension_depth":0},
+    {"clip_id":"S08","scene_id":"SC03_PRODUCT","sequence_index":8,"parent_clip_id":null,"generation_mode":"I2V","status":"planned","narrative_job":"clean final hero","felt_intent":"the product is calm enough to be remembered","planned_start_state":"three-quarter jewelry arrangement","planned_end_state":"still textless plate with clear negative space","continuity_locks":["product geometry","natural window light","no generated logo"],"reserved_for_later":[],"extension_depth":0}
+  ],
+  "take_history": [],
+  "current_clip_id": "S01",
+  "canon_revision": 0,
+  "updated_at": "2026-07-18"
+}
