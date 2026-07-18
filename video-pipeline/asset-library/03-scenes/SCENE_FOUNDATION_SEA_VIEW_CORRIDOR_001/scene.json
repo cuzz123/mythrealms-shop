@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_SEA_VIEW_CORRIDOR_001",
+  "asset_type": "product_adapted_scene",
+  "status": "planned",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["earrings", "necklaces"],
+  "model_position": "stand midway through the corridor with one shoulder framed by the sea opening",
+  "light_direction": "late-afternoon sea light from frame right",
+  "framing_zone": "head, near ear, and neckline remain clear against the pale corridor opening",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，海风吹动纱帘，镜头缓慢推近。"}
+}

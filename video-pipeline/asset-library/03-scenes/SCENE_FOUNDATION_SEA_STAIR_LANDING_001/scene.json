@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_SEA_STAIR_LANDING_001",
+  "asset_type": "product_adapted_scene",
+  "status": "planned",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["earrings"],
+  "model_position": "pause on the lower stair with the sea horizon behind the far shoulder",
+  "light_direction": "late-afternoon sun from frame right",
+  "framing_zone": "head and near ear stay clear against pale sea and stone",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，海面轻微起伏，镜头缓慢推近。"}
+}

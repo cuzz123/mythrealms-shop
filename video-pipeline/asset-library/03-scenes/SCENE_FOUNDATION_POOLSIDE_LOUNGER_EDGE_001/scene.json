@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_POOLSIDE_LOUNGER_EDGE_001",
+  "asset_type": "product_adapted_scene",
+  "status": "planned",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["anklets", "sandals"],
+  "model_position": "sit at the lounger edge with one lower leg extended over pale paving",
+  "light_direction": "high sun from frame right",
+  "framing_zone": "ankle and foot remain clear against dry limestone paving",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，池水微微荡漾，镜头缓慢下移。"}
+}

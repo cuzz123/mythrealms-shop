@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_LIMESTONE_ARCH_SHADE_001",
+  "asset_type": "product_adapted_scene",
+  "status": "planned",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["necklaces", "pendants"],
+  "model_position": "stand one step inside the arch, torso facing the sunlit opening",
+  "light_direction": "morning sun from frame left",
+  "framing_zone": "neck and collarbone remain isolated against the shaded limestone",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，藤影轻轻摇曳，镜头缓慢横移。"}
+}
