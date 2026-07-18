@@ -23,7 +23,7 @@ export type GuideLayoutProps = Readonly<{
   relatedProducts: readonly StorefrontProduct[];
 }>;
 
-function formatUpdatedDate(value: string) {
+function formatEditorialDate(value: string) {
   return new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
@@ -178,7 +178,9 @@ export function GuideLayout({
           <p>
             By <span className="font-semibold text-[var(--text)]">{guide.author}</span>
             <span aria-hidden="true"> / </span>
-            Updated {formatUpdatedDate(guide.updated)}
+            Published {formatEditorialDate(guide.published)}
+            <span aria-hidden="true"> / </span>
+            Updated {formatEditorialDate(guide.updated)}
           </p>
           <div className="mt-4">
             <p className="font-semibold text-[var(--text)]">Sources</p>

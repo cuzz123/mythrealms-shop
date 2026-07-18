@@ -1,6 +1,5 @@
 ﻿import type { Metadata } from "next";
 import "./globals.css";
-import { Providers } from "./providers";
 import { Analytics } from "@/components/layout/Analytics";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/ui/JsonLd";
 import { LayoutShell } from "@/components/layout/LayoutShell";
@@ -73,9 +72,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </noscript>
         <Analytics />
         <ScrollRevealEnhancer />
-        <Providers>
-          <LayoutShell>{children}</LayoutShell>
-        </Providers>
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   );

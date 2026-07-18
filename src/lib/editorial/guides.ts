@@ -27,6 +27,7 @@ export type PearlGuide = Readonly<{
   directAnswer: string;
   image: { src: string; alt: string; objectPosition?: string };
   author: "MythRealms Editorial";
+  published: "2026-07-18";
   updated: "2026-07-18";
   sections: readonly GuideSection[];
   faq: readonly { question: string; answer: string }[];
@@ -41,6 +42,7 @@ export type PearlHubFaq = Readonly<{
 }>;
 
 const GIA_CARE_URL = "https://my.gia.edu/faqs/gia-faq-about-gemstones-how-to-care-for-pearls";
+const GIA_JEWELRY_CARE_URL = "https://www.gia.edu/articles/gia-news-research-tips-caring-jewelry";
 const GIA_PEARL_TYPES_URL = "https://www.gia.edu/pearl-description";
 const GIA_PEARL_BUYING_URL = "https://www.gia.edu/pearl/buyers-guide";
 
@@ -74,11 +76,12 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       objectPosition: "center",
     },
     author: "MythRealms Editorial",
+    published: "2026-07-18",
     updated: "2026-07-18",
     sections: [
       {
         id: "daily-routine",
-        heading: "Daily routine",
+        heading: "What is a practical daily pearl routine?",
         answer: "Make pearls the finishing step when getting ready and the first item you remove at the end of the day.",
         paragraphs: [
           "Apply cosmetics, fragrance, and hair products before putting on pearl jewelry. This reduces contact with residue from those products.",
@@ -87,7 +90,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       },
       {
         id: "cleaning",
-        heading: "Cleaning",
+        heading: "How should pearl jewelry be cleaned?",
         answer: "Use a soft cloth for routine care and avoid household cleaners.",
         paragraphs: [
           "Do not use abrasive cloths, ultrasonic cleaners, or harsh cleaning products on pearls. If a piece needs more than a gentle wipe, ask a qualified jeweler for advice.",
@@ -95,7 +98,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       },
       {
         id: "storage",
-        heading: "Storage",
+        heading: "How should pearl jewelry be stored?",
         answer: "Keep pearl jewelry dry and separate from pieces that can scratch it.",
         paragraphs: [
           "Store each piece in a soft pouch or lined compartment. Avoid leaving pearls in a hot, dry place or pressed against hard jewelry.",
@@ -103,16 +106,18 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       },
       {
         id: "avoid",
-        heading: "What to avoid",
-        answer: "Avoid chemicals, rough contact, and prolonged heat.",
+        heading: "Can I shower or swim while wearing pearls?",
+        answer: "Remove pearl jewelry before showering or swimming.",
         paragraphs: [
-          "Take pearl jewelry off before using cleaning products or doing activities where it may rub against hard or rough surfaces.",
+          "Showering can expose pearl jewelry to soaps and other products, while swimming can expose it to chlorinated water. Take the piece off first, then put it back on only after you are dry and finished with cosmetics or hair products.",
+          "Also remove pearl jewelry before using household cleaners or doing activities where it may rub against hard or rough surfaces.",
         ],
         table: {
           headers: ["Do", "Do not"],
           rows: [
             ["Wipe pearls with a soft cloth after wear.", "Spray fragrance or hairspray onto worn pearls."],
             ["Store pieces separately in a soft pouch or case.", "Store pearls loose against hard jewelry."],
+            ["Remove pearl jewelry before showering or swimming.", "Wear pearls in chlorinated pools or while using soaps."],
             ["Ask a jeweler about repairs or restringing.", "Use household cleaners or ultrasonic cleaning."],
           ],
         },
@@ -135,6 +140,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
     relatedTypes: ["earrings", "necklaces", "bracelets", "rings"],
     sources: [
       { label: "GIA: How should I care for my pearls?", href: GIA_CARE_URL },
+      { label: "GIA: Tips on caring for jewelry", href: GIA_JEWELRY_CARE_URL },
     ],
   },
   "how-to-wear": {
@@ -150,20 +156,22 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       objectPosition: "center",
     },
     author: "MythRealms Editorial",
+    published: "2026-07-18",
     updated: "2026-07-18",
     sections: [
       {
         id: "earrings",
-        heading: "Earrings",
-        answer: "Choose earrings when you want the detail to sit close to the face.",
+        heading: "How do I choose pearl earrings for my face?",
+        answer: "Compare earring scale and length near your face instead of treating face shape as a fixed rule.",
         paragraphs: [
           "Studs and small drops keep the focus near the ear. Longer drops add a vertical line and move with the wearer.",
+          "Facial proportions differ, so use a mirror or product dimensions to compare where a stud, short drop, or longer drop ends. Choose the scale and line that feel balanced to you rather than relying on a universal face-shape rule.",
           "For a coordinated look, keep other jewelry simple or repeat one metal tone already used in the earrings.",
         ],
       },
       {
         id: "necklaces",
-        heading: "Necklaces",
+        heading: "How do I match a pearl necklace to a neckline?",
         answer: "Choose the necklace length after checking the neckline it will sit against.",
         paragraphs: [
           "A close necklace works with open necklines when you want the jewelry near the collarbone. A longer pendant or lariat leaves more space between the neckline and the focal point.",
@@ -171,7 +179,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       },
       {
         id: "wrist-and-hand",
-        heading: "Wrist and hand",
+        heading: "How do I style pearls at the wrist and hand?",
         answer: "Bracelets and rings add detail where the hands are already active.",
         paragraphs: [
           "Use one bracelet or ring as the main detail, then add other pieces only when they do not compete for the same attention. Check that a bracelet is comfortable for writing, carrying, and other regular movement.",
@@ -179,10 +187,11 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       },
       {
         id: "daily-wardrobes",
-        heading: "Daily wardrobes",
-        answer: "Build from one pearl piece, then decide whether the outfit needs another focal point.",
+        heading: "How can pearls work for casual and formal occasions?",
+        answer: "Build from one pearl piece, then adjust its scale and placement to the occasion and outfit.",
         paragraphs: [
           "With a plain shirt, knit, or jacket, pearl jewelry can be the clearest detail. With a patterned or detailed outfit, a smaller piece often keeps the overall look easier to read.",
+          "For formal occasions, the same placement-first approach still applies: check the neckline, choose one focal piece, and add another only when the two placements do not compete.",
         ],
         table: {
           headers: ["Placement", "Visual effect"],
@@ -226,11 +235,12 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       objectPosition: "center",
     },
     author: "MythRealms Editorial",
+    published: "2026-07-18",
     updated: "2026-07-18",
     sections: [
       {
         id: "formation",
-        heading: "How cultured freshwater pearls form",
+        heading: "How do cultured freshwater pearls form?",
         answer: "A cultivation process begins inside a freshwater mollusk, which then forms nacre around the introduced material.",
         paragraphs: [
           "Cultured and natural pearls form through different starting conditions. With cultured pearls, people begin the process and the mollusk forms the pearl over time.",
@@ -239,7 +249,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       },
       {
         id: "appearance",
-        heading: "Shape, luster, surface, and tone",
+        heading: "How do shape, luster, surface, and tone vary?",
         answer: "Compare visible appearance details individually because pearls vary naturally.",
         paragraphs: [
           "Shape can range from round to more irregular forms. Luster describes how light appears to reflect from the surface, while surface shows marks or texture that may be visible at close range.",
@@ -248,21 +258,25 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       },
       {
         id: "comparison",
-        heading: "Comparison considerations",
-        answer: "Compare the same visible factors across pieces before deciding which one suits your use.",
+        heading: "How do freshwater pearls compare with other cultured types?",
+        answer: "Freshwater, Akoya, South Sea, and Tahitian cultured pearls differ by growing environment, mollusk, and typical appearance ranges.",
         paragraphs: [
-          "Consider placement, size, shape, luster, surface, tone, and the rest of the setting. A strand also adds matching between pearls as a separate visual consideration.",
+          "GIA identifies freshwater, Akoya, South Sea, and Tahitian as four major types of cultured whole pearls. Freshwater cultured pearls are generally grown in lakes and ponds, while Akoya, South Sea, and Tahitian cultured pearls are saltwater types.",
+          "These are broad type characteristics, not guarantees about an individual piece. Use the product record for any stated material or pearl identity, and compare its own gallery and dimensions before buying.",
         ],
-        bullets: [
-          "Placement and size",
-          "Shape and surface appearance",
-          "Luster and tone",
-          "Materials and current product details",
-        ],
+        table: {
+          headers: ["Cultured pearl type", "Growing environment", "Typical appearance described by GIA"],
+          rows: [
+            ["Freshwater", "Freshwater lakes and ponds", "A broad range of sizes, shapes, and colors"],
+            ["Akoya", "Saltwater", "Often white or cream and familiar in classic strands"],
+            ["South Sea", "Saltwater", "White to silver or golden, with generally larger sizes"],
+            ["Tahitian", "Saltwater", "Gray, black, or brown with varied overtones"],
+          ],
+        },
       },
       {
         id: "purchase-checks",
-        heading: "Purchase checks",
+        heading: "What should I check before buying pearl jewelry?",
         answer: "Use each product gallery as the exact visual reference for the item you are considering.",
         paragraphs: [
           "Compare the gallery, dimensions, materials, and care notes on the individual product page. Do not treat a general guide image as a substitute for the images attached to that product record.",

@@ -8,6 +8,12 @@ import { PEARL_GUIDES, PEARL_HUB_FAQ } from "../src/lib/editorial/guides";
 import { absoluteUrl } from "../src/lib/site";
 import { getProductType } from "../src/lib/storefront/catalog";
 
+function parseJsonLd(html: string): Array<Record<string, unknown>> {
+  return [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(
+    ([, value]) => JSON.parse(value) as Record<string, unknown>,
+  );
+}
+
 const EXPECTED_TITLES = {
   care: "How to Care for Pearl Jewelry | MythRealms",
   "how-to-wear": "How to Wear Pearl Jewelry | MythRealms",
@@ -18,6 +24,7 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
   test(`${slug} has exact canonical and social metadata`, async () => {
     const route = await import(`../src/app/pearls/${slug}/page`);
     const guide = PEARL_GUIDES[slug];
+    const published = (guide as typeof guide & { published?: string }).published;
     const canonical = absoluteUrl(`/pearls/${slug}`);
     const image = absoluteUrl(guide.image.src);
 
@@ -25,6 +32,10 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
     assert.equal(route.metadata.description, guide.description);
     assert.equal(route.metadata.alternates?.canonical, canonical);
     assert.equal(route.metadata.openGraph?.url, canonical);
+    assert.equal(
+      (route.metadata.openGraph as { publishedTime?: string } | undefined)?.publishedTime,
+      published,
+    );
     assert.match(JSON.stringify(route.metadata.openGraph?.images), new RegExp(image));
     assert.match(JSON.stringify(route.metadata.openGraph?.images), new RegExp(guide.image.alt));
     assert.equal((route.metadata.twitter as { card?: string } | undefined)?.card, "summary_large_image");
@@ -81,6 +92,42 @@ test("each guide opens with a 40-70 word direct answer", () => {
   }
 });
 
+test("guide registry records truthful publication and update dates separately", () => {
+  for (const guide of Object.values(PEARL_GUIDES)) {
+    const published = (guide as typeof guide & { published?: string }).published;
+    assert.equal(published, "2026-07-18", `${guide.slug}: published`);
+    assert.equal(guide.updated, "2026-07-18", `${guide.slug}: updated`);
+  }
+});
+
+test("every article section uses a clear user-question heading", () => {
+  for (const guide of Object.values(PEARL_GUIDES)) {
+    for (const section of guide.sections) {
+      assert.match(
+        section.heading,
+        /^(Are|Can|Do|How|Is|Should|What|When|Where|Which|Why)\b.*\?$/,
+        `${guide.slug}#${section.id}`,
+      );
+    }
+  }
+});
+
+test("guide pillars explicitly cover the approved care, styling, and pearl-type questions", () => {
+  const care = JSON.stringify(PEARL_GUIDES.care);
+  assert.match(care, /shower/i);
+  assert.match(care, /swim/i);
+
+  const styling = JSON.stringify(PEARL_GUIDES["how-to-wear"]);
+  assert.match(styling, /facial proportion/i);
+  assert.match(styling, /formal occasion/i);
+
+  const freshwater = JSON.stringify(PEARL_GUIDES["freshwater-pearls"]);
+  for (const pearlType of ["Akoya", "South Sea", "Tahitian"]) {
+    assert.match(freshwater, new RegExp(pearlType));
+  }
+  assert.match(freshwater, /https:\/\/www\.gia\.edu\/pearl-description/);
+});
+
 test("one selector returns 4-6 active in-stock products matching each guide", async () => {
   const guidesModule = await import("../src/lib/editorial/guides");
   const selector = (guidesModule as typeof guidesModule & {
@@ -101,12 +148,17 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
     const route = await import(`../src/app/pearls/${slug}/page`);
     const html = renderToStaticMarkup(createElement(route.default));
     const guide = PEARL_GUIDES[slug];
+    const published = (guide as typeof guide & { published?: string }).published;
+    const schemas = parseJsonLd(html);
+    const article = schemas.find((schema) => schema["@type"] === "Article");
+    const faq = schemas.find((schema) => schema["@type"] === "FAQPage");
 
     assert.equal((html.match(/<h1/g) ?? []).length, 1);
     assert.doesNotMatch(html, /<main/);
     assert.match(html, /Table of contents/);
     assert.match(html, /Frequently asked questions/);
     assert.match(html, /MythRealms Editorial/);
+    assert.match(html, /Published July 18, 2026/);
     assert.match(html, /Updated July 18, 2026/);
     assert.match(html, /rel="noopener noreferrer"/);
     assert.match(html, /Related guides/);
@@ -114,6 +166,18 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
     assert.match(html, /"@type":"Article"/);
     assert.match(html, /"@type":"BreadcrumbList"/);
     assert.match(html, /"@type":"FAQPage"/);
+    assert.ok(article);
+    assert.equal(article.headline, guide.title);
+    assert.equal(article.description, guide.directAnswer);
+    assert.equal(article.datePublished, published);
+    assert.equal(article.dateModified, guide.updated);
+    assert.ok(faq);
+    assert.deepEqual(
+      (faq.mainEntity as Array<{ name: string; acceptedAnswer: { text: string } }>).map(
+        ({ name, acceptedAnswer }) => ({ question: name, answer: acceptedAnswer.text }),
+      ),
+      guide.faq,
+    );
     for (const item of guide.faq) assert.match(html, new RegExp(item.answer.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   });
 }

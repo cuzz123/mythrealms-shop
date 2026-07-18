@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: guide.description,
     url: canonical,
     type: "article",
-    publishedTime: guide.updated,
+    publishedTime: guide.published,
     modifiedTime: guide.updated,
     images: [{ url: image, alt: guide.image.alt }],
   },
@@ -44,7 +44,7 @@ export default function PearlCarePage() {
   return (
     <div>
       <BreadcrumbJsonLd items={breadcrumbs.map((item) => ({ name: item.label, url: absoluteUrl(item.href) }))} />
-      <ArticleJsonLd title={guide.title} description={guide.directAnswer} url={canonical} image={image} datePublished={guide.updated} dateModified={guide.updated} />
+      <ArticleJsonLd title={guide.title} description={guide.directAnswer} url={canonical} image={image} datePublished={guide.published} dateModified={guide.updated} />
       <FAQPageJsonLd questions={guide.faq} />
       <GuideLayout breadcrumbs={breadcrumbs} guide={guide} relatedGuides={relatedGuides} relatedProducts={getRelatedGuideProducts(guide)} />
     </div>

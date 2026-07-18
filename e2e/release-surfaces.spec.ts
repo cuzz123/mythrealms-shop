@@ -1,6 +1,7 @@
 import { expect, test, type Locator } from "@playwright/test";
 
 import { PEARL_GUIDES, PEARL_HUB_FAQ } from "../src/lib/editorial/guides";
+import { absoluteUrl } from "../src/lib/site";
 
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
@@ -40,15 +41,19 @@ test.describe("release surfaces", () => {
   });
 
   test("pearl guide routes expose visible editorial and machine-readable contracts", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
     for (const guide of Object.values(PEARL_GUIDES)) {
+      const published = (guide as typeof guide & { published?: string }).published;
       await page.goto(`/pearls/${guide.slug}`);
       await expect(page.locator("h1")).toHaveCount(1);
       await expect(page.getByRole("heading", { level: 1, name: guide.title })).toBeVisible();
       await expect(page.locator("#main-content").getByText(guide.directAnswer, { exact: true })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Table of contents" })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Frequently asked questions" })).toBeVisible();
-      await expect(page.getByText("MythRealms Editorial", { exact: true })).toBeVisible();
-      await expect(page.getByText("Updated July 18, 2026", { exact: false })).toBeVisible();
+      const main = page.locator("#main-content");
+      await expect(main.getByText("MythRealms Editorial", { exact: true })).toBeVisible();
+      await expect(main.getByText("Published July 18, 2026", { exact: false })).toBeVisible();
+      await expect(main.getByText("Updated July 18, 2026", { exact: false })).toBeVisible();
       await expect(page.locator('a[href^="https://"][rel~="noopener"][rel~="noreferrer"]')).not.toHaveCount(0);
       await expect(page.getByRole("heading", { name: "Related products" })).toBeVisible();
       const productHrefs = await page.locator('#main-content a[href^="/products/"]').evaluateAll((links) => [...new Set(links.map((link) => link.getAttribute("href")))].filter(Boolean));
@@ -56,9 +61,51 @@ test.describe("release surfaces", () => {
       expect(productHrefs.length).toBeLessThanOrEqual(6);
       const schemas = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) => scripts.map((script) => JSON.parse(script.textContent || "{}")));
       for (const type of ["Article", "BreadcrumbList", "FAQPage"]) expect(schemas.some((schema) => schema["@type"] === type)).toBe(true);
+      const article = schemas.find((schema) => schema["@type"] === "Article");
+      expect(article).toMatchObject({
+        headline: guide.title,
+        description: guide.directAnswer,
+        image: absoluteUrl(guide.image.src),
+        url: absoluteUrl(`/pearls/${guide.slug}`),
+        datePublished: published,
+        dateModified: guide.updated,
+      });
+      const faq = schemas.find((schema) => schema["@type"] === "FAQPage");
+      expect(
+        faq.mainEntity.map((item: { name: string; acceptedAnswer: { text: string } }) => ({
+          question: item.name,
+          answer: item.acceptedAnswer.text,
+        })),
+      ).toEqual(guide.faq);
       await expectImagesLoaded(page.locator("#main-content img"));
       expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
     }
+  });
+
+  test("pearl knowledge and guides remain readable without JavaScript", async ({ browser }) => {
+    const context = await browser.newContext({
+      javaScriptEnabled: false,
+      viewport: { width: 390, height: 844 },
+    });
+    const page = await context.newPage();
+
+    await page.goto("/pearls");
+    await expect(page.getByRole("heading", { level: 1, name: "Pearl knowledge for choosing, wearing, and caring." })).toBeVisible();
+    for (const item of PEARL_HUB_FAQ) {
+      await expect(page.getByText(item.answer, { exact: true })).toBeVisible();
+    }
+
+    for (const guide of Object.values(PEARL_GUIDES)) {
+      await page.goto(`/pearls/${guide.slug}`);
+      await expect(page.getByRole("heading", { level: 1, name: guide.title })).toBeVisible();
+      await expect(page.getByText(guide.directAnswer, { exact: true })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Table of contents" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Frequently asked questions" })).toBeVisible();
+      await expect(page.getByText("Published July 18, 2026", { exact: false })).toBeVisible();
+      await expect(page.getByText("Updated July 18, 2026", { exact: false })).toBeVisible();
+    }
+
+    await context.close();
   });
 
   test("homepage preserves the approved editorial sequence and first-viewport style hint", async ({ page }) => {
