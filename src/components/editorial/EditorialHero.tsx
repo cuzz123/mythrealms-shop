@@ -25,7 +25,7 @@ export function EditorialHero({
 }: EditorialHeroProps) {
   return (
     <section
-      className="relative h-[min(680px,calc(100svh-7rem))] min-h-[480px] overflow-hidden bg-[#24312f] text-white"
+      className="relative h-[min(35rem,calc(100svh-13rem))] min-h-[30rem] overflow-hidden bg-[#24312f] text-white sm:h-[min(42rem,calc(100svh-12rem))] sm:min-h-[32rem]"
       aria-labelledby="editorial-hero-title"
     >
       <Image

@@ -28,6 +28,30 @@ test("editorial hero renders its image, heading, and optional actions", () => {
   assert.match(html, /href="\/collections\/pearl-series"/);
 });
 
+test("editorial hero reserves following-content space at common viewports", () => {
+  const html = renderToStaticMarkup(
+    createElement(EditorialHero, {
+      eyebrow: "Pearl Guide",
+      title: "Pearl Care",
+      description: "A direct answer about pearl care.",
+      image: { src: "/care.jpg", alt: "Pearls laid on a soft cloth" },
+    }),
+  );
+
+  assert.match(html, /h-\[min\(35rem,calc\(100svh-13rem\)\)\]/);
+  assert.match(html, /min-h-\[30rem\]/);
+  assert.match(html, /sm:h-\[min\(42rem,calc\(100svh-12rem\)\)\]/);
+  assert.match(html, /sm:min-h-\[32rem\]/);
+  assert.doesNotMatch(html, /680px/);
+
+  const fixedChromeHeight = 64 + 56;
+  const mobileFollowingContent = 800 - fixedChromeHeight - 35 * 16;
+  const desktopFollowingContent = 900 - fixedChromeHeight - 42 * 16;
+
+  assert.equal(mobileFollowingContent, 120);
+  assert.equal(desktopFollowingContent, 108);
+});
+
 test("guide layout keeps its visible editorial sections in the approved order", () => {
   const product = getStorefrontProducts()[0];
   assert.ok(product);
@@ -71,6 +95,8 @@ test("guide layout keeps its visible editorial sections in the approved order", 
   assert.match(html, /<table/);
   assert.match(html, /rel="noopener noreferrer"/);
   assert.match(html, new RegExp(`href="/products/${product.slug}"`));
+  assert.doesNotMatch(html, /路/);
+  assert.match(html, /aria-hidden="true"> \/ <\/span>/);
 });
 
 test("editorial link band renders exactly two image-led destinations", () => {

@@ -3,7 +3,7 @@ import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { JsonLd } from "../src/components/ui/JsonLd";
+import { JsonLd, ProductJsonLd } from "../src/components/ui/JsonLd";
 import {
   buildAboutPageSchema,
   buildArticleSchema,
@@ -105,6 +105,34 @@ test("product schema contains only verified commerce facts", () => {
   ]) {
     assert.equal(unsupportedClaim in schema, false);
   }
+});
+
+test("product schema cannot silently claim omitted availability", () => {
+  // @ts-expect-error Pure schema callers must supply verified availability.
+  const schema = buildProductSchema({
+    name: "Pearl Drop Earrings",
+    description: "Pearl drop earrings.",
+    images: ["https://example.com/product.jpg"],
+    price: 39.99,
+    currency: "USD",
+    url: "https://example.com/products/pearl-drop-earrings",
+  });
+
+  assert.equal("availability" in schema.offers, false);
+});
+
+test("ProductJsonLd preserves its legacy InStock default", () => {
+  const html = renderToStaticMarkup(
+    createElement(ProductJsonLd, {
+      name: "Pearl Drop Earrings",
+      description: "Pearl drop earrings.",
+      images: ["https://example.com/product.jpg"],
+      price: 39.99,
+      url: "https://example.com/products/pearl-drop-earrings",
+    }),
+  );
+
+  assert.match(html, /https:\/\/schema\.org\/InStock/);
 });
 
 test("breadcrumb and FAQ schema mirror supplied visible content", () => {

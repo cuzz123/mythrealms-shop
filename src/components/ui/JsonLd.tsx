@@ -23,8 +23,9 @@ export function JsonLd({ data }: { data: Record<string, unknown> }) {
   );
 }
 
-interface ProductSchemaProps extends ProductSchemaInput {
+interface ProductSchemaProps extends Omit<ProductSchemaInput, "availability"> {
   comparePrice?: number | null;
+  availability?: ProductSchemaInput["availability"];
 }
 
 export function ProductJsonLd({

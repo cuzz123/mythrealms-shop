@@ -33,7 +33,7 @@ export type ProductSchemaInput = Readonly<{
   price: number;
   currency?: string;
   sku?: string;
-  availability?: "InStock" | "OutOfStock";
+  availability: "InStock" | "OutOfStock";
   url: string;
   brand?: string;
   category?: string;
@@ -133,7 +133,9 @@ export function buildProductSchema(input: ProductSchemaInput) {
       url: input.url,
       priceCurrency: input.currency ?? "USD",
       price: input.price.toFixed(2),
-      availability: `https://schema.org/${input.availability ?? "InStock"}`,
+      ...(input.availability
+        ? { availability: `https://schema.org/${input.availability}` }
+        : {}),
       itemCondition: "https://schema.org/NewCondition",
     },
   } as const;

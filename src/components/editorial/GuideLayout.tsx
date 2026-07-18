@@ -177,7 +177,7 @@ export function GuideLayout({
         <footer className="mt-12 border-t border-[var(--border)] pt-7 text-sm leading-7 text-[var(--text-secondary)]">
           <p>
             By <span className="font-semibold text-[var(--text)]">{guide.author}</span>
-            <span aria-hidden="true"> · </span>
+            <span aria-hidden="true"> / </span>
             Updated {formatUpdatedDate(guide.updated)}
           </p>
           <div className="mt-4">
