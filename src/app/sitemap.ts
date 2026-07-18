@@ -7,7 +7,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: siteUrl, changeFrequency: "weekly", priority: 1 },
     { url: `${siteUrl}/collections/pearl-series`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/collections/new-arrivals`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/gifts`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/pearls`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/pearls/care`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${siteUrl}/pearls/how-to-wear`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${siteUrl}/pearls/freshwater-pearls`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/about`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/faq`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/contact`, changeFrequency: "monthly", priority: 0.6 },

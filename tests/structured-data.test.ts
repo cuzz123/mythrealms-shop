@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -121,7 +123,7 @@ test("product schema cannot silently claim omitted availability", () => {
   assert.equal("availability" in schema.offers, false);
 });
 
-test("ProductJsonLd preserves its legacy InStock default", () => {
+test("ProductJsonLd emits exactly one Product object with its legacy InStock default", () => {
   const html = renderToStaticMarkup(
     createElement(ProductJsonLd, {
       name: "Pearl Drop Earrings",
@@ -132,7 +134,18 @@ test("ProductJsonLd preserves its legacy InStock default", () => {
     }),
   );
 
+  assert.equal((html.match(/application\/ld\+json/g) || []).length, 1);
+  assert.equal((html.match(/"@type":"Product"/g) || []).length, 1);
   assert.match(html, /https:\/\/schema\.org\/InStock/);
+});
+
+test("the product page renders exactly one ProductJsonLd wrapper", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/products/[slug]/1688-product.tsx"),
+    "utf8",
+  );
+
+  assert.equal((source.match(/<ProductJsonLd\b/g) || []).length, 1);
 });
 
 test("breadcrumb and FAQ schema mirror supplied visible content", () => {

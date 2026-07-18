@@ -2,6 +2,13 @@
 
 import Script from "next/script";
 import { useState, useEffect } from "react";
+import { classifyReferralSource } from "@/lib/analytics/referral";
+
+const AI_REFERRAL_SESSION_KEY = "mythrealms-ai-referral-tracked";
+
+type AnalyticsWindow = Window & {
+  gtag?: (...args: unknown[]) => void;
+};
 
 export function Analytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
@@ -27,6 +34,21 @@ export function Analytics() {
     }
   }, []);
 
+  function reportAiReferral() {
+    try {
+      const source = classifyReferralSource(window.location.href);
+      if (!source || sessionStorage.getItem(AI_REFERRAL_SESSION_KEY)) return;
+
+      const gtag = (window as AnalyticsWindow).gtag;
+      if (!gtag) return;
+
+      sessionStorage.setItem(AI_REFERRAL_SESSION_KEY, "1");
+      gtag("event", "ai_referral", { source });
+    } catch {
+      // Storage or URL access can be unavailable in privacy-restricted contexts.
+    }
+  }
+
   if (!gaId && !pixelId && !pinterestId) return null;
   if (!consented) return null;
 
@@ -35,7 +57,7 @@ export function Analytics() {
       {gaId && (
         <>
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
-          <Script id="ga-init" strategy="afterInteractive">
+          <Script id="ga-init" strategy="afterInteractive" onReady={reportAiReferral}>
             {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}')`}
           </Script>
         </>

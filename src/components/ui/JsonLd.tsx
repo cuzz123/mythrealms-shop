@@ -1,6 +1,7 @@
 // JSON-LD structured data for search engines and answer engines.
 
 import { absoluteUrl, siteUrl } from "@/lib/site";
+import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
 import {
   buildArticleSchema,
   buildBreadcrumbListSchema,
@@ -8,7 +9,6 @@ import {
   buildOrganizationSchema,
   buildProductSchema,
   type ArticleSchemaInput,
-  type OrganizationSchemaInput,
   type ProductSchemaInput,
 } from "@/lib/seo/schema";
 
@@ -70,15 +70,7 @@ export function BreadcrumbJsonLd({ items }: BreadcrumbSchemaProps) {
   return <JsonLd data={buildBreadcrumbListSchema(items)} />;
 }
 
-type OrganizationJsonLdProps = Pick<
-  OrganizationSchemaInput,
-  "shippingService" | "returnPolicy"
->;
-
-export function OrganizationJsonLd({
-  shippingService,
-  returnPolicy,
-}: OrganizationJsonLdProps = {}) {
+export function OrganizationJsonLd() {
   return (
     <JsonLd
       data={buildOrganizationSchema({
@@ -94,8 +86,7 @@ export function OrganizationJsonLd({
           "Freshwater pearls",
         ],
         sameAs: ["https://instagram.com/mythrealms.shop"],
-        shippingService,
-        returnPolicy,
+        policyFacts: STORE_POLICY_FACTS,
       })}
     />
   );

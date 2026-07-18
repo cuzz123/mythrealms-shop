@@ -4,13 +4,30 @@ import path from "node:path";
 import test from "node:test";
 
 import { metadata as blogMetadata } from "../src/app/blog/page";
+import { GET as getLlmsText } from "../src/app/llms.txt/route";
+import robots from "../src/app/robots";
 import sitemap from "../src/app/sitemap";
 import { siteUrl } from "../src/lib/site";
 import { buildStorefrontFeedXml } from "../src/lib/storefront/feed";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
+import {
+  FOOTER_GROUPS,
+  HEADER_LINKS,
+  HEADER_MENUS,
+} from "../src/lib/storefront/navigation";
 
 const retiredLanguage =
-  /\bcrystals?\b|\bgemstones?\b|stones with intention|the serenity collection|balance\s*&\s*light|emotional balance/i;
+  /\bcrystals?\b|\bgemstones?\b|stones with intention|the serenity collection|balance\s*&\s*light|the intention stones|luxe collection|pearl\s*&\s*crystal|the archetypes|curated singles|emotional balance/i;
+
+const canonicalContentPaths = [
+  "/gifts",
+  "/collections/new-arrivals",
+  "/pearls",
+  "/pearls/care",
+  "/pearls/how-to-wear",
+  "/pearls/freshwater-pearls",
+  "/about",
+];
 
 test("the root layout does not force the homepage canonical onto every route", () => {
   const source = readFileSync(
@@ -46,8 +63,12 @@ test("the static sitemap includes all approved products and excludes the blog ar
   for (const product of getStorefrontProducts()) {
     assert.equal(urls.has(`${siteUrl}/products/${product.slug}`), true);
   }
+  for (const contentPath of canonicalContentPaths) {
+    assert.equal(urls.has(`${siteUrl}${contentPath}`), true);
+  }
   assert.equal([...urls].filter((url) => url.includes("/products/")).length, 45);
   assert.equal([...urls].some((url) => url.includes("/blog")), false);
+  assert.equal([...urls].some((url) => url.includes("?")), false);
 });
 
 test("the legacy blog is explicitly noindex", () => {
@@ -60,11 +81,59 @@ test("the legacy blog is explicitly noindex", () => {
   );
 });
 
-test("GEO guidance points to the canonical feed and not retired feeds", () => {
-  const llms = readFileSync(path.join(process.cwd(), "public/llms.txt"), "utf8");
-  assert.match(llms, /\/api\/feed(?:\s|$)/m);
+test("generated GEO guidance covers canonical sources and truth guardrails", async () => {
+  const response = getLlmsText();
+  const llms = await response.text();
+
+  assert.equal(response.headers.get("content-type"), "text/plain; charset=utf-8");
+  for (const resourcePath of [
+    "/collections/pearl-series",
+    "/collections/new-arrivals",
+    "/gifts",
+    "/about",
+    "/pearls",
+    "/pearls/care",
+    "/pearls/how-to-wear",
+    "/pearls/freshwater-pearls",
+    "/shipping",
+    "/refund",
+    "/contact",
+    "/sitemap.xml",
+    "/robots.txt",
+    "/api/feed",
+  ]) {
+    assert.match(llms, new RegExp(`${siteUrl}${resourcePath.replaceAll(".", "\\.")}`));
+  }
+  assert.match(llms, /The Pearl Edit/);
+  assert.match(llms, /product (?:gallery|images)/i);
+  assert.match(llms, /shape, luster, surface, tone, and size/i);
+  assert.match(llms, /medical/i);
+  assert.match(llms, /guaranteed emotional/i);
+  assert.match(llms, /most specific product, guide, collection, or policy page/i);
   assert.doesNotMatch(llms, /\/api\/feed\/(?:google|blog)/);
   assert.doesNotMatch(llms, retiredLanguage);
+  assert.equal(existsSync(path.join(process.cwd(), "public/llms.txt")), false);
+});
+
+test("navigation, sitemap, llms, and product feed reject retired positioning", async () => {
+  const navigation = JSON.stringify({ HEADER_MENUS, HEADER_LINKS, FOOTER_GROUPS });
+  const sitemapOutput = JSON.stringify(await sitemap());
+  const llms = await getLlmsText().text();
+  const feed = buildStorefrontFeedXml(siteUrl);
+
+  for (const surface of [navigation, sitemapOutput, llms, feed]) {
+    assert.doesNotMatch(surface, retiredLanguage);
+  }
+});
+
+test("the pearl collection page uses the pure collection schema builder", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/collections/[slug]/page.tsx"),
+    "utf8",
+  );
+
+  assert.match(source, /buildCollectionSchema\(/);
+  assert.doesNotMatch(source, /data=\{\{\s*"@context"/);
 });
 
 test("public SEO entry files contain no retired positioning", () => {
@@ -111,4 +180,21 @@ test("robots allows only the exact canonical product feed under api", () => {
     "utf8",
   );
   assert.match(source, /\/api\/feed\$/);
+
+  const rules = robots().rules;
+  assert.equal(Array.isArray(rules), true);
+  if (!Array.isArray(rules)) return;
+
+  const aiRule = rules[0];
+  const wildcardRule = rules[1];
+  assert.equal(Array.isArray(aiRule.userAgent), true);
+  assert.equal((aiRule.userAgent as string[]).includes("OAI-SearchBot"), true);
+  assert.equal((aiRule.userAgent as string[]).includes("OAI-AdsBot"), true);
+  assert.deepEqual(aiRule.allow, ["/", "/api/feed$"]);
+  assert.deepEqual(wildcardRule.allow, ["/", "/api/feed$"]);
+  assert.equal(wildcardRule.userAgent, "*");
+  for (const privatePath of ["/api/", "/admin/", "/account/", "/auth/", "/checkout/", "/studio/"]) {
+    assert.equal((aiRule.disallow as string[]).includes(privatePath), true);
+    assert.equal((wildcardRule.disallow as string[]).includes(privatePath), true);
+  }
 });

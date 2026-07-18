@@ -1,3 +1,5 @@
+import type { StorePolicyFacts } from "@/lib/storefront/policies";
+
 const SCHEMA_CONTEXT = "https://schema.org";
 const BRAND_NAME = "MythRealms";
 const EDITORIAL_AUTHOR = "MythRealms Editorial";
@@ -56,6 +58,7 @@ export type OrganizationSchemaInput = Readonly<{
   description?: string;
   knowsAbout?: readonly string[];
   sameAs?: readonly string[];
+  policyFacts?: StorePolicyFacts;
   shippingService?: VerifiedSchemaObject;
   returnPolicy?: VerifiedSchemaObject;
 }>;
@@ -170,6 +173,28 @@ export function buildFAQPageSchema(items: readonly FAQItem[]) {
 }
 
 export function buildOrganizationSchema(input: OrganizationSchemaInput) {
+  const baseUrl = input.url.replace(/\/+$/, "");
+  const shippingService = input.policyFacts
+    ? {
+        "@type": "ShippingService",
+        name: "MythRealms Standard Shipping",
+        url: `${baseUrl}/shipping`,
+        description: `${input.policyFacts.handlingBusinessDays.min}-${input.policyFacts.handlingBusinessDays.max} business-day handling, ${input.policyFacts.usStandardTransitBusinessDays.min}-${input.policyFacts.usStandardTransitBusinessDays.max} business-day US standard transit, and free shipping on orders over $${input.policyFacts.freeShippingThresholdUsd.toFixed(2)}.`,
+      }
+    : input.shippingService;
+  const returnPolicy = input.policyFacts
+    ? {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "US",
+        returnPolicyCategory:
+          "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: input.policyFacts.returnWindowDays,
+        returnMethod: input.policyFacts.returnMethod,
+        returnFees: input.policyFacts.defaultReturnFees,
+        merchantReturnLink: `${baseUrl}/refund`,
+      }
+    : input.returnPolicy;
+
   return {
     "@context": SCHEMA_CONTEXT,
     "@type": ["Organization", "OnlineStore"],
@@ -183,12 +208,13 @@ export function buildOrganizationSchema(input: OrganizationSchemaInput) {
       "@type": "ContactPoint",
       email: input.contactEmail,
       contactType: "customer service",
+      url: `${baseUrl}/contact`,
     },
-    ...(input.shippingService
-      ? { hasShippingService: { ...input.shippingService } }
+    ...(shippingService
+      ? { hasShippingService: { ...shippingService } }
       : {}),
-    ...(input.returnPolicy
-      ? { hasMerchantReturnPolicy: { ...input.returnPolicy } }
+    ...(returnPolicy
+      ? { hasMerchantReturnPolicy: { ...returnPolicy } }
       : {}),
   } as const;
 }
