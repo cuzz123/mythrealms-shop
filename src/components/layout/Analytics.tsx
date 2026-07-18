@@ -1,11 +1,12 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
   parseConsent,
+  requiresConsentReload,
   type ConsentState,
 } from "@/lib/analytics/consent";
 
@@ -14,14 +15,24 @@ export function Analytics() {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   const pinterestId = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID;
   const [consent, setConsent] = useState<ConsentState>({ analytics: false, marketing: false });
+  const previousConsent = useRef<ConsentState>({ analytics: false, marketing: false });
 
   useEffect(() => {
     const readConsent = () => {
+      let nextConsent: ConsentState;
+      let persisted = true;
+
       try {
-        setConsent(parseConsent(localStorage.getItem(CONSENT_STORAGE_KEY)));
+        nextConsent = parseConsent(localStorage.getItem(CONSENT_STORAGE_KEY));
       } catch {
-        setConsent(parseConsent(null));
+        nextConsent = parseConsent(null);
+        persisted = false;
       }
+
+      const previous = previousConsent.current;
+      previousConsent.current = nextConsent;
+      setConsent(nextConsent);
+      if (persisted && requiresConsentReload(previous, nextConsent)) window.location.reload();
     };
 
     const handleStorageChange = (event: StorageEvent) => {

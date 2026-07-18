@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Cookie, ShieldCheck } from "lucide-react";
+import { Cookie, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import {
   CONSENT_CHANGED_EVENT,
@@ -13,7 +13,7 @@ export function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookie-consent");
+    const consent = localStorage.getItem(CONSENT_STORAGE_KEY);
     if (!consent) {
       // Small delay so it doesn't flash on page load
       const timer = setTimeout(() => setVisible(true), 800);

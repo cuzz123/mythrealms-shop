@@ -18,8 +18,6 @@ export function parseConsent(raw: string | null): ConsentState {
     if (!value || typeof value !== "object") return noConsent();
 
     const consent = value as Record<string, unknown>;
-    if (consent.all === true) return { analytics: true, marketing: true };
-
     return {
       analytics: consent.analytics === true,
       marketing: consent.marketing === true,
@@ -27,6 +25,10 @@ export function parseConsent(raw: string | null): ConsentState {
   } catch {
     return noConsent();
   }
+}
+
+export function requiresConsentReload(previous: ConsentState, next: ConsentState): boolean {
+  return (previous.analytics && !next.analytics) || (previous.marketing && !next.marketing);
 }
 
 export function serializeConsent(level: "all" | "essential"): string {
