@@ -98,6 +98,17 @@ test.describe("storefront release flows", () => {
     await expect(styleRegion.getByRole("link", { name: "Pearl Eyewear Chains" })).toHaveAttribute("href", "/collections/pearl-series?type=eyewear-chains");
   });
 
+  test("homepage promotes only the approved editorial destinations", async ({ page }) => {
+    await page.goto("/");
+    const guides = page.getByRole("region", { name: "Editorial guides" });
+
+    await expect(guides.locator("article")).toHaveCount(2);
+    await expect(guides.locator('a[href="/gifts"]')).not.toHaveCount(0);
+    await expect(guides.locator('a[href="/pearls"]')).not.toHaveCount(0);
+    await expect(guides.locator('a[href="/pearls/care"]')).not.toHaveCount(0);
+    await expect(guides.locator('a[href="/pearls/how-to-wear"]')).not.toHaveCount(0);
+  });
+
   test("homepage reveal motion resolves and reduced motion stays visible", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.goto("/");
@@ -273,6 +284,15 @@ test.describe("storefront release flows", () => {
     await expect(thumbnails.first()).toHaveAttribute("aria-current", "true");
     await thumbnails.nth(1).click();
     await expect(thumbnails.nth(1)).toHaveAttribute("aria-current", "true");
+  });
+
+  test("product pages link to pearl learning guides", async ({ page }) => {
+    await page.goto("/products/pearl-series-01");
+    const guides = page.getByRole("region", { name: "Learn about your pearls" });
+
+    await expect(guides.getByRole("link", { name: "How to care for pearl jewelry" })).toHaveAttribute("href", "/pearls/care");
+    await expect(guides.getByRole("link", { name: "How to wear pearls" })).toHaveAttribute("href", "/pearls/how-to-wear");
+    await expect(guides.getByRole("link", { name: "What are freshwater pearls?" })).toHaveAttribute("href", "/pearls/freshwater-pearls");
   });
 
   test("footer exposes the centralized discovery and policy routes", async ({ page }) => {

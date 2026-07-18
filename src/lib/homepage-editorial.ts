@@ -48,6 +48,28 @@ export const HOMEPAGE_CATEGORY_LINKS = [
   { label: "Pearl Eyewear Chains", href: "/collections/pearl-series?type=eyewear-chains", image: HOMEPAGE_MEDIA.eyewear },
 ] as const;
 
+export const HOMEPAGE_EDITORIAL_LINKS = [
+  {
+    label: "Pearl Gift Guide",
+    title: "Choose by the way they wear it.",
+    copy: "Pearl gifts under $50 and $70, plus everyday and statement edits.",
+    href: "/gifts",
+    image: HOMEPAGE_MEDIA.earrings,
+  },
+  {
+    label: "Pearl Knowledge",
+    title: "Care, styling, and freshwater pearls.",
+    copy: "Straight answers for choosing and looking after pearl jewelry.",
+    href: "/pearls",
+    image: HOMEPAGE_MEDIA.seaside,
+    links: [
+      { label: "Pearl Guide", href: "/pearls" },
+      { label: "Pearl Care", href: "/pearls/care" },
+      { label: "How to Wear Pearls", href: "/pearls/how-to-wear" },
+    ],
+  },
+] as const;
+
 export function homepageEditorialSources(): string[] {
   return [...new Set(Object.values(HOMEPAGE_MEDIA).map(({ src }) => src))];
 }

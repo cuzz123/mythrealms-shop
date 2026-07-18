@@ -415,6 +415,23 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
               </div>
             )}
           </div>
+
+          <section className="mt-8" aria-labelledby="learn-about-your-pearls-title">
+            <h3 id="learn-about-your-pearls-title" className="font-serif text-xl font-medium text-[var(--text)]">
+              Learn about your pearls
+            </h3>
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold">
+              <Link href="/pearls/care" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">
+                How to care for pearl jewelry
+              </Link>
+              <Link href="/pearls/how-to-wear" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">
+                How to wear pearls
+              </Link>
+              <Link href="/pearls/freshwater-pearls" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">
+                What are freshwater pearls?
+              </Link>
+            </div>
+          </section>
         </div>
       </div>
 
