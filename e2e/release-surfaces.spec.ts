@@ -165,16 +165,32 @@ test.describe("release surfaces", () => {
     expect(robots).toContain("Allow: /api/feed$");
   });
 
-  test("about page uses loaded pearl imagery without horizontal overflow", async ({ page }) => {
+  test("Story about page shows its disclosure and loaded imagery without horizontal overflow", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/about");
     await expect(
-      page.getByRole("heading", { name: "One clear collection, centered on pearls." }),
+      page.getByRole("heading", { name: "Pearls, edited for real life." }),
     ).toBeVisible();
-    await expectImagesLoaded(page.locator("#main-content img"));
+    await expect(page.getByText(/some editorial images are digitally created/i)).toBeVisible();
+    const images = page.locator("#main-content img");
+    expect(await images.count()).toBeGreaterThanOrEqual(4);
+    await expectImagesLoaded(images);
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth),
     ).toBeLessThanOrEqual(0);
+  });
+
+  test("Story route issues a permanent redirect to about", async ({ page, request }) => {
+    const response = await request.get("/story", { maxRedirects: 0 });
+
+    expect(response.status()).toBe(308);
+    expect(response.headers().location).toBe("/about");
+
+    await page.goto("/story");
+    await expect(page).toHaveURL(/\/about$/);
+    await expect(
+      page.getByRole("heading", { name: "Pearls, edited for real life." }),
+    ).toBeVisible();
   });
 
   test("editorial and utility surfaces stay truthful and use valid landmarks", async ({ page }) => {
