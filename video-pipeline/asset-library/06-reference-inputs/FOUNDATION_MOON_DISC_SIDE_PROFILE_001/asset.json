@@ -1,8 +1,8 @@
-﻿{
+{
   "schema_version": "1.0",
   "id": "FOUNDATION_MOON_DISC_SIDE_PROFILE_001",
   "asset_type": "foundation_first_frame",
-  "status": "planned",
+  "status": "approved",
   "format": "9:16",
   "image_path": "image.png",
   "relationships": {
