@@ -63,4 +63,8 @@ Additional targeted validation result: all 13 target files parsed successfully a
 
 ## Commit
 
-Commit SHA: `51c370b8591b1368b16c0645910c0b36e409df81` (record commit before report-only amend)
+Commit SHA: `b00883e4a76b37687a05693ee1973a822a2c0f5e`
+
+## Correction
+
+Corrected the commit SHA above to match `git log` (`b00883e4a76b37687a05693ee1973a822a2c0f5e`). Focused text check passed: the corrected SHA is present and the superseded value is absent.
