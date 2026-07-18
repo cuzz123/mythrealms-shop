@@ -1,3 +1,9 @@
+import {
+  getProductType,
+  getStorefrontProducts,
+  type StorefrontProduct,
+} from "@/lib/storefront/catalog";
+
 export type GuideSlug = "care" | "how-to-wear" | "freshwater-pearls";
 
 export type GuideSection = Readonly<{
@@ -61,10 +67,10 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
     seoTitle: "How to Care for Pearl Jewelry",
     description: "A practical routine for wearing, cleaning, and storing pearl jewelry.",
     eyebrow: "Pearl Guide",
-    directAnswer: "Put pearls on after cosmetics, wipe them after wear, keep them dry, and store them separately.",
+    directAnswer: "Put pearls on after cosmetics, fragrance, and hair products. After wear, wipe the piece with a soft, clean cloth, keep it dry, and store it separately from harder jewelry. Avoid household cleaners and ultrasonic cleaning, and ask a qualified jeweler when a piece needs repair or deeper attention.",
     image: {
       src: "/images/brand/hero/pearl-bracelet-editorial.png",
-      alt: "Pearl bracelet on a model's wrist",
+      alt: "Gold wire pearl bracelet displayed on dark fabric",
       objectPosition: "center",
     },
     author: "MythRealms Editorial",
@@ -137,7 +143,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
     seoTitle: "How to Wear Pearl Jewelry",
     description: "A placement-first guide to combining pearl jewelry with daily outfits.",
     eyebrow: "Pearl Guide",
-    directAnswer: "Choose placement first, then scale, then neckline and outfit.",
+    directAnswer: "Choose where you want the pearl detail to sit first, then consider its scale against your neckline and outfit. Earrings bring the focus near the face, necklaces work with the line of a collar, and bracelets or rings add detail around everyday hand movement. Begin with one focal piece before adding another.",
     image: {
       src: "/images/brand/hero/pearl-earrings-editorial.png",
       alt: "Model wearing pearl earrings",
@@ -213,10 +219,10 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
     seoTitle: "What Are Freshwater Cultured Pearls?",
     description: "A plain-English overview of cultured freshwater pearls and the details to compare.",
     eyebrow: "Pearl Guide",
-    directAnswer: "Cultured freshwater pearls are formed in freshwater mollusks through a cultivation process, and natural variation is part of their appearance.",
+    directAnswer: "Cultured freshwater pearls form in freshwater mollusks after people begin the cultivation process. Their visible shape, luster, surface, and tone can vary naturally, so compare those characteristics piece by piece. For any item you are considering, use its own gallery, dimensions, materials, and care notes as the exact product reference.",
     image: {
       src: "/images/brand/hero/pearl-necklace-editorial.png",
-      alt: "Model wearing a pearl necklace",
+      alt: "Pearl necklace displayed on a black jewelry stand",
       objectPosition: "center",
     },
     author: "MythRealms Editorial",
@@ -284,3 +290,17 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
     ],
   },
 };
+
+export function getRelatedGuideProducts(
+  guide: Pick<PearlGuide, "relatedTypes">,
+  limit = 6,
+): StorefrontProduct[] {
+  return getStorefrontProducts()
+    .filter(
+      (product) =>
+        product.isActive &&
+        product.inStock &&
+        guide.relatedTypes.some((type) => type === getProductType(product)),
+    )
+    .slice(0, limit);
+}
