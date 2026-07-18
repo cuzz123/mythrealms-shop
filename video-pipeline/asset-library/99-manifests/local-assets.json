@@ -1,0 +1,383 @@
+{
+    "schema":  "mythrealms.local-assets.v1",
+    "updated_at":  "2026-07-18T17:50:08+00:00",
+    "assets":  [
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001",
+                       "title":  "暖金窗光花瓣珍珠耳环分镜 6s",
+                       "asset_type":  "storyboard-video",
+                       "status":  "available",
+                       "imported_at":  "2026-07-17T03:47:35+00:00",
+                       "library_path":  "10-storyboard-videos/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001",
+                       "origin":  {
+                                      "kind":  "file",
+                                      "path":  "D:\\Chrome_Download\\storyboard_6s_v2.mp4",
+                                      "size_bytes":  7640794,
+                                      "sha256":  "f999ff5488e691af84c1d6e226f5fe29d6a83ed6b8bee610fed687772c763d21"
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "storyboard_6s_v2.mp4",
+                                                "library_path":  "10-storyboard-videos/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001/source/storyboard_6s_v2.mp4",
+                                                "size_bytes":  7640794,
+                                                "sha256":  "f999ff5488e691af84c1d6e226f5fe29d6a83ed6b8bee610fed687772c763d21"
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "10-storyboard-videos/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001/Thumbnail.jpg",
+                                       "video":  "10-storyboard-videos/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001/Preview.mp4"
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001｜暖金窗光花瓣珍珠耳环分镜 6s.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_SEA_STAIR_LANDING_001",
+                       "title":  "临海石阶落点",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_SEA_STAIR_LANDING_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_SEA_STAIR_LANDING_001/image.png",
+                                      "size_bytes":  2630784,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_SEA_STAIR_LANDING_001/image.png",
+                                                "size_bytes":  2630784,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_SEA_STAIR_LANDING_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_SEA_STAIR_LANDING_001｜临海石阶落点.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_TERRACE_RAILING_001",
+                       "title":  "临海露台栏杆",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_TERRACE_RAILING_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_TERRACE_RAILING_001/image.png",
+                                      "size_bytes":  2219648,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_TERRACE_RAILING_001/image.png",
+                                                "size_bytes":  2219648,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_TERRACE_RAILING_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_TERRACE_RAILING_001｜临海露台栏杆.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_POOLSIDE_LOUNGER_EDGE_001",
+                       "title":  "池畔躺椅边缘",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_POOLSIDE_LOUNGER_EDGE_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_POOLSIDE_LOUNGER_EDGE_001/image.png",
+                                      "size_bytes":  3058411,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_POOLSIDE_LOUNGER_EDGE_001/image.png",
+                                                "size_bytes":  3058411,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_POOLSIDE_LOUNGER_EDGE_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_POOLSIDE_LOUNGER_EDGE_001｜池畔躺椅边缘.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_WATER_SIDE_STONE_LEDGE_001",
+                       "title":  "水边石台",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_WATER_SIDE_STONE_LEDGE_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_WATER_SIDE_STONE_LEDGE_001/image.png",
+                                      "size_bytes":  2612572,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_WATER_SIDE_STONE_LEDGE_001/image.png",
+                                                "size_bytes":  2612572,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_WATER_SIDE_STONE_LEDGE_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_WATER_SIDE_STONE_LEDGE_001｜水边石台.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_OLIVE_TREE_BENCH_001",
+                       "title":  "橄榄树长椅",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_OLIVE_TREE_BENCH_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_OLIVE_TREE_BENCH_001/image.png",
+                                      "size_bytes":  3238820,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_OLIVE_TREE_BENCH_001/image.png",
+                                                "size_bytes":  3238820,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_OLIVE_TREE_BENCH_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_OLIVE_TREE_BENCH_001｜橄榄树长椅.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_SUNSET_TERRACE_001",
+                       "title":  "日落露台",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_SUNSET_TERRACE_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_SUNSET_TERRACE_001/image.png",
+                                      "size_bytes":  2489010,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_SUNSET_TERRACE_001/image.png",
+                                                "size_bytes":  2489010,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_SUNSET_TERRACE_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_SUNSET_TERRACE_001｜日落露台.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_PLANTED_COURTYARD_PASSAGE_001",
+                       "title":  "植栽庭院通道",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_PLANTED_COURTYARD_PASSAGE_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_PLANTED_COURTYARD_PASSAGE_001/image.png",
+                                      "size_bytes":  3372635,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_PLANTED_COURTYARD_PASSAGE_001/image.png",
+                                                "size_bytes":  3372635,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_PLANTED_COURTYARD_PASSAGE_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_PLANTED_COURTYARD_PASSAGE_001｜植栽庭院通道.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_ROOFTOP_DOORWAY_001",
+                       "title":  "屋顶门洞",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_ROOFTOP_DOORWAY_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_ROOFTOP_DOORWAY_001/image.png",
+                                      "size_bytes":  2243483,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_ROOFTOP_DOORWAY_001/image.png",
+                                                "size_bytes":  2243483,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_ROOFTOP_DOORWAY_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_ROOFTOP_DOORWAY_001｜屋顶门洞.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_LIMESTONE_ARCH_SHADE_001",
+                       "title":  "石灰岩拱门阴影",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_LIMESTONE_ARCH_SHADE_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_LIMESTONE_ARCH_SHADE_001/image.png",
+                                      "size_bytes":  2769699,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_LIMESTONE_ARCH_SHADE_001/image.png",
+                                                "size_bytes":  2769699,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_LIMESTONE_ARCH_SHADE_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_LIMESTONE_ARCH_SHADE_001｜石灰岩拱门阴影.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_SEA_VIEW_CORRIDOR_001",
+                       "title":  "临海石廊",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_SEA_VIEW_CORRIDOR_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_SEA_VIEW_CORRIDOR_001/image.png",
+                                      "size_bytes":  2567674,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_SEA_VIEW_CORRIDOR_001/image.png",
+                                                "size_bytes":  2567674,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_SEA_VIEW_CORRIDOR_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_SEA_VIEW_CORRIDOR_001｜临海石廊.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_LINEN_WINDOW_CHAIR_001",
+                       "title":  "亚麻窗边",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_LINEN_WINDOW_CHAIR_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_LINEN_WINDOW_CHAIR_001/image.png",
+                                      "size_bytes":  2030719,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_LINEN_WINDOW_CHAIR_001/image.png",
+                                                "size_bytes":  2030719,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_LINEN_WINDOW_CHAIR_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_LINEN_WINDOW_CHAIR_001｜亚麻窗边.md"
+                   },
+                   {
+                       "schema":  "mythrealms.local-asset.v1",
+                       "id":  "SCENE_FOUNDATION_WHITE_WALL_MOVING_SHADE_001",
+                       "title":  "树影白墙通道",
+                       "asset_type":  "product-adapted-scene",
+                       "status":  "available",
+                       "imported_at":  "2026-07-18T17:50:08+00:00",
+                       "library_path":  "03-scenes/SCENE_FOUNDATION_WHITE_WALL_MOVING_SHADE_001",
+                       "origin":  {
+                                      "kind":  "generated",
+                                      "path":  "03-scenes/SCENE_FOUNDATION_WHITE_WALL_MOVING_SHADE_001/image.png",
+                                      "size_bytes":  2803538,
+                                      "sha256":  null
+                                  },
+                       "source_files":  [
+                                            {
+                                                "name":  "image.png",
+                                                "library_path":  "03-scenes/SCENE_FOUNDATION_WHITE_WALL_MOVING_SHADE_001/image.png",
+                                                "size_bytes":  2803538,
+                                                "sha256":  null
+                                            }
+                                        ],
+                       "preview":  {
+                                       "thumbnail":  "03-scenes/SCENE_FOUNDATION_WHITE_WALL_MOVING_SHADE_001/image.png",
+                                       "video":  null
+                                   },
+                       "project_snapshot":  null,
+                       "obsidian_card":  "01-资产卡/SCENE_FOUNDATION_WHITE_WALL_MOVING_SHADE_001｜树影白墙通道.md"
+                   }
+               ]
+}
