@@ -6,8 +6,8 @@
 
 **上传图片与职责：**
 
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：首帧、石灰岩露台、白亚麻、浅木桌、远海空间。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟与浅木桌材质。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：首帧、石灰岩露台、白亚麻、浅木桌、远海空间。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟与浅木桌材质。
 
 **提示词：**
 
@@ -17,8 +17,8 @@
 
 **上传图片与职责：**
 
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：桌面、光线、空间。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟、木桌与纸本材质。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：桌面、光线、空间。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟、木桌与纸本材质。
 
 **提示词：**
 
@@ -28,9 +28,9 @@
 
 **上传图片与职责：**
 
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-reverse-v1.png`：反打空间、门洞、亚麻帘、晨光。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\turnaround-v1.png`：模特身份、卷发与比例。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\motion-contacts-v1.png`：自然入座与端杯节奏。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-reverse-v1.png`：反打空间、门洞、亚麻帘、晨光。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\turnaround-v1.png`：模特身份、卷发与比例。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\motion-contacts-v1.png`：自然入座与端杯节奏。
 
 **提示词：**
 
@@ -40,9 +40,9 @@
 
 **上传图片与职责：**
 
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：海岸空间、桌面与远海。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷、浅木与亚麻材质。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\turnaround-v1.png`：人物仅作背景身份。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：海岸空间、桌面与远海。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷、浅木与亚麻材质。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\turnaround-v1.png`：人物仅作背景身份。
 
 **提示词：**
 
@@ -52,9 +52,9 @@
 
 **上传图片与职责：**
 
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-reverse-v1.png`：人物所在的门洞、帘幕、晨光。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\turnaround-v1.png`：人物身份和无首饰服装。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\expressions-v1.png`：平静、不看镜头的表情。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-reverse-v1.png`：人物所在的门洞、帘幕、晨光。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\turnaround-v1.png`：人物身份和无首饰服装。
+- `D:\mythrealms-shop\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_BREAKFAST_001\source\expressions-v1.png`：平静、不看镜头的表情。
 
 **提示词：**
 
@@ -64,8 +64,8 @@
 
 **上传图片与职责：**
 
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：海岸晨光、桌布、白瓷碟与木桌。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟、木桌和亚麻。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：海岸晨光、桌布、白瓷碟与木桌。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟、木桌和亚麻。
 - `D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-jade-bracelet\main.jpg`：项链唯一结构依据；只控制异形珍珠、雾绿椭圆玉石、细金色扣链与比例，不控制黑色背景、木圈和原图文字。
 
 **提示词：**
@@ -76,7 +76,7 @@
 
 **上传图片与职责：**
 
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟与浅木桌材质。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟与浅木桌材质。
 - `D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-jade-bracelet\main.jpg`：珍珠、雾绿玉石、金色链扣的唯一结构依据。
 
 **提示词：**
@@ -87,8 +87,8 @@
 
 **上传图片与职责：**
 
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：露台、远海、白亚麻与晨光。
-- `D:\mythrealms-shop\.worktrees\pearl-jade-coastal-breakfast\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟、木桌与亚麻材质。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_BREAKFAST_TERRACE_001\source\coastal-breakfast-panorama-v1.png`：露台、远海、白亚麻与晨光。
+- `D:\mythrealms-shop\video-pipeline\asset-library\03-scene-kits\PROP_MR_COASTAL_BREAKFAST_SET_001\source\turnaround-v1.png`：白瓷碟、木桌与亚麻材质。
 - `D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-jade-bracelet\main.jpg`：完整项链结构唯一依据。
 
 **提示词：**
