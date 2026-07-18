@@ -1,0 +1,19 @@
+﻿{
+  "schema_version": "1.0",
+  "id": "FOUNDATION_MOON_DISC_SIDE_PROFILE_001",
+  "asset_type": "foundation_first_frame",
+  "status": "planned",
+  "format": "9:16",
+  "image_path": "image.png",
+  "relationships": {
+    "character_id": "CHAR_FOUNDATION_MOON_DISC_001",
+    "scene_id": "SCENE_FOUNDATION_MEDITERRANEAN_SEA_TERRACE_001",
+    "product_id": "PROD_FOUNDATION_MOON_DISC_001",
+    "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001"
+  },
+  "i2v": {
+    "mode": "I2V",
+    "duration_seconds": 4,
+    "prompt_zh": "@Image1为首帧，严格保持可见首帧中的人物、圆贝壳耳坠、服装与海畔露台。4秒内模特只将头发别到耳后一次，镜头缓慢横向滑动；不得出现额外首饰、重复肢体、产品替换、文字、标志或水印。"
+  }
+}
