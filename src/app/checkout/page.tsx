@@ -10,6 +10,7 @@ import { LazyImage } from "@/components/ui/LazyImage";
 import Link from "next/link";
 import { Loader2, Tag, Check, AlertCircle } from "lucide-react";
 import toast from "react-hot-toast";
+import { trackBeginCheckout } from "@/lib/tracking";
 
 const COUNTRY_NAMES: Record<string, string> = { US:"United States",GB:"United Kingdom",CA:"Canada",AU:"Australia",DE:"Germany",FR:"France",JP:"Japan",SG:"Singapore",IT:"Italy",ES:"Spain",NL:"Netherlands",SE:"Sweden",NO:"Norway",DK:"Denmark",FI:"Finland",CH:"Switzerland",AT:"Austria",BE:"Belgium",IE:"Ireland",NZ:"New Zealand",KR:"South Korea",HK:"Hong Kong",TW:"Taiwan",MY:"Malaysia",TH:"Thailand",PH:"Philippines",ID:"Indonesia",IN:"India",BR:"Brazil",MX:"Mexico",AE:"United Arab Emirates",SA:"Saudi Arabia",IL:"Israel",PT:"Portugal",PL:"Poland" };
 const COUNTRY_CODES: Record<string, string> = Object.fromEntries(Object.entries(COUNTRY_NAMES).map(([k,v]) => [v,k]));
@@ -105,6 +106,20 @@ export default function CheckoutPage() {
   const shipping = subtotal() >= 69.99 ? 0 : 4.99;
   const discountedSubtotal = Math.max(0, subtotal() - (discountInfo?.discount ?? 0));
   const total = discountedSubtotal + shipping;
+  const checkoutTracked = useRef(false);
+
+  useEffect(() => {
+    if (checkoutTracked.current || items.length === 0) return;
+    checkoutTracked.current = true;
+    trackBeginCheckout(
+      items.map(({ product, quantity }) => ({
+        ...product,
+        quantity,
+        variant: product.variantName,
+      })),
+      total,
+    );
+  }, [items, total]);
 
   // Re-validate discounts whenever the cart contents change so totals stay correct
   const itemsKey = items.map((i) => `${i.product.id}:${i.product.variantId ?? ""}:${i.quantity}`).join("|");

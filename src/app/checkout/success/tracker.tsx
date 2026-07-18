@@ -2,18 +2,15 @@
 
 import { useEffect } from "react";
 
+import { CONSENT_CHANGED_EVENT } from "@/lib/analytics/consent";
+import { purchaseStorageKey, trackPurchase } from "@/lib/tracking";
+
 interface TrackItem {
   id: string;
   name: string;
   quantity: number;
   price: number;
 }
-
-type MarketingWindow = Window & {
-  gtag?: (...args: unknown[]) => void;
-  fbq?: (...args: unknown[]) => void;
-  pintrk?: (...args: unknown[]) => void;
-};
 
 export function SuccessTracker({
   orderId,
@@ -26,28 +23,48 @@ export function SuccessTracker({
 }) {
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const w = window as MarketingWindow;
+    const key = purchaseStorageKey(orderId);
+    let listening = false;
 
-    if (w.gtag) {
-      w.gtag("event", "purchase", {
-        transaction_id: orderId,
-        currency: "USD",
-        value,
-        items: items?.map((i) => ({
-          item_id: i.id,
-          item_name: i.name,
-          quantity: i.quantity,
-          price: i.price,
-        })),
-      });
+    const stopListening = () => {
+      if (!listening) return;
+      window.removeEventListener(CONSENT_CHANGED_EVENT, attemptPurchaseTracking);
+      listening = false;
+    };
+
+    const attemptPurchaseTracking = () => {
+      try {
+        if (localStorage.getItem(key) !== null) {
+          stopListening();
+          return;
+        }
+      } catch {
+        return;
+      }
+
+      if (!trackPurchase(orderId, value, items ?? [])) return;
+
+      try {
+        localStorage.setItem(key, "true");
+        stopListening();
+      } catch {
+        // The event was accepted, but storage is unavailable for cross-refresh deduplication.
+      }
+    };
+
+    attemptPurchaseTracking();
+
+    try {
+      if (localStorage.getItem(key) === null) {
+        window.addEventListener(CONSENT_CHANGED_EVENT, attemptPurchaseTracking);
+        listening = true;
+      }
+    } catch {
+      // Storage access failed closed above, so there is nothing to retry.
     }
-    if (w.fbq) {
-      w.fbq("track", "Purchase", { currency: "USD", value });
-    }
-    if (w.pintrk) {
-      w.pintrk("track", "checkout", { value, currency: "USD", order_id: orderId });
-    }
-  }, [orderId, value]);
+
+    return stopListening;
+  }, [items, orderId, value]);
 
   return null;
 }
