@@ -179,7 +179,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
       <button
         type="button"
         onClick={handleQuickAdd}
-        className="absolute bottom-[72px] right-3 z-10 flex h-9 w-9 translate-y-2 cursor-pointer items-center justify-center rounded-full bg-white/90 text-[var(--text)] opacity-0 shadow-md backdrop-blur-sm transition-[opacity,transform] duration-200 hover:bg-white hover:text-[var(--primary)] group-hover:translate-y-0 group-hover:opacity-100 max-sm:translate-y-0 max-sm:bg-[var(--accent)] max-sm:text-[var(--bg)] max-sm:opacity-100 max-sm:hover:bg-[var(--accent-hover)]"
+        className="absolute bottom-[72px] right-3 z-10 flex h-9 w-9 translate-y-2 cursor-pointer items-center justify-center rounded-full bg-white/90 text-[var(--text)] opacity-0 shadow-md backdrop-blur-sm transition-[opacity,transform] duration-200 hover:bg-white hover:text-[var(--primary)] group-hover:translate-y-0 group-hover:opacity-100 max-sm:bottom-auto max-sm:top-14 max-sm:translate-y-0 max-sm:bg-[var(--accent)] max-sm:text-[var(--bg)] max-sm:opacity-100 max-sm:hover:bg-[var(--accent-hover)]"
         aria-label={`Add ${product.name} to cart`}
       >
         <ShoppingBag className="h-4 w-4" />
