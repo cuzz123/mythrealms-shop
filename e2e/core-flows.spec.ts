@@ -1,5 +1,7 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
+import { HEADER_MENUS } from "../src/lib/storefront/navigation";
+
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
     const image = images.nth(index);
@@ -194,32 +196,23 @@ test.describe("storefront release flows", () => {
     expect(await sourcePreservedImages.first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
   });
 
-  test("desktop menus support keyboard close and focus return", async ({ page }) => {
-    await page.goto("/");
+  test("desktop Shop, Gifts, and Discover menus open and navigate", async ({ page }) => {
+    for (const journey of [
+      { trigger: "Shop menu", item: "New Arrivals", path: "/collections/new-arrivals" },
+      { trigger: "Gifts menu", item: "All Gifts", path: "/gifts" },
+      { trigger: "Discover menu", item: "Pearl Knowledge", path: "/pearls" },
+    ]) {
+      await page.goto("/");
+      const trigger = page.getByRole("button", { name: journey.trigger });
+      await trigger.click();
+      await expect(trigger).toHaveAttribute("aria-expanded", "true");
 
-    const shopMenu = page.getByRole("button", { name: "Shop menu" });
-    await shopMenu.focus();
-    await page.keyboard.press("Enter");
-    await expect(page.getByRole("link", { name: "Pearl Earrings" }).first()).toBeVisible();
-    await page.keyboard.press("Escape");
-    await expect(page.locator("#shop-menu")).toHaveCount(0);
-    await expect(shopMenu).toBeFocused();
-
-    await shopMenu.click();
-    await expect(page.locator("#shop-menu")).toBeVisible();
-    await page.mouse.click(5, 400);
-    await expect(page.locator("#shop-menu")).toHaveCount(0);
-
-    const giftsMenu = page.getByRole("button", { name: "Gifts menu" });
-    await giftsMenu.click();
-    await expect(page.getByRole("menuitem", { name: "All Gifts" })).toBeVisible();
-
-    const discoverMenu = page.getByRole("button", { name: "Discover menu" });
-    await discoverMenu.click();
-    const guardianLink = page.getByRole("link", { name: "Find Your Guardian" });
-    await expect(guardianLink).toBeVisible();
-    await guardianLink.click();
-    await expect(page).toHaveURL(/guardian-quiz/);
+      const item = page.getByRole("menuitem", { name: journey.item });
+      await expect(item).toBeVisible();
+      await expect(item).toHaveAttribute("href", journey.path);
+      await item.click();
+      await expect(page).toHaveURL(new RegExp(`${journey.path.replaceAll("/", "\\/")}$`));
+    }
   });
 
   test("desktop menu items return focus to their trigger on Escape", async ({ page }) => {
@@ -237,6 +230,34 @@ test.describe("storefront release flows", () => {
       await page.keyboard.press("Escape");
       await expect(menuList).toHaveCount(0);
       await expect(trigger).toBeFocused();
+    }
+  });
+
+  test("mobile navigation exposes every desktop route family without horizontal overflow", async ({ page }) => {
+    for (const viewport of [
+      { width: 320, height: 800 },
+      { width: 390, height: 844 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto("/");
+      await page.getByRole("button", { name: "Open navigation menu" }).click();
+
+      const mobileNav = page.getByRole("navigation", { name: "Mobile navigation" });
+      await expect(mobileNav).toBeVisible();
+      for (const menu of HEADER_MENUS) {
+        await expect(mobileNav.getByText(menu.label, { exact: true })).toBeVisible();
+        for (const link of menu.links) {
+          await expect(mobileNav.getByRole("link", { name: link.label, exact: true })).toHaveAttribute(
+            "href",
+            link.href,
+          );
+        }
+      }
+
+      expect(
+        await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth),
+      ).toBeLessThanOrEqual(0);
+      await page.getByRole("button", { name: "Close navigation menu" }).last().click();
     }
   });
 

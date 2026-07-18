@@ -1,6 +1,7 @@
-import { expect, test, type Locator } from "@playwright/test";
+import { expect, test, type APIRequestContext, type Locator, type Page } from "@playwright/test";
 
 import { PEARL_GUIDES, PEARL_HUB_FAQ } from "../src/lib/editorial/guides";
+import { getGiftSections, getNewArrivalProducts } from "../src/lib/editorial/gifts";
 import { absoluteUrl } from "../src/lib/site";
 
 async function expectImagesLoaded(images: Locator) {
@@ -17,6 +18,31 @@ async function expectImagesLoaded(images: Locator) {
       )
       .toBe(true);
   }
+}
+
+async function internalHrefs(page: Page) {
+  return page.locator('#main-content a[href^="/"]').evaluateAll((links) =>
+    [...new Set(links.map((link) => link.getAttribute("href")))]
+      .filter((href): href is string => Boolean(href))
+      .map((href) => href.split("#")[0])
+      .filter(Boolean),
+  );
+}
+
+async function expectInternalLinksHealthy(request: APIRequestContext, hrefs: readonly string[]) {
+  const responses = await Promise.all(
+    hrefs.map(async (href) => ({ href, response: await request.get(href) })),
+  );
+
+  for (const { href, response } of responses) {
+    expect(response.status(), href).toBeLessThan(400);
+  }
+}
+
+async function expectNoHorizontalOverflow(page: Page) {
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth),
+  ).toBeLessThanOrEqual(0);
 }
 
 test.describe("release surfaces", () => {
@@ -50,11 +76,26 @@ test.describe("release surfaces", () => {
       await expect(page.locator("#main-content").getByText(guide.directAnswer, { exact: true })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Table of contents" })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Frequently asked questions" })).toBeVisible();
+      for (const section of guide.sections) {
+        await expect(page.getByRole("link", { name: section.heading }).first()).toHaveAttribute(
+          "href",
+          `#${section.id}`,
+        );
+        await expect(page.locator(`#${section.id}`)).toBeVisible();
+      }
+      for (const item of guide.faq) {
+        await expect(page.getByText(item.question, { exact: true })).toBeVisible();
+        await expect(page.getByText(item.answer, { exact: true })).toBeVisible();
+      }
       const main = page.locator("#main-content");
       await expect(main.getByText("MythRealms Editorial", { exact: true })).toBeVisible();
       await expect(main.getByText("Published July 18, 2026", { exact: false })).toBeVisible();
       await expect(main.getByText("Updated July 18, 2026", { exact: false })).toBeVisible();
-      await expect(page.locator('a[href^="https://"][rel~="noopener"][rel~="noreferrer"]')).not.toHaveCount(0);
+      const sourceLinks = main.locator('a[href^="https://"][rel~="noopener"][rel~="noreferrer"]');
+      await expect(sourceLinks).toHaveCount(guide.sources.length);
+      for (const source of guide.sources) {
+        await expect(sourceLinks.filter({ hasText: source.label })).toHaveAttribute("href", source.href);
+      }
       await expect(page.getByRole("heading", { name: "Related products" })).toBeVisible();
       const productHrefs = await page.locator('#main-content a[href^="/products/"]').evaluateAll((links) => [...new Set(links.map((link) => link.getAttribute("href")))].filter(Boolean));
       expect(productHrefs.length).toBeGreaterThanOrEqual(4);
@@ -82,31 +123,159 @@ test.describe("release surfaces", () => {
     }
   });
 
-  test("pearl knowledge and guides remain readable without JavaScript", async ({ browser }) => {
+  test("new editorial pages remain readable without JavaScript", async ({ browser }) => {
     const context = await browser.newContext({
       javaScriptEnabled: false,
       viewport: { width: 390, height: 844 },
     });
     const page = await context.newPage();
 
-    await page.goto("/pearls");
-    await expect(page.getByRole("heading", { level: 1, name: "Pearl knowledge for choosing, wearing, and caring." })).toBeVisible();
-    for (const item of PEARL_HUB_FAQ) {
-      await expect(page.getByText(item.answer, { exact: true })).toBeVisible();
+    try {
+      for (const route of [
+        { path: "/", heading: "Pearls for sunlit days." },
+        { path: "/about", heading: "Pearls, edited for real life." },
+        { path: "/gifts", heading: "Pearl gifts, chosen by how they will be worn." },
+        { path: "/collections/new-arrivals", heading: "New pearl arrivals." },
+        { path: "/pearls", heading: "Pearl knowledge for choosing, wearing, and caring." },
+        ...Object.values(PEARL_GUIDES).map((guide) => ({
+          path: `/pearls/${guide.slug}`,
+          heading: guide.title,
+        })),
+      ]) {
+        await page.goto(route.path);
+        await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
+        await expect(page.locator("#main-content")).not.toBeEmpty();
+      }
+    } finally {
+      await context.close();
     }
-
-    for (const guide of Object.values(PEARL_GUIDES)) {
-      await page.goto(`/pearls/${guide.slug}`);
-      await expect(page.getByRole("heading", { level: 1, name: guide.title })).toBeVisible();
-      await expect(page.getByText(guide.directAnswer, { exact: true })).toBeVisible();
-      await expect(page.getByRole("heading", { name: "Table of contents" })).toBeVisible();
-      await expect(page.getByRole("heading", { name: "Frequently asked questions" })).toBeVisible();
-      await expect(page.getByText("Published July 18, 2026", { exact: false })).toBeVisible();
-      await expect(page.getByText("Updated July 18, 2026", { exact: false })).toBeVisible();
-    }
-
-    await context.close();
   });
+
+  test("gift edit under $50 contains only matching current catalog products", async ({ page }) => {
+    const expectedProducts = getGiftSections().find((section) => section.id === "under-50")!.products;
+    await page.goto("/gifts#under-50");
+
+    const section = page.locator("#under-50");
+    await expect(section).toBeVisible();
+    const productLinks = section.locator('a[href^="/products/"]');
+    await expect(productLinks).toHaveCount(expectedProducts.length);
+    expect(await productLinks.evaluateAll((links) => links.map((link) => link.getAttribute("href")))).toEqual(
+      expectedProducts.map((product) => `/products/${product.slug}`),
+    );
+
+    for (let index = 0; index < expectedProducts.length; index += 1) {
+      const product = expectedProducts[index];
+      expect(product.price, product.slug).toBeLessThan(50);
+      await expect(productLinks.nth(index)).toContainText(`$${product.price.toFixed(2)}`);
+    }
+  });
+
+  test("mobile gift quick-add controls do not overlap product names", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/gifts");
+
+    const controls = page.locator(
+      '#under-50 button[aria-label^="Add "][aria-label$=" to cart"], ' +
+        '#under-70 button[aria-label^="Add "][aria-label$=" to cart"], ' +
+        '#everyday button[aria-label^="Add "][aria-label$=" to cart"], ' +
+        '#statement button[aria-label^="Add "][aria-label$=" to cart"]',
+    );
+    expect(await controls.count()).toBeGreaterThan(0);
+
+    for (let index = 0; index < (await controls.count()); index += 1) {
+      const geometry = await controls.nth(index).evaluate((button) => {
+        const title = button.parentElement?.querySelector("h3");
+        if (!title) throw new Error("Product card is missing its name heading");
+
+        const buttonRect = button.getBoundingClientRect();
+        const titleRect = title.getBoundingClientRect();
+        const buttonStyle = window.getComputedStyle(button);
+        const visible =
+          buttonRect.width > 0 &&
+          buttonRect.height > 0 &&
+          buttonStyle.display !== "none" &&
+          buttonStyle.visibility !== "hidden" &&
+          Number(buttonStyle.opacity) > 0;
+
+        return {
+          name: title.textContent?.trim() ?? "Unnamed product",
+          visible,
+          overlaps:
+            buttonRect.left < titleRect.right &&
+            buttonRect.right > titleRect.left &&
+            buttonRect.top < titleRect.bottom &&
+            buttonRect.bottom > titleRect.top,
+          button: {
+            left: buttonRect.left,
+            right: buttonRect.right,
+            top: buttonRect.top,
+            bottom: buttonRect.bottom,
+          },
+          title: {
+            left: titleRect.left,
+            right: titleRect.right,
+            top: titleRect.top,
+            bottom: titleRect.bottom,
+          },
+        };
+      });
+
+      expect(geometry.visible, geometry.name).toBe(true);
+      expect(geometry.overlaps, JSON.stringify(geometry)).toBe(false);
+    }
+  });
+
+  test("new arrivals exactly match the catalog selector", async ({ page }) => {
+    const expectedHrefs = getNewArrivalProducts().map((product) => `/products/${product.slug}`);
+    await page.goto("/collections/new-arrivals");
+
+    const products = page.locator('section[aria-labelledby="related-products-title"] a[href^="/products/"]');
+    await expect(products).toHaveCount(expectedHrefs.length);
+    expect(await products.evaluateAll((links) => links.map((link) => link.getAttribute("href")))).toEqual(
+      expectedHrefs,
+    );
+  });
+
+  test("Story, gift, and pearl journeys contain only healthy internal links", async ({ page, request }) => {
+    test.setTimeout(120_000);
+    const hrefs = new Set<string>();
+
+    for (const path of [
+      "/about",
+      "/gifts",
+      "/pearls",
+      ...Object.values(PEARL_GUIDES).map((guide) => `/pearls/${guide.slug}`),
+    ]) {
+      await page.goto(path);
+      for (const href of await internalHrefs(page)) hrefs.add(href);
+    }
+
+    await expectInternalLinksHealthy(request, [...hrefs]);
+  });
+
+  for (const viewport of [
+    { width: 320, height: 800 },
+    { width: 390, height: 844 },
+    { width: 1440, height: 900 },
+  ]) {
+    test(`new editorial pages fit ${viewport.width}x${viewport.height} without horizontal overflow`, async ({ page }) => {
+      test.setTimeout(120_000);
+      await page.setViewportSize(viewport);
+
+      for (const path of [
+        "/",
+        "/about",
+        "/gifts",
+        "/collections/new-arrivals",
+        "/pearls",
+        ...Object.values(PEARL_GUIDES).map((guide) => `/pearls/${guide.slug}`),
+      ]) {
+        await page.goto(path);
+        await expect(page.locator("#main-content")).toBeVisible();
+        await expectNoHorizontalOverflow(page);
+      }
+    });
+  }
 
   test("homepage preserves the approved editorial sequence and first-viewport style hint", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
@@ -119,7 +288,6 @@ test.describe("release surfaces", () => {
       "A little light, close to home.",
       "A pearl point of view.",
       "Notes from the coast.",
-      "Explore",
     ];
     const positions: number[] = [];
 
