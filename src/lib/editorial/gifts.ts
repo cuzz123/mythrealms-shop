@@ -92,3 +92,17 @@ export function getGiftSections(): GiftSection[] {
     },
   ];
 }
+
+export function getUniqueGiftProducts(
+  sections: readonly Pick<GiftSection, "products">[],
+): StorefrontProduct[] {
+  const seenSlugs = new Set<string>();
+
+  return sections.flatMap(({ products }) =>
+    products.filter(({ slug }) => {
+      if (seenSlugs.has(slug)) return false;
+      seenSlugs.add(slug);
+      return true;
+    }),
+  );
+}
