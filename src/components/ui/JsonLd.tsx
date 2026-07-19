@@ -13,6 +13,43 @@ export function JsonLd({ data }: { data: Record<string, unknown> }) {
   );
 }
 
+interface BlogPostingDataProps {
+  headline: string;
+  description: string;
+  url: string;
+  image?: string;
+  datePublished: Date;
+  dateModified: Date;
+  authorName: string;
+}
+
+export function buildBlogPostingData({
+  headline,
+  description,
+  url,
+  image,
+  datePublished,
+  dateModified,
+  authorName,
+}: BlogPostingDataProps): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org/",
+    "@type": "BlogPosting",
+    headline,
+    description,
+    ...(image ? { image } : {}),
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    datePublished: datePublished.toISOString(),
+    dateModified: dateModified.toISOString(),
+    author: { "@type": "Person", name: authorName },
+    publisher: { "@type": "Organization", name: "MythRealms" },
+  };
+}
+
+export function BlogPostingJsonLd(props: BlogPostingDataProps) {
+  return <JsonLd data={buildBlogPostingData(props)} />;
+}
+
 interface ProductSchemaProps {
   name: string;
   description: string;
@@ -95,7 +132,6 @@ export function OrganizationJsonLd() {
       "Pearl jewelry",
       "Jewelry styling",
       "Pearl care",
-      "Freshwater pearls",
     ],
     sameAs: ["https://instagram.com/mythrealms.shop"],
     contactPoint: {

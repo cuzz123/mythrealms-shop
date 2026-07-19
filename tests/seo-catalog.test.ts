@@ -4,13 +4,26 @@ import path from "node:path";
 import test from "node:test";
 
 import { metadata as blogMetadata } from "../src/app/blog/page";
-import sitemap from "../src/app/sitemap";
+import { buildBlogPostingData } from "../src/components/ui/JsonLd";
+import { buildBlogMetadata } from "../src/lib/seo/blog";
+import { buildSitemapEntries } from "../src/lib/seo/sitemap";
 import { siteUrl } from "../src/lib/site";
 import { buildStorefrontFeedXml } from "../src/lib/storefront/feed";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
 
 const retiredLanguage =
   /\bcrystals?\b|\bgemstones?\b|stones with intention|the serenity collection|balance\s*&\s*light|emotional balance/i;
+
+const posts = [
+  { slug: "pearl-earrings-under-50", updatedAt: new Date("2026-07-18T00:00:00Z") },
+];
+
+const post = {
+  slug: "pearl-earrings-under-50",
+  title: "Pearl Earrings Under $50",
+  excerpt: "A practical guide to affordable pearl earrings.",
+  image: "/images/blog/pearl-earrings-under-50.jpg",
+};
 
 test("the root layout does not force the homepage canonical onto every route", () => {
   const source = readFileSync(
@@ -40,24 +53,76 @@ test("the authoritative feed is pearl-only and contains every storefront SKU", (
   }
 });
 
-test("the static sitemap includes all approved products and excludes the blog archive", async () => {
-  const entries = await sitemap();
+test("the sitemap includes the journal and published article URLs", () => {
+  const entries = buildSitemapEntries(siteUrl, getStorefrontProducts(), posts);
   const urls = new Set(entries.map((entry) => entry.url));
+
+  assert.equal(urls.has(`${siteUrl}/blog`), true);
+  assert.equal(urls.has(`${siteUrl}/blog/pearl-earrings-under-50`), true);
+
   for (const product of getStorefrontProducts()) {
     assert.equal(urls.has(`${siteUrl}/products/${product.slug}`), true);
   }
   assert.equal([...urls].filter((url) => url.includes("/products/")).length, 45);
-  assert.equal([...urls].some((url) => url.includes("/blog")), false);
 });
 
-test("the legacy blog is explicitly noindex", () => {
+test("the database-backed sitemap revalidates without a redeploy", () => {
+  const sitemapSource = readFileSync(
+    path.join(process.cwd(), "src/app/sitemap.ts"),
+    "utf8",
+  );
+
+  assert.match(sitemapSource, /export const revalidate = 3600;/);
+});
+
+test("the journal archive is indexable", () => {
   const robots = blogMetadata.robots;
-  assert.equal(
+  assert.notEqual(
     robots && typeof robots === "object" && "index" in robots
       ? robots.index
       : undefined,
     false,
   );
+});
+
+test("blog metadata uses the canonical article URL and article Open Graph data", () => {
+  const metadata = buildBlogMetadata(post);
+  const canonical = metadata.alternates?.canonical;
+  const openGraph = metadata.openGraph;
+
+  assert.equal(canonical, `${siteUrl}/blog/${post.slug}`);
+  assert.equal(openGraph?.type, "article");
+  assert.equal(
+    openGraph && "url" in openGraph ? openGraph.url : undefined,
+    `${siteUrl}/blog/${post.slug}`,
+  );
+  assert.equal(
+    metadata.robots && typeof metadata.robots === "object" && "index" in metadata.robots
+      ? metadata.robots.index
+      : undefined,
+    undefined,
+  );
+});
+
+test("BlogPosting JSON-LD includes canonical publisher and ISO dates", () => {
+  const datePublished = new Date("2026-07-01T12:00:00Z");
+  const dateModified = new Date("2026-07-18T00:00:00Z");
+  const url = `${siteUrl}/blog/${post.slug}`;
+  const data = buildBlogPostingData({
+    headline: post.title,
+    description: post.excerpt,
+    url,
+    image: `${siteUrl}${post.image}`,
+    datePublished,
+    dateModified,
+    authorName: "MythRealms Editorial",
+  });
+
+  assert.equal(data["@type"], "BlogPosting");
+  assert.deepEqual(data.mainEntityOfPage, { "@type": "WebPage", "@id": url });
+  assert.deepEqual(data.publisher, { "@type": "Organization", name: "MythRealms" });
+  assert.equal(data.datePublished, datePublished.toISOString());
+  assert.equal(data.dateModified, dateModified.toISOString());
 });
 
 test("GEO guidance points to the canonical feed and not retired feeds", () => {

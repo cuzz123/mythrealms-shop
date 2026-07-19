@@ -2,18 +2,18 @@
 
 import { useEffect } from "react";
 
+import {
+  createPurchaseTrackingController,
+  trackPurchase,
+  type TrackingEventTarget,
+} from "@/lib/tracking";
+
 interface TrackItem {
   id: string;
   name: string;
   quantity: number;
   price: number;
 }
-
-type MarketingWindow = Window & {
-  gtag?: (...args: unknown[]) => void;
-  fbq?: (...args: unknown[]) => void;
-  pintrk?: (...args: unknown[]) => void;
-};
 
 export function SuccessTracker({
   orderId,
@@ -26,28 +26,31 @@ export function SuccessTracker({
 }) {
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const w = window as MarketingWindow;
+    const target: TrackingEventTarget = {
+      addEventListener: (type, listener) =>
+        window.addEventListener(type, listener),
+      removeEventListener: (type, listener) =>
+        window.removeEventListener(type, listener),
+    };
+    const controller = createPurchaseTrackingController({
+      target,
+      storage: localStorage,
+      orderId,
+      track: (completed) =>
+        trackPurchase(
+          orderId,
+          value,
+          items ?? [],
+          undefined,
+          undefined,
+          undefined,
+          completed,
+        ),
+    });
 
-    if (w.gtag) {
-      w.gtag("event", "purchase", {
-        transaction_id: orderId,
-        currency: "USD",
-        value,
-        items: items?.map((i) => ({
-          item_id: i.id,
-          item_name: i.name,
-          quantity: i.quantity,
-          price: i.price,
-        })),
-      });
-    }
-    if (w.fbq) {
-      w.fbq("track", "Purchase", { currency: "USD", value });
-    }
-    if (w.pintrk) {
-      w.pintrk("track", "checkout", { value, currency: "USD", order_id: orderId });
-    }
-  }, [orderId, value]);
+    controller.start();
+    return controller.cleanup;
+  }, [items, orderId, value]);
 
   return null;
 }
