@@ -1,31 +1,31 @@
-# MythRealms US Channel Setup Implementation Plan
+# MythRealms 美国市场渠道配置实施计划
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **供智能代理执行者使用：** 必须使用子技能 superpowers:subagent-driven-development（推荐）或 superpowers:executing-plans，逐项实施本计划。各步骤使用复选框（`- [ ]`）语法跟踪进度。
 
-**Goal:** Configure the external discovery, analytics, and commerce channels needed to measure a US-only organic launch without spending the reserved operating budget.
+**目标：** 在不动用预留运营预算的前提下，配置衡量美国市场纯自然流量冷启动所需的外部发现、数据分析和电商渠道。
 
-**Architecture:** Vercel hosts the canonical storefront. GA4 is the measurement source, Search Console and Merchant Center are Google discovery surfaces, and TikTok/Instagram/Pinterest distribute content. Every profile link uses a stable UTM convention so channel performance can be compared in GA4.
+**架构：** Vercel 承载规范独立站。GA4 是数据衡量来源，Search Console 和 Merchant Center 是 Google 发现入口，TikTok、Instagram 和 Pinterest 负责内容分发。所有主页链接采用统一稳定的 UTM 规范，以便在 GA4 中对比各渠道表现。
 
-**Tech Stack:** Vercel, GA4, Google Search Console, Google Merchant Center, Meta Business Suite, Pinterest Business, TikTok Business, OpenAI/Perplexity crawler verification.
+**技术栈：** Vercel、GA4、Google Search Console、Google Merchant Center、Meta Business Suite、Pinterest Business、TikTok Business、OpenAI/Perplexity 爬虫验证。
 
-## Global Constraints
+## 全局约束
 
-- Complete this plan only after the technical-readiness plan is deployed.
-- Never paste access tokens, client secrets, recovery codes, or payment details into repository files or screenshots.
-- Use the verified production origin `https://mythrealms.shop`, not a Vercel preview URL.
-- Target only the United States. Do not enable international shipping destinations in feeds or campaigns unless fulfillment is ready.
-- Do not start paid ads during days 1-60. The reserved 300 RMB remains untouched until the strategy's trigger conditions are met.
-- Any platform action requiring account authorization remains a user-approved manual action.
+- 只有在技术就绪计划部署完成后，才能执行本计划。
+- 严禁将访问令牌、客户端密钥、恢复代码或付款信息粘贴到仓库文件或截图中。
+- 使用已验证的生产域名 `https://mythrealms.shop`，不得使用 Vercel 预览地址。
+- 仅面向美国。除非履约能力已经就绪，否则不得在商品 Feed 或营销活动中启用其他国家或地区。
+- 第 1-60 天不得启动付费广告。在满足策略规定的触发条件前，预留的 300 元人民币必须保持不动。
+- 任何需要账号授权的平台操作，都必须保留为经用户批准后手动执行的操作。
 
 ---
 
-### Task 1: Establish the URL and UTM contract
+### 任务 1：建立 URL 与 UTM 规范
 
-**Output:** A private operator note and the four production links used everywhere.
+**产出：** 一份私有运营备注，以及全渠道统一使用的四个生产链接。
 
-- [ ] **Step 1: Confirm canonical production behavior**
+- [ ] **步骤 1：确认规范生产地址的行为**
 
-Open each URL and verify a successful response with no preview-domain redirect:
+逐一打开以下 URL，确认响应成功，并且没有跳转到预览域名：
 
 ```text
 https://mythrealms.shop/
@@ -34,9 +34,9 @@ https://mythrealms.shop/sitemap.xml
 https://mythrealms.shop/api/feed
 ```
 
-- [ ] **Step 2: Adopt one UTM naming convention**
+- [ ] **步骤 2：采用统一的 UTM 命名规范**
 
-Use lowercase ASCII values:
+使用小写 ASCII 值：
 
 ```text
 utm_source=tiktok|instagram|pinterest
@@ -45,29 +45,29 @@ utm_campaign=us_cold_start_2026q3
 utm_content=<product>_<concept>_<hook-version>
 ```
 
-Example:
+示例：
 
 ```text
 https://mythrealms.shop/products/new-series-purple-gem-pearl-drops?utm_source=tiktok&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=violet_rain_macro_a
 ```
 
-- [ ] **Step 3: Create one stable bio link per channel**
+- [ ] **步骤 3：为每个渠道建立一个稳定的主页链接**
 
-Use the Pearl Edit collection for the profile bio and direct product URLs for individual posts. Do not use an external link-in-bio tool during cold start.
+账号主页统一链接到 Pearl Edit 合集，单条帖子则直接链接到对应产品。在冷启动阶段不使用第三方 link-in-bio 工具。
 
 ---
 
-### Task 2: Configure GA4 and production IDs in Vercel
+### 任务 2：在 Vercel 中配置 GA4 和生产环境 ID
 
-**Outputs:** GA4 web stream, production environment variables, verified DebugView events.
+**产出：** GA4 Web 数据流、生产环境变量，以及通过验证的 DebugView 事件。
 
-- [ ] **Step 1: Create or confirm the GA4 web data stream**
+- [ ] **步骤 1：创建或确认 GA4 Web 数据流**
 
-Use website URL `https://mythrealms.shop`, stream name `MythRealms US Store`, and record the `G-...` measurement ID privately.
+网站 URL 使用 `https://mythrealms.shop`，数据流名称使用 `MythRealms US Store`，并私下记录 `G-...` 衡量 ID。
 
-- [ ] **Step 2: Add production environment variables in Vercel**
+- [ ] **步骤 2：在 Vercel 中添加生产环境变量**
 
-In Project Settings -> Environment Variables, add only the IDs that exist:
+进入 Project Settings -> Environment Variables，只添加实际已经取得的 ID：
 
 ```text
 NEXT_PUBLIC_GA_ID=G-...
@@ -75,174 +75,174 @@ NEXT_PUBLIC_META_PIXEL_ID=...
 NEXT_PUBLIC_PINTEREST_TAG_ID=...
 ```
 
-Scope them to Production. Trigger a new deployment because public variables are compiled into the client bundle.
+作用域设为 Production。由于公开变量会被编译进客户端包，添加后必须触发一次新部署。
 
-- [ ] **Step 3: Validate GA4 events**
+- [ ] **步骤 3：验证 GA4 事件**
 
-In GA4 DebugView or Realtime, accept cookies and perform:
+在 GA4 DebugView 或 Realtime 中接受 Cookie，然后执行：
 
 ```text
 product view -> add to cart -> checkout -> paid test order
 ```
 
-Confirm `view_item`, `add_to_cart`, `begin_checkout`, and `purchase`. Confirm currency `USD`, correct item IDs, and one purchase for the order ID.
+确认收到 `view_item`、`add_to_cart`、`begin_checkout` 和 `purchase`。确认货币为 `USD`、商品 ID 正确，并且同一订单 ID 只产生一次购买事件。
 
-- [ ] **Step 4: Create a saved weekly acquisition view**
+- [ ] **步骤 4：创建保存的每周获客视图**
 
-The report must expose source/medium, campaign, landing page, US users, product views, add-to-carts, checkout starts, purchases, revenue, and conversion rate.
+报告必须展示来源/媒介、营销活动、落地页、美国用户、商品浏览、加购、开始结账、购买、收入和转化率。
 
 ---
 
-### Task 3: Configure Google Search Console
+### 任务 3：配置 Google Search Console
 
-**Outputs:** Verified domain property, accepted sitemap, baseline index record.
+**产出：** 已验证的域名资源、已接受的 Sitemap，以及索引基线记录。
 
-- [ ] **Step 1: Verify the domain property**
+- [ ] **步骤 1：验证域名资源**
 
-Use the existing DNS verification if available. Prefer a domain property for `mythrealms.shop`; do not create a second competing URL-prefix property unless needed for diagnostics.
+如已有 DNS 验证则沿用。优先为 `mythrealms.shop` 使用域名资源；除非诊断确有需要，否则不要再创建一个相互竞争的 URL 前缀资源。
 
-- [ ] **Step 2: Submit the sitemap**
+- [ ] **步骤 2：提交 Sitemap**
 
-Submit:
+提交：
 
 ```text
 https://mythrealms.shop/sitemap.xml
 ```
 
-Record submission date and status.
+记录提交日期和状态。
 
-- [ ] **Step 3: Inspect representative URLs**
+- [ ] **步骤 3：检查代表性 URL**
 
-Inspect the homepage, Pearl Edit collection, all four hero product URLs, the journal archive, and one journal article. Request indexing only after the live URL reports indexable and canonical.
+检查首页、Pearl Edit 合集、四个主推产品 URL、Journal 归档页和一篇 Journal 文章。只有在线 URL 显示可索引且规范地址正确后，才请求编入索引。
 
-- [ ] **Step 4: Capture the baseline**
+- [ ] **步骤 4：记录基线**
 
-Record indexed page count, excluded/noindex count, discovered-not-indexed count, and any structured-data errors. Recheck weekly; do not repeatedly request indexing every day.
-
----
-
-### Task 4: Configure Google Merchant Center free listings
-
-**Outputs:** US-only store settings, scheduled primary feed, approved-product baseline.
-
-- [ ] **Step 1: Verify business identity and website**
-
-Confirm the displayed business name, domain, customer-service email, return policy, shipping policy, and checkout currency match the live site.
-
-- [ ] **Step 2: Configure US shipping and returns from real fulfillment data**
-
-Use only the delivery range and cost that the chosen cross-border fulfillment route can meet. Do not copy a competitor's policy. Keep destination country to United States.
-
-- [ ] **Step 3: Add the scheduled feed**
-
-Use `https://mythrealms.shop/api/feed` as the primary feed, English language, United States target country, USD currency, daily fetch.
-
-- [ ] **Step 4: Resolve diagnostics by source-of-truth order**
-
-For price, availability, image, shipping, or policy mismatch, fix the storefront/catalog first, then let the feed regenerate. Do not patch values only inside Merchant Center.
-
-- [ ] **Step 5: Record the baseline**
-
-Record total submitted, approved, limited, and disapproved products. The launch can proceed with the four hero products approved even if low-priority SKUs still need non-policy cleanup; policy violations block launch.
+记录已编入索引页面数、被排除或 noindex 的页面数、已发现但尚未编入索引的页面数，以及所有结构化数据错误。每周复查一次，不要每天反复请求索引。
 
 ---
 
-### Task 5: Configure TikTok for organic US distribution
+### 任务 4：配置 Google Merchant Center 免费商品展示
 
-**Outputs:** Complete profile, commercial-safe publishing settings, channel bio URL.
+**产出：** 仅面向美国的商店设置、定时抓取的主 Feed，以及获批商品基线。
 
-- [ ] **Step 1: Complete the profile**
+- [ ] **步骤 1：验证企业身份和网站**
 
-Use the exact brand name, a recognizable logo, a short pearl-jewelry category statement, and the TikTok UTM bio link to `/collections/pearl-series`.
+确认展示的企业名称、域名、客服邮箱、退货政策、配送政策和结账货币均与线上网站一致。
 
-- [ ] **Step 2: Establish publishing safety defaults**
+- [ ] **步骤 2：根据真实履约数据配置美国配送和退货**
 
-For every commercial post:
+只填写所选跨境履约线路确实能够达到的配送时效与费用。不要复制竞品政策。目的地国家仅保留美国。
 
-- Mark the post as promoting the user's own brand where TikTok provides that disclosure.
-- Turn on the AI-generated label when realistic AI people or scenes are used.
-- Use TikTok Commercial Music Library audio or audio with documented commercial rights.
-- Do not reuse Douyin watermarks, unlicensed trending audio, or copyrighted movie footage.
+- [ ] **步骤 3：添加定时 Feed**
 
-- [ ] **Step 3: Keep early account behavior human-reviewed**
+将 `https://mythrealms.shop/api/feed` 设置为主 Feed，语言为英语，目标国家为美国，货币为 USD，每日抓取一次。
 
-Use scheduled drafts if available, but manually review the final crop, caption, product identity, disclosures, audio rights, and product link before publishing. Do not automate comments, likes, follows, or repetitive posting behavior.
+- [ ] **步骤 4：按事实来源优先级解决诊断问题**
 
-- [ ] **Step 4: Establish moderation rules**
+如出现价格、库存、图片、配送或政策不一致，先修复独立站或商品目录，再让 Feed 重新生成。不要只在 Merchant Center 内部临时修改数值。
 
-Reply to genuine questions within 24 hours. Hide spam and impersonation. Never answer material, pearl type, delivery, or durability questions beyond verified supplier/fulfillment facts.
+- [ ] **步骤 5：记录基线**
 
----
-
-### Task 6: Configure Instagram and Pinterest reuse channels
-
-**Outputs:** Business profiles, verified links, reusable publishing templates.
-
-- [ ] **Step 1: Instagram**
-
-Connect the Instagram professional account to Meta Business Suite. Add the Instagram UTM collection link. Confirm Meta Pixel Test Events receives PageView and ecommerce events after marketing consent.
-
-- [ ] **Step 2: Pinterest**
-
-Convert or confirm a business account, claim `mythrealms.shop`, create a board named `Pearl Jewelry Styling`, and use the Pinterest UTM collection link in the profile.
-
-- [ ] **Step 3: Pin contract**
-
-Every Pin needs a clean 2:3 image or compatible video, literal product/style title, factual description, direct product or guide URL, and useful alt text. Avoid keyword lists and vague mystical claims.
-
-- [ ] **Step 4: Verify Pinterest Tag**
-
-After marketing consent, confirm page, add-to-cart, and checkout events in Pinterest's tag diagnostic tools.
+记录已提交、已批准、受限和被拒商品总数。即使低优先级 SKU 仍有非政策类问题，只要四个主推产品已获批，冷启动仍可继续；任何政策违规都会阻止上线。
 
 ---
 
-### Task 7: Verify AI-search discoverability
+### 任务 5：配置 TikTok 的美国自然流量分发
 
-**Outputs:** Crawlability record and source-access check.
+**产出：** 完整账号资料、适用于商业内容的安全发布设置，以及渠道主页 URL。
 
-- [ ] **Step 1: Inspect robots rules in production**
+- [ ] **步骤 1：完善账号资料**
 
-Confirm `OAI-SearchBot` and `PerplexityBot` can access the homepage, collection, products, journal, policies, and sitemap. Keep private account, checkout, admin, and API routes blocked except the canonical public product feed.
+使用准确品牌名、易识别 Logo、简短的珍珠首饰品类说明，并将带 TikTok UTM 的主页链接指向 `/collections/pearl-series`。
 
-- [ ] **Step 2: Inspect the public facts AI systems can retrieve**
+- [ ] **步骤 2：建立安全发布默认值**
 
-Check the homepage, About, Shipping, Refund, FAQ, product page, and article in a logged-out browser. The same price, availability, shipping, return, and product wording must appear consistently.
+每条商业内容都必须：
 
-- [ ] **Step 3: Treat direct commerce-feed programs as optional**
+- 在 TikTok 提供相关披露选项时，将帖子标记为推广用户自己的品牌。
+- 使用写实 AI 人物或场景时，开启 AI 生成内容标签。
+- 使用 TikTok Commercial Music Library 中的音频，或拥有可证明商业使用权的音频。
+- 不得复用带抖音水印的视频、未授权热门音乐或受版权保护的电影片段。
 
-Apply to OpenAI commerce/product-feed access only if the account is eligible. Keep stable product IDs and use the canonical catalog as the source. Do not build or maintain a separate speculative feed merely to target answer engines.
+- [ ] **步骤 3：确保早期账号操作经过人工审核**
+
+如平台支持，可使用定时草稿，但发布前必须人工检查最终裁切、配文、产品身份、披露信息、音频版权和产品链接。不得自动化评论、点赞、关注或重复发布行为。
+
+- [ ] **步骤 4：建立内容审核规则**
+
+在 24 小时内回复真实问题。隐藏垃圾信息和冒充内容。对于材质、珍珠类型、配送或耐用性问题，回答不得超出已验证的供应商和履约事实。
 
 ---
 
-### Task 8: Perform the go-live acceptance review
+### 任务 6：配置 Instagram 和 Pinterest 复用渠道
 
-**Outputs:** Dated launch checklist and pass/fail decision.
+**产出：** 商业账号、已验证链接，以及可复用发布模板。
 
-- [ ] **Step 1: Run one mobile acceptance journey**
+- [ ] **步骤 1：Instagram**
 
-On a real or emulated US mobile viewport:
+将 Instagram 专业账号连接到 Meta Business Suite。添加带 Instagram UTM 的合集链接。确认用户同意营销 Cookie 后，Meta Pixel Test Events 能收到 PageView 和电商事件。
+
+- [ ] **步骤 2：Pinterest**
+
+转换或确认商业账号，认领 `mythrealms.shop`，创建名为 `Pearl Jewelry Styling` 的画板，并在主页使用带 Pinterest UTM 的合集链接。
+
+- [ ] **步骤 3：Pin 内容规范**
+
+每条 Pin 都需要干净的 2:3 图片或兼容视频、直白的产品或造型标题、符合事实的描述、直接产品或指南 URL，以及有用的替代文本。避免堆砌关键词和含糊的神秘功效声明。
+
+- [ ] **步骤 4：验证 Pinterest Tag**
+
+用户同意营销 Cookie 后，在 Pinterest Tag 诊断工具中确认页面、加购和结账事件。
+
+---
+
+### 任务 7：验证 AI 搜索可发现性
+
+**产出：** 可抓取性记录和信息源访问检查。
+
+- [ ] **步骤 1：检查生产环境的 robots 规则**
+
+确认 `OAI-SearchBot` 和 `PerplexityBot` 可以访问首页、合集、产品、Journal、政策页面和 Sitemap。私人账户、结账、后台和 API 路由应保持禁止抓取，规范公开产品 Feed 除外。
+
+- [ ] **步骤 2：检查 AI 系统能够获取的公开事实**
+
+在未登录浏览器中检查首页、About、Shipping、Refund、FAQ、产品页和文章。价格、库存、配送、退货和产品描述必须在各处保持一致。
+
+- [ ] **步骤 3：将直接电商 Feed 项目视为可选项**
+
+仅在账号符合资格时申请 OpenAI 电商或产品 Feed 接入。保持稳定的产品 ID，并以规范商品目录为事实来源。不要仅为了进入答案引擎而另建并维护一个推测性的 Feed。
+
+---
+
+### 任务 8：执行正式上线验收
+
+**产出：** 带日期的上线检查清单，以及通过或不通过的决策。
+
+- [ ] **步骤 1：执行一次移动端验收流程**
+
+在真实设备或模拟的美国移动端视口中执行：
 
 ```text
 TikTok UTM URL -> product -> add to cart -> checkout -> paid test -> confirmation
 ```
 
-- [ ] **Step 2: Confirm the data trail**
+- [ ] **步骤 2：确认数据链路**
 
-Verify the session source, campaign, landing page, four ecommerce events, order ID, USD value, and lack of duplicate purchase events.
+验证会话来源、营销活动、落地页、四个电商事件、订单 ID、USD 金额，并确认没有重复购买事件。
 
-- [ ] **Step 3: Confirm discovery surfaces**
+- [ ] **步骤 3：确认发现入口**
 
-Verify sitemap accepted, representative URLs indexable, Merchant feed fetching, four hero products free-listing eligible, and public pages crawlable.
+确认 Sitemap 已被接受、代表性 URL 可索引、Merchant Feed 能正常抓取、四个主推产品符合免费展示条件，并且公开页面可以抓取。
 
-- [ ] **Step 4: Make the launch decision**
+- [ ] **步骤 4：作出上线决策**
 
-Launch organic posting only when all payment, product-truth, analytics, and policy blockers pass. Search indexing and Merchant approval may still be processing, but they must have no unresolved configuration or policy error.
+只有付款、产品真实性、数据分析和政策阻断项全部通过后，才启动自然流量发布。搜索索引和 Merchant 审核可以仍在处理中，但不得存在尚未解决的配置或政策错误。
 
-### Completion Criteria
+### 完成标准
 
-- Production analytics IDs are configured without exposing secrets.
-- The complete ecommerce journey is visible in GA4 and configured marketing platforms after consent.
-- Search Console accepts the sitemap and representative URLs are indexable.
-- Merchant Center fetches the feed and the four hero products have no policy blocker.
-- TikTok, Instagram, and Pinterest profiles use channel-specific UTM links and compliant disclosure/audio defaults.
-- No ad spend has been activated.
+- 生产环境统计 ID 已配置，且没有暴露密钥。
+- 用户同意后，完整电商流程可以在 GA4 和已配置的营销平台中看到。
+- Search Console 已接受 Sitemap，代表性 URL 可以编入索引。
+- Merchant Center 能抓取 Feed，四个主推产品不存在政策阻断项。
+- TikTok、Instagram 和 Pinterest 账号使用各自渠道专属 UTM 链接，并采用合规的披露与音频默认设置。
+- 尚未启用任何广告支出。
