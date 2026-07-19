@@ -2,17 +2,17 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
-    const image = images.nth(index);
-    await image.scrollIntoViewIfNeeded();
-    await expect
-      .poll(() =>
-        image.evaluate(
+    await expect(async () => {
+      const image = images.nth(index);
+      await image.scrollIntoViewIfNeeded();
+      expect(
+        await image.evaluate(
           (node) =>
             (node as HTMLImageElement).complete &&
             (node as HTMLImageElement).naturalWidth > 0,
         ),
-      )
-      .toBe(true);
+      ).toBe(true);
+    }).toPass();
   }
 }
 
@@ -21,9 +21,34 @@ async function scrollToTop(page: Page) {
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
 }
 
+async function freezeFooterYear(page: Page) {
+  const copyright = page
+    .locator("footer")
+    .getByText(/^© \d{4} MythRealms\. All rights reserved\.$/);
+  await expect(copyright).toHaveCount(1);
+  await copyright.evaluate((node) => {
+    node.textContent = node.textContent?.replace(/© \d{4}/, "© 2000") ?? "";
+  });
+}
+
+async function waitForCanonicalAnnouncement(page: Page) {
+  await expect(page.getByRole("region", { name: "Announcement" })).toContainText(
+    "Free shipping over $69.99 | 30-day returns",
+  );
+}
+
 async function stabilizeVisual(page: Page, path: string) {
   await page.addInitScript(() => {
     localStorage.setItem("cookie-consent", JSON.stringify({ necessary: true }));
+    const nativeSetInterval = window.setInterval.bind(window);
+    window.setInterval = ((
+      handler: TimerHandler,
+      timeout?: number,
+      ...args: unknown[]
+    ) =>
+      timeout === 4500
+        ? 0
+        : nativeSetInterval(handler, timeout, ...args)) as typeof window.setInterval;
   });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(path);
@@ -31,6 +56,8 @@ async function stabilizeVisual(page: Page, path: string) {
   await page.evaluate(() => document.fonts.ready);
   await expectImagesLoaded(page.locator("#main-content img"));
   await scrollToTop(page);
+  await waitForCanonicalAnnouncement(page);
+  await freezeFooterYear(page);
 }
 
 test("homepage editorial discovery", async ({ page }) => {

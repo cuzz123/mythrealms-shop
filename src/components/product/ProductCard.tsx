@@ -129,7 +129,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
         </div>
 
         <div className="mt-3 space-y-1.5">
-          <h3 className="line-clamp-2 font-serif text-sm font-medium text-[var(--text)]">
+          <h3 className="font-serif text-sm font-medium text-[var(--text)] sm:line-clamp-2">
             {product.name}
           </h3>
           <div className="flex items-center gap-2">
