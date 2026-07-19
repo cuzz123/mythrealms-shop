@@ -15,6 +15,27 @@ const CheckoutPage =
     ? CheckoutPageModule
     : (CheckoutPageModule as unknown as { default: ComponentType }).default;
 
+function renderCheckoutAtPrice(price: number) {
+  const serverItems = useCartStore.getInitialState().items;
+  const originalServerItems = [...serverItems];
+  serverItems.splice(0, serverItems.length, {
+    product: {
+      id: "policy-test",
+      name: "Policy Test",
+      slug: "policy-test",
+      image: "/policy-test.jpg",
+      price,
+    },
+    quantity: 1,
+  });
+
+  try {
+    return renderToStaticMarkup(createElement(CheckoutPage));
+  } finally {
+    serverItems.splice(0, serverItems.length, ...originalServerItems);
+  }
+}
+
 test("structured policy facts match the public shipping and return promises", () => {
   assert.deepEqual(STORE_POLICY_FACTS, {
     freeShippingThresholdUsd: 69.99,
@@ -38,24 +59,10 @@ test("visible shipping copy renders the exact centralized price boundary", () =>
   const threshold = STORE_POLICY_FACTS.freeShippingThresholdUsd.toFixed(2);
   const flatRate = STORE_POLICY_FACTS.standardShippingFlatRateUsd.toFixed(2);
   const shipping = renderToStaticMarkup(createElement(ShippingPage));
-  const serverItems = useCartStore.getInitialState().items;
-  const originalServerItems = [...serverItems];
-  serverItems.splice(0, serverItems.length, {
-    product: {
-      id: "policy-test",
-      name: "Policy Test",
-      slug: "policy-test",
-      image: "/policy-test.jpg",
-      price: 20,
-    },
-    quantity: 1,
-  });
-  let checkout: string;
-  try {
-    checkout = renderToStaticMarkup(createElement(CheckoutPage));
-  } finally {
-    serverItems.splice(0, serverItems.length, ...originalServerItems);
-  }
+  const checkoutBelowThreshold = renderCheckoutAtPrice(20);
+  const checkoutAtThreshold = renderCheckoutAtPrice(
+    STORE_POLICY_FACTS.freeShippingThresholdUsd,
+  );
 
   assert.equal(
     shippingMetadata.description,
@@ -68,13 +75,25 @@ test("visible shipping copy renders the exact centralized price boundary", () =>
     ),
   );
   assert.ok(
-    checkout.includes(
+    checkoutBelowThreshold.includes(
       `Free shipping on orders of $${threshold} or more`,
     ),
   );
-  assert.ok(checkout.includes(`$${flatRate} shipping below $${threshold}`));
-  assert.ok(checkout.includes(`Free at $${threshold} or more`));
-  assert.doesNotMatch(`${shipping}\n${checkout}`, /over \$69\.99/i);
+  assert.ok(checkoutBelowThreshold.includes(`$${flatRate} shipping below $${threshold}`));
+  assert.ok(checkoutBelowThreshold.includes(`Free at $${threshold} or more`));
+  assert.match(checkoutBelowThreshold, /Shipping<\/span><span class="">\$4\.99<\/span>/);
+  assert.match(
+    checkoutAtThreshold,
+    /Shipping<\/span><span class="text-\[var\(--success\)\]">FREE<\/span>/,
+  );
+  assert.doesNotMatch(
+    checkoutAtThreshold,
+    /Free shipping on orders of \$69\.99 or more - add/i,
+  );
+  assert.doesNotMatch(
+    `${shipping}\n${checkoutBelowThreshold}\n${checkoutAtThreshold}`,
+    /over \$69\.99/i,
+  );
   assert.doesNotMatch(
     shipping,
     /otherwise (?:a )?flat rate calculated at checkout/i,
@@ -89,6 +108,16 @@ test("visible policy timing and return headlines render the centralized facts", 
   assert.match(shipping, /8-14 days/i);
   assert.match(refund, /30-Day Return Window/i);
   assert.match(refund, /30 days from the delivery date/i);
+  assert.match(
+    refund,
+    /cover the cost of return shipping and provide a prepaid return label if the return is due to our error/i,
+  );
+  assert.match(refund, /received a defective or damaged item/i);
+  assert.match(
+    refund,
+    /Return shipping costs are the customer(?:&#x27;|&apos;|')s responsibility in all other cases/i,
+  );
+  assert.match(refund, /changed your mind or no longer want the item/i);
 });
 
 test("organization schema emits only verified shipping and return policy facts", () => {

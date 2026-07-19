@@ -107,7 +107,10 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const shipping = subtotal() >= 69.99 ? 0 : 4.99;
+  const shipping =
+    subtotal() >= STORE_POLICY_FACTS.freeShippingThresholdUsd
+      ? 0
+      : STORE_POLICY_FACTS.standardShippingFlatRateUsd;
   const discountedSubtotal = Math.max(0, subtotal() - (discountInfo?.discount ?? 0));
   const total = discountedSubtotal + shipping;
 
@@ -605,7 +608,9 @@ export default function CheckoutPage() {
               {shipping > 0 && (
                 <p className="text-xs text-[var(--text-muted)]">
                   Free shipping on orders of ${freeShippingThreshold} or more - add{" "}
-                  {formatPrice(69.99 - discountedSubtotal)} more
+                  {formatPrice(
+                    STORE_POLICY_FACTS.freeShippingThresholdUsd - discountedSubtotal,
+                  )} more
                 </p>
               )}
 
