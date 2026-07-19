@@ -1,0 +1,22 @@
+{
+  "id": "VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001",
+  "status": "in_progress",
+  "format": "16:9",
+  "target_duration_seconds": 36.8,
+  "product": "PROD_MR_COASTAL_PEARL_CASCADE_NECKLACE_001",
+  "character": "CHAR_MR_TALENT_COASTAL_LIBRARY_001",
+  "environment": "ENV_MR_COASTAL_LIBRARY_001",
+  "animal": "ANIMAL_MR_WHITE_HORSE_001",
+  "fasten_reference": "REF_MR_COASTAL_NECKLACE_FASTEN_001",
+  "shots": [
+    "S01_COAST_OPENING",
+    "S02_HORSE_WIND",
+    "S03_LIBRARY_ENTRY",
+    "S04_WINDOW_NO_NECKLACE",
+    "S05_BACK_NECK_FASTEN",
+    "S06_FULL_NECKLACE_REVEAL",
+    "S07_MANE_LIGHT_MATCH",
+    "S08_COASTAL_WINDOW_WEARING",
+    "S09_PRODUCT_LOGO"
+  ]
+}
