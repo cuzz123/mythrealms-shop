@@ -10,6 +10,30 @@ interface BlogMetadataPost {
   image: string | null;
 }
 
+interface BlogEditorialPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: string;
+}
+
+const RETIRED_EDITORIAL_LANGUAGE =
+  /\bcrystals?\b|\bgemstones?\b|\bobsidian\b|\bamethyst\b|rose quartz|tiger'?s eye|aventurine|chakra|energy healing|the serenity collection|balance\s*&\s*light|the intention stones|the archetypes|curated singles|emotional balance/i;
+
+export function isPearlEditorialPost(post: BlogEditorialPost): boolean {
+  const searchableText = [
+    post.slug,
+    post.title,
+    post.excerpt,
+    post.content,
+    post.category,
+  ].join(" ");
+
+  return /\bpearls?\b/i.test(searchableText) &&
+    !RETIRED_EDITORIAL_LANGUAGE.test(searchableText);
+}
+
 export function buildBlogMetadata({
   slug,
   title,

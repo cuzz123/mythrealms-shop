@@ -6,6 +6,7 @@ import { buildDiscountPreviewRequest } from "@/lib/checkout/discount-preview";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
+import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
 import { LazyImage } from "@/components/ui/LazyImage";
 import Link from "next/link";
 import { Loader2, Tag, Check, AlertCircle } from "lucide-react";
@@ -18,6 +19,10 @@ import {
 
 const COUNTRY_NAMES: Record<string, string> = { US:"United States",GB:"United Kingdom",CA:"Canada",AU:"Australia",DE:"Germany",FR:"France",JP:"Japan",SG:"Singapore",IT:"Italy",ES:"Spain",NL:"Netherlands",SE:"Sweden",NO:"Norway",DK:"Denmark",FI:"Finland",CH:"Switzerland",AT:"Austria",BE:"Belgium",IE:"Ireland",NZ:"New Zealand",KR:"South Korea",HK:"Hong Kong",TW:"Taiwan",MY:"Malaysia",TH:"Thailand",PH:"Philippines",ID:"Indonesia",IN:"India",BR:"Brazil",MX:"Mexico",AE:"United Arab Emirates",SA:"Saudi Arabia",IL:"Israel",PT:"Portugal",PL:"Poland" };
 const COUNTRY_CODES: Record<string, string> = Object.fromEntries(Object.entries(COUNTRY_NAMES).map(([k,v]) => [v,k]));
+const freeShippingThreshold =
+  STORE_POLICY_FACTS.freeShippingThresholdUsd.toFixed(2);
+const standardShippingFlatRate =
+  STORE_POLICY_FACTS.standardShippingFlatRateUsd.toFixed(2);
 
 interface ValidationErrors {
   email?: string;
@@ -107,7 +112,10 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const shipping = subtotal() >= 69.99 ? 0 : 4.99;
+  const shipping =
+    subtotal() >= STORE_POLICY_FACTS.freeShippingThresholdUsd
+      ? 0
+      : STORE_POLICY_FACTS.standardShippingFlatRateUsd;
   const discountedSubtotal = Math.max(0, subtotal() - (discountInfo?.discount ?? 0));
   const total = discountedSubtotal + shipping;
   const checkoutTracked = useRef(false);
@@ -629,8 +637,10 @@ export default function CheckoutPage() {
 
               {shipping > 0 && (
                 <p className="text-xs text-[var(--text-muted)]">
-                  Free shipping on orders over $69.99 — add{" "}
-                  {formatPrice(69.99 - discountedSubtotal)} more
+                  Free shipping on orders of ${freeShippingThreshold} or more - add{" "}
+                  {formatPrice(
+                    STORE_POLICY_FACTS.freeShippingThresholdUsd - discountedSubtotal,
+                  )} more
                 </p>
               )}
 
@@ -668,7 +678,9 @@ export default function CheckoutPage() {
             {/* Trust signals */}
             <div className="mt-4 flex items-center justify-center gap-2 text-xs text-[var(--text-muted)]">
               <Check className="w-3 h-3 text-[var(--success)]" />
-              Free Shipping over $69.99
+              ${standardShippingFlatRate} shipping below ${freeShippingThreshold}
+              <span className="text-[var(--border)]">|</span>
+              Free at ${freeShippingThreshold} or more
               <span className="text-[var(--border)]">|</span>
               <Check className="w-3 h-3 text-[var(--success)]" />
               30-day returns

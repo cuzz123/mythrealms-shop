@@ -1,7 +1,7 @@
 // 1688 Products  - MythRealms
 export type ProductImageRoles = {
   primary: string;
-  wearing?: string;
+  alternate?: string;
   detail?: string;
 };
 
@@ -102,16 +102,17 @@ const pearlSourceImage = (slug: string, view: "main" | `detail${number}`) =>
 
 const sourceGallery = (
   slug: string,
-  wearingView: `detail${number}`,
+  alternateView: `detail${number}`,
   detailView: `detail${number}`,
 ): [string, string, string] => [
   pearlSourceImage(slug, "main"),
-  pearlSourceImage(slug, wearingView),
+  pearlSourceImage(slug, alternateView),
   pearlSourceImage(slug, detailView),
 ];
 
-// Every active product gallery starts with an exact supplier source file. The
-// order is main product view, real supplied wearing view, then product detail.
+// Every active product gallery uses an exact supplier source file. The order is
+// main product view, alternate supplier view, then product detail. No AI
+// reconstruction is used, so the material, structure, and proportions stay intact.
 const SOURCE_PRESERVED_PRODUCT_IMAGES: Record<string, [string, string, string]> = {
   "pearl-series-01": sourceGallery("pearl-series-01", "detail2", "detail1"),
   "pearl-series-02": sourceGallery("pearl-series-02", "detail2", "detail1"),
@@ -130,8 +131,6 @@ const SOURCE_PRESERVED_PRODUCT_IMAGES: Record<string, [string, string, string]> 
   "pearl-series-15": sourceGallery("pearl-series-15", "detail2", "detail1"),
   "pearl-series-16": sourceGallery("pearl-series-16", "detail2", "detail1"),
   "pearl-series-17": sourceGallery("pearl-series-17", "detail3", "detail1"),
-  // The supplier gallery has no actual wearing photo for this SKU. Keep the
-  // alternate source product view instead of fabricating a model image.
   "pearl-series-18": sourceGallery("pearl-series-18", "detail1", "detail2"),
   "pearl-series-19": sourceGallery("pearl-series-19", "detail3", "detail1"),
   "pearl-series-20": sourceGallery("pearl-series-20", "detail3", "detail1"),
@@ -176,13 +175,12 @@ export const PRODUCTS: Product[] = SOURCE_PRODUCTS.map((sourceProduct) => {
   const editorialImages = EDITORIAL_PILOT_IMAGES[product.slug];
   if (images) {
     const [primary, alternate, detail] = images;
-    const hasSupplierWearingImage = product.slug !== "pearl-series-18";
     product.image = primary;
     product.images = editorialImages ? [...images, ...editorialImages] : [...images];
     product.imageRoles = {
       primary,
-      ...(hasSupplierWearingImage ? { wearing: alternate } : {}),
-      detail: hasSupplierWearingImage ? detail : alternate,
+      alternate,
+      detail,
     };
   }
   return product;

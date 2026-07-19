@@ -159,13 +159,28 @@ test("approved new-series products use only their own source-preserved galleries
   }
 });
 
-test("storefront products expose truthful card image roles", () => {
-  const sourcePreserved = getStorefrontProductBySlug("pearl-series-13");
-  const noSupplierWearing = getStorefrontProductBySlug("pearl-series-18");
+test("storefront products expose neutral alternate card image roles", () => {
+  const sourcePreserved = getStorefrontProducts().filter((product) =>
+    product.slug.startsWith("pearl-series-"),
+  );
   const newSeries = getStorefrontProductBySlug("new-series-round-shell-disc-drops");
 
-  assert.ok(sourcePreserved?.imageRoles?.wearing);
-  assert.equal(noSupplierWearing?.imageRoles?.wearing, undefined);
-  assert.equal(newSeries?.imageRoles?.wearing, undefined);
+  assert.equal(sourcePreserved.length, 20);
+  for (const product of sourcePreserved) {
+    assert.ok(product.images.length >= 3, product.slug);
+    assert.equal(product.imageRoles?.primary, product.images[0], product.slug);
+    assert.equal(product.imageRoles?.alternate, product.images[1], product.slug);
+    assert.equal(product.imageRoles?.detail, product.images[2], product.slug);
+    if (product.slug === "pearl-series-01") {
+      assert.ok(
+        product.images
+          .slice(3)
+          .every((image) => image.includes("pearl-series-01-editorial-v1-")),
+      );
+    } else {
+      assert.equal(product.images.length, 3, product.slug);
+    }
+  }
+  assert.equal(newSeries?.imageRoles?.alternate, undefined);
   assert.equal(newSeries?.imageRoles?.primary, newSeries?.images[0]);
 });

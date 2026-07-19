@@ -4,9 +4,11 @@ import { HomepageEditorialStory } from "@/components/home/HomepageEditorialStory
 import { HomepageGuardian } from "@/components/home/HomepageGuardian";
 import { HomepageHero } from "@/components/home/HomepageHero";
 import { HomepagePearlEdit } from "@/components/home/HomepagePearlEdit";
+import { EditorialLinkBand } from "@/components/editorial/EditorialLinkBand";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { RecentlyViewed } from "@/components/ui/RecentlyViewed";
 import type { Product } from "@/lib/1688-products";
+import { HOMEPAGE_EDITORIAL_LINKS } from "@/lib/homepage-editorial";
 import { getStorefrontProducts } from "@/lib/storefront/catalog";
 import { siteUrl } from "@/lib/site";
 
@@ -32,6 +34,7 @@ export default function HomePage() {
       <HomepageCategoryStories />
       <HomepagePearlEdit products={featuredProducts} />
       <HomepageEditorialStory />
+      <EditorialLinkBand items={HOMEPAGE_EDITORIAL_LINKS} />
       <HomepageGuardian />
       <section className="bg-[var(--surface-alt)] py-16 md:py-20" aria-labelledby="newsletter-title">
         <div className="mx-auto max-w-2xl px-6 text-center">
