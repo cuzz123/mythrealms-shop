@@ -12,6 +12,19 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated media, local agent state, and non-JavaScript production tools.
+    ".claude/**",
+    ".impeccable/**",
+    ".superpowers/**",
+    ".vercel/**",
+    ".worktrees/**",
+    "assets/**",
+    "huanyuan_model/**",
+    "public/**",
+    "test-results/**",
+    "tmp/**",
+    "tools/**",
+    "video-pipeline/**",
   ]),
 ]);
 
