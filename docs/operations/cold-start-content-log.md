@@ -8,7 +8,7 @@
 
 | 编号 | 日期（ET） | 文件名 | 产品 | 形式 | Hook | 音频曲名／来源 | AI 标签 | CTA | UTM content | 审核结果 | 拒绝原因 |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 2026-07-20 | 待生成 | Moon Disc | 真人＋微距 | `Green light or pink light?` | 待人工选择／CML | 待设置 | 产品页 | `moon_disc_human_hook_a` | 待审核 |  |
+| 1 | 原计划 2026-07-20；实际待补 | 已发布成片（文件名待补） | Moon Disc | 真人＋微距 | `Green light or pink light?` | 待补／CML | 待补 | 产品页 | `moon_disc_human_hook_a` | 已发布（用户确认） | 实际发布时间、帖子链接、音频和 AI 标签待回填 |
 | 2 | 2026-07-21 | 待生成 | Violet Rain | 佩戴侧面 | `Violet after dark.` | 待人工选择／CML | 待设置 | 产品页 | `violet_rain_profile_a` | 待审核 |  |
 | 3 | 2026-07-22 | 待生成 | Moon vs Violet | A/B | `A: Moon light / B: Violet light` | 待人工选择／CML | 待设置 | 合集页 | `moon_violet_ab_a` | 待审核 |  |
 | 4 | 2026-07-23 | 待生成 | Falling Pearl | 领口展示 | `One falling line.` | 待人工选择／CML | 待设置 | 产品页 | `falling_pearl_neckline_a` | 待审核 |  |
@@ -17,6 +17,8 @@
 | 7 | 2026-07-26 | 待生成 | Violet Rain | 穿搭结果 | `The after-dark detail.` | 待人工选择／CML | 待设置 | 产品页 | `violet_rain_evening_a` | 待审核 |  |
 
 `CML` 表示 TikTok Commercial Music Library。正式发布前必须把“待人工选择”替换为实际曲名。
+
+**发布确认记录：** 2026-07-19 用户确认第 1 条已经发布。该确认只证明发布动作，不代表发布时间、链接、披露、音频授权或平台数据已经核验。
 
 ## 两小时数据
 
