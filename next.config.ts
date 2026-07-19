@@ -77,12 +77,12 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net https://s.pinimg.com https://accounts.google.com https://www.paypal.com",
-              "style-src 'self' 'unsafe-inline'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net https://s.pinimg.com https://accounts.google.com https://*.paypal.com https://*.paypalobjects.com",
+              "style-src 'self' 'unsafe-inline' https://*.paypal.com https://*.paypalobjects.com",
               "img-src 'self' data: https: blob: https://images.unsplash.com https://*.vercel-storage.com https://*.supabase.co https://*.amazonaws.com https://*.cloudinary.com https://*.imgix.net https://www.facebook.com https://ct.pinterest.com https://www.google-analytics.com",
               "font-src 'self'",
-              "connect-src 'self' https://*.vercel-storage.com https://*.supabase.co https://*.agnes-ai.space https://www.google-analytics.com https://*.paypal.com https://*.lemonsqueezy.com https://accounts.google.com https://oauth2.googleapis.com",
-              "frame-src 'self' https://*.paypal.com https://*.lemonsqueezy.com https://accounts.google.com",
+              "connect-src 'self' https://*.vercel-storage.com https://*.supabase.co https://*.agnes-ai.space https://www.google-analytics.com https://*.paypal.com https://*.paypalobjects.com https://*.lemonsqueezy.com https://accounts.google.com https://oauth2.googleapis.com",
+              "frame-src 'self' https://*.paypal.com https://*.paypalobjects.com https://*.lemonsqueezy.com https://accounts.google.com",
               "media-src 'self'",
               "object-src 'none'",
               "base-uri 'self'",
@@ -96,6 +96,10 @@ const nextConfig: NextConfig = {
           {
             key: "X-Content-Type-Options",
             value: "nosniff",
+          },
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin-allow-popups",
           },
           {
             key: "Strict-Transport-Security",

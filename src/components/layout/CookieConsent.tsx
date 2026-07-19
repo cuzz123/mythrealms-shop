@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Cookie, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   CONSENT_STORAGE_KEY,
   hasValidStoredConsent,
@@ -11,6 +12,8 @@ import {
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
+  const pathname = usePathname();
+  const isCheckout = pathname?.startsWith("/checkout");
 
   useEffect(() => {
     let hasValidConsent = false;
@@ -51,7 +54,11 @@ export function CookieConsent() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[300] animate-slide-up"
+      className={
+        isCheckout
+          ? "relative z-[1]"
+          : "fixed bottom-0 left-0 right-0 z-[300] animate-slide-up"
+      }
       role="dialog"
       aria-modal="false"
       aria-label="Cookie consent"

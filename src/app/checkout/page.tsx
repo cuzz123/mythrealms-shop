@@ -9,6 +9,7 @@ import { imageUrl } from "@/lib/images";
 import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
 import { LazyImage } from "@/components/ui/LazyImage";
 import Link from "next/link";
+import Script from "next/script";
 import { Loader2, Tag, Check, AlertCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import {
@@ -655,10 +656,14 @@ export default function CheckoutPage() {
               <p className="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-3">
                 Payment
               </p>
-              <div className="rounded-lg border border-[#0070BA]/30 bg-[#0070BA]/5 p-3 text-center text-sm text-[#0070BA]">
-                PayPal
-              </div>
-              <div id="paypal-button-container" className="mt-4" />
+              <PayPalButton
+                items={items}
+                email={email}
+                shippingAddress={{ name, phone, address, city, state, country, zip }}
+                discountCode={appliedDiscountCode}
+                validateForm={validateAll}
+                onSuccess={clearCart}
+              />
             </div>
 
             {/* Processing fee note */}
@@ -689,15 +694,6 @@ export default function CheckoutPage() {
         </div>
       </form>
 
-      {/* PayPal SDK — loaded via useEffect for reliable popup */}
-      <PayPalButton
-        items={items}
-        email={email}
-        shippingAddress={{ name, phone, address, city, state, country, zip }}
-        discountCode={appliedDiscountCode}
-        validateForm={validateAll}
-        onSuccess={clearCart}
-      />
     </div>
   );
 }
@@ -719,6 +715,8 @@ function PayPalButton({
   onSuccess: () => void;
 }) {
   const [sdkReady, setSdkReady] = useState(false);
+  const [buttonReady, setButtonReady] = useState(false);
+  const [paypalError, setPaypalError] = useState("");
   const buttonsRef = useRef<PayPalButtonsComponent | null>(null);
   const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "";
   const payloadRef = useRef({ items, email, shippingAddress, discountCode });
@@ -728,88 +726,127 @@ function PayPalButton({
 
   useEffect(() => {
     if (!paypalClientId) return;
-    if (document.getElementById("paypal-sdk")) {
-      setSdkReady(true);
-      return;
-    }
-    const script = document.createElement("script");
-    script.id = "paypal-sdk";
-    script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=USD&intent=capture`;
-    script.async = true;
-    script.onload = () => setSdkReady(true);
-    script.onerror = () => toast.error("Please try PayPal again later.");
-    document.body.appendChild(script);
-    return () => { script.remove(); };
-  }, [paypalClientId]);
-
-  useEffect(() => {
-    if (!paypalClientId) return;
     if (!sdkReady) return;
     const container = document.getElementById("paypal-button-container");
     const paypalWindow = window as MythRealmsWindow;
     const paypal = paypalWindow.paypal;
-    if (!container || !paypal) return;
+    if (!container || !paypal?.Buttons) {
+      setPaypalError("PayPal could not be loaded. Please refresh and try again.");
+      return;
+    }
 
     // Skip re-render if buttons already exist (prevents flash on re-renders)
     if (container.children.length > 0) return;
 
-    const buttons = paypal.Buttons({
-      fundingSource: paypal.FUNDING.PAYPAL,
-      // createOrder calls POST /api/checkout/paypal which sets
-      // PayPal's purchase_units[0].custom_id = order.id so the
-      // webhook can map incoming payments back to our DB orders.
-      createOrder: async () => {
-        if (!validateRef.current()) {
-          toast.error("Please complete your contact and shipping information");
-          throw new Error("Checkout form is incomplete");
-        }
-        const latest = payloadRef.current;
-        const res = await fetch("/api/checkout/paypal", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            items: latest.items.map((item) => ({
-              productId: item.product.id,
-              variantId: item.product.variantId,
-              quantity: item.quantity,
-            })),
-            email: latest.email,
-            shippingAddress: latest.shippingAddress,
-            discountCode: latest.discountCode.trim() || undefined,
-          }),
-        });
-        const data = await res.json();
-        if (data.error) { toast.error(data.error); throw new Error(data.error); }
-        paypalWindow.__mythrealmsOrderId = data.dbOrderId;
-        return data.orderId;
-      },
-      onApprove: async (data: PayPalApprovalData) => {
-        const dbOrderId = paypalWindow.__mythrealmsOrderId || data.orderID;
-        try {
-          const res = await fetch("/api/checkout/paypal/capture", {
+    let active = true;
+    let observer: MutationObserver | null = null;
+    let timeoutId: number | null = null;
+    const markButtonReady = () => {
+      if (!active) return;
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+      observer?.disconnect();
+      setPaypalError("");
+      setButtonReady(true);
+    };
+
+    observer = new MutationObserver(() => {
+      if (container.querySelector("iframe.component-frame.visible")) {
+        markButtonReady();
+      }
+    });
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    timeoutId = window.setTimeout(() => {
+      if (!active) return;
+      observer?.disconnect();
+      setButtonReady(false);
+      setPaypalError("PayPal took too long to load. Please refresh and try again.");
+    }, 45_000);
+
+    try {
+      const buttons = paypal.Buttons({
+        fundingSource: paypal.FUNDING.PAYPAL,
+        // createOrder calls POST /api/checkout/paypal which sets
+        // PayPal's purchase_units[0].custom_id = order.id so the
+        // webhook can map incoming payments back to our DB orders.
+        createOrder: async () => {
+          if (!validateRef.current()) {
+            toast.error("Please complete your contact and shipping information");
+            throw new Error("Checkout form is incomplete");
+          }
+          const latest = payloadRef.current;
+          const res = await fetch("/api/checkout/paypal", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ paypalOrderId: data.orderID, dbOrderId }),
+            body: JSON.stringify({
+              items: latest.items.map((item) => ({
+                productId: item.product.id,
+                variantId: item.product.variantId,
+                quantity: item.quantity,
+              })),
+              email: latest.email,
+              shippingAddress: latest.shippingAddress,
+              discountCode: latest.discountCode.trim() || undefined,
+            }),
           });
-          const result = await res.json();
-          if (!res.ok || !result.success) {
-            toast.error(result.error || "Payment could not be completed. Please contact support.");
-            return;
+          const data = await res.json();
+          if (data.error) { toast.error(data.error); throw new Error(data.error); }
+          paypalWindow.__mythrealmsOrderId = data.dbOrderId;
+          return data.orderId;
+        },
+        onApprove: async (data: PayPalApprovalData) => {
+          const dbOrderId = paypalWindow.__mythrealmsOrderId || data.orderID;
+          try {
+            const res = await fetch("/api/checkout/paypal/capture", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ paypalOrderId: data.orderID, dbOrderId }),
+            });
+            const result = await res.json();
+            if (!res.ok || !result.success) {
+              toast.error(result.error || "Payment could not be completed. Please contact support.");
+              return;
+            }
+            onSuccess();
+            window.location.href = `/checkout/success?orderId=${dbOrderId}`;
+          } catch {
+            toast.error("Payment confirmation failed. Please contact support.");
           }
-          onSuccess();
-          window.location.href = `/checkout/success?orderId=${dbOrderId}`;
-        } catch {
-          toast.error("Payment confirmation failed. Please contact support.");
-        }
-      },
-      onCancel: () => { toast.error("Payment cancelled."); },
-      onError: (err: unknown) => { toast.error("Payment failed. Please try again."); console.error("PayPal error:", err); },
-      style: { color: "gold", shape: "rect", label: "paypal", height: 48 },
-    });
-    buttonsRef.current = buttons;
-    void buttons.render("#paypal-button-container");
+        },
+        onCancel: () => { toast.error("Payment cancelled."); },
+        onError: (err: unknown) => { toast.error("Payment failed. Please try again."); console.error("PayPal error:", err); },
+        style: { color: "gold", shape: "rect", label: "paypal", height: 48 },
+      });
+      buttonsRef.current = buttons;
+      buttons
+        .render("#paypal-button-container")
+        .then(() => {
+          markButtonReady();
+        })
+        .catch((error: unknown) => {
+          if (!active) return;
+          if (timeoutId !== null) window.clearTimeout(timeoutId);
+          observer?.disconnect();
+          console.error("PayPal button render error:", error);
+          setButtonReady(false);
+          setPaypalError("PayPal is temporarily unavailable. Please refresh and try again.");
+        });
+    } catch (error) {
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+      observer?.disconnect();
+      console.error("PayPal button setup error:", error);
+      setButtonReady(false);
+      setPaypalError("PayPal is temporarily unavailable. Please refresh and try again.");
+    }
 
     return () => {
+      active = false;
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+      observer?.disconnect();
       if (buttonsRef.current && typeof buttonsRef.current.close === "function") {
         buttonsRef.current.close();
         buttonsRef.current = null;
@@ -817,15 +854,56 @@ function PayPalButton({
     };
   }, [sdkReady, paypalClientId, onSuccess]);
 
-  if (!paypalClientId) {
-    return (
-      <p className="mt-4 text-sm text-[var(--text-muted)]">
-        Please try PayPal again later.
-      </p>
-    );
-  }
-  if (!sdkReady) {
-    return <div className="mt-4 h-12 bg-[var(--border)] rounded animate-pulse" />;
-  }
-  return null;
+  const sdkUrl = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=USD&intent=capture`;
+
+  return (
+    <>
+      {paypalClientId && (
+        <Script
+          id="paypal-sdk"
+          src={sdkUrl}
+          strategy="afterInteractive"
+          onReady={() => {
+            const paypal = (window as MythRealmsWindow).paypal;
+            if (!paypal?.Buttons) {
+              setButtonReady(false);
+              setPaypalError("PayPal could not be loaded. Please refresh and try again.");
+              return;
+            }
+            setPaypalError("");
+            setSdkReady(true);
+          }}
+          onError={() => {
+            setSdkReady(false);
+            setButtonReady(false);
+            setPaypalError("PayPal could not be loaded. Please refresh and try again.");
+          }}
+        />
+      )}
+      {paypalClientId && (
+        <div className="relative min-h-12">
+          <div
+            id="paypal-button-container"
+            className={buttonReady ? "" : "opacity-0 pointer-events-none"}
+          />
+          {!buttonReady && !paypalError && (
+            <div
+              className="absolute inset-0 h-12 bg-[var(--border)] rounded animate-pulse"
+              aria-label="Loading PayPal"
+            />
+          )}
+        </div>
+      )}
+      {!paypalClientId && (
+        <p role="alert" className="text-sm text-red-700">
+          PayPal is not configured. Please contact support.
+        </p>
+      )}
+      {paypalError && (
+        <p role="alert" className="text-sm text-red-700">
+          {paypalError}
+        </p>
+      )}
+    </>
+  );
 }
