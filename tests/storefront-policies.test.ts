@@ -1,12 +1,19 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createElement } from "react";
+import { createElement, type ComponentType } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import RefundPage from "../src/app/refund/page";
-import ShippingPage from "../src/app/shipping/page";
+import ShippingPage, { metadata as shippingMetadata } from "../src/app/shipping/page";
+import CheckoutPageModule from "../src/app/checkout/page";
+import { useCartStore } from "../src/lib/cart";
 import { buildOrganizationSchema } from "../src/lib/seo/schema";
 import { STORE_POLICY_FACTS } from "../src/lib/storefront/policies";
+
+const CheckoutPage =
+  typeof CheckoutPageModule === "function"
+    ? CheckoutPageModule
+    : (CheckoutPageModule as unknown as { default: ComponentType }).default;
 
 test("structured policy facts match the public shipping and return promises", () => {
   assert.deepEqual(STORE_POLICY_FACTS, {
@@ -20,18 +27,64 @@ test("structured policy facts match the public shipping and return promises", ()
     customerRemorseReturnFees:
       "https://schema.org/ReturnFeesCustomerResponsibility",
     itemDefectReturnFees: "https://schema.org/FreeReturn",
-    returnLabelSource:
-      "https://schema.org/ReturnLabelCustomerResponsibility",
     customerRemorseReturnLabelSource:
       "https://schema.org/ReturnLabelCustomerResponsibility",
+    itemDefectReturnLabelSource:
+      "https://schema.org/ReturnLabelDownloadAndPrint",
   });
 });
 
-test("visible policy headlines render the centralized policy facts", () => {
+test("visible shipping copy renders the exact centralized price boundary", () => {
+  const threshold = STORE_POLICY_FACTS.freeShippingThresholdUsd.toFixed(2);
+  const flatRate = STORE_POLICY_FACTS.standardShippingFlatRateUsd.toFixed(2);
+  const shipping = renderToStaticMarkup(createElement(ShippingPage));
+  const serverItems = useCartStore.getInitialState().items;
+  const originalServerItems = [...serverItems];
+  serverItems.splice(0, serverItems.length, {
+    product: {
+      id: "policy-test",
+      name: "Policy Test",
+      slug: "policy-test",
+      image: "/policy-test.jpg",
+      price: 20,
+    },
+    quantity: 1,
+  });
+  let checkout: string;
+  try {
+    checkout = renderToStaticMarkup(createElement(CheckoutPage));
+  } finally {
+    serverItems.splice(0, serverItems.length, ...originalServerItems);
+  }
+
+  assert.equal(
+    shippingMetadata.description,
+    `Standard shipping costs $${flatRate} below $${threshold} and is free for orders of $${threshold} or more. View delivery times by country, shipping methods, and tracking information.`,
+  );
+  assert.ok(shipping.includes(`On all orders of $${threshold} or more`));
+  assert.ok(
+    shipping.includes(
+      `$${flatRate} below $${threshold}; free on orders of $${threshold} or more`,
+    ),
+  );
+  assert.ok(
+    checkout.includes(
+      `Free shipping on orders of $${threshold} or more`,
+    ),
+  );
+  assert.ok(checkout.includes(`$${flatRate} shipping below $${threshold}`));
+  assert.ok(checkout.includes(`Free at $${threshold} or more`));
+  assert.doesNotMatch(`${shipping}\n${checkout}`, /over \$69\.99/i);
+  assert.doesNotMatch(
+    shipping,
+    /otherwise (?:a )?flat rate calculated at checkout/i,
+  );
+});
+
+test("visible policy timing and return headlines render the centralized facts", () => {
   const shipping = renderToStaticMarkup(createElement(ShippingPage));
   const refund = renderToStaticMarkup(createElement(RefundPage));
 
-  assert.match(shipping, /orders over \$69\.99/i);
   assert.match(shipping, /2-5 business days/i);
   assert.match(shipping, /8-14 days/i);
   assert.match(refund, /30-Day Return Window/i);
@@ -132,14 +185,19 @@ test("organization schema emits only verified shipping and return policy facts",
     customerRemorseReturnFees:
       "https://schema.org/ReturnFeesCustomerResponsibility",
     itemDefectReturnFees: "https://schema.org/FreeReturn",
-    returnLabelSource:
-      "https://schema.org/ReturnLabelCustomerResponsibility",
     customerRemorseReturnLabelSource:
       "https://schema.org/ReturnLabelCustomerResponsibility",
+    itemDefectReturnLabelSource:
+      "https://schema.org/ReturnLabelDownloadAndPrint",
     merchantReturnLink: "https://example.com/refund",
   });
-  assert.equal("returnShippingFeesAmount" in schema.hasMerchantReturnPolicy, false);
-  assert.equal("customerRemorseReturnShippingFeesAmount" in schema.hasMerchantReturnPolicy, false);
+  assert.equal("returnLabelSource" in schema.hasMerchantReturnPolicy, false);
+  assert.deepEqual(
+    Object.keys(schema.hasMerchantReturnPolicy).filter((key) =>
+      /returnShippingFeesAmount$/i.test(key),
+    ),
+    [],
+  );
   assert.equal(schema.contactPoint.url, "https://example.com/contact");
 
   const serialized = JSON.stringify(schema);

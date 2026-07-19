@@ -251,9 +251,10 @@ export function buildOrganizationSchema(input: OrganizationSchemaInput) {
         returnFees: input.policyFacts.returnFees,
         customerRemorseReturnFees: input.policyFacts.customerRemorseReturnFees,
         itemDefectReturnFees: input.policyFacts.itemDefectReturnFees,
-        returnLabelSource: input.policyFacts.returnLabelSource,
         customerRemorseReturnLabelSource:
           input.policyFacts.customerRemorseReturnLabelSource,
+        itemDefectReturnLabelSource:
+          input.policyFacts.itemDefectReturnLabelSource,
         merchantReturnLink: `${baseUrl}/refund`,
       }
     : input.returnPolicy;

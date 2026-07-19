@@ -254,16 +254,19 @@ test("organization policy schema distinguishes shipping bands and return reasons
     "https://schema.org/ReturnFeesCustomerResponsibility",
   );
   assert.equal(returns.itemDefectReturnFees, "https://schema.org/FreeReturn");
-  assert.equal(
-    returns.returnLabelSource,
-    "https://schema.org/ReturnLabelCustomerResponsibility",
-  );
+  assert.equal("returnLabelSource" in returns, false);
   assert.equal(
     returns.customerRemorseReturnLabelSource,
     "https://schema.org/ReturnLabelCustomerResponsibility",
   );
-  assert.equal("returnShippingFeesAmount" in returns, false);
-  assert.equal("customerRemorseReturnShippingFeesAmount" in returns, false);
+  assert.equal(
+    returns.itemDefectReturnLabelSource,
+    "https://schema.org/ReturnLabelDownloadAndPrint",
+  );
+  assert.deepEqual(
+    Object.keys(returns).filter((key) => /returnShippingFeesAmount$/i.test(key)),
+    [],
+  );
 });
 
 test("JsonLd safely escapes less-than characters", () => {

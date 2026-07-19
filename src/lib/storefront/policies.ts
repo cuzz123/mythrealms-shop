@@ -9,10 +9,10 @@ export const STORE_POLICY_FACTS = {
   customerRemorseReturnFees:
     "https://schema.org/ReturnFeesCustomerResponsibility",
   itemDefectReturnFees: "https://schema.org/FreeReturn",
-  returnLabelSource:
-    "https://schema.org/ReturnLabelCustomerResponsibility",
   customerRemorseReturnLabelSource:
     "https://schema.org/ReturnLabelCustomerResponsibility",
+  itemDefectReturnLabelSource:
+    "https://schema.org/ReturnLabelDownloadAndPrint",
 } as const;
 
 export type StorePolicyFacts = typeof STORE_POLICY_FACTS;
