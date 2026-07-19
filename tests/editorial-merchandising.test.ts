@@ -44,6 +44,30 @@ test("gift price sections are ordered and do not repeat first-screen products", 
   assert.ok(under70.products.every(({ slug }) => !under50Slugs.has(slug)));
 });
 
+test("gift price sections sort ascending, cap at eight, and refill after exclusion", () => {
+  const [under50, under70] = getGiftSections();
+  const compareByPriceThenSlug = (
+    left: { price: number; slug: string },
+    right: { price: number; slug: string },
+  ) => left.price - right.price || left.slug.localeCompare(right.slug);
+
+  for (const section of [under50, under70]) {
+    assert.ok(section.products.length <= 8, `${section.id}: ${section.products.length}`);
+    assert.deepEqual(section.products, [...section.products].sort(compareByPriceThenSlug));
+  }
+
+  const under50Slugs = new Set(under50.products.map(({ slug }) => slug));
+  const refillCandidates = getStorefrontProducts()
+    .filter((product) => product.price < 70 && !under50Slugs.has(product.slug))
+    .sort(compareByPriceThenSlug);
+
+  assert.deepEqual(
+    under70.products.map(({ slug }) => slug),
+    refillCandidates.slice(0, 8).map(({ slug }) => slug),
+  );
+  assert.equal(under70.products.length, Math.min(8, refillCandidates.length));
+});
+
 test("gift labels do not claim unverified popularity", () => {
   const copy = JSON.stringify(getGiftSections());
   assert.doesNotMatch(copy, /best seller|most loved|top rated/i);

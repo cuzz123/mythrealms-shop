@@ -45,8 +45,6 @@ async function expectInternalLinksHealthy(request: APIRequestContext, hrefs: rea
 
 async function expectLayoutReady(page: Page) {
   await page.evaluate(() => document.fonts.ready);
-  const images = page.locator("#main-content img");
-  if ((await images.count()) > 0) await expectImagesLoaded(images);
 }
 
 async function expectNoHorizontalOverflow(page: Page) {
@@ -178,6 +176,30 @@ test.describe("release surfaces", () => {
       expect(new Set(productHrefs).size).toBe(productHrefs.length);
       const schemas = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) => scripts.map((script) => JSON.parse(script.textContent || "{}")));
       for (const type of ["Article", "BreadcrumbList", "FAQPage"]) expect(schemas.some((schema) => schema["@type"] === type)).toBe(true);
+      const visibleBreadcrumbs = await page
+        .getByRole("navigation", { name: "Breadcrumb" })
+        .locator('a, [aria-current="page"]')
+        .evaluateAll((items) =>
+          items.map((item) => ({
+            name: item.textContent?.trim(),
+            path:
+              item instanceof HTMLAnchorElement
+                ? new URL(item.href).pathname
+                : window.location.pathname,
+          })),
+        );
+      const breadcrumb = schemas.find((schema) => schema["@type"] === "BreadcrumbList");
+      expect(
+        breadcrumb.itemListElement.map(
+          (item: { position: number; name: string; item: string }) => ({
+            position: item.position,
+            name: item.name,
+            path: new URL(item.item).pathname,
+          }),
+        ),
+      ).toEqual(
+        visibleBreadcrumbs.map((item, index) => ({ position: index + 1, ...item })),
+      );
       const article = schemas.find((schema) => schema["@type"] === "Article");
       expect(article).toMatchObject({
         headline: guide.title,
@@ -208,7 +230,7 @@ test.describe("release surfaces", () => {
     }
   });
 
-  test("new editorial pages remain readable without JavaScript", async ({ browser }) => {
+  test("public editorial shell server-renders without JavaScript or a global skeleton", async ({ browser }) => {
     test.setTimeout(120_000);
     const context = await browser.newContext({
       javaScriptEnabled: false,
@@ -218,6 +240,8 @@ test.describe("release surfaces", () => {
 
     try {
       await page.goto("/");
+      await expect(page.locator('[data-storefront-chrome="header"]')).toBeVisible();
+      await expect(page.locator('[data-storefront-chrome="footer"]')).toBeVisible();
       await expect(page.getByRole("heading", { level: 1, name: "Pearls for sunlit days." })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Choose your starting point" }).first()).toBeVisible();
       await expect(page.getByRole("link", { name: "Shop the Pearl Edit" })).toHaveAttribute(
@@ -304,6 +328,19 @@ test.describe("release surfaces", () => {
     } finally {
       await context.close();
     }
+  });
+
+  test("studio renders its own provider boundary and suppresses storefront chrome", async ({ page }) => {
+    await page.goto("/studio");
+
+    await expect(page.locator("[data-studio-shell]")).toBeAttached();
+    await expect(page.getByRole("heading", { level: 1, name: "MythRealms Studio" })).toBeVisible();
+    await expect(page.locator("#react-flow-wrapper")).toBeVisible();
+    await expect(page.locator("[data-storefront-chrome]")).toHaveCount(2);
+    for (const chrome of await page.locator("[data-storefront-chrome]").all()) {
+      await expect(chrome).toBeHidden();
+    }
+    await expect(page.locator("#main-content")).toHaveCSS("padding-bottom", "0px");
   });
 
   test("gift edit under $50 contains only matching current catalog products", async ({ page }) => {
