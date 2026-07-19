@@ -11,11 +11,19 @@ import { STORE_POLICY_FACTS } from "../src/lib/storefront/policies";
 test("structured policy facts match the public shipping and return promises", () => {
   assert.deepEqual(STORE_POLICY_FACTS, {
     freeShippingThresholdUsd: 69.99,
+    standardShippingFlatRateUsd: 4.99,
     handlingBusinessDays: { min: 2, max: 5 },
     usStandardTransitBusinessDays: { min: 8, max: 14 },
     returnWindowDays: 30,
     returnMethod: "https://schema.org/ReturnByMail",
-    defaultReturnFees: "https://schema.org/ReturnShippingFees",
+    returnFees: "https://schema.org/ReturnFeesCustomerResponsibility",
+    customerRemorseReturnFees:
+      "https://schema.org/ReturnFeesCustomerResponsibility",
+    itemDefectReturnFees: "https://schema.org/FreeReturn",
+    returnLabelSource:
+      "https://schema.org/ReturnLabelCustomerResponsibility",
+    customerRemorseReturnLabelSource:
+      "https://schema.org/ReturnLabelCustomerResponsibility",
   });
 });
 
@@ -43,7 +51,75 @@ test("organization schema emits only verified shipping and return policy facts",
     name: "MythRealms Standard Shipping",
     url: "https://example.com/shipping",
     description:
-      "2-5 business-day handling, 8-14 business-day US standard transit, and free shipping on orders over $69.99.",
+      "US standard shipping costs $4.99 below $69.99 and is free for orders of $69.99 or more, with 2-5 business-day handling and 8-14 business-day transit.",
+    fulfillmentType: "https://schema.org/FulfillmentTypeDelivery",
+    handlingTime: {
+      "@type": "ServicePeriod",
+      duration: {
+        "@type": "QuantitativeValue",
+        minValue: 2,
+        maxValue: 5,
+        unitCode: "DAY",
+      },
+      businessDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    },
+    shippingConditions: [
+      {
+        "@type": "ShippingConditions",
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "US",
+        },
+        orderValue: {
+          "@type": "MonetaryAmount",
+          minValue: 0,
+          maxValue: 69.98,
+          currency: "USD",
+        },
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: 4.99,
+          currency: "USD",
+        },
+        transitTime: {
+          "@type": "ServicePeriod",
+          duration: {
+            "@type": "QuantitativeValue",
+            minValue: 8,
+            maxValue: 14,
+            unitCode: "DAY",
+          },
+          businessDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        },
+      },
+      {
+        "@type": "ShippingConditions",
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "US",
+        },
+        orderValue: {
+          "@type": "MonetaryAmount",
+          minValue: 69.99,
+          currency: "USD",
+        },
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: 0,
+          currency: "USD",
+        },
+        transitTime: {
+          "@type": "ServicePeriod",
+          duration: {
+            "@type": "QuantitativeValue",
+            minValue: 8,
+            maxValue: 14,
+            unitCode: "DAY",
+          },
+          businessDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        },
+      },
+    ],
   });
   assert.deepEqual(schema.hasMerchantReturnPolicy, {
     "@type": "MerchantReturnPolicy",
@@ -52,13 +128,20 @@ test("organization schema emits only verified shipping and return policy facts",
       "https://schema.org/MerchantReturnFiniteReturnWindow",
     merchantReturnDays: 30,
     returnMethod: "https://schema.org/ReturnByMail",
-    customerRemorseReturnFees: "https://schema.org/ReturnShippingFees",
+    returnFees: "https://schema.org/ReturnFeesCustomerResponsibility",
+    customerRemorseReturnFees:
+      "https://schema.org/ReturnFeesCustomerResponsibility",
+    itemDefectReturnFees: "https://schema.org/FreeReturn",
+    returnLabelSource:
+      "https://schema.org/ReturnLabelCustomerResponsibility",
+    customerRemorseReturnLabelSource:
+      "https://schema.org/ReturnLabelCustomerResponsibility",
     merchantReturnLink: "https://example.com/refund",
   });
-  assert.equal("returnFees" in schema.hasMerchantReturnPolicy, false);
+  assert.equal("returnShippingFeesAmount" in schema.hasMerchantReturnPolicy, false);
+  assert.equal("customerRemorseReturnShippingFeesAmount" in schema.hasMerchantReturnPolicy, false);
   assert.equal(schema.contactPoint.url, "https://example.com/contact");
 
   const serialized = JSON.stringify(schema);
-  assert.doesNotMatch(serialized, /shippingRate/);
   assert.doesNotMatch(serialized, /free returns?/i);
 });

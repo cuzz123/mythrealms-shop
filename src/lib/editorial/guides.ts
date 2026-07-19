@@ -53,7 +53,7 @@ export const PEARL_HUB_FAQ: readonly PearlHubFaq[] = [
   },
   {
     question: "How should I care for pearl jewelry?",
-    answer: "Put pearls on after cosmetics, wipe them after wear, and store them separately in a dry, soft place.",
+    answer: "Put pearls on after cosmetics, wipe them after wear, and let a cleaned or wet piece air-dry fully before storing it flat in a soft pouch, separate from harder jewelry.",
   },
   {
     question: "Where can I find customer help?",
@@ -69,7 +69,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
     seoTitle: "How to Care for Pearl Jewelry",
     description: "A practical routine for wearing, cleaning, and storing pearl jewelry.",
     eyebrow: "Pearl Guide",
-    directAnswer: "Put pearls on after cosmetics, fragrance, and hair products. After wear, wipe the piece with a soft, clean cloth, keep it dry, and store it separately from harder jewelry. Avoid household cleaners and ultrasonic cleaning, and ask a qualified jeweler when a piece needs repair or deeper attention.",
+    directAnswer: "Put pearls on after cosmetics, fragrance, and hair products. After wear, wipe the piece with a soft, clean cloth. If it is cleaned or gets wet, let it air-dry fully before storage. Store pearls flat in a soft pouch or cloth, separate from harder jewelry and away from heat and overly dry environments. Never hang strands.",
     image: {
       src: "/images/brand/hero/pearl-bracelet-editorial.png",
       alt: "Gold wire pearl bracelet displayed on dark fabric",
@@ -99,9 +99,9 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       {
         id: "storage",
         heading: "How should pearl jewelry be stored?",
-        answer: "Keep pearl jewelry dry and separate from pieces that can scratch it.",
+        answer: "Let a cleaned or wet piece air-dry fully, then store it flat in a soft pouch or cloth, separate from pieces that can scratch it.",
         paragraphs: [
-          "Store each piece in a soft pouch or lined compartment. Avoid leaving pearls in a hot, dry place or pressed against hard jewelry.",
+          "Keep pearls away from heat and overly dry environments, and never hang strands because hanging can stretch the thread.",
         ],
       },
       {
@@ -116,7 +116,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
           headers: ["Do", "Do not"],
           rows: [
             ["Wipe pearls with a soft cloth after wear.", "Spray fragrance or hairspray onto worn pearls."],
-            ["Store pieces separately in a soft pouch or case.", "Store pearls loose against hard jewelry."],
+            ["Store pieces flat and separately in a soft pouch or cloth.", "Hang pearl strands or store them loose against hard jewelry."],
             ["Remove pearl jewelry before showering or swimming.", "Wear pearls in chlorinated pools or while using soaps."],
             ["Ask a jeweler about repairs or restringing.", "Use household cleaners or ultrasonic cleaning."],
           ],
@@ -134,7 +134,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       },
       {
         question: "How should I store pearl jewelry?",
-        answer: "Keep it dry in a soft pouch or lined compartment, separate from hard jewelry.",
+        answer: "Let it air-dry fully if cleaned or wet, then store it flat in a soft pouch or cloth, separate from hard jewelry and away from heat and overly dry environments. Never hang strands.",
       },
     ],
     relatedTypes: ["earrings", "necklaces", "bracelets", "rings"],

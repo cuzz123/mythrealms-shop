@@ -41,7 +41,7 @@ export default function NewArrivalsPage() {
   const products = getNewArrivalProducts();
 
   return (
-    <main className="bg-[var(--bg)]">
+    <div className="bg-[var(--bg)]">
       <JsonLd
         data={buildCollectionSchema({
           name: "New Pearl Arrivals",
@@ -80,6 +80,6 @@ export default function NewArrivalsPage() {
           </div>
         </section>
       )}
-    </main>
+    </div>
   );
 }

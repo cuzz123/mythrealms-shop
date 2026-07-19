@@ -3,6 +3,7 @@ import type { StorePolicyFacts } from "@/lib/storefront/policies";
 const SCHEMA_CONTEXT = "https://schema.org";
 const BRAND_NAME = "MythRealms";
 const EDITORIAL_AUTHOR = "MythRealms Editorial";
+const BUSINESS_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const;
 
 type VerifiedSchemaObject = Readonly<Record<string, unknown>>;
 
@@ -174,12 +175,69 @@ export function buildFAQPageSchema(items: readonly FAQItem[]) {
 
 export function buildOrganizationSchema(input: OrganizationSchemaInput) {
   const baseUrl = input.url.replace(/\/+$/, "");
+  const servicePeriod = (duration: Readonly<{ min: number; max: number }>) => ({
+    "@type": "ServicePeriod",
+    duration: {
+      "@type": "QuantitativeValue",
+      minValue: duration.min,
+      maxValue: duration.max,
+      unitCode: "DAY",
+    },
+    businessDays: [...BUSINESS_DAYS],
+  });
   const shippingService = input.policyFacts
     ? {
         "@type": "ShippingService",
         name: "MythRealms Standard Shipping",
         url: `${baseUrl}/shipping`,
-        description: `${input.policyFacts.handlingBusinessDays.min}-${input.policyFacts.handlingBusinessDays.max} business-day handling, ${input.policyFacts.usStandardTransitBusinessDays.min}-${input.policyFacts.usStandardTransitBusinessDays.max} business-day US standard transit, and free shipping on orders over $${input.policyFacts.freeShippingThresholdUsd.toFixed(2)}.`,
+        description: `US standard shipping costs $${input.policyFacts.standardShippingFlatRateUsd.toFixed(2)} below $${input.policyFacts.freeShippingThresholdUsd.toFixed(2)} and is free for orders of $${input.policyFacts.freeShippingThresholdUsd.toFixed(2)} or more, with ${input.policyFacts.handlingBusinessDays.min}-${input.policyFacts.handlingBusinessDays.max} business-day handling and ${input.policyFacts.usStandardTransitBusinessDays.min}-${input.policyFacts.usStandardTransitBusinessDays.max} business-day transit.`,
+        fulfillmentType: "https://schema.org/FulfillmentTypeDelivery",
+        handlingTime: servicePeriod(input.policyFacts.handlingBusinessDays),
+        shippingConditions: [
+          {
+            "@type": "ShippingConditions",
+            shippingDestination: {
+              "@type": "DefinedRegion",
+              addressCountry: "US",
+            },
+            orderValue: {
+              "@type": "MonetaryAmount",
+              minValue: 0,
+              maxValue: Number(
+                (input.policyFacts.freeShippingThresholdUsd - 0.01).toFixed(2),
+              ),
+              currency: "USD",
+            },
+            shippingRate: {
+              "@type": "MonetaryAmount",
+              value: input.policyFacts.standardShippingFlatRateUsd,
+              currency: "USD",
+            },
+            transitTime: servicePeriod(
+              input.policyFacts.usStandardTransitBusinessDays,
+            ),
+          },
+          {
+            "@type": "ShippingConditions",
+            shippingDestination: {
+              "@type": "DefinedRegion",
+              addressCountry: "US",
+            },
+            orderValue: {
+              "@type": "MonetaryAmount",
+              minValue: input.policyFacts.freeShippingThresholdUsd,
+              currency: "USD",
+            },
+            shippingRate: {
+              "@type": "MonetaryAmount",
+              value: 0,
+              currency: "USD",
+            },
+            transitTime: servicePeriod(
+              input.policyFacts.usStandardTransitBusinessDays,
+            ),
+          },
+        ],
       }
     : input.shippingService;
   const returnPolicy = input.policyFacts
@@ -190,7 +248,12 @@ export function buildOrganizationSchema(input: OrganizationSchemaInput) {
           "https://schema.org/MerchantReturnFiniteReturnWindow",
         merchantReturnDays: input.policyFacts.returnWindowDays,
         returnMethod: input.policyFacts.returnMethod,
-        customerRemorseReturnFees: input.policyFacts.defaultReturnFees,
+        returnFees: input.policyFacts.returnFees,
+        customerRemorseReturnFees: input.policyFacts.customerRemorseReturnFees,
+        itemDefectReturnFees: input.policyFacts.itemDefectReturnFees,
+        returnLabelSource: input.policyFacts.returnLabelSource,
+        customerRemorseReturnLabelSource:
+          input.policyFacts.customerRemorseReturnLabelSource,
         merchantReturnLink: `${baseUrl}/refund`,
       }
     : input.returnPolicy;

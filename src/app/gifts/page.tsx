@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export function GiftProductSections({ sections }: { sections: readonly GiftSection[] }) {
-  return sections.map((section) => {
+  return sections.filter((section) => section.products.length > 0).map((section) => {
     const headingId = `${section.id}-products-title`;
 
     return (
@@ -49,36 +49,12 @@ export function GiftProductSections({ sections }: { sections: readonly GiftSecti
         className="scroll-mt-28"
         aria-labelledby={headingId}
       >
-        {section.products.length > 0 ? (
-          <RelatedProducts
-            products={section.products}
-            title={section.title}
-            description={section.description}
-            headingId={headingId}
-          />
-        ) : (
-          <div className="bg-[var(--surface-alt)] py-14 sm:py-16">
-            <div className="mx-auto max-w-7xl px-6">
-              <div className="max-w-2xl">
-                <p className="text-xs font-semibold uppercase text-[var(--accent)]">
-                  The Pearl Edit
-                </p>
-                <h2
-                  id={headingId}
-                  className="mt-3 font-serif text-3xl font-medium text-[var(--text)]"
-                >
-                  {section.title}
-                </h2>
-                <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
-                  {section.description}
-                </p>
-                <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">
-                  There are no pieces available in this edit right now.
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
+        <RelatedProducts
+          products={section.products}
+          title={section.title}
+          description={section.description}
+          headingId={headingId}
+        />
       </section>
     );
   });
@@ -89,7 +65,7 @@ export default function GiftsPage() {
   const products = getUniqueGiftProducts(sections);
 
   return (
-    <main className="bg-[var(--bg)]">
+    <div className="bg-[var(--bg)]">
       <JsonLd
         data={buildCollectionSchema({
           name: "MythRealms Pearl Gift Guide",
@@ -136,6 +112,6 @@ export default function GiftsPage() {
           </nav>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

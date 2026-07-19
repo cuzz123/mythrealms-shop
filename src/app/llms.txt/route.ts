@@ -1,5 +1,7 @@
 import { siteUrl } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export function GET() {
   const body = `# MythRealms
 

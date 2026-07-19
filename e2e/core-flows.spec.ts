@@ -127,18 +127,22 @@ test.describe("storefront release flows", () => {
     ).toBeVisible();
   });
 
-  test("homepage ScrollReveal stays visible without JavaScript", async ({ browser }) => {
+  test("homepage server-rendered content stays visible without JavaScript", async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
 
     try {
       await page.goto("/");
-      const reveal = page.locator('[aria-labelledby="noscript-shop-by-style-title"]');
+      const reveal = page.locator('[aria-labelledby="shop-by-style-title"]');
       await expect(reveal).toHaveAttribute("data-reveal-ready", "false");
       await expect(reveal).toHaveAttribute("data-reveal-visible", "true");
       await expect(
         reveal.getByRole("heading", { name: "Choose your starting point" }),
       ).toBeVisible();
+      await expect(reveal.getByRole("link", { name: "Everyday Pearl" })).toHaveAttribute(
+        "href",
+        "/collections/pearl-series",
+      );
     } finally {
       await context.close();
     }
@@ -176,7 +180,7 @@ test.describe("storefront release flows", () => {
     await expect(page.locator('[data-product-type]:not([data-product-type="earrings"])')).toHaveCount(0);
   });
 
-  test("product card media only exposes verified wearing views", async ({ page }) => {
+  test("product card media exposes neutral alternate views when supplied", async ({ page }) => {
     await page.goto("/collections/pearl-series");
 
     const newSeriesImages = page
@@ -194,6 +198,16 @@ test.describe("storefront release flows", () => {
     await expect(sourcePreservedImages).toHaveCount(2);
     await expect(sourcePreservedImages.first()).toHaveJSProperty("complete", true);
     expect(await sourcePreservedImages.first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
+
+    const pearlEighteenImages = page
+      .locator('a[href="/products/pearl-series-18"]')
+      .locator("img");
+    await pearlEighteenImages.first().scrollIntoViewIfNeeded();
+    await expect(pearlEighteenImages).toHaveCount(2);
+    await expect(pearlEighteenImages.nth(1)).toHaveAttribute(
+      "alt",
+      /alternate product view/i,
+    );
   });
 
   test("desktop Shop, Gifts, and Discover menus open and navigate", async ({ page }) => {
@@ -241,7 +255,7 @@ test.describe("storefront release flows", () => {
     }
   });
 
-  test("mobile navigation exposes every desktop route family without horizontal overflow", async ({ page }) => {
+  test("mobile navigation reaches and navigates through its last link", async ({ page }) => {
     for (const viewport of [
       { width: 320, height: 800 },
       { width: 390, height: 844 },
@@ -251,6 +265,8 @@ test.describe("storefront release flows", () => {
       await page.getByRole("button", { name: "Open navigation menu" }).click();
 
       const mobileNav = page.getByRole("navigation", { name: "Mobile navigation" });
+      const mobileDialog = page.getByRole("dialog", { name: "Navigation menu" });
+      const closeButton = mobileDialog.getByRole("button", { name: "Close navigation menu" });
       await expect(mobileNav).toBeVisible();
       for (const menu of HEADER_MENUS) {
         await expect(mobileNav.getByText(menu.label, { exact: true })).toBeVisible();
@@ -265,7 +281,18 @@ test.describe("storefront release flows", () => {
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth),
       ).toBeLessThanOrEqual(0);
-      await page.getByRole("button", { name: "Close navigation menu" }).last().click();
+
+      const lastMenu = HEADER_MENUS[HEADER_MENUS.length - 1];
+      const lastRoute = lastMenu.links[lastMenu.links.length - 1];
+      const lastLink = mobileNav.getByRole("link", {
+        name: lastRoute.label,
+        exact: true,
+      });
+      await lastLink.scrollIntoViewIfNeeded();
+      await expect(lastLink).toBeInViewport();
+      await expect(closeButton).toBeInViewport();
+      await lastLink.click();
+      await expect(page).toHaveURL(new RegExp(`${lastRoute.href.replaceAll("/", "\\/")}$`));
     }
   });
 
@@ -322,6 +349,7 @@ test.describe("storefront release flows", () => {
     await expect(guides.getByRole("link", { name: "How to care for pearl jewelry" })).toHaveAttribute("href", "/pearls/care");
     await expect(guides.getByRole("link", { name: "How to wear pearls" })).toHaveAttribute("href", "/pearls/how-to-wear");
     await expect(guides.getByRole("link", { name: "What are freshwater pearls?" })).toHaveAttribute("href", "/pearls/freshwater-pearls");
+    await expect(guides.getByRole("link", { name: "Shop pearl gifts" })).toHaveAttribute("href", "/gifts");
   });
 
   test("footer exposes the centralized discovery and policy routes", async ({ page }) => {

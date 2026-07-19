@@ -430,6 +430,9 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
               <Link href="/pearls/freshwater-pearls" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">
                 What are freshwater pearls?
               </Link>
+              <Link href="/gifts" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">
+                Shop pearl gifts
+              </Link>
             </div>
           </section>
         </div>

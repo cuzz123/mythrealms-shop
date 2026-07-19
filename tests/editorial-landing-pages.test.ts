@@ -49,6 +49,7 @@ test("gifts route renders the approved four edits and truthful support links", (
   assert.match(html, /"@type":"CollectionPage"/);
   assert.match(html, /"@type":"ItemList"/);
   assert.doesNotMatch(html, /best seller|most loved|top rated/i);
+  assert.doesNotMatch(html, /<main(?:\s|>)/);
 
   const productHeadingIds = ["under-50", "under-70", "everyday", "statement"].map(
     (id) => `${id}-products-title`,
@@ -59,21 +60,19 @@ test("gifts route renders the approved four edits and truthful support links", (
   }
 });
 
-test("gift section anchors and titles survive an empty edit without an empty grid", () => {
+test("gift sections omit empty edits completely", () => {
   const sections: GiftSection[] = getGiftSections().map((section) =>
     section.id === "under-50" ? { ...section, products: [] } : section,
   );
   const html = renderToStaticMarkup(createElement(GiftProductSections, { sections }));
 
-  for (const section of sections) {
+  for (const section of sections.filter((section) => section.products.length > 0)) {
     assert.match(html, new RegExp(`id="${section.id}"`));
     assert.match(html, new RegExp(`>${section.title.replace("$", "\\$")}<`));
   }
-
-  const emptySection = html.match(/<section[^>]*id="under-50"[\s\S]*?<\/section>/)?.[0];
-  assert.ok(emptySection);
-  assert.match(emptySection, /There are no pieces available in this edit right now\./);
-  assert.doesNotMatch(emptySection, /grid-cols-2/);
+  assert.doesNotMatch(html, /id="under-50"/);
+  assert.doesNotMatch(html, />Under \$50</);
+  assert.doesNotMatch(html, /There are no pieces available in this edit right now\./);
 });
 
 test("gift schemas list each rendered product only once", () => {
@@ -90,6 +89,7 @@ test("new-arrivals route describes the active catalog and renders its collection
   assert.match(html, /recently added pieces in the active catalog/i);
   assert.match(html, /"@type":"CollectionPage"/);
   assert.match(html, /"@type":"ItemList"/);
+  assert.doesNotMatch(html, /<main(?:\s|>)/);
 
   for (const product of getNewArrivalProducts()) {
     assert.match(html, new RegExp(`/products/${product.slug}`));

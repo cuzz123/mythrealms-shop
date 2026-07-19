@@ -32,13 +32,12 @@ export function ProductCard({ product, className }: ProductCardProps) {
   const toggleWishlist = useWishlistStore((s) => s.toggleItem);
   const isWishlisted = useWishlistStore((s) => s.isWishlisted);
   const [primaryFailed, setPrimaryFailed] = useState(false);
-  const [wearingFailed, setWearingFailed] = useState(false);
+  const [alternateFailed, setAlternateFailed] = useState(false);
 
   const primaryImage = product.imageRoles?.primary || product.images[0] || "";
-  const wearingImage = product.imageRoles?.wearing;
-  const hasWearingImage = Boolean(wearingImage);
+  const alternateImage = product.imageRoles?.alternate;
   const showPrimaryImage = Boolean(primaryImage) && !primaryFailed;
-  const showWearingImage = Boolean(wearingImage) && !wearingFailed;
+  const showAlternateImage = Boolean(alternateImage) && !alternateFailed;
   const isValidPrimaryImage =
     primaryImage && (primaryImage.startsWith("http") || primaryImage.startsWith("/"));
   const firstVariant = product.variants[0];
@@ -96,19 +95,19 @@ export function ProductCard({ product, className }: ProductCardProps) {
                 loading="lazy"
                 onError={() => setPrimaryFailed(true)}
                 className={`object-cover transition-[opacity,transform] duration-300 group-hover:scale-[1.02] group-focus-within:scale-[1.02] ${
-                  showWearingImage
+                  showAlternateImage
                     ? "opacity-100 group-hover:opacity-0 group-focus-within:opacity-0"
                     : "opacity-100"
                 }`}
               />
-              {showWearingImage && wearingImage && (
+              {showAlternateImage && alternateImage && (
                 <Image
-                  src={imageUrl(wearingImage)}
-                  alt={`${product.name} - on-model jewelry view`}
+                  src={imageUrl(alternateImage)}
+                  alt={`${product.name} - alternate product view`}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   loading="lazy"
-                  onError={() => setWearingFailed(true)}
+                  onError={() => setAlternateFailed(true)}
                   className="object-cover opacity-0 transition-[opacity,transform] duration-300 group-hover:scale-[1.02] group-hover:opacity-100 group-focus-within:scale-[1.02] group-focus-within:opacity-100"
                 />
               )}
@@ -119,11 +118,6 @@ export function ProductCard({ product, className }: ProductCardProps) {
           {hasSale && (
             <span className="absolute left-3 top-3 inline-flex items-center rounded-full bg-[var(--sale)] px-2.5 py-0.5 text-xs font-semibold text-white">
               Sale
-            </span>
-          )}
-          {hasWearingImage && showWearingImage && (
-            <span className="absolute bottom-3 left-3 bg-[var(--surface)]/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--text)]">
-              On model
             </span>
           )}
         </div>
@@ -160,9 +154,6 @@ export function ProductCard({ product, className }: ProductCardProps) {
               <span className="h-1.5 w-1.5 rounded-full bg-red-400 animate-pulse" />
               Only {firstVariant.stock} left
             </div>
-          )}
-          {hasWearingImage && showWearingImage && (
-            <p className="text-[10px] font-semibold uppercase tracking-[0.07em] text-[var(--accent)]">Product view + on-model view</p>
           )}
         </div>
       </Link>

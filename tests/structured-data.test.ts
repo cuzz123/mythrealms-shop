@@ -15,6 +15,7 @@ import {
   buildOrganizationSchema,
   buildProductSchema,
 } from "../src/lib/seo/schema";
+import { STORE_POLICY_FACTS } from "../src/lib/storefront/policies";
 
 test("article schema mirrors visible editorial facts", () => {
   const schema = buildArticleSchema({
@@ -200,14 +201,69 @@ test("organization schema mirrors optional verified policy objects", () => {
   assert.deepEqual(schema.hasMerchantReturnPolicy, returnPolicy);
 });
 
-test("organization return policy never applies customer-paid fees globally", () => {
-  const source = readFileSync(
-    path.join(process.cwd(), "src/lib/seo/schema.ts"),
-    "utf8",
-  );
+test("organization policy schema distinguishes shipping bands and return reasons", () => {
+  const schema = buildOrganizationSchema({
+    url: "https://example.com",
+    logo: "https://example.com/logo.png",
+    contactEmail: "support@example.com",
+    policyFacts: STORE_POLICY_FACTS,
+  });
+  const shipping = schema.hasShippingService as Record<string, unknown>;
+  const returns = schema.hasMerchantReturnPolicy as Record<string, unknown>;
 
-  assert.match(source, /customerRemorseReturnFees/);
-  assert.doesNotMatch(source, /\breturnFees:\s*input\.policyFacts/);
+  assert.equal(shipping["@type"], "ShippingService");
+  assert.ok(Array.isArray(shipping.shippingConditions));
+  assert.deepEqual(
+    (shipping.shippingConditions as Array<Record<string, unknown>>).map(
+      (condition) => ({
+        orderValue: condition.orderValue,
+        shippingRate: condition.shippingRate,
+      }),
+    ),
+    [
+      {
+        orderValue: {
+          "@type": "MonetaryAmount",
+          minValue: 0,
+          maxValue: 69.98,
+          currency: "USD",
+        },
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: 4.99,
+          currency: "USD",
+        },
+      },
+      {
+        orderValue: {
+          "@type": "MonetaryAmount",
+          minValue: 69.99,
+          currency: "USD",
+        },
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: 0,
+          currency: "USD",
+        },
+      },
+    ],
+  );
+  assert.equal(returns.returnFees, "https://schema.org/ReturnFeesCustomerResponsibility");
+  assert.equal(
+    returns.customerRemorseReturnFees,
+    "https://schema.org/ReturnFeesCustomerResponsibility",
+  );
+  assert.equal(returns.itemDefectReturnFees, "https://schema.org/FreeReturn");
+  assert.equal(
+    returns.returnLabelSource,
+    "https://schema.org/ReturnLabelCustomerResponsibility",
+  );
+  assert.equal(
+    returns.customerRemorseReturnLabelSource,
+    "https://schema.org/ReturnLabelCustomerResponsibility",
+  );
+  assert.equal("returnShippingFeesAmount" in returns, false);
+  assert.equal("customerRemorseReturnShippingFeesAmount" in returns, false);
 });
 
 test("JsonLd safely escapes less-than characters", () => {

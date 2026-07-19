@@ -304,12 +304,12 @@ export function Header() {
       {mobileMenuOpen && (
         <div
           ref={mobileMenuRef}
-          className="fixed inset-0 z-50 bg-[var(--surface)] text-[var(--text)] animate-slide-down lg:hidden"
+          className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-[var(--surface)] text-[var(--text)] animate-slide-down lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
         >
-          <div className="flex h-[72px] items-center justify-end px-4">
+          <div className="sticky top-0 z-10 flex h-[72px] items-center justify-end bg-[var(--surface)]/95 px-4 backdrop-blur-sm">
             <button
               ref={mobileCloseRef}
               type="button"
@@ -350,7 +350,7 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="absolute bottom-10 left-0 right-0 flex justify-center">
+          <div className="flex justify-center px-6 py-10">
             <span className="font-serif text-lg font-semibold tracking-normal text-[var(--text-muted)]">MythRealms</span>
           </div>
         </div>

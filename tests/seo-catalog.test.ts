@@ -90,6 +90,15 @@ test("the static sitemap includes all approved products and excludes the blog ar
   assert.deepEqual(urls, expectedUrls);
 });
 
+test("the root layout does not duplicate homepage content in noscript", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/layout.tsx"),
+    "utf8",
+  );
+  assert.doesNotMatch(source, /<noscript>/);
+  assert.doesNotMatch(source, /noscript-shop-by-style-title/);
+});
+
 test("the legacy blog is explicitly noindex", () => {
   const robots = blogMetadata.robots;
   assert.equal(
@@ -132,6 +141,14 @@ test("generated GEO guidance covers canonical sources and truth guardrails", asy
   assert.doesNotMatch(llms, /\/api\/feed\/(?:google|blog)/);
   assert.doesNotMatch(llms, retiredLanguage);
   assert.equal(existsSync(path.join(process.cwd(), "public/llms.txt")), false);
+});
+
+test("the llms route explicitly opts into static generation", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/llms.txt/route.ts"),
+    "utf8",
+  );
+  assert.match(source, /export const dynamic = ["']force-static["'];/);
 });
 
 test("navigation, sitemap, llms, and product feed reject retired positioning", async () => {

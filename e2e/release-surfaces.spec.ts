@@ -221,7 +221,7 @@ test.describe("release surfaces", () => {
       const expectedImageCount =
         1 +
         expectedProducts.reduce(
-          (count, product) => count + 1 + Number(Boolean(product.imageRoles?.wearing)),
+          (count, product) => count + 1 + Number(Boolean(product.imageRoles?.alternate)),
           0,
         );
       expect(expectedImageCount).toBeGreaterThan(0);
@@ -590,7 +590,7 @@ test.describe("release surfaces", () => {
     expect(text).not.toMatch(/hand-selected stones|Curated Singles/i);
   });
 
-  test("collection and product surfaces keep solid headers and truthful image roles", async ({ page }) => {
+  test("collection and product surfaces keep solid headers and neutral alternate image roles", async ({ page }) => {
     await page.goto("/collections/pearl-series");
     await expect(page.locator("header[data-visual-state]")).toHaveAttribute("data-visual-state", "solid");
 
