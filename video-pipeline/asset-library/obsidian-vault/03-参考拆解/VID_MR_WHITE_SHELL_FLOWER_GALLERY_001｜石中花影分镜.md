@@ -11,3 +11,9 @@ tags: [白贝母花耳环, 石灰岩, 花影, Seedance]
 
 - [资产角色清单](../../10-storyboard-videos/VID_MR_WHITE_SHELL_FLOWER_GALLERY_001/asset-pack-manifest.json)
 - [镜头合同](../../10-storyboard-videos/VID_MR_WHITE_SHELL_FLOWER_GALLERY_001/cut-map.md)
+
+## 首帧预览
+
+![](../../10-storyboard-videos/VID_MR_WHITE_SHELL_FLOWER_GALLERY_001/first-frames/overview.png)
+
+- [逐镜头首帧与使用规则](../../10-storyboard-videos/VID_MR_WHITE_SHELL_FLOWER_GALLERY_001/first-frames/README.md)
