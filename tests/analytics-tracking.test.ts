@@ -61,14 +61,87 @@ type TrackingApi = {
     target?: TrackingTarget,
     consent?: ConsentState,
     configured?: ConfiguredPlatforms,
-  ) => boolean;
+    completed?: Partial<Record<TrackingPlatform, boolean>>,
+  ) => PlatformTrackingResult;
   flushTrackingQueue: (
     platform: "ga" | "meta" | "pinterest",
     target?: TrackingTarget,
     consent?: ConsentState,
   ) => void;
-  purchaseStorageKey: (orderId: string) => string;
+  purchaseStorageKey: (orderId: string, platform: TrackingPlatform) => string;
+  createCheckoutTrackingController: (options: {
+    target: TrackingEventTarget;
+    completion: { current: boolean };
+    items: TrackItem[];
+    value: number;
+    track: (items: TrackItem[], value: number) => boolean;
+  }) => TrackingController;
+  createPurchaseTrackingController: (options: {
+    target: TrackingEventTarget;
+    storage: TrackingStorage;
+    orderId: string;
+    track: (
+      completed: Partial<Record<TrackingPlatform, boolean>>,
+    ) => PlatformTrackingResult;
+  }) => TrackingController;
 };
+
+type TrackingPlatform = "ga" | "meta" | "pinterest";
+type PlatformTrackingStatus = "accepted" | "complete" | "denied" | "disabled" | "failed";
+type PlatformTrackingResult = Record<TrackingPlatform, PlatformTrackingStatus>;
+
+interface TrackingController {
+  start(): void;
+  cleanup(): void;
+}
+
+type TrackingListener = () => void;
+
+interface TrackingEventTarget {
+  addEventListener(type: string, listener: TrackingListener): void;
+  removeEventListener(type: string, listener: TrackingListener): void;
+}
+
+interface TrackingStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+}
+
+class FakeTrackingEventTarget implements TrackingEventTarget {
+  readonly added: Array<{ type: string; listener: TrackingListener }> = [];
+  readonly removed: Array<{ type: string; listener: TrackingListener }> = [];
+
+  addEventListener(type: string, listener: TrackingListener) {
+    this.added.push({ type, listener });
+  }
+
+  removeEventListener(type: string, listener: TrackingListener) {
+    this.removed.push({ type, listener });
+  }
+
+  dispatch(type: string) {
+    for (const entry of [...this.added]) {
+      if (
+        entry.type === type &&
+        !this.removed.some((removed) => removed.listener === entry.listener)
+      ) {
+        entry.listener();
+      }
+    }
+  }
+}
+
+class MemoryTrackingStorage implements TrackingStorage {
+  readonly values = new Map<string, string>();
+
+  getItem(key: string) {
+    return this.values.get(key) ?? null;
+  }
+
+  setItem(key: string, value: string) {
+    this.values.set(key, value);
+  }
+}
 
 const tracking = trackingModule as unknown as TrackingApi;
 const allConsent: ConsentState = { analytics: true, marketing: true };
@@ -222,40 +295,37 @@ test("dispatches Meta and Pinterest independently when GA is absent", () => {
   ]);
 });
 
-test("deduplicates pending events and flushes each platform exactly once", () => {
-  const unavailableTarget: TrackingTarget = {};
+test("queues two identical add-to-cart transactions independently", () => {
   const product = { id: "pearl_queue", name: "Queued Pearl", price: 40, quantity: 1 };
+  const gaOnly: ConfiguredPlatforms = { ga: true, meta: false, pinterest: false };
 
   assert.equal(
-    tracking.trackAddToCart(product, unavailableTarget, allConsent, allConfigured),
+    tracking.trackAddToCart(product, {}, allConsent, gaOnly),
     true,
   );
   assert.equal(
-    tracking.trackAddToCart(product, unavailableTarget, allConsent, allConfigured),
+    tracking.trackAddToCart(product, {}, allConsent, gaOnly),
     true,
   );
 
   const gaCalls: unknown[][] = [];
-  const metaCalls: unknown[][] = [];
-  const pinterestCalls: unknown[][] = [];
   tracking.flushTrackingQueue("ga", { gtag: (...args) => gaCalls.push(args) }, allConsent);
-  tracking.flushTrackingQueue("meta", { fbq: (...args) => metaCalls.push(args) }, allConsent);
-  tracking.flushTrackingQueue(
-    "pinterest",
-    { pintrk: (...args) => pinterestCalls.push(args) },
-    allConsent,
-  );
-  tracking.flushTrackingQueue("ga", { gtag: (...args) => gaCalls.push(args) }, allConsent);
-  tracking.flushTrackingQueue("meta", { fbq: (...args) => metaCalls.push(args) }, allConsent);
-  tracking.flushTrackingQueue(
-    "pinterest",
-    { pintrk: (...args) => pinterestCalls.push(args) },
-    allConsent,
-  );
 
-  assert.equal(gaCalls.length, 1);
-  assert.equal(metaCalls.length, 1);
-  assert.equal(pinterestCalls.length, 1);
+  assert.equal(gaCalls.length, 2);
+});
+
+test("deduplicates true idempotent retries while a platform is unavailable", () => {
+  const product = { id: "view_retry", name: "Retry Pearl", price: 40 };
+  const gaOnly: ConfiguredPlatforms = { ga: true, meta: false, pinterest: false };
+
+  assert.equal(tracking.trackViewItem(product, {}, allConsent, gaOnly), true);
+  assert.equal(tracking.trackViewItem(product, {}, allConsent, gaOnly), true);
+
+  const calls: unknown[][] = [];
+  tracking.flushTrackingQueue("ga", { gtag: (...args) => calls.push(args) }, allConsent);
+  tracking.flushTrackingQueue("ga", { gtag: (...args) => calls.push(args) }, allConsent);
+
+  assert.equal(calls.length, 1);
 });
 
 test("drops queued events when consent is revoked before platform readiness", () => {
@@ -370,8 +440,8 @@ test("does not dispatch or queue Meta or Pinterest events when marketing consent
   assert.deepEqual(pinterestCalls, []);
 });
 
-test("returns false when no configured platform has consent", () => {
-  assert.equal(
+test("reports each configured platform denied when no consent is granted", () => {
+  assert.deepEqual(
     tracking.trackPurchase(
       "order_denied",
       20,
@@ -380,15 +450,129 @@ test("returns false when no configured platform has consent", () => {
       noConsent,
       allConfigured,
     ),
-    false,
+    { ga: "denied", meta: "denied", pinterest: "denied" },
   );
 });
 
-test("builds a stable namespaced purchase storage key", () => {
+test("builds stable per-platform purchase storage keys", () => {
   assert.equal(
-    tracking.purchaseStorageKey("order_123"),
-    "mythrealms:purchase-tracked:order_123",
+    tracking.purchaseStorageKey("order_123", "ga"),
+    "mythrealms:purchase-tracked:order_123:ga",
   );
+  assert.equal(
+    tracking.purchaseStorageKey("order_123", "meta"),
+    "mythrealms:purchase-tracked:order_123:meta",
+  );
+});
+
+test("checkout retries after consent is granted and cleans up the exact listener", () => {
+  const target = new FakeTrackingEventTarget();
+  const completion = { current: false };
+  const items = [{ id: "checkout_1", name: "Checkout Pearl", price: 32, quantity: 1 }];
+  const calls: Array<{ items: TrackItem[]; value: number }> = [];
+  let consentGranted = false;
+  const controller = tracking.createCheckoutTrackingController({
+    target,
+    completion,
+    items,
+    value: 36.99,
+    track: (trackedItems, value) => {
+      if (!consentGranted) return false;
+      calls.push({ items: trackedItems, value });
+      return true;
+    },
+  });
+
+  controller.start();
+  assert.equal(completion.current, false);
+  assert.equal(target.added.length, 1);
+
+  consentGranted = true;
+  target.dispatch("mythrealms:consent-changed");
+  target.dispatch("mythrealms:consent-changed");
+  controller.cleanup();
+
+  assert.deepEqual(calls, [{ items, value: 36.99 }]);
+  assert.equal(completion.current, true);
+  assert.equal(target.removed.length, 1);
+  assert.equal(target.removed[0].listener, target.added[0].listener);
+});
+
+function purchaseLifecycleFixture(initialConsent: ConsentState) {
+  const target = new FakeTrackingEventTarget();
+  const storage = new MemoryTrackingStorage();
+  const calls = { ga: 0, meta: 0, pinterest: 0 };
+  let consent = initialConsent;
+  const trackingTarget: TrackingTarget = {
+    gtag: () => calls.ga++,
+    fbq: () => calls.meta++,
+    pintrk: () => calls.pinterest++,
+  };
+  const items = [{ id: "purchase_1", name: "Purchase Pearl", price: 58, quantity: 1 }];
+  const createController = () =>
+    tracking.createPurchaseTrackingController({
+      target,
+      storage,
+      orderId: "order_platforms",
+      track: (completed) =>
+        tracking.trackPurchase(
+          "order_platforms",
+          58,
+          items,
+          trackingTarget,
+          consent,
+          allConfigured,
+          completed,
+        ),
+    });
+
+  return {
+    target,
+    storage,
+    calls,
+    createController,
+    setConsent(next: ConsentState) {
+      consent = next;
+    },
+  };
+}
+
+test("purchase sends analytics first and marketing once after later consent, including refresh", () => {
+  const fixture = purchaseLifecycleFixture({ analytics: true, marketing: false });
+  const controller = fixture.createController();
+
+  controller.start();
+  assert.deepEqual(fixture.calls, { ga: 1, meta: 0, pinterest: 0 });
+
+  fixture.setConsent(allConsent);
+  fixture.target.dispatch("mythrealms:consent-changed");
+  fixture.target.dispatch("mythrealms:consent-changed");
+  assert.deepEqual(fixture.calls, { ga: 1, meta: 1, pinterest: 1 });
+  controller.cleanup();
+
+  const refreshed = fixture.createController();
+  refreshed.start();
+  refreshed.cleanup();
+  assert.deepEqual(fixture.calls, { ga: 1, meta: 1, pinterest: 1 });
+});
+
+test("purchase sends marketing first and analytics once after later consent, including refresh", () => {
+  const fixture = purchaseLifecycleFixture({ analytics: false, marketing: true });
+  const controller = fixture.createController();
+
+  controller.start();
+  assert.deepEqual(fixture.calls, { ga: 0, meta: 1, pinterest: 1 });
+
+  fixture.setConsent(allConsent);
+  fixture.target.dispatch("mythrealms:consent-changed");
+  fixture.target.dispatch("mythrealms:consent-changed");
+  assert.deepEqual(fixture.calls, { ga: 1, meta: 1, pinterest: 1 });
+  controller.cleanup();
+
+  const refreshed = fixture.createController();
+  refreshed.start();
+  refreshed.cleanup();
+  assert.deepEqual(fixture.calls, { ga: 1, meta: 1, pinterest: 1 });
 });
 
 test("wires add-to-cart tracking through the cart store", () => {
@@ -426,18 +610,15 @@ test("retries product view tracking when consent changes", () => {
   assert.match(productSource, /removeEventListener\(CONSENT_CHANGED_EVENT,/);
 });
 
-test("tracks begin checkout once per checkout mount", () => {
+test("checkout page uses the acceptance-aware lifecycle controller", () => {
   const checkoutSource = source("src/app/checkout/page.tsx");
   assert.match(checkoutSource, /checkoutTracked = useRef\(false\)/);
-  assert.match(checkoutSource, /trackBeginCheckout\(/);
-  assert.match(checkoutSource, /checkoutTracked\.current = true/);
+  assert.match(checkoutSource, /createCheckoutTrackingController\(/);
 });
 
-test("delegates paid purchase tracking with storage deduplication and consent retry", () => {
+test("success tracker delegates per-platform storage and consent retry to its lifecycle controller", () => {
   const trackerSource = source("src/app/checkout/success/tracker.tsx");
-  assert.match(trackerSource, /purchaseStorageKey\(orderId\)/);
-  assert.match(trackerSource, /trackPurchase\(orderId, value, items/);
-  assert.match(trackerSource, /addEventListener\(CONSENT_CHANGED_EVENT,/);
-  assert.match(trackerSource, /removeEventListener\(CONSENT_CHANGED_EVENT,/);
+  assert.match(trackerSource, /createPurchaseTrackingController\(/);
+  assert.match(trackerSource, /trackPurchase\(\s*orderId,\s*value,\s*items/);
   assert.doesNotMatch(trackerSource, /\bw\.(?:gtag|fbq|pintrk)\b/);
 });

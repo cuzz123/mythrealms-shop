@@ -5,6 +5,8 @@ import { buildSitemapEntries } from "@/lib/seo/sitemap";
 import { siteUrl } from "@/lib/site";
 import { getStorefrontProducts } from "@/lib/storefront/catalog";
 
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await db.blogPost.findMany({
     select: { slug: true, updatedAt: true },

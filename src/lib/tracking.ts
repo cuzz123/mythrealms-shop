@@ -1,4 +1,5 @@
 import {
+  CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
   parseConsent,
   type ConsentState,
@@ -17,6 +18,37 @@ export interface ConfiguredPlatforms {
 }
 
 export type TrackingPlatform = keyof ConfiguredPlatforms;
+
+export type PlatformTrackingStatus =
+  | "accepted"
+  | "complete"
+  | "denied"
+  | "disabled"
+  | "failed";
+
+export type PlatformTrackingResult = Record<
+  TrackingPlatform,
+  PlatformTrackingStatus
+>;
+
+export type PlatformCompletion = Partial<Record<TrackingPlatform, boolean>>;
+
+export type TrackingListener = () => void;
+
+export interface TrackingEventTarget {
+  addEventListener(type: string, listener: TrackingListener): void;
+  removeEventListener(type: string, listener: TrackingListener): void;
+}
+
+export interface TrackingStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+}
+
+export interface TrackingController {
+  start(): void;
+  cleanup(): void;
+}
 
 export interface TrackingProduct {
   id: string;
@@ -41,13 +73,17 @@ interface GaItem {
 
 interface PendingEvent {
   args: unknown[];
+  key: string;
+  deduplicate: boolean;
 }
 
-const pendingQueues: Record<TrackingPlatform, Map<string, PendingEvent>> = {
-  ga: new Map(),
-  meta: new Map(),
-  pinterest: new Map(),
+const pendingQueues: Record<TrackingPlatform, PendingEvent[]> = {
+  ga: [],
+  meta: [],
+  pinterest: [],
 };
+
+const trackingPlatforms: TrackingPlatform[] = ["ga", "meta", "pinterest"];
 
 const targetKeys: Record<TrackingPlatform, keyof TrackingTarget> = {
   ga: "gtag",
@@ -56,8 +92,10 @@ const targetKeys: Record<TrackingPlatform, keyof TrackingTarget> = {
 };
 
 export const PURCHASE_STORAGE_PREFIX = "mythrealms:purchase-tracked:";
-export const purchaseStorageKey = (orderId: string) =>
-  `${PURCHASE_STORAGE_PREFIX}${orderId}`;
+export const purchaseStorageKey = (
+  orderId: string,
+  platform: TrackingPlatform,
+) => `${PURCHASE_STORAGE_PREFIX}${orderId}:${platform}`;
 
 function browserTarget(): TrackingTarget | undefined {
   return typeof window === "undefined"
@@ -145,6 +183,7 @@ function dispatchOrQueue(
   platform: TrackingPlatform,
   args: unknown[],
   target: TrackingTarget | undefined,
+  deduplicate = true,
 ): boolean {
   if (!target) return false;
 
@@ -153,13 +192,17 @@ function dispatchOrQueue(
   const dispatcher = target[targetKeys[platform]];
 
   if (!dispatcher) {
-    queue.set(key, { args });
+    if (!deduplicate || !queue.some((event) => event.key === key)) {
+      queue.push({ args, key, deduplicate });
+    }
     return true;
   }
 
   try {
     dispatcher(...args);
-    queue.delete(key);
+    if (deduplicate) {
+      pendingQueues[platform] = queue.filter((event) => event.key !== key);
+    }
     return true;
   } catch {
     return false;
@@ -175,21 +218,22 @@ export function flushTrackingQueue(
 
   const queue = pendingQueues[platform];
   if (!hasPlatformConsent(platform, consent)) {
-    queue.clear();
+    queue.length = 0;
     return;
   }
 
   const dispatcher = target[targetKeys[platform]];
   if (!dispatcher) return;
 
-  const events = [...queue.values()];
-  queue.clear();
+  const events = queue.splice(0);
 
   for (const event of events) {
     try {
       dispatcher(...event.args);
     } catch {
-      queue.set(eventKey(event.args), event);
+      if (!event.deduplicate || !queue.some(({ key }) => key === event.key)) {
+        queue.push(event);
+      }
     }
   }
 }
@@ -258,7 +302,12 @@ export function trackAddToCart(
 
   if (configured.ga && consent.analytics) {
     accepted =
-      dispatchOrQueue("ga", ["event", "add_to_cart", buildAddToCartPayload(item)], target) ||
+      dispatchOrQueue(
+        "ga",
+        ["event", "add_to_cart", buildAddToCartPayload(item)],
+        target,
+        false,
+      ) ||
       accepted;
   }
   if (configured.meta && consent.marketing) {
@@ -277,6 +326,7 @@ export function trackAddToCart(
           },
         ],
         target,
+        false,
       ) || accepted;
   }
   if (configured.pinterest && consent.marketing) {
@@ -295,6 +345,7 @@ export function trackAddToCart(
           },
         ],
         target,
+        false,
       ) || accepted;
   }
 
@@ -369,58 +420,158 @@ export function trackPurchase(
   target: TrackingTarget | undefined = browserTarget(),
   consent: ConsentState = browserConsent(),
   configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
-): boolean {
-  let accepted = false;
+  completed: PlatformCompletion = {},
+): PlatformTrackingResult {
+  const result = {} as PlatformTrackingResult;
 
-  if (configured.ga && consent.analytics) {
-    accepted =
-      dispatchOrQueue(
-        "ga",
-        ["event", "purchase", buildPurchasePayload(orderId, value, items)],
-        target,
-      ) || accepted;
-  }
-  if (configured.meta && consent.marketing) {
-    accepted =
-      dispatchOrQueue(
-        "meta",
-        [
-          "track",
-          "Purchase",
-          {
-            content_ids: items.map((item) => item.id),
-            content_type: "product",
-            contents: items.map((item) => ({
-              id: item.id,
-              item_price: item.price,
-              quantity: item.quantity,
-            })),
-            currency: "USD",
-            num_items: items.reduce((sum, item) => sum + item.quantity, 0),
-            value,
-          },
-        ],
-        target,
-      ) || accepted;
-  }
-  if (configured.pinterest && consent.marketing) {
-    accepted =
-      dispatchOrQueue(
-        "pinterest",
-        [
-          "track",
-          "checkout",
-          {
-            currency: "USD",
-            value,
-            order_id: orderId,
-            product_id: items.map((item) => item.id),
-            order_quantity: items.reduce((sum, item) => sum + item.quantity, 0),
-          },
-        ],
-        target,
-      ) || accepted;
+  const trackPlatform = (
+    platform: TrackingPlatform,
+    args: unknown[],
+  ): PlatformTrackingStatus => {
+    if (completed[platform]) return "complete";
+    if (!configured[platform]) return "disabled";
+    if (!hasPlatformConsent(platform, consent)) return "denied";
+    return dispatchOrQueue(platform, args, target) ? "accepted" : "failed";
+  };
+
+  result.ga = trackPlatform("ga", [
+    "event",
+    "purchase",
+    buildPurchasePayload(orderId, value, items),
+  ]);
+  result.meta = trackPlatform("meta", [
+    "track",
+    "Purchase",
+    {
+      content_ids: items.map((item) => item.id),
+      content_type: "product",
+      contents: items.map((item) => ({
+        id: item.id,
+        item_price: item.price,
+        quantity: item.quantity,
+      })),
+      currency: "USD",
+      num_items: items.reduce((sum, item) => sum + item.quantity, 0),
+      value,
+    },
+  ]);
+  result.pinterest = trackPlatform("pinterest", [
+    "track",
+    "checkout",
+    {
+      currency: "USD",
+      value,
+      order_id: orderId,
+      product_id: items.map((item) => item.id),
+      order_quantity: items.reduce((sum, item) => sum + item.quantity, 0),
+    },
+  ]);
+
+  return result;
+}
+
+export function createCheckoutTrackingController({
+  target,
+  completion,
+  items,
+  value,
+  track,
+}: {
+  target: TrackingEventTarget;
+  completion: { current: boolean };
+  items: CartProduct[];
+  value: number;
+  track: (items: CartProduct[], value: number) => boolean;
+}): TrackingController {
+  let listening = false;
+
+  const stopListening = () => {
+    if (!listening) return;
+    target.removeEventListener(CONSENT_CHANGED_EVENT, attemptTracking);
+    listening = false;
+  };
+
+  const attemptTracking = () => {
+    if (completion.current) {
+      stopListening();
+      return;
+    }
+    if (!track(items, value)) return;
+    completion.current = true;
+    stopListening();
+  };
+
+  return {
+    start() {
+      attemptTracking();
+      if (completion.current || listening) return;
+      target.addEventListener(CONSENT_CHANGED_EVENT, attemptTracking);
+      listening = true;
+    },
+    cleanup: stopListening,
+  };
+}
+
+export function createPurchaseTrackingController({
+  target,
+  storage,
+  orderId,
+  track,
+}: {
+  target: TrackingEventTarget;
+  storage: TrackingStorage;
+  orderId: string;
+  track: (completed: PlatformCompletion) => PlatformTrackingResult;
+}): TrackingController {
+  const completed: PlatformCompletion = {};
+  let listening = false;
+  let storageReadable = true;
+
+  try {
+    for (const platform of trackingPlatforms) {
+      completed[platform] =
+        storage.getItem(purchaseStorageKey(orderId, platform)) !== null;
+    }
+  } catch {
+    storageReadable = false;
   }
 
-  return accepted;
+  const stopListening = () => {
+    if (!listening) return;
+    target.removeEventListener(CONSENT_CHANGED_EVENT, attemptTracking);
+    listening = false;
+  };
+
+  const attemptTracking = () => {
+    if (!storageReadable) return false;
+    const result = track(completed);
+
+    for (const platform of trackingPlatforms) {
+      if (result[platform] !== "accepted") continue;
+      completed[platform] = true;
+      try {
+        storage.setItem(purchaseStorageKey(orderId, platform), "true");
+      } catch {
+        // In-memory completion still prevents duplicate sends during this mount.
+      }
+    }
+
+    const shouldRetry = trackingPlatforms.some(
+      (platform) =>
+        result[platform] === "denied" || result[platform] === "failed",
+    );
+    if (!shouldRetry) stopListening();
+    return shouldRetry;
+  };
+
+  return {
+    start() {
+      const shouldRetry = attemptTracking();
+      if (!shouldRetry || listening) return;
+
+      target.addEventListener(CONSENT_CHANGED_EVENT, attemptTracking);
+      listening = true;
+    },
+    cleanup: stopListening,
+  };
 }

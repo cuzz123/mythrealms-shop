@@ -66,6 +66,15 @@ test("the sitemap includes the journal and published article URLs", () => {
   assert.equal([...urls].filter((url) => url.includes("/products/")).length, 45);
 });
 
+test("the database-backed sitemap revalidates without a redeploy", () => {
+  const sitemapSource = readFileSync(
+    path.join(process.cwd(), "src/app/sitemap.ts"),
+    "utf8",
+  );
+
+  assert.match(sitemapSource, /export const revalidate = 3600;/);
+});
+
 test("the journal archive is indexable", () => {
   const robots = blogMetadata.robots;
   assert.notEqual(

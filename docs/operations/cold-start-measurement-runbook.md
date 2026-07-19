@@ -91,7 +91,7 @@ GA4 requires `analytics: true`; Meta and Pinterest require `marketing: true`.
 
 ## 6. Purchase refresh dedupe
 
-1. On `/checkout/success`, confirm `localStorage["mythrealms:purchase-tracked:<orderId>"]` is `"true"`.
+1. On `/checkout/success`, confirm each configured platform has its own `"true"` key: `localStorage["mythrealms:purchase-tracked:<orderId>:ga"]`, `:meta`, and `:pinterest`. A platform key appears only after that platform accepts the event for dispatch or queuing.
 2. Refresh the success page 2-3 times. Confirm there are no additional purchase hits in DevTools Network or any configured platform debugger.
 3. Test late consent: when consent is granted after landing on the success page, purchase must fire once on the consent change and then dedupe as above.
 
