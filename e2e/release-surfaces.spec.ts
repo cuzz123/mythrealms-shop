@@ -45,6 +45,8 @@ async function expectInternalLinksHealthy(request: APIRequestContext, hrefs: rea
 
 async function expectLayoutReady(page: Page) {
   await page.evaluate(() => document.fonts.ready);
+  const images = page.locator("#main-content img");
+  if ((await images.count()) > 0) await expectImagesLoaded(images);
 }
 
 async function expectNoHorizontalOverflow(page: Page) {
