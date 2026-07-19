@@ -18,12 +18,12 @@ Implemented the MythRealms Story registry and rebuilt `/about` with the approved
 - Targeted ESLint: passed.
 - TypeScript: passed after making the optional editorial image position fallback explicit.
 - Full unit: 337 passed, 0 failed.
-- Production build: passed with the pre-render redirect configured; `/about` and the `/story` page fallback were emitted as static routes.
+- Pre-review production build: passed with the pre-render redirect configured; `/about` and the `/story` page fallback were emitted as static routes.
 
 ## Browser / Build Results
 
 - The `/about` browser surface passed its loaded-image and no-horizontal-overflow checks at 390x844.
-- The final production build completed with Next.js 16.2.6 and generated 139 static pages.
+- The production build run before the later media review completed with Next.js 16.2.6 and generated 139 static pages.
 - Temporary development and production servers were stopped. Generated Task 5 `test-results` and server logs were removed.
 
 ## Files
@@ -58,7 +58,7 @@ The shared root loading boundary commits a streamed 200 response before the leaf
 
 ### Changes
 
-- Story hero, Open Graph, and Twitter now share the Mediterranean on-model `model-short-bob-blue-linen.png` asset, its accurate alt, and the established `center 38%` crop.
+- Story hero, Open Graph, and Twitter now share the Mediterranean on-model `model-short-bob-blue-linen.png` asset and its accurate alt. The visible hero uses the established `center 38%` object position; social metadata does not define a crop.
 - Editorial Styling now uses the distinct on-model shell-and-pearl drop earring image in warm studio light.
 - Product Reference remains the source-supplied `pearl-series-13-main.webp` SKU image.
 - Corrected the shared necklace, bracelet, and eyewear descriptions to identify their actual display contexts.
