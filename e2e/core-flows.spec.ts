@@ -1,11 +1,83 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
+
+async function expectImagesLoaded(images: Locator) {
+  for (let index = 0; index < (await images.count()); index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        image.evaluate(
+          (node) =>
+            (node as HTMLImageElement).complete &&
+            (node as HTMLImageElement).naturalWidth > 0,
+        ),
+      )
+      .toBe(true);
+  }
+}
+
+async function expectHeroContentWithinVisibleBounds(page: Page) {
+  const hero = page.locator('[aria-labelledby="homepage-hero-title"]');
+  const heroContent = [
+    hero.getByText("Editorial / Summer 2026", { exact: true }),
+    hero.getByRole("heading", { name: "Pearls for sunlit days." }),
+    hero.getByText(
+      "Pearl jewelry selected for natural light, everyday movement, and the moments worth keeping.",
+      { exact: true },
+    ),
+    hero.getByRole("link", { name: "Shop the Pearl Edit" }),
+  ];
+
+  for (const content of heroContent) {
+    await expect(content).toBeVisible();
+    const bounds = await content.evaluate((node) => {
+      const rect = node.getBoundingClientRect();
+      const heroRect = node
+        .closest('[aria-labelledby="homepage-hero-title"]')
+        ?.getBoundingClientRect();
+
+      if (!heroRect) {
+        return { hasArea: false, insideHero: false, insideViewport: false };
+      }
+
+      const tolerance = 0.5;
+      const visibleHeroTop = Math.max(heroRect.top, 0);
+      const visibleHeroBottom = Math.min(heroRect.bottom, window.innerHeight);
+
+      return {
+        hasArea: rect.width > 0 && rect.height > 0,
+        insideHero:
+          rect.left >= heroRect.left - tolerance &&
+          rect.right <= heroRect.right + tolerance &&
+          rect.top >= visibleHeroTop - tolerance &&
+          rect.bottom <= visibleHeroBottom + tolerance,
+        insideViewport:
+          rect.left >= -tolerance &&
+          rect.right <= window.innerWidth + tolerance &&
+          rect.top >= -tolerance &&
+          rect.bottom <= window.innerHeight + tolerance,
+      };
+    });
+
+    expect(bounds).toEqual({
+      hasArea: true,
+      insideHero: true,
+      insideViewport: true,
+    });
+  }
+}
 
 test.describe("storefront release flows", () => {
-  for (const width of [320, 390]) {
+  for (const { width, height } of [
+    { width: 320, height: 800 },
+    { width: 390, height: 844 },
+  ]) {
     test(`homepage fits a ${width}px viewport`, async ({ page }) => {
-      await page.setViewportSize({ width, height: 844 });
+      await page.setViewportSize({ width, height });
       await page.goto("/");
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expectHeroContentWithinVisibleBounds(page);
+      await expectImagesLoaded(page.locator("#main-content img"));
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - window.innerWidth,
       );
@@ -16,12 +88,69 @@ test.describe("storefront release flows", () => {
     });
   }
 
+  test("homepage shop by style links use approved pearl filters", async ({ page }) => {
+    await page.goto("/");
+    const styleRegion = page.getByRole("region", { name: "Choose your starting point" });
+    await expect(styleRegion.getByRole("link", { name: "Everyday Pearl" })).toHaveAttribute("href", "/collections/pearl-series");
+    await expect(styleRegion.getByRole("link", { name: "Pearl Earrings" })).toHaveAttribute("href", "/collections/pearl-series?type=earrings");
+    await expect(styleRegion.getByRole("link", { name: "Pearl Necklaces" })).toHaveAttribute("href", "/collections/pearl-series?type=necklaces");
+    await expect(styleRegion.getByRole("link", { name: "Pearl Bracelets" })).toHaveAttribute("href", "/collections/pearl-series?type=bracelets");
+    await expect(styleRegion.getByRole("link", { name: "Pearl Eyewear Chains" })).toHaveAttribute("href", "/collections/pearl-series?type=eyewear-chains");
+  });
+
+  test("homepage reveal motion resolves and reduced motion stays visible", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto("/");
+    const sections = page.locator("[data-reveal-ready]");
+    await expect(sections.first()).toHaveAttribute("data-reveal-ready", "true");
+    await sections.first().scrollIntoViewIfNeeded();
+    await expect(sections.first()).toHaveAttribute("data-reveal-visible", "true");
+
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.reload();
+    await expect(sections.first()).toHaveAttribute("data-reveal-visible", "true");
+    await expect(
+      page.getByRole("heading", { name: "Choose your starting point" }),
+    ).toBeVisible();
+  });
+
+  test("homepage ScrollReveal stays visible without JavaScript", async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+
+    try {
+      await page.goto("/");
+      const reveal = page.locator('[aria-labelledby="noscript-shop-by-style-title"]');
+      await expect(reveal).toHaveAttribute("data-reveal-ready", "false");
+      await expect(reveal).toHaveAttribute("data-reveal-visible", "true");
+      await expect(
+        reveal.getByRole("heading", { name: "Choose your starting point" }),
+      ).toBeVisible();
+    } finally {
+      await context.close();
+    }
+  });
+
+  test("homepage header moves from editorial overlay to solid navigation", async ({ page }) => {
+    await page.goto("/");
+    const header = page.locator("header[data-visual-state]");
+    await expect(header).toHaveAttribute("data-visual-state", "overlay");
+    await page.evaluate(() => window.scrollTo(0, window.innerHeight));
+    await expect(header).toHaveAttribute("data-visual-state", "solid");
+    await expect(page.getByRole("button", { name: "Shop menu" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Intention menu" })).toBeVisible();
+
+    await page.goto("/about");
+    await expect(page.locator("header[data-visual-state]")).toHaveAttribute(
+      "data-visual-state",
+      "solid",
+    );
+  });
+
   test("shop navigation links to real pearl product-type filters", async ({ page }) => {
     await page.goto("/");
-    await page
-      .getByRole("navigation", { name: "Main navigation" })
-      .getByText("Shop", { exact: true })
-      .click();
+    const shopMenu = page.getByRole("button", { name: "Shop menu" });
+    await shopMenu.click();
     const earringsLink = page.getByRole("link", { name: "Pearl Earrings" }).first();
     await expect(earringsLink).toHaveAttribute(
       "href",
@@ -33,10 +162,75 @@ test.describe("storefront release flows", () => {
     await expect(page.locator('[data-product-type]:not([data-product-type="earrings"])')).toHaveCount(0);
   });
 
+  test("product card media only exposes verified wearing views", async ({ page }) => {
+    await page.goto("/collections/pearl-series");
+
+    const newSeriesImages = page
+      .locator('a[href="/products/new-series-round-shell-disc-drops"]')
+      .locator("img");
+    await newSeriesImages.first().scrollIntoViewIfNeeded();
+    await expect(newSeriesImages).toHaveCount(1);
+    await expect(newSeriesImages.first()).toHaveJSProperty("complete", true);
+    expect(await newSeriesImages.first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
+
+    const sourcePreservedImages = page
+      .locator('a[href="/products/pearl-series-01"]')
+      .locator("img");
+    await sourcePreservedImages.first().scrollIntoViewIfNeeded();
+    await expect(sourcePreservedImages).toHaveCount(2);
+    await expect(sourcePreservedImages.first()).toHaveJSProperty("complete", true);
+    expect(await sourcePreservedImages.first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
+  });
+
+  test("desktop menus support keyboard close and focus return", async ({ page }) => {
+    await page.goto("/");
+
+    const shopMenu = page.getByRole("button", { name: "Shop menu" });
+    await shopMenu.focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("link", { name: "Pearl Earrings" }).first()).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#shop-menu")).toHaveCount(0);
+    await expect(shopMenu).toBeFocused();
+
+    await shopMenu.click();
+    await expect(page.locator("#shop-menu")).toBeVisible();
+    await page.mouse.click(5, 400);
+    await expect(page.locator("#shop-menu")).toHaveCount(0);
+
+    const intentionMenu = page.getByRole("button", { name: "Intention menu" });
+    await intentionMenu.click();
+    const guardianLink = page.getByRole("link", { name: "Find Your Guardian" });
+    await expect(guardianLink).toBeVisible();
+    await guardianLink.click();
+    await expect(page).toHaveURL(/guardian-quiz/);
+  });
+
+  test("desktop menu items return focus to their trigger on Escape", async ({ page }) => {
+    for (const menu of [
+      { triggerName: "Shop menu", menuId: "shop-menu", firstLink: "All Pearl Jewelry" },
+      { triggerName: "Intention menu", menuId: "intention-menu", firstLink: "Find Your Guardian" },
+    ]) {
+      await page.goto("/");
+      const trigger = page.getByRole("button", { name: menu.triggerName });
+      const menuList = page.locator(`#${menu.menuId}`);
+
+      await trigger.press("ArrowDown");
+      await expect(menuList.getByRole("menuitem", { name: menu.firstLink })).toBeFocused();
+      await page.keyboard.press("Escape");
+      await expect(menuList).toHaveCount(0);
+      await expect(trigger).toBeFocused();
+    }
+  });
+
   test("search, cart and mobile navigation restore keyboard focus", async ({ page }) => {
     await page.goto("/");
 
     const searchTrigger = page.getByRole("button", { name: "Search products" });
+    await expect(searchTrigger).toHaveAttribute("title", "Search products");
+    const searchBounds = await searchTrigger.boundingBox();
+    expect(searchBounds?.width).toBe(40);
+    expect(searchBounds?.height).toBe(40);
     await searchTrigger.click();
     const searchDialog = page.getByRole("dialog", { name: "Search products" });
     await expect(searchDialog).toBeVisible();
@@ -90,5 +284,35 @@ test.describe("storefront release flows", () => {
         href,
       );
     }
+  });
+
+  test("newsletter announces a successful subscription", async ({ page }) => {
+    await page.route("**/api/newsletter", async (route) => {
+      await route.fulfill({ status: 200, body: JSON.stringify({ ok: true }) });
+    });
+    await page.goto("/");
+    const footer = page.locator("footer");
+    await footer.getByPlaceholder("Your email address").fill("reader@example.com");
+    await footer.getByRole("button", { name: "Subscribe" }).click();
+    await expect(footer.getByText("You're on the list.")).toHaveAttribute(
+      "aria-live",
+      "polite",
+    );
+  });
+
+  test("newsletter exposes subscription errors as alerts", async ({ page }) => {
+    await page.route("**/api/newsletter", async (route) => {
+      await route.fulfill({
+        status: 400,
+        body: JSON.stringify({ error: "This address is already subscribed." }),
+      });
+    });
+    await page.goto("/");
+    const footer = page.locator("footer");
+    await footer.getByPlaceholder("Your email address").fill("reader@example.com");
+    await footer.getByRole("button", { name: "Subscribe" }).click();
+    await expect(footer.getByRole("alert")).toHaveText(
+      "This address is already subscribed.",
+    );
   });
 });

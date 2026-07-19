@@ -13,7 +13,7 @@ test("the storefront does not render fabricated purchase activity", () => {
 });
 
 test("editorial hero imagery is not presented as a specific SKU", () => {
-  const hero = source("src/components/layout/HeroCarousel.tsx");
+  const hero = source("src/components/home/HomepageHero.tsx");
   assert.doesNotMatch(hero, /On her\s*\//i);
   assert.doesNotMatch(hero, /The Soft Return Earrings/i);
   assert.match(hero, /Editorial/i);
@@ -28,6 +28,32 @@ test("product galleries disclose editorial images and organization data avoids p
     /Supplier-supplied product views appear first\. Later editorial scenes may be AI-generated; refer to the first views for product shape and details\./,
   );
   assert.doesNotMatch(jsonLd, /Freshwater pearls/);
+});
+
+test("homepage hero reserves a fixed category-story reveal", () => {
+  const hero = source("src/components/home/HomepageHero.tsx");
+  assert.match(hero, /\[--homepage-category-reveal:10rem\]/);
+  assert.match(hero, /min-h-\[calc\(100svh-2\.25rem-var\(--homepage-category-reveal\)\)\]/);
+});
+
+test("homepage category stories defer image motion", () => {
+  const stories = source("src/components/home/HomepageCategoryStories.tsx");
+  assert.doesNotMatch(stories, /transition-transform|duration-500|group-hover:scale/);
+});
+
+test("global storefront styles exclude unused decorative motion", () => {
+  const styles = source("src/app/globals.css");
+  assert.doesNotMatch(
+    styles,
+    /(?:@keyframes (?:twinkle1|twinkle2|fadeInUp|pulseDot|bounceDown|slideInContent|subtleZoom|progressFill|zoomFade|heroContentIn|paintAcross|riseUp|modalOpen)|\.animate-(?:slideInContent|subtle-zoom|paint-across|rise-up|modal-open|slide-in-right))/,
+  );
+});
+
+test("product cards never infer wearing media from array position or filename", () => {
+  const card = source("src/components/product/ProductCard.tsx");
+  assert.doesNotMatch(card, /images\[1\]/);
+  assert.doesNotMatch(card, /includes\(["']-worn\./);
+  assert.match(card, /imageRoles\?\.wearing/);
 });
 
 test("the legacy loyalty route is noindex and makes no unimplemented reward promises", () => {

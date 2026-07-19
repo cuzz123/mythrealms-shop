@@ -158,3 +158,14 @@ test("approved new-series products use only their own source-preserved galleries
     );
   }
 });
+
+test("storefront products expose truthful card image roles", () => {
+  const sourcePreserved = getStorefrontProductBySlug("pearl-series-13");
+  const noSupplierWearing = getStorefrontProductBySlug("pearl-series-18");
+  const newSeries = getStorefrontProductBySlug("new-series-round-shell-disc-drops");
+
+  assert.ok(sourcePreserved?.imageRoles?.wearing);
+  assert.equal(noSupplierWearing?.imageRoles?.wearing, undefined);
+  assert.equal(newSeries?.imageRoles?.wearing, undefined);
+  assert.equal(newSeries?.imageRoles?.primary, newSeries?.images[0]);
+});

@@ -1,6 +1,30 @@
-node_modules
-.next
-.superpowers
-.worktrees
-.vercel
+# Local dependencies and build output
+node_modules/
+.next/
+out/
+build/
+.worktrees/
+.vercel/
+
+# Development, review, and source-only assets
+.superpowers/
+.claude/
+.impeccable/
+assets/
+docs/
+e2e/
+tests/
+test-results/
+test-results-*/
+video-pipeline/
+tools/
+public/preview/
+
+# Local-only files
 .env*
+*.tsbuildinfo
+*.blend
+*.blend1
+*.mp4
+*.mov
+*.webm

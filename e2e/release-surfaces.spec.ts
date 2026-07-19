@@ -17,6 +17,84 @@ async function expectImagesLoaded(images: Locator) {
 }
 
 test.describe("release surfaces", () => {
+  test("homepage preserves the approved editorial sequence and first-viewport style hint", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+
+    const expectedHeadings = [
+      "Pearls for sunlit days.",
+      "Choose your starting point",
+      "Pieces for everyday light.",
+      "A little light, close to home.",
+      "A pearl point of view.",
+      "Notes from the coast.",
+      "Explore",
+    ];
+    const positions: number[] = [];
+
+    for (const name of expectedHeadings) {
+      const heading = page.getByRole("heading", { name, exact: true }).first();
+      await expect(heading).toBeVisible();
+      positions.push(await heading.evaluate((node) => node.getBoundingClientRect().top));
+    }
+
+    expect(positions).toEqual([...positions].sort((left, right) => left - right));
+    await expect
+      .poll(() =>
+        page
+          .getByRole("heading", { name: "Choose your starting point", exact: true })
+          .evaluate((heading) => {
+          const rect = heading.getBoundingClientRect();
+          return Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+        }),
+      )
+      .toBeGreaterThanOrEqual(24);
+  });
+
+  test("homepage keeps canonical metadata, organization data, and the Pearl Guide without retired claims", async ({ page }) => {
+    await page.goto("/");
+    await expect(page).toHaveTitle("MythRealms | Pearl Jewelry for Everyday Light");
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      "https://mythrealms-shop.vercel.app",
+    );
+    await expect(page.getByRole("link", { name: "Read the Pearl Guide" })).toHaveAttribute(
+      "href",
+      "/pearls",
+    );
+
+    const schemas = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
+      scripts.map((script) => JSON.parse(script.textContent || "{}")),
+    );
+    expect(schemas.some((schema) => Array.isArray(schema["@type"]) && schema["@type"].includes("Organization"))).toBe(true);
+    expect(schemas.some((schema) => schema["@type"] === "WebSite")).toBe(true);
+
+    const text = await page.locator("body").innerText();
+    expect(text).not.toMatch(/Balance\s*&\s*Light/i);
+    expect(text).not.toMatch(/hand-selected stones|Curated Singles/i);
+  });
+
+  test("collection and product surfaces keep solid headers and truthful image roles", async ({ page }) => {
+    await page.goto("/collections/pearl-series");
+    await expect(page.locator("header[data-visual-state]")).toHaveAttribute("data-visual-state", "solid");
+
+    const newSeriesImages = page
+      .locator('a[href="/products/new-series-round-shell-disc-drops"]')
+      .locator("img");
+    await expect(newSeriesImages).toHaveCount(1);
+    await expectImagesLoaded(newSeriesImages);
+
+    const sourcePreservedImages = page
+      .locator('a[href="/products/pearl-series-01"]')
+      .locator("img");
+    await expect(sourcePreservedImages).toHaveCount(2);
+    await expectImagesLoaded(sourcePreservedImages);
+
+    await page.goto("/products/pearl-series-01");
+    await expect(page.locator("header[data-visual-state]")).toHaveAttribute("data-visual-state", "solid");
+    await expectImagesLoaded(page.locator("#main-content img"));
+  });
+
   test("guardian quiz resolves to three live pearl products", async ({ page }) => {
     await page.goto("/guardian-quiz");
     await page.getByRole("button", { name: "A fresh start after an ending." }).click();
@@ -100,10 +178,30 @@ test.describe("release surfaces", () => {
   });
 
   test("editorial and utility surfaces stay truthful and use valid landmarks", async ({ page }) => {
+    for (const viewport of [
+      { width: 390, height: 844 },
+      { width: 1440, height: 900 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto("/");
+      await expect
+        .poll(() =>
+          page
+            .getByText("Shop by Style", { exact: true })
+            .evaluate((label) => {
+              const rect = label.getBoundingClientRect();
+              return Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+            }),
+        )
+        .toBeGreaterThan(0);
+    }
+
+    await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto("/");
-    await expect(
-      page.locator("#main-content").getByText("Editorial / Summer 2026").first(),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Pearls for sunlit days." })).toBeVisible();
+    await expect(page.getByText("Editorial / Summer 2026", { exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Choose your starting point" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "A pearl point of view." })).toBeVisible();
     await page.waitForTimeout(5500);
     await expect(page.getByText(/Someone from|bought The /i)).toHaveCount(0);
 

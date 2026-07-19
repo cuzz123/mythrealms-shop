@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, ShoppingBag } from "lucide-react";
 import toast from "react-hot-toast";
 import { ProductImage } from "@/components/ui/ProductImage";
+import type { ProductImageRoles } from "@/lib/1688-products";
 import { useCartStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import { imageUrl } from "@/lib/images";
@@ -15,6 +17,7 @@ export interface Product {
   name: string;
   slug: string;
   images: string[];
+  imageRoles?: ProductImageRoles;
   variants: { price: number; stock?: number }[];
   comparePrice?: number | null;
 }
@@ -28,12 +31,16 @@ export function ProductCard({ product, className }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
   const toggleWishlist = useWishlistStore((s) => s.toggleItem);
   const isWishlisted = useWishlistStore((s) => s.isWishlisted);
+  const [primaryFailed, setPrimaryFailed] = useState(false);
+  const [wearingFailed, setWearingFailed] = useState(false);
 
-  const image = product.images[0] || "";
-  const secondImage = product.images[1] || "";
-  const hasSecondImage = product.images.length >= 2;
-  const hasWearImage = secondImage.includes("-worn.");
-  const isValidImage = image && (image.startsWith("http") || image.startsWith("/"));
+  const primaryImage = product.imageRoles?.primary || product.images[0] || "";
+  const wearingImage = product.imageRoles?.wearing;
+  const hasWearingImage = Boolean(wearingImage);
+  const showPrimaryImage = Boolean(primaryImage) && !primaryFailed;
+  const showWearingImage = Boolean(wearingImage) && !wearingFailed;
+  const isValidPrimaryImage =
+    primaryImage && (primaryImage.startsWith("http") || primaryImage.startsWith("/"));
   const firstVariant = product.variants[0];
   const price = Number(firstVariant?.price ?? 0);
   const comparePrice = product.comparePrice ? Number(product.comparePrice) : null;
@@ -53,7 +60,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
       id: product.id,
       name: product.name,
       slug: product.slug,
-      image,
+      image: primaryImage,
       price,
     });
 
@@ -68,7 +75,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
       id: product.id,
       name: product.name,
       slug: product.slug,
-      image,
+      image: primaryImage,
       price,
     });
 
@@ -79,26 +86,30 @@ export function ProductCard({ product, className }: ProductCardProps) {
     <div className={cn("group relative", className)}>
       <Link href={`/products/${product.slug}`} className="block">
         <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] bg-[var(--border-light)]">
-          {isValidImage ? (
+          {showPrimaryImage && isValidPrimaryImage ? (
             <>
               <Image
-                src={imageUrl(image)}
+                src={imageUrl(primaryImage)}
                 alt={`${product.name} - MythRealms pearl jewelry`}
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 loading="lazy"
-                className={`object-cover transition-all duration-500 group-hover:scale-110 ${
-                  hasSecondImage ? "opacity-100 group-hover:opacity-0" : ""
+                onError={() => setPrimaryFailed(true)}
+                className={`object-cover transition-[opacity,transform] duration-300 group-hover:scale-[1.02] group-focus-within:scale-[1.02] ${
+                  showWearingImage
+                    ? "opacity-100 group-hover:opacity-0 group-focus-within:opacity-0"
+                    : "opacity-100"
                 }`}
               />
-              {hasSecondImage && (
+              {showWearingImage && wearingImage && (
                 <Image
-                  src={imageUrl(secondImage)}
-                  alt={`${product.name} - alternate jewelry view`}
+                  src={imageUrl(wearingImage)}
+                  alt={`${product.name} - on-model jewelry view`}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   loading="lazy"
-                  className="object-cover opacity-0 transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
+                  onError={() => setWearingFailed(true)}
+                  className="object-cover opacity-0 transition-[opacity,transform] duration-300 group-hover:scale-[1.02] group-hover:opacity-100 group-focus-within:scale-[1.02] group-focus-within:opacity-100"
                 />
               )}
             </>
@@ -110,7 +121,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
               Sale
             </span>
           )}
-          {hasWearImage && (
+          {hasWearingImage && showWearingImage && (
             <span className="absolute bottom-3 left-3 bg-[var(--surface)]/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--text)]">
               On model
             </span>
@@ -150,7 +161,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
               Only {firstVariant.stock} left
             </div>
           )}
-          {hasWearImage && (
+          {hasWearingImage && showWearingImage && (
             <p className="text-[10px] font-semibold uppercase tracking-[0.07em] text-[var(--accent)]">Product view + on-model view</p>
           )}
         </div>

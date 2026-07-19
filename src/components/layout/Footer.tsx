@@ -83,13 +83,13 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative text-[var(--announcement-text)]" style={{ background: 'linear-gradient(180deg, #0A0808 0%, #13100D 40%, #110E0B 70%, #0A0808 100%)' }}>
+    <footer className="bg-[var(--charcoal)] text-[var(--announcement-text)]">
       <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 border-y border-white/15 py-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Column 1 — Brand */}
           <div className="space-y-4">
             <Link href="/" className="inline-block">
-              <span className="font-serif text-xl font-semibold tracking-tight text-white">
+              <span className="font-serif text-xl font-semibold tracking-normal text-white">
                 MythRealms
               </span>
             </Link>
@@ -106,7 +106,8 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-[#3A3228] text-[#8B7B64] transition-colors hover:border-[#B0A590] hover:text-white"
+                  title={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-[#b7c2bd] transition-colors hover:border-white/65 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
                 >
                   {icon}
                 </a>
@@ -116,7 +117,7 @@ export function Footer() {
 
           {/* Column 2 — Explore */}
           <div>
-            <h3 className="mb-5 font-serif text-sm font-semibold tracking-wide text-white uppercase">
+            <h3 className="mb-5 font-serif text-sm font-semibold tracking-normal text-white uppercase">
               Explore
             </h3>
             <ul className="space-y-3">
@@ -124,7 +125,7 @@ export function Footer() {
                 <li key={label}>
                   <Link
                     href={href}
-                    className="block py-2 text-sm text-[#B0A590] transition-colors hover:text-white"
+                    className="block py-2 text-sm text-[#b7c2bd] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
                   >
                     {label}
                   </Link>
@@ -135,7 +136,7 @@ export function Footer() {
 
           {/* Column 3 — Support */}
           <div>
-            <h3 className="mb-5 font-serif text-sm font-semibold tracking-wide text-white uppercase">
+            <h3 className="mb-5 font-serif text-sm font-semibold tracking-normal text-white uppercase">
               Support
             </h3>
             <ul className="space-y-3">
@@ -143,7 +144,7 @@ export function Footer() {
                 <li key={label}>
                   <Link
                     href={href}
-                    className="block py-2 text-sm text-[#B0A590] transition-colors hover:text-white"
+                    className="block py-2 text-sm text-[#b7c2bd] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
                   >
                     {label}
                   </Link>
@@ -154,14 +155,14 @@ export function Footer() {
 
           {/* Column 4 — Contact & Newsletter */}
           <div>
-            <h3 className="mb-5 font-serif text-sm font-semibold tracking-wide text-white uppercase">
+            <h3 className="mb-5 font-serif text-sm font-semibold tracking-normal text-white uppercase">
               Stay Connected
             </h3>
-            <div className="space-y-4 text-sm text-[#B0A590]">
+            <div className="space-y-4 text-sm text-[#b7c2bd]">
               <p>
                 New pearl pieces, styling notes, and subscriber-only offers.
               </p>
-              <NewsletterForm />
+              <NewsletterForm tone="dark" />
               <div className="pt-2 space-y-2">
                 <a
                   href="mailto:mythrealms@outlook.com"
@@ -177,8 +178,8 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-[#2A2218]">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-[#8B7B64] sm:flex-row">
+      <div className="border-t border-white/15">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-[#b7c2bd] sm:flex-row">
           <p>
             &copy; {new Date().getFullYear()} MythRealms. All rights
             reserved.
