@@ -471,7 +471,7 @@ git commit -m "feat: track the ecommerce funnel"
 确保 `.env.example` 包含以下空占位符和注释：
 
 ```dotenv
-NEXT_PUBLIC_APP_URL="https://mythrealms.shop"
+NEXT_PUBLIC_APP_URL="https://mythrealms-shop.vercel.app"
 NEXT_PUBLIC_GA_ID=""
 NEXT_PUBLIC_META_PIXEL_ID=""
 NEXT_PUBLIC_PINTEREST_TAG_ID=""
@@ -504,7 +504,7 @@ git diff --check
 
 - [ ] **步骤 4：部署并验证生产环境**
 
-通过仓库现有 Vercel 流程部署。在 `https://mythrealms.shop` 上验证：
+通过仓库现有 Vercel 流程部署。在临时生产地址 `https://mythrealms-shop.vercel.app` 上验证：
 
 - `/robots.txt` 允许 `OAI-SearchBot`、`PerplexityBot` 和普通爬虫访问公开页面。
 - `/sitemap.xml` 包含 `/blog` 和真实文章 URL。

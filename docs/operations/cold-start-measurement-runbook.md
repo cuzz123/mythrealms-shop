@@ -1,7 +1,7 @@
 # Cold Start Measurement Runbook
 
 Production verification for the US cold-start tracking stack (GA4, Meta Pixel, and Pinterest Tag)
-on `https://mythrealms.shop`. Run after `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_META_PIXEL_ID`, and
+on the temporary production URL `https://mythrealms-shop.vercel.app`. Run after `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_META_PIXEL_ID`, and
 `NEXT_PUBLIC_PINTEREST_TAG_ID` are set in Vercel. Record every run in
 [Section 7](#7-production-test-record) **before** publishing any organic campaign links.
 
@@ -25,10 +25,9 @@ utm_content=<product>_<concept>_<hook-version>
 Use one URL per hero product. The examples exercise all three organic sources.
 
 ```text
-https://mythrealms.shop/products/new-series-purple-gem-pearl-drops?utm_source=tiktok&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=violet_rain_runbook_a
-https://mythrealms.shop/products/new-series-round-shell-disc-drops?utm_source=instagram&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=moon_disc_runbook_a
-https://mythrealms.shop/products/new-series-leaf-turquoise-pearl-cuff?utm_source=pinterest&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=turquoise_leaf_runbook_a
-https://mythrealms.shop/products/new-series-pearl-y-lariat?utm_source=tiktok&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=falling_pearl_runbook_a
+https://mythrealms-shop.vercel.app/products/new-series-purple-gem-pearl-drops?utm_source=tiktok&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=violet_rain_runbook_a
+https://mythrealms-shop.vercel.app/products/new-series-round-shell-disc-drops?utm_source=instagram&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=moon_disc_runbook_a
+https://mythrealms-shop.vercel.app/products/new-series-pearl-y-lariat?utm_source=tiktok&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=falling_pearl_runbook_a
 ```
 
 ## 3. Expected events and fields
@@ -101,6 +100,8 @@ Use `pass`, `fail: <reason>`, or `pending: <reason>` in Result.
 
 | Test date | Tester | Order ID | Result |
 | --- | --- | --- | --- |
-| 2026-07-19 | Codex | N/A | pending: `mythrealms.shop` is not attached to the Vercel project; analytics platform IDs are not configured; no live-money test was authorized |
+| 2026-07-19 | Codex | N/A | pending: temporary production URL confirmed as `mythrealms-shop.vercel.app`; analytics platform IDs are not configured; no live-money test was authorized |
 |  |  |  |  |
 |  |  |  |  |
+
+When a MythRealms-aligned custom domain is connected, replace these URLs, update Vercel production environment values, and repeat this runbook before moving campaign links. `jasperkit.com` is intentionally not used because it does not match the storefront brand.

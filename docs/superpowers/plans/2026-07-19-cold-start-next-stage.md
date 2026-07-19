@@ -21,6 +21,10 @@
 - 每个外部平台配置和真实支付操作都需要人工确认。
 - 工作区存在大量视频与 3D 素材，提交时只暂存本任务明确列出的文件。
 
+### 2026-07-19 执行例外
+
+用户决定暂缓完整供应商事实与图片许可核验，因此任务 2 不再阻止 AI 有机内容的小流量测试，但以下边界不变：Turquoise Leaf 继续冻结；内容不得写入未经证实的材质、尺寸、工艺、产地、功效或稀缺性；真实接单前必须最低限度确认可售款式、采购价、国内发货和跨境履约线路。冷启动期间统一使用 `https://mythrealms-shop.vercel.app`，不接入与 MythRealms 品牌不一致的 `jasperkit.com`。
+
 ---
 
 ### 任务 1：建立执行基线并同步计划状态
@@ -253,9 +257,9 @@ NEXT_PUBLIC_PINTEREST_TAG_ID
 确认以下地址在生产环境返回成功，并把结果记录到状态表：
 
 ```text
-https://mythrealms.shop/robots.txt
-https://mythrealms.shop/sitemap.xml
-https://mythrealms.shop/blog
+https://mythrealms-shop.vercel.app/robots.txt
+https://mythrealms-shop.vercel.app/sitemap.xml
+https://mythrealms-shop.vercel.app/blog
 ```
 
 **通过门槛：** 本地测试、Lint、构建和启动检查全部通过；生产环境页面可用；至少 GA4 的前三个漏斗事件已经在 DebugView 中确认。
@@ -297,7 +301,7 @@ utm_content=<product>_<format>_<variant>
 
 - [ ] **步骤 4：完成搜索平台配置**
 
-在 Google Search Console 验证域名并提交 `https://mythrealms.shop/sitemap.xml`。只有任务 3 的配送和退货信息通过后，才向 Google Merchant Center 提交商品 Feed。
+临时阶段可为 `https://mythrealms-shop.vercel.app` 创建 URL 前缀资源并提交 Sitemap，但不做域名型 SEO 沉淀；等与 MythRealms 一致的自定义域名确定后再迁移。只有任务 3 的配送和退货信息通过后，才向 Google Merchant Center 提交商品 Feed。
 
 - [ ] **步骤 5：记录发现入口状态**
 
@@ -323,17 +327,19 @@ utm_content=<product>_<format>_<variant>
 
 **输出：** 七条审核通过的视频、英文 Caption、首评、披露、音频来源和准确落地链接。
 
-- [ ] **步骤 1：按固定测试矩阵分配七条内容**
+- [x] **步骤 1：按固定测试矩阵分配七条内容**
 
 ```text
 第 1 条：Moon Disc 微距动态
 第 2 条：Violet Rain 佩戴侧面
 第 3 条：Moon Disc 对比 Violet Rain
 第 4 条：Falling Pearl 领口展示
-第 5 条：AI 场景与供应商参考图说明
-第 6 条：Turquoise Leaf 袖口展示
+第 5 条：AI 场景透明度与商品页参考图说明
+第 6 条：Moon Disc 纯产品第二 Hook
 第 7 条：Violet Rain 黑色礼服穿搭
 ```
+
+已建立 `video-pipeline/work/2026-07-19-us-cold-start-week-01/content-queue.md`。因现有 Violet Rain 镜头为深梅色穿搭，第 7 条按实际素材改为“深色晚间穿搭”，不虚构黑色礼服画面。
 
 没有通过产品门槛的 SKU 用已通过产品的第二 Hook 变体替换，不得为了凑齐四款而发布不确定产品。
 
@@ -372,7 +378,7 @@ utm_content=<product>_<format>_<variant>
 
 - [ ] **步骤 1：发布前执行最终上线门槛**
 
-只有以下条件全部成立时才发布：至少两款产品事实包通过；首选和备用履约线路已记录；配送与退货文案准确；GA4 前三个漏斗事件已验证；七条内容通过人工审核；社媒链接可访问准确落地页。
+只有以下条件全部成立时才发布：三款测试产品的本地图像身份一致且 Turquoise Leaf 保持冻结；首选和备用履约线路已记录；真实接单所需的可售款式、采购价和国内发货已最低限度确认；配送与退货文案准确；GA4 前三个漏斗事件已验证；七条内容通过人工审核；社媒链接可访问准确落地页。完整供应商事实与图片许可仍列为待补风险，不得被写成已完成。
 
 - [ ] **步骤 2：按固定时间发布**
 
@@ -412,7 +418,8 @@ utm_content=<product>_<format>_<variant>
 
 ## 阶段完成标准
 
-- 至少两款产品拥有完整事实包、图片许可、准确商品页和可接受单位经济性。
+- 三款测试产品的本地图像身份一致，Turquoise Leaf 保持冻结；完整事实包与图片许可按已记录的用户决定延期。
+- 真实接单前已最低限度确认可售款式、采购价、国内发货，并且至少两款产品具有可接受的单位经济性。
 - 已确定一条首选和一条备用美国履约线路。
 - 本地测试、Lint、构建和启动检查通过。
 - GA4 的 `view_item`、`add_to_cart` 和 `begin_checkout` 已在生产环境验证。

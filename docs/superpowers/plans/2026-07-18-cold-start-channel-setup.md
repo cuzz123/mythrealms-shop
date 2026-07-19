@@ -12,7 +12,7 @@
 
 - 只有在技术就绪计划部署完成后，才能执行本计划。
 - 严禁将访问令牌、客户端密钥、恢复代码或付款信息粘贴到仓库文件或截图中。
-- 使用已验证的生产域名 `https://mythrealms.shop`，不得使用 Vercel 预览地址。
+- 冷启动验证阶段使用稳定的生产地址 `https://mythrealms-shop.vercel.app`，不得使用单次 Vercel 预览地址。`jasperkit.com` 不接入 MythRealms。
 - 仅面向美国。除非履约能力已经就绪，否则不得在商品 Feed 或营销活动中启用其他国家或地区。
 - 第 1-60 天不得启动付费广告。在满足策略规定的触发条件前，预留的 300 元人民币必须保持不动。
 - 任何需要账号授权的平台操作，都必须保留为经用户批准后手动执行的操作。
@@ -28,10 +28,10 @@
 逐一打开以下 URL，确认响应成功，并且没有跳转到预览域名：
 
 ```text
-https://mythrealms.shop/
-https://mythrealms.shop/collections/pearl-series
-https://mythrealms.shop/sitemap.xml
-https://mythrealms.shop/api/feed
+https://mythrealms-shop.vercel.app/
+https://mythrealms-shop.vercel.app/collections/pearl-series
+https://mythrealms-shop.vercel.app/sitemap.xml
+https://mythrealms-shop.vercel.app/api/feed
 ```
 
 - [ ] **步骤 2：采用统一的 UTM 命名规范**
@@ -48,7 +48,7 @@ utm_content=<product>_<concept>_<hook-version>
 示例：
 
 ```text
-https://mythrealms.shop/products/new-series-purple-gem-pearl-drops?utm_source=tiktok&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=violet_rain_macro_a
+https://mythrealms-shop.vercel.app/products/new-series-purple-gem-pearl-drops?utm_source=tiktok&utm_medium=organic_social&utm_campaign=us_cold_start_2026q3&utm_content=violet_rain_macro_a
 ```
 
 - [ ] **步骤 3：为每个渠道建立一个稳定的主页链接**
@@ -63,7 +63,7 @@ https://mythrealms.shop/products/new-series-purple-gem-pearl-drops?utm_source=ti
 
 - [ ] **步骤 1：创建或确认 GA4 Web 数据流**
 
-网站 URL 使用 `https://mythrealms.shop`，数据流名称使用 `MythRealms US Store`，并私下记录 `G-...` 衡量 ID。
+网站 URL 使用 `https://mythrealms-shop.vercel.app`，数据流名称使用 `MythRealms US Store`，并私下记录 `G-...` 衡量 ID。迁移到正式品牌域名时更新数据流 URL，但保留同一数据流以维持冷启动数据连续性。
 
 - [ ] **步骤 2：在 Vercel 中添加生产环境变量**
 
@@ -99,14 +99,14 @@ product view -> add to cart -> checkout -> paid test order
 
 - [ ] **步骤 1：验证域名资源**
 
-如已有 DNS 验证则沿用。优先为 `mythrealms.shop` 使用域名资源；除非诊断确有需要，否则不要再创建一个相互竞争的 URL 前缀资源。
+临时阶段如需验证索引，只创建 `https://mythrealms-shop.vercel.app` 的 URL 前缀资源；不要为 `jasperkit.com` 建立 MythRealms 资源。正式品牌域名确定后，再建立域名资源并执行迁移。
 
 - [ ] **步骤 2：提交 Sitemap**
 
 提交：
 
 ```text
-https://mythrealms.shop/sitemap.xml
+https://mythrealms-shop.vercel.app/sitemap.xml
 ```
 
 记录提交日期和状态。
@@ -135,7 +135,7 @@ https://mythrealms.shop/sitemap.xml
 
 - [ ] **步骤 3：添加定时 Feed**
 
-将 `https://mythrealms.shop/api/feed` 设置为主 Feed，语言为英语，目标国家为美国，货币为 USD，每日抓取一次。
+履约门槛通过后，将 `https://mythrealms-shop.vercel.app/api/feed` 设置为临时主 Feed，语言为英语，目标国家为美国，货币为 USD，每日抓取一次；正式品牌域名上线后同步迁移 Feed URL。
 
 - [ ] **步骤 4：按事实来源优先级解决诊断问题**
 
@@ -184,7 +184,7 @@ https://mythrealms.shop/sitemap.xml
 
 - [ ] **步骤 2：Pinterest**
 
-转换或确认商业账号，认领 `mythrealms.shop`，创建名为 `Pearl Jewelry Styling` 的画板，并在主页使用带 Pinterest UTM 的合集链接。
+转换或确认商业账号，创建名为 `Pearl Jewelry Styling` 的画板，并在主页使用带 Pinterest UTM 的 Vercel 合集链接。网站认领留到正式品牌域名确定后完成。
 
 - [ ] **步骤 3：Pin 内容规范**
 
