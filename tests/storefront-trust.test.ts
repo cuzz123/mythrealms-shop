@@ -19,6 +19,17 @@ test("editorial hero imagery is not presented as a specific SKU", () => {
   assert.match(hero, /Editorial/i);
 });
 
+test("product galleries disclose editorial images and organization data avoids pearl-type expertise claims", () => {
+  const product = source("src/app/products/[slug]/1688-product.tsx");
+  const jsonLd = source("src/components/ui/JsonLd.tsx");
+
+  assert.match(
+    product,
+    /Supplier-supplied product views appear first\. Later editorial scenes may be AI-generated; refer to the first views for product shape and details\./,
+  );
+  assert.doesNotMatch(jsonLd, /Freshwater pearls/);
+});
+
 test("homepage hero reserves a fixed category-story reveal", () => {
   const hero = source("src/components/home/HomepageHero.tsx");
   assert.match(hero, /\[--homepage-category-reveal:10rem\]/);

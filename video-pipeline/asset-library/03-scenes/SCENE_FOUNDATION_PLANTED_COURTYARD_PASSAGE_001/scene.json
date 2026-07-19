@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_PLANTED_COURTYARD_PASSAGE_001",
+  "asset_type": "product_adapted_scene",
+  "status": "approved",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["bracelets", "rings"],
+  "model_position": "stand at the passage opening with the near arm held beside a pale plaster pier",
+  "light_direction": "dappled midday sun from frame left",
+  "framing_zone": "near hand and wrist remain clear against the pale plaster pier",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，花叶轻轻摇曳，镜头缓慢侧移。"}
+}

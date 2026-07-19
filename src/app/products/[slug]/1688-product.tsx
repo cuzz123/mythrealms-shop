@@ -13,6 +13,8 @@ import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import toast from "react-hot-toast";
 import { productBenefitTriplet, productDisplayName, productShortDescription, realmForProduct } from "@/lib/brand";
+import { CONSENT_CHANGED_EVENT } from "@/lib/analytics/consent";
+import { trackViewItem } from "@/lib/tracking";
 
 export function Product1688({ product }: { product: StorefrontProduct }) {
   const slug = product.slug;
@@ -61,6 +63,22 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
   const images = p.images;
   const mainImg = images[activeIdx] || p.image;
   const hasCompare = p.compareAt && p.compareAt > p.price;
+
+  useEffect(() => {
+    const trackProductView = () => {
+      trackViewItem({
+        id: p.id,
+        name: displayName,
+        price: p.price,
+        category: p.categoryName,
+        variant: p.slug,
+      });
+    };
+
+    trackProductView();
+    window.addEventListener(CONSENT_CHANGED_EVENT, trackProductView);
+    return () => window.removeEventListener(CONSENT_CHANGED_EVENT, trackProductView);
+  }, [displayName, p.categoryName, p.id, p.price, p.slug]);
 
   function handleAddToCart() {
     setAddToCartState("adding");
@@ -194,6 +212,11 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
                 </button>
               ))}
             </div>
+          )}
+          {images.some((image) => image.includes("-editorial-")) && (
+            <p className="mt-3 text-xs leading-relaxed text-[var(--text-muted)]">
+              Supplier-supplied product views appear first. Later editorial scenes may be AI-generated; refer to the first views for product shape and details.
+            </p>
           )}
         </div>
 

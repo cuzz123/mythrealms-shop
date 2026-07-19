@@ -122,6 +122,27 @@ test("catalog results cannot mutate the source collection or lookups", () => {
   assert.ok(!freshProduct.images.includes("/tampered.webp"));
 });
 
+test("the calm tide pilot leads with source views and retains editorial images as supplements", () => {
+  const pilot = getStorefrontProductBySlug("pearl-series-01");
+  assert.ok(pilot);
+  assert.equal(
+    pilot.image,
+    "/images/products/1688-shop/pearl-series/pearl-series-01-main.webp",
+  );
+  assert.deepEqual(pilot.images.slice(0, 3), [
+    "/images/products/1688-shop/pearl-series/pearl-series-01-main.webp",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-detail2.webp",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-detail1.webp",
+  ]);
+  assert.ok(pilot.images.some((image) => image.includes("-editorial-v1-")));
+
+  const unchanged = getStorefrontProductBySlug("pearl-series-02");
+  assert.ok(unchanged);
+  assert.ok(
+    unchanged.images.every((image) => !image.includes("-editorial-v1-")),
+  );
+});
+
 test("approved new-series products use only their own source-preserved galleries", () => {
   assert.equal(NEW_SERIES_SLUGS.length, 25);
 

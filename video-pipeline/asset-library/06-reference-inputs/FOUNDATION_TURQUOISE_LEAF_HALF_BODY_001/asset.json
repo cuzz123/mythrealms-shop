@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "id": "FOUNDATION_TURQUOISE_LEAF_HALF_BODY_001",
+  "asset_type": "foundation_first_frame",
+  "status": "approved",
+  "format": "9:16",
+  "image_path": "image.png",
+  "relationships": {
+    "character_id": "CHAR_FOUNDATION_TURQUOISE_LEAF_001",
+    "scene_id": "SCENE_FOUNDATION_MEDITERRANEAN_POOL_COURTYARD_001",
+    "product_id": "PROD_FOUNDATION_TURQUOISE_LEAF_001",
+    "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001"
+  },
+  "i2v": {
+    "mode": "I2V",
+    "duration_seconds": 4,
+    "prompt_zh": "@Image1为首帧，严格保持可见首帧中的人物、绿松石叶片珍珠手镯、服装与泳池庭院。4秒内手腕只转动一次，镜头克制缓慢推进；不得出现额外首饰、重复肢体、产品替换、文字、标志或水印。"
+  }
+}

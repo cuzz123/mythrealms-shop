@@ -4,6 +4,7 @@ node_modules/
 out/
 build/
 .worktrees/
+.vercel/
 
 # Development, review, and source-only assets
 .superpowers/

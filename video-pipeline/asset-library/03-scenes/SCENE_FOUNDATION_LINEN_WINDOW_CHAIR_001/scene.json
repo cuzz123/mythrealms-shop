@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_LINEN_WINDOW_CHAIR_001",
+  "asset_type": "product_adapted_scene",
+  "status": "approved",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["earrings", "necklaces"],
+  "model_position": "sit sideways in the window chair with the near shoulder facing the window",
+  "light_direction": "soft morning window light from frame left",
+  "framing_zone": "near ear and collarbone remain clear against the white linen curtain",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，亚麻帘轻轻起伏，镜头缓慢横移。"}
+}

@@ -3,6 +3,7 @@
 
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { trackAddToCart } from '@/lib/tracking'
 
 export interface CartProduct {
   id: string
@@ -35,8 +36,14 @@ export const useCartStore = create<CartStore>()(
       items: [],
 
       addItem: (product, quantity = 1) => {
+        trackAddToCart({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity,
+          variant: product.variantName,
+        })
         set((state) => {
-          const key = `${product.id}-${product.variantId || 'default'}`
           const existingIndex = state.items.findIndex(
             (item) =>
               item.product.id === product.id &&

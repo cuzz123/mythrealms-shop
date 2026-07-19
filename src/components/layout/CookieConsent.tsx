@@ -1,15 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Cookie, ShieldCheck } from "lucide-react";
+import { Cookie, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import {
+  CONSENT_CHANGED_EVENT,
+  CONSENT_STORAGE_KEY,
+  hasValidStoredConsent,
+  serializeConsent,
+} from "@/lib/analytics/consent";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookie-consent");
-    if (!consent) {
+    let hasValidConsent = false;
+    try {
+      hasValidConsent = hasValidStoredConsent(localStorage.getItem(CONSENT_STORAGE_KEY));
+    } catch {
+      hasValidConsent = false;
+    }
+
+    if (!hasValidConsent) {
       // Small delay so it doesn't flash on page load
       const timer = setTimeout(() => setVisible(true), 800);
       return () => clearTimeout(timer);
@@ -17,22 +29,14 @@ export function CookieConsent() {
   }, []);
 
   function acceptAll() {
-    localStorage.setItem("cookie-consent", JSON.stringify({
-      necessary: true,
-      analytics: true,
-      marketing: true,
-      timestamp: Date.now(),
-    }));
+    localStorage.setItem(CONSENT_STORAGE_KEY, serializeConsent("all"));
+    window.dispatchEvent(new CustomEvent(CONSENT_CHANGED_EVENT));
     setVisible(false);
   }
 
   function acceptNecessary() {
-    localStorage.setItem("cookie-consent", JSON.stringify({
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      timestamp: Date.now(),
-    }));
+    localStorage.setItem(CONSENT_STORAGE_KEY, serializeConsent("essential"));
+    window.dispatchEvent(new CustomEvent(CONSENT_CHANGED_EVENT));
     setVisible(false);
   }
 

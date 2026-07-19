@@ -1,0 +1,36 @@
+---
+id: SHOT_WHITE_SHELL_TRIPLE_DROPS_COLD_START_001
+asset_type: shot_template
+status: approved_first_frames
+format: "9:16"
+tags: [white-shell, earrings, first-frame, xiaoyunque]
+---
+
+# White Shell Triple Drops First Frames A-B
+
+## Product Lock
+
+- Exactly one pair of gold fish-hook earrings.
+- Each earring has three vertically connected irregular white shell drops.
+- Fine gold claw settings secure each shell drop.
+
+## FF_WHITE_SHELL_TRIPLE_DROPS_01_ARCH_HAIR_TUCK
+
+![](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_WHITE_SHELL_TRIPLE_DROPS_COLD_START_001/first-frames/FF_WHITE_SHELL_TRIPLE_DROPS_01_ARCH_HAIR_TUCK-v1.png)
+
+```text
+@Image1为首帧，严格保持成年模特面部、白色亚麻上衣、石灰岩拱门、暖色侧光与白贝三垂耳环结构不变。4秒内她只完成一次把近耳头发轻轻拨到耳后的动作，耳饰只产生一次自然微摆；镜头只做一次缓慢推近约5%。第4秒近耳耳饰完整清晰。禁止改变三颗贝壳数量、鱼钩耳线、金色爪镶或增加其他首饰，不生成文字。声音：低庭院环境音、轻微发丝与布料声，无对白。
+```
+
+## FF_WHITE_SHELL_TRIPLE_DROPS_02_SEA_STAIR_LOOKBACK
+
+![](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_WHITE_SHELL_TRIPLE_DROPS_COLD_START_001/first-frames/FF_WHITE_SHELL_TRIPLE_DROPS_02_SEA_STAIR_LOOKBACK-v1.png)
+
+```text
+@Image1为首帧，严格保持成年模特身份、白色亚麻上衣、临海石阶、橄榄前景、海面光线与白贝三垂耳环结构不变。4秒内她站在原地只完成一次约10度的小幅回望，身体和双脚保持稳定，耳饰随转头产生一次自然微摆；镜头只做一次克制的横向侧滑。建筑、石阶和海景保持画面主体，模特不居中放大。第4秒近耳耳饰完整可读。禁止改变三颗贝壳数量、鱼钩耳线、金色爪镶或增加其他首饰，不生成文字。声音：海风和远处海面环境音，无对白。
+```
+
+## Scene Assets
+
+- [[SCENE_FOUNDATION_LIMESTONE_ARCH_SHADE_001｜石灰岩拱门阴影]]
+- [[SCENE_FOUNDATION_SEA_STAIR_LANDING_001｜临海石阶落点]]

@@ -26,3 +26,13 @@
 在 Blender 使用 **File > Append** 打开全身绑定 Blend，追加 `RIG_WHITE_COAT_FULLBODY` 与 `MESH_WHITE_COAT_HIRES`。走路动作必须驱动 `root`、`pelvis`、左右 `foot_ik.*` 与 `knee_pole.*`，不要直接移动高模网格。
 
 当前绑定已通过结构、权重覆盖、IK 静止角与五个变形姿势检查。动作资产仍需逐条渲染后验收。
+
+<!-- WHITE_COAT_WALK_PACK_001 -->
+## 走路动作候选包
+
+- [3 组走路动作与镜头审片](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_ALL_3_REVIEW.mp4)
+- [关键帧审片表](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png)
+- [走路动作 Blend](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend)
+- [走路动作清单](file:///D:/mythrealms-shop/video-pipeline/asset-library/06-motions/WHITE_COAT_WALK_PACK_001/motion_manifest.json)
+
+当前 3 组走路动作均为 `candidate`，需要连续播放验收后才能升为正式资产。

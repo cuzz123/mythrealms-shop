@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "id": "FOUNDATION_VIOLET_RAIN_SIDE_PROFILE_001",
+  "asset_type": "foundation_first_frame",
+  "status": "approved",
+  "format": "9:16",
+  "image_path": "image.png",
+  "relationships": {
+    "character_id": "CHAR_FOUNDATION_VIOLET_RAIN_001",
+    "scene_id": "SCENE_FOUNDATION_MEDITERRANEAN_COURTYARD_001",
+    "product_id": "PROD_FOUNDATION_VIOLET_RAIN_001",
+    "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001"
+  },
+  "i2v": {
+    "mode": "I2V",
+    "duration_seconds": 4,
+    "prompt_zh": "@Image1为首帧，严格保持可见首帧中的人物、紫色宝石珍珠耳坠、服装与庭院。4秒内模特只将头发别到耳后一次，镜头缓慢横向滑动；不得出现额外首饰、重复肢体、产品替换、文字、标志或水印。"
+  }
+}

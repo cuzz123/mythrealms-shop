@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_TERRACE_RAILING_001",
+  "asset_type": "product_adapted_scene",
+  "status": "approved",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["bracelets", "rings"],
+  "model_position": "stand beside the railing with forearm resting on the sunlit top rail",
+  "light_direction": "afternoon sun from frame left",
+  "framing_zone": "near wrist and hand stay clear against the distant blue water",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，远处水面闪动，镜头缓慢推近。"}
+}

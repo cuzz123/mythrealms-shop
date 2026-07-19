@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_WHITE_WALL_MOVING_SHADE_001",
+  "asset_type": "product_adapted_scene",
+  "status": "approved",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["earrings", "hair accessories"],
+  "model_position": "stand close to the wall with the face angled into the clean light",
+  "light_direction": "direct afternoon sun from frame right",
+  "framing_zone": "profile, ear, and hairline remain clear against the matte white wall",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，叶影缓慢移动，镜头缓慢靠近。"}
+}

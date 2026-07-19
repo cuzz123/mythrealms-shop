@@ -6,6 +6,8 @@ import Markdown from "react-markdown"
 import { ArrowLeft } from "lucide-react";
 import { absoluteImageUrl } from "@/lib/images";
 import { absoluteUrl } from "@/lib/site";
+import { BlogPostingJsonLd } from "@/components/ui/JsonLd";
+import { buildBlogMetadata } from "@/lib/seo/blog";
 
 export const dynamic = "force-dynamic"
 
@@ -20,26 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: "Article Not Found | MythRealms", robots: { index: false, follow: false } };
   }
 
-  const url = absoluteUrl(`/blog/${slug}`);
-  return {
-    title: `${post.title} | MythRealms`,
-    description: post.excerpt,
-    robots: { index: false, follow: false },
-    alternates: { canonical: url },
-    openGraph: {
-      type: "article",
-      url,
-      title: post.title,
-      description: post.excerpt,
-      images: post.image ? [{ url: absoluteImageUrl(post.image) }] : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
-      images: post.image ? [absoluteImageUrl(post.image)] : [],
-    },
-  };
+  return buildBlogMetadata({ slug, ...post });
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -52,7 +35,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   if (!post) notFound();
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10">
+    <>
+      <BlogPostingJsonLd
+        headline={post.title}
+        description={post.excerpt}
+        url={absoluteUrl(`/blog/${post.slug}`)}
+        image={post.image ? absoluteImageUrl(post.image) : undefined}
+        datePublished={post.publishedAt}
+        dateModified={post.updatedAt}
+        authorName={post.author?.name || "MythRealms"}
+      />
+      <div className="max-w-3xl mx-auto px-6 py-10">
       <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mb-6">
         <ArrowLeft className="w-4 h-4" /> Back to Blog
       </Link>
@@ -72,6 +65,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <div className="prose prose-sm prose-invert max-w-none text-[var(--text-secondary)] leading-relaxed">
         <Markdown>{post.content}</Markdown>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

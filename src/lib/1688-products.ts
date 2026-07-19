@@ -110,11 +110,10 @@ const sourceGallery = (
   pearlSourceImage(slug, detailView),
 ];
 
-// Every active product gallery uses an exact supplier source file. The order is
-// main product view, real supplied wearing view, then product detail. No AI
-// reconstruction is used, so the material, structure, and proportions stay intact.
+// Every active product gallery starts with an exact supplier source file. The
+// order is main product view, real supplied wearing view, then product detail.
 const SOURCE_PRESERVED_PRODUCT_IMAGES: Record<string, [string, string, string]> = {
-  "pearl-series-01": sourceGallery("pearl-series-01", "detail3", "detail1"),
+  "pearl-series-01": sourceGallery("pearl-series-01", "detail2", "detail1"),
   "pearl-series-02": sourceGallery("pearl-series-02", "detail2", "detail1"),
   "pearl-series-03": sourceGallery("pearl-series-03", "detail2", "detail1"),
   "pearl-series-04": sourceGallery("pearl-series-04", "detail3", "detail1"),
@@ -138,6 +137,21 @@ const SOURCE_PRESERVED_PRODUCT_IMAGES: Record<string, [string, string, string]> 
   "pearl-series-20": sourceGallery("pearl-series-20", "detail3", "detail1"),
 };
 
+// This approved pilot is intentionally limited to one product. Its source
+// gallery remains in public/images as a non-destructive fallback.
+const EDITORIAL_PILOT_IMAGES: Record<
+  string,
+  [string, string, string, string, string]
+> = {
+  "pearl-series-01": [
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-01-hero.png",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-02-macro.png",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-03-worn.png",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-04-profile.png",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-05-atmosphere.png",
+  ],
+};
+
 export const PRODUCTS: Product[] = SOURCE_PRODUCTS.map((sourceProduct) => {
   const product: Product = {
     ...sourceProduct,
@@ -159,11 +173,12 @@ export const PRODUCTS: Product[] = SOURCE_PRODUCTS.map((sourceProduct) => {
   product.reviewCount = 0;
   product.isBestSeller = false;
   product.tag = product.isNew ? "New" : undefined;
+  const editorialImages = EDITORIAL_PILOT_IMAGES[product.slug];
   if (images) {
     const [primary, alternate, detail] = images;
     const hasSupplierWearingImage = product.slug !== "pearl-series-18";
     product.image = primary;
-    product.images = [...images];
+    product.images = editorialImages ? [...images, ...editorialImages] : [...images];
     product.imageRoles = {
       primary,
       ...(hasSupplierWearingImage ? { wearing: alternate } : {}),

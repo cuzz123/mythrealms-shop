@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_WATER_SIDE_STONE_LEDGE_001",
+  "asset_type": "product_adapted_scene",
+  "status": "approved",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["bracelets", "rings"],
+  "model_position": "kneel beside the stone ledge with one hand placed above the waterline",
+  "light_direction": "late-afternoon sun from frame right",
+  "framing_zone": "hand and wrist remain clear over the still pale water",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，水面泛起细纹，镜头缓慢靠近。"}
+}

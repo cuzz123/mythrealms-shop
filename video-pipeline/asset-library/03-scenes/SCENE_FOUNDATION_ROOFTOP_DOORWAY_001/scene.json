@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "id": "SCENE_FOUNDATION_ROOFTOP_DOORWAY_001",
+  "asset_type": "product_adapted_scene",
+  "status": "approved",
+  "format": "9:16",
+  "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001",
+  "compatible_product_types": ["earrings", "hair accessories"],
+  "model_position": "stand in the doorway with one shoulder toward the terrace light",
+  "light_direction": "golden-hour sun from frame right",
+  "framing_zone": "head and near ear remain clear against the white doorway interior",
+  "image_path": "image.png",
+  "i2v": {"mode": "I2V", "duration_seconds": 4, "prompt_zh": "@Image1为首帧，门帘轻轻飘动，镜头缓慢上移。"}
+}

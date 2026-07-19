@@ -1,0 +1,14 @@
+{
+  "id": "SCENE_FOUNDATION_MEDITERRANEAN_COURTYARD_001",
+  "asset_type": "editorial_scene_reference",
+  "status": "foundation_ready",
+  "version": "v1",
+  "title": "Mediterranean Courtyard",
+  "created_at": "2026-07-18",
+  "tags": ["foundation", "mediterranean-editorial"],
+  "relationships": {
+    "product_id": "PROD_FOUNDATION_VIOLET_RAIN_001",
+    "character_id": "CHAR_FOUNDATION_VIOLET_RAIN_001",
+    "style_id": "STYLE_FOUNDATION_MEDITERRANEAN_EDITORIAL_001"
+  }
+}

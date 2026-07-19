@@ -48,6 +48,14 @@
       "weight_method": "decimated_proxy_with_procedural_anatomical_fallback_and_data_transfer",
       "validation_status": "passed",
       "checkpoint_preview_dir": "preview/rig_v1_checkpoints"
+    },
+    "walk_pack_candidate": {
+      "id": "WHITE_COAT_WALK_PACK_001",
+      "file": "../../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+      "action_count": 3,
+      "camera_count": 3,
+      "status": "candidate_review",
+      "combined_reel": "../../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_ALL_3_REVIEW.mp4"
     }
   },
   "status": "rigged_candidate"

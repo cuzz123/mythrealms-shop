@@ -1454,12 +1454,15 @@
       "name": "白色长外套全身女模特",
       "category": "character",
       "status": "approved_source",
+      "rig_status": "rigged_candidate",
       "version": "v1",
       "source_paths": [
         "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/source.glb",
         "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/thumbnail.png",
         "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_RIG_v1.blend",
-        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/rig_v1_checkpoints/01_neutral.png"
+        "../05-characters/CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001/preview/rig_v1_checkpoints/01_neutral.png",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_ALL_3_REVIEW.mp4"
       ],
       "tags": [
         "hunyuan3d",
@@ -1471,7 +1474,8 @@
       "usage": {
         "default_import": "append",
         "walk_rig_candidate": true,
-        "rig_object": "RIG_WHITE_COAT_FULLBODY"
+        "rig_object": "RIG_WHITE_COAT_FULLBODY",
+        "walk_pack": "WHITE_COAT_WALK_PACK_001"
       },
       "quality_gate": [
         "preserve original source.glb",
@@ -1479,6 +1483,402 @@
         "validate fullbody rig before building walk actions"
       ],
       "notes": "2026-07-17 fullbody rig v1; 292098-vertex render mesh, 29334-vertex hidden binding proxy, 27-bone rig with foot IK."
+    },
+    {
+      "id": "ACT_WHITE_COAT_RUNWAY_WALK_01",
+      "name": "白色长外套·正面台步",
+      "category": "motion",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/01_ACT_WHITE_COAT_RUNWAY_WALK_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "CAM_WHITE_COAT_RUNWAY_DOLLY_01",
+        "suitable_for": [
+          "全身台步预演",
+          "长外套行走测试",
+          "模特广告走位"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "CAM_WHITE_COAT_RUNWAY_DOLLY_01",
+      "name": "正面全身·同步后移",
+      "category": "camera_rig",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/01_ACT_WHITE_COAT_RUNWAY_WALK_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "ACT_WHITE_COAT_RUNWAY_WALK_01",
+        "suitable_for": [
+          "全身走路跟拍",
+          "模特台步预演",
+          "动作验收"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "ACT_WHITE_COAT_WALK_IN_STOP_01",
+      "name": "白色长外套·走入停下",
+      "category": "motion",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/02_ACT_WHITE_COAT_WALK_IN_STOP_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "CAM_WHITE_COAT_WALK_IN_STOP_01",
+        "suitable_for": [
+          "全身台步预演",
+          "长外套行走测试",
+          "模特广告走位"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "CAM_WHITE_COAT_WALK_IN_STOP_01",
+      "name": "正面全身·落点定格",
+      "category": "camera_rig",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/02_ACT_WHITE_COAT_WALK_IN_STOP_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "ACT_WHITE_COAT_WALK_IN_STOP_01",
+        "suitable_for": [
+          "全身走路跟拍",
+          "模特台步预演",
+          "动作验收"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "ACT_WHITE_COAT_TRACKING_PASS_01",
+      "name": "白色长外套·三分侧跟行",
+      "category": "motion",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/03_ACT_WHITE_COAT_TRACKING_PASS_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "CAM_WHITE_COAT_TRACKING_PASS_01",
+        "suitable_for": [
+          "全身台步预演",
+          "长外套行走测试",
+          "模特广告走位"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "CAM_WHITE_COAT_TRACKING_PASS_01",
+      "name": "右前三分侧·平行跟拍",
+      "category": "camera_rig",
+      "status": "candidate",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/03_ACT_WHITE_COAT_TRACKING_PASS_01.mp4",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png"
+      ],
+      "tags": [
+        "white-coat",
+        "fullbody",
+        "walk",
+        "candidate"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "paired_asset": "ACT_WHITE_COAT_TRACKING_PASS_01",
+        "suitable_for": [
+          "全身走路跟拍",
+          "模特台步预演",
+          "动作验收"
+        ]
+      },
+      "quality_gate": [
+        "脚底落点数值验证通过",
+        "连续播放复核滑步与重心",
+        "用户验收后才能升为 approved"
+      ],
+      "notes": "96 帧、24 fps、4 秒；当前为白色长外套全身模特走路候选资产。"
+    },
+    {
+      "id": "WHITE_COAT_WALK_PACK_001",
+      "name": "白色长外套全身走路动作镜头测试包",
+      "category": "motion_camera_pack",
+      "status": "candidate_review",
+      "version": "v1",
+      "source_paths": [
+        "../06-motions/WHITE_COAT_WALK_PACK_001/WHITE_COAT_WALK_PACK_v1.blend",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/motion_manifest.json",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_REVIEW_SHEET.png",
+        "../06-motions/WHITE_COAT_WALK_PACK_001/preview/WHITE_COAT_WALK_ALL_3_REVIEW.mp4"
+      ],
+      "tags": [
+        "motion-pack",
+        "camera-pack",
+        "white-coat",
+        "fullbody",
+        "walk"
+      ],
+      "usage": {
+        "default_import": "append",
+        "character_id": "CHAR_HUNYUAN_WHITE_COAT_FULLBODY_001",
+        "suitable_for": [
+          "全身台步预演",
+          "长外套走路测试",
+          "模特镜头调度"
+        ]
+      },
+      "quality_gate": [
+        "3个动作与3个镜头完整存在",
+        "脚底落点和停步保持数值验证通过",
+        "连续播放由用户验收"
+      ],
+      "notes": "候选测试包；不得在用户动态验收前标记 approved。"
+    },
+    {
+      "id": "ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001",
+      "name": "Natural Window Linen Apartment",
+      "category": "scene_kit",
+      "status": "available",
+      "version": "v1",
+      "source_paths": [
+        "../03-scene-kits/ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001/source/window-apartment-panorama-v1.png",
+        "../03-scene-kits/ENV_MR_NATURAL_WINDOW_LINEN_APARTMENT_001/source/window-apartment-reverse-v1.png"
+      ],
+      "tags": ["photoreal", "window-light", "linen", "lifestyle"],
+      "usage": {"suitable_for": ["natural lifestyle", "window-side performance", "Pearl Series 04"]},
+      "notes": "Forward and reverse environment anchors; no dark-stage styling."
+    },
+    {
+      "id": "PROP_MR_LINEN_BOOK_AND_CERAMIC_001",
+      "name": "Linen Book and Ceramic Dish",
+      "category": "prop",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/PROP_MR_LINEN_BOOK_AND_CERAMIC_001/source/turnaround-v1.png"],
+      "tags": ["linen", "ceramic", "walnut", "supporting-prop"],
+      "usage": {"suitable_for": ["natural lifestyle", "product supporting set"]},
+      "notes": "Use only as low-weight lived-in context; never obscure jewelry."
+    },
+    {
+      "id": "PROD_MR_PEARL_SERIES_04_001",
+      "name": "Pearl Series 04 Cobalt and Blush Pearl Jewelry",
+      "category": "product_lock",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../../public/images/products/1688-shop/pearl-series/pearl-series-04-detail1.webp"],
+      "tags": ["pearl", "cobalt", "blush-pearl", "antique-gold"],
+      "usage": {"suitable_for": ["structure reference", "wearing shot", "macro product shot"]},
+      "notes": "Structure lock: cobalt stones, blush pearl clusters and antique-gold filigree; no redesign."
+    },
+    {
+      "id": "VID_MR_PEARL_SERIES_04_NATURAL_WINDOW_001",
+      "name": "Pearl Series 04 Natural Window Asset Pack",
+      "category": "storyboard_asset_pack",
+      "status": "asset_pack_ready",
+      "version": "v1",
+      "source_paths": ["../10-storyboard-videos/VID_MR_PEARL_SERIES_04_NATURAL_WINDOW_001/asset-pack-manifest.json"],
+      "tags": ["pearl-series-04", "photoreal", "natural-window", "seedance"],
+      "usage": {"suitable_for": ["storyboard generation", "Seedance multi-reference prompts"]},
+      "notes": "Use the manifest role paths; first-frame boards never replace this asset pack."
+    },
+    {
+      "id": "ENV_MR_COASTAL_BREAKFAST_TERRACE_001",
+      "name": "Coastal Breakfast Terrace",
+      "category": "scene_kit",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/ENV_MR_COASTAL_BREAKFAST_TERRACE_001/source/coastal-breakfast-panorama-v1.png", "../03-scene-kits/ENV_MR_COASTAL_BREAKFAST_TERRACE_001/source/coastal-breakfast-reverse-v1.png"],
+      "tags": ["photoreal", "coastal", "breakfast", "linen", "limestone"],
+      "usage": {"suitable_for": ["natural lifestyle", "Mediterranean morning", "product reveal"]},
+      "notes": "Forward and reverse anchors for a real coastal breakfast terrace."
+    },
+    {
+      "id": "CHAR_MR_TALENT_COASTAL_BREAKFAST_001",
+      "name": "Coastal Breakfast Curly Linen Talent",
+      "category": "character",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../05-characters/CHAR_MR_TALENT_COASTAL_BREAKFAST_001/source/turnaround-v1.png", "../05-characters/CHAR_MR_TALENT_COASTAL_BREAKFAST_001/source/expressions-v1.png", "../05-characters/CHAR_MR_TALENT_COASTAL_BREAKFAST_001/source/motion-contacts-v1.png"],
+      "tags": ["photoreal", "female", "curly", "linen", "lifestyle"],
+      "usage": {"suitable_for": ["coastal breakfast", "quiet portrait", "natural lifestyle"]},
+      "notes": "Identity pack; jewelry remains a separate reference role."
+    },
+    {
+      "id": "PROP_MR_COASTAL_BREAKFAST_SET_001",
+      "name": "Coastal Breakfast Table Set",
+      "category": "prop",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/PROP_MR_COASTAL_BREAKFAST_SET_001/source/turnaround-v1.png"],
+      "tags": ["ceramic", "linen", "pale-wood", "breakfast"],
+      "usage": {"suitable_for": ["product table reveal", "lifestyle continuity"]},
+      "notes": "White ceramic dish stays empty before the reveal."
+    },
+    {
+      "id": "PROD_MR_PEARL_JADE_NECKLACE_001",
+      "name": "Baroque Pearl and Mist Jade Necklace",
+      "category": "product_lock",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../../public/images/products/new-series/new-series-pearl-jade-bracelet/main.jpg"],
+      "tags": ["baroque-pearl", "jade", "green", "gold", "necklace"],
+      "usage": {"suitable_for": ["structure reference", "macro product proof", "hero closing"]},
+      "notes": "Structure lock only; original black velvet and product text must not carry into generations."
+    },
+    {
+      "id": "VID_MR_PEARL_JADE_COASTAL_BREAKFAST_001",
+      "name": "Pearl Jade Coastal Breakfast Asset Pack",
+      "category": "storyboard_asset_pack",
+      "status": "asset_pack_ready",
+      "version": "v1",
+      "source_paths": ["../10-storyboard-videos/VID_MR_PEARL_JADE_COASTAL_BREAKFAST_001/asset-pack-manifest.json"],
+      "tags": ["pearl-jade", "coastal", "breakfast", "photoreal", "seedance"],
+      "usage": {"suitable_for": ["storyboard generation", "Seedance multi-reference prompts"]},
+      "notes": "Eight 4-second clips; necklace is reserved until S06."
+    },
+    {
+      "id": "ENV_MR_LIMESTONE_FLORAL_GALLERY_001",
+      "name": "Limestone Floral Gallery",
+      "category": "scene_kit",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/ENV_MR_LIMESTONE_FLORAL_GALLERY_001/source/gallery-forward-v1.png", "../03-scene-kits/ENV_MR_LIMESTONE_FLORAL_GALLERY_001/source/gallery-reverse-v1.png"],
+      "tags": ["photoreal", "limestone", "high-window", "leaf-shadow", "gallery"],
+      "usage": {"suitable_for": ["quiet earring reveal", "art gallery portrait", "natural window light"]},
+      "notes": "Forward/reverse world anchors; no products or text."
+    },
+    {
+      "id": "CHAR_MR_TALENT_LIMESTONE_GALLERY_001",
+      "name": "Limestone Gallery Cream Dress Talent",
+      "category": "character",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../05-characters/CHAR_MR_TALENT_LIMESTONE_GALLERY_001/source/turnaround-v1.png", "../05-characters/CHAR_MR_TALENT_LIMESTONE_GALLERY_001/source/expressions-v1.png", "../05-characters/CHAR_MR_TALENT_LIMESTONE_GALLERY_001/source/motion-contacts-v1.png"],
+      "tags": ["photoreal", "female", "cream-dress", "bare-ear", "gallery"],
+      "usage": {"suitable_for": ["quiet portrait", "earring reveal", "art gallery walk-in"]},
+      "notes": "Identity and movement references are intentionally jewelry-free."
+    },
+    {
+      "id": "PROP_MR_PLASTER_FLOWER_PEDESTAL_001",
+      "name": "Plaster Flower Pedestal",
+      "category": "prop",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/PROP_MR_PLASTER_FLOWER_PEDESTAL_001/source/turnaround-v1.png"],
+      "tags": ["plaster", "flower-sculpture", "limestone", "gallery"],
+      "usage": {"suitable_for": ["spatial cut bridge", "gallery context"]},
+      "notes": "Matte art prop, explicitly not a jewelry structure reference."
+    },
+    {
+      "id": "PROD_MR_WHITE_SHELL_FLOWER_DROPS_001",
+      "name": "White Shell Flower Drops",
+      "category": "product_lock",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../../public/images/products/new-series/new-series-white-shell-flower-drops/detail-04.jpg"],
+      "tags": ["earrings", "white-shell", "flower", "pearl", "gold"],
+      "usage": {"suitable_for": ["structure reference", "ear macro", "product closing"]},
+      "notes": "Lock the translucent white flower petals, tiny pearl strand and fine gold connector only."
+    },
+    {
+      "id": "VID_MR_WHITE_SHELL_FLOWER_GALLERY_001",
+      "name": "White Shell Flower Gallery Asset Pack",
+      "category": "storyboard_asset_pack",
+      "status": "asset_pack_ready",
+      "version": "v1",
+      "source_paths": ["../10-storyboard-videos/VID_MR_WHITE_SHELL_FLOWER_GALLERY_001/asset-pack-manifest.json"],
+      "tags": ["white-shell-flower", "limestone-gallery", "photoreal", "seedance"],
+      "usage": {"suitable_for": ["storyboard generation", "Seedance multi-reference prompts"]},
+      "notes": "Eight 4-second clips; the first earring appears only in S06."
     }
   ]
 }

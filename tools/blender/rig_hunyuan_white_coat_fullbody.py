@@ -207,6 +207,15 @@ def create_fullbody_rig(minimum: Vector, maximum: Vector) -> bpy.types.Object:
         constraint.chain_count = 2
         constraint.pole_angle = -math.pi / 2.0
         constraint.use_stretch = False
+        foot_rotation = rig.pose.bones[f"foot.{side}"].constraints.new(
+            "COPY_ROTATION"
+        )
+        foot_rotation.name = f"FOOT_ROTATION_{side}"
+        foot_rotation.target = rig
+        foot_rotation.subtarget = f"foot_ik.{side}"
+        foot_rotation.target_space = "WORLD"
+        foot_rotation.owner_space = "WORLD"
+        foot_rotation.mix_mode = "REPLACE"
     bpy.ops.object.mode_set(mode="OBJECT")
     rig.select_set(False)
     return rig

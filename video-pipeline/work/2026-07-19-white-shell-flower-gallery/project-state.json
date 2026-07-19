@@ -1,0 +1,17 @@
+{
+  "project_id": "VID_MR_WHITE_SHELL_FLOWER_GALLERY_001",
+  "title": "White Shell Flower Drops｜石中花影",
+  "mode": "sequence_project",
+  "delivery": {"aspect_ratio": "9:16", "clip_count": 8, "clip_duration_sec": 4, "total_duration_sec": 32},
+  "directorial_intent": "让观众先感到一个真实、安静、值得靠近的空间，再让耳畔的白色花朵像被晨风轻轻带出。",
+  "world_locks": ["浅灰白石灰岩", "高窗晨光从左侧进入", "细碎叶影只轻微漂移", "真实成年女模特与自然肤质", "奶油白无袖长裙"],
+  "product_lock": ["乳白半透明贝母花瓣", "一段竖向小珍珠串", "细金色连接件", "不转移商品图背景、文字或包装"],
+  "reveal_policy": {"reserved_until": "S06", "first_reveal": "S06 one earring", "hero_pair": "S08 pair on limestone"},
+  "scenes": [
+    {"scene_id": "SC01", "arc_position": "open", "location": "石灰岩花影馆", "clips": ["S01", "S02"], "max_chain_depth": 0},
+    {"scene_id": "SC02", "arc_position": "rising", "location": "石灰岩花影馆", "clips": ["S03", "S04", "S05"], "max_chain_depth": 2},
+    {"scene_id": "SC03", "arc_position": "turn", "location": "石灰岩花影馆", "clips": ["S06", "S07"], "max_chain_depth": 2},
+    {"scene_id": "SC04", "arc_position": "release", "location": "石灰岩花影馆", "clips": ["S08"], "max_chain_depth": 0}
+  ],
+  "status": "planned; compile S01 first, then replace planned state with accepted take observations before continuation"
+}
