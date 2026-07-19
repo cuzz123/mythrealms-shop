@@ -55,6 +55,30 @@ async function expectNoHorizontalOverflow(page: Page) {
   ).toBeLessThanOrEqual(0);
 }
 
+function parseRenderedCurrency(text: string) {
+  const markerIndexes = [...text.matchAll(/\$/g)].map((match) => match.index);
+  const tokens = markerIndexes.flatMap((index) => {
+    const match = text
+      .slice(index)
+      .match(/^\$(?:0|[1-9]\d*)\.\d{2}(?![\d,.])/);
+    return match ? [match[0]] : [];
+  });
+
+  return {
+    markerCount: markerIndexes.length,
+    tokens,
+    amounts: tokens.map((token) => Number(token.slice(1))),
+  };
+}
+
+function expectStrictlyParsedAmountsUnder50(text: string, label: string) {
+  const parsed = parseRenderedCurrency(text);
+  expect(parsed.markerCount, `${label}: dollar markers`).toBeGreaterThan(0);
+  expect(parsed.tokens, `${label}: exact currency tokens`).toHaveLength(parsed.markerCount);
+  expect(parsed.amounts, `${label}: parsed amounts`).toHaveLength(parsed.markerCount);
+  for (const amount of parsed.amounts) expect(amount, label).toBeLessThan(50);
+}
+
 test.describe("release surfaces", () => {
   test("pearl knowledge hub renders its registry content on mobile and desktop", async ({ page }) => {
     for (const viewport of [
@@ -250,36 +274,35 @@ test.describe("release surfaces", () => {
   });
 
   test("gift edit under $50 contains only matching current catalog products", async ({ page }) => {
-    const expectedProducts = getGiftSections().find((section) => section.id === "under-50")!.products;
+    const expectedSection = getGiftSections().find((section) => section.id === "under-50");
+    expect(expectedSection).toBeDefined();
+    const expectedProducts = expectedSection!.products;
+    expect(expectedProducts.length).toBeGreaterThan(0);
+
     await page.goto("/gifts#under-50");
 
     const section = page.locator("#under-50");
     await expect(section).toBeVisible();
     const productLinks = section.locator('a[href^="/products/"]');
+    const cards = productLinks.locator("..");
+    const renderedCardCount = await cards.count();
+    expect(renderedCardCount).toBeGreaterThan(0);
+    expect(renderedCardCount).toBe(expectedProducts.length);
     await expect(productLinks).toHaveCount(expectedProducts.length);
     expect(await productLinks.evaluateAll((links) => links.map((link) => link.getAttribute("href")))).toEqual(
       expectedProducts.map((product) => `/products/${product.slug}`),
     );
 
-    const renderedSectionAmounts: number[] = [];
     for (let index = 0; index < expectedProducts.length; index += 1) {
       const product = expectedProducts[index];
       expect(product.price, product.slug).toBeLessThan(50);
-      const card = productLinks.nth(index).locator("..");
+      const card = cards.nth(index);
       await expect(card).toContainText(`$${product.price.toFixed(2)}`);
-      const cardAmounts = await card.evaluate((node) =>
-        [...(node.textContent?.matchAll(/\$([\d,]+(?:\.\d{2})?)/g) ?? [])].map((match) =>
-          Number(match[1].replaceAll(",", "")),
-        ),
-      );
-      expect(cardAmounts.length, product.slug).toBeGreaterThan(0);
-      for (const amount of cardAmounts) expect(amount, product.slug).toBeLessThan(50);
-      renderedSectionAmounts.push(...cardAmounts);
+      expectStrictlyParsedAmountsUnder50(await card.innerText(), product.slug);
     }
-    expect(renderedSectionAmounts.length).toBeGreaterThanOrEqual(expectedProducts.length);
-    for (const amount of renderedSectionAmounts) {
-      expect(amount, "under-50 product grid").toBeLessThan(50);
-    }
+
+    const renderedProductSectionText = (await cards.allInnerTexts()).join("\n");
+    expectStrictlyParsedAmountsUnder50(renderedProductSectionText, "under-50 product grid");
   });
 
   test("mobile gift cards keep complete names and quick-add controls in separate action space", async ({ page }) => {
