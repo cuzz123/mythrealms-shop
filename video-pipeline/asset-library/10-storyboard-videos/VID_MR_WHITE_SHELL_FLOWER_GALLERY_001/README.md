@@ -7,4 +7,9 @@
 - 道具锚点：[石膏花雕](../../03-scene-kits/PROP_MR_PLASTER_FLOWER_PEDESTAL_001/README.md)
 - 产品锁：[白贝母花耳环](../../01-products/PROD_MR_WHITE_SHELL_FLOWER_DROPS_001/README.md)
 
-生成时先用 S01 建立本次空间，再根据验收的末帧继续 S02–S07；S08 从反向世界锚点独立开镜，避免长链漂移。
+生成时先用 S01 建立本次空间，再根据验收的末帧继续 S02—S07；S08 从反向世界锚点独立开镜，避免长链漂移。
+
+## 首帧预览
+
+- [8 段总览](first-frames/overview.png)
+- [逐镜头首帧与使用规则](first-frames/README.md)
