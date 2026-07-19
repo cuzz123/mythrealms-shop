@@ -210,6 +210,14 @@ test.describe("storefront release flows", () => {
       const item = page.getByRole("menuitem", { name: journey.item });
       await expect(item).toBeVisible();
       await expect(item).toHaveAttribute("href", journey.path);
+
+      await page.locator("h1").click();
+      await expect(item).toHaveCount(0);
+      await expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+      await trigger.click();
+      await expect(trigger).toHaveAttribute("aria-expanded", "true");
+      await expect(item).toBeVisible();
       await item.click();
       await expect(page).toHaveURL(new RegExp(`${journey.path.replaceAll("/", "\\/")}$`));
     }

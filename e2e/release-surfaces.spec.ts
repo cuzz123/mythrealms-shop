@@ -60,7 +60,7 @@ function parseRenderedCurrency(text: string) {
   const tokens = markerIndexes.flatMap((index) => {
     const match = text
       .slice(index)
-      .match(/^\$(?:0|[1-9]\d*)\.\d{2}(?![\d,.])/);
+      .match(/^\$(?:0|[1-9]\d*)\.\d{2}(?=$|\s)/);
     return match ? [match[0]] : [];
   });
 
@@ -80,6 +80,39 @@ function expectStrictlyParsedAmountsUnder50(text: string, label: string) {
 }
 
 test.describe("release surfaces", () => {
+  test("rendered currency parser requires safe terminal boundaries", () => {
+    const currentCardText =
+      "The Calm Tide - Ring\n$29.99\t$39.99\nSave $10.00\nPRODUCT VIEW";
+    expect(parseRenderedCurrency(currentCardText)).toEqual({
+      markerCount: 3,
+      tokens: ["$29.99", "$39.99", "$10.00"],
+      amounts: [29.99, 39.99, 10],
+    });
+    expect(() =>
+      expectStrictlyParsedAmountsUnder50(currentCardText, "current card separators"),
+    ).not.toThrow();
+
+    for (const malformed of ["$49.99USD", "$49.99e3"]) {
+      expect(parseRenderedCurrency(malformed), malformed).toEqual({
+        markerCount: 1,
+        tokens: [],
+        amounts: [],
+      });
+      expect(
+        () => expectStrictlyParsedAmountsUnder50(malformed, malformed),
+        malformed,
+      ).toThrow();
+    }
+
+    const mixedText = "$29.99\n$49.99USD";
+    expect(parseRenderedCurrency(mixedText)).toEqual({
+      markerCount: 2,
+      tokens: ["$29.99"],
+      amounts: [29.99],
+    });
+    expect(() => expectStrictlyParsedAmountsUnder50(mixedText, "mixed markers")).toThrow();
+  });
+
   test("pearl knowledge hub renders its registry content on mobile and desktop", async ({ page }) => {
     for (const viewport of [
       { width: 390, height: 844 },
