@@ -95,7 +95,7 @@ git commit -m "docs: localize and sequence cold start plans"
 
 **输出：** 四份只包含可验证事实的产品资料包；任何信息不完整的 SKU 被明确暂停。
 
-- [ ] **步骤 1：记录每款产品的固定事实字段**
+- [x] **步骤 1：记录每款产品的固定事实字段**
 
 每份资料包必须包含：产品名称、站内 slug、1688 链接、供应商名称、采购价、可选款式、可见组件、已验证尺寸、单件重量、包装尺寸、库存处理方式、缺货处理方式、供应商国内发货时效、供应商原图路径、图片许可日期和许可范围。
 
@@ -103,7 +103,7 @@ git commit -m "docs: localize and sequence cold start plans"
 
 许可记录至少需要明确允许在独立站和社交媒体中使用供应商图片。没有明确回复时，将对应产品标记为“禁止发布供应商图”，不得将沉默视为授权。
 
-- [ ] **步骤 3：逐图检查产品身份**
+- [x] **步骤 3：逐图检查产品身份**
 
 对照以下源目录和镜头包，检查颜色、形状、珍珠数量、连接结构、吊坠方向和产品比例：
 
@@ -122,7 +122,7 @@ video-pipeline/asset-library/09-shot-templates/SHOT_FALLING_PEARL_COLD_START_001
 
 若产品名称、材质、尺寸、库存或价格与事实包不一致，先在 `src/lib/new-series-products.ts` 或 `src/lib/1688-products.ts` 修正，再发布内容。每项修正都需要在 `tests/storefront-catalog.test.ts` 或 `tests/storefront-trust.test.ts` 中增加回归断言。
 
-- [ ] **步骤 5：执行产品真实性测试**
+- [x] **步骤 5：执行产品真实性测试**
 
 运行：
 
