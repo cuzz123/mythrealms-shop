@@ -27,6 +27,57 @@ test("public checkout exposes PayPal only", () => {
   assert.match(cart, /Checkout securely with PayPal/);
 });
 
+test("PayPal checkout exposes one real payment control without a fake selector", () => {
+  const checkout = source("src/app/checkout/page.tsx");
+  assert.doesNotMatch(
+    checkout,
+    /rounded-lg border border-\[#0070BA\][\s\S]*?>\s*PayPal\s*<\/div>/,
+  );
+  assert.match(checkout, /<PayPalButton[\s\S]*?<\/div>\s*\{\/\* Processing fee note/);
+});
+
+test("PayPal SDK waits for the real global and reports load or render failures", () => {
+  const checkout = source("src/app/checkout/page.tsx");
+  assert.match(checkout, /import Script from "next\/script"/);
+  assert.match(checkout, /<Script[\s\S]*?onReady=/);
+  assert.match(checkout, /window as MythRealmsWindow[\s\S]*?paypal\?\.Buttons/);
+  assert.match(checkout, /buttons\s*\.render\([\s\S]*?\.catch\(/);
+  assert.match(checkout, /buttons\s*\.render\([\s\S]*?\.then\([\s\S]*?markButtonReady/);
+  assert.match(checkout, /const markButtonReady[\s\S]*?setButtonReady\(true\)/);
+  assert.match(checkout, /new MutationObserver/);
+  assert.match(checkout, /iframe\.component-frame\.visible/);
+  assert.match(checkout, /window\.setTimeout/);
+  assert.match(checkout, /!buttonReady[\s\S]*?aria-label="Loading PayPal"/);
+  assert.match(checkout, /className=\{buttonReady \? "" : "opacity-0 pointer-events-none"\}/);
+  assert.doesNotMatch(checkout, /id="paypal-button-container"[\s\S]{0,120}"invisible"/);
+  assert.match(checkout, /role="alert"/);
+  assert.doesNotMatch(checkout, /document\.createElement\("script"\)/);
+  assert.doesNotMatch(
+    checkout,
+    /document\.getElementById\("paypal-sdk"\)[\s\S]{0,100}setSdkReady\(true\)/,
+  );
+});
+
+test("security headers permit the PayPal SDK resource chain and popups", () => {
+  const config = source("next.config.ts");
+  assert.match(config, /script-src[^\n]*https:\/\/\*\.paypal\.com/);
+  assert.match(config, /script-src[^\n]*https:\/\/\*\.paypalobjects\.com/);
+  assert.match(config, /connect-src[^\n]*https:\/\/\*\.paypalobjects\.com/);
+  assert.match(config, /frame-src[^\n]*https:\/\/\*\.paypalobjects\.com/);
+  assert.match(config, /Cross-Origin-Opener-Policy/);
+  assert.match(config, /same-origin-allow-popups/);
+});
+
+test("cookie consent does not cover the PayPal control on checkout", () => {
+  const consent = source("src/components/layout/CookieConsent.tsx");
+  assert.match(consent, /usePathname/);
+  assert.match(consent, /pathname\?\.startsWith\("\/checkout"\)/);
+  assert.match(
+    consent,
+    /isCheckout\s*\?\s*"relative z-\[1\]"\s*:\s*"fixed bottom-0 left-0 right-0 z-\[300\] animate-slide-up"/,
+  );
+});
+
 test("PayPal checkout validates the form and sends identity without client-owned pricing", () => {
   const checkout = source("src/app/checkout/page.tsx");
   assert.match(checkout, /discountCode=\{appliedDiscountCode\}/);
