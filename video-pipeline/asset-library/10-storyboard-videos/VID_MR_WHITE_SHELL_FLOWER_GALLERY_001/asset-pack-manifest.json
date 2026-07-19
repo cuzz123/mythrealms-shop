@@ -1,0 +1,14 @@
+{
+  "id": "VID_MR_WHITE_SHELL_FLOWER_GALLERY_001",
+  "title": "White Shell Flower Drops｜石中花影",
+  "asset_roles": {
+    "environment_forward": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\03-scene-kits\\ENV_MR_LIMESTONE_FLORAL_GALLERY_001\\source\\gallery-forward-v1.png",
+    "environment_reverse": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\03-scene-kits\\ENV_MR_LIMESTONE_FLORAL_GALLERY_001\\source\\gallery-reverse-v1.png",
+    "talent_turnaround": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_MR_TALENT_LIMESTONE_GALLERY_001\\source\\turnaround-v1.png",
+    "talent_expressions": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_MR_TALENT_LIMESTONE_GALLERY_001\\source\\expressions-v1.png",
+    "talent_actions": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_MR_TALENT_LIMESTONE_GALLERY_001\\source\\motion-contacts-v1.png",
+    "prop_turnaround": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\03-scene-kits\\PROP_MR_PLASTER_FLOWER_PEDESTAL_001\\source\\turnaround-v1.png",
+    "product_structure": "D:\\mythrealms-shop\\public\\images\\products\\new-series\\new-series-white-shell-flower-drops\\detail-04.jpg"
+  },
+  "reveal_rule": "S01-S05 no jewelry; S06 first reveal is one ear wearing the white shell flower drop."
+}

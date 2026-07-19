@@ -1824,6 +1824,61 @@
       "tags": ["pearl-jade", "coastal", "breakfast", "photoreal", "seedance"],
       "usage": {"suitable_for": ["storyboard generation", "Seedance multi-reference prompts"]},
       "notes": "Eight 4-second clips; necklace is reserved until S06."
+    },
+    {
+      "id": "ENV_MR_LIMESTONE_FLORAL_GALLERY_001",
+      "name": "Limestone Floral Gallery",
+      "category": "scene_kit",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/ENV_MR_LIMESTONE_FLORAL_GALLERY_001/source/gallery-forward-v1.png", "../03-scene-kits/ENV_MR_LIMESTONE_FLORAL_GALLERY_001/source/gallery-reverse-v1.png"],
+      "tags": ["photoreal", "limestone", "high-window", "leaf-shadow", "gallery"],
+      "usage": {"suitable_for": ["quiet earring reveal", "art gallery portrait", "natural window light"]},
+      "notes": "Forward/reverse world anchors; no products or text."
+    },
+    {
+      "id": "CHAR_MR_TALENT_LIMESTONE_GALLERY_001",
+      "name": "Limestone Gallery Cream Dress Talent",
+      "category": "character",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../05-characters/CHAR_MR_TALENT_LIMESTONE_GALLERY_001/source/turnaround-v1.png", "../05-characters/CHAR_MR_TALENT_LIMESTONE_GALLERY_001/source/expressions-v1.png", "../05-characters/CHAR_MR_TALENT_LIMESTONE_GALLERY_001/source/motion-contacts-v1.png"],
+      "tags": ["photoreal", "female", "cream-dress", "bare-ear", "gallery"],
+      "usage": {"suitable_for": ["quiet portrait", "earring reveal", "art gallery walk-in"]},
+      "notes": "Identity and movement references are intentionally jewelry-free."
+    },
+    {
+      "id": "PROP_MR_PLASTER_FLOWER_PEDESTAL_001",
+      "name": "Plaster Flower Pedestal",
+      "category": "prop",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../03-scene-kits/PROP_MR_PLASTER_FLOWER_PEDESTAL_001/source/turnaround-v1.png"],
+      "tags": ["plaster", "flower-sculpture", "limestone", "gallery"],
+      "usage": {"suitable_for": ["spatial cut bridge", "gallery context"]},
+      "notes": "Matte art prop, explicitly not a jewelry structure reference."
+    },
+    {
+      "id": "PROD_MR_WHITE_SHELL_FLOWER_DROPS_001",
+      "name": "White Shell Flower Drops",
+      "category": "product_lock",
+      "status": "available",
+      "version": "v1",
+      "source_paths": ["../../public/images/products/new-series/new-series-white-shell-flower-drops/detail-04.jpg"],
+      "tags": ["earrings", "white-shell", "flower", "pearl", "gold"],
+      "usage": {"suitable_for": ["structure reference", "ear macro", "product closing"]},
+      "notes": "Lock the translucent white flower petals, tiny pearl strand and fine gold connector only."
+    },
+    {
+      "id": "VID_MR_WHITE_SHELL_FLOWER_GALLERY_001",
+      "name": "White Shell Flower Gallery Asset Pack",
+      "category": "storyboard_asset_pack",
+      "status": "asset_pack_ready",
+      "version": "v1",
+      "source_paths": ["../10-storyboard-videos/VID_MR_WHITE_SHELL_FLOWER_GALLERY_001/asset-pack-manifest.json"],
+      "tags": ["white-shell-flower", "limestone-gallery", "photoreal", "seedance"],
+      "usage": {"suitable_for": ["storyboard generation", "Seedance multi-reference prompts"]},
+      "notes": "Eight 4-second clips; the first earring appears only in S06."
     }
   ]
 }
