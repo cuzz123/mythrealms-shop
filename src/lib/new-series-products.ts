@@ -21,7 +21,29 @@ function sourceGallery(slug: string, detailCount: number): string[] {
 }
 
 function createProduct(input: NewSeriesProductInput): Product {
-  const images = sourceGallery(input.slug, input.detailCount);
+  const sourceImages = sourceGallery(input.slug, input.detailCount);
+  const editorialImages = [
+    "new-series-white-shell-flower-drops", "new-series-gold-shell-teardrops",
+    "new-series-baroque-pearl-hoops", "new-series-purple-gem-pearl-drops",
+    "new-series-white-petal-flower-earrings", "new-series-mother-of-pearl-cluster-earrings",
+    "new-series-white-shell-triple-drops", "new-series-round-shell-disc-drops",
+    "new-series-pearl-jade-bracelet", "new-series-purple-gem-bangle",
+    "new-series-shell-twist-pearl-cuff", "new-series-leaf-turquoise-pearl-cuff",
+    "new-series-leaf-pearl-bracelet", "new-series-round-shell-gold-cuff",
+    "new-series-purple-stone-pendant-necklace", "new-series-pearl-y-lariat",
+    "new-series-green-layered-pendant-necklace", "new-series-pearl-dreamcatcher-lariat",
+    "new-series-pearl-drop-choker", "new-series-multi-strand-pearl-choker",
+    "new-series-black-drop-pearl-choker", "new-series-pearl-glasses-chain",
+    "new-series-shell-drop-glasses-chain", "new-series-classic-pearl-chain",
+    "new-series-turquoise-bead-chain",
+  ].includes(input.slug)
+    ? [
+        `/images/products/new-series/${input.slug}/editorial-v1-01-hero.png`,
+        `/images/products/new-series/${input.slug}/editorial-v1-02-macro.png`,
+        `/images/products/new-series/${input.slug}/editorial-v1-03-worn.png`,
+      ]
+    : undefined;
+  const images = editorialImages ?? sourceImages;
   const productType = input.kind === "earring design" ? "earrings" : input.kind;
 
   return {

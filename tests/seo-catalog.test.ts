@@ -127,6 +127,15 @@ test("the root layout does not duplicate homepage content in noscript", () => {
   assert.doesNotMatch(source, /noscript-shop-by-style-title/);
 });
 
+test("the database-backed journal archive is rendered dynamically", () => {
+  const blogSource = readFileSync(
+    path.join(process.cwd(), "src/app/blog/page.tsx"),
+    "utf8",
+  );
+
+  assert.match(blogSource, /export const dynamic = "force-dynamic";/);
+});
+
 test("the journal archive is indexable", () => {
   const metadataRobots = blogMetadata.robots;
   assert.notEqual(

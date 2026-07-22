@@ -122,35 +122,77 @@ test("catalog results cannot mutate the source collection or lookups", () => {
   assert.ok(!freshProduct.images.includes("/tampered.webp"));
 });
 
-test("the calm tide pilot leads with source views and retains editorial images as supplements", () => {
+test("the calm tide pilot uses its complete editorial gallery without changing other pearl source galleries", () => {
   const pilot = getStorefrontProductBySlug("pearl-series-01");
   assert.ok(pilot);
   assert.equal(
     pilot.image,
-    "/images/products/1688-shop/pearl-series/pearl-series-01-main.webp",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-01-hero.png",
   );
-  assert.deepEqual(pilot.images.slice(0, 3), [
-    "/images/products/1688-shop/pearl-series/pearl-series-01-main.webp",
-    "/images/products/1688-shop/pearl-series/pearl-series-01-detail2.webp",
-    "/images/products/1688-shop/pearl-series/pearl-series-01-detail1.webp",
+  assert.deepEqual(pilot.images, [
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-01-hero.png",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-02-macro.png",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-03-worn.png",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-04-profile.png",
+    "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-05-atmosphere.png",
   ]);
-  assert.ok(pilot.images.some((image) => image.includes("-editorial-v1-")));
+  assert.deepEqual(pilot.imageRoles, {
+    primary: "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-01-hero.png",
+    wearing: "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-03-worn.png",
+    detail: "/images/products/1688-shop/pearl-series/pearl-series-01-editorial-v1-02-macro.png",
+  });
 
-  const unchanged = getStorefrontProductBySlug("pearl-series-02");
-  assert.ok(unchanged);
-  assert.ok(
-    unchanged.images.every((image) => !image.includes("-editorial-v1-")),
-  );
+  const coreEditorialSlugs = [
+    "pearl-series-02", "pearl-series-03", "pearl-series-04", "pearl-series-05",
+    "pearl-series-06", "pearl-series-07", "pearl-series-08", "pearl-series-09",
+    "pearl-series-10", "pearl-series-11", "pearl-series-12", "pearl-series-13",
+    "pearl-series-14", "pearl-series-15", "pearl-series-16", "pearl-series-17",
+    "pearl-series-18", "pearl-series-19", "pearl-series-20",
+  ];
+
+  for (const slug of coreEditorialSlugs) {
+    const product = getStorefrontProductBySlug(slug);
+    assert.ok(product, `Expected ${slug} to be available`);
+    const imageRoot = `/images/products/1688-shop/pearl-series/${slug}-editorial-v1-`;
+    assert.deepEqual(product.images, [
+      `${imageRoot}01-hero.png`,
+      `${imageRoot}02-macro.png`,
+      `${imageRoot}03-worn.png`,
+    ]);
+    assert.deepEqual(product.imageRoles, {
+      primary: `${imageRoot}01-hero.png`,
+      detail: `${imageRoot}02-macro.png`,
+      wearing: `${imageRoot}03-worn.png`,
+    });
+  }
 });
 
-test("approved new-series products use only their own source-preserved galleries", () => {
+test("approved new-series products use their own approved galleries", () => {
   assert.equal(NEW_SERIES_SLUGS.length, 25);
 
   for (const slug of NEW_SERIES_SLUGS) {
     const product = getStorefrontProductBySlug(slug);
     assert.ok(product, `Expected approved new-series product ${slug}`);
     const sourceRoot = `/images/products/new-series/${slug}/`;
-    assert.equal(product.image, `${sourceRoot}main.jpg`);
+    const editorialRoot = `${sourceRoot}editorial-v1-`;
+    const expectedPrimary = [
+      "new-series-white-shell-flower-drops", "new-series-gold-shell-teardrops",
+      "new-series-baroque-pearl-hoops", "new-series-purple-gem-pearl-drops",
+      "new-series-white-petal-flower-earrings", "new-series-mother-of-pearl-cluster-earrings",
+      "new-series-white-shell-triple-drops", "new-series-round-shell-disc-drops",
+      "new-series-pearl-jade-bracelet", "new-series-purple-gem-bangle",
+      "new-series-shell-twist-pearl-cuff", "new-series-leaf-turquoise-pearl-cuff",
+      "new-series-leaf-pearl-bracelet", "new-series-round-shell-gold-cuff",
+      "new-series-purple-stone-pendant-necklace", "new-series-pearl-y-lariat",
+      "new-series-green-layered-pendant-necklace", "new-series-pearl-dreamcatcher-lariat",
+      "new-series-pearl-drop-choker", "new-series-multi-strand-pearl-choker",
+      "new-series-black-drop-pearl-choker", "new-series-pearl-glasses-chain",
+      "new-series-shell-drop-glasses-chain", "new-series-classic-pearl-chain",
+      "new-series-turquoise-bead-chain",
+    ].includes(slug)
+      ? `${editorialRoot}01-hero.png`
+      : `${sourceRoot}main.jpg`;
+    assert.equal(product.image, expectedPrimary);
     assert.ok(product.images.length >= 1);
     assert.ok(
       product.images.every((image) => image.startsWith(sourceRoot)),
@@ -159,28 +201,13 @@ test("approved new-series products use only their own source-preserved galleries
   }
 });
 
-test("storefront products expose neutral alternate card image roles", () => {
-  const sourcePreserved = getStorefrontProducts().filter((product) =>
-    product.slug.startsWith("pearl-series-"),
-  );
+test("storefront products expose truthful card image roles", () => {
+  const editorialCore = getStorefrontProductBySlug("pearl-series-13");
+  const editorialWorn = getStorefrontProductBySlug("pearl-series-18");
   const newSeries = getStorefrontProductBySlug("new-series-round-shell-disc-drops");
 
-  assert.equal(sourcePreserved.length, 20);
-  for (const product of sourcePreserved) {
-    assert.ok(product.images.length >= 3, product.slug);
-    assert.equal(product.imageRoles?.primary, product.images[0], product.slug);
-    assert.equal(product.imageRoles?.alternate, product.images[1], product.slug);
-    assert.equal(product.imageRoles?.detail, product.images[2], product.slug);
-    if (product.slug === "pearl-series-01") {
-      assert.ok(
-        product.images
-          .slice(3)
-          .every((image) => image.includes("pearl-series-01-editorial-v1-")),
-      );
-    } else {
-      assert.equal(product.images.length, 3, product.slug);
-    }
-  }
-  assert.equal(newSeries?.imageRoles?.alternate, undefined);
+  assert.equal(editorialCore?.imageRoles?.wearing, "/images/products/1688-shop/pearl-series/pearl-series-13-editorial-v1-03-worn.png");
+  assert.equal(editorialWorn?.imageRoles?.wearing, "/images/products/1688-shop/pearl-series/pearl-series-18-editorial-v1-03-worn.png");
+  assert.equal(newSeries?.imageRoles?.wearing, undefined);
   assert.equal(newSeries?.imageRoles?.primary, newSeries?.images[0]);
 });

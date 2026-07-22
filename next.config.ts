@@ -64,7 +64,7 @@ const nextConfig: NextConfig = {
     ],
     // Allow unoptimized images for dynamic/external URLs stored in DB
     dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment",
+    contentDispositionType: "inline",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 

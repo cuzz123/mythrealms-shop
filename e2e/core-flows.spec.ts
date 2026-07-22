@@ -186,28 +186,14 @@ test.describe("storefront release flows", () => {
     const newSeriesImages = page
       .locator('a[href="/products/new-series-round-shell-disc-drops"]')
       .locator("img");
-    await newSeriesImages.first().scrollIntoViewIfNeeded();
     await expect(newSeriesImages).toHaveCount(1);
-    await expect(newSeriesImages.first()).toHaveJSProperty("complete", true);
-    expect(await newSeriesImages.first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
+    await expectImagesLoaded(newSeriesImages);
 
-    const sourcePreservedImages = page
+    const editorialImages = page
       .locator('a[href="/products/pearl-series-01"]')
       .locator("img");
-    await sourcePreservedImages.first().scrollIntoViewIfNeeded();
-    await expect(sourcePreservedImages).toHaveCount(2);
-    await expect(sourcePreservedImages.first()).toHaveJSProperty("complete", true);
-    expect(await sourcePreservedImages.first().evaluate((image) => image.naturalWidth > 0)).toBe(true);
-
-    const pearlEighteenImages = page
-      .locator('a[href="/products/pearl-series-18"]')
-      .locator("img");
-    await pearlEighteenImages.first().scrollIntoViewIfNeeded();
-    await expect(pearlEighteenImages).toHaveCount(2);
-    await expect(pearlEighteenImages.nth(1)).toHaveAttribute(
-      "alt",
-      /alternate product view/i,
-    );
+    await expect(editorialImages).toHaveCount(1);
+    await expectImagesLoaded(editorialImages);
   });
 
   test("desktop Shop, Gifts, and Discover menus open and navigate", async ({ page }) => {
@@ -336,7 +322,7 @@ test.describe("storefront release flows", () => {
     await expect(page.getByRole("button", { name: /Previous product image/ })).toBeVisible();
     await expect(page.getByRole("button", { name: /Next product image/ })).toBeVisible();
     const thumbnails = page.getByRole("button", { name: /View image \d+ of \d+/ });
-    await expect(thumbnails).toHaveCount(8);
+    await expect(thumbnails).toHaveCount(5);
     await expect(thumbnails.first()).toHaveAttribute("aria-current", "true");
     await thumbnails.nth(1).click();
     await expect(thumbnails.nth(1)).toHaveAttribute("aria-current", "true");

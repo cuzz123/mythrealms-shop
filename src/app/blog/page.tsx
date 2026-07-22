@@ -5,7 +5,7 @@ import Image from "next/image";
 import { absoluteUrl } from "@/lib/site";
 import { isPearlEditorialPost } from "@/lib/seo/blog";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Pearl Jewelry Journal | MythRealms",

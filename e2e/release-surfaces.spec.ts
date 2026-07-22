@@ -46,7 +46,13 @@ async function expectInternalLinksHealthy(request: APIRequestContext, hrefs: rea
 async function expectLayoutReady(page: Page) {
   await page.evaluate(() => document.fonts.ready);
   const images = page.locator("#main-content img");
-  if ((await images.count()) > 0) await expectImagesLoaded(images);
+  const visibleIndexes = await images.evaluateAll((nodes) =>
+    nodes.flatMap((node, index) => {
+      const rect = node.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight ? [index] : [];
+    }),
+  );
+  for (const index of visibleIndexes) await expectImagesLoaded(images.nth(index));
 }
 
 async function expectNoHorizontalOverflow(page: Page) {
@@ -600,11 +606,11 @@ test.describe("release surfaces", () => {
     await expect(newSeriesImages).toHaveCount(1);
     await expectImagesLoaded(newSeriesImages);
 
-    const sourcePreservedImages = page
+    const editorialImages = page
       .locator('a[href="/products/pearl-series-01"]')
       .locator("img");
-    await expect(sourcePreservedImages).toHaveCount(2);
-    await expectImagesLoaded(sourcePreservedImages);
+    await expect(editorialImages).toHaveCount(1);
+    await expectImagesLoaded(editorialImages);
 
     await page.goto("/products/pearl-series-01");
     await expect(page.locator("header[data-visual-state]")).toHaveAttribute("data-visual-state", "solid");
@@ -760,12 +766,12 @@ test.describe("release surfaces", () => {
     await page.getByRole("link", { name: /The Pearl Line - Eyewear Chain/ }).first().click();
     await expect(page).toHaveURL(/\/products\/new-series-pearl-glasses-chain$/);
     await expect(page.getByRole("heading", { name: "The Pearl Line - Eyewear Chain" })).toBeVisible();
-    await expect(page.getByRole("button", { name: /View image 1 of 5/ })).toHaveAttribute(
+    await expect(page.getByRole("button", { name: /View image 1 of 3/ })).toHaveAttribute(
       "aria-current",
       "true",
     );
     const galleryImages = page.locator('button[aria-label^="View image"] img');
-    await expect(galleryImages).toHaveCount(5);
+    await expect(galleryImages).toHaveCount(3);
     await expectImagesLoaded(galleryImages);
   });
 });

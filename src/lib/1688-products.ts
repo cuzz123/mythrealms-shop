@@ -3,6 +3,7 @@ export type ProductImageRoles = {
   primary: string;
   alternate?: string;
   detail?: string;
+  wearing?: string;
 };
 
 export interface Product {
@@ -114,7 +115,7 @@ const sourceGallery = (
 // main product view, alternate supplier view, then product detail. No AI
 // reconstruction is used, so the material, structure, and proportions stay intact.
 const SOURCE_PRESERVED_PRODUCT_IMAGES: Record<string, [string, string, string]> = {
-  "pearl-series-01": sourceGallery("pearl-series-01", "detail2", "detail1"),
+  "pearl-series-01": sourceGallery("pearl-series-01", "detail3", "detail1"),
   "pearl-series-02": sourceGallery("pearl-series-02", "detail2", "detail1"),
   "pearl-series-03": sourceGallery("pearl-series-03", "detail2", "detail1"),
   "pearl-series-04": sourceGallery("pearl-series-04", "detail3", "detail1"),
@@ -151,6 +152,25 @@ const EDITORIAL_PILOT_IMAGES: Record<
   ],
 };
 
+const EDITORIAL_CORE_SLUGS = [
+  "pearl-series-02", "pearl-series-03", "pearl-series-04", "pearl-series-05",
+  "pearl-series-06", "pearl-series-07", "pearl-series-08", "pearl-series-09",
+  "pearl-series-10", "pearl-series-11", "pearl-series-12", "pearl-series-13",
+  "pearl-series-14", "pearl-series-15", "pearl-series-16", "pearl-series-17",
+  "pearl-series-18", "pearl-series-19", "pearl-series-20",
+] as const;
+
+const EDITORIAL_CORE_IMAGES = Object.fromEntries(
+  EDITORIAL_CORE_SLUGS.map((slug) => [
+    slug,
+    [
+      `/images/products/1688-shop/pearl-series/${slug}-editorial-v1-01-hero.png`,
+      `/images/products/1688-shop/pearl-series/${slug}-editorial-v1-02-macro.png`,
+      `/images/products/1688-shop/pearl-series/${slug}-editorial-v1-03-worn.png`,
+    ],
+  ]),
+) as Record<string, [string, string, string]>;
+
 export const PRODUCTS: Product[] = SOURCE_PRODUCTS.map((sourceProduct) => {
   const product: Product = {
     ...sourceProduct,
@@ -173,10 +193,20 @@ export const PRODUCTS: Product[] = SOURCE_PRODUCTS.map((sourceProduct) => {
   product.isBestSeller = false;
   product.tag = product.isNew ? "New" : undefined;
   const editorialImages = EDITORIAL_PILOT_IMAGES[product.slug];
-  if (images) {
+  if (editorialImages) {
+    const [primary, detail, wearing] = editorialImages;
+    product.image = primary;
+    product.images = [...editorialImages];
+    product.imageRoles = { primary, wearing, detail };
+  } else if (EDITORIAL_CORE_IMAGES[product.slug]) {
+    const [primary, detail, wearing] = EDITORIAL_CORE_IMAGES[product.slug];
+    product.image = primary;
+    product.images = [primary, detail, wearing];
+    product.imageRoles = { primary, detail, wearing };
+  } else if (images) {
     const [primary, alternate, detail] = images;
     product.image = primary;
-    product.images = editorialImages ? [...images, ...editorialImages] : [...images];
+    product.images = [...images];
     product.imageRoles = {
       primary,
       alternate,
