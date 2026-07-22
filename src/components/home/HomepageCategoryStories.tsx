@@ -30,6 +30,7 @@ export function HomepageCategoryStories() {
                   fill
                   sizes="(max-width: 767px) 100vw, 33vw"
                   className="object-cover"
+                  style={{ objectPosition: image.objectPosition }}
                 />
               </div>
               <div className="mt-4 flex items-center justify-between gap-3 border-b border-[var(--border)] pb-3">

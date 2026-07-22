@@ -33,7 +33,24 @@ test("product galleries disclose editorial images and organization data avoids p
 test("homepage hero reserves a fixed category-story reveal", () => {
   const hero = source("src/components/home/HomepageHero.tsx");
   assert.match(hero, /\[--homepage-category-reveal:10rem\]/);
-  assert.match(hero, /min-h-\[calc\(100svh-2\.25rem-var\(--homepage-category-reveal\)\)\]/);
+  assert.match(hero, /aspect-\[4\/5\]/);
+  assert.match(hero, /lg:aspect-\[16\/9\]/);
+});
+
+test("homepage hero uses the new model-worn editorial carousel", () => {
+  const hero = source("src/components/home/HomepageHero.tsx");
+  const media = source("src/lib/homepage-editorial.ts");
+  assert.match(hero, /HOMEPAGE_HERO_SLIDES/);
+  assert.match(hero, /setActiveSlide/);
+  assert.match(media, /hero-earrings-model-v2\.png/);
+  assert.match(media, /hero-necklace-model-v2\.png/);
+  assert.match(media, /hero-bracelet-model-v2\.png/);
+});
+
+test("homepage necklace category uses a model-worn editorial image", () => {
+  const media = source("src/lib/homepage-editorial.ts");
+  assert.match(media, /necklaces:[\s\S]*hero-necklace-model-v2\.png/);
+  assert.match(media, /objectPosition: "82% center"/);
 });
 
 test("homepage category stories defer image motion", () => {
