@@ -656,6 +656,7 @@ export default function CheckoutPage() {
               <p className="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-3">
                 Payment
               </p>
+              <p className="mb-2 text-sm font-medium text-[var(--text)]">PayPal</p>
               <PayPalButton
                 items={items}
                 email={email}
