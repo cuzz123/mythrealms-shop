@@ -32,10 +32,10 @@ Mythrealms remains a focused Mediterranean editorial pearl jewelry store. Every 
 
 ## Information Architecture
 
-### New public entry points
+### Strengthened and new public entry points
 
-- `/gifts`: Pearl gifts by occasion, recipient, and budget-minded edit; a gift-note explanation; existing product links.
-- `/pearls/care`: Practical pearl care and storage guidance, with FAQ.
+- `/gifts`: Rework the existing route around occasion, recipient, and budget-minded edits; add a gift-note explanation and existing product links.
+- `/pearls/care`: Expand the existing practical care and storage guide, with only visible, fact-bounded FAQ content.
 - `/pearls/stories`: Editorial index for origin, styling, and gift stories; canonical index rather than a duplicate of `/blog`.
 - `/pearls/symbolism`: A neutral guide to pearl associations in gift giving and personal style, without health, protection, luck, or spiritual outcome claims.
 - `/edits/[slug]`: A small, curated set of occasion and style edits generated from approved product slugs. Initial edits are Everyday Light, Dinner by the Water, A Gift to Keep, and Soft Gold & Pearl.
@@ -105,7 +105,7 @@ Create one typed registry that owns edit IDs, labels, descriptions, canonical pa
 
 - A visitor can find approved products by occasion and style from home, navigation, product pages, cart, and new guide pages.
 - No page offers a product slug that is absent from the approved storefront catalog.
-- Gift note, cart, and checkout preserve validated order facts without exposing personal content to analytics.
+- Gift note, cart, and checkout preserve validated order facts in the existing private `Order.notes` field without exposing personal content to analytics.
 - Every public addition has canonical metadata and truthful visible structured-data counterparts.
 - The full unit suite, production build, and Playwright suite pass; no new lint errors are introduced.
 - The production deployment is made only after local verification and follows the repository's existing `main` deployment flow.
