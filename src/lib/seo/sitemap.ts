@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import type { StorefrontProduct } from "@/lib/storefront/catalog";
+import { PEARL_EDITS } from "@/lib/storefront/pearl-edits";
 
 export interface SitemapPost {
   slug: string;
@@ -38,6 +39,11 @@ export function buildSitemapEntries(
     ...staticPages,
     ...products.map((product) => ({
       url: `${baseUrl}/products/${product.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...PEARL_EDITS.map((edit) => ({
+      url: `${baseUrl}${edit.route}`,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
