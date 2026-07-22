@@ -75,6 +75,15 @@ test("the database-backed sitemap revalidates without a redeploy", () => {
   assert.match(sitemapSource, /export const revalidate = 3600;/);
 });
 
+test("the database-backed journal archive is rendered dynamically", () => {
+  const blogSource = readFileSync(
+    path.join(process.cwd(), "src/app/blog/page.tsx"),
+    "utf8",
+  );
+
+  assert.match(blogSource, /export const dynamic = "force-dynamic";/);
+});
+
 test("the journal archive is indexable", () => {
   const robots = blogMetadata.robots;
   assert.notEqual(

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { absoluteUrl } from "@/lib/site";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Pearl Jewelry Journal | MythRealms",
