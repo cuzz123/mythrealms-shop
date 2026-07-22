@@ -1,0 +1,46 @@
+{
+  "id": "CHAR_CCO_STYLIZED_HUMANOID_YW_001",
+  "status": "available",
+  "role": "previs_character_prototype",
+  "format": ["blend", "png", "7z"],
+  "source": {
+    "name": "Base Rigged Stylized Humanoid Character (YW)",
+    "author": "Girush",
+    "url": "https://opengameart.org/content/base-rigged-stylized-humanoid-character-yw",
+    "download_file": "basemesh_a1_human_yw_by_girush.7z"
+  },
+  "license": {
+    "type": "CC0-1.0",
+    "source": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "library_rule": "may_be_modified_and_redistributed_with_license_record_retained"
+  },
+  "scale": {
+    "normalized_height_m": 1.9134,
+    "source_scale_factor": 0.01,
+    "grounding": "armature_root_translated_so_feet_rest_at_z_0"
+  },
+  "rig": {
+    "type": "custom_humanoid_armature",
+    "armature_object": "Armature",
+    "bone_count": 65,
+    "root_bone": "Sacrum",
+    "key_bones": [
+      "Sacrum",
+      "Spine1",
+      "Spine2",
+      "Spine3",
+      "head",
+      "Clavicle.L",
+      "Humerus.L",
+      "LowerArm.L",
+      "hand001.L"
+    ]
+  },
+  "files": {
+    "source_blend": "baseMesh_A1_(human_YW)_by_Girush.blend",
+    "standardized_preview_blend": "Preview.blend",
+    "thumbnail": "Thumbnail.png"
+  },
+  "quality_boundary": "CC0 stylized proxy for composition, blocking, rig tests and motion retargeting. Not a final luxury-product human character."
+}

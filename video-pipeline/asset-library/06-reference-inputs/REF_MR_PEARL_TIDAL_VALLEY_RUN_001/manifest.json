@@ -1,0 +1,32 @@
+{
+  "id": "REF_MR_PEARL_TIDAL_VALLEY_RUN_001",
+  "title": "珍珠潮汐谷第四段：逃离不存在的晚宴",
+  "status": "ready",
+  "created_at": "2026-07-17",
+  "aspect_ratio": "16:9",
+  "duration_seconds": 12,
+  "continuity_from": "REF_MR_PEARL_TIDAL_VALLEY_HORSE_001",
+  "character": "CHAR_MR_TALENT_AUBURN_SATIN_001",
+  "references": [
+    {"role": "departure", "file": "references/departure-anchor.png"},
+    {"role": "run_motion", "file": "references/run-anchor.png"},
+    {"role": "breath_bridge", "file": "references/breath-anchor.png"}
+  ],
+  "shots": [
+    {"id": "S04A", "timecode": "00:28-00:32", "primary_reference": "departure"},
+    {"id": "S04B", "timecode": "00:32-00:36", "primary_reference": "run_motion"},
+    {"id": "S04C", "timecode": "00:36-00:40", "primary_reference": "breath_bridge"}
+  ],
+  "deliverables": {
+    "prompts": "prompts/seedance-s04.md",
+    "board": "board/pearl-tidal-valley-run-board.png",
+    "accessibility_text": "board/pearl-tidal-valley-run-board.txt"
+  },
+  "checksums": {
+    "references/departure-anchor.png": "ba2a971b2a45bbbe937b7325a59d8aaf649c97bb94383a44d385879d4c7de30d",
+    "references/run-anchor.png": "8b28631cbf67165cf179c83b9001c6e1a803bae22a110cf920f4dffd0813c982",
+    "references/breath-anchor.png": "d2813a21fee7ff7acf94cfb5204cb9c6f6625d01000d8ddfe1caefb7ba0e701b",
+    "board/pearl-tidal-valley-run-board.png": "f443111bdc3810e42ad19ed750d0ac87a3644939b82b77920fd8c3ef61446582"
+  },
+  "asset_library_path": "video-pipeline/asset-library/06-reference-inputs/REF_MR_PEARL_TIDAL_VALLEY_RUN_001"
+}

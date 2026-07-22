@@ -1,0 +1,10 @@
+{
+  "schema_version":"1.0","id":"SHOT_MOTHER_OF_PEARL_CLUSTER_COLD_START_001","name":"Mother of Pearl Cluster｜晨光中庭四镜头","category":"shot_template","status":"approved_first_frames","version":"v1","format":"9:16","fps":30,"generation_surface":"Xiaoyunque Seedance 2.0 Fast","generation_mode":"I2V first-frame","minimum_clip_duration_seconds":4,"credits_per_take":44,
+  "product":{"slug":"new-series-mother-of-pearl-cluster-earrings","geometry_locks":["round polished gold stud","compact creamy rice-pearl cluster","irregular translucent white mother-of-pearl petal drops"]},
+  "frames":[
+    {"frame_id":"FF_MOP_CLUSTER_01_ATRIUM_HOOK","path":"first-frames/FF_MOP_CLUSTER_01_ATRIUM_HOOK-v1.png","approval_status":"approved","target_duration_seconds":4,"seedance_prompt_zh":"@图片1 是首帧并锁定浅金发雀斑模特、真实肤质、灰色丝质衬衫、母贝花簇耳环、浅石材玻璃中庭、奶油色纱帘和晨光。4秒单镜头，保持当前85mm耳部近景构图，机位基本锁定，只允许不超过2%的极慢推进。0-1秒模特自然眨眼；1-3秒视线轻微移向窗外，发丝和纱帘被轻风带动；3-4秒停稳，耳环只摆动一次后静止。保持金色圆形耳钉、米粒珍珠簇和半透明不规则母贝花瓣完全不变；不新增首饰或道具。环境声只有轻风，不要音乐。"},
+    {"frame_id":"FF_MOP_CLUSTER_02_ATRIUM_WALK","path":"first-frames/FF_MOP_CLUSTER_02_ATRIUM_WALK-v1.png","approval_status":"approved","target_duration_seconds":4,"seedance_prompt_zh":"@图片1 是首帧并锁定同一位浅金发模特、灰色丝质衬衫、母贝花簇耳环、浅石材玻璃中庭、纱帘和晨光。4秒单镜头，保持当前50mm人物中景构图，机位锁定；人物保持在右侧，左侧纱帘与石墙保持干净作为后期文案安全区。0-2秒模特向前走半步；2-4秒停下，发丝、纱帘和耳环只自然轻动一次后停稳。保持金色圆形耳钉、米粒珍珠簇和半透明不规则母贝花瓣完全不变，不新增首饰或道具。环境声只有轻风，不要音乐。"},
+    {"frame_id":"FF_MOP_CLUSTER_03_CURTAIN_PROFILE","path":"first-frames/FF_MOP_CLUSTER_03_CURTAIN_PROFILE-v1.png","approval_status":"approved","target_duration_seconds":4,"seedance_prompt_zh":"@图片1 是首帧并锁定同一位浅金发模特、灰色丝质衬衫、母贝花簇耳环、石材玻璃中庭、纱帘和晨光。4秒单镜头，保持当前50mm窗边侧面人像构图，机位完全锁定。0-2秒模特视线缓慢掠向纱帘；2-4秒纱帘与发丝轻动，耳环只摆动一次后静止。保持金色圆形耳钉、米粒珍珠簇和半透明不规则母贝花瓣完全不变，不新增首饰或道具。环境声只有轻风，不要音乐。"},
+    {"frame_id":"FF_MOP_CLUSTER_04_CURTAIN_END","path":"first-frames/FF_MOP_CLUSTER_04_CURTAIN_END-v1.png","approval_status":"approved","target_duration_seconds":4,"seedance_prompt_zh":"@图片1 是首帧并锁定同一位浅金发模特、灰色丝质衬衫、母贝花簇耳环、石材玻璃中庭、纱帘和晨光。4秒单镜头，保持当前35mm环境人像构图，机位基本锁定，只允许约2%的极慢后撤；人物保持在右侧，左侧纱帘保持干净作为后期文案安全区。0-2秒模特自然呼吸并望向窗外；2-4秒纱帘、发丝和耳环只轻动一次后停稳。保持金色圆形耳钉、米粒珍珠簇和半透明不规则母贝花瓣完全不变，不新增首饰或道具。环境声只有轻风，不要音乐。"}
+  ]
+}

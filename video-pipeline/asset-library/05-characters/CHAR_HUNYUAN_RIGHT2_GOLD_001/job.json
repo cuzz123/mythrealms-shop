@@ -1,0 +1,25 @@
+{
+  "asset_id": "CHAR_HUNYUAN_RIGHT2_GOLD_001",
+  "submitted_at": "2026-07-14T09:16:21.246513+00:00",
+  "job_id": "1468535638567149568",
+  "request_id": "507d55c3-0010-41a6-95b3-9004247f4a36",
+  "request": {
+    "model": "3.1",
+    "primary_image": "source/three-view-crops/front.jpg",
+    "multi_views": [
+      "right_front",
+      "back"
+    ],
+    "pbr": true,
+    "generate_type": "Normal",
+    "face_count": 500000
+  },
+  "completion_request_id": "9bee9e1f-0702-4eec-817d-1e91cbdf8f99",
+  "credit_consumed": 40,
+  "credit_details": "{\"GenerateType-Normal\":20,\"MultiViewImages\":10,\"Pbr\":10}",
+  "downloaded_files": {
+    "OBJ": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_HUNYUAN_RIGHT2_GOLD_001\\source\\hunyuan-raw\\RIGHT2_GOLD.obj.zip",
+    "GLB": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_HUNYUAN_RIGHT2_GOLD_001\\source\\hunyuan-raw\\RIGHT2_GOLD.glb"
+  },
+  "preview": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_HUNYUAN_RIGHT2_GOLD_001\\source\\hunyuan-raw\\HunyuanPreview.png"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "STYLE_VIEW_POSITION_MEDIUM_001",
+  "status": "reference_derived",
+  "source": {
+    "title": "43种AI视频视觉风格｜告别乱堆砌提示词，镜头语言+导演气质全拆解",
+    "url": "https://mp.weixin.qq.com/s/KsI2Hz8WokeHjk2Uca574w",
+    "captured_at": "2026-07-14",
+    "note": "原文正文可验证地列出以下观看位置与媒介质感；文章宣称共 43 种，但未公开完整文字清单。"
+  },
+  "decision_order": ["观看位置", "媒介可信度", "情绪气质", "具体镜头参数"],
+  "families": [
+    {
+      "id": "TEMPORAL_DISTANCE",
+      "items": ["handheld", "locked_off", "long_take", "slow_motion"],
+      "use": "先决定观众与事件的距离和节奏，再写运动方式。"
+    },
+    {
+      "id": "PERSPECTIVE_EMOTION",
+      "items": ["overhead", "dutch_angle", "voyeur_view", "wide_angle", "telephoto", "macro"],
+      "use": "用视点和焦段建立压迫、疏离、窥视或亲密，而不是只写电影感。"
+    },
+    {
+      "id": "CAPTURE_MEDIUM",
+      "items": ["gopro", "fpv", "bodycam"],
+      "use": "给画面提供可信的记录来源；适用于运动、第一视角和突发感。"
+    },
+    {
+      "id": "ANALYTICAL_OR_MEMORY_DEVICE",
+      "items": ["infrared_night_vision", "thermal_imaging", "xray_view", "glass_reflection", "fisheye"],
+      "use": "作为单镜头记忆点或叙事信息层，避免整支片持续滥用。"
+    }
+  ],
+  "negative": ["single_generic_cinematic_prompt", "unmotivated_lens_gimmick", "mixed_media_without_story_reason"]
+}

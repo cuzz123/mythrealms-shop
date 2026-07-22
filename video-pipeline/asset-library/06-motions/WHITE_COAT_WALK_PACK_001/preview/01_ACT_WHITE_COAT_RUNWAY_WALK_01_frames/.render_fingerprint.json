@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "blend_sha256": "108ea8e88efcdb3eef73c2302924e10f0fe838963e202d380e8796e7fa84569a",
+  "renderer_sha256": "233dd6321db8e4ce39fa0c5ffcace2bdc6e6c1da0e292d516acbcde5d952bf10",
+  "action_id": "ACT_WHITE_COAT_RUNWAY_WALK_01",
+  "camera_id": "CAM_WHITE_COAT_RUNWAY_DOLLY_01",
+  "frames": 96,
+  "fps": 24
+}

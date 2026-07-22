@@ -1,0 +1,29 @@
+{
+  "id": "CHAR_MR_TALENT_MUSE_EMERALD_001",
+  "asset_type": "female_editorial_character_reference",
+  "status": "draft",
+  "version": "v1",
+  "generator": "Codex image generation",
+  "created_at": "2026-07-15",
+  "identity_group": "CHAR_MR_TALENT_MUSE_001",
+  "featured_product_id": "pearl-series-16",
+  "description": "同一位亚洲女性模特，祖母绿单肩缎面礼服与 The Listening Stone 耳环，正面／左前 45°／背面三视图。",
+  "files": {
+    "identity_master": "source/generated-reference/identity-master.png",
+    "turnaround_sheet": "source/generated-turnaround/turnaround-sheet.png",
+    "front": "source/three-view-crops/front.jpg",
+    "left_45": "source/three-view-crops/left_front.jpg",
+    "back": "source/three-view-crops/back.jpg",
+    "thumbnail": "Thumbnail.png"
+  },
+  "hunyuan_web_upload_order": [
+    "front.jpg",
+    "left_front.jpg",
+    "back.jpg"
+  ],
+  "limitations": [
+    "这是图像参考资产，不含 GLB、FBX、骨骼或动作。",
+    "饰品为该 SKU 的视觉表现参考；正式商品页和成片前，需逐帧核验珠宝造型与在售 SKU 一致。",
+    "使用混元图生 3D 后，仍需检查发丝、手指、服装与背面的一致性。"
+  ]
+}

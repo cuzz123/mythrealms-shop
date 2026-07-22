@@ -1,0 +1,35 @@
+{
+  "id": "CHAR_DIRECTOR_DESK_UE_MANNEQUIN_001",
+  "status": "linked_internal_asset",
+  "source_model_path": "D:\\storyai-3d-director-desk\\public\\models\\ue-mannequin-retopology.glb",
+  "source_project": "D:\\storyai-3d-director-desk",
+  "format": "glb",
+  "role": "previs_mannequin",
+  "rig": {
+    "type": "ue4_mannequin_retopology",
+    "mapped_controls": [
+      "pelvis",
+      "spine",
+      "head",
+      "left_shoulder",
+      "right_shoulder",
+      "left_elbow",
+      "right_elbow",
+      "left_hand",
+      "right_hand",
+      "left_hip",
+      "right_hip",
+      "left_knee",
+      "right_knee",
+      "left_foot",
+      "right_foot"
+    ],
+    "director_desk_rig_type": "ue4-mannequin"
+  },
+  "license": {
+    "type": "Sketchfab Standard",
+    "source": "https://sketchfab.com/3d-models/ue-mannequin-retopology-5394d9f894374a2ab7c57a21929ce4c2",
+    "author": "William Luque",
+    "library_rule": "internal_use_only_do_not_redistribute_as_standalone_model"
+  }
+}

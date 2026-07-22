@@ -1,0 +1,25 @@
+{
+  "asset_id": "CHAR_HUNYUAN_C_POSITION_001",
+  "submitted_at": "2026-07-14T08:49:18.650566+00:00",
+  "job_id": "1468528833040629760",
+  "request_id": "b63fb320-1c6d-4f3d-bea9-fb2fc05e78db",
+  "request": {
+    "model": "3.1",
+    "primary_image": "source/three-view-crops/front.jpg",
+    "multi_views": [
+      "right_front",
+      "back"
+    ],
+    "pbr": true,
+    "generate_type": "Normal",
+    "face_count": "service default (500000)"
+  },
+  "completion_request_id": "29d1901a-efc3-472d-9727-eb015a1558bc",
+  "credit_consumed": 40,
+  "credit_details": "{\"GenerateType-Normal\":20,\"MultiViewImages\":10,\"Pbr\":10}",
+  "downloaded_files": {
+    "OBJ": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_HUNYUAN_C_POSITION_001\\source\\hunyuan-raw\\C_POSITION.obj.zip",
+    "GLB": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_HUNYUAN_C_POSITION_001\\source\\hunyuan-raw\\C_POSITION.glb"
+  },
+  "preview": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_HUNYUAN_C_POSITION_001\\source\\hunyuan-raw\\HunyuanPreview.png"
+}

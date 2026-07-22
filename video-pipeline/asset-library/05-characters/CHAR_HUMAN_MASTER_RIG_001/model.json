@@ -1,0 +1,60 @@
+{
+  "id": "CHAR_HUMAN_MASTER_RIG_001",
+  "status": "available",
+  "role": "canonical_humanoid_previs_rig",
+  "format": ["blend", "png"],
+  "source": {
+    "name": "Original Human Master Rig specification",
+    "author": "AI Film Asset Library",
+    "url": null
+  },
+  "license": {
+    "type": "Original-library-specification",
+    "geometry_included": false,
+    "library_rule": "The rig specification may be reused within this asset library. Pair it only with character meshes whose source license permits the intended use."
+  },
+  "coordinate_standard": {
+    "up_axis": "Z",
+    "character_forward": "-Y",
+    "character_left": "+X",
+    "nominal_height_m": 1.7,
+    "ground_plane": "Z=0"
+  },
+  "rig": {
+    "type": "humanoid_canonical_v1",
+    "armature_object": "HumanMasterRig",
+    "deform_bone_count": 55,
+    "controller_bone_count": 14,
+    "total_bone_count": 70,
+    "root_bone": "root",
+    "control_layer": [
+      "CTRL_root",
+      "CTRL_cog",
+      "CTRL_torso",
+      "CTRL_head",
+      "CTRL_hand_ik.L",
+      "CTRL_hand_ik.R",
+      "CTRL_elbow_pole.L",
+      "CTRL_elbow_pole.R",
+      "CTRL_foot_ik.L",
+      "CTRL_foot_ik.R",
+      "CTRL_knee_pole.L",
+      "CTRL_knee_pole.R",
+      "CTRL_eye.L",
+      "CTRL_eye.R"
+    ],
+    "features": [
+      "five-spine neck head facial staging chain",
+      "independent jaw and eye bones",
+      "three-joint fingers on both hands",
+      "two-bone arm and leg IK with pole controls",
+      "asymmetric validation action"
+    ]
+  },
+  "files": {
+    "master_blend": "HumanMasterRig.blend",
+    "thumbnail": "Thumbnail.png",
+    "action": "ValidationPose_Asymmetric"
+  },
+  "quality_boundary": "This is a reusable motion and previs rig standard, not a finished photoreal female character mesh. It deliberately contains no borrowed body, face, hair, clothing or texture geometry."
+}

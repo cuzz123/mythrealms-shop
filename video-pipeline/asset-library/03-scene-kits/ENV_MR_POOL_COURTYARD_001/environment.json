@@ -1,0 +1,23 @@
+{
+  "id": "ENV_MR_POOL_COURTYARD_001",
+  "asset_type": "equirectangular_world_environment",
+  "status": "available_360_background",
+  "version": "v1",
+  "generator": "Codex image generation",
+  "created_at": "2026-07-15",
+  "description": "浅绿色瓷砖水池、石灰岩平台、棕榈与亚麻躺椅；正午晴光。",
+  "files": {
+    "original_reference": "source/generated-reference/original-reference.png",
+    "panorama": "panoramas/ENV_MR_POOL_COURTYARD_001_360-preview.png",
+    "thumbnail": "Thumbnail.png"
+  },
+  "projection": "equirectangular_2_to_1",
+  "resolution_px": [
+    1774,
+    887
+  ],
+  "limitations": [
+    "这是 Blender World 背景，不是可碰撞或可近景游走的几何场景。",
+    "近景地面、桌面和角色投影应另用 Blender 几何与灯光补齐。"
+  ]
+}

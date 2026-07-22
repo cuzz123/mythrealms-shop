@@ -1,0 +1,20 @@
+{
+  "id": "CHAR_WEB_LEFT1_MINT_001",
+  "asset_type": "female_editorial_character_fullbody",
+  "status": "available_unrigged",
+  "version": "v1",
+  "generator": "Tencent Hunyuan 3D web",
+  "source_trace": {
+    "reference_asset": "source/three-view-crops",
+    "original_download": "D:/mythrealms-shop/huanyuan_model/9102900ee726384b29739ff33aa09e1b.glb"
+  },
+  "files": {
+    "glb": "source/hunyuan-web/LEFT1_MINT_FULLBODY.glb",
+    "blender_preview": "LEFT1_MINT_FULLBODY.blend",
+    "thumbnail": "Thumbnail.png"
+  },
+  "dimensions_m": [0.4249, 0.3594, 1.1062],
+  "rig": {"has_armature": false, "status": "needs_retarget_or_binding_before_motion"},
+  "usage": ["礼服人物全身构图", "耳饰灯光预演", "多模特站位尺度测试"],
+  "limitations": ["单一静态网格", "无骨骼", "生成结果礼服颜色偏象牙白，非严格薄荷绿", "不可直接用于走位或坐姿动画"]
+}

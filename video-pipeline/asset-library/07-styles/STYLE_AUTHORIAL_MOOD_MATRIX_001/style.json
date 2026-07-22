@@ -1,0 +1,25 @@
+{
+  "id": "STYLE_AUTHORIAL_MOOD_MATRIX_001",
+  "status": "reference_derived",
+  "source": {
+    "title": "43种AI视频视觉风格｜告别乱堆砌提示词，镜头语言+导演气质全拆解",
+    "url": "https://mp.weixin.qq.com/s/KsI2Hz8WokeHjk2Uca574w",
+    "captured_at": "2026-07-14"
+  },
+  "usage": "使用通用的、可执行的情绪特征，不把创作者姓名当作生成提示词。",
+  "mood_systems": [
+    {"id": "ROMANTIC_URBAN_MEMORY", "keywords": ["霓虹色块", "擦肩运动", "碎片化记忆", "暧昧距离"]},
+    {"id": "NONLINEAR_RATIONAL_TENSION", "keywords": ["结构谜题", "冷暖对抗", "时间压力", "明确动机"]},
+    {"id": "SYMMETRICAL_COLOR_THEATRE", "keywords": ["正面构图", "几何秩序", "受控色块", "干燥幽默"]},
+    {"id": "CONTEMPLATIVE_RUIN", "keywords": ["长停留", "自然噪声", "废墟尺度", "精神性"]},
+    {"id": "PSYCHOLOGICAL_PRECISION", "keywords": ["冷色控制", "微表情", "空间压迫", "信息延迟"]},
+    {"id": "INDUSTRIAL_SCI_FI_WORLD", "keywords": ["雾化体积光", "工业尺度", "功能性道具", "潮湿反光"]},
+    {"id": "LUMINOUS_YOUTH", "keywords": ["高透空气", "天空渐变", "青春尺度", "光线叙事"]},
+    {"id": "DREAM_MONTAGE", "keywords": ["空间错位", "跳切联想", "现实裂缝", "情绪优先"]},
+    {"id": "DARK_FAIRYTALE", "keywords": ["巴洛克轮廓", "怪诞童话", "暖暗反差", "手工材质"]},
+    {"id": "SUSPENSE_INFORMATION_GAP", "keywords": ["遮挡", "主观信息差", "延迟揭示", "视线控制"]},
+    {"id": "ICONIC_COLD_ORDER", "keywords": ["中心对称", "低频运动", "强透视", "克制表演"]},
+    {"id": "WARM_FAMILY_EPIC", "keywords": ["金棕色温", "多人关系", "时间沉淀", "家庭空间"]}
+  ],
+  "negative": ["named_creator_prompt_shortcut", "unrelated_mood_mixing", "style_without_narrative_function"]
+}

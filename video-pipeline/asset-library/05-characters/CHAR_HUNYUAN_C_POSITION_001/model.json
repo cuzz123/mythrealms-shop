@@ -1,0 +1,57 @@
+{
+  "id": "CHAR_HUNYUAN_C_POSITION_001",
+  "status": "available_limited",
+  "role": "female_editorial_character_midshot_unrigged",
+  "format": ["blend", "glb", "obj_zip", "png"],
+  "source": {
+    "reference": "User-provided C-position front / right-front / back contact sheet",
+    "generator": "Tencent Hunyuan 3D Pro 3.1",
+    "generation": {
+      "job_id": "1468528833040629760",
+      "model": "3.1",
+      "generate_type": "Normal",
+      "pbr": true,
+      "views": ["front", "right_front", "back"],
+      "credit_consumed": 40,
+      "credit_details": {
+        "GenerateType-Normal": 20,
+        "MultiViewImages": 10,
+        "Pbr": 10
+      }
+    }
+  },
+  "license": {
+    "type": "generated_from_user_reference",
+    "commercial_review_required": true,
+    "library_rule": "Retain the user-supplied reference and Hunyuan job record. Confirm source-image rights and Tencent service terms before external commercial release."
+  },
+  "geometry": {
+    "generated_bbox_m": {
+      "min": [-0.2445, -0.1736, 0.0],
+      "max": [0.2296, 0.2094, 1.1093]
+    },
+    "height_m": 1.1093,
+    "coverage": "head through above-knee dress silhouette; lower legs and shoes are not present",
+    "up_axis": "Z",
+    "forward_axis": "not yet normalized"
+  },
+  "rig": {
+    "status": "unrigged",
+    "target_standard": "CHAR_HUMAN_MASTER_RIG_001",
+    "required_before_motion_use": [
+      "Create or generate full lower-body geometry",
+      "Retopology and A-pose alignment",
+      "Bind to CHAR_HUMAN_MASTER_RIG_001",
+      "Validate shoulders, elbows, neck and facial silhouette at shot distance"
+    ]
+  },
+  "files": {
+    "preview_blend": "C_POSITION.blend",
+    "thumbnail": "Thumbnail.png",
+    "hunyuan_preview": "source/hunyuan-raw/HunyuanPreview.png",
+    "source_glb": "source/hunyuan-raw/C_POSITION.glb",
+    "source_obj_zip": "source/hunyuan-raw/C_POSITION.obj.zip",
+    "job_record": "job.json"
+  },
+  "quality_boundary": "A high-fidelity, textured C-position character for close and medium previs. It is not a full-body animation asset: the lower legs and shoes are absent and the mesh has no animation rig or production retopology."
+}

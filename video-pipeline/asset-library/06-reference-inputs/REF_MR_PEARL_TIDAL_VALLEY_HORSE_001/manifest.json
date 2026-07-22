@@ -1,0 +1,31 @@
+{
+  "id": "REF_MR_PEARL_TIDAL_VALLEY_HORSE_001",
+  "title": "珍珠潮汐谷第三段：野马隐喻",
+  "status": "ready",
+  "created_at": "2026-07-17",
+  "aspect_ratio": "16:9",
+  "duration_seconds": 12,
+  "continuity_from": "REF_MR_PEARL_TIDAL_VALLEY_WOMAN_001",
+  "references": [
+    {"role": "horse_identity", "file": "references/horse-anchor.png"},
+    {"role": "horse_portrait", "file": "references/horse-profile-anchor.png"},
+    {"role": "hoof_motion", "file": "references/hoof-anchor.png"}
+  ],
+  "shots": [
+    {"id": "S03A", "timecode": "00:16-00:20", "primary_reference": "horse_identity"},
+    {"id": "S03B", "timecode": "00:20-00:24", "primary_reference": "horse_portrait"},
+    {"id": "S03C", "timecode": "00:24-00:28", "primary_reference": "hoof_motion"}
+  ],
+  "deliverables": {
+    "prompts": "prompts/seedance-s03.md",
+    "board": "board/pearl-tidal-valley-horse-board.png",
+    "accessibility_text": "board/pearl-tidal-valley-horse-board.txt"
+  },
+  "checksums": {
+    "references/horse-anchor.png": "db3db1e1985f1879f50c30a87f6af8fa23d824bfd28dabd90e998c608fc5d61a",
+    "references/horse-profile-anchor.png": "268e76489e142219753620d953cdbd32882e1e52d9bf3b240b034f8cbd5ee2fb",
+    "references/hoof-anchor.png": "3c3ece2f433be17e54ef89f96cc651f121751c45b9bb5458101b7b5a37848b0d",
+    "board/pearl-tidal-valley-horse-board.png": "7da283fa0393f85f7c6a72e7c9e45c43e692bc40312e3ecf8a7cb256b0496551"
+  },
+  "asset_library_path": "video-pipeline/asset-library/06-reference-inputs/REF_MR_PEARL_TIDAL_VALLEY_HORSE_001"
+}

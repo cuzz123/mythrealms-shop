@@ -1,0 +1,29 @@
+{
+  "characters": [
+    {
+      "id": "center",
+      "source_file": "\u0043\u4f4d\u002e\u006a\u0070\u0067",
+      "panels": ["front", "three_quarter", "back"]
+    },
+    {
+      "id": "left1",
+      "source_file": "\u5de6\u0031\u002e\u006a\u0070\u0067",
+      "panels": ["front", "side", "back"]
+    },
+    {
+      "id": "left2",
+      "source_file": "\u5de6\u0032\u002e\u006a\u0070\u0067",
+      "panels": ["side", "front", "back"]
+    },
+    {
+      "id": "right1",
+      "source_file": "\u53f3\u0031\u002e\u006a\u0070\u0067",
+      "panels": ["three_quarter", "front", "back"]
+    },
+    {
+      "id": "right2",
+      "source_file": "\u53f3\u0032\u002e\u006a\u0070\u0067",
+      "panels": ["side", "three_quarter", "back"]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "id": "SHOT_PEARL_FRINGE_CHOKER_COLD_START_001",
+  "name": "Pearl Fringe Choker｜夜宴画廊四镜头",
+  "category": "shot_template",
+  "status": "approved_first_frames",
+  "version": "v1",
+  "format": "9:16",
+  "fps": 30,
+  "generation_surface": "Xiaoyunque Seedance 2.0 Fast",
+  "generation_mode": "I2V first-frame",
+  "minimum_clip_duration_seconds": 4,
+  "credits_per_take": 44,
+  "product": {
+    "slug": "new-series-black-drop-pearl-choker",
+    "name": "Pearl Fringe Choker",
+    "source_references": ["../../../../public/images/products/new-series/new-series-black-drop-pearl-choker/main.jpg"],
+    "geometry_locks": ["single choker-length strand of small creamy-white pearls", "centered fringe of seven slender gold chains", "one small white pearl at each chain end", "middle chain longest"]
+  },
+  "visual_bible": {
+    "character_lock": "成年自然红发雀斑模特，真实皮肤纹理，黑色高领缎面衬衫。",
+    "environment_lock": "真实石灰岩画廊，蓝调时刻窗光与一盏暖色壁灯。",
+    "prohibited": ["cutout composite", "generated text", "logos", "extra jewelry", "cups", "tables", "books", "chairs", "vases", "flowers", "studio sweep"]
+  },
+  "frames": [
+    {
+      "frame_id": "FF_PEARL_FRINGE_CHOKER_01_LAMP_HOOK",
+      "role": "necklace_portrait_hook",
+      "path": "first-frames/FF_PEARL_FRINGE_CHOKER_01_LAMP_HOOK-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "camera_contract": "85mm 人像近景，机位锁定，只允许不超过2%的极慢推进；珠链和流苏全程清晰。",
+      "motion_contract": "自然眨眼、轻微转头，七条链穗因惯性只摆动一次后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定红发雀斑模特、真实肤质、黑色高领缎面衬衫、珍珠流苏项圈、石灰岩画廊、蓝调窗光和暖色壁灯。4秒单镜头，保持当前85mm人像近景构图，机位基本锁定，只允许不超过2%的极慢推进。0-1秒模特自然眨眼；1-3秒头部朝壁灯方向轻微转动约3度；3-4秒全部停稳，七条链穗因惯性只摆动一次后静止。保持一圈小白珍珠项圈、正中七条细金链和每条末端白珍珠完全不变，中间链始终最长；不新增耳环、戒指、手镯或道具。环境声只有室内夜风和远处环境声，不要音乐。"
+    },
+    {
+      "frame_id": "FF_PEARL_FRINGE_CHOKER_02_GALLERY_WALK",
+      "role": "gallery_walk",
+      "path": "first-frames/FF_PEARL_FRINGE_CHOKER_02_GALLERY_WALK-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "copy_safe_area": "upper-left limestone wall",
+      "camera_contract": "50mm 人物中景，机位锁定，人物在右侧，左侧石墙保持干净。",
+      "motion_contract": "模特向前走半步后停下，发丝和链穗受轻风摆动一次后回稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位红发雀斑模特、黑色高领缎面衬衫、珍珠流苏项圈、石灰岩画廊、蓝调窗光和暖色壁灯。4秒单镜头，保持当前50mm人物中景构图，机位基本锁定；人物保持在右侧，左侧石墙保持干净作为后期文案安全区。0-2秒模特向前走半步；2-4秒停下，发丝和七条链穗受轻风摆动一次后回稳。保持一圈小白珍珠项圈、正中七条细金链和每条末端白珍珠完全不变，中间链始终最长；不新增耳环、戒指、手镯或道具。环境声只有室内夜风和远处环境声，不要音乐。"
+    },
+    {
+      "frame_id": "FF_PEARL_FRINGE_CHOKER_03_WINDOW_PROFILE",
+      "role": "window_profile",
+      "path": "first-frames/FF_PEARL_FRINGE_CHOKER_03_WINDOW_PROFILE-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "camera_contract": "50mm 窗边侧面人像，机位锁定，焦点保持在项圈和流苏。",
+      "motion_contract": "模特视线掠向窗外，衣料与链穗只发生一次非常轻的自然位移。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位红发雀斑模特、黑色高领缎面衬衫、珍珠流苏项圈、石灰岩拱窗、蓝调窗光和暖色灯光。4秒单镜头，保持当前50mm窗边侧面人像构图，机位完全锁定，焦点始终在项圈和流苏。0-2秒模特视线缓慢掠向窗外；2-4秒衣料与七条链穗只发生一次非常轻的自然位移后停稳。保持一圈小白珍珠项圈、正中七条细金链和每条末端白珍珠完全不变，中间链始终最长；不新增耳环、戒指、手镯或道具。环境声只有室内夜风和远处环境声，不要音乐。"
+    },
+    {
+      "frame_id": "FF_PEARL_FRINGE_CHOKER_04_ARCH_END",
+      "role": "gallery_brand_end",
+      "path": "first-frames/FF_PEARL_FRINGE_CHOKER_04_ARCH_END-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "copy_safe_area": "left limestone wall",
+      "camera_contract": "35mm 环境人像，机位锁定，只允许约2%极慢后撤；人物在右侧，左侧石墙留给 CTA。",
+      "motion_contract": "模特自然呼吸并向拱门方向看，链穗只随呼吸轻摆一次后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位红发雀斑模特、黑色高领缎面衬衫、珍珠流苏项圈、石灰岩画廊拱门、蓝调窗光和暖色壁灯。4秒单镜头，保持当前35mm环境人像构图，机位基本锁定，只允许约2%的极慢后撤；人物保持在右侧，左侧石灰岩墙保持干净作为后期文案安全区。0-2秒模特自然呼吸并向拱门方向看；2-4秒七条链穗只随呼吸轻摆一次后停稳。保持一圈小白珍珠项圈、正中七条细金链和每条末端白珍珠完全不变，中间链始终最长；不新增耳环、戒指、手镯、人物或道具。环境声只有室内夜风和远处环境声，不要音乐。"
+    }
+  ],
+  "created_at": "2026-07-19",
+  "updated_at": "2026-07-19"
+}

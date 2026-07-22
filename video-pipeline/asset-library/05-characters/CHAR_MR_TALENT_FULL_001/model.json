@@ -1,0 +1,20 @@
+{
+  "id": "CHAR_MR_TALENT_FULL_001",
+  "asset_type": "female_editorial_character_fullbody",
+  "status": "available_unrigged",
+  "version": "v1",
+  "generator": "Tencent Hunyuan 3D web",
+  "source_trace": {
+    "reference_asset": "06-reference-inputs/mythrealms-pearl-modeling/CHAR_MR_TALENT_FULL_001",
+    "original_download": "D:/mythrealms-shop/huanyuan_model/85848780b48a738fbe785543a8cbb05a.glb"
+  },
+  "files": {
+    "glb": "source/hunyuan-web/MR_TALENT_WHITE_SHIRT.glb",
+    "blender_preview": "MR_TALENT_WHITE_SHIRT.blend",
+    "thumbnail": "Thumbnail.png"
+  },
+  "dimensions_m": [0.36, 0.22, 1.1831],
+  "rig": {"has_armature": false, "status": "needs_retarget_or_binding_before_motion"},
+  "usage": ["人物全身构图", "品牌生活方式预演", "服装与场景尺度测试"],
+  "limitations": ["单一静态网格", "无骨骼", "裸足与白衬衫裙外观固定", "不可直接用于走位或坐姿动画"]
+}

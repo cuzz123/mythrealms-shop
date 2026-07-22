@@ -1,0 +1,4 @@
+opencv-python>=4.10
+numpy>=2.0
+pillow>=10.0
+pyJianYingDraft>=0.2.7
