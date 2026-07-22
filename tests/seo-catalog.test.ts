@@ -15,7 +15,6 @@ import { buildSitemapEntries } from "../src/lib/seo/sitemap";
 import { siteUrl } from "../src/lib/site";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
 import { buildStorefrontFeedXml } from "../src/lib/storefront/feed";
-import { PEARL_EDITS } from "../src/lib/storefront/pearl-edits";
 import {
   FOOTER_GROUPS,
   HEADER_LINKS,
@@ -96,7 +95,6 @@ test("the sitemap contains canonical content, products, and journal articles onc
     siteUrl,
     ...canonicalContentPaths.map((contentPath) => `${siteUrl}${contentPath}`),
     ...products.map((product) => `${siteUrl}/products/${product.slug}`),
-    ...PEARL_EDITS.map((edit) => `${siteUrl}${edit.route}`),
     ...posts.map((entry) => `${siteUrl}/blog/${entry.slug}`),
   ]);
 
@@ -104,6 +102,7 @@ test("the sitemap contains canonical content, products, and journal articles onc
     assert.equal(urls.has(expectedUrl), true, `missing ${expectedUrl}`);
   }
   assert.equal([...urls].filter((url) => url.includes("/products/")).length, 45);
+  assert.equal([...urls].some((url) => url.includes("/edits/")), false);
   assert.equal([...urls].some((url) => url.includes("?")), false);
   assert.equal(entries.length, urls.size, "sitemap URLs must be unique");
   assert.deepEqual(urls, expectedUrls);

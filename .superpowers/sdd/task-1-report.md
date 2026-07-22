@@ -34,3 +34,19 @@ Completed. The registry is the single source of truth for the four initial edito
 
 - Pre-existing untracked `.superpowers/sdd/progress.md` and `.superpowers/sdd/task-1-brief.md` were not changed or staged.
 - No plan/spec files or unrelated user work were modified.
+
+## Ordering Correction
+
+The Task 1 registry was published in navigation and the sitemap before Task 2 created the `/edits/[slug]` pages. That made the canonical edit URLs crawler-facing 404s.
+
+- Removed the Task 1 edit-route entries from `buildSitemapEntries` and restored the application sitemap call to its pre-registry form.
+- Removed the Task 1 Discover and Learn navigation additions.
+- Restored the existing sitemap expectation and added a regression assertion that unpublished `/edits/` URLs are absent.
+- Reduced `tests/pearl-edits.test.ts` to direct registry, approved-SKU, missing-SKU, and deterministic-complement behavior only.
+
+### Correction Verification
+
+1. Changed the sitemap test to reject `/edits/` URLs and ran it against the prior implementation; it failed because those URLs were present.
+2. Removed the premature public integrations.
+3. Ran `node --import tsx --test tests/pearl-edits.test.ts tests/storefront-catalog.test.ts tests/seo-catalog.test.ts`: 30 passed, 0 failed.
+4. Ran `npm run test:unit`: 425 passed, 0 failed.

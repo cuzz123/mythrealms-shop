@@ -7,13 +7,7 @@ import {
   getPearlEditBySlug,
   getPearlEditProducts,
 } from "../src/lib/storefront/pearl-edits";
-import { buildSitemapEntries } from "../src/lib/seo/sitemap";
-import { siteUrl } from "../src/lib/site";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
-import {
-  FOOTER_GROUPS,
-  HEADER_MENUS,
-} from "../src/lib/storefront/navigation";
 
 const products = getStorefrontProducts();
 
@@ -31,7 +25,6 @@ test("each pearl edit resolves only approved storefront products", () => {
   );
 
   for (const edit of PEARL_EDITS) {
-    assert.equal(edit.route, `/edits/${edit.slug}`);
     assert.match(edit.heroImage, /^\/images\//);
     const resolved = getPearlEditProducts(edit, products);
     assert.deepEqual(resolved.map((product) => product.slug), edit.productSlugs);
@@ -79,28 +72,4 @@ test("complement selection is deterministic and ignores products outside an edit
 
   assert.deepEqual(first, second);
   assert.deepEqual(getComplementaryProducts("unknown-product", products), []);
-});
-
-test("navigation adds pearl stories and symbolism without another top-level menu", () => {
-  assert.deepEqual(HEADER_MENUS.map((menu) => menu.id), ["shop", "gifts", "discover"]);
-  assert.ok(
-    HEADER_MENUS.find((menu) => menu.id === "discover")?.links.some(
-      ({ label, href }) => label === "Pearl Stories" && href === "/blog",
-    ),
-  );
-  assert.ok(
-    FOOTER_GROUPS.find((group) => group.label === "Learn")?.links.some(
-      ({ label, href }) => label === "Pearl Symbolism" && href === "/pearls",
-    ),
-  );
-});
-
-test("the sitemap includes each canonical pearl edit exactly once", () => {
-  const entries = buildSitemapEntries(siteUrl, products, []);
-  const urls = entries.map((entry) => entry.url);
-
-  for (const edit of PEARL_EDITS) {
-    const url = `${siteUrl}${edit.route}`;
-    assert.equal(urls.filter((entry) => entry === url).length, 1, url);
-  }
 });

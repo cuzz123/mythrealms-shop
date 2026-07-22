@@ -9,7 +9,6 @@ import { getStorefrontProducts } from "@/lib/storefront/catalog";
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const products = getStorefrontProducts();
   const posts = await db.blogPost.findMany({
     select: {
       slug: true,
@@ -24,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return buildSitemapEntries(
     siteUrl,
-    products,
+    getStorefrontProducts(),
     posts.filter(isPearlEditorialPost),
   );
 }
