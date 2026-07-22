@@ -9,3 +9,6 @@ S04 是无项链状态，S05 必须在画内把同一条三层珍珠项链扣在
 ## 生成规则
 
 每个 Seedance 片段先独立生成并验收。只有接受上一段的末帧后，才可将其作为下一段的续接输入。详见 prompts 与 cut-map.md。
+## Delivery
+
+See [小云雀提示词、TikTok文案与音乐](./交付包｜小云雀提示词、TikTok文案与音乐.md) for every prompt, absolute reference-image path, TikTok copy, and music edit map.
