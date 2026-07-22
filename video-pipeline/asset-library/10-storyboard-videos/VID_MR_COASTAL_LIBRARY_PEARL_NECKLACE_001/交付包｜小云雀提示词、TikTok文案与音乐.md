@@ -48,7 +48,7 @@
 
 提示词：
 
-> 全能模式，16:9，生成 4 秒。保留首帧的冷灰海岸地理、黑色石崖、草浪和远处原创石灰岩图书馆。24mm 航拍缓慢前推并轻微下降；低云缓慢漂移，银灰海浪自然拍岸，近处草浪被海风压低。无人、无马、无建筑特写、无首饰。声音：低沉海风、远浪。不要文字、Logo 或突然变焦。
+> @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s01-coast.png 只控制首帧构图。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\world-anchor.png 只控制海岛地理、石崖、草浪与远处图书馆。全能模式，16:9，生成 4 秒。24mm 航拍缓慢前推并轻微下降；低云缓慢漂移，银灰海浪自然拍岸，近处草浪被海风压低。无人、无马、无建筑特写、无首饰。声音：低沉海风、远浪。不要文字、Logo 或突然变焦。
 
 剪辑：80% 慢放至 5.2 秒；保留低频海风作底。
 
@@ -61,7 +61,7 @@
 
 提示词：
 
-> 全能模式，16:9，生成 4 秒。保留同一匹白马和灰色海岸空气。紧侧面特写，白色鬃毛在左向右的侧风中只做一次持续掠动；镜头固定，鬃毛向画面右侧扫开。没有人、没有珠宝、没有缰绳鞍具、没有产品。声音：连续海风，最后半秒保持风声便于 J-cut。
+> @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s02-horse-mane.png 只控制首帧与鬃毛取景。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ANIMAL_MR_WHITE_HORSE_001\views\horse-turnaround.png 只控制白马身份与鬃毛颜色。全能模式，16:9，生成 4 秒。紧侧面特写，白色鬃毛在左向右的侧风中只做一次持续掠动；镜头固定，鬃毛向画面右侧扫开。没有人、没有珠宝、没有缰绳鞍具、没有产品。声音：连续海风，最后半秒保持风声便于 J-cut。
 
 剪辑：从中段取 2.8 秒；海风提前延续入镜。
 
@@ -75,7 +75,7 @@
 
 提示词：
 
-> 全能模式，16:9，生成 4 秒。保留原创石灰岩图书馆的竖向门廊和同一海岸光线。35mm 镜头缓慢越过门槛向室内推进；门内一片亚麻窗帘被从左到右的海风轻轻带动一次。无人、无马、无首饰。声音：海风持续，最后 6 帧加入安静室内低频房间声。不要跑动、不要第二个运镜。
+> @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s03-library-entry.png 只控制首帧构图。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\world-anchor.png 只控制海岸气候与远处地理。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\library-window-anchor.png 只控制石灰岩门廊、窗与室内材质。全能模式，16:9，生成 4 秒。35mm 镜头缓慢越过门槛向室内推进；门内一片亚麻窗帘被从左到右的海风轻轻带动一次。无人、无马、无首饰。声音：海风持续，最后 6 帧加入安静室内低频房间声。不要跑动、不要第二个运镜。
 
 剪辑：85% 慢放至 4.7 秒；以鬃毛由左向右的方向硬切到窗帘。
 
@@ -89,7 +89,7 @@
 
 提示词：
 
-> 全能模式，16:9，生成 4 秒。保留同一女主、墨蓝丝缎长裙和空白锁骨；绝不出现项链或任何珠宝。50mm 镜头仅做极轻微缓慢推进，她站在高窗边看向画外的海，不直视镜头。头、肩、胸口保持视觉稳定；嘴唇不动；本 4 秒不眨眼；不出现可见呼吸循环；眼神停在画外目标。声音：低房间声、远海风、极轻衣料声。不要微笑、不要转身、不要第二个动作。
+> @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s04-window-no-necklace.png 只控制首帧、无首饰锁骨与取景。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_LIBRARY_001\views\character-turnaround.png 只控制女主身份、发型和墨蓝丝缎长裙。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\library-window-anchor.png 只控制高窗、石灰岩和窗光。全能模式，16:9，生成 4 秒。绝不出现项链或任何珠宝。50mm 镜头仅做极轻微缓慢推进，她站在高窗边看向画外的海，不直视镜头。头、肩、胸口保持视觉稳定；嘴唇不动；本 4 秒不眨眼；不出现可见呼吸循环；眼神停在画外目标。声音：低房间声、远海风、极轻衣料声。不要微笑、不要转身、不要第二个动作。
 
 剪辑：85% 慢放至 4.6 秒；室内低频提前 6 帧进入。
 
@@ -103,7 +103,7 @@
 
 提示词：
 
-> 全能模式，16:9，生成 4 秒。后颈近景，保留同一女主和墨蓝裙装。左手把头发固定拨开，右手拇指与食指只完成一个可见动作：把小金色扣环扣入延长链的圆环，然后停住。背面只能有三条细金链、延长链和扣环；正面的垂坠珍珠不得翻到背面。镜头固定。声音：安静房间声，扣合瞬间一声很轻的金属 click。不要新增首饰、不要手指变形、不要让项链凭空完成。
+> @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s05-back-neck-fasten.png 只控制后颈首帧与双手位置。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\06-reference-inputs\REF_MR_COASTAL_NECKLACE_FASTEN_001\views\back-neck-fasten.png 只控制后颈扣环、延长链和背面无珍珠的结构。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\01-products\PROD_MR_COASTAL_PEARL_CASCADE_NECKLACE_001\source\product-source.jpg 只控制项链层数、金色细链与前胸珍珠。全能模式，16:9，生成 4 秒。后颈近景，保留同一女主和墨蓝裙装。左手把头发固定拨开，右手拇指与食指只完成一个可见动作：把小金色扣环扣入延长链的圆环，然后停住。背面只能有三条细金链、延长链和扣环；正面的垂坠珍珠不得翻到背面。镜头固定。声音：安静房间声，扣合瞬间一声很轻的金属 click。不要新增首饰、不要手指变形、不要让项链凭空完成。
 
 剪辑：90% 慢放到 4.4 秒，再冻结 0.4 秒；上一镜衣料声 L-cut 到扣合 click。
 
@@ -117,7 +117,7 @@
 
 提示词：
 
-> 全能模式，16:9，生成 4 秒。只允许从“扣环已合上”继续；不得增殖、替换或重设计项链；三层细链由短至长，白色不规则珍珠垂坠。镜头从后肩自然绕到正面三分之四侧，停在同一女主的锁骨项链上；微风仅掀动一缕发丝，女主看向镜头外，嘴唇不动，不微笑，不眨眼，不出现可见呼吸循环。冷静的海岸窗光在珍珠上产生一次轻微高光。声音：室内空气、远海风。不要第二条项链或任何其他首饰。
+> @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\accepted-s05-last-frame.png 是唯一的连续首帧，必须是验收 S05 视频导出的真实最后一帧。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s06-necklace-reveal.png 只控制正面三分之四侧的目标构图。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\01-products\PROD_MR_COASTAL_PEARL_CASCADE_NECKLACE_001\source\product-source.jpg 只控制项链的层数和珍珠结构。全能模式，16:9，生成 4 秒。只允许从“扣环已合上”继续；不得增殖、替换或重设计项链；三层细链由短至长，白色不规则珍珠垂坠。镜头从后肩自然绕到正面三分之四侧，停在同一女主的锁骨项链上；微风仅掀动一缕发丝，女主看向镜头外，嘴唇不动，不微笑，不眨眼，不出现可见呼吸循环。冷静的海岸窗光在珍珠上产生一次轻微高光。声音：室内空气、远海风。不要第二条项链或任何其他首饰。
 
 剪辑：85% 慢放至 4.6 秒；只在 S05 真实末帧验收后生成。
 
@@ -130,7 +130,7 @@
 
 提示词：
 
-> 全能模式，16:9，生成 4 秒。极近景保留同一匹白马的白色鬃毛。镜头固定，海风让鬃毛缓慢掠过画面一次，鬃毛边缘只出现自然的冷白高光。没有人、没有首饰、没有产品、没有缰具。声音：连续海风。末帧保留一根亮鬃毛高光，以匹配下一剪的珍珠高光。
+> @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s07-mane-match.png 只控制鬃毛高光的首帧构图。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ANIMAL_MR_WHITE_HORSE_001\views\horse-turnaround.png 只控制白马身份与鬃毛颜色。全能模式，16:9，生成 4 秒。极近景保留同一匹白马的白色鬃毛。镜头固定，海风让鬃毛缓慢掠过画面一次，鬃毛边缘只出现自然的冷白高光。没有人、没有首饰、没有产品、没有缰具。声音：连续海风。末帧保留一根亮鬃毛高光，以匹配下一剪的珍珠高光。
 
 剪辑：成片取 3.7 秒；用 S06 珍珠高光匹配切入鬃毛高光。
 
@@ -144,7 +144,7 @@
 
 提示词：
 
-> 全能模式，16:9，生成 4 秒。保留 S06 已验收的女主和同一条三层珍珠项链。镜头为中远景，固定在海岸图书馆高窗内；女主仅完成一次很小的侧转，始终看向海面而非镜头。项链维持已扣合的短、中、长三层金色细链与前胸白色垂坠珍珠，静止而自然。声音：远海风和安静室内声。不要眨眼、不要微笑、不要新增首饰、不要出现白马。
+> @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\accepted-s06-last-frame.png 是唯一的连续首帧，必须是验收 S06 视频导出的真实最后一帧。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s08-coastal-window-wearing.png 只控制中远景的目标构图。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\world-anchor.png 只控制海岸气候与窗外海面。全能模式，16:9，生成 4 秒。保留 S06 已验收的女主和同一条三层珍珠项链。镜头为中远景，固定在海岸图书馆高窗内；女主仅完成一次很小的侧转，始终看向海面而非镜头。项链维持已扣合的短、中、长三层金色细链与前胸白色垂坠珍珠，静止而自然。声音：远海风和安静室内声。不要眨眼、不要微笑、不要新增首饰、不要出现白马。
 
 剪辑：取 2.7 秒；只在 S06 真实末帧验收后生成。
 
@@ -157,7 +157,7 @@
 
 提示词：
 
-> 全能模式，16:9，生成 4 秒。保留一条完整的三层金色细链珍珠项链置于蓝灰石灰岩板上；三层弧线从短到长，白色不规则珍珠只作前方垂坠装饰。100mm 微距镜头极慢前推，珍珠高光从左向右移动一次，右侧留出干净暗部供后期静态 MythRealms Logo 使用。没有人、没有马、没有其他首饰、没有生成文字或 Logo。声音：安静空间、极轻海风。
+> @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s09-product-macro.png 只控制首帧、石灰岩板与右侧 Logo 留白。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\01-products\PROD_MR_COASTAL_PEARL_CASCADE_NECKLACE_001\source\product-source.jpg 只控制一条完整项链的三层细金链、白色不规则珍珠和正面垂坠结构。全能模式，16:9，生成 4 秒。100mm 微距镜头极慢前推，珍珠高光从左向右移动一次，右侧留出干净暗部供后期静态 MythRealms Logo 使用。没有人、没有马、没有其他首饰、没有生成文字或 Logo。声音：安静空间、极轻海风。
 
 剪辑：取 3.7 秒。最后 0.9 秒叠加静态 `MYTHREALMS` Logo；不要让模型生成 Logo。
 
