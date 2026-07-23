@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import Image from "next/image";
 import { absoluteUrl } from "@/lib/site";
+import { isPearlEditorialPost } from "@/lib/seo/blog";
 
 export const dynamic = "force-dynamic";
 
@@ -24,10 +25,10 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const posts = await db.blogPost.findMany({
+  const posts = (await db.blogPost.findMany({
     orderBy: { publishedAt: "desc" },
     include: { author: { select: { name: true } } },
-  });
+  })).filter(isPearlEditorialPost);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -57,7 +58,7 @@ export default async function BlogPage() {
               <h2 className="font-serif text-xl font-bold mt-2 mb-2 leading-tight group-hover:text-[var(--primary)] transition-colors">{post.title}</h2>
               <p className="text-sm text-[var(--text-muted)] line-clamp-2 mb-4">{post.excerpt}</p>
               <div className="flex items-center gap-4 text-xs text-[var(--text-muted)] pt-4 border-t border-[var(--border-light)]">
-                <span className="font-medium text-[var(--text-secondary)]">{post.author?.name || "Taoverse"}</span>
+                <span className="font-medium text-[var(--text-secondary)]">{post.author?.name || "MythRealms"}</span>
                 <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
               </div>
             </div>

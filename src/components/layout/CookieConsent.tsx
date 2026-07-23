@@ -5,10 +5,9 @@ import { Cookie, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
   hasValidStoredConsent,
-  serializeConsent,
+  saveConsentPreference,
 } from "@/lib/analytics/consent";
 
 export function CookieConsent() {
@@ -32,14 +31,22 @@ export function CookieConsent() {
   }, []);
 
   function acceptAll() {
-    localStorage.setItem(CONSENT_STORAGE_KEY, serializeConsent("all"));
-    window.dispatchEvent(new CustomEvent(CONSENT_CHANGED_EVENT));
+    saveConsentPreference(window, {
+      necessary: true,
+      analytics: true,
+      marketing: true,
+      timestamp: Date.now(),
+    });
     setVisible(false);
   }
 
   function acceptNecessary() {
-    localStorage.setItem(CONSENT_STORAGE_KEY, serializeConsent("essential"));
-    window.dispatchEvent(new CustomEvent(CONSENT_CHANGED_EVENT));
+    saveConsentPreference(window, {
+      necessary: true,
+      analytics: false,
+      marketing: false,
+      timestamp: Date.now(),
+    });
     setVisible(false);
   }
 

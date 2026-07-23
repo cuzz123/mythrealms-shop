@@ -1,7 +1,5 @@
-"use client";
-
-import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
+import { Providers } from "@/app/providers";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -11,24 +9,24 @@ import { CookieConsent } from "./CookieConsent";
 import { BackToTop } from "./BackToTop";
 
 export function LayoutShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const isStudio = pathname?.startsWith("/studio");
-
   return (
     <>
-      {!isStudio && <AnnouncementBar />}
-      {!isStudio && <Header />}
-      <main
-        id="main-content"
-        className={isStudio ? "" : "min-h-screen pb-28 lg:pb-0"}
-      >
+      <div data-storefront-chrome="header">
+        <AnnouncementBar />
+        <Providers>
+          <Header />
+        </Providers>
+      </div>
+      <main id="main-content" className="min-h-screen pb-28 lg:pb-0">
         {children}
       </main>
-      {!isStudio && <Footer />}
-      {!isStudio && <CartDrawer />}
-      {!isStudio && <CookieConsent />}
-      {!isStudio && <MobileBottomNav />}
-      {!isStudio && <BackToTop />}
+      <div data-storefront-chrome="footer">
+        <Footer />
+        <CartDrawer />
+        <CookieConsent />
+        <MobileBottomNav />
+        <BackToTop />
+      </div>
       <Toaster position="bottom-center" />
     </>
   );

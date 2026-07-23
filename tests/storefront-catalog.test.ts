@@ -7,6 +7,7 @@ import {
   getStorefrontProductBySlug,
   getStorefrontProducts,
 } from "../src/lib/storefront/catalog";
+import { shouldShowStickyAddToCart } from "../src/components/storefront/StickyAddToCart";
 
 const EXPECTED_TYPES = {
   rings: ["pearl-series-01", "pearl-series-02", "pearl-series-03"],
@@ -210,4 +211,11 @@ test("storefront products expose truthful card image roles", () => {
   assert.equal(editorialWorn?.imageRoles?.wearing, "/images/products/1688-shop/pearl-series/pearl-series-18-editorial-v1-03-worn.png");
   assert.equal(newSeries?.imageRoles?.wearing, undefined);
   assert.equal(newSeries?.imageRoles?.primary, newSeries?.images[0]);
+});
+
+test("sticky purchase controls remain absent when the product is unavailable", () => {
+  assert.equal(shouldShowStickyAddToCart(false, false, true), false);
+  assert.equal(shouldShowStickyAddToCart(true, true, true), false);
+  assert.equal(shouldShowStickyAddToCart(true, false, false), false);
+  assert.equal(shouldShowStickyAddToCart(true, false, true), true);
 });
