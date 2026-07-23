@@ -25,32 +25,26 @@
 **Files:**
 - Create: src/lib/storefront/pearl-edits.ts
 - Create: tests/pearl-edits.test.ts
-- Modify: src/lib/storefront/navigation.ts
-- Modify: src/lib/seo/sitemap.ts
-- Modify: src/app/sitemap.ts
 
 **Interfaces:**
 - Produces PearlEdit, PEARL_EDITS, getPearlEditBySlug(slug), getPearlEditProducts(edit, products), and getComplementaryProducts(productSlug, products).
 - Consumes getStorefrontProducts() and StorefrontProduct only.
-- Sitemap and public components consume PEARL_EDITS, never duplicated hard-coded SKU lists.
+- Later public components consume PEARL_EDITS, never duplicated hard-coded SKU lists.
 
 - [ ] **Step 1: Write the failing registry tests**
-Create tests/pearl-edits.test.ts. Assert that each edit resolves every declared product slug to an approved storefront product, rejects an unavailable product slug, excludes the source product from complements, and returns complements in stable order. Extend the sitemap test to assert every /edits/[slug] URL appears exactly once.
+Create tests/pearl-edits.test.ts. Assert that each edit resolves every declared product slug to an approved storefront product, rejects an unavailable product slug, excludes the source product from complements, and returns complements in stable order.
 
 - [ ] **Step 2: Run the tests and verify they fail**
 Run: node --import tsx --test tests/pearl-edits.test.ts
-Expected: FAIL because pearl-edits and canonical edit URLs do not exist.
+Expected: FAIL because pearl-edits does not exist.
 
 - [ ] **Step 3: Implement the registry**
 Define PearlEdit with the four approved slugs: everyday-light, dinner-by-the-water, a-gift-to-keep, and soft-gold-and-pearl. Each record contains title, description, approved hero image path, productSlugs, and canonical route. Build an indexed lookup from approved StorefrontProduct data; throw if a registry SKU is missing. Select two to four deterministic complements from the first edit containing the source SKU and otherwise use stable catalog order.
 
-- [ ] **Step 4: Wire navigation and sitemap**
-Add Pearl Stories and Pearl Symbolism to the existing Discover/Learn link arrays. Add PEARL_EDITS to buildSitemapEntries. Do not change catalog visibility or add a top-level menu.
-
-- [ ] **Step 5: Verify and commit**
-Run: node --import tsx --test tests/pearl-edits.test.ts tests/storefront-navigation.test.ts tests/seo-catalog.test.ts
+- [ ] **Step 4: Verify and commit**
+Run: node --import tsx --test tests/pearl-edits.test.ts tests/storefront-catalog.test.ts
 Expected: PASS.
-Commit: git add src/lib/storefront/pearl-edits.ts src/lib/storefront/navigation.ts src/lib/seo/sitemap.ts src/app/sitemap.ts tests/pearl-edits.test.ts && git commit -m "feat: add pearl edit registry"
+Commit: git add src/lib/storefront/pearl-edits.ts tests/pearl-edits.test.ts && git commit -m "feat: add pearl edit registry"
 
 ### Task 2: Implement Discovery, Gifts, and Guide Pages
 
@@ -60,13 +54,16 @@ Commit: git add src/lib/storefront/pearl-edits.ts src/lib/storefront/navigation.
 - Create: src/app/pearls/symbolism/page.tsx
 - Modify: src/app/gifts/page.tsx
 - Modify: src/app/pearls/care/page.tsx
+- Modify: src/lib/storefront/navigation.ts
+- Modify: src/lib/seo/sitemap.ts
+- Modify: src/app/sitemap.ts
 - Modify: src/components/ui/JsonLd.tsx
 - Modify: src/lib/seo/schema.ts
 - Create: tests/pearl-growth-pages.test.ts
 
 **Interfaces:**
 - Consumes Task 1 registry, ProductCard, BreadcrumbJsonLd, FAQPageJsonLd, ArticleJsonLd, and policy facts.
-- Produces canonical pages and ItemListJsonLd with name, URL, position, product name, and canonical product URL.
+- Produces canonical pages and ItemListJsonLd with name, URL, position, product name, and canonical product URL; adds navigation and sitemap routes only after the target pages exist.
 
 - [ ] **Step 1: Write failing page and schema tests**
 Add tests which render /edits/everyday-light and assert it has visible edit title, registry product links, one ItemList schema, and canonical metadata. Add a /pearls/symbolism test that confirms visible neutral styling/gift copy and rejects health, protection, luck, manifestation, and healing claims.
@@ -79,7 +76,7 @@ Expected: FAIL because route pages and ItemListJsonLd do not exist.
 Add buildItemListSchema to src/lib/seo/schema.ts and ItemListJsonLd to src/components/ui/JsonLd.tsx. It returns an ItemList whose itemListElement is a sequence of ListItem values with position, name, and URL. Escape JSON through existing JsonLd.
 
 - [ ] **Step 4: Implement page content**
-Render edit pages as unframed editorial bands with a hero, selected product list, short selection rationale, and guide links. Rework /gifts around recipient, occasion, and price anchors using approved products only. Expand existing /pearls/care with fact-bounded visible FAQ. Make Stories a focused index linking current /blog entries rather than a duplicate archive. Keep Symbolism about gift giving and personal style only.
+Render edit pages as unframed editorial bands with a hero, selected product list, short selection rationale, and guide links. Rework /gifts around recipient, occasion, and price anchors using approved products only. Expand existing /pearls/care with fact-bounded visible FAQ. Make Stories a focused index linking current /blog entries rather than a duplicate archive. Keep Symbolism about gift giving and personal style only. In this same task, add Pearl Stories and Pearl Symbolism to the existing Discover/Learn links and add edit URLs to the sitemap after their routes exist.
 
 - [ ] **Step 5: Verify and commit**
 Run: node --import tsx --test tests/pearl-growth-pages.test.ts tests/pearl-guides.test.ts tests/structured-data.test.ts tests/seo-catalog.test.ts
