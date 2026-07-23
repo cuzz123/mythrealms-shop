@@ -40,11 +40,30 @@ test("gift notes preserve cart subtotal and only change through cart editing", (
 
   state.setGiftNote(pearl.id, undefined, "  Cart note  ");
   state = useCartStore.getState();
+  assert.equal(state.items[0].giftNote, "  Cart note  ");
+
+  state.commitGiftNote(pearl.id, undefined);
+  state = useCartStore.getState();
   assert.equal(state.items[0].giftNote, "Cart note");
   assert.equal(state.subtotal(), 89.97);
 
   state.setGiftNote(pearl.id, undefined, " ");
+  state.commitGiftNote(pearl.id, undefined);
   assert.equal(useCartStore.getState().items[0].giftNote, undefined);
+  useCartStore.getState().clearCart();
+});
+
+test("preserves a typed space until a multiword gift note is committed", () => {
+  const store = useCartStore.getState();
+  store.clearCart();
+  store.addItem(pearl);
+
+  store.setGiftNote(pearl.id, undefined, "For ");
+  assert.equal(useCartStore.getState().items[0].giftNote, "For ");
+
+  useCartStore.getState().setGiftNote(pearl.id, undefined, "For Ada");
+  useCartStore.getState().commitGiftNote(pearl.id, undefined);
+  assert.equal(useCartStore.getState().items[0].giftNote, "For Ada");
   useCartStore.getState().clearCart();
 });
 

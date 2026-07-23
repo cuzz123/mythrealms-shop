@@ -35,6 +35,7 @@ interface CartStore {
   removeItem: (productId: string, variantId?: string) => void
   updateQuantity: (productId: string, variantId: string | undefined, quantity: number) => void
   setGiftNote: (productId: string, variantId: string | undefined, note?: string) => void
+  commitGiftNote: (productId: string, variantId: string | undefined) => void
   clearCart: () => void
   itemCount: () => number
   subtotal: () => number
@@ -100,13 +101,27 @@ export const useCartStore = create<CartStore>()(
       },
 
       setGiftNote: (productId, variantId, note) => {
-        const giftNote = normalizeGiftNote(note)
+        const giftNote = typeof note === "string"
+          ? note.slice(0, MAX_GIFT_NOTE_LENGTH)
+          : undefined
         set((state) => ({
           items: state.items.map((item) =>
             item.product.id === productId && item.product.variantId === variantId
               ? { ...item, ...(giftNote ? { giftNote } : { giftNote: undefined }) }
               : item
           ),
+        }))
+      },
+
+      commitGiftNote: (productId, variantId) => {
+        set((state) => ({
+          items: state.items.map((item) => {
+            if (item.product.id !== productId || item.product.variantId !== variantId) {
+              return item
+            }
+            const giftNote = normalizeGiftNote(item.giftNote)
+            return { ...item, ...(giftNote ? { giftNote } : { giftNote: undefined }) }
+          }),
         }))
       },
 

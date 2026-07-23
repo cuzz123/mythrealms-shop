@@ -14,7 +14,7 @@ import Link from "next/link";
 import { Minus, Plus, Trash2, ArrowLeft, ShoppingBag, TicketPercent, CheckCircle2 } from "lucide-react";
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, setGiftNote, subtotal } = useCartStore();
+  const { items, removeItem, updateQuantity, setGiftNote, commitGiftNote, subtotal } = useCartStore();
   const [discountCode, setDiscountCode] = useState("");
   const [discountApplied, setDiscountApplied] = useState(false);
   const [discountError, setDiscountError] = useState("");
@@ -99,6 +99,7 @@ export default function CartPage() {
                   id={`gift-note-${item.product.id}-${item.product.variantId ?? "default"}`}
                   value={item.giftNote ?? ""}
                   onChange={(event) => setGiftNote(item.product.id, item.product.variantId, event.target.value)}
+                  onBlur={() => commitGiftNote(item.product.id, item.product.variantId)}
                   maxLength={MAX_GIFT_NOTE_LENGTH}
                   rows={2}
                   placeholder="A private note for this gift"
