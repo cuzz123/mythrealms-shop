@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
 import {
@@ -61,4 +61,17 @@ test("homepage product media uses visually accurate descriptions", () => {
     HOMEPAGE_MEDIA.eyewear.alt,
     "Pearl eyewear chain attached to eyeglasses on a dark background",
   );
+});
+
+test("homepage growth surfaces use approved brand and storefront imagery", () => {
+  const sources = [
+    "src/components/home/HomepageOccasionEdit.tsx",
+    "src/components/home/HomepageGiftSets.tsx",
+    "src/components/home/HomepageWhyPearls.tsx",
+  ].map((path) => readFileSync(resolve(path), "utf8"));
+
+  for (const componentSource of sources) {
+    assert.match(componentSource, /@\/lib\//);
+    assert.doesNotMatch(componentSource, /https?:\/\//);
+  }
 });
