@@ -29,6 +29,12 @@ export type CollectionSchemaInput = Readonly<{
   products: readonly Readonly<{ name: string; url: string }>[];
 }>;
 
+export type ItemListSchemaInput = Readonly<{
+  name: string;
+  url: string;
+  products: readonly Readonly<{ name: string; url: string }>[];
+}>;
+
 export type ProductSchemaInput = Readonly<{
   name: string;
   description: string;
@@ -116,6 +122,22 @@ export function buildCollectionSchema(input: CollectionSchemaInput) {
         url: product.url,
       })),
     },
+  } as const;
+}
+
+export function buildItemListSchema(input: ItemListSchemaInput) {
+  return {
+    "@context": SCHEMA_CONTEXT,
+    "@type": "ItemList",
+    name: input.name,
+    url: input.url,
+    numberOfItems: input.products.length,
+    itemListElement: input.products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: product.name,
+      url: product.url,
+    })),
   } as const;
 }
 

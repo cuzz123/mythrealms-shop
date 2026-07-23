@@ -41,6 +41,8 @@ export const HEADER_MENUS: readonly HeaderMenu[] = [
     links: [
       { label: "Pearl Knowledge", href: "/pearls" },
       { label: "Pearl Care", href: "/pearls/care" },
+      { label: "Pearl Stories", href: "/pearls/stories" },
+      { label: "Pearl Symbolism", href: "/pearls/symbolism" },
       { label: "How to Wear Pearls", href: "/pearls/how-to-wear" },
       { label: "Freshwater Pearls", href: "/pearls/freshwater-pearls" },
       { label: "Find Your Guardian", href: "/guardian-quiz" },
@@ -69,6 +71,8 @@ export const FOOTER_GROUPS: readonly FooterGroup[] = [
     links: [
       { label: "Pearl Guide", href: "/pearls" },
       { label: "Pearl Care", href: "/pearls/care" },
+      { label: "Pearl Stories", href: "/pearls/stories" },
+      { label: "Pearl Symbolism", href: "/pearls/symbolism" },
       { label: "How to Wear Pearls", href: "/pearls/how-to-wear" },
       { label: "Freshwater Pearls", href: "/pearls/freshwater-pearls" },
       { label: "FAQs", href: "/faq" },

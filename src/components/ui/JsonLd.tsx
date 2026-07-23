@@ -4,9 +4,11 @@ import {
   buildArticleSchema,
   buildBreadcrumbListSchema,
   buildFAQPageSchema,
+  buildItemListSchema,
   buildOrganizationSchema,
   buildProductSchema,
   type ArticleSchemaInput,
+  type ItemListSchemaInput,
   type ProductSchemaInput,
 } from "@/lib/seo/schema";
 import { absoluteUrl, siteUrl } from "@/lib/site";
@@ -97,6 +99,10 @@ export function ProductJsonLd({
 
 export function ArticleJsonLd(input: ArticleSchemaInput) {
   return <JsonLd data={buildArticleSchema(input)} />;
+}
+
+export function ItemListJsonLd(input: ItemListSchemaInput) {
+  return <JsonLd data={buildItemListSchema(input)} />;
 }
 
 interface BreadcrumbSchemaProps {
