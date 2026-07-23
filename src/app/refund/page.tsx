@@ -2,10 +2,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/site";
 import { RotateCcw, Package, AlertCircle, Gift, Mail } from "lucide-react";
+import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
+
+const returnWindowDays = STORE_POLICY_FACTS.returnWindowDays;
 
 export const metadata: Metadata = {
   title: "Refund & Return Policy — MythRealms",
-  description: "30-day return policy for MythRealms products. Learn about our refund process, return conditions, and how to initiate a return.",
+  description: `${returnWindowDays}-day return policy for MythRealms products. Learn about our refund process, return conditions, and how to initiate a return.`,
   alternates: { canonical: absoluteUrl("/refund") },
 };
 
@@ -27,8 +30,8 @@ export default function RefundPage() {
         <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
           <RotateCcw className="w-6 h-6 text-[var(--accent)] flex-shrink-0 mt-0.5" />
           <div>
-            <h3 className="font-semibold text-[var(--text)] mb-1">30-Day Return Window</h3>
-            <p className="text-sm text-[var(--text-muted)]">You have 30 days from the delivery date to initiate a return.</p>
+            <h3 className="font-semibold text-[var(--text)] mb-1">{returnWindowDays}-Day Return Window</h3>
+            <p className="text-sm text-[var(--text-muted)]">You have {returnWindowDays} days from the delivery date to initiate a return.</p>
           </div>
         </div>
         <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex gap-4">
@@ -60,7 +63,7 @@ export default function RefundPage() {
         <section>
           <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">1. Return Eligibility</h2>
           <p className="mb-3">
-            We want you to be completely satisfied with your purchase. If you are not satisfied for any reason, you may return eligible items within <strong>30 calendar days</strong> of the delivery date for a full refund of the product price.
+            We want you to be completely satisfied with your purchase. If you are not satisfied for any reason, you may return eligible items within <strong>{returnWindowDays} calendar days</strong> of the delivery date for a full refund of the product price.
           </p>
           <p className="mb-3">
             To be eligible for a return, your item must meet the following conditions:
@@ -68,7 +71,7 @@ export default function RefundPage() {
           <ul className="list-disc pl-6 space-y-2">
             <li>The item is <strong>unused</strong> and in the same condition that you received it</li>
             <li>The item is in its <strong>original packaging</strong> with all tags and accessories included</li>
-            <li>The return is initiated within <strong>30 days</strong> of the delivery date</li>
+            <li>The return is initiated within <strong>{returnWindowDays} days</strong> of the delivery date</li>
             <li>You have proof of purchase (order number, receipt, or order confirmation email)</li>
           </ul>
         </section>

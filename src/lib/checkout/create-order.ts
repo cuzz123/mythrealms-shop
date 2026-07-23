@@ -43,6 +43,17 @@ export async function createPendingOrder(
   repository: PendingOrderRepository = prismaPendingOrderRepository,
 ): Promise<{ id: string }> {
   const discountCodes = quote.appliedDiscounts.map((discount) => discount.code);
+  const giftNotes = quote.lines.flatMap((line) =>
+    line.giftNote
+      ? [
+          {
+            productId: line.productId,
+            ...(line.variantId ? { variantId: line.variantId } : {}),
+            note: line.giftNote,
+          },
+        ]
+      : [],
+  );
   const data: PendingOrderData = {
     email: input.email,
     ...(sessionUserId ? { userId: sessionUserId } : {}),
@@ -52,8 +63,13 @@ export async function createPendingOrder(
     discount: dollars(quote.discountCents),
     total: dollars(quote.totalCents),
     shippingAddress: JSON.stringify(input.shippingAddress),
-    ...(discountCodes.length > 0
-      ? { notes: JSON.stringify({ discountCodes }) }
+    ...(discountCodes.length > 0 || giftNotes.length > 0
+      ? {
+          notes: JSON.stringify({
+            ...(discountCodes.length > 0 ? { discountCodes } : {}),
+            ...(giftNotes.length > 0 ? { giftNotes } : {}),
+          }),
+        }
       : {}),
     items: {
       create: quote.lines.map((line) => ({

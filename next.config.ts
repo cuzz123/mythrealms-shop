@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/story",
+        destination: "/about",
+        permanent: true,
+      },
+      {
         source: "/collections/luxe-collection",
         destination: "/collections/pearl-series",
         permanent: true,
@@ -59,7 +64,7 @@ const nextConfig: NextConfig = {
     ],
     // Allow unoptimized images for dynamic/external URLs stored in DB
     dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment",
+    contentDispositionType: "inline",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 

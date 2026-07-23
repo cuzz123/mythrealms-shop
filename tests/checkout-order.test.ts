@@ -39,6 +39,7 @@ const quote: CheckoutQuote = {
       quantity: 1,
       unitPriceCents: 2999,
       lineTotalCents: 2999,
+      giftNote: "For Ada",
     },
   ],
   subtotalCents: 2999,
@@ -95,7 +96,13 @@ test("persists a pending order from the authoritative quote only", async () => {
     },
   );
   assert.deepEqual(JSON.parse(persisted.shippingAddress), input.shippingAddress);
-  assert.equal(persisted.notes, JSON.stringify({ discountCodes: ["PEARL10"] }));
+  assert.equal(
+    persisted.notes,
+    JSON.stringify({
+      discountCodes: ["PEARL10"],
+      giftNotes: [{ productId: "1688-001", note: "For Ada" }],
+    }),
+  );
   assert.equal(persisted.items.create.length, 1);
 
   const item = persisted.items.create[0];

@@ -9,6 +9,7 @@ import {
   type StorefrontProductType,
 } from "@/lib/storefront/catalog";
 import { siteUrl } from "@/lib/site";
+import { buildCollectionSchema } from "@/lib/seo/schema";
 
 const RETIRED_COLLECTION_SLUGS = new Set([
   "luxe-collection",
@@ -80,23 +81,15 @@ export default async function CollectionPage({
         ]}
       />
       <JsonLd
-        data={{
-          "@context": "https://schema.org/",
-          "@type": "CollectionPage",
+        data={buildCollectionSchema({
           name: messaging.name,
           description: messaging.description,
           url: `${siteUrl}/collections/pearl-series`,
-          mainEntity: {
-            "@type": "ItemList",
-            numberOfItems: products.length,
-            itemListElement: products.map((product, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              url: `${siteUrl}/products/${product.slug}`,
-              name: productDisplayName(product),
-            })),
-          },
-        }}
+          products: products.map((product) => ({
+            url: `${siteUrl}/products/${product.slug}`,
+            name: productDisplayName(product),
+          })),
+        })}
       />
       <Collection1688 slug={slug} initialType={initialType} />
     </>

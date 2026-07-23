@@ -67,3 +67,15 @@ test("product page and APIs expose storefront products with true 404 boundaries"
   assert.match(detailApi, /getStorefrontProductBySlug\(/);
   assert.match(detailApi, /status:\s*404/);
 });
+
+test("in-stock product pages compose the single mobile sticky purchase control", () => {
+  const productPage = source("src/app/products/[slug]/1688-product.tsx");
+  const stickyControl = source("src/components/storefront/StickyAddToCart.tsx");
+
+  assert.match(productPage, /StickyAddToCart/);
+  assert.match(productPage, /primary-add-to-cart/);
+  assert.match(productPage, /visible=\{p\.inStock !== false\}/);
+  assert.match(stickyControl, /IntersectionObserver/);
+  assert.match(stickyControl, /onClick=\{onAdd\}/);
+  assert.doesNotMatch(stickyControl, /useCartStore|addItem\(/);
+});

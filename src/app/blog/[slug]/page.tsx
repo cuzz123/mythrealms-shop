@@ -7,7 +7,7 @@ import { ArrowLeft } from "lucide-react";
 import { absoluteImageUrl } from "@/lib/images";
 import { absoluteUrl } from "@/lib/site";
 import { BlogPostingJsonLd } from "@/components/ui/JsonLd";
-import { buildBlogMetadata } from "@/lib/seo/blog";
+import { buildBlogMetadata, isPearlEditorialPost } from "@/lib/seo/blog";
 
 export const dynamic = "force-dynamic"
 
@@ -15,10 +15,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = await db.blogPost.findUnique({
     where: { slug },
-    select: { title: true, excerpt: true, image: true },
+    select: {
+      title: true,
+      excerpt: true,
+      image: true,
+      content: true,
+      category: true,
+    },
   });
 
-  if (!post) {
+  if (!post || !isPearlEditorialPost({ slug, ...post })) {
     return { title: "Article Not Found | MythRealms", robots: { index: false, follow: false } };
   }
 
@@ -32,7 +38,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     include: { author: { select: { name: true } } },
   });
 
-  if (!post) notFound();
+  if (!post || !isPearlEditorialPost(post)) notFound();
 
   return (
     <>

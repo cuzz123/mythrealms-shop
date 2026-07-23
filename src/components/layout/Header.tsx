@@ -9,35 +9,14 @@ import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
+import {
+  HEADER_LINKS,
+  HEADER_MENUS,
+  type HeaderMenuId,
+  type NavigationLink,
+} from "@/lib/storefront/navigation";
 
-type NavigationLink = { label: string; href: string };
-type DesktopMenu = "shop" | "intention" | null;
-
-const shopLinks: NavigationLink[] = [
-  { label: "All Pearl Jewelry", href: "/collections/pearl-series" },
-  { label: "Pearl Rings", href: "/collections/pearl-series?type=rings" },
-  { label: "Pearl Bracelets", href: "/collections/pearl-series?type=bracelets" },
-  { label: "Pearl Earrings", href: "/collections/pearl-series?type=earrings" },
-  { label: "Pearl Necklaces", href: "/collections/pearl-series?type=necklaces" },
-  { label: "Pearl Eyewear Chains", href: "/collections/pearl-series?type=eyewear-chains" },
-];
-
-const intentionLinks: NavigationLink[] = [
-  { label: "Find Your Guardian", href: "/guardian-quiz" },
-  { label: "Pearl Guide", href: "/pearls" },
-  { label: "Everyday Pearl", href: "/collections/pearl-series" },
-  { label: "Our Story", href: "/about" },
-];
-
-const desktopMenus = [
-  { id: "shop" as const, label: "Shop", links: shopLinks },
-  { id: "intention" as const, label: "Intention", links: intentionLinks },
-];
-
-const navLinks: NavigationLink[] = [
-  { label: "Pearls", href: "/collections/pearl-series" },
-  { label: "Story", href: "/about" },
-];
+type DesktopMenu = HeaderMenuId | null;
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -58,11 +37,13 @@ export function Header() {
   const previousPathname = useRef(pathname);
   const menuTriggerRefs = useRef<Record<Exclude<DesktopMenu, null>, HTMLButtonElement | null>>({
     shop: null,
-    intention: null,
+    gifts: null,
+    discover: null,
   });
   const menuPanelRefs = useRef<Record<Exclude<DesktopMenu, null>, HTMLDivElement | null>>({
     shop: null,
-    intention: null,
+    gifts: null,
+    discover: null,
   });
 
   useDialogFocus({
@@ -128,7 +109,7 @@ export function Header() {
     };
   }, [itemCount]);
 
-  const isActive = (links: NavigationLink[]) =>
+  const isActive = (links: readonly NavigationLink[]) =>
     links.some((link) => pathname.startsWith(link.href.split("?")[0]));
 
   const closeDesktopMenu = (restoreFocus = false) => {
@@ -180,7 +161,7 @@ export function Header() {
             if (!event.currentTarget.contains(event.relatedTarget as Node)) setDesktopMenu(null);
           }}
         >
-          {desktopMenus.map((menu) => {
+          {HEADER_MENUS.map((menu) => {
             const isOpen = desktopMenu === menu.id;
             return (
               <div key={menu.id} className="relative">
@@ -249,7 +230,7 @@ export function Header() {
               </div>
             );
           })}
-          {navLinks.map((link) => (
+          {HEADER_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -323,12 +304,12 @@ export function Header() {
       {mobileMenuOpen && (
         <div
           ref={mobileMenuRef}
-          className="fixed inset-0 z-50 bg-[var(--surface)] text-[var(--text)] animate-slide-down lg:hidden"
+          className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-[var(--surface)] text-[var(--text)] animate-slide-down lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
         >
-          <div className="flex h-[72px] items-center justify-end px-4">
+          <div className="sticky top-0 z-10 flex h-[72px] items-center justify-end bg-[var(--surface)]/95 px-4 backdrop-blur-sm">
             <button
               ref={mobileCloseRef}
               type="button"
@@ -342,7 +323,7 @@ export function Header() {
           </div>
 
           <nav className="flex flex-col gap-2 px-6 pt-4" aria-label="Mobile navigation">
-            {desktopMenus.map((menu) => (
+            {HEADER_MENUS.map((menu) => (
               <div key={menu.id} className="py-2">
                 <div className="px-3 py-2 text-sm font-semibold uppercase tracking-normal text-[var(--text-muted)]">{menu.label}</div>
                 {menu.links.map((link) => (
@@ -357,7 +338,7 @@ export function Header() {
                 ))}
               </div>
             ))}
-            {navLinks.map((link) => (
+            {HEADER_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -369,7 +350,7 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="absolute bottom-10 left-0 right-0 flex justify-center">
+          <div className="flex justify-center px-6 py-10">
             <span className="font-serif text-lg font-semibold tracking-normal text-[var(--text-muted)]">MythRealms</span>
           </div>
         </div>

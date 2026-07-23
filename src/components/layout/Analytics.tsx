@@ -1,13 +1,17 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   CONSENT_STORAGE_KEY,
   createConsentSubscriptionController,
   type ConsentEventTarget,
   type ConsentState,
 } from "@/lib/analytics/consent";
+import {
+  reportAiReferralOnce,
+  shouldReportAiReferral,
+} from "@/lib/analytics/referral";
 import { flushTrackingQueue } from "@/lib/tracking";
 
 const TRACKING_READY_EVENTS = {
@@ -16,11 +20,20 @@ const TRACKING_READY_EVENTS = {
   pinterest: "mythrealms:pinterest-ready",
 } as const;
 
+type AnalyticsWindow = Window & {
+  gtag?: (...args: unknown[]) => void;
+};
+
 export function Analytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   const pinterestId = process.env.NEXT_PUBLIC_PINTEREST_TAG_ID;
-  const [consent, setConsent] = useState<ConsentState>({ analytics: false, marketing: false });
+  const [consent, setConsent] = useState<ConsentState>({
+    analytics: false,
+    marketing: false,
+  });
+  const [gaInitialized, setGaInitialized] = useState(false);
+  const referralDedupe = useRef(false);
 
   useEffect(() => {
     const target: ConsentEventTarget = {
@@ -33,10 +46,16 @@ export function Analytics() {
     const controller = createConsentSubscriptionController({
       target,
       readConsent: () => localStorage.getItem(CONSENT_STORAGE_KEY),
-      onConsentChange: setConsent,
+      onConsentChange: (nextConsent) => {
+        setConsent(nextConsent);
+        if (!nextConsent.analytics) setGaInitialized(false);
+      },
       reload: () => window.location.reload(),
     });
-    const flushGa = () => flushTrackingQueue("ga");
+    const flushGa = () => {
+      flushTrackingQueue("ga");
+      setGaInitialized(true);
+    };
     const flushMeta = () => flushTrackingQueue("meta");
     const flushPinterest = () => flushTrackingQueue("pinterest");
 
@@ -52,13 +71,33 @@ export function Analytics() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!shouldReportAiReferral(consent.analytics, gaInitialized)) return;
+
+    try {
+      const gtag = (window as AnalyticsWindow).gtag;
+      if (!gtag) return;
+      reportAiReferralOnce({
+        locationHref: window.location.href,
+        sessionStorage: window.sessionStorage,
+        gtag,
+        dedupe: referralDedupe,
+      });
+    } catch {
+      // Browser APIs can be unavailable in privacy-restricted contexts.
+    }
+  }, [consent.analytics, gaInitialized]);
+
   if (!gaId && !pixelId && !pinterestId) return null;
 
   return (
     <>
       {gaId && consent.analytics && (
         <>
-          <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+            strategy="afterInteractive"
+          />
           <Script
             id="ga-init"
             strategy="afterInteractive"
@@ -79,7 +118,13 @@ export function Analytics() {
           </Script>
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element -- Tracking pixels require literal noscript images. */}
-            <img height="1" width="1" style={{ display: "none" }} src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`} alt="" />
+            <img
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`}
+              alt=""
+            />
           </noscript>
         </>
       )}
@@ -94,7 +139,13 @@ export function Analytics() {
           </Script>
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element -- Tracking pixels require literal noscript images. */}
-            <img height="1" width="1" style={{ display: "none" }} alt="" src={`https://ct.pinterest.com/v3/?event=init&tid=${pinterestId}&noscript=1`} />
+            <img
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              alt=""
+              src={`https://ct.pinterest.com/v3/?event=init&tid=${pinterestId}&noscript=1`}
+            />
           </noscript>
         </>
       )}

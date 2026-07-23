@@ -2,10 +2,18 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/site";
 import { Truck, Clock, Globe, Shield } from "lucide-react";
+import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
+
+const freeShippingThreshold =
+  STORE_POLICY_FACTS.freeShippingThresholdUsd.toFixed(2);
+const standardShippingFlatRate =
+  STORE_POLICY_FACTS.standardShippingFlatRateUsd.toFixed(2);
+const handlingBusinessDays = `${STORE_POLICY_FACTS.handlingBusinessDays.min}-${STORE_POLICY_FACTS.handlingBusinessDays.max}`;
+const usStandardTransitBusinessDays = `${STORE_POLICY_FACTS.usStandardTransitBusinessDays.min}-${STORE_POLICY_FACTS.usStandardTransitBusinessDays.max}`;
 
 export const metadata: Metadata = {
   title: "Shipping Information — MythRealms",
-  description: "Free worldwide shipping on orders over $69.99. View delivery times by country, shipping methods, and tracking information.",
+  description: `Standard shipping costs $${standardShippingFlatRate} below $${freeShippingThreshold} and is free for orders of $${freeShippingThreshold} or more. View delivery times by country, shipping methods, and tracking information.`,
   alternates: { canonical: absoluteUrl("/shipping") },
 };
 
@@ -27,7 +35,7 @@ export default function ShippingPage() {
         <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 text-center">
           <Globe className="w-6 h-6 text-[var(--accent)] mx-auto mb-3" />
           <h3 className="font-semibold text-[var(--text)] mb-1">Free Worldwide Shipping</h3>
-          <p className="text-sm text-[var(--text-muted)]">On all orders over $69.99</p>
+          <p className="text-sm text-[var(--text-muted)]">On all orders of ${freeShippingThreshold} or more</p>
         </div>
         <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 text-center">
           <Truck className="w-6 h-6 text-[var(--accent)] mx-auto mb-3" />
@@ -47,7 +55,7 @@ export default function ShippingPage() {
         <section>
           <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-4">1. Processing Time</h2>
           <p className="mb-3">
-            All orders are processed within <strong>2-5 business days</strong> (Monday through Friday, excluding holidays). You will receive a confirmation email with your tracking number once your order has shipped.
+            All orders are processed within <strong>{handlingBusinessDays} business days</strong> (Monday through Friday, excluding holidays). You will receive a confirmation email with your tracking number once your order has shipped.
           </p>
           <p className="mb-3">
             Processing time includes:
@@ -75,7 +83,7 @@ export default function ShippingPage() {
               <h3 className="font-semibold text-[var(--text)] text-lg mb-2">Standard Shipping</h3>
               <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
                 <li><span className="font-medium text-[var(--text)]">Delivery Time:</span> 7-20 business days</li>
-                <li><span className="font-medium text-[var(--text)]">Cost:</span> Free on orders over $69.99; otherwise a flat rate calculated at checkout</li>
+                <li><span className="font-medium text-[var(--text)]">Cost:</span> ${standardShippingFlatRate} below ${freeShippingThreshold}; free on orders of ${freeShippingThreshold} or more</li>
                 <li><span className="font-medium text-[var(--text)]">Carrier:</span> Local postal services with tracking</li>
                 <li><span className="font-medium text-[var(--text)]">Best For:</span> Non-urgent orders where budget is a priority</li>
               </ul>
@@ -112,7 +120,7 @@ export default function ShippingPage() {
               <tbody className="divide-y divide-[var(--border-light)]">
                 <tr>
                   <td className="px-6 py-3 font-medium text-[var(--text)]">United States</td>
-                  <td className="px-6 py-3 text-center">8-14 days</td>
+                  <td className="px-6 py-3 text-center">{usStandardTransitBusinessDays} days</td>
                   <td className="px-6 py-3 text-center">6-8 days</td>
                 </tr>
                 <tr className="bg-[var(--bg)]/50">

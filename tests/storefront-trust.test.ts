@@ -81,11 +81,14 @@ test("global storefront styles exclude unused decorative motion", () => {
   );
 });
 
-test("product cards never infer wearing media from array position or filename", () => {
+test("product cards use explicit neutral alternate media without model claims", () => {
   const card = source("src/components/product/ProductCard.tsx");
   assert.doesNotMatch(card, /images\[1\]/);
   assert.doesNotMatch(card, /includes\(["']-worn\./);
-  assert.match(card, /imageRoles\?\.wearing/);
+  assert.doesNotMatch(card, /imageRoles\?\.wearing/);
+  assert.match(card, /imageRoles\?\.alternate/);
+  assert.match(card, /alternate product view/i);
+  assert.doesNotMatch(card, /on[- ]model/i);
 });
 
 test("the legacy loyalty route is noindex and makes no unimplemented reward promises", () => {

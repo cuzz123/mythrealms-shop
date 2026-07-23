@@ -4,18 +4,53 @@ import path from "node:path";
 import test from "node:test";
 
 import { metadata as blogMetadata } from "../src/app/blog/page";
+import { GET as getLlmsText } from "../src/app/llms.txt/route";
+import robots from "../src/app/robots";
 import { buildBlogPostingData } from "../src/components/ui/JsonLd";
-import { buildBlogMetadata } from "../src/lib/seo/blog";
+import {
+  buildBlogMetadata,
+  isPearlEditorialPost,
+} from "../src/lib/seo/blog";
 import { buildSitemapEntries } from "../src/lib/seo/sitemap";
 import { siteUrl } from "../src/lib/site";
-import { buildStorefrontFeedXml } from "../src/lib/storefront/feed";
+import { PEARL_EDITS } from "../src/lib/storefront/pearl-edits";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
+import { buildStorefrontFeedXml } from "../src/lib/storefront/feed";
+import {
+  FOOTER_GROUPS,
+  HEADER_LINKS,
+  HEADER_MENUS,
+} from "../src/lib/storefront/navigation";
 
 const retiredLanguage =
-  /\bcrystals?\b|\bgemstones?\b|stones with intention|the serenity collection|balance\s*&\s*light|emotional balance/i;
+  /\bcrystals?\b|\bgemstones?\b|stones with intention|the serenity collection|balance\s*&\s*light|the intention stones|luxe collection|pearl\s*&\s*crystal|the archetypes|curated singles|emotional balance/i;
+
+const canonicalContentPaths = [
+  "/collections",
+  "/collections/pearl-series",
+  "/collections/new-arrivals",
+  "/gifts",
+  "/guardian-quiz",
+  "/pearls",
+  "/pearls/care",
+  "/pearls/how-to-wear",
+  "/pearls/freshwater-pearls",
+  "/blog",
+  "/about",
+  "/faq",
+  "/contact",
+  "/size-guide",
+  "/shipping",
+  "/refund",
+  "/privacy",
+  "/terms",
+];
 
 const posts = [
-  { slug: "pearl-earrings-under-50", updatedAt: new Date("2026-07-18T00:00:00Z") },
+  {
+    slug: "pearl-earrings-under-50",
+    updatedAt: new Date("2026-07-18T00:00:00Z"),
+  },
 ];
 
 const post = {
@@ -53,17 +88,44 @@ test("the authoritative feed is pearl-only and contains every storefront SKU", (
   }
 });
 
-test("the sitemap includes the journal and published article URLs", () => {
-  const entries = buildSitemapEntries(siteUrl, getStorefrontProducts(), posts);
+test("the sitemap contains canonical content, products, and journal articles once", () => {
+  const products = getStorefrontProducts();
+  const entries = buildSitemapEntries(siteUrl, products, posts);
   const urls = new Set(entries.map((entry) => entry.url));
+  const expectedUrls = new Set([
+    siteUrl,
+    ...canonicalContentPaths.map((contentPath) => `${siteUrl}${contentPath}`),
+    ...products.map((product) => `${siteUrl}/products/${product.slug}`),
+    ...posts.map((entry) => `${siteUrl}/blog/${entry.slug}`),
+  ]);
 
-  assert.equal(urls.has(`${siteUrl}/blog`), true);
-  assert.equal(urls.has(`${siteUrl}/blog/pearl-earrings-under-50`), true);
-
-  for (const product of getStorefrontProducts()) {
-    assert.equal(urls.has(`${siteUrl}/products/${product.slug}`), true);
+  for (const expectedUrl of expectedUrls) {
+    assert.equal(urls.has(expectedUrl), true, `missing ${expectedUrl}`);
   }
   assert.equal([...urls].filter((url) => url.includes("/products/")).length, 45);
+  assert.equal([...urls].some((url) => url.includes("/edits/")), false);
+  assert.equal([...urls].some((url) => url.includes("?")), false);
+  assert.equal(entries.length, urls.size, "sitemap URLs must be unique");
+  assert.deepEqual(urls, expectedUrls);
+});
+
+test("navigation and sitemap expose only implemented pearl discovery routes", () => {
+  const discoveryPaths = ["/pearls/stories", "/pearls/symbolism"];
+  const entries = buildSitemapEntries(
+    siteUrl,
+    getStorefrontProducts(),
+    posts,
+    PEARL_EDITS.map((edit) => edit.route),
+    discoveryPaths,
+  );
+  const urls = entries.map((entry) => entry.url);
+  const navigation = JSON.stringify({ HEADER_MENUS, FOOTER_GROUPS });
+
+  for (const path of [...discoveryPaths, ...PEARL_EDITS.map((edit) => edit.route)]) {
+    assert.ok(urls.includes(`${siteUrl}${path}`), `${path} is sitemap-discoverable`);
+  }
+  assert.match(navigation, /\/pearls\/stories/);
+  assert.match(navigation, /\/pearls\/symbolism/);
 });
 
 test("the database-backed sitemap revalidates without a redeploy", () => {
@@ -73,6 +135,26 @@ test("the database-backed sitemap revalidates without a redeploy", () => {
   );
 
   assert.match(sitemapSource, /export const revalidate = 3600;/);
+  assert.match(sitemapSource, /db\.blogPost\.findMany/);
+  assert.match(sitemapSource, /buildSitemapEntries/);
+});
+
+test("the root layout does not duplicate homepage content in noscript", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/layout.tsx"),
+    "utf8",
+  );
+  assert.doesNotMatch(source, /<noscript>/);
+  assert.doesNotMatch(source, /noscript-shop-by-style-title/);
+});
+
+test("the database-backed journal archive is rendered dynamically", () => {
+  const blogSource = readFileSync(
+    path.join(process.cwd(), "src/app/blog/page.tsx"),
+    "utf8",
+  );
+
+  assert.match(blogSource, /export const dynamic = "force-dynamic";/);
 });
 
 test("the database-backed journal archive is rendered dynamically", () => {
@@ -85,10 +167,12 @@ test("the database-backed journal archive is rendered dynamically", () => {
 });
 
 test("the journal archive is indexable", () => {
-  const robots = blogMetadata.robots;
+  const metadataRobots = blogMetadata.robots;
   assert.notEqual(
-    robots && typeof robots === "object" && "index" in robots
-      ? robots.index
+    metadataRobots &&
+      typeof metadataRobots === "object" &&
+      "index" in metadataRobots
+      ? metadataRobots.index
       : undefined,
     false,
   );
@@ -100,16 +184,41 @@ test("blog metadata uses the canonical article URL and article Open Graph data",
   const openGraph = metadata.openGraph;
 
   assert.equal(canonical, `${siteUrl}/blog/${post.slug}`);
-  assert.equal(openGraph?.type, "article");
+  assert.equal(openGraph && "type" in openGraph ? openGraph.type : undefined, "article");
   assert.equal(
     openGraph && "url" in openGraph ? openGraph.url : undefined,
     `${siteUrl}/blog/${post.slug}`,
   );
   assert.equal(
-    metadata.robots && typeof metadata.robots === "object" && "index" in metadata.robots
+    metadata.robots &&
+      typeof metadata.robots === "object" &&
+      "index" in metadata.robots
       ? metadata.robots.index
       : undefined,
     undefined,
+  );
+});
+
+test("the journal publication gate accepts pearl guidance and rejects retired content", () => {
+  assert.equal(
+    isPearlEditorialPost({
+      slug: "how-to-clean-pearl-earrings",
+      title: "How to Clean Pearl Earrings",
+      excerpt: "A practical freshwater pearl care guide.",
+      content: "Use a soft damp cloth and let pearl jewelry air dry.",
+      category: "Pearl Care",
+    }),
+    true,
+  );
+  assert.equal(
+    isPearlEditorialPost({
+      slug: "crystal-intentions-101",
+      title: "Crystal Intentions 101",
+      excerpt: "Choose an energy stone.",
+      content: "Pearls and rose quartz for emotional balance.",
+      category: "Crystal Wellness",
+    }),
+    false,
   );
 });
 
@@ -129,16 +238,84 @@ test("BlogPosting JSON-LD includes canonical publisher and ISO dates", () => {
 
   assert.equal(data["@type"], "BlogPosting");
   assert.deepEqual(data.mainEntityOfPage, { "@type": "WebPage", "@id": url });
-  assert.deepEqual(data.publisher, { "@type": "Organization", name: "MythRealms" });
+  assert.deepEqual(data.publisher, {
+    "@type": "Organization",
+    name: "MythRealms",
+  });
   assert.equal(data.datePublished, datePublished.toISOString());
   assert.equal(data.dateModified, dateModified.toISOString());
 });
 
-test("GEO guidance points to the canonical feed and not retired feeds", () => {
-  const llms = readFileSync(path.join(process.cwd(), "public/llms.txt"), "utf8");
-  assert.match(llms, /\/api\/feed(?:\s|$)/m);
+test("generated GEO guidance covers canonical sources and truth guardrails", async () => {
+  const response = getLlmsText();
+  const llms = await response.text();
+
+  assert.equal(response.headers.get("content-type"), "text/plain; charset=utf-8");
+  for (const resourcePath of [
+    "/collections/pearl-series",
+    "/collections/new-arrivals",
+    "/gifts",
+    "/about",
+    "/blog",
+    "/pearls",
+    "/pearls/care",
+    "/pearls/how-to-wear",
+    "/pearls/freshwater-pearls",
+    "/shipping",
+    "/refund",
+    "/contact",
+    "/sitemap.xml",
+    "/robots.txt",
+    "/api/feed",
+  ]) {
+    assert.match(
+      llms,
+      new RegExp(`${siteUrl}${resourcePath.replaceAll(".", "\\.")}`),
+    );
+  }
+  assert.match(llms, /The Pearl Edit/);
+  assert.match(llms, /product (?:gallery|images)/i);
+  assert.match(llms, /shape, luster, surface, tone, and size/i);
+  assert.match(llms, /medical/i);
+  assert.match(llms, /guaranteed emotional/i);
+  assert.match(
+    llms,
+    /most specific product, guide, collection, or policy page/i,
+  );
   assert.doesNotMatch(llms, /\/api\/feed\/(?:google|blog)/);
   assert.doesNotMatch(llms, retiredLanguage);
+  assert.equal(existsSync(path.join(process.cwd(), "public/llms.txt")), false);
+});
+
+test("the llms route explicitly opts into static generation", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/llms.txt/route.ts"),
+    "utf8",
+  );
+  assert.match(source, /export const dynamic = ["']force-static["'];/);
+});
+
+test("navigation, sitemap, llms, and product feed reject retired positioning", async () => {
+  const navigation = JSON.stringify({ HEADER_MENUS, HEADER_LINKS, FOOTER_GROUPS });
+  const sitemapOutput = JSON.stringify(
+    buildSitemapEntries(siteUrl, getStorefrontProducts(), posts),
+  );
+  const llms = await getLlmsText().text();
+  const feed = buildStorefrontFeedXml(siteUrl);
+
+  for (const surface of [navigation, sitemapOutput, llms, feed]) {
+    assert.doesNotMatch(surface, retiredLanguage);
+  }
+});
+
+test("the pearl collection page uses the pure collection schema builder", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/collections/[slug]/page.tsx"),
+    "utf8",
+  );
+
+  assert.match(source, /buildCollectionSchema\(/);
+  assert.doesNotMatch(source, /data=\{\{\s*"@context"/);
 });
 
 test("public SEO entry files contain no retired positioning", () => {
@@ -185,4 +362,28 @@ test("robots allows only the exact canonical product feed under api", () => {
     "utf8",
   );
   assert.match(source, /\/api\/feed\$/);
+
+  const rules = robots().rules;
+  assert.equal(Array.isArray(rules), true);
+  if (!Array.isArray(rules)) return;
+
+  const aiRule = rules[0];
+  const wildcardRule = rules[1];
+  assert.equal(Array.isArray(aiRule.userAgent), true);
+  assert.equal((aiRule.userAgent as string[]).includes("OAI-SearchBot"), true);
+  assert.equal((aiRule.userAgent as string[]).includes("OAI-AdsBot"), true);
+  assert.deepEqual(aiRule.allow, ["/", "/api/feed$"]);
+  assert.deepEqual(wildcardRule.allow, ["/", "/api/feed$"]);
+  assert.equal(wildcardRule.userAgent, "*");
+  for (const privatePath of [
+    "/api/",
+    "/admin/",
+    "/account/",
+    "/auth/",
+    "/checkout/",
+    "/studio/",
+  ]) {
+    assert.equal((aiRule.disallow as string[]).includes(privatePath), true);
+    assert.equal((wildcardRule.disallow as string[]).includes(privatePath), true);
+  }
 });

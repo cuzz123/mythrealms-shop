@@ -35,6 +35,14 @@ type TrackingApi = {
   buildAddToCartPayload: (product: TrackItem) => unknown;
   buildBeginCheckoutPayload: (items: TrackItem[], value: number) => unknown;
   buildPurchasePayload: (orderId: string, value: number, items: TrackItem[]) => unknown;
+  buildViewItemListPayload: (list: { id: string; name: string; items: TrackItem[] }) => unknown;
+  buildSelectItemPayload: (list: { id: string; name: string }, product: TrackItem) => unknown;
+  buildViewPromotionPayload: (promotion: { id: string; name: string }) => unknown;
+  buildSelectPromotionPayload: (promotion: { id: string; name: string }) => unknown;
+  buildAddGiftNotePayload: (product: Pick<TrackItem, "id" | "name">) => unknown;
+  buildViewEditPayload: (edit: { id: string; name: string }) => unknown;
+  trackViewItemList: (list: { id: string; name: string; items: TrackItem[] }, target?: TrackingTarget, consent?: ConsentState, configured?: ConfiguredPlatforms) => boolean;
+  trackAddGiftNote: (product: Pick<TrackItem, "id" | "name">, target?: TrackingTarget, consent?: ConsentState, configured?: ConfiguredPlatforms) => boolean;
   trackViewItem: (
     product: Omit<TrackItem, "quantity">,
     target?: TrackingTarget,
@@ -249,6 +257,60 @@ test("builds purchase with a transaction ID", () => {
       { item_id: "pearl_1", item_name: "Stillwater Pearl", price: 29.5, quantity: 2 },
     ],
   });
+});
+
+test("builds growth payloads without gift note or email content", () => {
+  const product = { id: "pearl_3", name: "Daylight Pearl", price: 38, quantity: 1 };
+  const list = { id: "complements:pearl_1", name: "Complete the edit", items: [product] };
+
+  assert.deepEqual(tracking.buildViewItemListPayload(list), {
+    item_list_id: "complements:pearl_1",
+    item_list_name: "Complete the edit",
+    items: [{ item_id: "pearl_3", item_name: "Daylight Pearl", price: 38, quantity: 1 }],
+  });
+  assert.deepEqual(tracking.buildSelectItemPayload(list, product), {
+    item_list_id: "complements:pearl_1",
+    item_list_name: "Complete the edit",
+    items: [{ item_id: "pearl_3", item_name: "Daylight Pearl", price: 38, quantity: 1 }],
+  });
+  assert.deepEqual(tracking.buildViewPromotionPayload({ id: "free-shipping", name: "Free shipping progress" }), {
+    promotion_id: "free-shipping",
+    promotion_name: "Free shipping progress",
+  });
+  assert.deepEqual(tracking.buildSelectPromotionPayload({ id: "free-shipping", name: "Free shipping progress" }), {
+    promotion_id: "free-shipping",
+    promotion_name: "Free shipping progress",
+  });
+  assert.deepEqual(tracking.buildAddGiftNotePayload(product), {
+    item_id: "pearl_3",
+    item_name: "Daylight Pearl",
+  });
+  assert.deepEqual(tracking.buildViewEditPayload({ id: "everyday-light", name: "Everyday Light" }), {
+    edit_id: "everyday-light",
+    edit_name: "Everyday Light",
+  });
+
+  const serialized = JSON.stringify([
+    tracking.buildAddGiftNotePayload(product),
+    tracking.buildViewItemListPayload(list),
+  ]);
+  assert.doesNotMatch(serialized, /private|note|email/i);
+});
+
+test("growth events do not dispatch or queue when analytics consent is denied", () => {
+  const gaOnly: ConfiguredPlatforms = { ga: true, meta: false, pinterest: false };
+  const calls: unknown[][] = [];
+  const list = {
+    id: "complements:pearl_1",
+    name: "Complete the edit",
+    items: [{ id: "pearl_3", name: "Daylight Pearl", price: 38, quantity: 1 }],
+  };
+
+  assert.equal(tracking.trackViewItemList(list, { gtag: (...args) => calls.push(args) }, noConsent, gaOnly), false);
+  assert.equal(tracking.trackAddGiftNote({ id: "pearl_3", name: "Daylight Pearl" }, {}, noConsent, gaOnly), false);
+  tracking.flushTrackingQueue("ga", { gtag: (...args) => calls.push(args) }, allConsent);
+
+  assert.deepEqual(calls, []);
 });
 
 test("dispatches Meta and Pinterest independently when GA is absent", () => {
@@ -578,7 +640,10 @@ test("purchase sends marketing first and analytics once after later consent, inc
 test("wires add-to-cart tracking through the cart store", () => {
   const cartSource = source("src/lib/cart.ts");
   assert.match(cartSource, /import \{ trackAddToCart \} from ['\"]@\/lib\/tracking['\"]/);
-  assert.match(cartSource, /addItem: \(product, quantity = 1\) => \{\s*trackAddToCart\(/);
+  assert.match(
+    cartSource,
+    /addItem: \(product, quantity = 1(?:, giftNote)?\) => \{\s*trackAddToCart\(/,
+  );
 });
 
 test("flushes only the initializer platform from each analytics Script", () => {

@@ -32,13 +32,12 @@ export function ProductCard({ product, className }: ProductCardProps) {
   const toggleWishlist = useWishlistStore((s) => s.toggleItem);
   const isWishlisted = useWishlistStore((s) => s.isWishlisted);
   const [primaryFailed, setPrimaryFailed] = useState(false);
-  const [wearingFailed, setWearingFailed] = useState(false);
+  const [alternateFailed, setAlternateFailed] = useState(false);
 
   const primaryImage = product.imageRoles?.primary || product.images[0] || "";
-  const wearingImage = product.imageRoles?.wearing;
-  const hasWearingImage = Boolean(wearingImage);
+  const alternateImage = product.imageRoles?.alternate;
   const showPrimaryImage = Boolean(primaryImage) && !primaryFailed;
-  const showWearingImage = Boolean(wearingImage) && !wearingFailed;
+  const showAlternateImage = Boolean(alternateImage) && !alternateFailed;
   const isValidPrimaryImage =
     primaryImage && (primaryImage.startsWith("http") || primaryImage.startsWith("/"));
   const firstVariant = product.variants[0];
@@ -96,19 +95,19 @@ export function ProductCard({ product, className }: ProductCardProps) {
                 loading="lazy"
                 onError={() => setPrimaryFailed(true)}
                 className={`object-cover transition-[opacity,transform] duration-300 group-hover:scale-[1.02] group-focus-within:scale-[1.02] ${
-                  showWearingImage
+                  showAlternateImage
                     ? "opacity-100 group-hover:opacity-0 group-focus-within:opacity-0"
                     : "opacity-100"
                 }`}
               />
-              {showWearingImage && wearingImage && (
+              {showAlternateImage && alternateImage && (
                 <Image
-                  src={imageUrl(wearingImage)}
-                  alt={`${product.name} - on-model jewelry view`}
+                  src={imageUrl(alternateImage)}
+                  alt={`${product.name} - alternate product view`}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   loading="lazy"
-                  onError={() => setWearingFailed(true)}
+                  onError={() => setAlternateFailed(true)}
                   className="object-cover opacity-0 transition-[opacity,transform] duration-300 group-hover:scale-[1.02] group-hover:opacity-100 group-focus-within:scale-[1.02] group-focus-within:opacity-100"
                 />
               )}
@@ -121,15 +120,10 @@ export function ProductCard({ product, className }: ProductCardProps) {
               Sale
             </span>
           )}
-          {hasWearingImage && showWearingImage && (
-            <span className="absolute bottom-3 left-3 bg-[var(--surface)]/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--text)]">
-              On model
-            </span>
-          )}
         </div>
 
         <div className="mt-3 space-y-1.5">
-          <h3 className="line-clamp-2 font-serif text-sm font-medium text-[var(--text)]">
+          <h3 className="font-serif text-sm font-medium text-[var(--text)] sm:line-clamp-2">
             {product.name}
           </h3>
           <div className="flex items-center gap-2">
@@ -161,9 +155,6 @@ export function ProductCard({ product, className }: ProductCardProps) {
               Only {firstVariant.stock} left
             </div>
           )}
-          {hasWearingImage && showWearingImage && (
-            <p className="text-[10px] font-semibold uppercase tracking-[0.07em] text-[var(--accent)]">Product view + on-model view</p>
-          )}
         </div>
       </Link>
 
@@ -179,7 +170,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
       <button
         type="button"
         onClick={handleQuickAdd}
-        className="absolute bottom-[72px] right-3 z-10 flex h-9 w-9 translate-y-2 cursor-pointer items-center justify-center rounded-full bg-white/90 text-[var(--text)] opacity-0 shadow-md backdrop-blur-sm transition-[opacity,transform] duration-200 hover:bg-white hover:text-[var(--primary)] group-hover:translate-y-0 group-hover:opacity-100 max-sm:translate-y-0 max-sm:bg-[var(--accent)] max-sm:text-[var(--bg)] max-sm:opacity-100 max-sm:hover:bg-[var(--accent-hover)]"
+        className="absolute bottom-[72px] right-3 z-10 flex h-9 w-9 translate-y-2 cursor-pointer items-center justify-center rounded-full bg-white/90 text-[var(--text)] opacity-0 shadow-md backdrop-blur-sm transition-[opacity,transform] duration-200 hover:bg-white hover:text-[var(--primary)] group-hover:translate-y-0 group-hover:opacity-100 max-sm:bottom-auto max-sm:top-14 max-sm:translate-y-0 max-sm:bg-[var(--accent)] max-sm:text-[var(--bg)] max-sm:opacity-100 max-sm:hover:bg-[var(--accent-hover)]"
         aria-label={`Add ${product.name} to cart`}
       >
         <ShoppingBag className="h-4 w-4" />
