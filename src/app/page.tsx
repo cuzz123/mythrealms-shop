@@ -38,11 +38,11 @@ export default function HomePage() {
     <>
       <HomepageHero />
       <HomepageCategoryStories />
-      <HomepagePearlEdit products={featuredProducts} />
       <HomepageEditorialStory />
       <EditorialLinkBand items={HOMEPAGE_EDITORIAL_LINKS} />
       <HomepageGuardian />
       <HomepageOccasionEdit />
+      <HomepagePearlEdit products={featuredProducts} />
       <HomepageGiftSets products={giftProducts} />
       <HomepageWhyPearls />
       <section className="bg-[var(--surface-alt)] py-16 md:py-20" aria-labelledby="newsletter-title">

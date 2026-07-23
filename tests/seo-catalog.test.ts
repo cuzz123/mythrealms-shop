@@ -155,7 +155,7 @@ test("blog metadata uses the canonical article URL and article Open Graph data",
   const openGraph = metadata.openGraph;
 
   assert.equal(canonical, `${siteUrl}/blog/${post.slug}`);
-  assert.equal(openGraph?.type, "article");
+  assert.equal(openGraph && "type" in openGraph ? openGraph.type : undefined, "article");
   assert.equal(
     openGraph && "url" in openGraph ? openGraph.url : undefined,
     `${siteUrl}/blog/${post.slug}`,

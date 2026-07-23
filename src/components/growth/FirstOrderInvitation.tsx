@@ -90,6 +90,7 @@ export function FirstOrderInvitation({
   const [error, setError] = useState("");
   const dialogRef = useRef<HTMLDivElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const errorId = useId();
   const copy = getFirstOrderInvitationCopy(campaignCode);
 
@@ -117,21 +118,26 @@ export function FirstOrderInvitation({
     }
 
     let hasEngaged = false;
+    let delayComplete = false;
 
     const reveal = () => {
-      if (!hasEngaged) return;
+      if (!hasEngaged || !delayComplete) return;
       markSessionShown();
       setIsOpen(true);
     };
 
     const markEngaged = () => {
       hasEngaged = true;
+      reveal();
     };
 
     window.addEventListener("pointerdown", markEngaged, { once: true, passive: true });
     window.addEventListener("keydown", markEngaged, { once: true });
     window.addEventListener("scroll", markEngaged, { once: true, passive: true });
-    const timer = setTimeout(reveal, FIRST_ORDER_INVITATION_DELAY_MS);
+    const timer = setTimeout(() => {
+      delayComplete = true;
+      reveal();
+    }, FIRST_ORDER_INVITATION_DELAY_MS);
 
     return () => {
       clearTimeout(timer);
@@ -159,6 +165,7 @@ export function FirstOrderInvitation({
         throw new Error(typeof data.error === "string" ? data.error : "Newsletter signup is temporarily unavailable");
       }
       setStatus("success");
+      requestAnimationFrame(() => closeRef.current?.focus());
     } catch (submissionError: unknown) {
       setStatus("error");
       setError(submissionError instanceof Error ? submissionError.message : "Newsletter signup is temporarily unavailable");
@@ -199,7 +206,7 @@ export function FirstOrderInvitation({
             <p aria-live="polite" className="flex items-center gap-2 text-sm font-medium text-[var(--success)]">
               <Check className="h-5 w-5" aria-hidden="true" /> You&apos;re on the list.
             </p>
-            <Button type="button" variant="outline" className="mt-4" onClick={dismiss}>
+            <Button ref={closeRef} type="button" variant="outline" className="mt-4" onClick={dismiss}>
               Close
             </Button>
           </div>

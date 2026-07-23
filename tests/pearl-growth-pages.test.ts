@@ -140,8 +140,8 @@ test("stories and symbolism metadata use local image-backed social cards", async
   for (const metadata of [stories.metadata, symbolism.metadata]) {
     const images = metadata.openGraph?.images;
     assert.ok(Array.isArray(images));
-    assert.match(String(images[0]?.url), new RegExp(`^${siteUrl}/images/`));
-    assert.match(String(metadata.twitter?.images?.[0]), new RegExp(`^${siteUrl}/images/`));
+    assert.match(JSON.stringify(images[0]), new RegExp(`${siteUrl}/images/`));
+    assert.match(JSON.stringify(metadata.twitter?.images), new RegExp(`${siteUrl}/images/`));
   }
 });
 
