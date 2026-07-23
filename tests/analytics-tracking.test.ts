@@ -578,7 +578,10 @@ test("purchase sends marketing first and analytics once after later consent, inc
 test("wires add-to-cart tracking through the cart store", () => {
   const cartSource = source("src/lib/cart.ts");
   assert.match(cartSource, /import \{ trackAddToCart \} from ['\"]@\/lib\/tracking['\"]/);
-  assert.match(cartSource, /addItem: \(product, quantity = 1\) => \{\s*trackAddToCart\(/);
+  assert.match(
+    cartSource,
+    /addItem: \(product, quantity = 1(?:, giftNote)?\) => \{\s*trackAddToCart\(/,
+  );
 });
 
 test("flushes only the initializer platform from each analytics Script", () => {

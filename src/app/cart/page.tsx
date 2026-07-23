@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useCartStore } from "@/lib/cart";
+import { MAX_GIFT_NOTE_LENGTH, useCartStore } from "@/lib/cart";
 import {
   buildDiscountPreviewRequest,
   parseDiscountPreviewResponse,
@@ -14,7 +14,7 @@ import Link from "next/link";
 import { Minus, Plus, Trash2, ArrowLeft, ShoppingBag, TicketPercent, CheckCircle2 } from "lucide-react";
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, subtotal } = useCartStore();
+  const { items, removeItem, updateQuantity, setGiftNote, subtotal } = useCartStore();
   const [discountCode, setDiscountCode] = useState("");
   const [discountApplied, setDiscountApplied] = useState(false);
   const [discountError, setDiscountError] = useState("");
@@ -92,6 +92,19 @@ export default function CartPage() {
                 <h3 className="text-sm font-semibold line-clamp-2 mb-1 text-[var(--text)]">{item.product.name}</h3>
                 {item.product.variantName && <p className="text-xs text-[var(--text-muted)]">{item.product.variantName}</p>}
                 <p className="text-xs text-[var(--text-muted)] mt-1">{formatPrice(item.product.price)} each</p>
+                <label className="mt-3 block text-xs font-medium text-[var(--text-secondary)]" htmlFor={`gift-note-${item.product.id}-${item.product.variantId ?? "default"}`}>
+                  Gift note (optional)
+                </label>
+                <textarea
+                  id={`gift-note-${item.product.id}-${item.product.variantId ?? "default"}`}
+                  value={item.giftNote ?? ""}
+                  onChange={(event) => setGiftNote(item.product.id, item.product.variantId, event.target.value)}
+                  maxLength={MAX_GIFT_NOTE_LENGTH}
+                  rows={2}
+                  placeholder="A private note for this gift"
+                  className="mt-1 w-full max-w-md resize-y rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--bg)] px-2.5 py-2 text-xs text-[var(--text)] placeholder:text-[var(--text-muted)] outline-none focus:border-[var(--accent)]"
+                />
+                <p className="mt-1 text-[11px] text-[var(--text-muted)]">{(item.giftNote ?? "").length}/{MAX_GIFT_NOTE_LENGTH}</p>
               </div>
               <div className="flex items-center border border-[var(--border)] rounded-full">
                 <button aria-label={`Decrease quantity for ${item.product.name}`} onClick={() => updateQuantity(item.product.id, item.product.variantId, item.quantity - 1)} className="w-8 h-8 flex items-center justify-center hover:bg-[var(--border-light)] rounded-l-full text-[var(--text)]"><Minus className="w-3 h-3" /></button>

@@ -520,6 +520,11 @@ export default function CheckoutPage() {
                     <p className="text-[var(--text-muted)]">
                       Qty: {item.quantity} x {formatPrice(item.product.price)}
                     </p>
+                    {item.giftNote && (
+                      <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">
+                        <span className="font-medium">Gift note:</span> {item.giftNote}
+                      </p>
+                    )}
                   </div>
                 </div>
               ))}
@@ -788,6 +793,7 @@ function PayPalButton({
                 productId: item.product.id,
                 variantId: item.product.variantId,
                 quantity: item.quantity,
+                ...(item.giftNote ? { giftNote: item.giftNote } : {}),
               })),
               email: latest.email,
               shippingAddress: latest.shippingAddress,

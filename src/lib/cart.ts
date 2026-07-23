@@ -15,16 +15,26 @@ export interface CartProduct {
   variantName?: string
 }
 
-interface CartItem {
+export const MAX_GIFT_NOTE_LENGTH = 240
+
+export function normalizeGiftNote(note?: string): string | undefined {
+  if (typeof note !== "string") return undefined
+  const normalized = note.trim().slice(0, MAX_GIFT_NOTE_LENGTH)
+  return normalized || undefined
+}
+
+export interface CartItem {
   product: CartProduct
   quantity: number
+  giftNote?: string
 }
 
 interface CartStore {
   items: CartItem[]
-  addItem: (product: CartProduct, quantity?: number) => void
+  addItem: (product: CartProduct, quantity?: number, giftNote?: string) => void
   removeItem: (productId: string, variantId?: string) => void
   updateQuantity: (productId: string, variantId: string | undefined, quantity: number) => void
+  setGiftNote: (productId: string, variantId: string | undefined, note?: string) => void
   clearCart: () => void
   itemCount: () => number
   subtotal: () => number
@@ -35,7 +45,7 @@ export const useCartStore = create<CartStore>()(
     (set, get) => ({
       items: [],
 
-      addItem: (product, quantity = 1) => {
+      addItem: (product, quantity = 1, giftNote) => {
         trackAddToCart({
           id: product.id,
           name: product.name,
@@ -56,7 +66,13 @@ export const useCartStore = create<CartStore>()(
             return { items: updated }
           }
 
-          return { items: [...state.items, { product, quantity }] }
+          const normalizedGiftNote = normalizeGiftNote(giftNote)
+          return {
+            items: [
+              ...state.items,
+              { product, quantity, ...(normalizedGiftNote ? { giftNote: normalizedGiftNote } : {}) },
+            ],
+          }
         })
       },
 
@@ -78,6 +94,17 @@ export const useCartStore = create<CartStore>()(
           items: state.items.map((item) =>
             item.product.id === productId && item.product.variantId === variantId
               ? { ...item, quantity }
+              : item
+          ),
+        }))
+      },
+
+      setGiftNote: (productId, variantId, note) => {
+        const giftNote = normalizeGiftNote(note)
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.product.id === productId && item.product.variantId === variantId
+              ? { ...item, ...(giftNote ? { giftNote } : { giftNote: undefined }) }
               : item
           ),
         }))

@@ -9,7 +9,7 @@ import { formatPrice } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info, Heart, Check, Loader2 } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/ui/JsonLd";
-import { useCartStore, useCartUIStore } from "@/lib/cart";
+import { MAX_GIFT_NOTE_LENGTH, useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import toast from "react-hot-toast";
 import { productBenefitTriplet, productDisplayName, productShortDescription, realmForProduct } from "@/lib/brand";
@@ -22,6 +22,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
   const addItem = useCartStore((s) => s.addItem);
   const openCart = useCartUIStore((s) => s.openCart);
   const [quantity, setQuantity] = useState(1);
+  const [giftNote, setGiftNote] = useState("");
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [justToggledWishlist, setJustToggledWishlist] = useState(false);
   const [addToCartState, setAddToCartState] = useState<"idle" | "adding" | "added">("idle");
@@ -88,7 +89,8 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
       slug: p.slug,
       image: p.image,
       price: p.price,
-    }, quantity);
+    }, quantity, giftNote);
+    setGiftNote("");
     setTimeout(() => {
       setAddToCartState("added");
       toast.success(`${quantity > 1 ? `${quantity} items` : "Item"} added to cart!`);
@@ -364,6 +366,24 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
                     <Plus className="w-3.5 h-3.5" />
                   </button>
                 </div>
+              </div>
+              <div>
+                <label htmlFor="product-gift-note" className="block text-sm text-[var(--text-muted)]">
+                  Gift note (optional)
+                </label>
+                <textarea
+                  id="product-gift-note"
+                  value={giftNote}
+                  onChange={(event) => setGiftNote(event.target.value.slice(0, MAX_GIFT_NOTE_LENGTH))}
+                  maxLength={MAX_GIFT_NOTE_LENGTH}
+                  rows={3}
+                  placeholder="A private note for this gift"
+                  aria-describedby="product-gift-note-help"
+                  className="mt-2 w-full resize-y rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2.5 text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] outline-none focus:border-[var(--accent)]"
+                />
+                <p id="product-gift-note-help" className="mt-1 text-xs text-[var(--text-muted)]">
+                  Added when this item first enters your cart. Edit it in your cart later. {giftNote.length}/{MAX_GIFT_NOTE_LENGTH}
+                </p>
               </div>
               <button
                 onClick={handleAddToCart}

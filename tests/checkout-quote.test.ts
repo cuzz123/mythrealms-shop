@@ -67,6 +67,16 @@ test("uses catalog prices and ignores a tampered client price", () => {
   assert.equal(quote.totalCents, 6497);
 });
 
+test("a validated gift note does not change the catalog quote", () => {
+  const quote = quoteStorefrontCart([
+    { productId: "1688-001", quantity: 2, giftNote: "For Ada" },
+  ]);
+
+  assert.equal(quote.subtotalCents, 5998);
+  assert.equal(quote.totalCents, 6497);
+  assert.equal(quote.lines[0].giftNote, "For Ada");
+});
+
 test("revalidates cart boundaries when the quote function is called directly", () => {
   const invalidLines = [
     [],
