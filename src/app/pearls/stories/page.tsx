@@ -4,12 +4,14 @@ import Link from "next/link";
 
 import { BreadcrumbJsonLd } from "@/components/ui/JsonLd";
 import { db } from "@/lib/db";
-import { isPearlEditorialPost } from "@/lib/seo/blog";
+import { isPearlStoryPost } from "@/lib/seo/blog";
+import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
 import { absoluteUrl } from "@/lib/site";
 
 const title = "Pearl Stories | MythRealms";
 const description = "A focused reading list of current MythRealms stories about styling, care, gifting, and choosing pearl jewelry.";
 const canonical = absoluteUrl("/pearls/stories");
+const image = HOMEPAGE_MEDIA.courtyard;
 
 export const dynamic = "force-dynamic";
 
@@ -17,15 +19,23 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical },
-  openGraph: { title, description, url: canonical, type: "website" },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: {
+    title,
+    description,
+    url: canonical,
+    type: "website",
+    images: [{ url: absoluteUrl(image.src), alt: image.alt }],
+  },
+  twitter: { card: "summary_large_image", title, description, images: [absoluteUrl(image.src)] },
 };
 
 export default async function PearlStoriesPage() {
   const posts = (await db.blogPost.findMany({
     orderBy: { publishedAt: "desc" },
     include: { author: { select: { name: true } } },
-  })).filter(isPearlEditorialPost);
+  }))
+    .filter(isPearlStoryPost)
+    .slice(0, 6);
 
   return (
     <div className="bg-[var(--bg)]">

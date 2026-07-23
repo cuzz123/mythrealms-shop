@@ -5,12 +5,13 @@ import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
+import { isPearlStoryPost } from "../src/lib/seo/blog";
 import { buildItemListSchema } from "../src/lib/seo/schema";
 import { buildSitemapEntries } from "../src/lib/seo/sitemap";
 import { PEARL_EDITS, getPearlEditProducts } from "../src/lib/storefront/pearl-edits";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
 import { FOOTER_GROUPS, HEADER_MENUS } from "../src/lib/storefront/navigation";
-import { absoluteUrl } from "../src/lib/site";
+import { absoluteUrl, siteUrl } from "../src/lib/site";
 
 function parseJsonLd(html: string): Array<Record<string, unknown>> {
   return [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(
@@ -84,6 +85,7 @@ test("discovery navigation and the sitemap expose routes only after the routes e
     getStorefrontProducts(),
     [],
     PEARL_EDITS.map((edit) => edit.route),
+    ["/pearls/stories", "/pearls/symbolism"],
   ).map((entry) => entry.url);
 
   for (const href of ["/pearls/stories", "/pearls/symbolism"]) {
@@ -91,6 +93,9 @@ test("discovery navigation and the sitemap expose routes only after the routes e
   }
   for (const edit of PEARL_EDITS) {
     assert.ok(sitemapUrls.includes(`https://example.com${edit.route}`), edit.route);
+  }
+  for (const href of ["/pearls/stories", "/pearls/symbolism"]) {
+    assert.ok(sitemapUrls.includes(`https://example.com${href}`), href);
   }
   assert.equal(new Set(sitemapUrls).size, sitemapUrls.length);
 });
@@ -102,6 +107,46 @@ test("stories remain a focused view of current blog entries rather than a second
   );
 
   assert.match(source, /db\.blogPost\.findMany/);
-  assert.match(source, /filter\(isPearlEditorialPost\)/);
+  assert.match(source, /filter\(isPearlStoryPost\)/);
+  assert.match(source, /slice\(0, 6\)/);
   assert.match(source, /href=\{`\/blog\/\$\{post\.slug\}`\}/);
+});
+
+test("story selection keeps pearl styling, care, gifting, and choosing topics out of the full archive", () => {
+  const pearlStory = {
+    slug: "how-to-wear-pearl-earrings",
+    title: "How to Wear Pearl Earrings",
+    excerpt: "A practical pearl styling guide.",
+    content: "Choose a pearl earring shape that works with your usual neckline.",
+    category: "Style Guide",
+  };
+  const pearlProfile = {
+    ...pearlStory,
+    slug: "pearl-maker-profile",
+    title: "A Pearl Maker Profile",
+    excerpt: "A conversation about studio practice.",
+    content: "A portrait of a pearl maker and their workshop.",
+    category: "Journal",
+  };
+
+  assert.equal(isPearlStoryPost(pearlStory), true);
+  assert.equal(isPearlStoryPost(pearlProfile), false);
+});
+
+test("stories and symbolism metadata use local image-backed social cards", async () => {
+  const stories = await import("../src/app/pearls/stories/page");
+  const symbolism = await import("../src/app/pearls/symbolism/page");
+
+  for (const metadata of [stories.metadata, symbolism.metadata]) {
+    const images = metadata.openGraph?.images;
+    assert.ok(Array.isArray(images));
+    assert.match(String(images[0]?.url), new RegExp(`^${siteUrl}/images/`));
+    assert.match(String(metadata.twitter?.images?.[0]), new RegExp(`^${siteUrl}/images/`));
+  }
+});
+
+test("gifts does not promise a checkout gift note before the feature exists", () => {
+  const source = readFileSync(path.join(process.cwd(), "src/app/gifts/page.tsx"), "utf8");
+
+  assert.doesNotMatch(source, /add a personal gift note during checkout/i);
 });

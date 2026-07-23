@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { BreadcrumbJsonLd } from "@/components/ui/JsonLd";
+import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
 import { PEARL_EDITS } from "@/lib/storefront/pearl-edits";
 import { absoluteUrl } from "@/lib/site";
 
 const title = "Pearl Symbolism in Style and Gifting | MythRealms";
 const description = "A neutral look at how pearls can carry personal style, memory, and occasion in a gift or an everyday jewelry choice.";
 const canonical = absoluteUrl("/pearls/symbolism");
-const image = PEARL_EDITS[2].heroImage;
+const image = HOMEPAGE_MEDIA.everyday;
 
 export const metadata: Metadata = {
   title,
@@ -20,9 +21,9 @@ export const metadata: Metadata = {
     description,
     url: canonical,
     type: "article",
-    images: [{ url: absoluteUrl(image), alt: "Pearl jewelry selected for a thoughtful gift" }],
+    images: [{ url: absoluteUrl(image.src), alt: image.alt }],
   },
-  twitter: { card: "summary_large_image", title, description, images: [absoluteUrl(image)] },
+  twitter: { card: "summary_large_image", title, description, images: [absoluteUrl(image.src)] },
 };
 
 export default function PearlSymbolismPage() {
@@ -37,7 +38,7 @@ export default function PearlSymbolismPage() {
       />
       <section className="grid min-h-[34rem] border-b border-[var(--border)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <div className="relative min-h-[22rem] bg-[var(--surface-alt)] lg:min-h-full">
-          <Image src={image} alt="Pearl jewelry selected for a thoughtful gift" fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+          <Image src={image.src} alt={image.alt} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
         </div>
         <div className="flex items-end bg-[var(--surface)] px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
           <div className="max-w-xl">

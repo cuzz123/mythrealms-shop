@@ -27,5 +27,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getStorefrontProducts(),
     posts.filter(isPearlEditorialPost),
     PEARL_EDITS.map((edit) => edit.route),
+    ["/pearls/stories", "/pearls/symbolism"],
   );
 }

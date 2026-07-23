@@ -148,7 +148,7 @@ export default function GiftsPage() {
             <h2 className="mt-3 font-serif text-3xl font-medium text-[var(--text)]">
               Keep the practical details close.
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">You can add a personal gift note during checkout. Review the shipping and returns pages for the current store policy before placing an order.</p>
+            <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">Review the shipping and returns pages for the current store policy before placing an order. A personal message can still begin with the piece and occasion you choose.</p>
           </div>
           <nav className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-[var(--accent)] sm:mt-0" aria-label="Gift guide help">
             <Link href="/shipping">Shipping</Link>
