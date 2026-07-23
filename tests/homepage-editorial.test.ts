@@ -51,7 +51,7 @@ test("homepage product media uses visually accurate descriptions", () => {
   assert.equal(HOMEPAGE_MEDIA.earrings.alt, HOMEPAGE_MEDIA.hero.alt);
   assert.equal(
     HOMEPAGE_MEDIA.necklaces.alt,
-    "Pearl necklace displayed on a black jewelry stand",
+    "Model wearing a pearl and gold lariat necklace in a sunlit courtyard",
   );
   assert.equal(
     HOMEPAGE_MEDIA.bracelets.alt,
