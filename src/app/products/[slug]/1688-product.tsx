@@ -1,10 +1,7 @@
 ﻿"use client";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-  getStorefrontProducts,
-  type StorefrontProduct,
-} from "@/lib/storefront/catalog";
+import { type StorefrontProduct } from "@/lib/storefront/catalog";
 import { formatPrice } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info, Heart, Check, Loader2 } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
@@ -14,7 +11,9 @@ import { useWishlistStore } from "@/lib/wishlist";
 import toast from "react-hot-toast";
 import { productBenefitTriplet, productDisplayName, productShortDescription, realmForProduct } from "@/lib/brand";
 import { CONSENT_CHANGED_EVENT } from "@/lib/analytics/consent";
-import { trackViewItem } from "@/lib/tracking";
+import { trackAddGiftNote, trackViewItem } from "@/lib/tracking";
+import { ComplementaryProducts } from "@/components/storefront/ComplementaryProducts";
+import { FreeShippingProgress } from "@/components/storefront/FreeShippingProgress";
 
 export function Product1688({ product }: { product: StorefrontProduct }) {
   const slug = product.slug;
@@ -37,13 +36,6 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
   const toggleWishlistItem = useWishlistStore((s) => s.toggleItem);
   const isWishlisted = useWishlistStore((s) => s.isWishlisted);
   const wishlisted = isWishlisted(product.id);
-
-  // Related products stay stable so hydration and merchandising are predictable.
-  const related = useMemo(() => {
-    return getStorefrontProducts()
-      .filter((candidate) => candidate.slug !== slug)
-      .slice(0, 4);
-  }, [slug]);
 
   // Save to recently viewed
   useEffect(() => {
@@ -83,6 +75,9 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
 
   function handleAddToCart() {
     setAddToCartState("adding");
+    if (giftNote.trim()) {
+      trackAddGiftNote({ id: p.id, name: displayName });
+    }
     addItem({
       id: p.id,
       name: displayName,
@@ -269,6 +264,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
           <p className="mt-1.5 text-xs text-[var(--text-muted)]">
             Free shipping over $69.99 - Delivery estimate shown at checkout
           </p>
+          <FreeShippingProgress subtotal={p.price * quantity} className="mt-4" />
 
           <div className="mt-5 space-y-3 text-sm text-[var(--text-muted)] leading-relaxed">
             <p>{displayDescription}</p>
@@ -481,35 +477,9 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
         </div>
       </div>
 
-      {/* ===== YOU MAY ALSO LIKE ===== */}
-      {related.length > 0 && (
-        <section className="mt-16 pt-12 border-t border-[var(--border)]">
-          <h2 className="font-serif text-2xl font-bold text-[var(--text)] mb-6">You May Also Like</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {related.map((rp) => (
-              <Link key={rp.slug} href={`/products/${rp.slug}`} className="group" aria-label={`View ${productDisplayName(rp)}`}>
-                <div className="aspect-square rounded-xl overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent)]/40 transition-all relative">
-                  <LazyImage src={rp.image} alt={productDisplayName(rp)} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" containerClassName="absolute inset-0" />
-                  {rp.tag && (
-                    <span className={`absolute top-3 left-3 text-[10px] font-semibold px-2 py-0.5 rounded-full ${rp.tag === 'New' ? 'bg-[var(--accent)]/20 text-[var(--accent)]' : 'bg-[var(--surface)]/80 text-[var(--text)]'}`}>
-                      {rp.tag}
-                    </span>
-                  )}
-                </div>
-                <div className="mt-2.5 px-1">
-                  <h3 className="text-sm font-medium text-[var(--text)] line-clamp-1 group-hover:text-[var(--accent)] transition-colors">{productDisplayName(rp)}</h3>
-                  <div className="flex items-baseline gap-2 mt-0.5">
-                    <span className="text-xs font-semibold text-[var(--text)]">{formatPrice(rp.price)}</span>
-                    {rp.compareAt && rp.compareAt > rp.price && (
-                      <span className="text-[10px] text-[var(--text-muted)] line-through">{formatPrice(rp.compareAt)}</span>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
+      <div className="mt-16">
+        <ComplementaryProducts sourceSlug={slug} />
+      </div>
     </div>
   );
 }

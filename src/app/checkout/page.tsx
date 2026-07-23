@@ -8,6 +8,7 @@ import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
 import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
 import { LazyImage } from "@/components/ui/LazyImage";
+import { FreeShippingProgress } from "@/components/storefront/FreeShippingProgress";
 import Link from "next/link";
 import Script from "next/script";
 import { Loader2, Tag, Check, AlertCircle } from "lucide-react";
@@ -641,14 +642,7 @@ export default function CheckoutPage() {
                 </span>
               </div>
 
-              {shipping > 0 && (
-                <p className="text-xs text-[var(--text-muted)]">
-                  Free shipping on orders of ${freeShippingThreshold} or more - add{" "}
-                  {formatPrice(
-                    STORE_POLICY_FACTS.freeShippingThresholdUsd - discountedSubtotal,
-                  )} more
-                </p>
-              )}
+              <FreeShippingProgress subtotal={subtotal()} />
 
               <div className="flex justify-between font-bold text-lg pt-2 border-t border-[var(--border)]">
                 <span className="text-[var(--text)]">Total</span>
