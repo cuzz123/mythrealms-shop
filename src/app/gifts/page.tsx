@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { EditorialHero } from "@/components/editorial/EditorialHero";
+import { GiftProductSections } from "@/components/editorial/GiftProductSections";
 import { RelatedProducts } from "@/components/editorial/RelatedProducts";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { productDisplayName } from "@/lib/brand";
 import {
-  type GiftSection,
   getGiftSections,
   getUniqueGiftProducts,
 } from "@/lib/editorial/gifts";
@@ -39,28 +39,6 @@ export const metadata: Metadata = {
     images: [absoluteUrl(heroImage.src)],
   },
 };
-
-export function GiftProductSections({ sections }: { sections: readonly GiftSection[] }) {
-  return sections.filter((section) => section.products.length > 0).map((section) => {
-    const headingId = `${section.id}-products-title`;
-
-    return (
-      <section
-        key={section.id}
-        id={section.id}
-        className="scroll-mt-28"
-        aria-labelledby={headingId}
-      >
-        <RelatedProducts
-          products={section.products}
-          title={section.title}
-          description={section.description}
-          headingId={headingId}
-        />
-      </section>
-    );
-  });
-}
 
 export default function GiftsPage() {
   const sections = getGiftSections();

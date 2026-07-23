@@ -112,6 +112,10 @@ export function FirstOrderInvitation({
   });
 
   useEffect(() => {
+    if (isOpen) {
+      return;
+    }
+
     const dismissedAt = getStoredTimestamp(DISMISSAL_STORAGE_KEY);
     if (!shouldShowFirstOrderInvitation({ now: Date.now(), dismissedAt, sessionShown: getSessionShown(), cooldownDays })) {
       return;
@@ -145,7 +149,7 @@ export function FirstOrderInvitation({
       window.removeEventListener("keydown", markEngaged);
       window.removeEventListener("scroll", markEngaged);
     };
-  }, [cooldownDays]);
+  }, [cooldownDays, isOpen]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

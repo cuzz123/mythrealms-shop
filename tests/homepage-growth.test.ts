@@ -73,3 +73,10 @@ test("first-order invitation never displays twice in a session and waits twenty 
     false,
   );
 });
+
+test("opening the first-order invitation clears the engagement listeners before Escape can dismiss it", () => {
+  const invitation = source("src/components/growth/FirstOrderInvitation.tsx");
+
+  assert.match(invitation, /if \(isOpen\) \{\s*return;/);
+  assert.match(invitation, /\[cooldownDays, isOpen\]/);
+});

@@ -14,6 +14,7 @@ import { CONSENT_CHANGED_EVENT } from "@/lib/analytics/consent";
 import { trackAddGiftNote, trackViewItem } from "@/lib/tracking";
 import { ComplementaryProducts } from "@/components/storefront/ComplementaryProducts";
 import { FreeShippingProgress } from "@/components/storefront/FreeShippingProgress";
+import { StickyAddToCart } from "@/components/storefront/StickyAddToCart";
 
 export function Product1688({ product }: { product: StorefrontProduct }) {
   const slug = product.slug;
@@ -156,7 +157,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
   const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10">
+    <div className="product-purchase-page max-w-7xl mx-auto px-6 py-10">
       {/* JSON-LD Structured Data */}
       <ProductJsonLd
         name={displayName}
@@ -382,6 +383,9 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
                 </p>
               </div>
               <button
+                id="primary-add-to-cart"
+                data-testid="primary-add-to-cart"
+                type="button"
                 onClick={handleAddToCart}
                 disabled={addToCartState !== "idle"}
                 className="w-full py-3.5 rounded-lg bg-[var(--accent)] text-[var(--bg)] font-semibold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
@@ -480,6 +484,13 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
       <div className="mt-16">
         <ComplementaryProducts sourceSlug={slug} />
       </div>
+      <StickyAddToCart
+        visible={p.inStock !== false}
+        disabled={addToCartState !== "idle"}
+        onAdd={handleAddToCart}
+        price={formatPrice(p.price)}
+        label={displayName}
+      />
     </div>
   );
 }

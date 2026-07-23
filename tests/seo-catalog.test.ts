@@ -13,6 +13,7 @@ import {
 } from "../src/lib/seo/blog";
 import { buildSitemapEntries } from "../src/lib/seo/sitemap";
 import { siteUrl } from "../src/lib/site";
+import { PEARL_EDITS } from "../src/lib/storefront/pearl-edits";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
 import { buildStorefrontFeedXml } from "../src/lib/storefront/feed";
 import {
@@ -106,6 +107,25 @@ test("the sitemap contains canonical content, products, and journal articles onc
   assert.equal([...urls].some((url) => url.includes("?")), false);
   assert.equal(entries.length, urls.size, "sitemap URLs must be unique");
   assert.deepEqual(urls, expectedUrls);
+});
+
+test("navigation and sitemap expose only implemented pearl discovery routes", () => {
+  const discoveryPaths = ["/pearls/stories", "/pearls/symbolism"];
+  const entries = buildSitemapEntries(
+    siteUrl,
+    getStorefrontProducts(),
+    posts,
+    PEARL_EDITS.map((edit) => edit.route),
+    discoveryPaths,
+  );
+  const urls = entries.map((entry) => entry.url);
+  const navigation = JSON.stringify({ HEADER_MENUS, FOOTER_GROUPS });
+
+  for (const path of [...discoveryPaths, ...PEARL_EDITS.map((edit) => edit.route)]) {
+    assert.ok(urls.includes(`${siteUrl}${path}`), `${path} is sitemap-discoverable`);
+  }
+  assert.match(navigation, /\/pearls\/stories/);
+  assert.match(navigation, /\/pearls\/symbolism/);
 });
 
 test("the database-backed sitemap revalidates without a redeploy", () => {

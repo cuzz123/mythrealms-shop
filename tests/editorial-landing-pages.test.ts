@@ -3,10 +3,8 @@ import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import GiftsPage, {
-  GiftProductSections,
-  metadata as giftsMetadata,
-} from "../src/app/gifts/page";
+import GiftsPage, { metadata as giftsMetadata } from "../src/app/gifts/page";
+import { GiftProductSections } from "../src/components/editorial/GiftProductSections";
 import NewArrivalsPage, {
   metadata as arrivalsMetadata,
 } from "../src/app/collections/new-arrivals/page";

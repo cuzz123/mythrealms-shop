@@ -275,7 +275,7 @@ test.describe("release surfaces", () => {
       const giftSections = getGiftSections();
       await page.goto("/gifts");
       await expect(page.getByRole("heading", { level: 1, name: "Pearl gifts, chosen by how they will be worn." })).toBeVisible();
-      await expect(page.getByRole("link", { name: "Browse gifts" })).toHaveAttribute("href", "#under-50");
+      await expect(page.getByRole("link", { name: "Browse gift paths" })).toHaveAttribute("href", "#gift-paths");
       for (const section of giftSections) {
         await expect(page.getByRole("heading", { name: section.title, exact: true })).toBeVisible();
         await expect(page.locator(`#${section.id} a[href^="/products/"]`)).toHaveCount(
@@ -547,9 +547,12 @@ test.describe("release surfaces", () => {
     const expectedHeadings = [
       "Pearls for sunlit days.",
       "Choose your starting point",
-      "Pieces for everyday light.",
       "A little light, close to home.",
       "A pearl point of view.",
+      "Follow the shape of the day.",
+      "Pieces for everyday light.",
+      "A little something to keep close.",
+      "Made for the life around them.",
       "Notes from the coast.",
     ];
     const positions: number[] = [];
