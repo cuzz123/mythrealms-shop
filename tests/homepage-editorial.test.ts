@@ -43,12 +43,23 @@ test("homepage promotes only the two approved editorial destinations", () => {
   );
 });
 
+test("homepage editorial cards use the dedicated model-led replacement imagery", () => {
+  assert.match(HOMEPAGE_MEDIA.earrings.src, /category-earrings-model-v3\.png$/);
+  assert.match(HOMEPAGE_EDITORIAL_LINKS[0].image.src, /editorial-gift-guide-model-v3\.png$/);
+  assert.match(HOMEPAGE_EDITORIAL_LINKS[1].image.src, /editorial-pearl-knowledge-model-v3\.png$/);
+  assert.doesNotMatch(HOMEPAGE_EDITORIAL_LINKS[0].image.src, /pearl-earrings-editorial\.png$/);
+  assert.doesNotMatch(HOMEPAGE_EDITORIAL_LINKS[1].image.src, /scene-seaside-stairs\.png$/);
+});
+
 test("homepage product media uses visually accurate descriptions", () => {
   assert.equal(
     HOMEPAGE_MEDIA.hero.alt,
     "Model wearing shell-and-pearl drop earrings in warm studio light",
   );
-  assert.equal(HOMEPAGE_MEDIA.earrings.alt, HOMEPAGE_MEDIA.hero.alt);
+  assert.equal(
+    HOMEPAGE_MEDIA.earrings.alt,
+    "Model wearing pearl drop earrings in a sunlit limestone courtyard",
+  );
   assert.equal(
     HOMEPAGE_MEDIA.necklaces.alt,
     "Model wearing a pearl and gold lariat necklace in a sunlit courtyard",
