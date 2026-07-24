@@ -67,6 +67,104 @@
 
 > @D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s09-product-macro.png 只控制首帧的蓝灰石灰岩板、项链摆放、镜头角度与右侧暗部留白。@D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\01-products\PROD_MR_COASTAL_PEARL_CASCADE_NECKLACE_001\source\product-source.jpg 只锁定一条完整产品的三层细金链、由短至长的弧线、白色不规则珍珠和实际金属结构。全能模式，16:9，4 秒，100mm 微距产品镜头，摄影机锁在微型滑轨上。0–1 秒：产品完整平放于蓝灰石灰岩板，三层弧线清楚，右侧留出干净暗部，不出现人手。1–3 秒：镜头沿项链方向极慢前移约 8 厘米，焦点从最前方一颗不规则珍珠平稳移到中层金链的连接处；只允许一次连续、克制的焦点迁移。3–4 秒：窄而柔的窗光从画面左上方扫过金链与两颗珍珠一次，形成真实、短暂、可控的高光，最后停在产品最清晰的状态。石灰岩纹理低调，金属不是镜面爆闪，珍珠有微妙乳白色层次。没有人、没有马、没有其他首饰、没有手、没有文字或 Logo。声音：室内静默、极轻海风；后期在最后 0.9 秒叠加静态 MYTHREALMS Logo 与音乐收束。禁止产品形变、额外珍珠、重复链条、快速拉焦、360 度旋转、生成文字。
 
+## 上传图片与剪辑执行清单
+
+所有“上传图片”都必须同时上传到小云雀，并在上方对应提示词中保留同一路径的 `@图片` 标签；不要只上传但不写 `@`。
+
+### S01
+
+上传图片：
+
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s01-coast.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\world-anchor.png`
+
+剪辑：生成 4 秒后以 80% 慢放至 5.2 秒。S01→S02 为匹配硬切，用海风和草浪方向接鬃毛，不用视频尾帧。
+
+### S02
+
+上传图片：
+
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s02-horse-mane.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ANIMAL_MR_WHITE_HORSE_001\views\horse-turnaround.png`
+
+剪辑：取生成片中后段 2.8 秒。S02→S03 以鬃毛亮边匹配切到窗帘亮边；不使用尾帧连续。
+
+### S03
+
+上传图片：
+
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s03-library-entry.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\world-anchor.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\library-window-anchor.png`
+
+剪辑：以 85% 慢放至 4.7 秒。S03→S04 为窗帘纵线到高窗竖线的有意切换；不使用尾帧连续。
+
+### S04
+
+上传图片：
+
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s04-window-no-necklace.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\05-characters\CHAR_MR_TALENT_COASTAL_LIBRARY_001\views\character-turnaround.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\library-window-anchor.png`
+
+剪辑：以 85% 慢放至 4.6 秒，最后约 0.4 秒保持稳定。S04→S05 是“空白锁骨 → 后颈待扣合”的叙事硬切；不使用尾帧连续。
+
+### S05
+
+上传图片：
+
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s05-back-neck-fasten.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\06-reference-inputs\REF_MR_COASTAL_NECKLACE_FASTEN_001\views\back-neck-fasten.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\01-products\PROD_MR_COASTAL_PEARL_CASCADE_NECKLACE_001\source\product-source.jpg`
+
+剪辑与尾帧：以 90% 慢放至 4.4 秒，可冻结 0.4 秒。验收通过后，从**该条 S05 视频**导出真正最后一帧，保存为：
+
+`D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\accepted-s05-last-frame.png`
+
+这张真实尾帧是 S06 的第 1 张上传图和第一个 `@` 引用，不能用 S05 首帧或任意静态图替代。
+
+### S06
+
+上传图片：
+
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\accepted-s05-last-frame.png`（先由验收 S05 导出）
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s06-necklace-reveal.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\01-products\PROD_MR_COASTAL_PEARL_CASCADE_NECKLACE_001\source\product-source.jpg`
+
+剪辑与尾帧：以 85% 慢放至 4.6 秒。验收通过后，从**该条 S06 视频**导出真正最后一帧，保存为：
+
+`D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\accepted-s06-last-frame.png`
+
+这张真实尾帧是 S08 的第 1 张上传图和第一个 `@` 引用。S07 是插入式匹配镜头，不改变 S06→S08 的人物连续关系。
+
+### S07
+
+上传图片：
+
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s07-mane-match.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ANIMAL_MR_WHITE_HORSE_001\views\horse-turnaround.png`
+
+剪辑：取 3.7 秒；S06 珍珠冷白高光 → S07 鬃毛亮边匹配切。S07 是插入镜头，不需要导出尾帧。
+
+### S08
+
+上传图片：
+
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\accepted-s06-last-frame.png`（先由验收 S06 导出）
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s08-coastal-window-wearing.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\03-scene-kits\ENV_MR_COASTAL_LIBRARY_001\views\world-anchor.png`
+
+剪辑：取 2.7 秒。S08→S09 是人物到产品的收束切，用窗光/珍珠高光做匹配，不使用尾帧连续。
+
+### S09
+
+上传图片：
+
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\s09-product-macro.png`
+- `D:\mythrealms-shop\.worktrees\main-storefront-integration\video-pipeline\asset-library\01-products\PROD_MR_COASTAL_PEARL_CASCADE_NECKLACE_001\source\product-source.jpg`
+
+剪辑：取 3.7 秒。最后 0.9 秒在剪映叠加静态 `MYTHREALMS` Logo；不要让小云雀生成 Logo。
+
 ## 验收门槛（每段生成后）
 
 1. 先看是否出现“起势 → 单一事件 → 稳定结束”，没有则重做，不用靠慢放掩盖循环。
