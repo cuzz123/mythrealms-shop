@@ -4,7 +4,12 @@ type NewSeriesProductInput = {
   id: string;
   slug: string;
   name: string;
-  kind: "earring design" | "bracelet" | "necklace" | "eyewear chain";
+  kind:
+    | "earring design"
+    | "bracelet"
+    | "necklace"
+    | "eyewear chain"
+    | "hair accessory";
   price: number;
   detailCount: number;
 };
@@ -36,6 +41,15 @@ function createProduct(input: NewSeriesProductInput): Product {
     "new-series-black-drop-pearl-choker", "new-series-pearl-glasses-chain",
     "new-series-shell-drop-glasses-chain", "new-series-classic-pearl-chain",
     "new-series-turquoise-bead-chain",
+    "new-series-white-floral-hair-stick", "new-series-white-flower-wood-stick",
+    "new-series-pearl-cluster-hair-claw", "new-series-gold-pearl-hair-stick",
+    "new-series-pearl-flower-u-pin", "new-series-pearl-bar-hair-clip",
+    "new-series-shell-chip-hair-clip", "new-series-wood-flower-hair-stick",
+    "new-series-daisy-chain-hair-stick", "new-series-wood-pearl-hair-stick",
+    "new-series-gold-star-hair-stick", "new-series-star-flower-hair-clip",
+    "new-series-chain-flower-hair-pin", "new-series-flower-pearl-hair-clip",
+    "new-series-pink-flower-hair-clip", "new-series-blue-flower-bow-hair-clip",
+    "new-series-blue-teardrop-hair-stick", "new-series-dragonfly-hair-clip",
   ].includes(input.slug)
     ? [
         `/images/products/new-series/${input.slug}/editorial-v1-01-hero.png`,
@@ -59,6 +73,7 @@ function createProduct(input: NewSeriesProductInput): Product {
     imageRoles: {
       primary: images[0],
       ...(images[1] ? { detail: images[1] } : {}),
+      ...(images[2] ? { wearing: images[2] } : {}),
     },
     tag: "New",
     isBestSeller: false,
@@ -98,4 +113,22 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
   createProduct({ id: "new-series-023", slug: "new-series-shell-drop-glasses-chain", name: "The Shell Drop - Eyewear Chain", kind: "eyewear chain", price: 36.99, detailCount: 2 }),
   createProduct({ id: "new-series-024", slug: "new-series-classic-pearl-chain", name: "The Classic Pearl - Eyewear Chain", kind: "eyewear chain", price: 32.99, detailCount: 0 }),
   createProduct({ id: "new-series-025", slug: "new-series-turquoise-bead-chain", name: "The Turquoise Note - Eyewear Chain", kind: "eyewear chain", price: 34.99, detailCount: 0 }),
+  createProduct({ id: "new-series-026", slug: "new-series-white-floral-hair-stick", name: "The Blueheart Bloom - Hair Stick", kind: "hair accessory", price: 36.99, detailCount: 0 }),
+  createProduct({ id: "new-series-027", slug: "new-series-white-flower-wood-stick", name: "The Ivory Woodflower - Hair Stick", kind: "hair accessory", price: 38.99, detailCount: 0 }),
+  createProduct({ id: "new-series-028", slug: "new-series-pearl-cluster-hair-claw", name: "The Pearl Cluster - Hair Claw", kind: "hair accessory", price: 42.99, detailCount: 0 }),
+  createProduct({ id: "new-series-029", slug: "new-series-gold-pearl-hair-stick", name: "The Golden Pearl - Hair Stick", kind: "hair accessory", price: 34.99, detailCount: 0 }),
+  createProduct({ id: "new-series-030", slug: "new-series-pearl-flower-u-pin", name: "The Pearl Halo - U Pin", kind: "hair accessory", price: 39.99, detailCount: 0 }),
+  createProduct({ id: "new-series-031", slug: "new-series-pearl-bar-hair-clip", name: "The Triple Bloom - Hair Clip", kind: "hair accessory", price: 39.99, detailCount: 0 }),
+  createProduct({ id: "new-series-032", slug: "new-series-shell-chip-hair-clip", name: "The Shell Petal - Hair Clip", kind: "hair accessory", price: 38.99, detailCount: 0 }),
+  createProduct({ id: "new-series-033", slug: "new-series-wood-flower-hair-stick", name: "The Woodflower Pearl - Hair Stick", kind: "hair accessory", price: 37.99, detailCount: 0 }),
+  createProduct({ id: "new-series-034", slug: "new-series-daisy-chain-hair-stick", name: "The Daisy Chain - Hair Stick", kind: "hair accessory", price: 36.99, detailCount: 0 }),
+  createProduct({ id: "new-series-035", slug: "new-series-wood-pearl-hair-stick", name: "The Cloud Pearl - Hair Stick", kind: "hair accessory", price: 39.99, detailCount: 0 }),
+  createProduct({ id: "new-series-036", slug: "new-series-gold-star-hair-stick", name: "The Amber Bloom - U Pin", kind: "hair accessory", price: 41.99, detailCount: 0 }),
+  createProduct({ id: "new-series-037", slug: "new-series-star-flower-hair-clip", name: "The Pink Pearl Star - Hair Clip", kind: "hair accessory", price: 38.99, detailCount: 0 }),
+  createProduct({ id: "new-series-038", slug: "new-series-chain-flower-hair-pin", name: "The Pearl Canopy - U Pin", kind: "hair accessory", price: 44.99, detailCount: 0 }),
+  createProduct({ id: "new-series-039", slug: "new-series-flower-pearl-hair-clip", name: "The Pearl Moth - Hair Clip", kind: "hair accessory", price: 39.99, detailCount: 0 }),
+  createProduct({ id: "new-series-040", slug: "new-series-pink-flower-hair-clip", name: "The Blush Cluster - Hair Clip", kind: "hair accessory", price: 36.99, detailCount: 0 }),
+  createProduct({ id: "new-series-041", slug: "new-series-blue-flower-bow-hair-clip", name: "The Sea Glass Bloom - Hair Clip", kind: "hair accessory", price: 38.99, detailCount: 0 }),
+  createProduct({ id: "new-series-042", slug: "new-series-blue-teardrop-hair-stick", name: "The Blue Sun - Hair Stick", kind: "hair accessory", price: 42.99, detailCount: 0 }),
+  createProduct({ id: "new-series-043", slug: "new-series-dragonfly-hair-clip", name: "The Jade Dragonfly - Hair Clip", kind: "hair accessory", price: 43.99, detailCount: 0 }),
 ];
