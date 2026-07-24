@@ -12,3 +12,5 @@ S04 是无项链状态，S05 必须在画内把同一条三层珍珠项链扣在
 ## Delivery
 
 See [小云雀提示词、TikTok文案与音乐](./交付包｜小云雀提示词、TikTok文案与音乐.md) for every prompt, absolute reference-image path, TikTok copy, and music edit map.
+
+Use [Seedance2导演级提示词V2](./交付包｜Seedance2导演级提示词V2.md) as the current production prompt pack; the earlier prompt pack is retained only for its edit map, TikTok copy, and music notes.
