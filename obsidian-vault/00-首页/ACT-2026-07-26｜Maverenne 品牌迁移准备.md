@@ -16,16 +16,16 @@ review_date: 2026-08-07
 
 ## 验收
 
-- [ ] USPTO/WIPO/域名/社交名称形成带来源与时间的只读清查记录；明确非法律意见。
+- [x] USPTO/WIPO/域名/社交名称已形成带来源与时间的只读清查记录，并明确非法律意见；因关键第一方结果不可用，当前 `name_clearance_passed: false`。
 - [x] 技术预检完成：已识别 `/api/health`、`BASE_URL`、`AUTH_URL`、build-time env、schema 来源、rewrite 语义和 Prisma 依赖问题。
 - [x] 内容与品牌只读审计完成：客户可见表面已按保留、改写、删除入口和禁用承诺分类。
 - [x] 增长与数据只读审计完成：确认当前缺少逐 URL 的 GSC/Bing/GA4/Pinterest 证据，不作 keep/rewrite/redirect 猜测。
-- [ ] 名称门槛通过后，阶段一 Task 2 才可开始；未通过则退回命名。
+- [x] 已执行停止规则：名称门槛未通过，阶段一 Task 2–7 不启动；当前只继续与品牌上线无关的旧 URL 证据审计。
 - [ ] 域名购买、外部平台写入和生产部署分别取得明确授权后才执行。
 
 ## 阻塞与依赖
 
-- 名称清查结果尚未回收。
+- 名称清查已回收但证据不足：USPTO 查询结果不可复核、WIPO 要求验证码、社交用户名状态不可可靠确认、RDAP 404 不等于注册商可购买。
 - GSC、Bing、GA4、Pinterest 的逐路径只读导出尚未取得；无证据 URL 保持 `keep/待确认`，不得重定向到首页。
 - 本地 `@prisma/client` 缺失会阻塞 clean build；代码任务开始前须运行 `npm ci` 与 `npx prisma generate` 并验证可解析。
 - 商品、支付、库存、定价与当前销售状态不在本行动变更范围。
@@ -37,4 +37,5 @@ review_date: 2026-08-07
 - [公司策略](../../docs/company/strategy.md)
 - [本周优先级](../../docs/company/weekly-priorities.md)
 - [公司决策日志](../../docs/company/decision-log.md)
+- [名称与域名核验记录](../../docs/company/maverenne-name-clearance.md)
 - [[../06-决策与复盘/关键决策/DEC-2026-07-26｜批准 Maverenne 品牌重定位设计]]
