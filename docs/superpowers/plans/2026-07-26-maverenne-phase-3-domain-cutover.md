@@ -83,20 +83,21 @@ git commit -m "docs: authorize Maverenne production cutover"
 $cutoverOrigin = ((Select-String -Path 'docs/company/maverenne-cutover-runbook.md' -Pattern '^new_canonical_origin:').Line -replace '^new_canonical_origin:\s*','').Trim()
 $parsedOrigin = $null
 if (-not [Uri]::TryCreate($cutoverOrigin, [UriKind]::Absolute, [ref]$parsedOrigin) -or $parsedOrigin.Scheme -ne 'https') { throw 'runbook new_canonical_origin must be an absolute HTTPS URL' }
-Invoke-WebRequest -Method Head -Uri "$cutoverOrigin/health" -MaximumRedirection 0
+Invoke-WebRequest -Method Head -Uri "$cutoverOrigin/api/health" -MaximumRedirection 0
 ```
 
 Expected: HTTP 200，证书主机名与 `new_canonical_origin` 一致。
 
 - [ ] **Step 2: 设置生产环境变量**
 
-从 runbook 读取已核验值，并在 Vercel Production 环境设置：
+从 runbook 读取已核验值，并在 Vercel Production 环境设置。`NEXT_PUBLIC_APP_URL` 会在 Next.js 构建时内联，因此这些变量必须在生产 build 之前写入，随后从同一 release commit 重新构建；不得只切 alias 或只改运行时环境：
 
 ```powershell
 $cutoverOrigin = ((Select-String -Path 'docs/company/maverenne-cutover-runbook.md' -Pattern '^new_canonical_origin:').Line -replace '^new_canonical_origin:\s*','').Trim()
 $supportEmail = ((Select-String -Path 'docs/company/maverenne-cutover-runbook.md' -Pattern '^support_email:').Line -replace '^support_email:\s*','').Trim()
 $resendFrom = "Maverenne <$supportEmail>"
 $cutoverOrigin | vercel env add NEXT_PUBLIC_APP_URL production
+$cutoverOrigin | vercel env add AUTH_URL production
 $supportEmail | vercel env add SUPPORT_EMAIL production
 $resendFrom | vercel env add RESEND_FROM_EMAIL production
 ```
@@ -171,12 +172,11 @@ Pinterest 与 TikTok 显示名称改为 Maverenne，主页链接改为新域名�
 
 **Files:**
 - Create: `e2e/maverenne-production-smoke.spec.ts`
-- Modify: `playwright.config.ts`
 - Modify: `docs/company/maverenne-cutover-runbook.md`
 - Modify: `docs/company/metrics.md`
 
 **Interfaces:**
-- Consumes: 环境变量 `PRODUCTION_BASE_URL`
+- Consumes: `playwright.config.ts` 已支持的环境变量 `BASE_URL`
 - Produces: 可重复生产 smoke 结果和最终 GO/ROLLBACK 结论
 
 - [ ] **Step 1: 写生产 smoke**
@@ -202,7 +202,7 @@ test("Maverenne production identity and commerce paths", async ({ page }) => {
 Run:
 
 ```powershell
-$env:PRODUCTION_BASE_URL = ((Select-String -Path 'docs/company/maverenne-cutover-runbook.md' -Pattern '^new_canonical_origin:').Line -replace '^new_canonical_origin:\s*','').Trim()
+$env:BASE_URL = ((Select-String -Path 'docs/company/maverenne-cutover-runbook.md' -Pattern '^new_canonical_origin:').Line -replace '^new_canonical_origin:\s*','').Trim()
 npx playwright test e2e/maverenne-production-smoke.spec.ts
 ```
 
@@ -225,7 +225,7 @@ Run: `npm run brand:check-public`
 - [ ] **Step 6: 提交测试与运行记录**
 
 ```bash
-git add e2e/maverenne-production-smoke.spec.ts playwright.config.ts docs/company/maverenne-cutover-runbook.md docs/company/metrics.md
+git add e2e/maverenne-production-smoke.spec.ts docs/company/maverenne-cutover-runbook.md docs/company/metrics.md
 git commit -m "test: verify Maverenne production cutover"
 ```
 

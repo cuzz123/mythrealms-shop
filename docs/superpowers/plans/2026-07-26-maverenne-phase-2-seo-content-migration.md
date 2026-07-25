@@ -30,8 +30,8 @@
 - Modify: `package.json`
 
 **Interfaces:**
-- Produces: `auditBrandRoutes(input): BrandRouteDecision[]`
-- Type: `BrandRouteDecision = { path: string; action: "keep" | "rewrite" | "redirect"; destination: string; evidence: string }`
+- Produces: `auditBrandRoutes(input: BrandRouteEvidence[]): BrandRouteDecision[]`
+- Types: `BrandRouteEvidence = { path: string; clicks: number | "not_available"; backlinks: number | "not_available"; replacement: string; brandConflict: boolean }`；`BrandRouteDecision = { path: string; action: "keep" | "rewrite" | "redirect"; destination: string; evidence: string }`
 
 - [ ] **Step 1: 写失败测试**
 
@@ -58,9 +58,9 @@ Expected: FAIL，模块不存在。
 
 - [ ] **Step 3: 实现审计规则**
 
-规则固定为：有点击或外链则 `rewrite` 并原 URL 保留；无数据则 `keep` 并从导航移除，等待 30 天观测；点击和外链均为 0 且有具体 replacement 才 `redirect`；没有具体 replacement 时 `keep`，绝不回首页。
+规则固定为：任一数据为 `not_available` 时 `keep` 且 `destination=path`；有点击或外链且 `brandConflict=true` 时 `rewrite`、保留原 URL 且 `destination=path`；有点击或外链且无品牌冲突时 `keep`；点击和外链均为 0 且 replacement 为具体非首页路径时才 `redirect`；没有具体 replacement 时 `keep`。`rewrite` 的执行语义只是在原路径改写内容、metadata 与内部链接，不产生 HTTP redirect。
 
-CSV 固定列：`path,gsc_clicks,external_backlinks,evidence_window,action,destination,reviewer,reviewed_at`。首次填入 `/guardian-quiz`、`/pearls/stories`、`/pearls/symbolism` 和所有含旧神话主题的已发布博客 URL；缺失外部数据写 `not_available`，对应 action 必须为 `keep`。
+CSV 固定列：`path,gsc_clicks,external_backlinks,evidence_window,brand_conflict,action,destination,reviewer,reviewed_at`。首次填入 `/guardian-quiz`、`/pearls/stories`、`/pearls/symbolism` 和所有含旧神话主题的已发布博客 URL；缺失外部数据写 `not_available`，对应 action 必须为 `keep`。CSV 只保存证据，不在运行时读取；经人工复核且 action 为 redirect 的行，才可在 Task 2 手工复制到受 TypeScript 类型约束的 `LEGACY_BRAND_REDIRECTS`。
 
 - [ ] **Step 4: 验证脚本与 CSV**
 
@@ -133,7 +133,7 @@ git commit -m "feat: retire Guardian mythology surfaces safely"
 - Modify: `tests/public-catalog.test.ts`
 
 **Interfaces:**
-- Consumes: `BRAND`、`siteUrl`、`absoluteUrl()`
+- Consumes: 阶段一 Task 5 已迁移的 schema 模块、`BRAND`、`siteUrl`、`absoluteUrl()`
 - Produces: 同源 sitemap、robots、feed、产品 JSON-LD 与 `llms.txt`
 
 - [ ] **Step 1: 写失败测试**

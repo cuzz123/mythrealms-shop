@@ -71,7 +71,17 @@ git commit -m "docs: record Maverenne name clearance gate"
 - Produces: `BRAND` 只读对象；`BrandIdentity` 类型；`SITE_NAME` 从 `BRAND.name` 导出
 - Consumes: Task 1 的 `name_clearance_passed: true`
 
-- [ ] **Step 1: 写失败测试**
+- [ ] **Step 1: 恢复可构建依赖树**
+
+Run: `npm ci`
+
+Run: `npx prisma generate`
+
+Run: `node -e "require.resolve('@prisma/client'); console.log('prisma-client-resolved')"`
+
+Expected: 三条命令退出 0，最后输出 `prisma-client-resolved`。若 registry 超时或客户端仍不可解析，记录为环境阻塞并停止代码任务，不得跳过阶段总 build。
+
+- [ ] **Step 2: 写失败测试**
 
 ```ts
 import assert from "node:assert/strict";
@@ -90,13 +100,13 @@ test("Maverenne identity exposes approved copy", () => {
 });
 ```
 
-- [ ] **Step 2: 运行测试确认失败**
+- [ ] **Step 3: 运行测试确认失败**
 
 Run: `node --import tsx --test tests/brand-identity.test.ts`
 
 Expected: FAIL，错误包含 `Cannot find module '../src/lib/brand-identity'`。
 
-- [ ] **Step 3: 添加最小实现**
+- [ ] **Step 4: 添加最小实现**
 
 ```ts
 export const BRAND = {
@@ -117,13 +127,13 @@ export type BrandIdentity = typeof BRAND;
 
 在 `src/lib/site.ts` 中以 `export const SITE_NAME = BRAND.name` 替代硬编码名称；保留 `DEFAULT_SITE_URL` 到阶段三再改。
 
-- [ ] **Step 4: 运行测试确认通过**
+- [ ] **Step 5: 运行测试确认通过**
 
 Run: `node --import tsx --test tests/brand-identity.test.ts`
 
 Expected: PASS。
 
-- [ ] **Step 5: 提交**
+- [ ] **Step 6: 提交**
 
 ```bash
 git add src/lib/brand-identity.ts src/lib/site.ts tests/brand-identity.test.ts
@@ -271,6 +281,8 @@ git commit -m "feat: launch Maverenne emotional storefront homepage"
 - Modify: `src/app/opengraph-image.tsx`
 - Modify: `src/components/ui/JsonLd.tsx`
 - Modify: `src/components/ui/SeoJsonLd.tsx`
+- Modify: `src/lib/seo/schema.ts`
+- Modify: `src/lib/seo/blog.ts`
 - Modify: `tests/structured-data.test.ts`
 - Modify: `tests/seo-catalog.test.ts`
 
@@ -280,7 +292,7 @@ git commit -m "feat: launch Maverenne emotional storefront homepage"
 
 - [ ] **Step 1: 写失败测试**
 
-断言 Organization、WebSite、BlogPosting publisher 名称均为 `Maverenne`，且序列化 schema 不含 `MythRealms`、Guardian archetype 或中国神话实体。根 metadata title 断言为 `Maverenne | Jewelry & Accessories for Everyday Moments`。
+断言 Organization、WebSite、Product、BlogPosting publisher 名称均为 `Maverenne`，且序列化 schema 不含 `MythRealms`、Guardian archetype 或中国神话实体。根 metadata title 断言为 `Maverenne | Jewelry & Accessories for Everyday Moments`。
 
 - [ ] **Step 2: 运行测试确认失败**
 
@@ -298,7 +310,7 @@ description: "Thoughtful jewelry and accessories for everyday moments that feel 
 openGraph: { siteName: BRAND.name, /* 保留现有类型与尺寸 */ },
 ```
 
-OG 图片保留现有可用影像，但将所有可见文字与 alt 改为 Maverenne。JSON-LD 名称和 publisher 从 `BRAND.name` 读取；域名继续从 `siteUrl` 读取。
+OG 图片保留现有可用影像，但将所有可见文字与 alt 改为 Maverenne。`src/lib/seo/schema.ts`、`src/lib/seo/blog.ts`、两个 JSON-LD 组件的名称和 publisher 全部从 `BRAND.name` 读取；域名继续从 `siteUrl` 读取。
 
 - [ ] **Step 4: 验证 metadata 与结构化数据**
 
@@ -309,7 +321,7 @@ Expected: PASS。
 - [ ] **Step 5: 提交**
 
 ```bash
-git add src/app/layout.tsx src/app/opengraph-image.tsx src/components/ui/JsonLd.tsx src/components/ui/SeoJsonLd.tsx tests/structured-data.test.ts tests/seo-catalog.test.ts
+git add src/app/layout.tsx src/app/opengraph-image.tsx src/components/ui/JsonLd.tsx src/components/ui/SeoJsonLd.tsx src/lib/seo/schema.ts src/lib/seo/blog.ts tests/structured-data.test.ts tests/seo-catalog.test.ts
 git commit -m "feat: migrate metadata and schemas to Maverenne"
 ```
 
