@@ -10,15 +10,15 @@ build/
 .superpowers/
 .claude/
 .impeccable/
-assets/
-docs/
-e2e/
-tests/
-test-results/
-test-results-*/
-video-pipeline/
-tools/
-public/preview/
+assets/**
+docs/**
+e2e/**
+tests/**
+test-results/**
+test-results-*/**
+video-pipeline/**
+tools/**
+public/preview/**
 
 # Local-only files
 .env*
