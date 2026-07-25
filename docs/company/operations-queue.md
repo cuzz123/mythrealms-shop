@@ -16,13 +16,29 @@
 | OPS-010 | P0 支持 | GEO 实体与事实注册表 | 内容与品牌 + 增长与数据 | `maverenne-entity-fact-registry.md`；提交 `973d06c` | 可审计的实体、事实边界、证据等级与 AI 答复限制 | 2026-07-26 | 已形成内部注册表；未把 proposed/unknown 写为经营事实 | 逐 SKU、订单、平台与名称核验仍待独立证据 | `accepted` |
 | OPS-011 | P0 支持 | 四周 SEO/GEO backlog | 增长与数据 + 内容与品牌 | `maverenne-seo-geo-backlog.md`；提交 `1433162` | 有优先级、验收定义和事实边界的四周内部 backlog | 2026-07-26 | backlog 已登记；其中客户可见品牌改名项不自动获授权 | 名称门槛、生产变更及外部证据 | `accepted` |
 | OPS-012 | P0 支持 | 构建基线报告 | 技术与自动化 | `maverenne-build-baseline.md`；提交 `6e9624a` | 依赖恢复门槛、失败原因与可复现验证顺序 | 2026-07-26 | 报告已接受；报告明确 `npm ci` 失败、Prisma/测试/lint/build 均未运行 | 依赖锁修复与完整验证见 OPS-016 | `accepted` |
-| OPS-013 | P0 子项目 | URL 审计工具、初始 CSV 与测试 | 技术与自动化 + 增长与数据 | `scripts/audit-brand-routes.ts`、`maverenne-url-migration.csv`、`tests/brand-route-audit.test.ts`；提交 `394284e` | 基于点击/外链证据的 keep/rewrite/redirect 决策工具与初始审计表 | 2026-07-26 | 工具、CSV 与测试已登记；CSV 当前外部指标为 `not_available`，不表示 URL 决策已完成 | GSC/Bing/GA4/Pinterest 逐路径导出；OPS-003 保持等待 | `accepted` |
+| OPS-013 | P0 子项目 | URL 审计工具、初始 CSV 与测试 | 技术与自动化 + 增长与数据 | `scripts/audit-brand-routes.ts`、`maverenne-url-migration.csv`、`tests/brand-route-audit.test.ts`；提交 `394284e` | 基于点击/外链证据的 keep/rewrite/redirect 决策工具与初始审计表 | 2026-07-26 | 工具、CSV 与测试已登记；Node 原生测试 `5/5` 通过。CSV 当前外部指标为 `not_available`，不表示 URL 决策已完成 | GSC/Bing/GA4/Pinterest 逐路径导出；OPS-003 保持等待 | `accepted` |
 | OPS-014 | P0 子项目 | Maverenne 人工名称清查清单 | 秘书处调度；获授权账号管理员执行 | `maverenne-clearance-manual-checklist.md`；提交 `2168b5c` | 不写入外部系统的第一方证据采集与停止规则清单 | 2026-07-26 | 清单已接受；未执行清单，也不改变 `name_clearance_passed: false` | 律师、注册商、平台账号管理员与明确授权 | `accepted` |
 | OPS-015 | 治理 | 运营执行台章程 | 秘书处/调度中心 | [运营执行台](operations-desk-14d.md)；提交 `b2cc656` | 14 天职责边界、六态流转、交接/对账/升级与转永久门槛 | 2026-07-26 | 章程已接受；不授予策略、发布、部署、付款、采购、外联或商品状态权限 | CEO 在 Day 14 复盘是否延续 | `accepted` |
-| OPS-016 | P0 支持 | 依赖锁修复与完整验证 | 技术与自动化 | OPS-012 的 `npm ci` 错误和可复现修复顺序 | 经审查的锁文件修复，以及 `npm ci`、`prisma generate`、Prisma 解析、单测、lint、build 的逐项结果 | 待排期 | 每项命令有真实退出码和输出；任一失败不得称完整验证通过 | 明确的依赖维护授权、批准 Node/npm 版本与锁文件审查 | `in_progress` |
-| OPS-017 | 支持（非 P0） | 转化政策一致性审计 | 商品与转化 + 内容与品牌；技术与自动化支持 | 现行公开政策、商品页、FAQ 与队列中的事实边界 | 内部差异清单、风险分级和建议；不修改公开内容 | 待排期 | 每项差异都有页面/来源证据；不把政策文本等同实际履约 | 政策页事实、商品/履约证据；公开修改需另行授权 | `queued` |
-| OPS-018 | P0 支持 | 内部链接与页面验收矩阵 | 增长与数据 + 内容与品牌；技术与自动化支持 | OPS-009、OPS-011、OPS-013 及现有路由清单 | 路径级内链、canonical、robots、sitemap、结构化信息与验收证据矩阵 | 待排期 | 每个结论标明源码、测试或生产证据；不以源码推断已部署/收录 | 可用构建环境；生产只读核验和变更授权 | `queued` |
+| OPS-016 | P0 支持 | 依赖锁同步修复 | 技术与自动化 | `maverenne-build-baseline-followup.md`；提交 `bbbf255` | 经审查的 `package-lock.json` 同步修复与验证记录 | 2026-07-26 | 锁文件修复已接受；忽略 lifecycle scripts 的干净安装通过。完整验证未接受，见下方阻塞证据 | 支持的 Node/npm/Prisma 运行环境；后续验证须另行取得真实结果 | `accepted` |
+| OPS-017 | 支持（非 P0） | 转化政策一致性与 readiness 审计 | 商品与转化 + 内容与品牌；技术与自动化支持 | `maverenne-conversion-evidence-pack.md`、`maverenne-conversion-readiness.md`；提交 `88c0978`、`6feb644` | 转化证据准备包、政策一致性/ready 状态审计与风险边界 | 2026-07-26 | 内部审计与待填写证据包已接受；不等于真实接单、履约、退款或公开政策已放行 | 一手履约、政策、支付和商品事实；公开修改需另行授权 | `accepted` |
+| OPS-018 | P0 支持 | 内部链接与页面验收矩阵 | 增长与数据 + 内容与品牌；技术与自动化支持 | `maverenne-seo-internal-link-map.md`；提交 `7829cdf` | 路径级内链、canonical、robots、sitemap、结构化信息与验收证据矩阵 | 2026-07-26 | 内部验收矩阵已接受；其中生产/发布门禁仍须按矩阵取得实际证据 | 可用构建环境；生产只读核验和变更授权 | `accepted` |
 | OPS-019 | 治理 | 原商品会话消息提交失败的替代处置 | 秘书处/调度中心 | 原会话提交失败记录；OPS-017 | 将未送达的原商品会话事项由独立转化政策一致性审计承接 | 2026-07-26 | 已记录替代关系；不追溯宣称原消息已送达或已处理 | OPS-017 的实际交付与验收 | `accepted` |
+
+## 本批接受的交付（非新增任务）
+
+| 交付 | 证据提交 | 登记 | 说明 |
+| --- | --- | --- | --- |
+| SEO draft pack 01 | `10e4927` | `accepted` | 内部、不可发布的 SEO/GEO 草稿包；不授权公开文案、代码、metadata、结构化数据或链接变更。 |
+| Conversion evidence pack | `88c0978` | `accepted` | 待填写的经营事实采集/复核包；接受文档交付，不表示任何 P0 经营事实已获证明。 |
+| Conversion readiness audit | `6feb644` | `accepted` | 由 OPS-017 承接；接受内部审计，不表示真实接单或履约放行。 |
+| Internal link acceptance map | `7829cdf` | `accepted` | 由 OPS-018 承接；接受内部矩阵，生产页面验收仍需逐项实际证据。 |
+| 依赖锁同步修复 | `bbbf255` | `accepted` | 由 OPS-016 承接；仅接受锁文件同步修复，未接受完整构建验证。 |
+
+## 验证阻塞证据（非新增任务）
+
+| 状态 | 范围 | 可复查证据 | 未运行项 | 解除条件 |
+| --- | --- | --- | --- | --- |
+| `waiting_external` | Prisma 与完整验证 | `bbbf255` 记录 Node `v25.2.1` / npm `11.6.2` 环境中 `npx prisma generate` 超时；完整 lifecycle 安装也挂起 | Prisma 解析、单测、lint、build 均未运行 | 在受支持的 Node/npm/Prisma 环境诊断并完成 generate 后，按顺序重新运行并记录真实退出码；在此之前不得称构建通过。 |
 
 ## 冻结提示
 
