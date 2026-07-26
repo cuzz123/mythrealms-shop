@@ -2,7 +2,7 @@
 type: founder_handoff
 status: ready_internal
 project_id: TIKTOK_SEEDANCE_14D
-day: 3
+day: 4
 subject: Falling Pearl
 generation_mode: I2V
 format: 9:16
@@ -10,7 +10,7 @@ clip_seconds: 4
 external_actions: founder_only
 ---
 
-# TikTok 制作台｜Day 3 Falling Pearl 投喂包
+# TikTok 制作台｜Day 4 Falling Pearl 投喂包
 
 ## 当天目标
 
@@ -65,10 +65,43 @@ external_actions: founder_only
 
 ## 输出文件名
 
-- 主钩子：`D03_FALLING_PEARL_MAIN_HOOK_T01.mp4`
-- 回应镜头：`D03_FALLING_PEARL_RESPONSE_T01.mp4`
-- 备用钩子：`D03_FALLING_PEARL_ALT_HOOK_T01.mp4`
-- 剪映候选：`D03_FALLING_PEARL_CANDIDATE_C01.mp4`
+- 主钩子：`D04_FALLING_PEARL_MAIN_HOOK_T01.mp4`
+- 回应镜头：`D04_FALLING_PEARL_RESPONSE_T01.mp4`
+- 备用钩子：`D04_FALLING_PEARL_ALT_HOOK_T01.mp4`
+- 剪映候选：`D04_FALLING_PEARL_CANDIDATE_C01.mp4`
+- 候选母版：`D04_FALLING_PEARL_CANDIDATE_C01_MASTER.mp4`
+- 候选发布版：`D04_FALLING_PEARL_CANDIDATE_C01_POST.mp4`
+
+## TikTok 发布包
+
+- 封面字：`Follow the Line`
+- 屏幕字：`Would you wear it this way?`
+- Caption：`One line, one step, one quiet shift. Would you wear it this way?`
+- 标签：`#PearlNecklace #NecklaceStyling #RooftopLight #EverydayJewelry`
+- CTA 类型：评论互动；不附商品链接。
+
+### BGM 卡
+
+- 曲库搜索词：`dusk electronic`；`cinematic pulse`；`rooftop editorial`。
+- 建议节奏：88–100 BPM。
+- 主钩子到回应镜头的硬切：素材 QA 后，在第一次回摆终点对齐；精确入点和出点：`待回传 QA`。
+- BGM：15%；生成音频：关闭；若另有经审核屋顶环境音：4%。
+- 结尾淡出：0.20 秒。
+- 最终曲目：`待确认`；必须从创始人账号可用的已授权音乐库中选择。
+
+## 发布与数据证据
+
+- [ ] 最终曲目：`待确认`
+- [ ] 已发布 URL：`待确认`
+- [ ] 已发布时间：`待确认`
+- [ ] 播放量：`待确认`
+- [ ] 平均观看时长：`待确认`
+- [ ] 完播率：`待确认`
+- [ ] 点赞：`待确认`
+- [ ] 评论：`待确认`
+- [ ] 分享：`待确认`
+- [ ] 主页访问：`待确认`
+- [ ] 网站点击：`待确认`
 
 ## 生成前检查
 
