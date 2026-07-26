@@ -53,6 +53,43 @@ external_actions: none
 4. 建议只保留一行：`Which view caught you first?`
 5. 音乐、caption、平台链接和发布仍由创始人决定；本交接不授权外部操作。
 
+## TikTok 发布包
+
+- 封面字：`Light Changes Everything`
+- 屏幕字：`Which view caught you first?`
+- Caption：`The same shape can feel completely different when the light moves. Which view caught you first?`
+- 标签：`#PearlEarrings #JewelryStyling #CoastalStyle #EverydayJewelry`
+- CTA 类型：评论互动；不附商品链接。
+
+## BGM 与卡点
+
+- 曲库搜索词：`coastal minimal`；`warm pluck`；`soft editorial`。
+- 建议节奏：92–100 BPM，4/4，前半拍点清晰但没有重低音 drop。
+- 0.00 秒：从可辨识的轻拍或拨弦起点进入。
+- 3.15 秒：主钩子切回应镜头，对齐一次 downbeat。
+- 6.55–6.79 秒：保留尾音并做 0.20 秒淡出。
+- BGM：15%；生成音频：关闭；若另有经审核海风环境音：4%。
+- 当天候选曲：只记录创始人账号内最终可用曲目，不把文件中的搜索词视为授权证明。
+
+## 导出文件
+
+- `D01_MOON_DISC_CANDIDATE_C01_MASTER.mp4`
+- `D01_MOON_DISC_CANDIDATE_C01_POST.mp4`
+
+## 发布回传证据
+
+- [ ] 最终曲目：`待确认`
+- [ ] 已发布 URL：`待确认`
+- [ ] 发布时间：`待确认`
+- [ ] 播放量：`待确认`
+- [ ] 平均观看时长：`待确认`
+- [ ] 完播率：`待确认`
+- [ ] 点赞：`待确认`
+- [ ] 评论：`待确认`
+- [ ] 分享：`待确认`
+- [ ] 主页访问：`待确认`
+- [ ] 站点点击：`待确认`
+
 ## 五点回传 QA
 
 - [x] 人物/商品身份稳定。
