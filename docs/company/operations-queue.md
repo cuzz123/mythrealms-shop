@@ -23,6 +23,9 @@
 | OPS-017 | 支持（非 P0） | 转化政策一致性与 readiness 审计 | 商品与转化 + 内容与品牌；技术与自动化支持 | `maverenne-conversion-evidence-pack.md`、`maverenne-conversion-readiness.md`；提交 `88c0978`、`6feb644` | 转化证据准备包、政策一致性/ready 状态审计与风险边界 | 2026-07-26 | 内部审计与待填写证据包已接受；不等于真实接单、履约、退款或公开政策已放行 | 一手履约、政策、支付和商品事实；公开修改需另行授权 | `accepted` |
 | OPS-018 | P0 支持 | 内部链接与页面验收矩阵 | 增长与数据 + 内容与品牌；技术与自动化支持 | `maverenne-seo-internal-link-map.md`；提交 `7829cdf` | 路径级内链、canonical、robots、sitemap、结构化信息与验收证据矩阵 | 2026-07-26 | 内部验收矩阵已接受；其中生产/发布门禁仍须按矩阵取得实际证据 | 可用构建环境；生产只读核验和变更授权 | `accepted` |
 | OPS-019 | 治理 | 原商品会话消息提交失败的替代处置 | 秘书处/调度中心 | 原会话提交失败记录；OPS-017 | 将未送达的原商品会话事项由独立转化政策一致性审计承接 | 2026-07-26 | 已记录替代关系；不追溯宣称原消息已送达或已处理 | OPS-017 的实际交付与验收 | `accepted` |
+| OPS-020 | P0 支持 | SEO/GEO 完整草稿包 02 | 内容与品牌 | `maverenne-seo-draft-pack-02.md`；提交 `ff1cdcb` | `/pearls/care` 与 `/pearls/freshwater-pearls` 的品牌中性内部草稿 | 2026-07-26 | 正文、直接回答、FAQ、来源与禁用推断边界齐全；未改公开页面 | 名称清查、公开文案审查与发布授权 | `accepted` |
+| OPS-021 | P0 支持 | SEO/GEO 完整草稿包 03 | 内容与品牌 | `maverenne-seo-draft-pack-03.md`；提交 `654dd3d` | `/pearls` 与 `/about` 的内部审校草稿 | 2026-07-26 | About 使用 `[BRAND_NAME]`；未宣称注册、上线、域名或经营事实 | 名称清查、品牌事实与发布授权 | `accepted` |
+| OPS-022 | P0 支持 | Prisma 运行时兼容性诊断 | 技术与自动化 | `maverenne-build-runtime-compatibility.md`；提交 `efe8fee` | Node 24 安装、Prisma CLI 与 generate 的分层诊断证据 | 2026-07-26 | Node 24 干净安装与 CLI 启动证据已接受；`generate` 仍未通过 | Node 22 LTS 对照或 Prisma 引擎/生成挂起根因 | `accepted` |
 
 ## 本批接受的交付（非新增任务）
 
@@ -33,12 +36,15 @@
 | Conversion readiness audit | `6feb644` | `accepted` | 由 OPS-017 承接；接受内部审计，不表示真实接单或履约放行。 |
 | Internal link acceptance map | `7829cdf` | `accepted` | 由 OPS-018 承接；接受内部矩阵，生产页面验收仍需逐项实际证据。 |
 | 依赖锁同步修复 | `bbbf255` | `accepted` | 由 OPS-016 承接；仅接受锁文件同步修复，未接受完整构建验证。 |
+| SEO draft pack 02 | `ff1cdcb` | `accepted` | 两个现有珍珠知识 URL 的品牌中性内部草稿；不授权发布。 |
+| SEO draft pack 03 | `654dd3d` | `accepted` | Pearl Guide hub 与 `[BRAND_NAME]` About 内部草稿；不授权替换占位符或上线。 |
+| Prisma 运行时兼容性诊断 | `efe8fee` | `accepted` | 接受诊断记录，不表示 `prisma generate`、测试、lint 或 build 通过。 |
 
 ## 验证阻塞证据（非新增任务）
 
 | 状态 | 范围 | 可复查证据 | 未运行项 | 解除条件 |
 | --- | --- | --- | --- | --- |
-| `waiting_external` | Prisma 与完整验证 | `bbbf255` 记录 Node `v25.2.1` / npm `11.6.2` 环境中 `npx prisma generate` 超时；完整 lifecycle 安装也挂起 | Prisma 解析、单测、lint、build 均未运行 | 在受支持的 Node/npm/Prisma 环境诊断并完成 generate 后，按顺序重新运行并记录真实退出码；在此之前不得称构建通过。 |
+| `waiting_external` | Prisma 与完整验证 | `bbbf255` 记录 Node `v25.2.1` / npm `11.6.2` 超时；`efe8fee` 进一步证明 bundled Node `v24.14.0` 下干净安装和 Prisma CLI `--version` 可运行，但 `generate` 仍无输出挂起 | Prisma 客户端解析、单测、lint、build 均未运行 | 在 Node 22 LTS 对照环境或经证明可用的 Prisma 生成环境完成 `generate`，再按顺序运行并记录真实退出码；在此之前不得称构建通过。 |
 
 ## 冻结提示
 
