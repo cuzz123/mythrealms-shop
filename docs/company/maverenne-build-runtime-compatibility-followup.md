@@ -161,3 +161,37 @@ taskkill.exe /PID 33060 /T /F
 - `npm run build`：未运行。
 
 本轮证据继续支持“主工作区冷启动引擎获取在当前链路上超过有界窗口，并且普通外层超时/当前 .NET 包装器不能可靠清理完整进程树”。本轮没有得到 target 下载 stdout/stderr，故不能把具体下载 URL、单一 target 或网络设备宣称为确定根因。
+
+## 主工作区修复与最终复核（2026-07-26 11:27–11:38 +08:00）
+
+### 已确认根因
+
+1. 诊断流程使用 `npm ci --ignore-scripts`，这会跳过 `@prisma/engines` 与项目根 `postinstall`；当时主工作区 `node_modules/@prisma/engines` 只有说明文件，没有 Windows schema/query engine。
+2. 旧 generator 同时要求 `native`、`rhel-openssl-3.0.x` 和 `windows`。Windows 本地生成因此还要冷下载 RHEL 查询引擎；当前链路下载缓慢，并被外层超时提前终止。
+3. 同版本 Windows schema engine 单独执行 `--version` 退出 0；引擎和查询缓存齐备后，同一 Node 24、Prisma 5.22.0 与 schema 的主工作区 `generate` 正常退出。因此不是 Node 24 ABI 或 Prisma CLI 固有不兼容。
+
+### 持久修复
+
+- `package.json` 的 `db:generate` 与 `postinstall` 直接调用已安装的 `prisma generate`，不再使用 `npx` 包装层。
+- `vercel.json` 构建命令改为 `npm run db:generate && next build`，保证每次 Vercel build 都在目标主机重新生成客户端。
+- generator 使用 `binaryTargets = ["native"]`。本地 Windows 生成 Windows 引擎；Vercel Linux 构建生成 Linux 原生引擎，不再要求 Windows 冷安装额外下载 RHEL 产物。
+- 新增 `tests/prisma-build-contract.test.ts` 锁定上述契约。
+
+官方依据：Prisma 的 Vercel 指南要求在 postinstall 或 build 中运行 `prisma generate`；generator 参考说明 `native` 会按实际构建操作系统选择正确引擎。
+
+### fresh 验证
+
+| 验证 | 结果 |
+| --- | --- |
+| Prisma 构建契约测试（RED） | 修改前 0/2，通过预期失败证明测试能捕获 `npx` 和多平台 targets |
+| Prisma 构建契约测试（GREEN） | 2/2，退出 0 |
+| `npm run db:generate` | 退出 0；Prisma Client 5.22.0，167 ms |
+| `npm run test:unit` | 475/475，退出 0 |
+| `npm run build` | 退出 0；Next 16.2.6 编译、TypeScript、166 个静态页面生成均通过 |
+| `playwright test e2e/release-surfaces.spec.ts` | 18/24；6 项非 Prisma 失败，现已能真实运行而不再被客户端缺失阻断 |
+
+### 当前边界
+
+- Prisma 主工作区阻塞已解除。
+- 浏览器 E2E 尚未全绿；失败集中于旧 45 商品数量断言、旧指南商品链接契约、图片加载、首页样式与购物车 hydration 状态，应独立处理。
+- 未部署、未修改生产环境、未操作外部账号或数据库。

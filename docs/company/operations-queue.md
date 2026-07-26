@@ -28,9 +28,9 @@
 | OPS-022 | P0 支持 | Prisma 运行时兼容性诊断 | 技术与自动化 | `maverenne-build-runtime-compatibility.md`；提交 `efe8fee` | Node 24 安装、Prisma CLI 与 generate 的分层诊断证据 | 2026-07-26 | Node 24 干净安装与 CLI 启动证据已接受；`generate` 仍未通过 | Node 22 LTS 对照或 Prisma 引擎/生成挂起根因 | `accepted` |
 | OPS-023 | P0 子项目 | Maverenne 名称清查证据补强 | 秘书处调度 | `maverenne-name-clearance.md` | 带查询时间、词组、类别、官方方法和明确布尔门槛的只读记录 | 2026-07-26 | 证据记录已补强；三项门槛继续为 `false`，不代表发现确定冲突 | USPTO/WIPO 可复核结果、律师复核、注册商与账号管理员证据 | `waiting_external` |
 | OPS-024 | P0 支持 | 六页 SEO/GEO 一手来源证据包 | 内容与品牌 + 增长与数据 | `maverenne-seo-source-evidence.md` | 六页逐主张的来源、支持范围、禁止推断与采用状态 | 2026-07-26 | 仅采用 GIA、FTC、Google Search Central；未改公开页面 | 发布前链接复核、商品/政策事实、名称清查与发布授权 | `accepted` |
-| OPS-025 | P0 支持 | Prisma 运行时兼容性跟进诊断 | 技术与自动化 + 秘书处复核 | `maverenne-build-runtime-compatibility-followup.md` | Node 22 获取失败、隔离目录成功与主工作区冷启动超时的分层证据 | 2026-07-26 | 主工作区安装退出 0；最新有界 `generate` 300 秒仍未自行退出，唯一遗留 PID 已按完整命令行定向终止；客户端仍不可解析，build 未运行 | 诊断主工作区多平台引擎获取链路或提供可信预热缓存，再重新验证 | `accepted_with_blocker` |
-| OPS-026 | P0 支持 | 测量就绪与 Day 0 证据单表 | 增长与数据 + 技术与自动化只读审计 | `metrics.md`、`growth-readiness.md`；当前 analytics/consent/tracking/sitemap/verification 源码与测试 | 单表区分本地实现、生产部署、外部接收、报表可读、基线数据和决策资格；定义 GSC、Pinterest、GA4 与测试订单最小字段 | 2026-07-26 | 状态冲突修正后接受：analytics/consent 专项测试可复现 46/46；`quiz_start` 仅确认本地实现；Day 0 仅记录创始人手动发布 `new-series-002 v1` 的历史起点且关键元数据/当前读数待确认；不授予部门新增发布权限；识别当前 schema 缺少 `isTestOrder` 排除闭环 | Prisma client 阻断 SEO/结账套件；GA4/Pinterest/GSC 只读证据、测试订单标记/过滤与 schema/生产一致性；后续发布另需创始人明确授权与逐条 QA | `accepted_with_blocker` |
-| OPS-027 | P0 交付候选 | 三个高意图 SEO 页面本地 release candidate | 内容与品牌 + 技术与自动化 | `/pearls/how-to-wear`、`/pearls/care`、`/gifts`；来源证据包；实施计划 | 证据边界、直接答案、FAQ/JSON-LD 与安全内链的本地候选；不含未核验商品卡、价格档或政策承诺 | 2026-07-26 | 交叉审查问题已关闭；秘书处 fresh 聚焦套件 76/76、目标 ESLint 与 diff check 退出 0；旧 E2E 验收契约已同步，但因 Prisma 阻塞尚未执行浏览器 E2E；未 build、部署或发布 | Prisma 生成、clean build 与浏览器 E2E；生产变更和发布仍需明确授权 | `accepted_with_blocker` |
+| OPS-025 | P0 支持 | Prisma 运行时兼容性跟进与修复 | 技术与自动化 + 秘书处复核 | `maverenne-build-runtime-compatibility-followup.md`；`tests/prisma-build-contract.test.ts` | 根因证据、目标主机原生引擎配置、直接 CLI 构建契约及回归测试 | 2026-07-26 | 主工作区 `prisma generate` 退出 0；全量单测 475/475；production build 退出 0并生成 166 个静态页面；未部署 | 浏览器 E2E 剩余 6 项独立失败另行修复，不再属于 Prisma 阻塞 | `accepted` |
+| OPS-026 | P0 支持 | 测量就绪与 Day 0 证据单表 | 增长与数据 + 技术与自动化只读审计 | `metrics.md`、`growth-readiness.md`；当前 analytics/consent/tracking/sitemap/verification 源码与测试 | 单表区分本地实现、生产部署、外部接收、报表可读、基线数据和决策资格；定义 GSC、Pinterest、GA4 与测试订单最小字段 | 2026-07-26 | 状态冲突修正后接受：全量单测 475/475；`quiz_start` 仅确认本地实现；Day 0 仅记录创始人手动发布 `new-series-002 v1` 的历史起点且关键元数据/当前读数待确认；不授予部门新增发布权限；识别当前 schema 缺少 `isTestOrder` 排除闭环 | GA4/Pinterest/GSC 只读证据、测试订单标记/过滤与 schema/生产一致性；后续发布另需创始人明确授权与逐条 QA | `accepted_with_blocker` |
+| OPS-027 | P0 交付候选 | 三个高意图 SEO 页面本地 release candidate | 内容与品牌 + 技术与自动化 | `/pearls/how-to-wear`、`/pearls/care`、`/gifts`；来源证据包；实施计划 | 证据边界、直接答案、FAQ/JSON-LD 与安全内链的本地候选；不含未核验商品卡、价格档或政策承诺 | 2026-07-26 | 全量单测 475/475、目标 ESLint 与 production build 退出 0；浏览器 E2E 18/24，三个新页面相关验收已通过，但全文件仍有 6 项独立失败；未部署或发布 | 修复或校正剩余 6 项 E2E；生产变更和发布仍需明确授权 | `accepted_with_blocker` |
 
 ## 本批接受的交付（非新增任务）
 
@@ -46,7 +46,7 @@
 | Prisma 运行时兼容性诊断 | `efe8fee` | `accepted` | 接受诊断记录，不表示 `prisma generate`、测试、lint 或 build 通过。 |
 | Maverenne 名称清查证据补强 | `maverenne-name-clearance.md` | `accepted_with_blocker` | 接受只读证据记录；名称、购买、生产迁移三项门槛继续为 `false`。 |
 | 六页 SEO/GEO 一手来源证据包 | `maverenne-seo-source-evidence.md` | `accepted` | 接受内部来源矩阵；不授权公开页面、商品事实或品牌事实变更。 |
-| Prisma 运行时兼容性跟进 | `maverenne-build-runtime-compatibility-followup.md` | `accepted` | 接受隔离诊断目录中 Node 24 缓存命中后的真实成功证据；不表示主工作区、单测、lint 或 build 通过。 |
+| Prisma 运行时兼容性跟进 | `maverenne-build-runtime-compatibility-followup.md` | `accepted` | 主工作区生成、475 项单测与 production build 已通过；未执行生产部署。 |
 | 测量就绪与 Day 0 证据单表 | `metrics.md`、`growth-readiness.md` | `accepted_with_blocker` | 状态冲突修正后接受只读源码/测试审计与六层状态单表；Day 0 历史起点不等于新增发布授权，外部接收、报表读取、当前基线和决策资格仍待确认，当前 schema 的测试订单排除闭环继续阻断。 |
 | 三个高意图 SEO 页面本地候选 | `src/app/gifts/page.tsx`、`src/app/pearls/care/page.tsx`、`src/app/pearls/how-to-wear/page.tsx`、`src/lib/editorial/guides.ts` | `accepted_with_blocker` | 只接受本地候选与测试证据；页面未 build、部署、发布、收录或产生流量。 |
 
@@ -54,7 +54,7 @@
 
 | 状态 | 范围 | 可复查证据 | 未运行项 | 解除条件 |
 | --- | --- | --- | --- | --- |
-| `blocked_main_workspace` | Prisma 与完整验证 | 隔离诊断目录在引擎缓存齐备后 `generate` 1.049 秒退出 0；主工作区 lockfile 安装退出 0，但最新直接 `generate` 在 300 秒窗口内未自行退出，唯一匹配 PID `33060` 已定向终止且复查残留为 0 | 主工作区 Prisma 客户端不可解析，SEO/结账数据库套件与 clean build 未运行；Node 22 A/B 因官方 ZIP 下载失败未完成 | 诊断或预热主工作区所需 Windows/RHEL 多平台引擎获取链路，生成客户端后再运行被阻断套件与 clean build；不得把隔离目录成功写成主工作区或构建通过。 |
+| `resolved_local` | Prisma 与本地完整验证 | `npm ci --ignore-scripts` 跳过引擎 postinstall，旧 schema 又要求 Windows/RHEL 多平台冷下载；补齐同版本引擎后主工作区生成成功。构建契约已改为本地 CLI + `native`；回归测试 2/2、全量单测 475/475、build 退出 0 | 浏览器 E2E 已运行但仍有 6 项非 Prisma 失败；未做生产部署 | 保持直接 CLI 与目标主机 `native` 生成；后续安装不得把 `--ignore-scripts` 的结果当作完整可运行依赖树。 |
 
 ## 冻结提示
 
