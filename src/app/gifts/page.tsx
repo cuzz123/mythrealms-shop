@@ -2,24 +2,28 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { EditorialHero } from "@/components/editorial/EditorialHero";
-import { GiftProductSections } from "@/components/editorial/GiftProductSections";
-import { RelatedProducts } from "@/components/editorial/RelatedProducts";
-import { JsonLd } from "@/components/ui/JsonLd";
-import { productDisplayName } from "@/lib/brand";
-import {
-  getGiftSections,
-  getUniqueGiftProducts,
-} from "@/lib/editorial/gifts";
+import { FAQPageJsonLd } from "@/components/ui/JsonLd";
 import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
-import { buildCollectionSchema } from "@/lib/seo/schema";
 import { absoluteUrl } from "@/lib/site";
-import { PEARL_EDITS, getPearlEditProducts } from "@/lib/storefront/pearl-edits";
-import { getStorefrontProducts } from "@/lib/storefront/catalog";
 
-const title = "Pearl Jewelry Gifts | MythRealms Gift Guide";
+const title = "Pearl Jewelry Gift Guide | Everyday Giving | MythRealms";
 const description =
-  "Shop pearl jewelry gifts under $50 and $70, plus everyday and statement pearl edits selected from the current MythRealms catalog.";
+  "Choose jewelry as a gift without guessing size or material. Use an item detail only if it is explicitly stated on the exact item page; otherwise, do not infer it.";
 const heroImage = HOMEPAGE_MEDIA.everyday;
+const giftFaq = [
+  {
+    question: "How do I buy jewelry as a gift when I do not know the recipient's size?",
+    answer: "Do not guess from photographs. Use dimensions, length, closure, or adjustment information only if it is explicitly stated on the exact item page. If it is not stated, contact support or choose another option.",
+  },
+  {
+    question: "Can I tell what a jewelry gift is made of from its photo?",
+    answer: "No. Images do not establish metal content, pearl type, plating, treatment, coating, or allergy suitability. Use a detail only if it is explicitly stated on the exact item page; otherwise, do not infer it.",
+  },
+  {
+    question: "Will a jewelry gift arrive by a certain date?",
+    answer: "This guide cannot make a delivery promise. Read the shipping page and checkout details that apply when you order, and contact support if timing is important.",
+  },
+] as const;
 
 export const metadata: Metadata = {
   title,
@@ -41,83 +45,52 @@ export const metadata: Metadata = {
 };
 
 export default function GiftsPage() {
-  const sections = getGiftSections();
-  const products = getUniqueGiftProducts(sections);
-  const giftEdit = PEARL_EDITS.find((edit) => edit.slug === "a-gift-to-keep");
-  const everydayEdit = PEARL_EDITS.find((edit) => edit.slug === "everyday-light");
-  const dinnerEdit = PEARL_EDITS.find((edit) => edit.slug === "dinner-by-the-water");
-  const catalog = getStorefrontProducts();
-
   return (
     <div className="bg-[var(--bg)]">
-      <JsonLd
-        data={buildCollectionSchema({
-          name: "MythRealms Pearl Gift Guide",
-          description,
-          url: absoluteUrl("/gifts"),
-          products: products.map((product) => ({
-            name: productDisplayName(product),
-            url: absoluteUrl(`/products/${product.slug}`),
-          })),
-        })}
-      />
+      <FAQPageJsonLd questions={giftFaq} />
       <EditorialHero
         eyebrow="Pearl Gift Guide"
-        title="Pearl gifts, chosen by how they will be worn."
-        description="Start with who you are choosing for, the occasion you want to mark, or a price point that keeps the choice focused. Every piece below is from the current Pearl Edit."
+        title="A Pearl Jewelry Gift Guide for Everyday Giving"
+        description="Start with the recipient's usual style and the occasion. Use a size, material, fastening, or care detail only if it is explicitly stated on the exact item page; if it is absent, do not infer it."
         image={heroImage}
-        primaryAction={{ label: "Browse gift paths", href: "#gift-paths" }}
-        secondaryAction={{ label: "Shop The Pearl Edit", href: "/collections/pearl-series" }}
+        primaryAction={{ label: "Read the gift checklist", href: "#gift-method" }}
+        secondaryAction={{ label: "Browse the catalog", href: "/collections/pearl-series" }}
       />
 
-      <section id="gift-paths" className="scroll-mt-24 border-b border-[var(--border)] bg-[var(--surface)]" aria-labelledby="gift-paths-title">
+      <section id="gift-method" className="scroll-mt-24 border-b border-[var(--border)] bg-[var(--surface)]" aria-labelledby="gift-method-title">
         <div className="mx-auto max-w-7xl px-6 py-10 sm:py-12">
-          <p className="text-xs font-semibold uppercase text-[var(--accent)]">Gift paths</p>
-          <h2 id="gift-paths-title" className="mt-3 font-serif text-3xl font-medium text-[var(--text)]">Begin with the part that feels certain.</h2>
-          <nav className="mt-8 grid gap-x-8 gap-y-6 border-t border-[var(--border)] pt-6 sm:grid-cols-2 lg:grid-cols-4" aria-label="Gift guide paths">
+          <p className="text-xs font-semibold uppercase text-[var(--accent)]">Gift checklist</p>
+          <h2 id="gift-method-title" className="mt-3 font-serif text-3xl font-medium text-[var(--text)]">Begin with what you know about the recipient.</h2>
+          <div className="mt-8 grid gap-x-8 gap-y-6 border-t border-[var(--border)] pt-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              ["For someone close", "A personal place to begin for a friend, partner, or family member.", "#for-someone-close"],
-              ["For an occasion", "Choose an everyday, dinner, or milestone-ready direction.", "#for-an-occasion"],
-              ["By price", "Compare current pieces below $50 or below $70.", "#under-50"],
-              ["Before you order", "Review practical shipping, returns, and care details.", "#gift-help"],
-            ].map(([label, copy, href]) => (
-              <a key={href} href={href} className="border-t border-[var(--border)] pt-4 hover:border-[var(--accent)]">
+              ["Usual style", "Notice whether they tend to choose subtle details, stronger shapes, or little jewelry at all."],
+              ["Occasion", "Use the occasion as a personal prompt, not as a rule about value or meaning."],
+              ["Budget", "Set a comfortable total before browsing; this guide does not state item prices."],
+              ["Exact details", "If the exact item page does not explicitly state a needed fact, do not infer it from an image."],
+            ].map(([label, copy]) => (
+              <div key={label} className="border-t border-[var(--border)] pt-4">
                 <h3 className="font-serif text-xl font-medium text-[var(--text)]">{label}</h3>
                 <p className="mt-2 text-sm leading-7 text-[var(--text-secondary)]">{copy}</p>
-              </a>
-            ))}
-          </nav>
-        </div>
-      </section>
-
-      {giftEdit && (
-        <section id="for-someone-close" className="scroll-mt-24">
-          <RelatedProducts
-            products={getPearlEditProducts(giftEdit, catalog)}
-            title="For someone close"
-            description="A small selection with a personal focal point, chosen from the active Pearl Edit for gifts that can be worn often."
-            headingId="for-someone-close-title"
-          />
-        </section>
-      )}
-
-      <section id="for-an-occasion" className="scroll-mt-24 border-b border-[var(--border)] bg-[var(--surface)]" aria-labelledby="occasion-title">
-        <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
-          <p className="text-xs font-semibold uppercase text-[var(--accent)]">For an occasion</p>
-          <h2 id="occasion-title" className="mt-3 font-serif text-3xl font-medium text-[var(--text)]">Choose the rhythm of the day.</h2>
-          <div className="mt-8 grid gap-x-8 gap-y-6 border-t border-[var(--border)] pt-6 sm:grid-cols-2">
-            {[everydayEdit, dinnerEdit].filter(Boolean).map((edit) => (
-              <Link key={edit!.slug} href={edit!.route} className="border-t border-[var(--border)] pt-5 hover:border-[var(--accent)]">
-                <h3 className="font-serif text-2xl font-medium text-[var(--text)]">{edit!.title}</h3>
-                <p className="mt-2 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">{edit!.description}</p>
-                <span className="mt-4 inline-block text-sm font-semibold text-[var(--accent)]">Explore the edit</span>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <GiftProductSections sections={sections} />
+      <section className="border-b border-[var(--border)] bg-[var(--surface)]" aria-labelledby="gift-faq-title">
+        <div className="mx-auto max-w-3xl px-6 py-14 sm:py-16">
+          <p className="text-xs font-semibold uppercase text-[var(--accent)]">Gift questions</p>
+          <h2 id="gift-faq-title" className="mt-3 font-serif text-3xl font-medium text-[var(--text)]">Check the facts before you choose.</h2>
+          <dl className="mt-8 divide-y divide-[var(--border)] border-y border-[var(--border)]">
+            {giftFaq.map((item) => (
+              <div key={item.question} className="py-6">
+                <dt className="font-serif text-xl font-medium text-[var(--text)]">{item.question}</dt>
+                <dd className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
 
       <section id="gift-help" className="scroll-mt-24 mx-auto max-w-7xl px-6 py-14 sm:py-16">
         <div className="border-y border-[var(--border)] py-9 sm:flex sm:items-center sm:justify-between sm:gap-10">
@@ -126,12 +99,13 @@ export default function GiftsPage() {
             <h2 className="mt-3 font-serif text-3xl font-medium text-[var(--text)]">
               Keep the practical details close.
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">Review the shipping and returns pages for the current store policy before placing an order. A personal message can still begin with the piece and occasion you choose.</p>
+            <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--text-secondary)]">A general gift guide cannot establish availability, delivery timing, or return eligibility. Read the exact item page, the policy page that applies when you order, and checkout details. If a needed fact is absent, do not infer it.</p>
           </div>
           <nav className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-[var(--accent)] sm:mt-0" aria-label="Gift guide help">
             <Link href="/shipping">Shipping</Link>
-            <Link href="/returns">Returns</Link>
-            <Link href="/pearls/care">Pearl care</Link>
+            <Link href="/refund">Returns</Link>
+            <Link href="/pearls/how-to-wear">Styling guide</Link>
+            <Link href="/contact">Contact</Link>
           </nav>
         </div>
       </section>

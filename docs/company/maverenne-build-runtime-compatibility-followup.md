@@ -87,3 +87,77 @@
 - 超时后只读进程检查发现本轮 Prisma Node 子进程 PID `37248` 仍在运行，再次证明外层超时未清理完整进程树。秘书处核对命令行属于本轮 `prisma generate` 后，仅终止该 PID；复核结果为进程已终止。
 - 当前主工作区仍不能解析 `@prisma/client`。因此隔离目录的成功证据不能升级为“主工作区已解除阻塞”，单测、lint、clean build 继续未运行。
 - 这次复核没有修改业务代码、商品状态或生产环境；依赖安装只影响本地 `node_modules`。
+
+## 主工作区有界复现（Task 1，2026-07-26 09:06–09:15 +08:00）
+
+### 结论
+
+- 本轮未恢复主工作区生成的 Prisma Client，结果为**有界、可复现阻塞**。`npm ci --ignore-scripts` 成功，但直接 Prisma CLI 在 300 秒窗口内没有退出；清理包装器自身随后退出 `1`，并遗留本轮唯一匹配的 Prisma Node 进程 PID `33060`。
+- 只按完整绝对命令行匹配该 PID 后执行 `taskkill.exe /PID 33060 /T /F`，命令报告成功；1 秒后复查匹配进程数为 `0`。未允许进程在后台继续下载或生成。
+- 清理后 `node_modules/.prisma/client/index.js`、`default.js`、Windows 查询引擎和 RHEL 查询引擎均不存在。因此没有执行后置 `require.resolve('@prisma/client')` 门禁，也没有执行单测、lint 或 build。
+- 本轮没有修改 `prisma/schema.prisma`、依赖版本、业务代码、商品状态或生产环境。唯一持久文档修改是本节。
+
+### 重跑前基线
+
+使用 bundled Node `C:\Users\11458\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe`（`v24.14.0`）：
+
+| 检查 | 时长 | 退出码 | 结果 |
+| --- | ---: | ---: | --- |
+| `node24 -e "try { console.log(require.resolve('@prisma/client')); console.log(require('@prisma/client/package.json').version); process.exit(0) } catch (e) { console.error(e.code + ': ' + e.message); process.exit(1) }"` | 0.149 秒 | 0 | 仅解析到包入口 `D:\mythrealms-shop\node_modules\@prisma\client\default.js`，包版本 `5.22.0`。这不代表生成客户端存在。 |
+| 生成产物检查 | — | — | `node_modules/.prisma/client/index.js`、Windows 查询引擎、RHEL 查询引擎均不存在；`node_modules/@prisma/engines/schema-engine-windows.exe` 存在，18,145,792 字节。 |
+| 命令行包含本工作区 Prisma 的 `node.exe` / `cmd.exe` 进程检查 | — | — | 匹配数 `0`。 |
+
+### `npm ci --ignore-scripts`
+
+实际命令：
+
+```powershell
+& 'C:\Users\11458\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe' `
+  'D:\Softwares\node_modules\npm\bin\npm-cli.js' `
+  ci --ignore-scripts --no-audit --no-fund
+```
+
+| 根 PID | 时长 | 退出码 | stdout/stderr | 结束后残留检查 |
+| ---: | ---: | ---: | --- | --- |
+| `62504` | 57.965 秒 | 0 | `added 521 packages in 58s`；另有 `node-domexception@1.0.0` deprecated 警告 | 根 PID、直接子 PID、以及匹配 `npm-cli.js ... ci --ignore-scripts` 的进程数均为 `0`；未调用 kill。 |
+
+在此之前曾有一次包装器探测因本机 `ProcessStartInfo.ArgumentList` 为 null 而未把参数传给 Node；该探测实际只启动无参数 Node（0.184 秒、退出 0），已当场作废，**不计为 `npm ci` 结果**。
+
+### Prisma 生成与清理
+
+实际子进程命令（环境变量 `DEBUG=prisma:fetch-engine:download`）：
+
+```powershell
+& 'C:\Users\11458\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe' `
+  'D:\mythrealms-shop\node_modules\prisma\build\index.js' `
+  generate --schema 'D:\mythrealms-shop\prisma\schema.prisma'
+```
+
+外层使用 `System.Diagnostics.Process` 异步读取 stdout/stderr，调用 `WaitForExit(300000)`；计划在超时时调用 `Kill($true)` 并等待退出。实际外层调用于 304.7 秒后退出 `1` 且未返回内部 stdout/stderr 摘要，不能宣称捕获到 target 下载日志，也不能把该退出码解释为 Prisma 自身退出码。只读复查证明 Prisma 子进程仍在运行：
+
+```text
+PID 33060, parent PID 41060
+"C:\Users\11458\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" "D:\mythrealms-shop\node_modules\prisma\build\index.js" generate --schema "D:\mythrealms-shop\prisma\schema.prisma"
+```
+
+精确清理与复查：
+
+```powershell
+taskkill.exe /PID 33060 /T /F
+```
+
+| 动作 | 退出码/结果 |
+| --- | --- |
+| 清理前完整命令行匹配 | 1 个进程：PID `33060` |
+| `taskkill.exe /PID 33060 /T /F` | 报告 `SUCCESS`，PID `33060` 已终止 |
+| 1 秒后相同完整命令行匹配 | `0` 个进程 |
+| 清理后生成产物 | `.prisma/client/index.js`、`default.js`、`query_engine-windows.dll.node`、`libquery_engine-rhel-openssl-3.0.x.so.node` 均不存在 |
+
+### 未运行项
+
+- 后置 `require.resolve('@prisma/client')`：未运行；原因是 Prisma generation 没有退出 `0`。
+- `npm run test:unit`：未运行。
+- `npm run lint`：未运行。
+- `npm run build`：未运行。
+
+本轮证据继续支持“主工作区冷启动引擎获取在当前链路上超过有界窗口，并且普通外层超时/当前 .NET 包装器不能可靠清理完整进程树”。本轮没有得到 target 下载 stdout/stderr，故不能把具体下载 URL、单一 target 或网络设备宣称为确定根因。

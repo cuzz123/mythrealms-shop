@@ -74,8 +74,11 @@ test("guide layout keeps its visible editorial sections in the approved order", 
     }),
   );
 
+  const renderedDirectAnswer = renderToStaticMarkup(
+    createElement("span", null, PEARL_GUIDES.care.directAnswer),
+  ).slice("<span>".length, -"</span>".length);
   const breadcrumbIndex = html.indexOf('aria-label="Breadcrumb"');
-  const heroIndex = html.indexOf("Put pearls on after cosmetics");
+  const heroIndex = html.indexOf(renderedDirectAnswer);
   const contentsIndex = html.indexOf("Table of contents");
   const articleIndex = html.indexOf("<article");
   const faqIndex = html.indexOf("Frequently asked questions");

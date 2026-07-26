@@ -5,7 +5,7 @@ import {
   PEARL_GUIDES,
   PEARL_HUB_FAQ,
 } from "../src/lib/editorial/guides";
-import { getGiftSections, getNewArrivalProducts } from "../src/lib/editorial/gifts";
+import { getNewArrivalProducts } from "../src/lib/editorial/gifts";
 import { absoluteUrl } from "../src/lib/site";
 
 async function expectImagesLoaded(images: Locator) {
@@ -163,25 +163,37 @@ test.describe("release surfaces", () => {
       const main = page.locator("#main-content");
       await expect(main.getByText("MythRealms Editorial", { exact: true })).toBeVisible();
       await expect(main.getByText("Published July 18, 2026", { exact: false })).toBeVisible();
-      await expect(main.getByText("Updated July 18, 2026", { exact: false })).toBeVisible();
+      const updatedLabel = new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        timeZone: "UTC",
+      }).format(new Date(`${guide.updated}T00:00:00Z`));
+      await expect(main.getByText(`Updated ${updatedLabel}`, { exact: false })).toBeVisible();
       const sourceLinks = main.locator('a[href^="https://"][rel~="noopener"][rel~="noreferrer"]');
       await expect(sourceLinks).toHaveCount(guide.sources.length);
       for (const source of guide.sources) {
         await expect(sourceLinks.filter({ hasText: source.label })).toHaveAttribute("href", source.href);
       }
-      await expect(page.getByRole("heading", { name: "Related products" })).toBeVisible();
-      const expectedProducts = getRelatedGuideProducts(guide);
-      expect(expectedProducts.length).toBeGreaterThanOrEqual(4);
-      expect(expectedProducts.length).toBeLessThanOrEqual(6);
       const productLinks = main.locator('a[href^="/products/"]');
-      await expect(productLinks).toHaveCount(expectedProducts.length);
-      const productHrefs = await productLinks.evaluateAll((links) =>
-        links.map((link) => link.getAttribute("href")),
-      );
-      expect(productHrefs).toEqual(
-        expectedProducts.map((product) => `/products/${product.slug}`),
-      );
-      expect(new Set(productHrefs).size).toBe(productHrefs.length);
+      const expectedProducts =
+        guide.slug === "freshwater-pearls" ? getRelatedGuideProducts(guide) : [];
+      if (expectedProducts.length > 0) {
+        await expect(page.getByRole("heading", { name: "Related products" })).toBeVisible();
+        expect(expectedProducts.length).toBeGreaterThanOrEqual(4);
+        expect(expectedProducts.length).toBeLessThanOrEqual(6);
+        await expect(productLinks).toHaveCount(expectedProducts.length);
+        const productHrefs = await productLinks.evaluateAll((links) =>
+          links.map((link) => link.getAttribute("href")),
+        );
+        expect(productHrefs).toEqual(
+          expectedProducts.map((product) => `/products/${product.slug}`),
+        );
+        expect(new Set(productHrefs).size).toBe(productHrefs.length);
+      } else {
+        await expect(page.getByRole("heading", { name: "Related products" })).toHaveCount(0);
+        await expect(productLinks).toHaveCount(0);
+      }
       const schemas = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) => scripts.map((script) => JSON.parse(script.textContent || "{}")));
       for (const type of ["Article", "BreadcrumbList", "FAQPage"]) expect(schemas.some((schema) => schema["@type"] === type)).toBe(true);
       const visibleBreadcrumbs = await page
@@ -272,19 +284,12 @@ test.describe("release surfaces", () => {
       await expect(page.getByRole("link", { name: "Explore Gifts" })).toHaveAttribute("href", "/gifts");
       expect(await page.locator("#main-content img").count()).toBeGreaterThanOrEqual(4);
 
-      const giftSections = getGiftSections();
       await page.goto("/gifts");
-      await expect(page.getByRole("heading", { level: 1, name: "Pearl gifts, chosen by how they will be worn." })).toBeVisible();
-      await expect(page.getByRole("link", { name: "Browse gift paths" })).toHaveAttribute("href", "#gift-paths");
-      for (const section of giftSections) {
-        await expect(page.getByRole("heading", { name: section.title, exact: true })).toBeVisible();
-        await expect(page.locator(`#${section.id} a[href^="/products/"]`)).toHaveCount(
-          section.products.length,
-        );
-      }
-      await expect(
-        page.locator("#main-content").getByRole("link", { name: "Pearl care", exact: true }),
-      ).toHaveAttribute("href", "/pearls/care");
+      await expect(page.getByRole("heading", { level: 1, name: "A Pearl Jewelry Gift Guide for Everyday Giving" })).toBeVisible();
+      await expect(page.getByRole("link", { name: "Read the gift checklist" })).toHaveAttribute("href", "#gift-method");
+      await expect(page.getByRole("link", { name: "Browse the catalog" })).toHaveAttribute("href", "/collections/pearl-series");
+      await expect(page.getByRole("heading", { name: "Check the facts before you choose." })).toBeVisible();
+      await expect(page.locator('#main-content a[href^="/products/"]')).toHaveCount(0);
       expect(await page.locator("#main-content img").count()).toBeGreaterThan(0);
 
       const newArrivals = getNewArrivalProducts();
@@ -351,138 +356,28 @@ test.describe("release surfaces", () => {
     await expect(page.locator("#main-content")).toHaveCSS("padding-bottom", "0px");
   });
 
-  test("gift edit under $50 contains only matching current catalog products", async ({ page }) => {
-    const expectedSection = getGiftSections().find((section) => section.id === "under-50");
-    expect(expectedSection).toBeDefined();
-    const expectedProducts = expectedSection!.products;
-    expect(expectedProducts.length).toBeGreaterThan(0);
+  test("gift guide avoids unverified price and product merchandising", async ({ page }) => {
+    await page.goto("/gifts");
 
-    await page.goto("/gifts#under-50");
-
-    const section = page.locator("#under-50");
-    await expect(section).toBeVisible();
-    const productLinks = section.locator('a[href^="/products/"]');
-    const cards = productLinks.locator("..");
-    const renderedCardCount = await cards.count();
-    expect(renderedCardCount).toBeGreaterThan(0);
-    expect(renderedCardCount).toBe(expectedProducts.length);
-    await expect(productLinks).toHaveCount(expectedProducts.length);
-    expect(await productLinks.evaluateAll((links) => links.map((link) => link.getAttribute("href")))).toEqual(
-      expectedProducts.map((product) => `/products/${product.slug}`),
-    );
-
-    for (let index = 0; index < expectedProducts.length; index += 1) {
-      const product = expectedProducts[index];
-      expect(product.price, product.slug).toBeLessThan(50);
-      const card = cards.nth(index);
-      await expect(card).toContainText(`$${product.price.toFixed(2)}`);
-      expectStrictlyParsedAmountsUnder50(await card.innerText(), product.slug);
-    }
-
-    const renderedProductSectionText = (await cards.allInnerTexts()).join("\n");
-    expectStrictlyParsedAmountsUnder50(renderedProductSectionText, "under-50 product grid");
+    const main = page.locator("#main-content");
+    await expect(main.locator('a[href^="/products/"]')).toHaveCount(0);
+    await expect(main.locator('button[aria-label^="Add "][aria-label$=" to cart"]')).toHaveCount(0);
+    await expect(main.getByText("Under $50", { exact: true })).toHaveCount(0);
+    await expect(main.getByText("Under $70", { exact: true })).toHaveCount(0);
+    await expect(main.getByRole("link", { name: "Shipping" })).toHaveAttribute("href", "/shipping");
+    await expect(main.getByRole("link", { name: "Returns" })).toHaveAttribute("href", "/refund");
+    await expect(main.getByRole("link", { name: "Styling guide" })).toHaveAttribute("href", "/pearls/how-to-wear");
+    await expect(main.getByRole("link", { name: "Contact" })).toHaveAttribute("href", "/contact");
   });
 
-  test("mobile gift cards keep complete names and quick-add controls in separate action space", async ({ page }) => {
+  test("mobile gift guide keeps its checklist and help links readable", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/gifts");
 
-    const expectedSections = getGiftSections();
-    const renderedHrefs: (string | null)[] = [];
-    let renderedCardCount = 0;
-
-    for (const expectedSection of expectedSections) {
-      const section = page.locator(`#${expectedSection.id}`);
-      const productLinks = section.locator('a[href^="/products/"]');
-      const quickAdds = section.locator(
-        'button[aria-label^="Add "][aria-label$=" to cart"]',
-      );
-      await expect(productLinks).toHaveCount(expectedSection.products.length);
-      await expect(quickAdds).toHaveCount(expectedSection.products.length);
-      renderedHrefs.push(
-        ...(await productLinks.evaluateAll((links) =>
-          links.map((link) => link.getAttribute("href")),
-        )),
-      );
-      renderedCardCount += await productLinks.count();
-
-      for (let index = 0; index < expectedSection.products.length; index += 1) {
-        const card = productLinks.nth(index).locator("..");
-        const titles = card.locator("h3");
-        const controls = card.locator(
-          'button[aria-label^="Add "][aria-label$=" to cart"]',
-        );
-        await expect(titles).toHaveCount(1);
-        await expect(controls).toHaveCount(1);
-        await expect(controls).toBeVisible();
-
-        const geometry = await card.evaluate((node) => {
-          const title = node.querySelector("h3");
-          const control = node.querySelector<HTMLButtonElement>(
-            'button[aria-label^="Add "][aria-label$=" to cart"]',
-          );
-          const imageActionArea = node.querySelector(":scope > a > div");
-          if (!title || !control || !imageActionArea) {
-            throw new Error("Product card is missing title, quick-add, or image action area");
-          }
-
-          const cardRect = node.getBoundingClientRect();
-          const imageRect = imageActionArea.getBoundingClientRect();
-          const titleRect = title.getBoundingClientRect();
-          const controlRect = control.getBoundingClientRect();
-          const titleStyle = window.getComputedStyle(title);
-          const controlStyle = window.getComputedStyle(control);
-          const tolerance = 0.5;
-
-          return {
-            name: title.textContent?.trim() ?? "",
-            titleHasArea: titleRect.width > 0 && titleRect.height > 0,
-            controlVisible:
-              controlRect.width > 0 &&
-              controlRect.height > 0 &&
-              controlStyle.display !== "none" &&
-              controlStyle.visibility !== "hidden" &&
-              Number(controlStyle.opacity) > 0,
-            titleLineClamp: titleStyle.webkitLineClamp,
-            titleOverflow: titleStyle.overflow,
-            titleTruncated:
-              title.scrollHeight > title.clientHeight + 1 ||
-              title.scrollWidth > title.clientWidth + 1,
-            controlInsideCard:
-              controlRect.left >= cardRect.left - tolerance &&
-              controlRect.right <= cardRect.right + tolerance &&
-              controlRect.top >= cardRect.top - tolerance &&
-              controlRect.bottom <= cardRect.bottom + tolerance,
-            controlInsideImage:
-              controlRect.left >= imageRect.left - tolerance &&
-              controlRect.right <= imageRect.right + tolerance &&
-              controlRect.top >= imageRect.top - tolerance &&
-              controlRect.bottom <= imageRect.bottom + tolerance,
-            overlaps:
-              controlRect.left < titleRect.right &&
-              controlRect.right > titleRect.left &&
-              controlRect.top < titleRect.bottom &&
-              controlRect.bottom > titleRect.top,
-          };
-        });
-
-        expect(geometry.name.length, expectedSection.products[index].slug).toBeGreaterThan(0);
-        expect(geometry.titleHasArea, geometry.name).toBe(true);
-        expect(geometry.controlVisible, geometry.name).toBe(true);
-        expect(geometry.titleLineClamp, geometry.name).toBe("none");
-        expect(geometry.titleOverflow, geometry.name).not.toMatch(/hidden|clip/);
-        expect(geometry.titleTruncated, geometry.name).toBe(false);
-        expect(geometry.controlInsideCard, geometry.name).toBe(true);
-        expect(geometry.controlInsideImage, geometry.name).toBe(true);
-        expect(geometry.overlaps, geometry.name).toBe(false);
-      }
-    }
-
-    const expectedProducts = expectedSections.flatMap((section) => section.products);
-    expect(renderedCardCount).toBe(expectedProducts.length);
-    expect(renderedHrefs).toEqual(
-      expectedProducts.map((product) => `/products/${product.slug}`),
-    );
+    await expect(page.locator("#gift-method")).toBeVisible();
+    await expect(page.getByRole("navigation", { name: "Gift guide help" })).toBeVisible();
+    await expect(page.locator('#main-content a[href^="/products/"]')).toHaveCount(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
   });
 
   test("new arrivals exactly match the catalog selector", async ({ page }) => {

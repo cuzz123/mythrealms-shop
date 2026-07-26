@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { GuideLayout } from "@/components/editorial/GuideLayout";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQPageJsonLd } from "@/components/ui/JsonLd";
-import { getRelatedGuideProducts, PEARL_GUIDES } from "@/lib/editorial/guides";
+import { PEARL_GUIDES } from "@/lib/editorial/guides";
 import { absoluteUrl } from "@/lib/site";
 
 const guide = PEARL_GUIDES.care;
@@ -16,7 +17,7 @@ const careQuickAnswers = [
   },
   {
     question: "What should I do after pearl jewelry gets wet?",
-    answer: "Use a soft, clean cloth to remove surface moisture, then let the piece air-dry fully before storing it flat in a soft pouch or cloth.",
+    answer: "Use item-specific care only if it is explicitly stated on the exact item page. As a general precaution, use a very soft, clean cloth for surface moisture and let a strung piece dry completely before wearing it.",
   },
   {
     question: "When should I ask a jeweler for help?",
@@ -60,7 +61,7 @@ export default function PearlCarePage() {
       <BreadcrumbJsonLd items={breadcrumbs.map((item) => ({ name: item.label, url: absoluteUrl(item.href) }))} />
       <ArticleJsonLd title={guide.title} description={guide.directAnswer} url={canonical} image={image} datePublished={guide.published} dateModified={guide.updated} />
       <FAQPageJsonLd questions={guide.faq} />
-      <GuideLayout breadcrumbs={breadcrumbs} guide={guide} relatedGuides={relatedGuides} relatedProducts={getRelatedGuideProducts(guide)} />
+      <GuideLayout breadcrumbs={breadcrumbs} guide={guide} relatedGuides={relatedGuides} relatedProducts={[]} />
       <section className="border-t border-[var(--border)] bg-[var(--surface)]" aria-labelledby="care-quick-answers-title">
         <div className="mx-auto max-w-3xl px-6 py-14 sm:py-16">
           <p className="text-xs font-semibold uppercase text-[var(--accent)]">Care reminders</p>
@@ -73,6 +74,9 @@ export default function PearlCarePage() {
               </div>
             ))}
           </dl>
+          <p className="mt-8 text-sm leading-7 text-[var(--text-secondary)]">
+            If the exact item page does not state the care detail you need, do not infer it; <Link className="font-semibold text-[var(--accent)]" href="/contact">contact support</Link> before trying a cleaner or care method.
+          </p>
         </div>
       </section>
     </div>
