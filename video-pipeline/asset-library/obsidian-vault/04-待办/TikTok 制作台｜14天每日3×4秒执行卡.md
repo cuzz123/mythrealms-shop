@@ -12,9 +12,9 @@ external_actions: founder_only
 ## Day 1–5 执行文件
 
 - [[TikTok 制作台｜Day 1 Moon Disc QA与剪辑交接]]
-- [[TikTok 制作台｜Day 2 Turquoise Leaf 投放卡]]
-- [[TikTok 制作台｜Day 3 Violet Rain 投放卡]]
-- [[TikTok 制作台｜Day 4 Falling Pearl 投放卡]]
+- [[TikTok 制作台｜Day 2 Turquoise Leaf 投喂包]]
+- [[TikTok 制作台｜Day 3 Violet Rain 投喂包]]
+- [[TikTok 制作台｜Day 4 Falling Pearl 投喂包]]
 - [[TikTok 制作台｜Day 5 胜出主体复用模板]]
 
 # TikTok 制作台｜14天每日3×4秒执行卡
