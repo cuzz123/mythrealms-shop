@@ -9,6 +9,14 @@ support_owner: content_brand
 external_actions: founder_only
 ---
 
+## Day 1–5 执行文件
+
+- [[TikTok 制作台｜Day 1 Moon Disc QA与剪辑交接]]
+- [[TikTok 制作台｜Day 2 Turquoise Leaf 投放卡]]
+- [[TikTok 制作台｜Day 3 Violet Rain 投放卡]]
+- [[TikTok 制作台｜Day 4 Falling Pearl 投放卡]]
+- [[TikTok 制作台｜Day 5 胜出主体复用模板]]
+
 # TikTok 制作台｜14天每日3×4秒执行卡
 
 > 这是内部制作台，不是发布日历。创始人是小云雀、剪映、AdsPower 与 TikTok 的唯一外部执行者；内容与品牌只负责维护提示词、素材路径、回传记录和复盘。所有未知数据必须写 `待确认`，不以 0 代替。
