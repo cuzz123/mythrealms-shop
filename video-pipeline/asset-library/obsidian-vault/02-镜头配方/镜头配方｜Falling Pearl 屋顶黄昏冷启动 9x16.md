@@ -140,7 +140,12 @@ tags: [Falling Pearl, 屋顶黄昏, TikTok, Seedance, 项链, 冷启动, 9x16]
 **可直接喂小云雀的提示词：**
 
 ```text
-@Image1 是精确首帧、成年虚构模特身份、象牙色开口领口、门洞空间、暖光到蓝调光界和纵向佩戴位置锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK-v1.png。@Image2 是 `new-series-pearl-y-lariat` 的完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\main.jpg。@Image3 是纵向连接和终端细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\detail-01.jpg。@Image4 是屋顶行进方向和偏心终点的场景参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK-v1.png 是精确首帧、成年虚构模特身份、象牙色开口领口、门洞空间、暖光到蓝调光界和纵向佩戴位置锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\main.jpg 是 `new-series-pearl-y-lariat` 的完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\detail-01.jpg 是纵向连接和终端细节锁。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png 是屋顶行进方向和偏心终点的场景参考。
+
 
 第0帧，模特已经跨过门洞：前脚已落在门外，后脚仍在门内，躯干先进入光区，完整纵向线条正在随步伐移动。唯一动机事件：她完成这一整步，不触碰首饰；躯干先跨越，象牙色衣料随后，最低圆形终端最后以自然延迟完成一次回摆。
 
@@ -156,7 +161,11 @@ tags: [Falling Pearl, 屋顶黄昏, TikTok, Seedance, 项链, 冷启动, 9x16]
 **可直接喂小云雀的提示词：**
 
 ```text
-@Image1 是精确首帧、浅色石灰岩支撑面、唯一一条 `new-series-pearl-y-lariat` 的数量、竖直摆放和首帧构图锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_02_LIMESTONE_FULL_PRODUCT-v1.png。@Image2 是完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\main.jpg。@Image3 是纵向连接和终端细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\detail-01.jpg。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_02_LIMESTONE_FULL_PRODUCT-v1.png 是精确首帧、浅色石灰岩支撑面、唯一一条 `new-series-pearl-y-lariat` 的数量、竖直摆放和首帧构图锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\main.jpg 是完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\detail-01.jpg 是纵向连接和终端细节锁。
+
 
 第0帧，唯一产品已经被石灰岩完整支撑，一道真实的象牙色布料阴影正从画面上方进入。唯一动机事件：布料从画外经过，使阴影沿纵向轮廓越过石面；产品不旋转、不滚动、不悬浮，也没有手或人物进入。
 
@@ -172,7 +181,12 @@ tags: [Falling Pearl, 屋顶黄昏, TikTok, Seedance, 项链, 冷启动, 9x16]
 **可直接喂小云雀的提示词：**
 
 ```text
-@Image1 是精确首帧、成年虚构模特身份、象牙色服装、屋顶边缘、城市纵深、光向和三分之四背侧起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png。@Image2 是 `new-series-pearl-y-lariat` 的完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\main.jpg。@Image3 是纵向连接和终端细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\detail-01.jpg。@Image4 是同一模特、门洞和领口佩戴位置的身份支持：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK-v1.png。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png 是精确首帧、成年虚构模特身份、象牙色服装、屋顶边缘、城市纵深、光向和三分之四背侧起点锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\main.jpg 是 `new-series-pearl-y-lariat` 的完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\detail-01.jpg 是纵向连接和终端细节锁。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK-v1.png 是同一模特、门洞和领口佩戴位置的身份支持。
+
 
 第0帧，模特已经沿屋顶边缘向右移动，重心在前脚，右侧终点尚未形成，双手远离首饰。唯一动机事件：她完成这一次沿边缘的行走并到达右侧偏心 profile；这只是把开场机制改为屋顶落点，视觉方向和终点目的与主钩子保持一致，全程没有手碰首饰。
 

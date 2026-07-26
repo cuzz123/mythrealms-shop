@@ -64,7 +64,12 @@ external_actions: founder_only
 **输出文件：** `D01_MOON_DISC_MAIN_HOOK_T01.mp4`
 
 ```text
-@Image1 是精确首帧、成年虚构模特身份、白色亚麻衬衫、石灰岩露台、海边阴影与侧光起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_01_IRIDESCENT_HUMAN_HOOK-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg。@Image3 是连接处和圆形垂片细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg。@Image4 是同一人物、海岸方向与侧脸终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_04_SIDE_PROFILE_COAST_END-v2.png。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_01_IRIDESCENT_HUMAN_HOOK-v1.png 是精确首帧、成年虚构模特身份、白色亚麻衬衫、石灰岩露台、海边阴影与侧光起点锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg 是耳饰完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg 是连接处和圆形垂片细节锁。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_04_SIDE_PROFILE_COAST_END-v2.png 是同一人物、海岸方向与侧脸终点参考。
+
 
 第0帧，模特的肩和半张脸已经跨在露台阴影与侧光的边界，躯干正在完成向右的转身，目光尚未抵达画外目标。唯一动机事件：她完成这一次转身并越过光界；近侧圆形垂片因自身角度改变呈现不同反光，不出现独立扫光或魔法效果。
 
@@ -78,7 +83,11 @@ external_actions: founder_only
 **输出文件：** `D01_MOON_DISC_RESPONSE_T01.mp4`
 
 ```text
-@Image1 是精确首帧、浅色石灰岩支撑面、一对耳饰的数量、平行摆放和海面方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_02_SEASIDE_PAIR-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg。@Image3 是连接处和圆形垂片细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_02_SEASIDE_PAIR-v1.png 是精确首帧、浅色石灰岩支撑面、一对耳饰的数量、平行摆放和海面方向锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg 是耳饰完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg 是连接处和圆形垂片细节锁。
+
 
 第0帧，两只耳饰已经完整、真实地被石灰岩支撑，来自海面的水光反射和低位前景视差正从左侧进入。唯一动机事件：同一方向的水面反射越过石面与两只耳饰；耳饰本体始终不滚动、不转向、不悬浮。
 
@@ -92,7 +101,12 @@ external_actions: founder_only
 **输出文件：** `D01_MOON_DISC_ALT_HOOK_T01.mp4`
 
 ```text
-@Image1 是精确首帧、成年虚构模特身份、白色亚麻衬衫、三分之四起点、露台和海边空间锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_03_SUN_TURN-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg。@Image3 是连接处和圆形垂片细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg。@Image4 是同一人物、海岸方向与侧脸终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_04_SIDE_PROFILE_COAST_END-v2.png。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_03_SUN_TURN-v1.png 是精确首帧、成年虚构模特身份、白色亚麻衬衫、三分之四起点、露台和海边空间锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg 是耳饰完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg 是连接处和圆形垂片细节锁。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_04_SIDE_PROFILE_COAST_END-v2.png 是同一人物、海岸方向与侧脸终点参考。
+
 
 第0帧，一角真实的白色亚麻前景已经从左侧覆盖部分镜头，模特正从被遮住的三分之四角度迈入，近侧耳朵尚未完全露出。唯一动机事件：她完成这一步并进入清晰侧脸；这是与主钩子唯一改变的开场机制，人物、产品、场景和4秒终点目的保持一致。
 

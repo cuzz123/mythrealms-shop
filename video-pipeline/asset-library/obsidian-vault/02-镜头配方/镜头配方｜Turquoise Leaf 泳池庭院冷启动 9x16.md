@@ -139,7 +139,12 @@ tags: [Turquoise Leaf, 泳池庭院, TikTok, Seedance, 手镯, 冷启动, 9x16]
 **可直接喂小云雀的提示词：**
 
 ```text
-@Image1 是精确首帧、成年虚构模特身份、奶油色亚麻服装、泳池庭院、石栏接触点和手腕起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_01_POOL_SLEEVE_HOOK-v1.png。@Image2 是手镯完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\main.jpg。@Image3 是中央与两侧细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\detail-01.jpg。@Image4 是同一人物、石阶、墙面和偏心终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_04_STAIR_WALL_TRACK_END-v1.png。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_01_POOL_SLEEVE_HOOK-v1.png 是精确首帧、成年虚构模特身份、奶油色亚麻服装、泳池庭院、石栏接触点和手腕起点锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\main.jpg 是手镯完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\detail-01.jpg 是中央与两侧细节锁。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_04_STAIR_WALL_TRACK_END-v1.png 是同一人物、石阶、墙面和偏心终点参考。
+
 
 第0帧，模特已经沿泳池旁迈出一步，佩戴手镯的手仍在真实地松开石栏，手掌尚有部分接触，袖口正在从手腕向后滑开。唯一动机事件：她完成这一次放开石栏的动作；手腕因动作结束自然露出，不为展示而翻转。
 
@@ -155,7 +160,11 @@ tags: [Turquoise Leaf, 泳池庭院, TikTok, Seedance, 手镯, 冷启动, 9x16]
 **可直接喂小云雀的提示词：**
 
 ```text
-@Image1 是精确首帧、浅石灰岩支撑面、唯一手镯的数量、摆放方向和泳池方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_02_POOL_LIMESTONE_PRODUCT-v1.png。@Image2 是手镯完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\main.jpg。@Image3 是中央与两侧细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\detail-01.jpg。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_02_POOL_LIMESTONE_PRODUCT-v1.png 是精确首帧、浅石灰岩支撑面、唯一手镯的数量、摆放方向和泳池方向锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\main.jpg 是手镯完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\detail-01.jpg 是中央与两侧细节锁。
+
 
 第0帧，唯一手镯已经完整、真实地被石灰岩支撑，泳池水光和近景边缘的低位视差正沿左下进入。唯一动机事件：同一方向的泳池焦散反射越过石面和手镯；手镯本体不滚动、不转向、不悬浮。
 
@@ -171,7 +180,12 @@ tags: [Turquoise Leaf, 泳池庭院, TikTok, Seedance, 手镯, 冷启动, 9x16]
 **可直接喂小云雀的提示词：**
 
 ```text
-@Image1 是精确首帧、成年虚构模特身份、奶油色亚麻服装、石阶、石灰岩墙面、手掌接触点和庭院空间锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_04_STAIR_WALL_TRACK_END-v1.png。@Image2 是手镯完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\main.jpg。@Image3 是中央与两侧细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\detail-01.jpg。@Image4 是同一人物、泳池光向和袖口起点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_01_POOL_SLEEVE_HOOK-v1.png。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_04_STAIR_WALL_TRACK_END-v1.png 是精确首帧、成年虚构模特身份、奶油色亚麻服装、石阶、石灰岩墙面、手掌接触点和庭院空间锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\main.jpg 是手镯完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\detail-01.jpg 是中央与两侧细节锁。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_01_POOL_SLEEVE_HOOK-v1.png 是同一人物、泳池光向和袖口起点参考。
+
 
 第0帧，手掌已经沿石灰岩墙面滑行，手指仍保持真实接触，模特正靠近右侧偏心终点，留白尚未形成。唯一动机事件：她完成这一次沿墙的手部任务并让手掌离开墙面；这是与主钩子唯一改变的手部任务，运动方向和终点目的保持一致。
 

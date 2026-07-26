@@ -232,7 +232,12 @@ Promote / 广告链接参数：
 **可直接喂小云雀的提示词：**
 
 ```text
-@Image1 是精确首帧、成年虚构模特身份、白色亚麻衣领、拱廊空间与侧向自然光锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg。@Image3 是近侧耳饰细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg。@Image4 是同一人物和庭院行进方向的场景终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_06_COURTYARD_WALK_END-v1.png。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK-v1.png 是精确首帧、成年虚构模特身份、白色亚麻衣领、拱廊空间与侧向自然光锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg 是耳饰完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg 是近侧耳饰细节锁。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_06_COURTYARD_WALK_END-v1.png 是同一人物和庭院行进方向的场景终点参考。
+
 
 第0帧，石灰岩拱门的近侧边缘已从左侧擦过镜头，模特正从被遮住的三分之四角度迈出，肩线已向右移动，近侧耳朵正在露出，动作不是完成的摆姿势。唯一动机事件：她完成这一步并做一次明确的四分之一转身，视线落向画外右侧。
 
@@ -248,7 +253,11 @@ Promote / 广告链接参数：
 **可直接喂小云雀的提示词：**
 
 ```text
-@Image1 是精确首帧、石灰岩支撑面、耳饰数量和原始摆放方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_02_SUSPENDED_HERO-v2.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg。@Image3 是绿色点缀与不规则白色垂坠的细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_02_SUSPENDED_HERO-v2.png 是精确首帧、石灰岩支撑面、耳饰数量和原始摆放方向锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg 是耳饰完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg 是绿色点缀与不规则白色垂坠的细节锁。
+
 
 第0帧，两只耳饰已经完整、真实地被石灰岩支撑，来自左向右的橄榄叶影和近景枝叶视差已经进入画面。唯一动机事件：一阵轻风让同一方向的叶影和前景枝叶越过耳饰；耳饰本体不滚动、不转向、不悬浮。
 
@@ -264,7 +273,12 @@ Promote / 广告链接参数：
 **可直接喂小云雀的提示词：**
 
 ```text
-@Image1 是精确首帧、成年虚构模特身份、白色亚麻衣领、近侧耳饰与光界起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_01_MACRO_HOOK-v2.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg。@Image3 是近侧耳饰细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg。@Image4 是同一拱廊的遮挡、空间方向和自然光参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK-v1.png。
+9:16 竖屏，4 秒，首帧生视频（I2V）。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_01_MACRO_HOOK-v2.png 是精确首帧、成年虚构模特身份、白色亚麻衣领、近侧耳饰与光界起点锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg 是耳饰完整结构锁。
+@D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg 是近侧耳饰细节锁。
+@D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK-v1.png 是同一拱廊的遮挡、空间方向和自然光参考。
+
 
 第0帧，模特的肩和半张脸已经跨在阴影与侧光的边界，躯干正在向右完成转身，目光尚未抵达画外目标。唯一动机事件：她完成这一次跨光界的四分之一转身；这是与主钩子唯一改变的开场机制，产品、场景、4秒时长和终点目的保持一致。
 
