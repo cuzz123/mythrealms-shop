@@ -73,6 +73,42 @@ external_actions: founder_only
 - 回应镜头：`D02_TURQUOISE_LEAF_RESPONSE_T01.mp4`
 - 备用钩子：`D02_TURQUOISE_LEAF_ALT_HOOK_T01.mp4`
 - 剪映候选：`D02_TURQUOISE_LEAF_CANDIDATE_C01.mp4`
+- 候选母版：`D02_TURQUOISE_LEAF_CANDIDATE_C01_MASTER.mp4`
+- 候选发布版：`D02_TURQUOISE_LEAF_CANDIDATE_C01_POST.mp4`
+
+## TikTok 发布包
+
+- 封面字：`A Small Release`
+- 屏幕字：`Pool light or golden hour?`
+- Caption：`One small movement changes the whole frame. Pool light or golden hour?`
+- 标签：`#BraceletStyle #JewelryDetails #PoolsideStyle #EverydayJewelry`
+- CTA 类型：评论互动；不附商品链接。
+
+### BGM 卡
+
+- 搜索词：`organic house`、`poolside groove`、`sunlit fashion`
+- 节奏：98–108 BPM；第一个干净节拍在 0.00 秒。
+- 主钩子到回应镜头的硬切仅在回传素材 QA 后选择下拍对齐。
+- BGM 音量：14%–17%；生成音频静音；可选的已验证泳池环境音：3%–5%；结尾淡出：0.20 秒。
+- 最终曲目：`待确认`；必须从创始人账号可用的已授权音乐库中选择。
+
+### 剪映条件指引
+
+- 精确入点和出点：`待回传 QA`。
+
+## 发布与数据证据
+
+- [ ] 最终曲目：`待确认`
+- [ ] 已发布 URL：`待确认`
+- [ ] 已发布时间：`待确认`
+- [ ] 播放量：`待确认`
+- [ ] 平均观看时长：`待确认`
+- [ ] 完播率：`待确认`
+- [ ] 点赞：`待确认`
+- [ ] 评论：`待确认`
+- [ ] 分享：`待确认`
+- [ ] 主页访问：`待确认`
+- [ ] 网站点击：`待确认`
 
 ## 生成前检查
 
