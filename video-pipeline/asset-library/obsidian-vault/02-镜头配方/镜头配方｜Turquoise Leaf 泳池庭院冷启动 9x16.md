@@ -127,3 +127,55 @@ tags: [Turquoise Leaf, 泳池庭院, TikTok, Seedance, 手镯, 冷启动, 9x16]
 
 - [template.json](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_TURQUOISE_LEAF_COLD_START_001/template.json)
 - [Thumbnail.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_TURQUOISE_LEAF_COLD_START_001/Thumbnail.png)
+
+## v3｜每日方案 C
+
+> 每日仅生成三条 4 秒 I2V：主钩子 + 回应镜头剪为 7–8 秒候选，备用钩子只替换开场机制。以下三条只写可观察外观和运动，不增加材质、价格、库存或履约信息。生成前先复核 [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 中对应槽位仍为 `ready`。
+
+### 主钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#W1｜完成动作后露出手腕|W1｜完成动作后露出手腕]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、奶油色亚麻服装、泳池庭院、石栏接触点和手腕起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_01_POOL_SLEEVE_HOOK-v1.png。@Image2 是手镯完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\main.jpg。@Image3 是中央与两侧细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\detail-01.jpg。@Image4 是同一人物、石阶、墙面和偏心终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_04_STAIR_WALL_TRACK_END-v1.png。
+
+第0帧，模特已经沿泳池旁迈出一步，佩戴手镯的手仍在真实地松开石栏，手掌尚有部分接触，袖口正在从手腕向后滑开。唯一动机事件：她完成这一次放开石栏的动作；手腕因动作结束自然露出，不为展示而翻转。
+
+镜头以手臂中近景沿手离开石栏的真实路径做一次对角跟移，保持肘、腕、手指与石栏处于同一空间，不围绕手腕旋转；终点落在放松的手腕和离开的手掌。手指依次离开石面，袖口因前臂移动后退并轻微回落，手镯只随真实位移产生响应。
+
+手掌刚完全离开石栏、袖口已清开且手腕不再旋转时硬切，终帧必须不同于首帧。锁定 open gold-tone silhouette、white center detail、blue-green side details、两个浅色端点和佩戴朝向；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 回应镜头
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#P1｜环境运动证明产品|P1｜环境运动证明产品]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、浅石灰岩支撑面、唯一手镯的数量、摆放方向和泳池方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_02_POOL_LIMESTONE_PRODUCT-v1.png。@Image2 是手镯完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\main.jpg。@Image3 是中央与两侧细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\detail-01.jpg。
+
+第0帧，唯一手镯已经完整、真实地被石灰岩支撑，泳池水光和近景边缘的低位视差正沿左下进入。唯一动机事件：同一方向的泳池焦散反射越过石面和手镯；手镯本体不滚动、不转向、不悬浮。
+
+镜头以低位近景从左下到右上的方向做一次果断对角移动，与主钩子的手部方向可剪接，不推拉、不环绕；终点让 open gold-tone silhouette、white center detail 和 blue-green side details 同时可读。只有水光和前景产生视差，石面反射维持同一光向，手镯的数量、位置、朝向和几何保持不变。
+
+焦散刚越过中央视觉点、完整开口轮廓仍清晰时硬切，终帧必须不同于首帧。锁定 open gold-tone silhouette、white center detail、blue-green side details、两个浅色端点和唯一手镯数量；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 备用钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#D1｜运动落点形成新构图|D1｜运动落点形成新构图]] 与 [[镜头配方｜Seedance 动态叙事动作库 v3#W1｜完成动作后露出手腕|W1｜完成动作后露出手腕]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、奶油色亚麻服装、石阶、石灰岩墙面、手掌接触点和庭院空间锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_04_STAIR_WALL_TRACK_END-v1.png。@Image2 是手镯完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\main.jpg。@Image3 是中央与两侧细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-leaf-turquoise-pearl-cuff\detail-01.jpg。@Image4 是同一人物、泳池光向和袖口起点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_TURQUOISE_LEAF_COLD_START_001\first-frames\FF_TURQUOISE_LEAF_01_POOL_SLEEVE_HOOK-v1.png。
+
+第0帧，手掌已经沿石灰岩墙面滑行，手指仍保持真实接触，模特正靠近右侧偏心终点，留白尚未形成。唯一动机事件：她完成这一次沿墙的手部任务并让手掌离开墙面；这是与主钩子唯一改变的手部任务，运动方向和终点目的保持一致。
+
+镜头以环境中近景沿手的路径同向伴移一次，不跨越轴线、不倒退追拍；终帧把模特与放松手腕放在右侧三分位，左侧留下干净石灰岩区域。手指依次离开墙面，袖口随后回落，手镯只因手臂完成动作产生一次自然衰减。
+
+手掌刚离墙、右侧终点和左侧留白同时形成时硬切，终帧必须不同于首帧。锁定 open gold-tone silhouette、white center detail、blue-green side details、两个浅色端点和佩戴朝向；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```

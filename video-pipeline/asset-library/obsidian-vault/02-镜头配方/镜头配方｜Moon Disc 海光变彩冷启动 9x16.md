@@ -125,3 +125,55 @@ The exact pair shown is The Moon Disc. Tap the link in our bio to see it.
 
 - [template.json](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_MOON_DISC_COLD_START_001/template.json)
 - [Thumbnail.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_MOON_DISC_COLD_START_001/Thumbnail.png)
+
+## v3｜每日方案 C
+
+> 每日仅生成三条 4 秒 I2V：主钩子 + 回应镜头剪为 7–8 秒候选，备用钩子只替换开场机制。以下三条只写可观察形状和运动，不增加材质、价格、库存或履约信息。生成前先复核 [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 中对应槽位仍为 `ready`。
+
+### 主钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#E2｜越过光界完成转身|E2｜越过光界完成转身]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、白色亚麻衬衫、石灰岩露台、海边阴影与侧光起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_01_IRIDESCENT_HUMAN_HOOK-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg。@Image3 是连接处和圆形垂片细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg。@Image4 是同一人物、海岸方向与侧脸终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_04_SIDE_PROFILE_COAST_END-v2.png。
+
+第0帧，模特的肩和半张脸已经跨在露台阴影与侧光的边界，躯干正在完成向右的转身，目光尚未抵达画外目标。唯一动机事件：她完成这一次转身并越过光界；近侧圆形垂片因自身角度改变呈现不同反光，不出现独立扫光或魔法效果。
+
+镜头以头肩近景在模特近侧做一次低幅横向伴移，始终保持同侧、不绕人、不跨越轴线；终点让侧脸进入右侧三分位，近侧耳饰位于最清晰角度。躯干先转，短发和亚麻衣料稍后跟随，耳饰以更短延迟自然追随，所有高光只响应这一次真实角度变化。
+
+视线抵达画外目标、侧脸和近侧耳饰同时可读的第一帧为硬切点，终帧必须不同于首帧。锁定细长耳线、钩根小透明点、单一连接环、圆片顶部的小簇、单一正圆垂片和近侧佩戴耳；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 回应镜头
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#P1｜环境运动证明产品|P1｜环境运动证明产品]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、浅色石灰岩支撑面、一对耳饰的数量、平行摆放和海面方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_02_SEASIDE_PAIR-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg。@Image3 是连接处和圆形垂片细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg。
+
+第0帧，两只耳饰已经完整、真实地被石灰岩支撑，来自海面的水光反射和低位前景视差正从左侧进入。唯一动机事件：同一方向的水面反射越过石面与两只耳饰；耳饰本体始终不滚动、不转向、不悬浮。
+
+镜头用低位近景沿左到右方向做一次果断横移，与主钩子的方向保持可剪接关系，不推拉、不环绕；终点仍让两只圆形轮廓、耳线和连接处同时可读。只有水光和前景产生视差，石面上的反光保持同一光向，耳饰数量、位置、朝向和几何保持不变。
+
+水光刚越过两只圆形轮廓、完整结构仍清晰时硬切，终帧必须不同于首帧。锁定一对耳饰、细长耳线、钩根小透明点、单一连接环、圆片顶部的小簇和单一正圆垂片；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 备用钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#E1｜前景擦镜进入侧脸|E1｜前景擦镜进入侧脸]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、白色亚麻衬衫、三分之四起点、露台和海边空间锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_03_SUN_TURN-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg。@Image3 是连接处和圆形垂片细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg。@Image4 是同一人物、海岸方向与侧脸终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_04_SIDE_PROFILE_COAST_END-v2.png。
+
+第0帧，一角真实的白色亚麻前景已经从左侧覆盖部分镜头，模特正从被遮住的三分之四角度迈入，近侧耳朵尚未完全露出。唯一动机事件：她完成这一步并进入清晰侧脸；这是与主钩子唯一改变的开场机制，人物、产品、场景和4秒终点目的保持一致。
+
+镜头以头肩近景沿前景边缘横向清障一次，始终与人物同侧，不绕人、不跨越轴线；终点把侧脸与近侧耳饰放在右侧三分位。步伐先改变肩线，短发和衣领随后响应，耳饰最后做一次短促且自然衰减的惯性追随。
+
+前景刚完全离开镜头、侧脸与完整近侧耳饰同时可读时硬切，终帧必须不同于首帧。锁定细长耳线、钩根小透明点、单一连接环、圆片顶部的小簇、单一正圆垂片和近侧佩戴耳；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```

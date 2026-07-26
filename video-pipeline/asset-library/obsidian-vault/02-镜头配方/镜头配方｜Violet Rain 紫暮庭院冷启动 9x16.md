@@ -131,3 +131,55 @@ tags: [Violet Rain, 紫暮庭院, TikTok, Seedance, 耳饰, 冷启动, 9x16]
 
 - [template.json](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_VIOLET_RAIN_COLD_START_001/template.json)
 - [Thumbnail.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_VIOLET_RAIN_COLD_START_001/Thumbnail.png)
+
+## v3｜每日方案 C
+
+> 每日仅生成三条 4 秒 I2V：主钩子 + 回应镜头剪为 7–8 秒候选，备用钩子只替换开场机制。以下三条只写可观察形状和运动，不增加材质、价格、库存、履约或耐久信息；雨只存在于建筑和地面，不与耳饰发生接触。生成前先复核 [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 中对应槽位仍为 `ready`。
+
+### 主钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#E1｜前景擦镜进入侧脸|E1｜前景擦镜进入侧脸]] 与 [[镜头配方｜Seedance 动态叙事动作库 v3#E2｜越过光界完成转身|E2｜越过光界完成转身]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、深梅色无袖上衣、湿石灰岩庭院、屋檐雨线、近侧耳饰和起步方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_VIOLET_RAIN_COLD_START_001\first-frames\FF_VIOLET_RAIN_01_HUMAN_HOOK-v2.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-purple-gem-pearl-drops\main.jpg。@Image3 是上方圆形点缀、外框和主垂坠细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-purple-gem-pearl-drops\detail-01.jpg。@Image4 是同一人物、拱门、庭院方向和右侧终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_VIOLET_RAIN_COLD_START_001\first-frames\FF_VIOLET_RAIN_04_ARCH_LOOKBACK_END-v3.png。
+
+第0帧，一条来自屋檐外的前景雨线已经从左侧擦过镜头，模特正以一步越过湿屋顶边缘进入庭院，肩和半张脸同时跨向侧光，近侧耳朵尚未完全露出。唯一动机事件：她完成这一步并完成一次四分之一转身；雨只落在屋檐、建筑和地面，不触碰或改变耳饰。
+
+镜头以头肩近景沿雨线清障后与人物同向横向伴移一次，始终保持近侧、不绕人、不跨越轴线；终点把侧脸与近侧耳饰放在右侧三分位。脚步先改变肩线，深色发尾和衣料稍后跟随，耳饰最后以一次短促自然惯性响应，湿石面反光保持与建筑光向一致。
+
+侧脸进入侧光、前景雨线刚离开镜头且近侧耳饰完整可读时硬切，终帧必须不同于首帧。锁定小圆上方点缀、单一连接环、紫色外框、不规则白色主垂坠和近侧佩戴耳；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 回应镜头
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#P1｜环境运动证明产品|P1｜环境运动证明产品]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、湿石灰岩支撑面、一对耳饰的数量、分离摆放和庭院反射方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_VIOLET_RAIN_COLD_START_001\first-frames\FF_VIOLET_RAIN_02_WET_LIMESTONE_PAIR-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-purple-gem-pearl-drops\main.jpg。@Image3 是上方圆形点缀、外框和主垂坠细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-purple-gem-pearl-drops\detail-01.jpg。
+
+第0帧，两只耳饰已经完整、真实地被湿石灰岩支撑，一道庭院反射光和一个前景水面涟漪的倒影正从左侧进入石面。唯一动机事件：同一方向的反射光与倒影涟漪越过石面和耳饰；耳饰本体始终不滚动、不转向、不悬浮，水不接触耳饰。
+
+镜头以低位近景沿左到右方向横移一次，与主钩子的方向可剪接，不推拉、不环绕；终点让两只耳饰的上方圆形点缀、外框和不规则主垂坠同时清晰。只有地面反射与前景倒影产生视差，石面的湿感保持不变，耳饰数量、位置、朝向和几何保持不变。
+
+反射刚越过两只耳饰的身份特征、完整轮廓仍可读时硬切，终帧必须不同于首帧。锁定一对耳饰、小圆上方点缀、单一连接环、紫色外框和不规则白色主垂坠；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 备用钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#D1｜运动落点形成新构图|D1｜运动落点形成新构图]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、深梅色无袖上衣、拱门、湿石灰岩庭院、右侧起点和光向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_VIOLET_RAIN_COLD_START_001\first-frames\FF_VIOLET_RAIN_04_ARCH_LOOKBACK_END-v3.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-purple-gem-pearl-drops\main.jpg。@Image3 是上方圆形点缀、外框和主垂坠细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-purple-gem-pearl-drops\detail-01.jpg。@Image4 是同一人物、屋檐雨线、步伐方向和近侧耳饰起点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_VIOLET_RAIN_COLD_START_001\first-frames\FF_VIOLET_RAIN_01_HUMAN_HOOK-v2.png。
+
+第0帧，模特已经穿过拱门开口向右移动，右侧偏心终点尚未形成，左侧干净墙面仍被她的运动方向占用。唯一动机事件：她完成这一次跨过拱门的行走并到达右侧三分位；这是与主钩子唯一改变的开场动作，人物、产品、庭院和终点目的保持一致，双手全程远离耳饰。
+
+镜头以环境中景与人物保持同向伴移一次，不跨越轴线、不倒退追拍；终帧让人物停在右侧三分位，左侧留下一块干净墙面和庭院区域。脚步先结束，衣摆和发尾随后衰减，耳饰只随真实步伐做一次轻微延迟响应；雨仍只存在于建筑和地面。
+
+人物刚到达右侧三分位、左侧留白已形成且次级运动仍有极少余量时硬切，终帧必须不同于首帧。锁定近侧佩戴耳、小圆上方点缀、单一连接环、紫色外框和不规则白色主垂坠；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
