@@ -220,3 +220,55 @@ Promote / 广告链接参数：
 | 待填写 | 02 | 待生成 |  |  | 44 |
 | 待填写 | 03 | 待生成 |  |  | 44 |
 | 待填写 | 04 | 待生成 |  |  | 44 |
+
+## v3｜每日方案 C
+
+> 每日仅生成三条 4 秒 I2V：主钩子 + 回应镜头剪为 7–8 秒候选，备用钩子只替换开场机制。以下三条只描述可观察外观，不增加材质、价格、库存或履约信息。生成前先复核 [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 中对应槽位仍为 `ready`。
+
+### 主钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#E1｜前景擦镜进入侧脸|E1｜前景擦镜进入侧脸]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、白色亚麻衣领、拱廊空间与侧向自然光锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg。@Image3 是近侧耳饰细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg。@Image4 是同一人物和庭院行进方向的场景终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_06_COURTYARD_WALK_END-v1.png。
+
+第0帧，石灰岩拱门的近侧边缘已从左侧擦过镜头，模特正从被遮住的三分之四角度迈出，肩线已向右移动，近侧耳朵正在露出，动作不是完成的摆姿势。唯一动机事件：她完成这一步并做一次明确的四分之一转身，视线落向画外右侧。
+
+镜头保持在模特近侧，以头肩近景沿拱门边缘横向清障一次；不绕人物、不跨越人物轴线，终点把侧脸与近侧耳饰放在右侧三分位。步伐先改变肩线，发尾和亚麻衣领随后响应，耳饰最后只做一次短促、自然衰减的惯性追随。
+
+第4秒前景刚完全离开镜头，画面落在一个与首帧不同的侧脸构图，可硬切。始终锁定一对耳饰、上方圆环、绿色点缀、不规则白色垂坠、末端小圆点以及近侧佩戴耳；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 回应镜头
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#P1｜环境运动证明产品|P1｜环境运动证明产品]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、石灰岩支撑面、耳饰数量和原始摆放方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_02_SUSPENDED_HERO-v2.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg。@Image3 是绿色点缀与不规则白色垂坠的细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg。
+
+第0帧，两只耳饰已经完整、真实地被石灰岩支撑，来自左向右的橄榄叶影和近景枝叶视差已经进入画面。唯一动机事件：一阵轻风让同一方向的叶影和前景枝叶越过耳饰；耳饰本体不滚动、不转向、不悬浮。
+
+镜头用低位近景沿与主钩子相同的左到右方向作一次果断横移，不推拉、不环绕；终点停在前景耳饰的不规则白色垂坠和绿色点缀。只有叶影与前景产生视差，石面上的阴影跟随同一光向，产品数量、位置、朝向和几何保持不变。
+
+叶影刚越过身份特征且完整轮廓仍清晰时硬切，终帧必须不同于首帧。锁定两只耳饰、圆环、连接点、绿色点缀、不规则白色垂坠和末端小圆点；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 备用钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#E2｜越过光界完成转身|E2｜越过光界完成转身]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、白色亚麻衣领、近侧耳饰与光界起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_01_MACRO_HOOK-v2.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg。@Image3 是近侧耳饰细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg。@Image4 是同一拱廊的遮挡、空间方向和自然光参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK-v1.png。
+
+第0帧，模特的肩和半张脸已经跨在阴影与侧光的边界，躯干正在向右完成转身，目光尚未抵达画外目标。唯一动机事件：她完成这一次跨光界的四分之一转身；这是与主钩子唯一改变的开场机制，产品、场景、4秒时长和终点目的保持一致。
+
+镜头以头肩近景在近侧低幅横向伴移一次，始终保持人物同侧，不围绕人物；终点让侧脸进入右侧三分位，近侧耳饰变为最清晰角度。躯干先转，发尾和衣料延迟跟随，耳饰以更短延迟自然追随；可见高光只能因角度改变而变化。
+
+视线抵达画外目标、侧脸和近侧耳饰同时可读的第一帧为硬切点，构图必须不同于首帧。锁定一对耳饰、上方圆环、绿色点缀、不规则白色垂坠、末端小圆点和近侧佩戴耳；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```

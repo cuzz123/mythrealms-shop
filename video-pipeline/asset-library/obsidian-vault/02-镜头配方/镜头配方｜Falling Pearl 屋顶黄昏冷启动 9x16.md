@@ -128,3 +128,55 @@ tags: [Falling Pearl, 屋顶黄昏, TikTok, Seedance, 项链, 冷启动, 9x16]
 
 - [template.json](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_FALLING_PEARL_COLD_START_001/template.json)
 - [Thumbnail.png](file:///D:/mythrealms-shop/video-pipeline/asset-library/09-shot-templates/SHOT_FALLING_PEARL_COLD_START_001/Thumbnail.png)
+
+## v3｜每日方案 C
+
+> 每日仅生成三条 4 秒 I2V：主钩子 + 回应镜头剪为 7–8 秒候选，备用钩子只替换开场机制。以下三条只使用内部产品 ID `new-series-pearl-y-lariat` 和可观察的纵向轮廓；不重述本卡既有的价格、材质、库存或履约文字。生成前先复核 [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 中对应槽位仍为 `ready`。
+
+### 主钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#N1｜跨过门洞链坠追随|N1｜跨过门洞链坠追随]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、象牙色开口领口、门洞空间、暖光到蓝调光界和纵向佩戴位置锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK-v1.png。@Image2 是 `new-series-pearl-y-lariat` 的完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\main.jpg。@Image3 是纵向连接和终端细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\detail-01.jpg。@Image4 是屋顶行进方向和偏心终点的场景参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png。
+
+第0帧，模特已经跨过门洞：前脚已落在门外，后脚仍在门内，躯干先进入光区，完整纵向线条正在随步伐移动。唯一动机事件：她完成这一整步，不触碰首饰；躯干先跨越，象牙色衣料随后，最低圆形终端最后以自然延迟完成一次回摆。
+
+镜头以中近景沿人物行进方向做一次对角伴移，保持门洞轴线和完整纵向轮廓，不绕人、不反向超越人物；终点是偏心侧身构图。物理响应只来自这一步：上段结构响应较小，末端响应较晚并自然衰减。
+
+最低终端完成第一次回摆、第二次摆动尚未开始时硬切，终帧必须与首帧构图不同。锁定两侧上段交替的圆形与椭圆形部件、Y 形交汇处的圆形连接点、纵向部件顺序、长线段、末端圆点和整体长度比例；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 回应镜头
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#P1｜环境运动证明产品|P1｜环境运动证明产品]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、浅色石灰岩支撑面、唯一一条 `new-series-pearl-y-lariat` 的数量、竖直摆放和首帧构图锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_02_LIMESTONE_FULL_PRODUCT-v1.png。@Image2 是完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\main.jpg。@Image3 是纵向连接和终端细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\detail-01.jpg。
+
+第0帧，唯一产品已经被石灰岩完整支撑，一道真实的象牙色布料阴影正从画面上方进入。唯一动机事件：布料从画外经过，使阴影沿纵向轮廓越过石面；产品不旋转、不滚动、不悬浮，也没有手或人物进入。
+
+镜头只做一次由上向下的缓慢下降，沿完整纵向轮廓到达最低圆形终端；不推拉、不环绕，终点仍保留整个 Y 形结构于画面内。只有布料阴影在同一光向下移动，产品的数量、位置、朝向、连接顺序和几何保持不变。
+
+阴影刚越过末端、完整纵向轮廓仍可读时硬切，终帧与首帧不同。锁定唯一产品、两侧上段交替的圆形与椭圆形部件、Y 形交汇处圆形连接点、纵向部件顺序、长线段和末端圆点；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 备用钩子
+
+**动作锚点：** [[镜头配方｜Seedance 动态叙事动作库 v3#D1｜运动落点形成新构图|D1｜运动落点形成新构图]]
+
+**可直接喂小云雀的提示词：**
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、象牙色服装、屋顶边缘、城市纵深、光向和三分之四背侧起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_04_ROOFTOP_WALK_END-v1.png。@Image2 是 `new-series-pearl-y-lariat` 的完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\main.jpg。@Image3 是纵向连接和终端细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-pearl-y-lariat\detail-01.jpg。@Image4 是同一模特、门洞和领口佩戴位置的身份支持：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_FALLING_PEARL_COLD_START_001\first-frames\FF_FALLING_PEARL_01_ROOFTOP_HUMAN_HOOK-v1.png。
+
+第0帧，模特已经沿屋顶边缘向右移动，重心在前脚，右侧终点尚未形成，双手远离首饰。唯一动机事件：她完成这一次沿边缘的行走并到达右侧偏心 profile；这只是把开场机制改为屋顶落点，视觉方向和终点目的与主钩子保持一致，全程没有手碰首饰。
+
+镜头以环境中景和人物保持同向，沿屋顶边缘轻微伴移一次，不跨越轴线、不倒退追拍；终帧把模特放在右侧三分位，左侧只留下一个干净的天空与城市区域。脚步先结束，衣摆和发尾随后衰减，纵向佩戴线仅随真实步伐产生轻微、自然的延迟响应。
+
+模特刚到达右侧 profile、次级运动尚有极少余量时硬切，终帧必须不同于首帧。锁定佩戴侧、唯一纵向结构、两侧上段交替的圆形与椭圆形部件、Y 形交汇处圆形连接点、末端圆点和与领口的相对位置；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
