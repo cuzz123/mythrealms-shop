@@ -3,7 +3,7 @@ type: first_frame_generation_prep
 status: ready_internal
 prepared_at: 2026-07-26
 scope: next_tiktok_recipe_batch
-image_generation_executed: false
+image_generation_executed: partial
 external_actions: none
 ---
 
@@ -11,7 +11,7 @@ external_actions: none
 
 ## 使用边界
 
-- 本卡只准备首帧生成与后续 3×4 秒镜头骨架，没有调用 `image/imagegen`，没有生成图片或视频，也没有发布。
+- 本卡已对 Coastal Pearl Cascade Necklace 与 Pearl Series 04 Cobalt & Blush 各执行一次内置 `image/imagegen` 首帧生成；Mist Jade 未生成。没有生成视频，也没有发布。
 - `GO` 只代表允许进入内部首帧生成与视觉 QA；不代表商品材质、商用权、价格、库存、履约或公开发布已经核验。
 - 三组首帧均采用 `9:16` 竖屏构图，不生成文字、Logo、水印、价格或商品承诺。
 - 不引用或复用已发布的 Baroque Orbit、Gold Shell Teardrops 素材。
@@ -24,6 +24,15 @@ external_actions: none
 | Mist Jade | **NO-GO** | 资产卡与 manifest 把对象写成 necklace，但唯一商品源图、公开目录 slug 与肉眼结构均指向 bracelet；身份冲突会把错误结构固化进生成链 | 先把路线明确改为 bracelet，或补一张真正的 necklace 结构源图；完成后再启用下方暂存提示词 |
 | Coastal Pearl Cascade Necklace | **GO（仅内部生成）** | 环境与产品结构源分离清楚；横向人物图只控制海岸石墙、窗光与深蓝色承托关系，不控制人物身份 | 生成一个无可识别人脸的 9:16 产品首帧，逐层核对三层结构与单件数量 |
 | Pearl Series 04 Cobalt & Blush | **GO（仅内部生成）** | 商品源图清楚显示项链与手链为一组，环境图可提供自然窗光；但源图含第三方字样且权利状态未核验 | 仅以源图控制可见结构与配色关系，生成无文字的 9:16 内部首帧；公开使用前另做权利 QA |
+
+## 2026-07-26 image/imagegen 输出与首轮视觉 QA
+
+| 候选 | 输出 | 首轮视觉 QA | 当前边界 |
+| --- | --- | --- | --- |
+| Coastal Pearl Cascade Necklace | `D:\mythrealms-shop\video-pipeline\asset-library\10-storyboard-videos\VID_MR_COASTAL_LIBRARY_PEARL_NECKLACE_001\first-frames\FF_COASTAL_CASCADE_01_NAVY_BUST-v1.png` | 941×1672；9:16；恰好一条项链；三层结构完整、最长层未裁切；无人物、文字、Logo 或水印。可进入内部 Seedance 提示词 QA。 | 仅为生成图视觉证据，不证明材质、商品事实、非侵权或公开商用权；生成视频后仍需检查链条和垂坠单元漂移。 |
+| Pearl Series 04 Cobalt & Blush | `D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_COBALT_BLUSH_SET_COLD_START_001\first-frames\FF_COBALT_BLUSH_01_WINDOW_TABLE-v1.png` | 941×1672；9:16；恰好一条项链加一条手链，二者分离且未裁切；无人物、文字、Logo 或水印。可进入内部 Seedance 提示词 QA。 | 仅为生成图视觉证据，不证明宝石、珍珠、金属或商用状态；相对源图的细小连接件可能发生重构，公开使用前仍需商品结构与权利 QA。 |
+
+生成方式：Codex 内置 `image/imagegen`；输入为各候选在下文列出的环境/构图参考与商品结构参考；两张输出均采用版本化新文件名，未覆盖源图。
 
 ---
 
