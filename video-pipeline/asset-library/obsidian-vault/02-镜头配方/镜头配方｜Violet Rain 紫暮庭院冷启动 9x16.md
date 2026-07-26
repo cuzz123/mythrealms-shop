@@ -2,7 +2,7 @@
 id: SHOT_VIOLET_RAIN_COLD_START_001
 asset_type: shot_template
 status: approved
-version: v1
+version: v2
 format: 9:16
 campaign: violet_rain_cold_start
 product: new-series-purple-gem-pearl-drops
@@ -12,6 +12,8 @@ tags: [Violet Rain, 紫暮庭院, TikTok, Seedance, 耳饰, 冷启动, 9x16]
 ---
 
 # 镜头配方｜Violet Rain 紫暮庭院冷启动 9x16
+
+> **v2 动态默认：** Frame 01 改用 [[镜头配方｜Seedance 动态叙事动作库 v2#A3｜雨后屋檐下的加速一步|A3 雨后屋檐下的加速一步]]；Frame 04 改用 [[镜头配方｜Seedance 动态叙事动作库 v2#D2｜镜头先过场景，再捕获人物|D2 从拱门前景捕获人物]]。不再采用“拨发、转头、停住”的摆拍节奏。
 
 蓝调时刻的湿石灰岩庭院，以真人眼神开场、双只产品证明承接、佩戴识别加深、拱门回望完成情绪 CTA。四帧全部用于 4 秒 Seedance 2.0 Fast I2V，最终剪成约 11.5 秒 TikTok 冷启动广告；文案与 CML 音乐只在后期加入。
 

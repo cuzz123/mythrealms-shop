@@ -2,7 +2,7 @@
 id: SHOT_FALLING_PEARL_COLD_START_001
 asset_type: shot_template
 status: approved
-version: v1
+version: v2
 format: 9:16
 campaign: falling_pearl_cold_start
 product: new-series-pearl-y-lariat
@@ -12,6 +12,8 @@ tags: [Falling Pearl, 屋顶黄昏, TikTok, Seedance, 项链, 冷启动, 9x16]
 ---
 
 # 镜头配方｜Falling Pearl 屋顶黄昏冷启动 9x16
+
+> **v2 动态默认：** Frame 01 / 03 改用 [[镜头配方｜Seedance 动态叙事动作库 v2#B1｜门洞转身，链坠滞后落下|B1 门洞转身，链坠滞后落下]]；结尾改用 [[镜头配方｜Seedance 动态叙事动作库 v2#D2｜镜头先过场景，再捕获人物|D2 镜头先过场景，再捕获人物]]。链坠由转身与衣料惯性带动，不用手抓首饰或站桩反光。
 
 屋顶黄昏进入蓝调时刻的四帧 TikTok 冷启动包：真人门洞光界钩子，唯一单件完整产品证明，模特佩戴识别，再以天际线边缘主导的 profile 转向完成 CTA。四帧全部用于 4 秒 Seedance 2.0 Fast I2V，最终剪成 11.5 秒；文字与 CML 音乐只在后期加入。
 

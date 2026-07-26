@@ -2,7 +2,7 @@
 id: SHOT_MOON_DISC_COLD_START_001
 asset_type: shot_template
 status: approved
-version: v1
+version: v2
 format: 9:16
 campaign: moon_disc_cold_start
 product: new-series-round-shell-disc-drops
@@ -12,6 +12,8 @@ tags: [Moon Disc, 海光变彩, TikTok, Seedance, 耳饰, 冷启动, 9x16]
 ---
 
 # 镜头配方｜Moon Disc 海光变彩冷启动 9x16
+
+> **v2 动态默认：** Frame 01 / 03 改用 [[镜头配方｜Seedance 动态叙事动作库 v2#A2｜风把头发吹向耳后|A2 风把头发吹向耳后]]；结尾改用 [[镜头配方｜Seedance 动态叙事动作库 v2#D2｜镜头先过场景，再捕获人物|D2 从前景发现人物]]。贝壳变彩来自人物进入侧光后的真实角度变化，不用“光扫过首饰”代替人物行为。
 
 明亮海边石灰岩露台的四帧 TikTok 冷启动包：真人转向阳光引出一次贝壳闪彩，唯一的双只产品证明承接，再由三分之四佩戴镜头和侧脸海岸结尾完成 CTA。所有帧均为 4 秒 Seedance 2.0 Fast I2V 动态源片；文字与音乐只在后期添加。
 

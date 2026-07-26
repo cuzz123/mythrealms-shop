@@ -2,7 +2,7 @@
 id: SHOT_TURQUOISE_LEAF_COLD_START_001
 asset_type: shot_template
 status: approved
-version: v1
+version: v2
 format: 9:16
 campaign: turquoise_leaf_cold_start
 product: new-series-leaf-turquoise-pearl-cuff
@@ -12,6 +12,8 @@ tags: [Turquoise Leaf, 泳池庭院, TikTok, Seedance, 手镯, 冷启动, 9x16]
 ---
 
 # 镜头配方｜Turquoise Leaf 泳池庭院冷启动 9x16
+
+> **v2 动态默认：** Frame 01 / 03 改用 [[镜头配方｜Seedance 动态叙事动作库 v2#C1｜手沿石墙滑行，离墙收势|C1 手沿石墙滑行，离墙收势]]；备选为 [[镜头配方｜Seedance 动态叙事动作库 v2#C2｜抬手遮光，再放下视线|C2 抬手遮光，再放下视线]]。手镯必须由手在完成一件自然动作时被看见，禁止单纯扭转手腕展示产品。
 
 热带石灰岩泳池庭院的四帧 TikTok 冷启动包：真人高位袖口动作开场，唯一单件产品证明承接，平视半身佩戴识别加深，再以石阶与墙面主导的手部滑动完成 CTA。四帧全部用于 4 秒 Seedance 2.0 Fast I2V，最终剪成 11.5 秒；文字与 CML 音乐只在后期加入。
 
