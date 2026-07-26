@@ -13,6 +13,8 @@ external_actions: founder_only
 
 > 这是内部制作台，不是发布日历。创始人是小云雀、剪映、AdsPower 与 TikTok 的唯一外部执行者；内容与品牌只负责维护提示词、素材路径、回传记录和复盘。所有未知数据必须写 `待确认`，不以 0 代替。
 
+> **已发布素材排除：** `SHOT_BAROQUE_ORBIT_COLD_START_001` 与 `SHOT_GOLD_SHELL_TEARDROPS_COLD_START_001` 的素材已经制作并发布，本轮 14 天队列不再使用，也不作为备用钩子或补位素材。历史配方和文件保留，不删除。
+
 ## 每天只做这七步
 
 1. 打开当天的主钩子、回应镜头、备用钩子；确认 [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 中三槽仍为 `ready`。
@@ -27,33 +29,88 @@ external_actions: founder_only
 
 `D{两位日序}_{SUBJECT}_{SLOT}_T{尝试号}.mp4`
 
-- `SUBJECT`：`BAROQUE`、`MOON_DISC`、`TURQUOISE_LEAF`、`VIOLET_RAIN`、`FALLING_PEARL` 或当天的 `BEST`。
+- `SUBJECT`：`MOON_DISC`、`TURQUOISE_LEAF`、`VIOLET_RAIN`、`FALLING_PEARL` 或当天的 `BEST`。
 - `SLOT`：`MAIN_HOOK`、`RESPONSE`、`ALT_HOOK`、`CANDIDATE`。
-- 原片保留尝试号，例如 `D01_BAROQUE_MAIN_HOOK_T01.mp4`；剪映导出候选使用 `D01_BAROQUE_CANDIDATE_C01.mp4`。
+- 原片保留尝试号，例如 `D01_MOON_DISC_MAIN_HOOK_T01.mp4`；剪映导出候选使用 `D01_MOON_DISC_CANDIDATE_C01.mp4`。
 - 不覆盖原片；重试递增 `T02`、`T03`。被拒绝的文件仍保留，并在回传记录写原因。
 
 ## 14 天队列
 
 | Day | 主体 | 当天只测试的变量 | 三个生成位 |
 | --- | --- | --- | --- |
-| 1 | Baroque Orbit | 前景擦镜 vs 越过光界钩子 | 主钩子、回应镜头、备用钩子 |
-| 2 | Moon Disc | 角度驱动的光线变化 vs 前景揭示 | 主钩子、回应镜头、备用钩子 |
-| 3 | Turquoise Leaf | 松开石栏 vs 沿墙放手任务 | 主钩子、回应镜头、备用钩子 |
-| 4 | Violet Rain | 湿前景揭示 vs 穿过拱门 | 主钩子、回应镜头、备用钩子 |
-| 5 | Falling Pearl | 穿过门口 vs 屋顶落点 | 主钩子、回应镜头、备用钩子 |
-| 6 | Day 1–5 中最可用主体 | 只增大或减小人物动作幅度 | 主钩子、回应镜头、备用钩子 |
-| 7 | Day 1–5 中最可用主体 | 只改变镜头与主体的关系 | 主钩子、回应镜头、备用钩子 |
-| 8 | Baroque Orbit 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
-| 9 | Moon Disc 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
-| 10 | Turquoise Leaf 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
-| 11 | Violet Rain 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
-| 12 | Falling Pearl 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 1 | Moon Disc | 角度驱动的光线变化 vs 前景揭示 | 主钩子、回应镜头、备用钩子 |
+| 2 | Turquoise Leaf | 松开石栏 vs 沿墙放手任务 | 主钩子、回应镜头、备用钩子 |
+| 3 | Violet Rain | 湿前景揭示 vs 穿过拱门 | 主钩子、回应镜头、备用钩子 |
+| 4 | Falling Pearl | 穿过门口 vs 屋顶落点 | 主钩子、回应镜头、备用钩子 |
+| 5 | Day 1–4 中最可用主体 | 只增大或减小人物动作幅度 | 主钩子、回应镜头、备用钩子 |
+| 6 | Day 1–4 中第二可用主体 | 只改变镜头与主体的关系 | 主钩子、回应镜头、备用钩子 |
+| 7 | Day 1–4 中最可用主体 | 保持钩子，只改变回应镜头的终点 | 主钩子、回应镜头、备用钩子 |
+| 8 | Moon Disc 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 9 | Turquoise Leaf 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 10 | Violet Rain 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 11 | Falling Pearl 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 12 | Day 1–4 中第二可用主体 | 只替换较弱钩子的开场机制 | 主钩子、回应镜头、备用钩子 |
 | 13 | 最佳留存候选 | 两个备用钩子，共用同一回应镜头 | 钩子 A、回应镜头、钩子 B |
 | 14 | 试点综合 | 一个最终候选 + 两条可复用动作库片段 | 最终候选、动作库片段 A、动作库片段 B |
 
 `Luxury Product Reveal` 在 `blocked_by_product_asset` 解除前始终不进入队列、不消耗当日三个生成位。
 
-## Day 1｜Baroque Orbit 校准包
+## Day 1｜Moon Disc 校准包
+
+**前置检查：** [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 的 `SHOT_MOON_DISC_COLD_START_001` 三个槽位当前均为 `ready`。本日只使用 `SHOT_MOON_DISC_COLD_START_001` 与其产品图，不引用已经发布过的 Baroque Orbit 或 Gold Shell Teardrops 目录。
+
+### 主钩子
+
+**输出文件：** `D01_MOON_DISC_MAIN_HOOK_T01.mp4`
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、白色亚麻衬衫、石灰岩露台、海边阴影与侧光起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_01_IRIDESCENT_HUMAN_HOOK-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg。@Image3 是连接处和圆形垂片细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg。@Image4 是同一人物、海岸方向与侧脸终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_04_SIDE_PROFILE_COAST_END-v2.png。
+
+第0帧，模特的肩和半张脸已经跨在露台阴影与侧光的边界，躯干正在完成向右的转身，目光尚未抵达画外目标。唯一动机事件：她完成这一次转身并越过光界；近侧圆形垂片因自身角度改变呈现不同反光，不出现独立扫光或魔法效果。
+
+镜头以头肩近景在模特近侧做一次低幅横向伴移，始终保持同侧、不绕人、不跨越轴线；终点让侧脸进入右侧三分位，近侧耳饰位于最清晰角度。躯干先转，短发和亚麻衣料稍后跟随，耳饰以更短延迟自然追随，所有高光只响应这一次真实角度变化。
+
+视线抵达画外目标、侧脸和近侧耳饰同时可读的第一帧为硬切点，终帧必须不同于首帧。锁定细长耳线、钩根小透明点、单一连接环、圆片顶部的小簇、单一正圆垂片和近侧佩戴耳；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 回应镜头
+
+**输出文件：** `D01_MOON_DISC_RESPONSE_T01.mp4`
+
+```text
+@Image1 是精确首帧、浅色石灰岩支撑面、一对耳饰的数量、平行摆放和海面方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_02_SEASIDE_PAIR-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg。@Image3 是连接处和圆形垂片细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg。
+
+第0帧，两只耳饰已经完整、真实地被石灰岩支撑，来自海面的水光反射和低位前景视差正从左侧进入。唯一动机事件：同一方向的水面反射越过石面与两只耳饰；耳饰本体始终不滚动、不转向、不悬浮。
+
+镜头用低位近景沿左到右方向做一次果断横移，与主钩子的方向保持可剪接关系，不推拉、不环绕；终点仍让两只圆形轮廓、耳线和连接处同时可读。只有水光和前景产生视差，石面上的反光保持同一光向，耳饰数量、位置、朝向和几何保持不变。
+
+水光刚越过两只圆形轮廓、完整结构仍清晰时硬切，终帧必须不同于首帧。锁定一对耳饰、细长耳线、钩根小透明点、单一连接环、圆片顶部的小簇和单一正圆垂片；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 备用钩子
+
+**输出文件：** `D01_MOON_DISC_ALT_HOOK_T01.mp4`
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、白色亚麻衬衫、三分之四起点、露台和海边空间锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_03_SUN_TURN-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\main.jpg。@Image3 是连接处和圆形垂片细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-round-shell-disc-drops\detail-01.jpg。@Image4 是同一人物、海岸方向与侧脸终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_MOON_DISC_COLD_START_001\first-frames\FF_MOON_DISC_04_SIDE_PROFILE_COAST_END-v2.png。
+
+第0帧，一角真实的白色亚麻前景已经从左侧覆盖部分镜头，模特正从被遮住的三分之四角度迈入，近侧耳朵尚未完全露出。唯一动机事件：她完成这一步并进入清晰侧脸；这是与主钩子唯一改变的开场机制，人物、产品、场景和4秒终点目的保持一致。
+
+镜头以头肩近景沿前景边缘横向清障一次，始终与人物同侧，不绕人、不跨越轴线；终点把侧脸与近侧耳饰放在右侧三分位。步伐先改变肩线，短发和衣领随后响应，耳饰最后做一次短促且自然衰减的惯性追随。
+
+前景刚完全离开镜头、侧脸与完整近侧耳饰同时可读时硬切，终帧必须不同于首帧。锁定细长耳线、钩根小透明点、单一连接环、圆片顶部的小簇、单一正圆垂片和近侧佩戴耳；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 屏幕文案与中性 caption
+
+- 屏幕文案第 1 行：`The angle changes everything.`
+- 屏幕文案第 2 行：`Which view caught you first?`
+- 中性 caption：`Movement changes how a shape catches the light. Which moment caught your eye?`
+- 不附公开产品 URL；创始人在发布时自行决定最终 caption、链接与平台设置。
+
+## 历史归档｜Baroque Orbit 校准包（已发布，不再执行）
+
+> 以下内容仅为历史记录。`SHOT_BAROQUE_ORBIT_COLD_START_001` 已经用于已发布视频，本轮不得再次提交小云雀、进入剪映候选或作为 14 天队列补位。
 
 **前置检查：** [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 的 `SHOT_BAROQUE_ORBIT_COLD_START_001` 三个槽位当前均为 `ready`。如果任何一个变为非 `ready`，当天停止生成并记录，不用替代素材硬凑。
 
