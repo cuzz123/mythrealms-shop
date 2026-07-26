@@ -1,0 +1,177 @@
+---
+type: production_desk
+status: pilot
+pilot_days: 14
+daily_seedance_clips: 3
+clip_seconds: 4
+execution_owner: founder
+support_owner: content_brand
+external_actions: founder_only
+---
+
+# TikTok 制作台｜14天每日3×4秒执行卡
+
+> 这是内部制作台，不是发布日历。创始人是小云雀、剪映、AdsPower 与 TikTok 的唯一外部执行者；内容与品牌只负责维护提示词、素材路径、回传记录和复盘。所有未知数据必须写 `待确认`，不以 0 代替。
+
+## 每天只做这七步
+
+1. 打开当天的主钩子、回应镜头、备用钩子；确认 [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 中三槽仍为 `ready`。
+2. 逐条复制当天三个 4 秒 I2V 提示词到小云雀；只上传提示词声明的 `@Image`，不混入其他人物、产品或场景图。
+3. 生成后立即保存三条原始 MP4；不把失败片段当作下一条的续接参考。
+4. 先做五点原片 QA：人物/产品身份稳定、数量和几何稳定、动作从第 0 帧已开始、4 秒前形成可硬切新构图、无文字/logo/水印或明显变形。
+5. 在剪映按本卡的 7–8 秒时间线，把主钩子与回应镜头剪成一个候选；备用钩子只作为开场替代测试，不与回应镜头混成第三个叙事段。
+6. 记录原片、入出点、导出文件、拒片原因和可见平台数据；没有的数据写 `待确认`。
+7. 由创始人决定是否手动发布；部门不登录、不发布、不改链接、不投放。发布后仅回传记录，2 小时和 24 小时再做只读复盘。
+
+## 文件命名
+
+`D{两位日序}_{SUBJECT}_{SLOT}_T{尝试号}.mp4`
+
+- `SUBJECT`：`BAROQUE`、`MOON_DISC`、`TURQUOISE_LEAF`、`VIOLET_RAIN`、`FALLING_PEARL` 或当天的 `BEST`。
+- `SLOT`：`MAIN_HOOK`、`RESPONSE`、`ALT_HOOK`、`CANDIDATE`。
+- 原片保留尝试号，例如 `D01_BAROQUE_MAIN_HOOK_T01.mp4`；剪映导出候选使用 `D01_BAROQUE_CANDIDATE_C01.mp4`。
+- 不覆盖原片；重试递增 `T02`、`T03`。被拒绝的文件仍保留，并在回传记录写原因。
+
+## 14 天队列
+
+| Day | 主体 | 当天只测试的变量 | 三个生成位 |
+| --- | --- | --- | --- |
+| 1 | Baroque Orbit | 前景擦镜 vs 越过光界钩子 | 主钩子、回应镜头、备用钩子 |
+| 2 | Moon Disc | 角度驱动的光线变化 vs 前景揭示 | 主钩子、回应镜头、备用钩子 |
+| 3 | Turquoise Leaf | 松开石栏 vs 沿墙放手任务 | 主钩子、回应镜头、备用钩子 |
+| 4 | Violet Rain | 湿前景揭示 vs 穿过拱门 | 主钩子、回应镜头、备用钩子 |
+| 5 | Falling Pearl | 穿过门口 vs 屋顶落点 | 主钩子、回应镜头、备用钩子 |
+| 6 | Day 1–5 中最可用主体 | 只增大或减小人物动作幅度 | 主钩子、回应镜头、备用钩子 |
+| 7 | Day 1–5 中最可用主体 | 只改变镜头与主体的关系 | 主钩子、回应镜头、备用钩子 |
+| 8 | Baroque Orbit 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 9 | Moon Disc 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 10 | Turquoise Leaf 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 11 | Violet Rain 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 12 | Falling Pearl 第二轮 | 沿用较好钩子，改一个新的回应终点 | 主钩子、回应镜头、备用钩子 |
+| 13 | 最佳留存候选 | 两个备用钩子，共用同一回应镜头 | 钩子 A、回应镜头、钩子 B |
+| 14 | 试点综合 | 一个最终候选 + 两条可复用动作库片段 | 最终候选、动作库片段 A、动作库片段 B |
+
+`Luxury Product Reveal` 在 `blocked_by_product_asset` 解除前始终不进入队列、不消耗当日三个生成位。
+
+## Day 1｜Baroque Orbit 校准包
+
+**前置检查：** [[TikTok 制作台｜输入资产完整性审计|输入资产完整性审计]] 的 `SHOT_BAROQUE_ORBIT_COLD_START_001` 三个槽位当前均为 `ready`。如果任何一个变为非 `ready`，当天停止生成并记录，不用替代素材硬凑。
+
+### 主钩子
+
+**输出文件：** `D01_BAROQUE_MAIN_HOOK_T01.mp4`
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、白色亚麻衣领、拱廊空间与侧向自然光锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK-v1.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg。@Image3 是近侧耳饰细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg。@Image4 是同一人物和庭院行进方向的场景终点参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_06_COURTYARD_WALK_END-v1.png。
+
+第0帧，石灰岩拱门的近侧边缘已从左侧擦过镜头，模特正从被遮住的三分之四角度迈出，肩线已向右移动，近侧耳朵正在露出，动作不是完成的摆姿势。唯一动机事件：她完成这一步并做一次明确的四分之一转身，视线落向画外右侧。
+
+镜头保持在模特近侧，以头肩近景沿拱门边缘横向清障一次；不绕人物、不跨越人物轴线，终点把侧脸与近侧耳饰放在右侧三分位。步伐先改变肩线，发尾和亚麻衣领随后响应，耳饰最后只做一次短促、自然衰减的惯性追随。
+
+第4秒前景刚完全离开镜头，画面落在一个与首帧不同的侧脸构图，可硬切。始终锁定一对耳饰、上方圆环、绿色点缀、不规则白色垂坠、末端小圆点以及近侧佩戴耳；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 回应镜头
+
+**输出文件：** `D01_BAROQUE_RESPONSE_T01.mp4`
+
+```text
+@Image1 是精确首帧、石灰岩支撑面、耳饰数量和原始摆放方向锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_02_SUSPENDED_HERO-v2.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg。@Image3 是绿色点缀与不规则白色垂坠的细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg。
+
+第0帧，两只耳饰已经完整、真实地被石灰岩支撑，来自左向右的橄榄叶影和近景枝叶视差已经进入画面。唯一动机事件：一阵轻风让同一方向的叶影和前景枝叶越过耳饰；耳饰本体不滚动、不转向、不悬浮。
+
+镜头用低位近景沿与主钩子相同的左到右方向作一次果断横移，不推拉、不环绕；终点停在前景耳饰的不规则白色垂坠和绿色点缀。只有叶影与前景产生视差，石面上的阴影跟随同一光向，产品数量、位置、朝向和几何保持不变。
+
+叶影刚越过身份特征且完整轮廓仍清晰时硬切，终帧必须不同于首帧。锁定两只耳饰、圆环、连接点、绿色点缀、不规则白色垂坠和末端小圆点；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 备用钩子
+
+**输出文件：** `D01_BAROQUE_ALT_HOOK_T01.mp4`
+
+```text
+@Image1 是精确首帧、成年虚构模特身份、白色亚麻衣领、近侧耳饰与光界起点锁：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_01_MACRO_HOOK-v2.png。@Image2 是耳饰完整结构锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\main.jpg。@Image3 是近侧耳饰细节锁：D:\mythrealms-shop\public\images\products\new-series\new-series-baroque-pearl-hoops\detail-05.jpg。@Image4 是同一拱廊的遮挡、空间方向和自然光参考：D:\mythrealms-shop\video-pipeline\asset-library\09-shot-templates\SHOT_BAROQUE_ORBIT_COLD_START_001\first-frames\FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK-v1.png。
+
+第0帧，模特的肩和半张脸已经跨在阴影与侧光的边界，躯干正在向右完成转身，目光尚未抵达画外目标。唯一动机事件：她完成这一次跨光界的四分之一转身；这是与主钩子唯一改变的开场机制，产品、场景、4秒时长和终点目的保持一致。
+
+镜头以头肩近景在近侧低幅横向伴移一次，始终保持人物同侧，不围绕人物；终点让侧脸进入右侧三分位，近侧耳饰变为最清晰角度。躯干先转，发尾和衣料延迟跟随，耳饰以更短延迟自然追随；可见高光只能因角度改变而变化。
+
+视线抵达画外目标、侧脸和近侧耳饰同时可读的第一帧为硬切点，构图必须不同于首帧。锁定一对耳饰、上方圆环、绿色点缀、不规则白色垂坠、末端小圆点和近侧佩戴耳；禁止身份漂移、几何复制、额外首饰、换脸、商品漂浮、文字、logo、水印。
+```
+
+### 屏幕文案与中性 caption
+
+- 屏幕文案第 1 行：`Not made to stand still.`
+- 屏幕文案第 2 行：`Which detail caught you first?`
+- 中性 caption：`Movement changes what you notice first. Which detail caught your eye?`
+- 不附公开产品 URL；创始人在发布时自行决定最终 caption、链接与平台设置。
+
+## 剪映 7–8 秒模板
+
+```text
+0.00–0.20：从最强动作中间开始；不加淡入。
+0.20–3.15：主钩子；在动作明显失速前裁掉。
+3.15：在同方向、前景清障或光线变化处硬切。
+3.15–6.90：回应镜头；保留干净的产品终点。
+6.90–7.80：可选最终文案；不使用模板转场。
+音频：一条连续的商业可用音乐；最多一个轻微切点音效。
+```
+
+初学者操作：把主钩子放在 V1，把回应镜头紧接在 V1；不要用自动转场，不要变速，不要用滤镜遮掩几何漂移。先完成无文案版本，再只在最后 0.90 秒加入两行屏幕文案。
+
+## 生成结果回传格式
+
+```markdown
+日期：待确认
+Day / 主体：待确认
+三条原始 MP4：
+- 主钩子：待确认
+- 回应镜头：待确认
+- 备用钩子：待确认
+选定入出点：待确认
+导出候选路径：待确认
+原片 QA：人物/产品稳定｜待确认；数量/几何稳定｜待确认；第 0 帧动作｜待确认；硬切终点｜待确认；无文字/logo/水印｜待确认
+拒绝片段及原因：待确认
+可见平台数据（如有）：待确认
+下一次只改的变量：待确认
+```
+
+回传的最小必填物：三条原始 MP4 路径、选定入出点、导出候选路径、拒绝片段原因、任何可见平台指标。未知字段必须为 `待确认`，不是 0。
+
+## 发布记录
+
+发布动作只由创始人手动完成。本卡不授权账号登录、发布、广告、付款、采购、部署或商品状态修改。
+
+```markdown
+实际发布时间与时区：待确认
+平台/账号：待确认
+公开视频 URL：待确认
+最终 caption：待确认
+是否含链接：待确认
+审核或异常：待确认
+```
+
+## 2 小时 / 24 小时复盘
+
+| 检查点 | 只读记录 | 决定规则 |
+| --- | --- | --- |
+| 发布后 2 小时 | 播放、平均观看、完播、点赞、评论、分享、主页访问、异常；均为待确认直到可见 | 只判断是否有审核、链接、画面或明显归因异常；有异常则暂停新增发布并记录。 |
+| 发布后 24 小时 | 同上，并记录主钩子/回应/备用钩子实际采用版本 | 不把单条播放量当作胜负；只选择下一轮唯一变量，或保持当前方案。 |
+
+禁止把未知平台指标填为 0；没有可读取数据时，只写 `待确认`。
+
+## Blender / AE 例外申请
+
+默认不用 Blender 或 AE。仅当两个小云雀重试都在同一、已记录的单一问题上失败，并且该问题不能通过“更换首帧 / 减少动作 / 缩短提示词 / 剪映裁切”解决时，才可申请一个成对对照测试。
+
+申请必须写明：问题证据、要精确控制的单一变量、Blender 或 AE 只负责的层、对照用的同一首帧/动作、预计时间、成功判定和回退方式。未批准前不制作；测试结果不自动进入发布队列。
+
+## 试点结束判断
+
+第 14 天只根据已回传的原片 QA、剪映候选、可见且可归因的平台数据和创始人实际耗时判断：
+
+- 保留：能稳定做出身份/几何合格、动作从第 0 帧开始、可硬切的 7–8 秒候选，且创始人愿意继续使用。
+- 调整：某一个主体、钩子机制或剪辑步骤反复失败时，仅替换该变量，再跑一个短周期。
+- 停止：无法稳定通过原片 QA，或制作成本对创始人不成比例。
+
+没有数据的字段均为 `待确认`；不把试点计划、播放量或未验证商品信息写成结论。
