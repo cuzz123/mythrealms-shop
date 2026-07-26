@@ -26,6 +26,9 @@
 | OPS-020 | P0 支持 | SEO/GEO 完整草稿包 02 | 内容与品牌 | `maverenne-seo-draft-pack-02.md`；提交 `ff1cdcb` | `/pearls/care` 与 `/pearls/freshwater-pearls` 的品牌中性内部草稿 | 2026-07-26 | 正文、直接回答、FAQ、来源与禁用推断边界齐全；未改公开页面 | 名称清查、公开文案审查与发布授权 | `accepted` |
 | OPS-021 | P0 支持 | SEO/GEO 完整草稿包 03 | 内容与品牌 | `maverenne-seo-draft-pack-03.md`；提交 `654dd3d` | `/pearls` 与 `/about` 的内部审校草稿 | 2026-07-26 | About 使用 `[BRAND_NAME]`；未宣称注册、上线、域名或经营事实 | 名称清查、品牌事实与发布授权 | `accepted` |
 | OPS-022 | P0 支持 | Prisma 运行时兼容性诊断 | 技术与自动化 | `maverenne-build-runtime-compatibility.md`；提交 `efe8fee` | Node 24 安装、Prisma CLI 与 generate 的分层诊断证据 | 2026-07-26 | Node 24 干净安装与 CLI 启动证据已接受；`generate` 仍未通过 | Node 22 LTS 对照或 Prisma 引擎/生成挂起根因 | `accepted` |
+| OPS-023 | P0 子项目 | Maverenne 名称清查证据补强 | 秘书处调度 | `maverenne-name-clearance.md` | 带查询时间、词组、类别、官方方法和明确布尔门槛的只读记录 | 2026-07-26 | 证据记录已补强；三项门槛继续为 `false`，不代表发现确定冲突 | USPTO/WIPO 可复核结果、律师复核、注册商与账号管理员证据 | `waiting_external` |
+| OPS-024 | P0 支持 | 六页 SEO/GEO 一手来源证据包 | 内容与品牌 + 增长与数据 | `maverenne-seo-source-evidence.md` | 六页逐主张的来源、支持范围、禁止推断与采用状态 | 2026-07-26 | 仅采用 GIA、FTC、Google Search Central；未改公开页面 | 发布前链接复核、商品/政策事实、名称清查与发布授权 | `accepted` |
+| OPS-025 | P0 支持 | Prisma 运行时兼容性跟进诊断 | 技术与自动化 + 秘书处复核 | `maverenne-build-runtime-compatibility-followup.md` | Node 22 获取失败、隔离目录成功与主工作区冷启动超时的分层证据 | 2026-07-26 | 主工作区安装退出 0，但 `generate` 124 秒超时且遗留进程已定向终止；客户端仍不可解析，单测、lint、build 未运行 | 诊断主工作区多平台引擎获取链路或提供可信预热缓存，再重新验证 | `accepted_with_blocker` |
 
 ## 本批接受的交付（非新增任务）
 
@@ -39,12 +42,15 @@
 | SEO draft pack 02 | `ff1cdcb` | `accepted` | 两个现有珍珠知识 URL 的品牌中性内部草稿；不授权发布。 |
 | SEO draft pack 03 | `654dd3d` | `accepted` | Pearl Guide hub 与 `[BRAND_NAME]` About 内部草稿；不授权替换占位符或上线。 |
 | Prisma 运行时兼容性诊断 | `efe8fee` | `accepted` | 接受诊断记录，不表示 `prisma generate`、测试、lint 或 build 通过。 |
+| Maverenne 名称清查证据补强 | `maverenne-name-clearance.md` | `accepted_with_blocker` | 接受只读证据记录；名称、购买、生产迁移三项门槛继续为 `false`。 |
+| 六页 SEO/GEO 一手来源证据包 | `maverenne-seo-source-evidence.md` | `accepted` | 接受内部来源矩阵；不授权公开页面、商品事实或品牌事实变更。 |
+| Prisma 运行时兼容性跟进 | `maverenne-build-runtime-compatibility-followup.md` | `accepted` | 接受隔离诊断目录中 Node 24 缓存命中后的真实成功证据；不表示主工作区、单测、lint 或 build 通过。 |
 
 ## 验证阻塞证据（非新增任务）
 
 | 状态 | 范围 | 可复查证据 | 未运行项 | 解除条件 |
 | --- | --- | --- | --- | --- |
-| `waiting_external` | Prisma 与完整验证 | `bbbf255` 记录 Node `v25.2.1` / npm `11.6.2` 超时；`efe8fee` 进一步证明 bundled Node `v24.14.0` 下干净安装和 Prisma CLI `--version` 可运行，但 `generate` 仍无输出挂起 | Prisma 客户端解析、单测、lint、build 均未运行 | 在 Node 22 LTS 对照环境或经证明可用的 Prisma 生成环境完成 `generate`，再按顺序运行并记录真实退出码；在此之前不得称构建通过。 |
+| `blocked_main_workspace` | Prisma 与完整验证 | 隔离诊断目录在引擎缓存齐备后 `generate` 1.049 秒退出 0；主工作区 lockfile 安装 43.7 秒退出 0，但直接 `generate` 124 秒超时且遗留本轮 PID `37248`，定向终止后客户端仍不可解析 | 主工作区单测、lint、build 均未运行；Node 22 A/B 因官方 ZIP 下载失败未完成 | 诊断或预热主工作区所需 Windows/RHEL 多平台引擎获取链路，生成客户端后再按顺序验证；不得把隔离目录成功写成主工作区或构建通过。 |
 
 ## 冻结提示
 
