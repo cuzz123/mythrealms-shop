@@ -41,6 +41,38 @@ test("Quiet Light tokens and system font stacks are applied", async ({ page }) =
   expect(styles.bodyFont).toBe("Inter, ui-sans-serif, system-ui, sans-serif");
 });
 
+test("Quiet Light keeps small accent text readable and keyboard focus visible", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const smallAccentColors = await page.evaluate(() => {
+    return ["text-xs", "text-sm"].map((sizeClass) => {
+      const text = document.createElement("p");
+      text.className = `${sizeClass} text-[var(--accent)]`;
+      text.textContent = "Supporting detail";
+      document.body.appendChild(text);
+      return getComputedStyle(text).color;
+    });
+  });
+
+  expect(smallAccentColors).toEqual(["rgb(109, 101, 93)", "rgb(109, 101, 93)"]);
+
+  const homeLink = page.getByRole("link", { name: "Maverenne home" });
+  for (let index = 0; index < 10; index += 1) {
+    if (await homeLink.evaluate((node) => node === document.activeElement)) break;
+    await page.keyboard.press("Tab");
+  }
+  await expect(homeLink).toBeFocused();
+  const focusIndicator = await homeLink.evaluate((node) => {
+    const style = getComputedStyle(node);
+    return { boxShadow: style.boxShadow, outlineStyle: style.outlineStyle };
+  });
+  expect(
+    focusIndicator.boxShadow !== "none" || focusIndicator.outlineStyle !== "none",
+  ).toBe(true);
+});
+
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
     await expect(async () => {
