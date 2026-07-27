@@ -1,4 +1,6 @@
-export const SITE_NAME = "MythRealms";
+import { BRAND } from "./brand-identity";
+
+export const SITE_NAME = BRAND.name;
 export const DEFAULT_SITE_URL = "https://mythrealms-shop.vercel.app";
 
 function normalizeSiteUrl(value: string): string {
