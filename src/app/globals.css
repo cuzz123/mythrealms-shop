@@ -177,7 +177,8 @@ h4 { line-height: 1.3; }
 }
 
 /* Keep champagne gold for non-text accents; static accent-text utilities use readable copy color. */
-[class~="text-[var(--accent)]"] {
+[class~="text-[var(--accent)]"],
+[class~="text-[var(--accent)]/80"] {
   color: var(--text-secondary);
 }
 

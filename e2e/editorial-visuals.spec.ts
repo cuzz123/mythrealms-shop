@@ -47,20 +47,24 @@ test("Quiet Light keeps small accent text readable and keyboard focus visible", 
   await page.goto("/");
 
   const accentTextColors = await page.evaluate(() => {
-    return ["text-xs", "text-sm", "text-[10px]", "text-[11px]", ""].map(
-      (sizeClass) => {
-        const text = document.createElement("p");
-        text.className = [sizeClass, "text-[var(--accent)]"]
-          .filter(Boolean)
-          .join(" ");
-        text.textContent = "Supporting detail";
-        document.body.appendChild(text);
-        return getComputedStyle(text).color;
-      },
-    );
+    return [
+      ["text-xs", "text-[var(--accent)]"],
+      ["text-sm", "text-[var(--accent)]"],
+      ["text-[10px]", "text-[var(--accent)]"],
+      ["text-[11px]", "text-[var(--accent)]"],
+      ["", "text-[var(--accent)]"],
+      ["text-sm", "text-[var(--accent)]/80"],
+    ].map(([sizeClass, colorClass]) => {
+      const text = document.createElement("p");
+      text.className = [sizeClass, colorClass].filter(Boolean).join(" ");
+      text.textContent = "Supporting detail";
+      document.body.appendChild(text);
+      return getComputedStyle(text).color;
+    });
   });
 
   expect(accentTextColors).toEqual([
+    "rgb(109, 101, 93)",
     "rgb(109, 101, 93)",
     "rgb(109, 101, 93)",
     "rgb(109, 101, 93)",
