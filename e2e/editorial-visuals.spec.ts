@@ -1,5 +1,46 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
+test("Quiet Light tokens and system font stacks are applied", async ({ page }) => {
+  await page.goto("/");
+
+  const styles = await page.evaluate(() => {
+    const root = getComputedStyle(document.documentElement);
+    const heading = document.createElement("h1");
+    heading.textContent = "Quiet Light";
+    document.body.appendChild(heading);
+
+    return {
+      tokens: {
+        background: root.getPropertyValue("--background").trim(),
+        surface: root.getPropertyValue("--surface").trim(),
+        surfaceAlt: root.getPropertyValue("--surface-alt").trim(),
+        text: root.getPropertyValue("--text").trim(),
+        textSecondary: root.getPropertyValue("--text-secondary").trim(),
+        accent: root.getPropertyValue("--accent").trim(),
+        primary: root.getPropertyValue("--primary").trim(),
+        border: root.getPropertyValue("--border").trim(),
+      },
+      bodyFont: getComputedStyle(document.body).fontFamily,
+      headingFont: getComputedStyle(heading).fontFamily,
+    };
+  });
+
+  expect(styles.tokens).toEqual({
+    background: "#f7f3eb",
+    surface: "#fffdf8",
+    surfaceAlt: "#eee6da",
+    text: "#292622",
+    textSecondary: "#6d655d",
+    accent: "#a98758",
+    primary: "#b99863",
+    border: "#ddd2c4",
+  });
+  expect(styles.headingFont).toBe(
+    '"Iowan Old Style", Baskerville, "Times New Roman", serif',
+  );
+  expect(styles.bodyFont).toBe("Inter, ui-sans-serif, system-ui, sans-serif");
+});
+
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
     await expect(async () => {
