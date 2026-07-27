@@ -5,6 +5,8 @@ import {
   SupportEmailError,
   deliverSupportEmail,
 } from "../src/lib/server/support-email";
+import { getSupportEmail } from "../src/app/api/contact/route";
+import { buildPayPalDescription } from "../src/app/api/checkout/paypal/route";
 
 const message = {
   to: "support@example.com",
@@ -79,4 +81,17 @@ test("reports success only after the provider accepts delivery", async () => {
   assert.equal(request?.method, "POST");
   assert.match(String(request?.headers && JSON.stringify(request.headers)), /Bearer resend-key/);
   assert.match(String(request?.body), /MythRealms <support@example\.com>/);
+});
+
+test("support recipient uses configured email and a non-deliverable development fallback", () => {
+  assert.equal(
+    getSupportEmail(" help@maverenne.com "),
+    "help@maverenne.com",
+  );
+  assert.equal(getSupportEmail(""), "support@maverenne.invalid");
+  assert.equal(getSupportEmail("   "), "support@maverenne.invalid");
+});
+
+test("PayPal order description uses the centralized customer-facing brand", () => {
+  assert.equal(buildPayPalDescription("order-123456789"), "Maverenne Order #23456789");
 });

@@ -5,6 +5,9 @@ import { renderToStaticMarkup } from "react-dom/server";
 
 import RefundPage from "../src/app/refund/page";
 import ShippingPage, { metadata as shippingMetadata } from "../src/app/shipping/page";
+import ContactPage from "../src/app/contact/page";
+import PrivacyPage, { metadata as privacyMetadata } from "../src/app/privacy/page";
+import TermsPage, { metadata as termsMetadata } from "../src/app/terms/page";
 import CheckoutPageModule from "../src/app/checkout/page";
 import { useCartStore } from "../src/lib/cart";
 import { buildOrganizationSchema } from "../src/lib/seo/schema";
@@ -36,7 +39,7 @@ function renderCheckoutAtPrice(price: number) {
   }
 }
 
-test("structured policy facts match the public shipping and return promises", () => {
+test("structured policy facts remain stable for checkout and schema consumers", () => {
   assert.deepEqual(STORE_POLICY_FACTS, {
     freeShippingThresholdUsd: 69.99,
     standardShippingFlatRateUsd: 4.99,
@@ -55,25 +58,14 @@ test("structured policy facts match the public shipping and return promises", ()
   });
 });
 
-test("visible shipping copy renders the exact centralized price boundary", () => {
+test("checkout continues to render the centralized price boundary", () => {
   const threshold = STORE_POLICY_FACTS.freeShippingThresholdUsd.toFixed(2);
   const flatRate = STORE_POLICY_FACTS.standardShippingFlatRateUsd.toFixed(2);
-  const shipping = renderToStaticMarkup(createElement(ShippingPage));
   const checkoutBelowThreshold = renderCheckoutAtPrice(20);
   const checkoutAtThreshold = renderCheckoutAtPrice(
     STORE_POLICY_FACTS.freeShippingThresholdUsd,
   );
 
-  assert.equal(
-    shippingMetadata.description,
-    `Standard shipping costs $${flatRate} below $${threshold} and is free for orders of $${threshold} or more. View delivery times by country, shipping methods, and tracking information.`,
-  );
-  assert.ok(shipping.includes(`On all orders of $${threshold} or more`));
-  assert.ok(
-    shipping.includes(
-      `$${flatRate} below $${threshold}; free on orders of $${threshold} or more`,
-    ),
-  );
   assert.ok(
     checkoutBelowThreshold.includes(
       `Free shipping on orders of $${threshold} or more`,
@@ -91,33 +83,30 @@ test("visible shipping copy renders the exact centralized price boundary", () =>
     /Free shipping on orders of \$69\.99 or more - add/i,
   );
   assert.doesNotMatch(
-    `${shipping}\n${checkoutBelowThreshold}\n${checkoutAtThreshold}`,
+    `${checkoutBelowThreshold}\n${checkoutAtThreshold}`,
     /over \$69\.99/i,
-  );
-  assert.doesNotMatch(
-    shipping,
-    /otherwise (?:a )?flat rate calculated at checkout/i,
   );
 });
 
-test("visible policy timing and return headlines render the centralized facts", () => {
+test("customer-facing policy pages use Maverenne and avoid unverified promises", () => {
   const shipping = renderToStaticMarkup(createElement(ShippingPage));
   const refund = renderToStaticMarkup(createElement(RefundPage));
+  const privacy = renderToStaticMarkup(createElement(PrivacyPage));
+  const terms = renderToStaticMarkup(createElement(TermsPage));
+  const contact = renderToStaticMarkup(createElement(ContactPage));
+  const visible = [shipping, refund, privacy, terms, contact].join("\n");
 
-  assert.match(shipping, /2-5 business days/i);
-  assert.match(shipping, /8-14 days/i);
-  assert.match(refund, /30-Day Return Window/i);
-  assert.match(refund, /30 days from the delivery date/i);
-  assert.match(
-    refund,
-    /cover the cost of return shipping and provide a prepaid return label if the return is due to our error/i,
+  assert.match(visible, /Maverenne/);
+  assert.doesNotMatch(visible, /MythRealms|mythrealms\.com|mythrealms@/i);
+  assert.match(shipping, /See the current policy page for confirmed details\./i);
+  assert.match(refund, /See the current policy page for confirmed details\./i);
+  assert.doesNotMatch(
+    visible,
+    /ships? worldwide|DHL|FedEx|7-20 business days|6-8 business days|30-day return|30 days from|48 hours|tracking number|guardian match/i,
   );
-  assert.match(refund, /received a defective or damaged item/i);
-  assert.match(
-    refund,
-    /Return shipping costs are the customer(?:&#x27;|&apos;|')s responsibility in all other cases/i,
-  );
-  assert.match(refund, /changed your mind or no longer want the item/i);
+  assert.match(String(shippingMetadata.title), /Maverenne/);
+  assert.match(String(privacyMetadata.title), /Maverenne/);
+  assert.match(String(termsMetadata.title), /Maverenne/);
 });
 
 test("organization schema emits only verified shipping and return policy facts", () => {
@@ -130,7 +119,7 @@ test("organization schema emits only verified shipping and return policy facts",
 
   assert.deepEqual(schema.hasShippingService, {
     "@type": "ShippingService",
-    name: "MythRealms Standard Shipping",
+    name: "Maverenne Standard Shipping",
     url: "https://example.com/shipping",
     description:
       "US standard shipping costs $4.99 below $69.99 and is free for orders of $69.99 or more, with 2-5 business-day handling and 8-14 business-day transit.",

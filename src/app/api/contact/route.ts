@@ -6,7 +6,9 @@ import {
   SupportEmailError,
 } from "@/lib/server/support-email";
 
-const SUPPORT_EMAIL = process.env.SUPPORT_EMAIL || "mythrealms@outlook.com";
+export function getSupportEmail(value = process.env.SUPPORT_EMAIL): string {
+  return value?.trim() || "support@maverenne.invalid";
+}
 
 function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (character) => {
@@ -47,7 +49,7 @@ export async function POST(request: NextRequest) {
     }
 
     await deliverSupportEmail({
-      to: SUPPORT_EMAIL,
+      to: getSupportEmail(),
       replyTo: email,
       subject: `Contact: ${subject} from ${name}`,
       html: `<p><strong>Name:</strong> ${escapeHtml(name)}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Subject:</strong> ${escapeHtml(subject)}</p><p><strong>Message:</strong></p><p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>`,

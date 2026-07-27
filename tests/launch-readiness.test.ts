@@ -23,6 +23,7 @@ const env = {
   PAYPAL_WEBHOOK_ID: "sentinel-webhook",
   RESEND_API_KEY: "sentinel-resend",
   RESEND_FROM_EMAIL: "MythRealms <orders@mythrealms.shop>",
+  SUPPORT_EMAIL: "support@maverenne.com",
 } satisfies NodeJS.ProcessEnv;
 
 function dependencies(
@@ -92,6 +93,7 @@ test("every required environment variable fails closed when missing", async (t) 
     "PAYPAL_WEBHOOK_ID",
     "RESEND_API_KEY",
     "RESEND_FROM_EMAIL",
+    "SUPPORT_EMAIL",
   ]) {
     await t.test(key, async () => {
       const next = { ...env, [key]: "" };
@@ -113,6 +115,7 @@ test("every required environment variable rejects placeholders", async (t) => {
     PAYPAL_WEBHOOK_ID: "your-webhook-id",
     RESEND_API_KEY: "placeholder-resend-key",
     RESEND_FROM_EMAIL: "placeholder",
+    SUPPORT_EMAIL: "support@example.com",
   })) {
     await t.test(key, async () => {
       const report = await runLaunchReadiness(
@@ -123,6 +126,19 @@ test("every required environment variable rejects placeholders", async (t) => {
       assert.equal(readinessExitCode(report), 1);
     });
   }
+});
+
+test("production readiness rejects the non-deliverable support fallback", async () => {
+  const report = await runLaunchReadiness(
+    { ...env, SUPPORT_EMAIL: "support@maverenne.invalid" },
+    dependencies().value,
+  );
+
+  assert.equal(report.ok, false);
+  assert.equal(
+    report.checks.find((item) => item.id === "environment")?.status,
+    "fail",
+  );
 });
 
 test("rejects common launch placeholders before provider access", async (t) => {

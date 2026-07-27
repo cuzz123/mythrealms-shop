@@ -35,13 +35,14 @@ const REQUIRED = [
   "PAYPAL_WEBHOOK_ID",
   "RESEND_API_KEY",
   "RESEND_FROM_EMAIL",
+  "SUPPORT_EMAIL",
 ] as const;
 
 function configured(value: string | undefined): value is string {
   const trimmed = value?.trim();
   return Boolean(
     trimmed &&
-      !/your-|placeholder|postgresql:\/\/user:password|\.example\b|example\.com|change[-_]?me|replace[-_]?me|\btodo\b|\btbd\b/i.test(trimmed),
+      !/your-|placeholder|postgresql:\/\/user:password|\.example\b|example\.com|\.invalid\b|change[-_]?me|replace[-_]?me|\btodo\b|\btbd\b/i.test(trimmed),
   );
 }
 
