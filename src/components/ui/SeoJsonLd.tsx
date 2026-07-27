@@ -1,5 +1,6 @@
 // SEO/GEO — BreadcrumbList JSON-LD
 import { JsonLd } from "@/components/ui/JsonLd";
+import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl } from "@/lib/site";
 
 export function BreadcrumbJsonLd({ items }: { items: { name: string; url: string }[] }) {
@@ -17,7 +18,7 @@ export function BreadcrumbJsonLd({ items }: { items: { name: string; url: string
   return <JsonLd data={jsonLd} />;
 }
 
-export function BlogPostJsonLd({ title, excerpt, image, datePublished, dateModified, author, url }: {
+export function BlogPostJsonLd({ title, excerpt, image, datePublished, dateModified, author: _author, url }: {
   title: string; excerpt: string; image?: string; datePublished: string; dateModified?: string; author: string; url: string;
 }) {
   const jsonLd = {
@@ -29,12 +30,12 @@ export function BlogPostJsonLd({ title, excerpt, image, datePublished, dateModif
     datePublished,
     ...(dateModified ? { dateModified } : {}),
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    author: { "@type": "Person", name: author },
+    author: { "@type": "Organization", name: `${BRAND.name} Editorial` },
     url,
     inLanguage: "en",
     publisher: {
       "@type": "Organization",
-      name: "MythRealms",
+      name: BRAND.name,
       url: absoluteUrl("/"),
       logo: { "@type": "ImageObject", url: absoluteUrl("/apple-icon.png") },
     },

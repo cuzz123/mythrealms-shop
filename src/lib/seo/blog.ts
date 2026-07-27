@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { absoluteImageUrl } from "@/lib/images";
+import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl } from "@/lib/site";
 
 interface BlogMetadataPost {
@@ -59,7 +60,7 @@ export function buildBlogMetadata({
   const images = image ? [{ url: absoluteImageUrl(image) }] : [];
 
   return {
-    title: `${title} | MythRealms`,
+    title: `${title} | ${BRAND.name}`,
     description: excerpt,
     alternates: { canonical: url },
     openGraph: {

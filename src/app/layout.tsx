@@ -4,12 +4,13 @@ import { Analytics } from "@/components/layout/Analytics";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/ui/JsonLd";
 import { LayoutShell } from "@/components/layout/LayoutShell";
 import { ScrollRevealEnhancer } from "@/components/ui/ScrollRevealEnhancer";
+import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl, siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "MythRealms | Pearl Jewelry for Everyday Light",
-  description: "MythRealms curates pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view. Explore the Pearl Edit.",
+  title: `${BRAND.name} | ${BRAND.descriptor} for Everyday Moments`,
+  description: BRAND.promise,
   keywords: ["pearl jewelry", "pearl earrings", "pearl necklace", "pearl bracelet", "pearl ring", "freshwater pearl jewelry", "everyday pearl jewelry", "baroque pearl jewelry"],
   icons: {
     icon: "/icon.svg",
@@ -22,16 +23,16 @@ export const metadata: Metadata = {
     "p:domain_verify": "f7403d777d8595e4acf712c703023325",
   },
   openGraph: {
-    title: "MythRealms | Pearl Jewelry for Everyday Light",
-    description: "Pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.",
+    title: `${BRAND.name} | ${BRAND.descriptor} for Everyday Moments`,
+    description: BRAND.promise,
     type: "website",
-    siteName: "MythRealms",
-    images: [{ url: absoluteUrl("/images/brand/hero/pearl-earrings-editorial.png"), width: 1024, height: 1024, alt: "MythRealms pearl jewelry" }],
+    siteName: BRAND.name,
+    images: [{ url: absoluteUrl("/images/brand/hero/pearl-earrings-editorial.png"), width: 1024, height: 1024, alt: `${BRAND.name} jewelry and accessories` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MythRealms | Pearl Jewelry for Everyday Light",
-    description: "Pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.",
+    title: `${BRAND.name} | ${BRAND.descriptor} for Everyday Moments`,
+    description: BRAND.promise,
     images: [absoluteUrl("/images/brand/hero/pearl-earrings-editorial.png")],
   },
   robots: {

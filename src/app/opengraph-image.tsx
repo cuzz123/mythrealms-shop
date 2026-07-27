@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
+import { BRAND } from "@/lib/brand-identity";
 
-export const alt = "MythRealms - The Pearl Edit";
+export const alt = `${BRAND.name} - The Pearl Edit`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -22,13 +23,13 @@ export default function Image() {
         }}
       >
         <div style={{ fontSize: 86, fontWeight: 700, letterSpacing: 14, color: "#D4A84B" }}>
-          MYTHREALMS
+          {BRAND.name}
         </div>
         <div style={{ marginTop: 28, fontSize: 34, color: "#E8DEC8", maxWidth: 900, textAlign: "center" }}>
           The Pearl Edit
         </div>
         <div style={{ marginTop: 36, fontSize: 25, color: "#B9A77E" }}>
-          Pearl earrings - necklaces - bracelets - rings
+          {BRAND.descriptor}
         </div>
       </div>
     ),

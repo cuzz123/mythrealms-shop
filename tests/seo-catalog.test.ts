@@ -6,7 +6,9 @@ import test from "node:test";
 import { metadata as blogMetadata } from "../src/app/blog/page";
 import { GET as getLlmsText } from "../src/app/llms.txt/route";
 import robots from "../src/app/robots";
+import { alt as rootOpenGraphAlt } from "../src/app/opengraph-image";
 import { buildBlogPostingData } from "../src/components/ui/JsonLd";
+import { BRAND } from "../src/lib/brand-identity";
 import {
   buildBlogMetadata,
   isPearlEditorialPost,
@@ -69,9 +71,31 @@ test("the root layout does not force the homepage canonical onto every route", (
   assert.doesNotMatch(source, /openGraph:\s*\{[\s\S]*?url:\s*siteUrl/);
 });
 
-test("the storefront catalog exposes all 45 approved Pearl Edit products", () => {
+test("root metadata and Open Graph surfaces use the Maverenne identity", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/layout.tsx"),
+    "utf8",
+  );
+  const openGraphSource = readFileSync(
+    path.join(process.cwd(), "src/app/opengraph-image.tsx"),
+    "utf8",
+  );
+
+  assert.match(source, /import \{ BRAND \} from "@\/lib\/brand-identity"/);
+  assert.match(
+    source,
+    /title:\s*`\$\{BRAND\.name\} \| \$\{BRAND\.descriptor\} for Everyday Moments`/,
+  );
+  assert.match(source, /description:\s*BRAND\.promise/);
+  assert.match(source, /siteName:\s*BRAND\.name/);
+  assert.equal(rootOpenGraphAlt, "Maverenne - The Pearl Edit");
+  assert.match(openGraphSource, /\{BRAND\.name\}/);
+  assert.doesNotMatch(openGraphSource, /MYTHREALMS/);
+});
+
+test("the storefront catalog exposes all 63 approved Pearl Edit products", () => {
   const products = getStorefrontProducts();
-  assert.equal(products.length, 45);
+  assert.equal(products.length, 63);
   for (const product of products) {
     assert.equal(product.categoryName, "The Pearl Edit");
     assert.doesNotMatch(product.description, retiredLanguage);
@@ -82,7 +106,7 @@ test("the authoritative feed is pearl-only and contains every storefront SKU", (
   const products = getStorefrontProducts();
   const xml = buildStorefrontFeedXml("https://example.com");
   assert.doesNotMatch(xml, retiredLanguage);
-  assert.equal((xml.match(/<item>/g) || []).length, 45);
+  assert.equal((xml.match(/<item>/g) || []).length, products.length);
   for (const product of products) {
     assert.match(xml, new RegExp(`/products/${product.slug}`));
   }
@@ -102,7 +126,10 @@ test("the sitemap contains canonical content, products, and journal articles onc
   for (const expectedUrl of expectedUrls) {
     assert.equal(urls.has(expectedUrl), true, `missing ${expectedUrl}`);
   }
-  assert.equal([...urls].filter((url) => url.includes("/products/")).length, 45);
+  assert.equal(
+    [...urls].filter((url) => url.includes("/products/")).length,
+    products.length,
+  );
   assert.equal([...urls].some((url) => url.includes("/edits/")), false);
   assert.equal([...urls].some((url) => url.includes("?")), false);
   assert.equal(entries.length, urls.size, "sitemap URLs must be unique");
@@ -184,6 +211,7 @@ test("blog metadata uses the canonical article URL and article Open Graph data",
   const openGraph = metadata.openGraph;
 
   assert.equal(canonical, `${siteUrl}/blog/${post.slug}`);
+  assert.equal(metadata.title, `${post.title} | Maverenne`);
   assert.equal(openGraph && "type" in openGraph ? openGraph.type : undefined, "article");
   assert.equal(
     openGraph && "url" in openGraph ? openGraph.url : undefined,
@@ -233,17 +261,28 @@ test("BlogPosting JSON-LD includes canonical publisher and ISO dates", () => {
     image: `${siteUrl}${post.image}`,
     datePublished,
     dateModified,
-    authorName: "MythRealms Editorial",
+    authorName: "Legacy Editorial",
   });
 
   assert.equal(data["@type"], "BlogPosting");
   assert.deepEqual(data.mainEntityOfPage, { "@type": "WebPage", "@id": url });
   assert.deepEqual(data.publisher, {
     "@type": "Organization",
-    name: "MythRealms",
+    name: "Maverenne",
+  });
+  assert.deepEqual(data.author, {
+    "@type": "Organization",
+    name: "Maverenne Editorial",
   });
   assert.equal(data.datePublished, datePublished.toISOString());
   assert.equal(data.dateModified, dateModified.toISOString());
+  assert.equal(BRAND.name, "Maverenne");
+  assert.doesNotMatch(
+    JSON.stringify(data, (key, value) =>
+      key === "url" || key === "@id" || key === "image" ? undefined : value,
+    ),
+    /MythRealms|Phoenix|Moon Rabbit|White Tiger|Chinese mythology/i,
+  );
 });
 
 test("generated GEO guidance covers canonical sources and truth guardrails", async () => {
