@@ -134,7 +134,7 @@ scope: "Read-only public-source preliminary clearance; United States jewelry and
 
 ## 停止规则与下一步
 
-- 立即保持三项布尔值为 `false`，不得据此推进客户可见改名或生产迁移。
+- 当前内部名称门槛与域名归属状态以前置字段为准；继续保持 `production_migration_authorized=false`，未经独立书面授权不得推进 DNS、客户可见改名或生产迁移。
 - 由获授权人员在 USPTO 和 WIPO 第一方界面中完成全部查询并保存带 URL、查询词、时间、结果数和命中详情的证据；验证码必须由人工正常完成，不得绕过。
 - 由有经验的美国持牌商标律师完成完整清查和书面近似性判断；本文件不替代该工作。
 - 由获授权账号管理员在平台第一方界面中只查看社媒用户名状态；不得保存改名或占用。
