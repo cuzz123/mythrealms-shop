@@ -46,3 +46,6 @@ prisma/dev.db
 
 # Vercel Blob — images served from object storage
 public/images/
+
+# Local Superpowers execution ledgers and review artifacts
+.superpowers/
