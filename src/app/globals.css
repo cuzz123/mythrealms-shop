@@ -176,8 +176,8 @@ h4 { line-height: 1.3; }
   }
 }
 
-/* Keep champagne gold as an accent, not a low-contrast small-text color. */
-:where(.text-xs, .text-sm).text-\[var\(--accent\)\] {
+/* Keep champagne gold for non-text accents; static accent-text utilities use readable copy color. */
+[class~="text-[var(--accent)]"] {
   color: var(--text-secondary);
 }
 

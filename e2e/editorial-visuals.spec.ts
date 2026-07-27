@@ -46,17 +46,27 @@ test("Quiet Light keeps small accent text readable and keyboard focus visible", 
 }) => {
   await page.goto("/");
 
-  const smallAccentColors = await page.evaluate(() => {
-    return ["text-xs", "text-sm"].map((sizeClass) => {
-      const text = document.createElement("p");
-      text.className = `${sizeClass} text-[var(--accent)]`;
-      text.textContent = "Supporting detail";
-      document.body.appendChild(text);
-      return getComputedStyle(text).color;
-    });
+  const accentTextColors = await page.evaluate(() => {
+    return ["text-xs", "text-sm", "text-[10px]", "text-[11px]", ""].map(
+      (sizeClass) => {
+        const text = document.createElement("p");
+        text.className = [sizeClass, "text-[var(--accent)]"]
+          .filter(Boolean)
+          .join(" ");
+        text.textContent = "Supporting detail";
+        document.body.appendChild(text);
+        return getComputedStyle(text).color;
+      },
+    );
   });
 
-  expect(smallAccentColors).toEqual(["rgb(109, 101, 93)", "rgb(109, 101, 93)"]);
+  expect(accentTextColors).toEqual([
+    "rgb(109, 101, 93)",
+    "rgb(109, 101, 93)",
+    "rgb(109, 101, 93)",
+    "rgb(109, 101, 93)",
+    "rgb(109, 101, 93)",
+  ]);
 
   const homeLink = page.getByRole("link", { name: "Maverenne home" });
   for (let index = 0; index < 10; index += 1) {
