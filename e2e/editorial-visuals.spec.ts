@@ -111,7 +111,7 @@ async function scrollToTop(page: Page) {
 async function freezeFooterYear(page: Page) {
   const copyright = page
     .locator("footer")
-    .getByText(/^© \d{4} MythRealms\. All rights reserved\.$/);
+    .getByText(/^© \d{4} Maverenne\. All rights reserved\.$/);
   await expect(copyright).toHaveCount(1);
   await copyright.evaluate((node) => {
     node.textContent = node.textContent?.replace(/© \d{4}/, "© 2000") ?? "";

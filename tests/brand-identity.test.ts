@@ -23,11 +23,15 @@ const publicBrandFiles = [
 ] as const;
 
 test("public brand surfaces use Maverenne without legacy claims or identities", () => {
-  const sources = publicBrandFiles.map((relativePath) => ({
+  const sources = new Map(publicBrandFiles.map((relativePath) => [
     relativePath,
-    source: readFileSync(fileURLToPath(new URL(relativePath, import.meta.url)), "utf8"),
-  }));
-  const combinedSource = sources.map(({ source }) => source).join("\n");
+    readFileSync(fileURLToPath(new URL(relativePath, import.meta.url)), "utf8"),
+  ]));
+  const footer = sources.get("../src/components/layout/Footer.tsx") ?? "";
+  const announcement = sources.get("../src/components/layout/AnnouncementBar.tsx") ?? "";
+  const cart = sources.get("../src/components/layout/CartDrawer.tsx") ?? "";
+  const contact = sources.get("../src/app/contact/layout.tsx") ?? "";
+  const combinedSource = [...sources.values()].join("\n");
 
   for (const bannedResidue of [
     /MythRealms/i,
@@ -41,13 +45,23 @@ test("public brand surfaces use Maverenne without legacy claims or identities", 
     assert.doesNotMatch(combinedSource, bannedResidue);
   }
 
-  for (const requiredBrandSurface of [
-    "../src/components/layout/Footer.tsx",
-    "../src/components/layout/AnnouncementBar.tsx",
-    "../src/app/contact/layout.tsx",
-  ]) {
-    const source = sources.find(({ relativePath }) => relativePath === requiredBrandSurface)?.source;
-    assert.ok(source, `missing source fixture for ${requiredBrandSurface}`);
-    assert.match(source, /BRAND\./);
+  for (const brandField of [/BRAND\.name/, /BRAND\.tagline/, /BRAND\.newsletterTitle/]) {
+    assert.match(footer, brandField);
   }
+  assert.doesNotMatch(
+    footer,
+    /socialLinks|tiktok\.com|instagram\.com|facebook\.com|youtube\.com|mailto:|Mon\s*&ndash;\s*Fri|subscriber-only offers|Secure checkout in USD/i,
+  );
+
+  assert.match(announcement, /BRAND\.tagline/);
+  assert.match(announcement, /BRAND\.descriptor/);
+  assert.doesNotMatch(announcement, /free shipping|30-day returns/i);
+
+  assert.match(contact, /BRAND\.name/);
+  assert.match(contact, /absoluteUrl\(["']\/contact["']\)/);
+
+  assert.match(cart, /\bsubtotal\b/);
+  assert.match(cart, /href=["']\/cart["']/);
+  assert.match(cart, /href=["']\/checkout["']/);
+  assert.doesNotMatch(cart, /FREE_SHIPPING_THRESHOLD|free shipping/i);
 });
