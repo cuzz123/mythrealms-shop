@@ -498,7 +498,7 @@ test.describe("release surfaces", () => {
     await expect
       .poll(() =>
         page
-          .getByRole("heading", { name: "Shop by moment", exact: true })
+          .getByRole("heading", { name: "The Pearl Edit", exact: true })
           .evaluate((heading) => {
           const rect = heading.getBoundingClientRect();
           return Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));

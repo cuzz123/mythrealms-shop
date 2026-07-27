@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HOMEPAGE_CATEGORY_LINKS } from "@/lib/homepage-editorial";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { BRAND } from "@/lib/brand-identity";
 
 export function HomepageCategoryStories() {
   const featureLinks = HOMEPAGE_CATEGORY_LINKS.slice(0, 3);
@@ -11,7 +12,7 @@ export function HomepageCategoryStories() {
   return (
     <ScrollReveal as="section" className="bg-[var(--surface-alt)] py-16 md:py-24" aria-labelledby="pearl-edit-categories-title">
       <div className="mx-auto max-w-7xl px-6">
-        <p className="text-xs font-semibold uppercase text-[var(--accent)]">Jewelry &amp; Accessories</p>
+        <p className="text-xs font-semibold uppercase text-[var(--accent)]">{BRAND.descriptor}</p>
         <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
           <h2 id="pearl-edit-categories-title" className="max-w-xl font-serif text-3xl font-medium text-[var(--text)] md:text-4xl">
             The Pearl Edit
