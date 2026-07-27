@@ -11,8 +11,6 @@ import { productDisplayName } from "@/lib/brand";
 import { imageUrl } from "@/lib/images";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
 
-const FREE_SHIPPING_THRESHOLD = 69.99;
-
 export function CartDrawer() {
   const isOpen = useCartUIStore((state) => state.isOpen);
   const closeCart = useCartUIStore((state) => state.closeCart);
@@ -39,9 +37,6 @@ export function CartDrawer() {
   }, [items]);
 
   if (!isOpen) return null;
-
-  const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
-  const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
 
   return (
     <>
@@ -200,17 +195,6 @@ export function CartDrawer() {
             </div>
 
             <div className="border-t border-[var(--border)] px-5 py-4">
-              <p className="mb-2 text-xs text-[var(--text-secondary)]">
-                {remaining === 0
-                  ? "You have earned free shipping."
-                  : `${formatPrice(remaining)} away from free shipping.`}
-              </p>
-              <div className="mb-4 h-1.5 overflow-hidden bg-[var(--border-light)]">
-                <div
-                  className="h-full bg-[var(--accent)]"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
               <div className="mb-4 flex items-center justify-between text-sm">
                 <span>Subtotal</span>
                 <strong>{formatPrice(subtotal)}</strong>

@@ -5,52 +5,6 @@ import { NewsletterForm } from "@/components/layout/NewsletterForm";
 import { BRAND } from "@/lib/brand-identity";
 import { FOOTER_GROUPS } from "@/lib/storefront/navigation";
 
-const socialLinks = [
-  {
-    label: "TikTok",
-    href: "https://tiktok.com/@mythrealms.shop",
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
-        <path d="M12.5 3h-1.75v8.5a1.5 1.5 0 11-1.5-1.5V8.25a3.25 3.25 0 103.25 3.25V5.5a4.25 4.25 0 002.5.8V4.55a2.5 2.5 0 01-2.5-1.55z" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: "Instagram",
-    href: "https://instagram.com/mythrealms.shop",
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
-        <rect x="1.5" y="1.5" width="15" height="15" rx="4" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="9" cy="9" r="3.5" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="13.5" cy="4.5" r="0.9" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: "Facebook",
-    href: "https://facebook.com/mythrealms.shop",
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
-        <path d="M10.5 16v-5.5h1.85l.28-2.15H10.5V7c0-.59.15-1 .98-1H12.7V3.82a15 15 0 00-1.62-.07c-1.52 0-2.56.93-2.56 2.63v1.47H6.5v2.15h2.02V16h1.98z" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: "YouTube",
-    href: "https://youtube.com/@mythrealms",
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
-        <path
-          d="M15.66 5.47a1.88 1.88 0 00-1.32-1.33C13.03 3.75 9 3.75 9 3.75s-4.03 0-5.34.39A1.88 1.88 0 002.34 5.47 22.9 22.9 0 002 9c0 1.24.11 2.4.34 3.53a1.88 1.88 0 001.32 1.33c1.31.39 5.34.39 5.34.39s4.03 0 5.34-.39a1.88 1.88 0 001.32-1.33c.23-1.13.34-2.29.34-3.53s-.11-2.4-.34-3.53z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-        <path d="M7.5 11.35l3.5-2.35L7.5 6.65v4.7z" fill="currentColor" />
-      </svg>
-    ),
-  },
-];
-
 export function Footer() {
   return (
     <footer className="bg-[var(--charcoal)] text-[var(--announcement-text)]">
@@ -63,30 +17,10 @@ export function Footer() {
             <p className="max-w-xs text-sm leading-relaxed text-[#B0A590]">
               {BRAND.tagline}
             </p>
-            <div className="flex items-center gap-3">
-              {socialLinks.map(({ label, href, icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  title={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-[#b7c2bd] transition-colors hover:border-white/65 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
-                >
-                  {icon}
-                </a>
-              ))}
-            </div>
             <div className="space-y-4 pt-2 text-sm text-[#b7c2bd]">
-              <p>New pearl pieces, styling notes, and subscriber-only offers.</p>
+              <p className="font-medium text-white">{BRAND.newsletterTitle}</p>
+              <p>New pieces and styling notes, sent occasionally.</p>
               <NewsletterForm tone="dark" />
-              <div className="space-y-2 pt-2">
-                <a href="mailto:mythrealms@outlook.com" className="inline-block text-white transition-colors hover:text-[var(--accent)]">
-                  mythrealms@outlook.com
-                </a>
-                <p>Mon &ndash; Fri, 9am &ndash; 6pm EST</p>
-              </div>
             </div>
           </div>
 
@@ -111,9 +45,8 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/15">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-[#b7c2bd] sm:flex-row">
+        <div className="mx-auto flex max-w-7xl justify-center px-4 py-6 text-xs text-[#b7c2bd]">
           <p>&copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.</p>
-          <p>Secure checkout in USD</p>
         </div>
       </div>
     </footer>

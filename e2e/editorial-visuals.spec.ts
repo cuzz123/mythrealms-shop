@@ -120,7 +120,7 @@ async function freezeFooterYear(page: Page) {
 
 async function waitForCanonicalAnnouncement(page: Page) {
   await expect(page.getByRole("region", { name: "Announcement" })).toContainText(
-    "Free shipping over $69.99 | 30-day returns",
+    "Come back to yourself. | Jewelry & Accessories",
   );
 }
 
