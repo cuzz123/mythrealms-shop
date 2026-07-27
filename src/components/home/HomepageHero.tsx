@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { HOMEPAGE_HERO_SLIDES } from "@/lib/homepage-editorial";
+import { BRAND } from "@/lib/brand-identity";
 
 export function HomepageHero() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -44,17 +45,17 @@ export function HomepageHero() {
         <div className="max-w-xl">
           <p className="text-xs font-semibold uppercase text-white/80">{hero.eyebrow}</p>
           <h1 id="homepage-hero-title" className="mt-4 max-w-lg font-serif text-4xl font-medium leading-none sm:text-6xl lg:text-7xl">
-            {hero.title}
+            {BRAND.heroTitle}
           </h1>
           <p className="mt-5 max-w-md text-sm leading-7 text-white/85 md:text-base">
-            {hero.description}
+            {BRAND.heroDescription}
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-5 sm:mt-8">
-            <Link href="/collections/pearl-series" className="inline-flex items-center gap-2 bg-white px-5 py-3 text-sm font-semibold text-[#1d2423] transition-colors hover:bg-[#e9e8df]">
-              Shop the Pearl Edit <ArrowRight className="h-4 w-4" />
+            <Link href={BRAND.primaryCta.href} className="inline-flex items-center gap-2 bg-white px-5 py-3 text-sm font-semibold text-[#1d2423] transition-colors hover:bg-[#e9e8df]">
+              {BRAND.primaryCta.label} <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/pearls" className="border-b border-white/70 pb-1 text-sm font-semibold text-white transition-colors hover:border-white">
-              Read the Pearl Guide
+            <Link href={BRAND.secondaryCta.href} className="border-b border-white/70 pb-1 text-sm font-semibold text-white transition-colors hover:border-white">
+              {BRAND.secondaryCta.label}
             </Link>
           </div>
           <div className="mt-8 flex gap-2" aria-label="Homepage editorial slides">

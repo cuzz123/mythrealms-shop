@@ -271,17 +271,20 @@ test.describe("release surfaces", () => {
       await page.goto("/");
       await expect(page.locator('[data-storefront-chrome="header"]')).toBeVisible();
       await expect(page.locator('[data-storefront-chrome="footer"]')).toBeVisible();
-      await expect(page.getByRole("heading", { level: 1, name: "Pearls for sunlit days." })).toBeVisible();
-      await expect(page.getByRole("heading", { name: "Choose your starting point" }).first()).toBeVisible();
+      await expect(page.getByRole("heading", { level: 1, name: "A little something for yourself." })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "The Pearl Edit" }).first()).toBeVisible();
+      await expect(page.getByRole("link", { name: "Find Your Piece" })).toHaveAttribute(
+        "href",
+        "/collections/pearl-series",
+      );
       await expect(page.getByRole("link", { name: "Shop the Pearl Edit" })).toHaveAttribute(
         "href",
         "/collections/pearl-series",
       );
-      await expect(page.getByRole("link", { name: "Read the Pearl Guide" })).toHaveAttribute(
+      await expect(page.getByRole("link", { name: "Read the guide" })).toHaveAttribute(
         "href",
         "/pearls",
       );
-      await expect(page.getByRole("region", { name: "Editorial guides" }).locator("article")).toHaveCount(2);
       expect(await page.locator("#main-content img").count()).toBeGreaterThan(0);
 
       await page.goto("/about");
@@ -444,20 +447,18 @@ test.describe("release surfaces", () => {
     });
   }
 
-  test("homepage preserves the approved editorial sequence and first-viewport style hint", async ({ page }) => {
+  test("homepage preserves the Maverenne section order without Guardian", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
 
     const expectedHeadings = [
-      "Pearls for sunlit days.",
-      "Choose your starting point",
-      "A little light, close to home.",
-      "A pearl point of view.",
-      "Follow the shape of the day.",
+      "A little something for yourself.",
+      "The Pearl Edit",
+      "Shop by moment",
       "Pieces for everyday light.",
-      "A little something to keep close.",
-      "Made for the life around them.",
-      "Notes from the coast.",
+      "Come back to yourself.",
+      "Everyday notes",
+      "A quiet note for you.",
     ];
     const positions: number[] = [];
 
@@ -468,10 +469,36 @@ test.describe("release surfaces", () => {
     }
 
     expect(positions).toEqual([...positions].sort((left, right) => left - right));
+
+    await expect(page.getByRole("link", { name: "Find Your Piece" })).toHaveAttribute(
+      "href",
+      "/collections/pearl-series",
+    );
+    await expect(page.getByRole("link", { name: "Shop the Pearl Edit" }).first()).toHaveAttribute(
+      "href",
+      "/collections/pearl-series",
+    );
+    for (const [label, href] of [
+      ["For Everyday", "/collections/pearl-series"],
+      ["For a New Chapter", "/gifts"],
+      ["Just Because", "/collections/new-arrivals"],
+      ["Small Gifts", "/gifts#under-50"],
+    ] as const) {
+      await expect(page.getByRole("link", { name: label, exact: true })).toHaveAttribute("href", href);
+    }
+
+    await expect(page.locator('a[href="/guardian-quiz"]')).toHaveCount(0);
+    await expect(page.getByText(/Guardian/i)).toHaveCount(0);
+  });
+
+  test("homepage keeps the existing first-viewport style hint", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+
     await expect
       .poll(() =>
         page
-          .getByRole("heading", { name: "Choose your starting point", exact: true })
+          .getByRole("heading", { name: "Shop by moment", exact: true })
           .evaluate((heading) => {
           const rect = heading.getBoundingClientRect();
           return Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
@@ -487,7 +514,7 @@ test.describe("release surfaces", () => {
       "href",
       "https://mythrealms-shop.vercel.app",
     );
-    await expect(page.getByRole("link", { name: "Read the Pearl Guide" })).toHaveAttribute(
+    await expect(page.getByRole("link", { name: "Read the guide" })).toHaveAttribute(
       "href",
       "/pearls",
     );
@@ -635,7 +662,7 @@ test.describe("release surfaces", () => {
       await expect
         .poll(() =>
           page
-            .getByText("Shop by Style", { exact: true })
+            .getByText("Jewelry & Accessories", { exact: true })
             .evaluate((label) => {
               const rect = label.getBoundingClientRect();
               return Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
@@ -646,10 +673,11 @@ test.describe("release surfaces", () => {
 
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1, name: "Pearls for sunlit days." })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "A little something for yourself." })).toBeVisible();
     await expect(page.getByText("Editorial / Summer 2026", { exact: true })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Choose your starting point" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "A pearl point of view." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "The Pearl Edit" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Shop by moment" })).toBeVisible();
+    await expect(page.getByText(/Guardian/i)).toHaveCount(0);
     await page.waitForTimeout(5500);
     await expect(page.getByText(/Someone from|bought The /i)).toHaveCount(0);
 

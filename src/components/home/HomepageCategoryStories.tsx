@@ -9,12 +9,12 @@ export function HomepageCategoryStories() {
   const indexLinks = HOMEPAGE_CATEGORY_LINKS.slice(3);
 
   return (
-    <ScrollReveal as="section" className="bg-[var(--surface-alt)] py-16 md:py-24" aria-labelledby="shop-by-style-title">
+    <ScrollReveal as="section" className="bg-[var(--surface-alt)] py-16 md:py-24" aria-labelledby="pearl-edit-categories-title">
       <div className="mx-auto max-w-7xl px-6">
-        <p className="text-xs font-semibold uppercase text-[var(--accent)]">Shop by Style</p>
+        <p className="text-xs font-semibold uppercase text-[var(--accent)]">Jewelry &amp; Accessories</p>
         <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
-          <h2 id="shop-by-style-title" className="max-w-xl font-serif text-3xl font-medium text-[var(--text)] md:text-4xl">
-            Choose your starting point
+          <h2 id="pearl-edit-categories-title" className="max-w-xl font-serif text-3xl font-medium text-[var(--text)] md:text-4xl">
+            The Pearl Edit
           </h2>
           <Link href="/collections/pearl-series" className="inline-flex items-center gap-2 border-b border-[var(--text)] pb-1 text-sm font-semibold text-[var(--text)]">
             View all pearls <ArrowRight className="h-4 w-4" />

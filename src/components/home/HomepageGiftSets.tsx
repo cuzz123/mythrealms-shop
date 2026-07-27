@@ -14,16 +14,16 @@ export function HomepageGiftSets({ products }: HomepageGiftSetsProps) {
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div className="max-w-xl">
-            <p className="text-xs font-semibold uppercase text-[var(--accent)]">Gift-ready Sets</p>
+            <p className="text-xs font-semibold uppercase text-[var(--accent)]">Small Gifts</p>
             <h2 id="gift-sets-title" className="mt-3 font-serif text-3xl font-medium text-[var(--text)] md:text-4xl">
-              A little something to keep close.
+              Everyday notes
             </h2>
             <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)] md:text-base">
-              Pearl pieces selected for a personal gesture, from a quiet thank-you to a date worth remembering.
+              A small edit of pieces for everyday moments and thoughtful gestures.
             </p>
           </div>
           <Link href="/gifts" className="inline-flex items-center gap-2 border-b border-[var(--text)] pb-1 text-sm font-semibold text-[var(--text)]">
-            Explore pearl gifts <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            Find a gift <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 
