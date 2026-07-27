@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
+import { BRAND } from "@/lib/brand-identity";
 import { FOOTER_GROUPS } from "@/lib/storefront/navigation";
 
 const socialLinks = [
@@ -57,10 +58,10 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 border-y border-white/15 py-10 sm:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-4">
             <Link href="/" className="inline-block">
-              <span className="font-serif text-xl font-semibold tracking-normal text-white">MythRealms</span>
+              <span className="font-serif text-xl font-semibold tracking-normal text-white">{BRAND.name}</span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-[#B0A590]">
-              An edited collection of pearl rings, bracelets, earrings, and necklaces for everyday light and easy styling.
+              {BRAND.tagline}
             </p>
             <div className="flex items-center gap-3">
               {socialLinks.map(({ label, href, icon }) => (
@@ -111,7 +112,7 @@ export function Footer() {
 
       <div className="border-t border-white/15">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-[#b7c2bd] sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} MythRealms. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.</p>
           <p>Secure checkout in USD</p>
         </div>
       </div>

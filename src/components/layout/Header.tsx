@@ -9,6 +9,7 @@ import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
+import { BRAND } from "@/lib/brand-identity";
 import {
   HEADER_LINKS,
   HEADER_MENUS,
@@ -143,14 +144,9 @@ export function Header() {
         <Link
           href="/"
           className="flex shrink-0 items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2"
-          aria-label="MythRealms home"
+          aria-label={`${BRAND.name} home`}
         >
-          <svg viewBox="0 0 28 28" fill="none" aria-hidden="true" className="h-7 w-7" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 2L22 10L14 26L6 10L14 2Z" fill="currentColor" fillOpacity="0.92" />
-            <path d="M14 8L18 12L14 20L10 12L14 8Z" fill="var(--primary)" fillOpacity="0.9" />
-            <circle cx="14" cy="5" r="1.5" fill="currentColor" />
-          </svg>
-          <span className="font-serif text-[19px] font-semibold tracking-normal sm:text-[22px]">MythRealms</span>
+          <span className="font-serif text-[19px] font-semibold tracking-normal sm:text-[22px]">{BRAND.name}</span>
         </Link>
 
         <nav
@@ -351,7 +347,7 @@ export function Header() {
           </nav>
 
           <div className="flex justify-center px-6 py-10">
-            <span className="font-serif text-lg font-semibold tracking-normal text-[var(--text-muted)]">MythRealms</span>
+            <span className="font-serif text-lg font-semibold tracking-normal text-[var(--text-muted)]">{BRAND.name}</span>
           </div>
         </div>
       )}

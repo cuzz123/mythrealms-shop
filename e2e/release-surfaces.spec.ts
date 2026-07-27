@@ -86,6 +86,15 @@ function expectStrictlyParsedAmountsUnder50(text: string, label: string) {
 }
 
 test.describe("release surfaces", () => {
+  test("public navigation presents the Maverenne home link without Guardian", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.getByRole("link", { name: "Maverenne home" })).toBeVisible();
+    const storefrontChrome = page.locator("[data-storefront-chrome]");
+    await expect(storefrontChrome.getByRole("link", { name: "Find Your Guardian" })).toHaveCount(0);
+    await expect(storefrontChrome.getByText("Find Your Guardian", { exact: true })).toHaveCount(0);
+  });
+
   test("rendered currency parser requires safe terminal boundaries", () => {
     const currentCardText =
       "The Calm Tide - Ring\n$29.99\t$39.99\nSave $10.00\nPRODUCT VIEW";

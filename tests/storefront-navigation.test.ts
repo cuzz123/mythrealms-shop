@@ -6,25 +6,29 @@ import {
   HEADER_MENUS,
 } from "../src/lib/storefront/navigation";
 
-test("storefront navigation exposes every approved discovery route", () => {
-  assert.deepEqual(HEADER_MENUS.map(({ id, label }) => [id, label]), [
-    ["shop", "Shop"],
-    ["gifts", "Gifts"],
-    ["discover", "Discover"],
+test("storefront navigation exposes the Maverenne public top-level order", () => {
+  assert.deepEqual(HEADER_MENUS, []);
+  assert.deepEqual(HEADER_LINKS.map(({ label }) => label), [
+    "New",
+    "Jewelry",
+    "The Pearl Edit",
+    "Gifts",
+    "Journal",
+    "About",
   ]);
-  const hrefs = [
-    ...HEADER_MENUS.flatMap((menu) => menu.links.map((link) => link.href)),
-    ...HEADER_LINKS.map((link) => link.href),
-  ];
-  for (const href of [
+  assert.deepEqual(HEADER_LINKS.map(({ href }) => href), [
     "/collections/new-arrivals",
+    "/collections",
+    "/collections/pearl-series",
     "/gifts",
-    "/pearls/care",
-    "/pearls/how-to-wear",
-    "/pearls/freshwater-pearls",
-    "/guardian-quiz",
+    "/blog",
     "/about",
-  ]) assert.ok(hrefs.includes(href), href);
+  ]);
+});
+
+test("public navigation serializations omit Guardian", () => {
+  const navigation = JSON.stringify({ HEADER_MENUS, HEADER_LINKS, FOOTER_GROUPS });
+  assert.doesNotMatch(navigation, /Guardian/);
 });
 
 test("footer groups are Shop, Learn, About, and Help", () => {
