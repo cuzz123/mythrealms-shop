@@ -3,10 +3,11 @@ import Link from "next/link";
 
 import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { FAQPageJsonLd } from "@/components/ui/JsonLd";
+import { BRAND } from "@/lib/brand-identity";
 import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
 import { absoluteUrl } from "@/lib/site";
 
-const title = "Pearl Jewelry Gift Guide | Everyday Giving | MythRealms";
+const title = `Pearl Jewelry Gift Guide | Everyday Giving | ${BRAND.name}`;
 const description =
   "Choose jewelry as a gift without guessing size or material. Use an item detail only if it is explicitly stated on the exact item page; otherwise, do not infer it.";
 const heroImage = HOMEPAGE_MEDIA.everyday;

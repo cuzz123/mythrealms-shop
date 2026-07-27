@@ -13,7 +13,6 @@ import {
 } from "@/lib/seo/schema";
 import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl, siteUrl } from "@/lib/site";
-import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
 
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
@@ -126,7 +125,6 @@ export function OrganizationJsonLd() {
         "Jewelry styling",
         "Pearl care",
       ],
-      policyFacts: STORE_POLICY_FACTS,
     });
 
   return (

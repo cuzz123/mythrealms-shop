@@ -4,6 +4,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import PearlHubPage, { metadata as hubMetadata } from "../src/app/pearls/page";
+import { BRAND } from "../src/lib/brand-identity";
 import { PEARL_GUIDES, PEARL_HUB_FAQ } from "../src/lib/editorial/guides";
 import { absoluteUrl } from "../src/lib/site";
 import { getProductType } from "../src/lib/storefront/catalog";
@@ -15,9 +16,9 @@ function parseJsonLd(html: string): Array<Record<string, unknown>> {
 }
 
 const EXPECTED_TITLES = {
-  care: "How to Care for Pearl Jewelry | MythRealms",
-  "how-to-wear": "How to Wear Pearl Jewelry | MythRealms",
-  "freshwater-pearls": "What Are Freshwater Cultured Pearls? | MythRealms",
+  care: `How to Care for Pearl Jewelry | Pearl Care Guide | ${BRAND.name}`,
+  "how-to-wear": `How to Wear Pearl Jewelry Every Day | Pearl Guide | ${BRAND.name}`,
+  "freshwater-pearls": `What Are Freshwater Cultured Pearls? | ${BRAND.name}`,
 } as const;
 
 for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>) {
@@ -44,7 +45,7 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
 }
 
 test("hub metadata and visible content use the approved registries and truthful hero", () => {
-  const title = "Pearl Jewelry Guide: Care, Styling & Freshwater Pearls | MythRealms";
+  const title = `Pearl Jewelry Guide: Care, Styling & Freshwater Pearls | ${BRAND.name}`;
   const heroSrc = "/images/brand/editorial/model-short-bob-blue-linen.png";
   const heroAlt = "Model in pale linen wearing pearl jewelry outdoors";
   const html = renderToStaticMarkup(createElement(PearlHubPage));
@@ -93,10 +94,15 @@ test("each guide opens with a 40-70 word direct answer", () => {
 });
 
 test("guide registry records truthful publication and update dates separately", () => {
+  const expectedUpdated = {
+    care: "2026-07-26",
+    "how-to-wear": "2026-07-26",
+    "freshwater-pearls": "2026-07-18",
+  } as const;
   for (const guide of Object.values(PEARL_GUIDES)) {
     const published = (guide as typeof guide & { published?: string }).published;
     assert.equal(published, "2026-07-18", `${guide.slug}: published`);
-    assert.equal(guide.updated, "2026-07-18", `${guide.slug}: updated`);
+    assert.equal(guide.updated, expectedUpdated[guide.slug], `${guide.slug}: updated`);
   }
 });
 
@@ -157,12 +163,13 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
     assert.doesNotMatch(html, /<main/);
     assert.match(html, /Table of contents/);
     assert.match(html, /Frequently asked questions/);
-    assert.match(html, /MythRealms Editorial/);
+    assert.match(html, new RegExp(`${BRAND.name} Editorial`));
     assert.match(html, /Published July 18, 2026/);
-    assert.match(html, /Updated July 18, 2026/);
+    assert.match(html, new RegExp(`Updated ${new Date(`${guide.updated}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}`));
     assert.match(html, /rel="noopener noreferrer"/);
     assert.match(html, /Related guides/);
-    assert.match(html, /Related products/);
+    if (slug === "freshwater-pearls") assert.match(html, /Related products/);
+    else assert.doesNotMatch(html, /Related products/);
     assert.match(html, /"@type":"Article"/);
     assert.match(html, /"@type":"BreadcrumbList"/);
     assert.match(html, /"@type":"FAQPage"/);

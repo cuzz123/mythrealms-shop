@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 
 import { GuideLayout } from "@/components/editorial/GuideLayout";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQPageJsonLd } from "@/components/ui/JsonLd";
+import { BRAND } from "@/lib/brand-identity";
 import { getRelatedGuideProducts, PEARL_GUIDES } from "@/lib/editorial/guides";
 import { absoluteUrl } from "@/lib/site";
 
 const guide = PEARL_GUIDES["freshwater-pearls"];
 const canonical = absoluteUrl("/pearls/freshwater-pearls");
 const image = absoluteUrl(guide.image.src);
-const title = `${guide.seoTitle} | MythRealms`;
+const title = `${guide.seoTitle} | ${BRAND.name}`;
 
 export const metadata: Metadata = {
   title,

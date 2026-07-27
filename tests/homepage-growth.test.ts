@@ -14,15 +14,18 @@ const source = (relativePath: string) =>
 
 test("homepage appends the growth bands after the existing editorial sections", () => {
   const page = source("src/app/page.tsx");
-  const editorialIndex = page.indexOf("<HomepageGuardian />");
+  const categoryIndex = page.indexOf("<HomepageCategoryStories />");
   const occasionIndex = page.indexOf("<HomepageOccasionEdit");
+  const pearlEditIndex = page.indexOf("<HomepagePearlEdit");
+  const editorialIndex = page.indexOf("<HomepageEditorialStory />");
   const giftIndex = page.indexOf("<HomepageGiftSets");
-  const whyIndex = page.indexOf("<HomepageWhyPearls");
 
-  assert.ok(editorialIndex >= 0);
-  assert.ok(occasionIndex > editorialIndex);
-  assert.ok(giftIndex > occasionIndex);
-  assert.ok(whyIndex > giftIndex);
+  assert.ok(categoryIndex >= 0);
+  assert.ok(occasionIndex > categoryIndex);
+  assert.ok(pearlEditIndex > occasionIndex);
+  assert.ok(editorialIndex > pearlEditIndex);
+  assert.ok(giftIndex > editorialIndex);
+  assert.doesNotMatch(page, /HomepageGuardian|HomepageWhyPearls/);
 });
 
 test("first-order invitation uses notes language without a configured campaign", () => {

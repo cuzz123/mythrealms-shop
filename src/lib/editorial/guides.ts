@@ -3,6 +3,9 @@ import {
   getStorefrontProducts,
   type StorefrontProduct,
 } from "@/lib/storefront/catalog";
+import { BRAND } from "@/lib/brand-identity";
+
+const EDITORIAL_AUTHOR = `${BRAND.name} Editorial` as const;
 
 export type GuideSlug = "care" | "how-to-wear" | "freshwater-pearls";
 
@@ -26,7 +29,7 @@ export type PearlGuide = Readonly<{
   eyebrow: string;
   directAnswer: string;
   image: { src: string; alt: string; objectPosition?: string };
-  author: "MythRealms Editorial";
+  author: typeof EDITORIAL_AUTHOR;
   published: "2026-07-18";
   updated: "2026-07-18" | "2026-07-26";
   sections: readonly GuideSection[];
@@ -78,7 +81,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       alt: "Gold wire pearl bracelet displayed on dark fabric",
       objectPosition: "center",
     },
-    author: "MythRealms Editorial",
+    author: EDITORIAL_AUTHOR,
     published: "2026-07-18",
     updated: "2026-07-26",
     sections: [
@@ -160,7 +163,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       alt: "Model wearing pearl earrings",
       objectPosition: "center",
     },
-    author: "MythRealms Editorial",
+    author: EDITORIAL_AUTHOR,
     published: "2026-07-18",
     updated: "2026-07-26",
     sections: [
@@ -241,7 +244,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       alt: "Pearl necklace displayed on a black jewelry stand",
       objectPosition: "center",
     },
-    author: "MythRealms Editorial",
+    author: EDITORIAL_AUTHOR,
     published: "2026-07-18",
     updated: "2026-07-18",
     sections: [

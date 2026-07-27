@@ -8,6 +8,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import {
   buildBlogPostingData,
   JsonLd,
+  OrganizationJsonLd,
   WebSiteJsonLd,
   ProductJsonLd,
 } from "../src/components/ui/JsonLd";
@@ -190,6 +191,16 @@ test("organization schema accepts verified policy data without inventing people"
   assert.equal(schema.url, "https://example.com");
   assert.equal(schema.contactPoint.email, "support@example.com");
   assert.equal("founder" in schema, false);
+});
+
+test("public organization JSON-LD omits unverified shipping and return policies", () => {
+  const html = renderToStaticMarkup(createElement(OrganizationJsonLd));
+  const match = html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/);
+
+  assert.ok(match, "expected an organization JSON-LD script");
+  const schema = JSON.parse(match[1]) as Record<string, unknown>;
+  assert.equal("hasShippingService" in schema, false);
+  assert.equal("hasMerchantReturnPolicy" in schema, false);
 });
 
 test("organization schema mirrors optional verified policy objects", () => {

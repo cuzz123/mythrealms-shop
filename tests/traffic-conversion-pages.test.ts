@@ -11,6 +11,7 @@ import PearlCarePage, {
   metadata as careMetadata,
 } from "../src/app/pearls/care/page";
 import { PEARL_GUIDES } from "../src/lib/editorial/guides";
+import { BRAND } from "../src/lib/brand-identity";
 
 test("high-intent pages separate general guidance from unverified item and policy facts", () => {
   const howToWearHtml = renderToStaticMarkup(createElement(HowToWearPearlsPage));
@@ -19,13 +20,13 @@ test("high-intent pages separate general guidance from unverified item and polic
 
   assert.equal(
     howToWearMetadata.title,
-    "How to Wear Pearl Jewelry Every Day | Pearl Guide | MythRealms",
+    `How to Wear Pearl Jewelry Every Day | Pearl Guide | ${BRAND.name}`,
   );
   assert.equal(
     careMetadata.title,
-    "How to Care for Pearl Jewelry | Pearl Care Guide | MythRealms",
+    `How to Care for Pearl Jewelry | Pearl Care Guide | ${BRAND.name}`,
   );
-  assert.equal(giftsMetadata.title, "Pearl Jewelry Gift Guide | Everyday Giving | MythRealms");
+  assert.equal(giftsMetadata.title, `Pearl Jewelry Gift Guide | Everyday Giving | ${BRAND.name}`);
 
   assert.match(
     PEARL_GUIDES["how-to-wear"].directAnswer,
@@ -61,8 +62,12 @@ test("high-intent pages separate general guidance from unverified item and polic
     /delivery guarantee|best seller|hypoallergenic|one-size/i,
   );
   assert.match(giftsHtml, /cannot make a delivery promise/i);
+  assert.match(`${howToWearHtml}\n${careHtml}\n${giftsHtml}`, new RegExp(BRAND.name, "i"));
+  // The canonical origin remains on the legacy domain until the separately
+  // authorized domain cutover; customer-visible and schema brand names must
+  // already use the single Phase 1 identity.
   assert.doesNotMatch(
     `${howToWearHtml}\n${careHtml}\n${giftsHtml}`,
-    /Maverenne/i,
+    /"name":"MythRealms(?: Editorial)?"|>MythRealms(?: Editorial)?</i,
   );
 });

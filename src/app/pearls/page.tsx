@@ -6,6 +6,7 @@ import Link from "next/link";
 import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { RelatedProducts } from "@/components/editorial/RelatedProducts";
 import { FAQPageJsonLd } from "@/components/ui/JsonLd";
+import { BRAND } from "@/lib/brand-identity";
 import {
   getRelatedGuideProducts,
   PEARL_GUIDES,
@@ -15,9 +16,9 @@ import {
 import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
 import { absoluteUrl } from "@/lib/site";
 
-const title = "Pearl Jewelry Guide: Care, Styling & Freshwater Pearls | MythRealms";
+const title = `Pearl Jewelry Guide: Care, Styling & Freshwater Pearls | ${BRAND.name}`;
 const description =
-  "Straight answers about pearl jewelry care, everyday styling, and freshwater cultured pearls, with links to current MythRealms pieces.";
+  `Straight answers about pearl jewelry care, everyday styling, and freshwater cultured pearls, with links to current ${BRAND.name} pieces.`;
 const heroImage = HOMEPAGE_MEDIA.everyday;
 
 const GUIDE_QUESTIONS: readonly { slug: GuideSlug; question: string }[] = [
@@ -150,7 +151,7 @@ export default function PearlHubPage() {
       <RelatedProducts
         products={products}
         title="Explore current pearl pieces"
-        description="Six active, in-stock pieces from the current MythRealms catalog."
+        description={`Six active, in-stock pieces from the current ${BRAND.name} catalog.`}
       />
 
       <section className="border-t border-[var(--border)] bg-[var(--surface)]">
