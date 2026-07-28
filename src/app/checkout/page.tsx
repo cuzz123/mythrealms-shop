@@ -721,8 +721,11 @@ function PayPalButton({
   const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "";
   const payloadRef = useRef({ items, email, shippingAddress, discountCode });
   const validateRef = useRef(validateForm);
-  payloadRef.current = { items, email, shippingAddress, discountCode };
-  validateRef.current = validateForm;
+
+  useEffect(() => {
+    payloadRef.current = { items, email, shippingAddress, discountCode };
+    validateRef.current = validateForm;
+  }, [discountCode, email, items, shippingAddress, validateForm]);
 
   useEffect(() => {
     if (!paypalClientId) return;
