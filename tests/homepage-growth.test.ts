@@ -8,6 +8,7 @@ import {
   getFirstOrderInvitationCopy,
   shouldShowFirstOrderInvitation,
 } from "../src/components/growth/FirstOrderInvitation";
+import { BRAND } from "../src/lib/brand-identity";
 
 const source = (relativePath: string) =>
   readFileSync(resolve(relativePath), "utf8");
@@ -33,6 +34,16 @@ test("first-order invitation uses notes language without a configured campaign",
 
   assert.match(copy.title, /notes/i);
   assert.doesNotMatch(`${copy.title} ${copy.description} ${copy.submitLabel}`, /discount|%|\$|code/i);
+});
+
+test("Phase 1 invitation and homepage product cards use the shared public brand", () => {
+  const copy = getFirstOrderInvitationCopy();
+  const invitation = source("src/components/growth/FirstOrderInvitation.tsx");
+  const productCard = source("src/components/product/ProductCard.tsx");
+
+  assert.match(copy.description, new RegExp(BRAND.name));
+  assert.match(invitation, /\{BRAND\.name\} Notes/);
+  assert.match(productCard, /\$\{BRAND\.name\} pearl jewelry/);
 });
 
 test("first-order invitation only references a supplied campaign code", () => {

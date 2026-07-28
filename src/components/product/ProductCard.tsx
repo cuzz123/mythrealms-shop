@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Heart, ShoppingBag } from "lucide-react";
 import toast from "react-hot-toast";
 import { ProductImage } from "@/components/ui/ProductImage";
+import { BRAND } from "@/lib/brand-identity";
 import type { ProductImageRoles } from "@/lib/1688-products";
 import { useCartStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
@@ -89,7 +90,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
             <>
               <Image
                 src={imageUrl(primaryImage)}
-                alt={`${product.name} - MythRealms pearl jewelry`}
+                alt={`${product.name} - ${BRAND.name} pearl jewelry`}
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 loading="lazy"

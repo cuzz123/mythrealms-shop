@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Check, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { BRAND } from "@/lib/brand-identity";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
 
 export const FIRST_ORDER_INVITATION_DELAY_MS = 20_000;
@@ -28,7 +29,7 @@ export function getFirstOrderInvitationCopy(campaignCode?: string): InvitationCo
 
   return {
     title: "Notes from the coast.",
-    description: "Subscribe for new pearl arrivals, thoughtful stories, and quiet notes from MythRealms.",
+    description: `Subscribe for new pearl arrivals, thoughtful stories, and quiet notes from ${BRAND.name}.`,
     submitLabel: "Subscribe",
   };
 }
@@ -189,7 +190,7 @@ export function FirstOrderInvitation({
       >
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase text-[var(--accent)]">MythRealms Notes</p>
+            <p className="text-xs font-semibold uppercase text-[var(--accent)]">{BRAND.name} Notes</p>
             <h2 id="first-order-invitation-title" className="mt-3 font-serif text-2xl font-medium text-[var(--text)]">
               {copy.title}
             </h2>
