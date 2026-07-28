@@ -28,15 +28,14 @@ test("high-intent pages separate general guidance from unverified item and polic
   );
   assert.equal(giftsMetadata.title, `Pearl Jewelry Gift Guide | Everyday Giving | ${BRAND.name}`);
 
-  assert.match(
-    PEARL_GUIDES["how-to-wear"].directAnswer,
-    /only if (?:it is|they are) explicitly stated on the exact item page/i,
-  );
+  assert.equal(PEARL_GUIDES["how-to-wear"].editorialStatus, "candidate");
+  assert.match(PEARL_GUIDES["how-to-wear"].evidenceBoundary ?? "", /does not establish product material/i);
   assert.match(
     PEARL_GUIDES.care.directAnswer,
     /only if (?:it is|they are) explicitly stated on the exact item page/i,
   );
   assert.match(howToWearHtml, /href="\/pearls\/care"/);
+  assert.match(howToWearHtml, /A guide cannot confirm composition, dimensions, fastening, price, availability, delivery, return eligibility, or how an item will feel when worn\./);
   assert.match(careHtml, /href="\/contact"/);
   for (const html of [howToWearHtml, careHtml]) {
     assert.doesNotMatch(html, /href="\/products\//);
