@@ -19,7 +19,7 @@ function parseJsonLd(html: string): Array<Record<string, unknown>> {
 }
 
 const EXPECTED_TITLES = {
-  care: `How to Care for Pearl Jewelry | Pearl Care Guide | ${BRAND.name}`,
+  care: "How to Care for Pearls | Pearl Care Guide",
   "how-to-wear": `How to Wear Pearl Jewelry Every Day | Pearl Guide | ${BRAND.name}`,
   "freshwater-pearls": `What Are Freshwater Cultured Pearls? | ${BRAND.name}`,
 } as const;
@@ -33,6 +33,17 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
     const image = absoluteUrl(guide.image.src);
 
     assert.equal(route.metadata.title, EXPECTED_TITLES[slug]);
+    if (slug === "care") {
+      assert.equal(
+        route.metadata.description,
+        "Read general pearl care guidance on cleaning, heat, chemicals, and storage boundaries. Check the exact item record for item-specific instructions.",
+      );
+      assert.equal(route.metadata.alternates?.canonical, canonical);
+      assert.equal(route.metadata.openGraph?.url, canonical);
+      assert.equal((route.metadata.twitter as { card?: string } | undefined)?.card, "summary");
+      assert.equal("images" in (route.metadata.openGraph ?? {}), false);
+      return;
+    }
     assert.equal(route.metadata.description, guide.description);
     assert.equal(route.metadata.alternates?.canonical, canonical);
     assert.equal(route.metadata.openGraph?.url, canonical);
@@ -199,6 +210,16 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
 
     assert.equal((html.match(/<h1/g) ?? []).length, 1);
     assert.doesNotMatch(html, /<main/);
+    if (slug === "care") {
+      assert.match(html, /How to Care for Pearls/);
+      assert.match(html, /Frequently asked questions/);
+      assert.ok(article);
+      assert.equal(article.headline, "How to Care for Pearls");
+      assert.equal("datePublished" in article, false);
+      assert.equal("dateModified" in article, false);
+      assert.ok(faq);
+      return;
+    }
     assert.match(html, /Table of contents/);
     assert.match(html, /Frequently asked questions/);
     assert.match(html, new RegExp(`${BRAND.name} Editorial`));
