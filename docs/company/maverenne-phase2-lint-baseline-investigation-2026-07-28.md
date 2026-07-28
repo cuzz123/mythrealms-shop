@@ -36,3 +36,7 @@ No fix was made because the instruction requires a single confirmed root-cause h
 ## Separate build boundary
 
 The isolated PostgreSQL fixture is still required for full Next `generate`/`generate-env`/prerender verification. It remains separate from lint and no production database was contacted.
+
+## Batch A remediation
+
+`src/app/admin/blog/[id]/page.tsx` now declares the unchanged `fillPost` function before the loading effect captures it. This preserves the request and state-update behavior while removing the compiler's declaration-order ambiguity. `tests/react-compiler-lint-contract.test.ts` first failed on the old order and then passed after the move. Target lint reported 0 errors and TypeScript passed; frozen-tree full-lint errors fell from 14 to 13.
