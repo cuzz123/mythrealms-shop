@@ -1,32 +1,22 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Search } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
-import { getProductType, getStorefrontProducts } from "@/lib/storefront/catalog";
-import { productDisplayName } from "@/lib/brand";
+import { searchStorefrontProducts } from "@/lib/storefront/search";
 import Link from "next/link";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
-
-interface SearchResult {
-  id: string;
-  name: string;
-  slug: string;
-  price: number;
-  image: string;
-  category: string;
-}
 
 export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<SearchResult[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const results = useMemo(() => searchStorefrontProducts(query), [query]);
 
   useDialogFocus({
     isOpen,
@@ -51,35 +41,6 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
-
-  useEffect(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    if (normalizedQuery.length < 2) {
-      setResults([]);
-      return;
-    }
-
-    const matches: SearchResult[] = getStorefrontProducts()
-      .filter((product) =>
-        [
-          productDisplayName(product),
-          product.description,
-          product.intention || "",
-          `pearl ${getProductType(product)}`,
-        ].some((value) => value.toLowerCase().includes(normalizedQuery)),
-      )
-      .slice(0, 8)
-      .map((product) => ({
-        id: product.id,
-        name: productDisplayName(product),
-        slug: product.slug,
-        price: product.price,
-        image: product.image,
-        category: getProductType(product).replace("-", " "),
-      }));
-
-    setResults(matches);
-  }, [query]);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
