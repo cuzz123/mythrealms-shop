@@ -7,7 +7,7 @@ const MOMENT_LINKS = [
   { label: "For Everyday", href: "/collections/pearl-series", image: HOMEPAGE_MEDIA.everyday },
   { label: "For a New Chapter", href: "/gifts", image: HOMEPAGE_MEDIA.courtyard },
   { label: "Just Because", href: "/collections/new-arrivals", image: HOMEPAGE_MEDIA.earrings },
-  { label: "Small Gifts", href: "/gifts#under-50", image: HOMEPAGE_MEDIA.seaside },
+  { label: "Small Gifts", href: "/gifts", image: HOMEPAGE_MEDIA.seaside },
 ] as const;
 
 export function HomepageOccasionEdit() {

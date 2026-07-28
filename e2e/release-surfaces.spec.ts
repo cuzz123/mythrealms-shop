@@ -482,7 +482,7 @@ test.describe("release surfaces", () => {
       ["For Everyday", "/collections/pearl-series"],
       ["For a New Chapter", "/gifts"],
       ["Just Because", "/collections/new-arrivals"],
-      ["Small Gifts", "/gifts#under-50"],
+      ["Small Gifts", "/gifts"],
     ] as const) {
       await expect(page.getByRole("link", { name: label, exact: true })).toHaveAttribute("href", href);
     }

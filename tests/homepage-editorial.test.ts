@@ -75,3 +75,13 @@ test("homepage growth surfaces use approved brand and storefront imagery", () =>
     assert.doesNotMatch(componentSource, /https?:\/\//);
   }
 });
+
+test("homepage gift navigation does not point to unrendered gift-page fragments", () => {
+  const source = readFileSync(
+    resolve("src/components/home/HomepageOccasionEdit.tsx"),
+    "utf8",
+  );
+
+  assert.match(source, /label: "Small Gifts", href: "\/gifts"/);
+  assert.doesNotMatch(source, /\/gifts#(?:under-50|under-70|everyday|statement)/);
+});
