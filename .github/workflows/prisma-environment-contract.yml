@@ -2,6 +2,9 @@ name: Prisma environment contract
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - codex/a0-prisma-actions-contract
 
 permissions:
   contents: read
