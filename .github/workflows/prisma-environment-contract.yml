@@ -15,9 +15,6 @@ jobs:
     timeout-minutes: 10
     env:
       DATABASE_URL: ''
-      NPM_CONFIG_CACHE: ${{ runner.temp }}/a0-prisma/npm-cache
-      npm_config_store_dir: ${{ runner.temp }}/a0-prisma/pnpm-store
-      XDG_CACHE_HOME: ${{ runner.temp }}/a0-prisma/xdg-cache
     steps:
       - uses: actions/checkout@v4
 
@@ -35,6 +32,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          export NPM_CONFIG_CACHE="$RUNNER_TEMP/a0-prisma/npm-cache"
+          export npm_config_store_dir="$RUNNER_TEMP/a0-prisma/pnpm-store"
+          export XDG_CACHE_HOME="$RUNNER_TEMP/a0-prisma/xdg-cache"
           contract_dir="$RUNNER_TEMP/a0-prisma/contract"
           trap 'rm -rf "$RUNNER_TEMP/a0-prisma"' EXIT
           mkdir -p "$contract_dir"
