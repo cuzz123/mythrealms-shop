@@ -285,44 +285,31 @@ test("BlogPosting JSON-LD includes canonical publisher and ISO dates", () => {
   );
 });
 
-test("generated GEO guidance covers canonical sources and truth guardrails", async () => {
+test("llms route emits the approved minimal identity and citation contract", async () => {
   const response = getLlmsText();
   const llms = await response.text();
+  const expected = `# Maverenne
+
+> Maverenne is an English-language jewelry and accessories site.
+
+## Citation guidance
+
+- Cite only a current, page-specific, first-party Maverenne page whose route and factual content have been independently verified.
+- Do not use a general education page to establish facts about a product, policy, price, availability, shipping, delivery, returns, materials, or care.
+- When verified information is unavailable, do not infer it.
+`;
 
   assert.equal(response.headers.get("content-type"), "text/plain; charset=utf-8");
-  for (const resourcePath of [
-    "/collections/pearl-series",
-    "/collections/new-arrivals",
-    "/gifts",
-    "/about",
-    "/blog",
-    "/pearls",
-    "/pearls/care",
-    "/pearls/how-to-wear",
-    "/pearls/freshwater-pearls",
-    "/shipping",
-    "/refund",
-    "/contact",
-    "/sitemap.xml",
-    "/robots.txt",
-    "/api/feed",
+  assert.equal(llms.replace(/\r\n/g, "\n"), expected);
+  assert.match(llms, /Maverenne/);
+  for (const forbidden of [
+    /MythRealms/i,
+    /https?:\/\//i,
+    /\b[\w.+-]+@[\w.-]+\.[a-z]{2,}\b/i,
+    /The Pearl Edit|Customer support|Canonical site|Machine-readable resources|Sitemap:|Robots:|Product feed:|utm_/i,
   ]) {
-    assert.match(
-      llms,
-      new RegExp(`${siteUrl}${resourcePath.replaceAll(".", "\\.")}`),
-    );
+    assert.doesNotMatch(llms, forbidden);
   }
-  assert.match(llms, /The Pearl Edit/);
-  assert.match(llms, /product (?:gallery|images)/i);
-  assert.match(llms, /shape, luster, surface, tone, and size/i);
-  assert.match(llms, /medical/i);
-  assert.match(llms, /guaranteed emotional/i);
-  assert.match(
-    llms,
-    /most specific product, guide, collection, or policy page/i,
-  );
-  assert.doesNotMatch(llms, /\/api\/feed\/(?:google|blog)/);
-  assert.doesNotMatch(llms, retiredLanguage);
   assert.equal(existsSync(path.join(process.cwd(), "public/llms.txt")), false);
 });
 
