@@ -99,6 +99,7 @@ test("pearl care renders the approved general-care answer, legacy canonical, and
   assert.equal(article?.headline, "How to Care for Pearls");
   assert.equal(article?.description, directAnswer);
   assert.equal(article?.url, "https://mythrealms-shop.vercel.app/pearls/care");
+  assert.equal("author" in (article ?? {}), false);
   assert.equal("datePublished" in (article ?? {}), false);
   assert.equal("image" in (article ?? {}), false);
   assert.deepEqual(
@@ -114,6 +115,13 @@ test("pearl care renders the approved general-care answer, legacy canonical, and
     ((breadcrumb?.itemListElement as Array<Record<string, unknown>>).at(-1)?.item),
     "https://mythrealms-shop.vercel.app/pearls/care",
   );
+  for (const [href, label] of [
+    ["https://www.gia.edu/gia-news-research/pearl-care-cleaning", "GIA Pearl Care and Cleaning Guide"],
+    ["https://www.gia.edu/pearl/buyers-guide", "GIA Pearl Buyer’s Guide"],
+  ]) {
+    assert.match(html, new RegExp(`<a[^>]+href="${href}"[^>]*>${label}<\\/a>`));
+  }
+  assert.doesNotMatch(html, /Published|Maverenne Editorial/);
 
   assert.doesNotMatch(
     html,

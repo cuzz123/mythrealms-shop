@@ -183,6 +183,32 @@ export default function PearlCarePage() {
             <li><Link href="/pearls/freshwater-pearls">Read general pearl terminology</Link></li>
           </ul>
         </section>
+
+        <section className="mt-16 border-t border-[var(--border)] pt-10" aria-labelledby="care-sources">
+          <h2 id="care-sources" className="font-serif text-3xl font-medium text-[var(--text)]">
+            Sources
+          </h2>
+          <ul className="mt-6 space-y-3 text-sm font-semibold text-[var(--accent)]">
+            <li>
+              <a
+                href="https://www.gia.edu/gia-news-research/pearl-care-cleaning"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GIA Pearl Care and Cleaning Guide
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.gia.edu/pearl/buyers-guide"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GIA Pearl Buyer’s Guide
+              </a>
+            </li>
+          </ul>
+        </section>
       </article>
     </div>
   );
