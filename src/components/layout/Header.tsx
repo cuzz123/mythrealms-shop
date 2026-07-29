@@ -9,6 +9,10 @@ import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
+import {
+  takePendingMenuFocus,
+  useHeaderVisualState,
+} from "@/lib/client/header-state";
 import { BRAND } from "@/lib/brand-identity";
 import {
   HEADER_LINKS,
@@ -22,20 +26,18 @@ type DesktopMenu = HeaderMenuId | null;
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenu, setDesktopMenu] = useState<DesktopMenu>(null);
-  const [pendingMenuFocus, setPendingMenuFocus] = useState<DesktopMenu>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
   const { data: session } = useSession();
   const pathname = usePathname();
   const itemCount = useCartStore((state) => state.itemCount());
   const openCart = useCartUIStore((state) => state.openCart);
   const wishlistCount = useWishlistStore((state) => state.count());
   const user = session?.user;
-  const isHome = pathname === "/";
-  const isOverlay = isHome && !isScrolled;
+  const isOverlay = useHeaderVisualState(pathname) === "overlay";
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileCloseRef = useRef<HTMLButtonElement>(null);
   const desktopNavigationRef = useRef<HTMLElement>(null);
   const previousPathname = useRef(pathname);
+  const pendingMenuFocusRef = useRef<DesktopMenu>(null);
   const menuTriggerRefs = useRef<Record<Exclude<DesktopMenu, null>, HTMLButtonElement | null>>({
     shop: null,
     gifts: null,
@@ -55,23 +57,11 @@ export function Header() {
   });
 
   useEffect(() => {
-    if (!isHome) {
-      setIsScrolled(true);
-      return;
-    }
-
-    const onScroll = () => setIsScrolled(window.scrollY > window.innerHeight * 0.5);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
-
-  useEffect(() => {
     if (previousPathname.current === pathname) return;
 
     previousPathname.current = pathname;
     setDesktopMenu(null);
-    setPendingMenuFocus(null);
+    pendingMenuFocusRef.current = null;
   }, [pathname]);
 
   useEffect(() => {
@@ -80,7 +70,7 @@ export function Header() {
     const closeOnPointerOutside = (event: PointerEvent) => {
       if (!desktopNavigationRef.current?.contains(event.target as Node)) {
         setDesktopMenu(null);
-        setPendingMenuFocus(null);
+        pendingMenuFocusRef.current = null;
       }
     };
 
@@ -89,11 +79,12 @@ export function Header() {
   }, [desktopMenu]);
 
   useEffect(() => {
-    if (!desktopMenu || pendingMenuFocus !== desktopMenu) return;
+    const menuToFocus = takePendingMenuFocus(pendingMenuFocusRef.current, desktopMenu);
+    if (!menuToFocus) return;
 
-    menuPanelRefs.current[desktopMenu]?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
-    setPendingMenuFocus(null);
-  }, [desktopMenu, pendingMenuFocus]);
+    pendingMenuFocusRef.current = null;
+    menuPanelRefs.current[menuToFocus]?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
+  }, [desktopMenu]);
 
   const [justAdded, setJustAdded] = useState(false);
   const previousItemCount = useRef(itemCount);
@@ -116,15 +107,15 @@ export function Header() {
   const closeDesktopMenu = (restoreFocus = false) => {
     const menuToClose = desktopMenu;
     setDesktopMenu(null);
-    setPendingMenuFocus(null);
+    pendingMenuFocusRef.current = null;
     if (restoreFocus && menuToClose) {
       window.requestAnimationFrame(() => menuTriggerRefs.current[menuToClose]?.focus());
     }
   };
 
   const openMenuAndFocusFirstItem = (menu: Exclude<DesktopMenu, null>) => {
+    pendingMenuFocusRef.current = menu;
     setDesktopMenu(menu);
-    setPendingMenuFocus(menu);
   };
 
   const overlayControlClass = isOverlay

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { CheckCircle2, Circle, ChevronDown, ChevronRight } from "lucide-react";
 import { PinterestDraftQueue } from "@/components/admin/PinterestDraftQueue";
+import { useSocialTaskStorage } from "@/lib/client/social-task-storage";
 
 // ====== TASK DEFINITIONS ======
 interface Task {
@@ -83,22 +83,7 @@ const CATEGORIES: Category[] = [
 
 // ====== COMPONENT ======
 export default function SocialTasksPage() {
-  const [completed, setCompleted] = useState<Record<string, string>>({}); // taskId -> date
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-
-  // Load from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("mythrealms-tasks");
-    if (saved) setCompleted(JSON.parse(saved));
-    const exp = localStorage.getItem("mythrealms-tasks-expanded");
-    if (exp) setExpanded(JSON.parse(exp));
-  }, []);
-
-  // Save to localStorage
-  useEffect(() => {
-    localStorage.setItem("mythrealms-tasks", JSON.stringify(completed));
-    localStorage.setItem("mythrealms-tasks-expanded", JSON.stringify(expanded));
-  }, [completed, expanded]);
+  const { completed, expanded, setCompleted, setExpanded } = useSocialTaskStorage();
 
   const today = new Date().toISOString().slice(0, 10);
   const isToday = (date: string) => date === today;

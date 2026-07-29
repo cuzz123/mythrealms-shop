@@ -3,6 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useCartStore } from "@/lib/cart";
 import { buildDiscountPreviewRequest } from "@/lib/checkout/discount-preview";
+import {
+  getKeyedValue,
+  schedulePayPalUnavailable,
+  type KeyedValue,
+} from "@/lib/checkout/client-state";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
@@ -106,7 +111,10 @@ export default function CheckoutPage() {
   // Discount
   const [discountCode, setDiscountCode] = useState("");
   const [appliedDiscountCode, setAppliedDiscountCode] = useState("");
-  const [discountInfo, setDiscountInfo] = useState<DiscountInfo | null>(null);
+  const [discountState, setDiscountState] = useState<KeyedValue<DiscountInfo>>({
+    key: "",
+    value: null,
+  });
   const [discountLoading, setDiscountLoading] = useState(false);
   const [discountError, setDiscountError] = useState("");
 
@@ -114,6 +122,8 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
+  const itemsKey = items.map((i) => `${i.product.id}:${i.product.variantId ?? ""}:${i.quantity}`).join("|");
+  const discountInfo = getKeyedValue(discountState, itemsKey);
   const shipping =
     subtotal() >= STORE_POLICY_FACTS.freeShippingThresholdUsd
       ? 0
@@ -146,14 +156,59 @@ export default function CheckoutPage() {
     return controller.cleanup;
   }, [items, total]);
 
-  // Re-validate discounts whenever the cart contents change so totals stay correct
-  const itemsKey = items.map((i) => `${i.product.id}:${i.product.variantId ?? ""}:${i.quantity}`).join("|");
-  useEffect(() => {
-    if (items.length > 0) {
-      validateDiscount(appliedDiscountCode);
-    } else {
-      setDiscountInfo(null);
+  async function validateDiscount(code?: string) {
+    const codeToUse = code ?? discountCode;
+    setDiscountLoading(true);
+    setDiscountError("");
+
+    try {
+      const res = await fetch("/api/discounts/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(
+          buildDiscountPreviewRequest(items, codeToUse, email),
+        ),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setAppliedDiscountCode("");
+        setDiscountState({ key: itemsKey, value: null });
+        setDiscountError(data.error || "Invalid discount code");
+        return;
+      }
+
+      setDiscountState({ key: itemsKey, value: data });
+      setAppliedDiscountCode(codeToUse.trim().toUpperCase());
+      if (data.appliedDiscounts?.length > 0) {
+        toast.success(
+          `${data.appliedDiscounts.length} discount${data.appliedDiscounts.length > 1 ? "s" : ""} applied!`
+        );
+      }
+    } catch (err: unknown) {
+      setAppliedDiscountCode("");
+      setDiscountState({ key: itemsKey, value: null });
+      console.error("Discount validation error:", err);
+      setDiscountError(
+        err instanceof Error
+          ? err.message
+          : "Failed to validate discount. Please try again.",
+      );
+    } finally {
+      setDiscountLoading(false);
     }
+  }
+
+  // Re-validate discounts whenever the cart contents change so totals stay correct
+  useEffect(() => {
+    if (items.length === 0) return;
+    let active = true;
+    queueMicrotask(() => {
+      if (active) validateDiscount(appliedDiscountCode);
+    });
+    return () => {
+      active = false;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsKey]);
 
@@ -262,49 +317,6 @@ export default function CheckoutPage() {
   }
 
   // --- Discount ---
-  async function validateDiscount(code?: string) {
-    const codeToUse = code ?? discountCode;
-    setDiscountLoading(true);
-    setDiscountError("");
-
-    try {
-      const res = await fetch("/api/discounts/validate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(
-          buildDiscountPreviewRequest(items, codeToUse, email),
-        ),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        setAppliedDiscountCode("");
-        setDiscountInfo(null);
-        setDiscountError(data.error || "Invalid discount code");
-        return;
-      }
-
-      setDiscountInfo(data);
-      setAppliedDiscountCode(codeToUse.trim().toUpperCase());
-      if (data.appliedDiscounts?.length > 0) {
-        toast.success(
-          `${data.appliedDiscounts.length} discount${data.appliedDiscounts.length > 1 ? "s" : ""} applied!`
-        );
-      }
-    } catch (err: unknown) {
-      setAppliedDiscountCode("");
-      setDiscountInfo(null);
-      console.error("Discount validation error:", err);
-      setDiscountError(
-        err instanceof Error
-          ? err.message
-          : "Failed to validate discount. Please try again.",
-      );
-    } finally {
-      setDiscountLoading(false);
-    }
-  }
-
   function handleApplyDiscount(e: React.MouseEvent) {
     e.preventDefault();
     if (discountCode.trim()) {
@@ -318,7 +330,7 @@ export default function CheckoutPage() {
       (d) => d.type !== type
     );
     if (remaining.length === 0) {
-      setDiscountInfo(null);
+      setDiscountState({ key: itemsKey, value: null });
       setDiscountCode("");
       setAppliedDiscountCode("");
     } else {
@@ -734,8 +746,7 @@ function PayPalButton({
     const paypalWindow = window as MythRealmsWindow;
     const paypal = paypalWindow.paypal;
     if (!container || !paypal?.Buttons) {
-      setPaypalError("PayPal could not be loaded. Please refresh and try again.");
-      return;
+      return schedulePayPalUnavailable(setPaypalError);
     }
 
     // Skip re-render if buttons already exist (prevents flash on re-renders)
@@ -843,8 +854,11 @@ function PayPalButton({
       if (timeoutId !== null) window.clearTimeout(timeoutId);
       observer?.disconnect();
       console.error("PayPal button setup error:", error);
-      setButtonReady(false);
-      setPaypalError("PayPal is temporarily unavailable. Please refresh and try again.");
+      queueMicrotask(() => {
+        if (!active) return;
+        setButtonReady(false);
+        setPaypalError("PayPal is temporarily unavailable. Please refresh and try again.");
+      });
     }
 
     return () => {

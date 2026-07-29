@@ -115,7 +115,7 @@ test("checkout non-2xx discount revalidation clears stale preview state", () => 
     "return;",
   );
   assert.match(nonOk, /setAppliedDiscountCode\(""\)/);
-  assert.match(nonOk, /setDiscountInfo\(null\)/);
+  assert.match(nonOk, /setDiscountState\(\{ key: itemsKey, value: null \}\)/);
 });
 
 test("checkout thrown discount revalidation clears stale preview state", () => {
@@ -125,7 +125,7 @@ test("checkout thrown discount revalidation clears stale preview state", () => {
     "} finally {",
   );
   assert.match(caught, /setAppliedDiscountCode\(""\)/);
-  assert.match(caught, /setDiscountInfo\(null\)/);
+  assert.match(caught, /setDiscountState\(\{ key: itemsKey, value: null \}\)/);
 });
 
 test("cart caught discount preview failures clear stale preview state", () => {

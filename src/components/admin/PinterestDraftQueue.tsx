@@ -12,6 +12,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
+import { loadPinterestDrafts } from "@/lib/client/admin-resource-loaders";
 
 type DraftStatus = "DRAFT" | "APPROVED" | "PUBLISHING" | "PUBLISHED" | "REJECTED" | "FAILED";
 
@@ -87,6 +88,11 @@ export function PinterestDraftQueue() {
   const [busyKey, setBusyKey] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
+  const applyDrafts = useCallback((nextDrafts: Draft[]) => {
+    setDrafts(nextDrafts);
+    setEdits(Object.fromEntries(nextDrafts.map((draft) => [draft.id, getEdits(draft)])));
+  }, []);
+
   const applyDraft = useCallback((nextDraft: Draft) => {
     setDrafts((current) => {
       const present = current.some((draft) => draft.id === nextDraft.id);
@@ -106,23 +112,30 @@ export function PinterestDraftQueue() {
     setLoading(true);
     setNotice(null);
     try {
-      const response = await fetch("/api/admin/pinterest-drafts", { cache: "no-store" });
-      const data = (await response.json()) as { drafts?: Draft[]; error?: string };
-      if (!response.ok) throw new Error(data.error || "无法加载 Pinterest 草稿");
-
-      const nextDrafts = data.drafts || [];
-      setDrafts(nextDrafts);
-      setEdits(Object.fromEntries(nextDrafts.map((draft) => [draft.id, getEdits(draft)])));
+      applyDrafts(await loadPinterestDrafts<Draft>());
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "无法加载 Pinterest 草稿");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [applyDrafts]);
 
   useEffect(() => {
-    void loadDrafts();
-  }, [loadDrafts]);
+    let active = true;
+    void loadPinterestDrafts<Draft>()
+      .then((nextDrafts) => {
+        if (active) applyDrafts(nextDrafts);
+      })
+      .catch((error) => {
+        if (active) setNotice(error instanceof Error ? error.message : "无法加载 Pinterest 草稿");
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [applyDrafts]);
 
   async function createDraft() {
     setBusyKey("create");
