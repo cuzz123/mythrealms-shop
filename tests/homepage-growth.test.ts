@@ -29,6 +29,17 @@ test("homepage appends the growth bands after the existing editorial sections", 
   assert.doesNotMatch(page, /HomepageGuardian|HomepageWhyPearls/);
 });
 
+test("global providers preserve children without mounting the first-order invitation", () => {
+  const providers = source("src/app/providers.tsx");
+
+  assert.match(providers, /\{children\}/);
+  assert.doesNotMatch(providers, /<FirstOrderInvitation\b/);
+  assert.doesNotMatch(
+    providers,
+    /import\s+\{\s*FirstOrderInvitation\s*\}\s+from/,
+  );
+});
+
 test("first-order invitation uses notes language without a configured campaign", () => {
   const copy = getFirstOrderInvitationCopy();
 
