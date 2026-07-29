@@ -13,8 +13,6 @@ jobs:
   verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    env:
-      DATABASE_URL: ''
     steps:
       - uses: actions/checkout@v4
 
@@ -22,32 +20,76 @@ jobs:
         with:
           node-version: 22
 
-      - name: Prepare pnpm 11.9.0
-        run: |
-          corepack enable
-          corepack prepare pnpm@11.9.0 --activate
-          test "$(pnpm --version)" = "11.9.0"
-
       - name: Verify isolated Prisma engine contract
         shell: bash
         run: |
           set -euo pipefail
           export NPM_CONFIG_CACHE="$RUNNER_TEMP/a0-prisma/npm-cache"
           export npm_config_store_dir="$RUNNER_TEMP/a0-prisma/pnpm-store"
-          export XDG_CACHE_HOME="$RUNNER_TEMP/a0-prisma/xdg-cache"
-          contract_dir="$RUNNER_TEMP/a0-prisma/contract"
-          trap 'rm -rf "$RUNNER_TEMP/a0-prisma"' EXIT
+          temp_root="$RUNNER_TEMP/a0-prisma"
+          cleanup() {
+            original_exit_code=$?
+            trap - EXIT
+            set +e
+            rm -rf -- "$temp_root"
+            cleanup_exit_code=$?
+            if [ "$cleanup_exit_code" -eq 0 ] && [ ! -e "$temp_root" ]; then
+              echo 'directed_cleanup=pass'
+              echo "original_exit_code=$original_exit_code"
+              exit "$original_exit_code"
+            else
+              echo 'directed_cleanup=fail'
+              echo "original_exit_code=$original_exit_code"
+              if [ "$original_exit_code" -ne 0 ]; then
+                exit "$original_exit_code"
+              fi
+              exit 70
+            fi
+          }
+          trap cleanup EXIT
+          export HOME="$temp_root/home"
+          export COREPACK_HOME="$temp_root/corepack"
+          mkdir -p "$HOME"
+          contract_dir="$temp_root/contract"
           mkdir -p "$contract_dir"
           cp package.json pnpm-lock.yaml pnpm-workspace.yaml "$contract_dir/"
           sed -i "s/'@prisma\/engines': set this to true or false/'@prisma\/engines': true/" "$contract_dir/pnpm-workspace.yaml"
+          if [ "$(grep -Fxc "  '@prisma/engines': true" "$contract_dir/pnpm-workspace.yaml" || true)" -ne 1 ]; then
+            echo 'allow_builds_prisma_engines=fail'
+            exit 1
+          fi
+          echo 'allow_builds_prisma_engines=pass'
           unset DATABASE_URL
           cd "$contract_dir"
-          pnpm install --frozen-lockfile --reporter=append-only
-          engine="$(find node_modules/.pnpm -type f -name 'schema-engine-*' -perm -u+x | head -n 1)"
-          test -n "$engine"
-          "$engine" --version
-          checksum="$(find "$XDG_CACHE_HOME" -type f -name 'schema-engine.sha256' | head -n 1)"
-          test -n "$checksum"
-          test "$(sha256sum "$engine" | awk '{print $1}')" = "$(awk '{print $1}' "$checksum")"
-          test -n "$(find "$XDG_CACHE_HOME" -type f -name 'schema-engine.gz.sha256' | head -n 1)"
+          assert_pnpm_11_9() {
+            actual="$(corepack pnpm@11.9.0 --version)"
+            echo "actual pnpm version=$actual"
+            test "$actual" = "11.9.0"
+          }
+          assert_pnpm_11_9
+          corepack pnpm@11.9.0 install --frozen-lockfile --ignore-scripts --reporter=append-only
+          assert_pnpm_11_9
+          corepack pnpm@11.9.0 rebuild @prisma/engines --reporter=append-only
+          assert_pnpm_11_9
+          expected_revision='605197351a3c8bdd595af2d2a9bc3025bca48ea2'
+          expected_platform='debian-openssl-3.0.x'
+          expected_engine_binary="schema-engine-$expected_platform"
+          find node_modules/.pnpm -type f -name "$expected_engine_binary" -perm -u+x -print > "$temp_root/engine-paths"
+          test "$(grep -c . "$temp_root/engine-paths" || true)" -eq 1
+          engine="$(find node_modules/.pnpm -type f -name "$expected_engine_binary" -perm -u+x -print -quit)"
+          test "$(basename "$engine")" = "$expected_engine_binary"
+          cache_dir="$HOME/.cache/prisma/master/$expected_revision/$expected_platform"
+          cache_engine="$cache_dir/schema-engine"
+          checksum="$cache_dir/schema-engine.sha256"
+          zipped_checksum="$cache_dir/schema-engine.gz.sha256"
+          test -s "$cache_engine" && test -s "$checksum" && test -s "$zipped_checksum"
+          cmp -s "$engine" "$cache_engine"
+          expected_hash="$(tr -d '[:space:]' < "$checksum")"
+          expected_zipped_hash="$(tr -d '[:space:]' < "$zipped_checksum")"
+          [[ "$expected_hash" =~ ^[0-9a-fA-F]{64}$ ]]
+          [[ "$expected_zipped_hash" =~ ^[0-9a-fA-F]{64}$ ]]
+          test "$(sha256sum "$engine" | awk '{print $1}')" = "$expected_hash"
+          engine_version="$("$engine" --version)"
+          printf '%s\n' "$engine_version"
+          grep -Fq "$expected_revision" <<< "$engine_version"
           echo 'prisma_environment_contract=pass'
