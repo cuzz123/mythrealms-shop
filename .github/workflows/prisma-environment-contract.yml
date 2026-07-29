@@ -1,0 +1,50 @@
+name: Prisma environment contract
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      DATABASE_URL: ''
+      NPM_CONFIG_CACHE: ${{ runner.temp }}/a0-prisma/npm-cache
+      npm_config_store_dir: ${{ runner.temp }}/a0-prisma/pnpm-store
+      XDG_CACHE_HOME: ${{ runner.temp }}/a0-prisma/xdg-cache
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v22
+        with:
+          node-version: 22
+
+      - name: Prepare pnpm 11.9.0
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.9.0 --activate
+          test "$(pnpm --version)" = "11.9.0"
+
+      - name: Verify isolated Prisma engine contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          contract_dir="$RUNNER_TEMP/a0-prisma/contract"
+          trap 'rm -rf "$RUNNER_TEMP/a0-prisma"' EXIT
+          mkdir -p "$contract_dir"
+          cp package.json pnpm-lock.yaml pnpm-workspace.yaml "$contract_dir/"
+          sed -i "s/'@prisma\/engines': set this to true or false/'@prisma\/engines': true/" "$contract_dir/pnpm-workspace.yaml"
+          unset DATABASE_URL
+          cd "$contract_dir"
+          pnpm install --frozen-lockfile --reporter=append-only
+          engine="$(find node_modules/.pnpm -type f -name 'schema-engine-*' -perm -u+x | head -n 1)"
+          test -n "$engine"
+          "$engine" --version
+          checksum="$(find "$XDG_CACHE_HOME" -type f -name 'schema-engine.sha256' | head -n 1)"
+          test -n "$checksum"
+          test "$(sha256sum "$engine" | awk '{print $1}')" = "$(awk '{print $1}' "$checksum")"
+          test -n "$(find "$XDG_CACHE_HOME" -type f -name 'schema-engine.gz.sha256' | head -n 1)"
+          echo 'prisma_environment_contract=pass'
