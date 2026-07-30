@@ -11,6 +11,7 @@ Generates product + category images for the full product strategy:
 """
 
 import requests, time, os, json, sys
+from required_env import require_env
 
 # --- Bypass proxy (direct connection) ---
 os.environ.pop('http_proxy', None)
@@ -20,7 +21,7 @@ os.environ.pop('HTTPS_PROXY', None)
 os.environ.pop('no_proxy', None)
 os.environ.pop('NO_PROXY', None)
 
-API_KEY = 'sk-N6xBOlG5L3XFU7blmlkdOSGawJo6D6kUpNcMd6QqbNHxDbDx'
+API_KEY = require_env("AGNES_API_KEY")
 BASE_URL = 'https://apihub.agnes-ai.com/v1'
 HEADERS = {'Authorization': f'Bearer {API_KEY}', 'Content-Type': 'application/json'}
 OUT_DIR = '/mnt/d/mythrealms-shop/public/images/products'

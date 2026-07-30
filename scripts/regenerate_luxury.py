@@ -5,11 +5,12 @@ Style: Abstract European luxury jewelry with gemstones, marble backgrounds, soft
 """
 
 import requests, time, os
+from required_env import require_env
 
 os.environ.pop('http_proxy', None); os.environ.pop('https_proxy', None)
 os.environ.pop('HTTP_PROXY', None); os.environ.pop('HTTPS_PROXY', None)
 
-API_KEY = 'sk-N6xBOlG5L3XFU7blmlkdOSGawJo6D6kUpNcMd6QqbNHxDbDx'
+API_KEY = require_env("AGNES_API_KEY")
 BASE = 'https://apihub.agnes-ai.com/v1'
 H = {'Authorization': f'Bearer {API_KEY}', 'Content-Type': 'application/json'}
 OUT = '/mnt/d/mythrealms-shop/public/images/products'
