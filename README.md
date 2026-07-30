@@ -26,11 +26,12 @@ npm run seed           # creates demo data (20 products, 6 categories, 5 blog po
 npm run dev            # opens http://localhost:3000
 ```
 
-## Default Admin Account (after seed)
+## Optional Seed Admin Account
 
-- Email: `admin@buddhastoneshop.com`
-- Password: `admin123`
-- Admin panel: `/admin`
+The seed does not create a default administrator. To create one in an authorized,
+resettable environment, provide both `SEED_ADMIN_EMAIL` and a unique
+`SEED_ADMIN_PASSWORD` of at least 12 characters to the seed subprocess. Never
+store those values in source control or public guides. The admin panel is `/admin`.
 
 ## Required Environment Variables
 
