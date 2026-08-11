@@ -21,7 +21,7 @@ async function expectImagesLoaded(images: Locator) {
 async function expectHeroContentWithinVisibleBounds(page: Page) {
   const hero = page.locator('[aria-labelledby="homepage-hero-title"]');
   const header = page.locator("header");
-  const heading = hero.getByRole("heading", { name: "Pearls for sunlit days." });
+  const heading = hero.getByRole("heading", { level: 1 });
   const [headerBounds, headingBounds] = await Promise.all([
     header.boundingBox(),
     heading.boundingBox(),
@@ -34,12 +34,9 @@ async function expectHeroContentWithinVisibleBounds(page: Page) {
   );
 
   const heroContent = [
-    hero.getByText("Editorial / Summer 2026", { exact: true }),
+    hero.locator("p").first(),
     heading,
-    hero.getByText(
-      "Pearl jewelry selected for natural light, everyday movement, and the moments worth keeping.",
-      { exact: true },
-    ),
+    hero.locator("p").nth(1),
     hero.getByRole("link", { name: "Shop the Pearl Edit" }),
   ];
 
@@ -103,9 +100,9 @@ test.describe("storefront release flows", () => {
     });
   }
 
-  test("homepage shop by style links use approved pearl filters", async ({ page }) => {
+  test("homepage Pearl Edit links use approved pearl filters", async ({ page }) => {
     await page.goto("/");
-    const styleRegion = page.getByRole("region", { name: "Choose your starting point" });
+    const styleRegion = page.getByRole("region", { name: "The Pearl Edit" });
     await expect(styleRegion.getByRole("link", { name: "Everyday Pearl" })).toHaveAttribute("href", "/collections/pearl-series");
     await expect(styleRegion.getByRole("link", { name: "Pearl Earrings" })).toHaveAttribute("href", "/collections/pearl-series?type=earrings");
     await expect(styleRegion.getByRole("link", { name: "Pearl Necklaces" })).toHaveAttribute("href", "/collections/pearl-series?type=necklaces");
@@ -113,15 +110,11 @@ test.describe("storefront release flows", () => {
     await expect(styleRegion.getByRole("link", { name: "Pearl Eyewear Chains" })).toHaveAttribute("href", "/collections/pearl-series?type=eyewear-chains");
   });
 
-  test("homepage promotes only the approved editorial destinations", async ({ page }) => {
+  test("homepage promotes the approved editorial destinations", async ({ page }) => {
     await page.goto("/");
-    const guides = page.getByRole("region", { name: "Editorial guides" });
-
-    await expect(guides.locator("article")).toHaveCount(2);
-    await expect(guides.locator('a[href="/gifts"]')).not.toHaveCount(0);
-    await expect(guides.locator('a[href="/pearls"]')).not.toHaveCount(0);
-    await expect(guides.locator('a[href="/pearls/care"]')).not.toHaveCount(0);
-    await expect(guides.locator('a[href="/pearls/how-to-wear"]')).not.toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Read the guide" })).toHaveAttribute("href", "/pearls");
+    await expect(page.getByRole("link", { name: "Find a gift" })).toHaveAttribute("href", "/gifts");
+    await expect(page.getByRole("link", { name: "About Maverenne" })).toHaveAttribute("href", "/about");
   });
 
   test("homepage reveal motion resolves and reduced motion stays visible", async ({ page }) => {
@@ -135,8 +128,8 @@ test.describe("storefront release flows", () => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.reload();
     await expect(sections.first()).toHaveAttribute("data-reveal-visible", "true");
-    await expect(
-      page.getByRole("heading", { name: "Choose your starting point" }),
+      await expect(
+      page.getByRole("heading", { name: "The Pearl Edit", exact: true }).first(),
     ).toBeVisible();
   });
 
@@ -146,11 +139,11 @@ test.describe("storefront release flows", () => {
 
     try {
       await page.goto("/");
-      const reveal = page.locator('[aria-labelledby="shop-by-style-title"]');
+      const reveal = page.locator('[aria-labelledby="pearl-edit-categories-title"]');
       await expect(reveal).toHaveAttribute("data-reveal-ready", "false");
       await expect(reveal).toHaveAttribute("data-reveal-visible", "true");
       await expect(
-        reveal.getByRole("heading", { name: "Choose your starting point" }),
+        reveal.getByRole("heading", { name: "The Pearl Edit", exact: true }),
       ).toBeVisible();
       await expect(reveal.getByRole("link", { name: "Everyday Pearl" })).toHaveAttribute(
         "href",
@@ -360,7 +353,6 @@ test.describe("storefront release flows", () => {
       ["Pearl Guide", "/pearls"],
       ["Pearl Care", "/pearls/care"],
       ["Our Story", "/about"],
-      ["Find Your Guardian", "/guardian-quiz"],
       ["Contact", "/contact"],
       ["Privacy", "/privacy"],
       ["Terms", "/terms"],

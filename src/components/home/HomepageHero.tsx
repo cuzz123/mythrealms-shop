@@ -23,7 +23,7 @@ export function HomepageHero() {
 
   return (
     <section
-      className="relative -mt-16 h-[30rem] [--homepage-category-reveal:10rem] lg:[--homepage-category-reveal:18rem] aspect-auto overflow-hidden bg-[#24312f] text-white min-[384px]:h-auto min-[384px]:aspect-[4/5] sm:aspect-[3/2] lg:aspect-[16/9]"
+      className="relative -mt-16 h-[32rem] [--homepage-category-reveal:10rem] lg:[--homepage-category-reveal:18rem] aspect-auto overflow-hidden bg-[#24312f] text-white min-[384px]:h-auto min-[384px]:aspect-[4/5] sm:aspect-[3/2] lg:aspect-[16/9]"
       aria-labelledby="homepage-hero-title"
     >
       {HOMEPAGE_HERO_SLIDES.map((slide, index) => (

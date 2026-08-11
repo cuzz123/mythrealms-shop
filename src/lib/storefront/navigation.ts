@@ -10,16 +10,45 @@ export type FooterGroup = Readonly<{
   links: readonly NavigationLink[];
 }>;
 
-export const HEADER_MENUS: readonly HeaderMenu[] = [] as const;
-
-export const HEADER_LINKS = [
-  { label: "New", href: "/collections/new-arrivals" },
-  { label: "Jewelry", href: "/collections" },
-  { label: "The Pearl Edit", href: "/collections/pearl-series" },
-  { label: "Gifts", href: "/gifts" },
-  { label: "Journal", href: "/blog" },
-  { label: "About", href: "/about" },
+export const HEADER_MENUS: readonly HeaderMenu[] = [
+  {
+    id: "shop",
+    label: "Shop",
+    links: [
+      { label: "All Pearl Jewelry", href: "/collections/pearl-series" },
+      { label: "New Arrivals", href: "/collections/new-arrivals" },
+      { label: "Pearl Earrings", href: "/collections/pearl-series?type=earrings" },
+      { label: "Pearl Necklaces", href: "/collections/pearl-series?type=necklaces" },
+      { label: "Pearl Bracelets", href: "/collections/pearl-series?type=bracelets" },
+      { label: "Pearl Rings", href: "/collections/pearl-series?type=rings" },
+      { label: "Pearl Eyewear Chains", href: "/collections/pearl-series?type=eyewear-chains" },
+    ],
+  },
+  {
+    id: "gifts",
+    label: "Gifts",
+    links: [
+      { label: "All Gifts", href: "/gifts" },
+      { label: "Gift Guide", href: "/gifts#gift-method" },
+      { label: "Before You Choose", href: "/gifts#gift-help" },
+    ],
+  },
+  {
+    id: "discover",
+    label: "Discover",
+    links: [
+      { label: "Pearl Knowledge", href: "/pearls" },
+      { label: "Pearl Care", href: "/pearls/care" },
+      { label: "Pearl Stories", href: "/pearls/stories" },
+      { label: "Pearl Symbolism", href: "/pearls/symbolism" },
+      { label: "How to Wear Pearls", href: "/pearls/how-to-wear" },
+      { label: "Freshwater Pearls", href: "/pearls/freshwater-pearls" },
+      { label: "Our Story", href: "/about" },
+    ],
+  },
 ] as const;
+
+export const HEADER_LINKS: readonly NavigationLink[] = [];
 
 export const FOOTER_GROUPS: readonly FooterGroup[] = [
   {

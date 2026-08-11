@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -24,6 +24,11 @@ import {
 type DesktopMenu = HeaderMenuId | null;
 
 export function Header() {
+  const hasMounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenu, setDesktopMenu] = useState<DesktopMenu>(null);
   const { data: session } = useSession();
@@ -31,6 +36,8 @@ export function Header() {
   const itemCount = useCartStore((state) => state.itemCount());
   const openCart = useCartUIStore((state) => state.openCart);
   const wishlistCount = useWishlistStore((state) => state.count());
+  const visibleItemCount = hasMounted ? itemCount : 0;
+  const visibleWishlistCount = hasMounted ? wishlistCount : 0;
   const user = session?.user;
   const isOverlay = useHeaderVisualState(pathname) === "overlay";
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -250,28 +257,28 @@ export function Header() {
           </Link>
           <Link
             href="/wishlist"
-            aria-label={`Wishlist, ${wishlistCount} items`}
+            aria-label={`Wishlist, ${visibleWishlistCount} items`}
             title="Wishlist"
             className={`relative hidden h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 sm:flex ${overlayControlClass}`}
           >
             <Heart size={20} strokeWidth={1.8} />
-            {wishlistCount > 0 && (
+            {visibleWishlistCount > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[var(--sale)] px-1 text-[10px] font-semibold leading-none text-white">
-                {wishlistCount > 99 ? "99+" : wishlistCount}
+                {visibleWishlistCount > 99 ? "99+" : visibleWishlistCount}
               </span>
             )}
           </Link>
           <button
             type="button"
             onClick={openCart}
-            aria-label={`Shopping cart, ${itemCount} items`}
+            aria-label={`Shopping cart, ${visibleItemCount} items`}
             title="Shopping cart"
             className={`relative flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${overlayControlClass}`}
           >
             <ShoppingBag size={20} strokeWidth={1.8} className={justAdded ? "cart-slide-up" : ""} />
-            {itemCount > 0 && (
+            {visibleItemCount > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[var(--primary)] px-1 text-[10px] font-semibold leading-none text-white">
-                {itemCount > 99 ? "99+" : itemCount}
+                {visibleItemCount > 99 ? "99+" : visibleItemCount}
               </span>
             )}
           </button>

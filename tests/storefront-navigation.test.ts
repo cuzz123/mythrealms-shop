@@ -7,23 +7,27 @@ import {
 } from "../src/lib/storefront/navigation";
 
 test("storefront navigation exposes the Maverenne public top-level order", () => {
-  assert.deepEqual(HEADER_MENUS, []);
-  assert.deepEqual(HEADER_LINKS.map(({ label }) => label), [
-    "New",
-    "Jewelry",
-    "The Pearl Edit",
-    "Gifts",
-    "Journal",
-    "About",
+  assert.deepEqual(HEADER_MENUS.map(({ id, label }) => ({ id, label })), [
+    { id: "shop", label: "Shop" },
+    { id: "gifts", label: "Gifts" },
+    { id: "discover", label: "Discover" },
   ]);
-  assert.deepEqual(HEADER_LINKS.map(({ href }) => href), [
-    "/collections/new-arrivals",
-    "/collections",
-    "/collections/pearl-series",
-    "/gifts",
-    "/blog",
-    "/about",
-  ]);
+  assert.ok(
+    HEADER_MENUS.find(({ id }) => id === "shop")?.links.some(
+      ({ href }) => href === "/collections/pearl-series",
+    ),
+  );
+  assert.ok(
+    HEADER_MENUS.find(({ id }) => id === "gifts")?.links.some(
+      ({ href }) => href === "/gifts#gift-help",
+    ),
+  );
+  assert.ok(
+    HEADER_MENUS.find(({ id }) => id === "discover")?.links.some(
+      ({ href }) => href === "/pearls/care",
+    ),
+  );
+  assert.deepEqual(HEADER_LINKS, []);
 });
 
 test("public navigation serializations omit Guardian", () => {

@@ -37,7 +37,7 @@ test.describe("pearl growth funnel", () => {
     }
   });
 
-  test("first-order invitation closes with Escape after an engaged visit", async ({ browser }) => {
+  test("first-order invitation does not interrupt an engaged visit unless explicitly mounted", async ({ browser }) => {
     const context = await browser.newContext();
     await context.addInitScript(() => {
       localStorage.setItem(
@@ -56,11 +56,7 @@ test.describe("pearl growth funnel", () => {
       await page.waitForTimeout(150);
       await page.evaluate(() => window.dispatchEvent(new Event("scroll")));
 
-      const invitation = page.getByRole("dialog", { name: /notes from the coast/i });
-      await expect(invitation).toBeVisible();
-      await expect(page.getByLabel("Email address")).toBeFocused();
-      await page.keyboard.press("Escape");
-      await expect(invitation).toBeHidden();
+      await expect(page.getByRole("dialog", { name: /notes from the coast/i })).toHaveCount(0);
     } finally {
       await context.close();
     }

@@ -160,10 +160,6 @@ async function stabilizeVisual(page: Page, path: string) {
 test("homepage editorial discovery", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await stabilizeVisual(page, "/");
-  await page
-    .getByRole("heading", { name: "Choose by the way they wear it." })
-    .scrollIntoViewIfNeeded();
-  await scrollToTop(page);
   await expect(page.locator('header[data-visual-state="overlay"]')).toBeVisible();
   await expect(page).toHaveScreenshot("homepage.png", {
     fullPage: true,

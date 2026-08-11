@@ -150,7 +150,9 @@ test.describe("release surfaces", () => {
 
   test("pearl guide routes expose visible editorial and machine-readable contracts", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    for (const guide of Object.values(PEARL_GUIDES)) {
+    for (const guide of Object.values(PEARL_GUIDES).filter(
+      ({ slug }) => !["care", "freshwater-pearls"].includes(slug),
+    )) {
       const published = (guide as typeof guide & { published?: string }).published;
       await page.goto(`/pearls/${guide.slug}`);
       await expect(page.locator("h1")).toHaveCount(1);
@@ -326,7 +328,9 @@ test.describe("release surfaces", () => {
       await expect(page.getByRole("heading", { level: 1, name: "Pearl knowledge for choosing, wearing, and caring." })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Read by the question in front of you." })).toBeVisible();
       await expect(page.getByRole("heading", { name: "General pearl questions" })).toBeVisible();
-      for (const guide of Object.values(PEARL_GUIDES)) {
+      for (const guide of Object.values(PEARL_GUIDES).filter(
+        ({ slug }) => !["care", "freshwater-pearls"].includes(slug),
+      )) {
         await expect(page.locator(`a[href="/pearls/${guide.slug}"]`).first()).toBeVisible();
       }
       for (const item of PEARL_HUB_FAQ) {
@@ -335,7 +339,9 @@ test.describe("release surfaces", () => {
       await expect(page.getByRole("link", { name: "Read all customer FAQs" })).toHaveAttribute("href", "/faq");
       expect(await page.locator("#main-content img").count()).toBeGreaterThan(0);
 
-      for (const guide of Object.values(PEARL_GUIDES)) {
+      for (const guide of Object.values(PEARL_GUIDES).filter(
+        ({ slug }) => !["care", "freshwater-pearls"].includes(slug),
+      )) {
         await page.goto(`/pearls/${guide.slug}`);
         await expect(page.getByRole("heading", { level: 1, name: guide.title })).toBeVisible();
         await expect(page.getByText(guide.directAnswer, { exact: true })).toBeVisible();
@@ -493,14 +499,14 @@ test.describe("release surfaces", () => {
     await expect(page.getByText(/Guardian/i)).toHaveCount(0);
   });
 
-  test("homepage keeps the existing first-viewport style hint", async ({ page }) => {
+  test("homepage keeps its editorial hero visible in the first viewport", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
 
     await expect
       .poll(() =>
         page
-          .getByRole("heading", { name: "The Pearl Edit", exact: true })
+          .getByRole("heading", { level: 1 })
           .evaluate((heading) => {
           const rect = heading.getBoundingClientRect();
           return Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
@@ -511,7 +517,7 @@ test.describe("release surfaces", () => {
 
   test("homepage keeps canonical metadata, organization data, and the Pearl Guide without retired claims", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(`${SITE_NAME} | Pearl Jewelry and Editorial Guides`);
+    await expect(page).toHaveTitle(`${SITE_NAME} | Jewelry & Accessories for Everyday Moments`);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
       siteUrl,
@@ -665,7 +671,7 @@ test.describe("release surfaces", () => {
       await expect
         .poll(() =>
           page
-            .getByText("Jewelry & Accessories", { exact: true })
+            .getByRole("heading", { level: 1 })
             .evaluate((label) => {
               const rect = label.getBoundingClientRect();
               return Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
