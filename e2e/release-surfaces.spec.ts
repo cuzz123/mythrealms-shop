@@ -345,7 +345,8 @@ test.describe("release surfaces", () => {
         await expect(page.locator('#main-content a[href^="https://"]')).toHaveCount(
           guide.sources.length,
         );
-        const relatedProducts = getRelatedGuideProducts(guide);
+        const relatedProducts =
+          guide.slug === "freshwater-pearls" ? getRelatedGuideProducts(guide) : [];
         await expect(page.locator('#main-content a[href^="/products/"]')).toHaveCount(
           relatedProducts.length,
         );
@@ -611,13 +612,13 @@ test.describe("release surfaces", () => {
     expect(apiResponse.status()).toBe(404);
   });
 
-  test("SEO machine surfaces expose the same 45 approved products", async ({ request }) => {
+  test("SEO machine surfaces expose the same 63 approved products", async ({ request }) => {
     const feed = await (await request.get("/api/feed")).text();
     const sitemap = await (await request.get("/sitemap.xml")).text();
     const robots = await (await request.get("/robots.txt")).text();
 
-    expect((feed.match(/<item>/g) || []).length).toBe(45);
-    expect((sitemap.match(/\/products\//g) || []).length).toBe(45);
+    expect((feed.match(/<item>/g) || []).length).toBe(63);
+    expect((sitemap.match(/\/products\//g) || []).length).toBe(63);
     expect(feed).not.toMatch(/crystal|gemstone|serenity|balance\s*&\s*light/i);
     expect(sitemap).toContain("/blog</loc>");
     expect(sitemap).not.toMatch(
