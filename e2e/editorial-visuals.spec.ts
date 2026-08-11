@@ -1,4 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
+import { SITE_NAME } from "../src/lib/site";
 
 test("Quiet Light tokens and system font stacks are applied", async ({ page }) => {
   await page.goto("/");
@@ -111,8 +112,9 @@ async function scrollToTop(page: Page) {
 async function freezeFooterYear(page: Page) {
   const copyright = page
     .locator("footer")
-    .getByText(/^© \d{4} Maverenne\. All rights reserved\.$/);
+    .getByText(new RegExp(`^© \\d{4} ${SITE_NAME}\\. All rights reserved\\.$`));
   await expect(copyright).toHaveCount(1);
+  await expect(page.locator("footer")).not.toContainText("MythRealms");
   await copyright.evaluate((node) => {
     node.textContent = node.textContent?.replace(/© \d{4}/, "© 2000") ?? "";
   });

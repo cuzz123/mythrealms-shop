@@ -6,7 +6,7 @@ import {
   PEARL_HUB_FAQ,
 } from "../src/lib/editorial/guides";
 import { getNewArrivalProducts } from "../src/lib/editorial/gifts";
-import { absoluteUrl } from "../src/lib/site";
+import { SITE_NAME, absoluteUrl, siteUrl } from "../src/lib/site";
 
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
@@ -170,7 +170,8 @@ test.describe("release surfaces", () => {
         await expect(page.getByText(item.answer, { exact: true })).toBeVisible();
       }
       const main = page.locator("#main-content");
-      await expect(main.getByText("MythRealms Editorial", { exact: true })).toBeVisible();
+      await expect(main.getByText(guide.author, { exact: true })).toBeVisible();
+      await expect(main).not.toContainText("MythRealms");
       await expect(main.getByText("Published July 18, 2026", { exact: false })).toBeVisible();
       const updatedLabel = new Intl.DateTimeFormat("en-US", {
         month: "long",
@@ -359,7 +360,7 @@ test.describe("release surfaces", () => {
     await page.goto("/studio");
 
     await expect(page.locator("[data-studio-shell]")).toBeAttached();
-    await expect(page.getByRole("heading", { level: 1, name: "MythRealms Studio" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: `${SITE_NAME} Studio` })).toBeVisible();
     await expect(page.locator("#react-flow-wrapper")).toBeVisible();
     await expect(page.locator("[data-storefront-chrome]")).toHaveCount(2);
     for (const chrome of await page.locator("[data-storefront-chrome]").all()) {
@@ -509,10 +510,10 @@ test.describe("release surfaces", () => {
 
   test("homepage keeps canonical metadata, organization data, and the Pearl Guide without retired claims", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle("MythRealms | Pearl Jewelry for Everyday Light");
+    await expect(page).toHaveTitle(`${SITE_NAME} | Pearl Jewelry and Editorial Guides`);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://mythrealms-shop.vercel.app",
+      siteUrl,
     );
     await expect(page.getByRole("link", { name: "Read the guide" })).toHaveAttribute(
       "href",
@@ -526,6 +527,7 @@ test.describe("release surfaces", () => {
     expect(schemas.some((schema) => schema["@type"] === "WebSite")).toBe(true);
 
     const text = await page.locator("body").innerText();
+    expect(text).not.toMatch(/MythRealms/i);
     expect(text).not.toMatch(/Balance\s*&\s*Light/i);
     expect(text).not.toMatch(/hand-selected stones|Curated Singles/i);
   });
