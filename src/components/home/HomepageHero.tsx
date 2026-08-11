@@ -23,7 +23,7 @@ export function HomepageHero() {
 
   return (
     <section
-      className="relative -mt-16 [--homepage-category-reveal:10rem] lg:[--homepage-category-reveal:18rem] aspect-[4/5] overflow-hidden bg-[#24312f] text-white sm:aspect-[3/2] lg:aspect-[16/9]"
+      className="relative -mt-16 h-[30rem] [--homepage-category-reveal:10rem] lg:[--homepage-category-reveal:18rem] aspect-auto overflow-hidden bg-[#24312f] text-white min-[384px]:h-auto min-[384px]:aspect-[4/5] sm:aspect-[3/2] lg:aspect-[16/9]"
       aria-labelledby="homepage-hero-title"
     >
       {HOMEPAGE_HERO_SLIDES.map((slide, index) => (
@@ -42,7 +42,7 @@ export function HomepageHero() {
       ))}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,22,21,.74)_0%,rgba(13,22,21,.28)_48%,rgba(13,22,21,.06)_72%)]" />
       <div className="relative mx-auto flex h-full max-w-7xl items-end px-6 pb-10 pt-24 sm:pb-16 sm:pt-28 lg:pb-20 lg:pt-32">
-        <div className="max-w-xl">
+        <div className="w-full min-w-0 max-w-xl">
           <p className="text-xs font-semibold uppercase text-white/80">{hero.eyebrow}</p>
           <h1 id="homepage-hero-title" className="mt-4 max-w-lg font-serif text-4xl font-medium leading-none sm:text-6xl lg:text-7xl">
             {BRAND.heroTitle}

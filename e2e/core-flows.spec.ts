@@ -20,9 +20,22 @@ async function expectImagesLoaded(images: Locator) {
 
 async function expectHeroContentWithinVisibleBounds(page: Page) {
   const hero = page.locator('[aria-labelledby="homepage-hero-title"]');
+  const header = page.locator("header");
+  const heading = hero.getByRole("heading", { name: "Pearls for sunlit days." });
+  const [headerBounds, headingBounds] = await Promise.all([
+    header.boundingBox(),
+    heading.boundingBox(),
+  ]);
+
+  expect(headerBounds).not.toBeNull();
+  expect(headingBounds).not.toBeNull();
+  expect(headingBounds!.y).toBeGreaterThanOrEqual(
+    headerBounds!.y + headerBounds!.height,
+  );
+
   const heroContent = [
     hero.getByText("Editorial / Summer 2026", { exact: true }),
-    hero.getByRole("heading", { name: "Pearls for sunlit days." }),
+    heading,
     hero.getByText(
       "Pearl jewelry selected for natural light, everyday movement, and the moments worth keeping.",
       { exact: true },
@@ -61,7 +74,7 @@ async function expectHeroContentWithinVisibleBounds(page: Page) {
       };
     });
 
-    expect(bounds).toEqual({
+    expect(bounds, await content.textContent()).toEqual({
       hasArea: true,
       insideHero: true,
       insideViewport: true,
