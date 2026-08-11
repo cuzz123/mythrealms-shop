@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MythRealms — Relics from Forgotten Domains</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+  :root {
+    --gold: #D4A84B; --gold-dim: #8B7340; --obsidian: #0A0808;
+    --void: #050505; --ash: #1A1816; --smoke: #8A7D6E;
+    --text: #E8E0D5; --text-dim: #6B5F52;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    background: var(--void); color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* ─── Hero ─── */
+  .hero {
+    position: relative; height: 100vh; display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 30%, #1a1208 0%, #0a0808 40%, #020202 100%);
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(2px 2px at 20% 50%, rgba(212,168,75,.6), transparent),
+      radial-gradient(1px 1px at 80% 30%, rgba(212,168,75,.4), transparent),
+      radial-gradient(2px 2px at 50% 80%, rgba(212,168,75,.5), transparent),
+      radial-gradient(1px 1px at 30% 20%, rgba(255,255,255,.3), transparent),
+      radial-gradient(1px 1px at 70% 70%, rgba(255,255,255,.2), transparent),
+      radial-gradient(2px 2px at 60% 40%, rgba(212,168,75,.3), transparent);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+  .hero::after {
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+    background: linear-gradient(transparent, var(--void));
+  }
+  @keyframes twinkle {
+    0% { opacity: .6; } 100% { opacity: 1; }
+  }
+  .hero .beam {
+    position: absolute; top: -20%; left: 50%; width: 2px; height: 60%;
+    background: linear-gradient(transparent, rgba(212,168,75,.3), transparent);
+    transform: translateX(-50%);
+    filter: blur(2px);
+    animation: beamPulse 6s ease-in-out infinite;
+  }
+  @keyframes beamPulse {
+    0%, 100% { opacity: .3; } 50% { opacity: .8; }
+  }
+  .hero-content {
+    position: relative; z-index: 2; text-align: center; padding: 0 24px;
+    animation: fadeIn 2s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    font-size: 12px; letter-spacing: 8px; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 32px;
+  }
+  .hero-title {
+    font-size: clamp(48px, 8vw, 96px); font-weight: 700;
+    line-height: 1; letter-spacing: 2px; margin-bottom: 24px;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 24px); color: var(--smoke);
+    font-style: italic; letter-spacing: 3px; margin-bottom: 48px;
+  }
+  .btn {
+    display: inline-block; padding: 16px 48px; border: 1px solid var(--gold);
+    color: var(--gold); text-decoration: none; letter-spacing: 4px;
+    font-size: 14px; text-transform: uppercase; background: transparent;
+    cursor: pointer; position: relative; overflow: hidden; transition: all .4s;
+  }
+  .btn::before {
+    content: ""; position: absolute; inset: 0; background: var(--gold);
+    opacity: 0; transition: opacity .4s; z-index: -1;
+  }
+  .btn:hover { color: var(--void); }
+  .btn:hover::before { opacity: 1; }
+
+  /* ─── Scroll indicator ─── */
+  .scroll-indicator {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 3;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: fadeIn 3s ease-out;
+  }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(var(--gold-dim), transparent); }
+  .scroll-text { font-size: 10px; letter-spacing: 4px; color: var(--gold-dim); text-transform: uppercase; }
+
+  /* ─── Section Common ─── */
+  section { padding: 120px 24px; position: relative; }
+  .section-title {
+    text-align: center; font-size: clamp(28px, 5vw, 48px); font-weight: 600;
+    letter-spacing: 3px; margin-bottom: 12px;
+  }
+  .section-sub {
+    text-align: center; font-size: 14px; color: var(--smoke);
+    letter-spacing: 4px; text-transform: uppercase; margin-bottom: 64px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* ─── Realms ─── */
+  .realms { background: linear-gradient(var(--void), var(--ash), var(--void)); }
+  .realm-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+  }
+  .realm-card {
+    position: relative; aspect-ratio: 3/4; overflow: hidden;
+    border: 1px solid rgba(212,168,75,.1); cursor: pointer;
+    transition: all .5s;
+  }
+  .realm-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .realm-card:hover .realm-overlay { opacity: 1; }
+  .realm-card:hover .realm-bg { transform: scale(1.08); }
+  .realm-bg {
+    position: absolute; inset: 0; background-size: cover; background-position: center;
+    transition: transform .8s;
+  }
+  .realm-bg.mythic { background: radial-gradient(ellipse at center, #1a1410 0%, #0a0808 70%); }
+  .realm-bg.forbidden { background: radial-gradient(ellipse at center, #100a14 0%, #050208 70%); }
+  .realm-bg.royal { background: radial-gradient(ellipse at center, #0a0a15 0%, #020208 70%); }
+  .realm-glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 40%, var(--gold-dim), transparent 70%);
+    opacity: .15; transition: opacity .5s;
+  }
+  .realm-card:hover .realm-glow { opacity: .3; }
+  .realm-content {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 32px;
+    background: linear-gradient(transparent, rgba(5,5,5,.9) 40%);
+  }
+  .realm-num { font-size: 11px; letter-spacing: 6px; color: var(--gold); margin-bottom: 8px; }
+  .realm-name { font-size: 28px; font-weight: 600; letter-spacing: 2px; margin-bottom: 8px; }
+  .realm-desc { font-size: 13px; color: var(--smoke); line-height: 1.6; opacity: .8; }
+  .realm-overlay {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity .5s; pointer-events: none;
+  }
+  .realm-overlay span {
+    font-size: 14px; letter-spacing: 4px; color: var(--gold); border-bottom: 1px solid var(--gold);
+    padding-bottom: 4px;
+  }
+
+  /* ─── Featured ─── */
+  .featured { background: var(--void); }
+  .featured-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  }
+  .featured-visual {
+    position: relative; aspect-ratio: 3/4;
+    background: radial-gradient(ellipse at 60% 40%, #1a1812 0%, #080604 80%);
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(212,168,75,.15);
+  }
+  .featured-id {
+    position: absolute; top: 24px; left: 24px;
+    font-size: 12px; letter-spacing: 6px; color: var(--gold);
+  }
+  .featured-img-text {
+    font-size: clamp(48px, 8vw, 80px); font-weight: 700;
+    color: rgba(212,168,75,.12); pointer-events: none;
+  }
+  .featured-info h3 {
+    font-size: 14px; letter-spacing: 4px; color: var(--gold); margin-bottom: 16px; text-transform: uppercase;
+  }
+  .featured-info h2 {
+    font-size: clamp(32px, 5vw, 56px); font-weight: 700; line-height: 1.1; margin-bottom: 24px;
+  }
+  .featured-info p {
+    font-size: 16px; line-height: 1.8; color: var(--smoke); margin-bottom: 32px;
+  }
+  .featured-info .btn { margin-top: 8px; }
+
+  /* ─── Final CTA ─── */
+  .final-cta {
+    text-align: center; padding: 160px 24px;
+    background: radial-gradient(ellipse at 50% 50%, #1a1610 0%, var(--void) 60%);
+  }
+  .final-cta h2 {
+    font-size: clamp(28px, 4vw, 40px); font-weight: 600;
+    letter-spacing: 2px; margin-bottom: 16px; font-style: italic;
+  }
+  .final-cta p { color: var(--smoke); margin-bottom: 40px; font-size: 16px; }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 768px) {
+    section { padding: 80px 20px; }
+    .featured-inner { grid-template-columns: 1fr; gap: 32px; }
+    .featured-visual { aspect-ratio: 1; }
+    .realm-grid { gap: 20px; }
+    .realm-card { aspect-ratio: 4/5; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═════ HERO ═════ -->
+<section class="hero">
+  <div class="beam"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">MythRealms · Domain of Forgotten Relics</p>
+    <h1 class="hero-title">Not<br>Jewelry.</h1>
+    <p class="hero-sub">Relics from forgotten domains.</p>
+    <a href="#realms" class="btn">Enter the Realms</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Enter</span>
+  </div>
+</section>
+
+<!-- ═════ REALMS ═════ -->
+<section class="realms" id="realms">
+  <div class="container">
+    <p class="section-sub">Three Domains · One Universe</p>
+    <h2 class="section-title">Choose Your Domain</h2>
+    <p class="section-sub" style="margin-top:8px;font-size:13px;">Each realm holds relics of a distinct forgotten age</p>
+
+    <div class="realm-grid">
+      <a href="/demo/realm.html?domain=mythic" class="realm-card" style="text-decoration:none;color:inherit;">
+        <div class="realm-bg mythic"></div>
+        <div class="realm-glow"></div>
+        <div class="realm-content">
+          <p class="realm-num">DOMAIN I</p>
+          <h3 class="realm-name">Mythic Relics</h3>
+          <p class="realm-desc">Artefacts forged in the silence before language. Worn by watchers at the threshold between worlds.</p>
+        </div>
+        <div class="realm-overlay"><span>Enter Domain</span></div>
+      </a>
+
+      <a href="/demo/realm.html?domain=forbidden" class="realm-card" style="text-decoration:none;color:inherit;">
+        <div class="realm-bg forbidden"></div>
+        <div class="realm-glow"></div>
+        <div class="realm-content">
+          <p class="realm-num">DOMAIN II</p>
+          <h3 class="realm-name">Forbidden Sanctums</h3>
+          <p class="realm-desc">Objects sealed by oath-breakers. Awakened only when the keeper of silence returns.</p>
+        </div>
+        <div class="realm-overlay"><span>Enter Domain</span></div>
+      </a>
+
+      <a href="/demo/realm.html?domain=royal" class="realm-card" style="text-decoration:none;color:inherit;">
+        <div class="realm-bg royal"></div>
+        <div class="realm-glow"></div>
+        <div class="realm-content">
+          <p class="realm-num">DOMAIN III</p>
+          <h3 class="realm-name">Royal Echoes</h3>
+          <p class="realm-desc">Adornments of sovereigns who ruled not through conquest, but through stillness that commanded legions.</p>
+        </div>
+        <div class="realm-overlay"><span>Enter Domain</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ FEATURED ═════ -->
+<section class="featured" id="featured">
+  <div class="container">
+    <div class="featured-inner">
+      <div class="featured-visual">
+        <span class="featured-id">MR-07</span>
+        <span class="featured-img-text">RELIC</span>
+      </div>
+      <div class="featured-info">
+        <h3>Featured Artifact</h3>
+        <h2>The Watcher of Silent Thrones</h2>
+        <p>Once worn by a queen who commanded not with words but with presence. This obsidian relic absorbs what no longer serves and returns only stillness. Discovered in a sealed chamber beneath the oldest cathedral — untouched for four centuries.</p>
+        <a href="/demo/product.html" class="btn">Claim This Relic</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ FINAL CTA ═════ -->
+<section class="final-cta" id="vault">
+  <h2>You do not buy it.<br>You hold it.</h2>
+  <p>Each relic enters the world only once. No duplicates. No mass production.</p>
+  <a href="/demo/vault.html" class="btn">Enter the Vault</a>
+</section>
+
+</body>
+</html>

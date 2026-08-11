@@ -43,6 +43,10 @@ type TrackingApi = {
   buildViewEditPayload: (edit: { id: string; name: string }) => unknown;
   trackViewItemList: (list: { id: string; name: string; items: TrackItem[] }, target?: TrackingTarget, consent?: ConsentState, configured?: ConfiguredPlatforms) => boolean;
   trackAddGiftNote: (product: Pick<TrackItem, "id" | "name">, target?: TrackingTarget, consent?: ConsentState, configured?: ConfiguredPlatforms) => boolean;
+  trackQuizComplete: (archetype: string, target?: TrackingTarget, consent?: ConsentState, configured?: ConfiguredPlatforms) => boolean;
+  trackQuizStart: (target?: TrackingTarget, consent?: ConsentState, configured?: ConfiguredPlatforms) => boolean;
+  trackQuizCtaClick: (archetype: string, destinationUrl: string, target?: TrackingTarget, consent?: ConsentState, configured?: ConfiguredPlatforms) => boolean;
+  trackNewsletterSubscribe: (target?: TrackingTarget, consent?: ConsentState, configured?: ConfiguredPlatforms) => boolean;
   trackViewItem: (
     product: Omit<TrackItem, "quantity">,
     target?: TrackingTarget,
@@ -480,6 +484,127 @@ test("does not dispatch or queue GA events when analytics consent is denied", ()
   assert.deepEqual(queuedCalls, []);
 });
 
+test("dispatches the four growth-dictionary events only with analytics consent", () => {
+  const calls: unknown[][] = [];
+  const gaOnly: ConfiguredPlatforms = { ga: true, meta: false, pinterest: false };
+  const target: TrackingTarget = { gtag: (...args) => calls.push(args) };
+
+  assert.equal(tracking.trackQuizStart(target, allConsent, gaOnly), true);
+  assert.equal(tracking.trackQuizComplete("moon-rabbit", target, allConsent, gaOnly), true);
+  assert.equal(
+    tracking.trackQuizCtaClick(
+      "moon-rabbit",
+      "/collections/pearl-series",
+      target,
+      allConsent,
+      gaOnly,
+    ),
+    true,
+  );
+  assert.equal(tracking.trackNewsletterSubscribe(target, allConsent, gaOnly), true);
+  assert.deepEqual(calls, [
+    ["event", "quiz_start", {}],
+    ["event", "quiz_complete", { archetype: "moon-rabbit" }],
+    [
+      "event",
+      "quiz_cta_click",
+      { archetype: "moon-rabbit", destination_url: "/collections/pearl-series" },
+    ],
+    ["event", "newsletter_subscribe", { method: "newsletter" }],
+  ]);
+
+  assert.equal(tracking.trackQuizStart(target, noConsent, gaOnly), false);
+  assert.equal(tracking.trackQuizComplete("phoenix", target, noConsent, gaOnly), false);
+  assert.equal(
+    tracking.trackQuizCtaClick(
+      "phoenix",
+      "/collections/pearl-series",
+      target,
+      noConsent,
+      gaOnly,
+    ),
+    false,
+  );
+  assert.equal(tracking.trackNewsletterSubscribe(target, noConsent, gaOnly), false);
+  tracking.flushTrackingQueue("ga", target, allConsent);
+  assert.equal(calls.length, 4);
+});
+
+test("adds consented first-touch UTM fields to growth-dictionary payloads", () => {
+  const storage = new MemoryTrackingStorage();
+  storage.setItem(
+    "maverenne:utm-attribution",
+    JSON.stringify({
+      utm_source: "pinterest",
+      utm_medium: "organic_social",
+      utm_campaign: "maverenne-pearls",
+      utm_content: "pin-a",
+    }),
+  );
+  Object.defineProperty(globalThis, "window", {
+    configurable: true,
+    value: { sessionStorage: storage },
+  });
+  const calls: unknown[][] = [];
+
+  try {
+    assert.equal(
+      tracking.trackQuizStart(
+        { gtag: (...args) => calls.push(args) },
+        allConsent,
+        { ga: true, meta: false, pinterest: false },
+      ),
+      true,
+    );
+  } finally {
+    Reflect.deleteProperty(globalThis, "window");
+  }
+
+  assert.deepEqual(calls, [[
+    "event",
+    "quiz_start",
+    {
+      utm_source: "pinterest",
+      utm_medium: "organic_social",
+      utm_campaign: "maverenne-pearls",
+      utm_content: "pin-a",
+    },
+  ]]);
+});
+
+test("Guardian Quiz wires first-start, one completion, and the existing CTA destination", () => {
+  const quizSource = source("src/app/guardian-quiz/quiz-client.tsx");
+
+  assert.match(quizSource, /const quizStartedTracked = useRef\(false\)/);
+  assert.match(
+    quizSource,
+    /if \(!quizStartedTracked\.current\) \{\s*trackQuizStart\(\);\s*quizStartedTracked\.current = true;/,
+  );
+  assert.match(quizSource, /const quizCompletionTracked = useRef\(false\)/);
+  assert.match(
+    quizSource,
+    /if \(!quizCompletionTracked\.current\) \{\s*trackQuizComplete\(archetype\);\s*quizCompletionTracked\.current = true;/,
+  );
+  assert.match(
+    quizSource,
+    /href="\/collections\/pearl-series" onClick=\{\(\) => trackQuizCtaClick\(result, "\/collections\/pearl-series"\)\}/,
+  );
+});
+
+test("newsletter event is wired only after a successful subscription response", () => {
+  const newsletterSource = source("src/components/layout/NewsletterForm.tsx");
+
+  assert.match(
+    newsletterSource,
+    /import \{ trackNewsletterSubscribe \} from ['"]@\/lib\/tracking['"]/,
+  );
+  assert.match(newsletterSource, /const subscriptionTracked = useRef\(false\)/);
+  assert.match(
+    newsletterSource,
+    /if \(!response\.ok\)[\s\S]*?throw new Error[\s\S]*?setStatus\("success"\);\s*if \(!subscriptionTracked\.current\) \{\s*trackNewsletterSubscribe\(\);\s*subscriptionTracked\.current = true;/,
+  );
+});
+
 test("does not dispatch or queue Meta or Pinterest events when marketing consent is denied", () => {
   const metaCalls: unknown[][] = [];
   const pinterestCalls: unknown[][] = [];
@@ -550,8 +675,8 @@ test("checkout retries after consent is granted and cleans up the exact listener
   assert.equal(target.added.length, 1);
 
   consentGranted = true;
-  target.dispatch("mythrealms:consent-changed");
-  target.dispatch("mythrealms:consent-changed");
+  target.dispatch("maverenne:consent-changed");
+  target.dispatch("maverenne:consent-changed");
   controller.cleanup();
 
   assert.deepEqual(calls, [{ items, value: 36.99 }]);
@@ -607,8 +732,8 @@ test("purchase sends analytics first and marketing once after later consent, inc
   assert.deepEqual(fixture.calls, { ga: 1, meta: 0, pinterest: 0 });
 
   fixture.setConsent(allConsent);
-  fixture.target.dispatch("mythrealms:consent-changed");
-  fixture.target.dispatch("mythrealms:consent-changed");
+  fixture.target.dispatch("maverenne:consent-changed");
+  fixture.target.dispatch("maverenne:consent-changed");
   assert.deepEqual(fixture.calls, { ga: 1, meta: 1, pinterest: 1 });
   controller.cleanup();
 
@@ -626,8 +751,8 @@ test("purchase sends marketing first and analytics once after later consent, inc
   assert.deepEqual(fixture.calls, { ga: 0, meta: 1, pinterest: 1 });
 
   fixture.setConsent(allConsent);
-  fixture.target.dispatch("mythrealms:consent-changed");
-  fixture.target.dispatch("mythrealms:consent-changed");
+  fixture.target.dispatch("maverenne:consent-changed");
+  fixture.target.dispatch("maverenne:consent-changed");
   assert.deepEqual(fixture.calls, { ga: 1, meta: 1, pinterest: 1 });
   controller.cleanup();
 
@@ -663,7 +788,7 @@ test("inline initializers signal an immediate platform-specific flush", () => {
     );
     assert.match(
       analyticsSource,
-      new RegExp(`dispatchEvent\\(new Event\\('mythrealms:${platform}-ready'\\)\\)`),
+      new RegExp(`dispatchEvent\\(new Event\\('maverenne:${platform}-ready'\\)\\)`),
     );
   }
 });

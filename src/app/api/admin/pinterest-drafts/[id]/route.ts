@@ -3,9 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireAdminApi } from "@/lib/server/admin-auth";
 import { db } from "@/lib/db";
 import {
-  publishPinterestDraft,
   serializePinterestDraft,
 } from "@/lib/pinterest-drafts";
+import {
+  getPinterestPublishBlock,
+  PINTEREST_PUBLISHING_DISABLED_STATUS,
+} from "@/lib/pinterest-publisher";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -14,36 +17,26 @@ type RouteContext = { params: Promise<{ id: string }> };
 type DraftAction = "save" | "approve" | "reject" | "publish" | "retry";
 
 export async function PATCH(request: NextRequest, { params }: RouteContext) {
-  const unauthorized = await requireAdminApi();
-  if (unauthorized) return unauthorized;
-
-  const { id } = await params;
   const body = await readJson(request);
   const action = body.action as DraftAction | undefined;
 
-  if (!action || !["save", "approve", "reject", "publish", "retry"].includes(action)) {
+  if (action === "publish" || action === "retry") {
+    return NextResponse.json(
+      getPinterestPublishBlock(action === "publish" ? "admin_publish" : "admin_retry"),
+      { status: PINTEREST_PUBLISHING_DISABLED_STATUS },
+    );
+  }
+
+  const unauthorized = await requireAdminApi();
+  if (unauthorized) return unauthorized;
+
+  if (!action || !["save", "approve", "reject"].includes(action)) {
     return NextResponse.json({ error: "Unsupported draft action" }, { status: 400 });
   }
 
+  const { id } = await params;
+
   try {
-    if (action === "publish") {
-      const draft = await publishPinterestDraft(id);
-      return NextResponse.json({ draft: serializePinterestDraft(draft) });
-    }
-
-    if (action === "retry") {
-      const requeued = await db.pinterestContentDraft.updateMany({
-        where: { id, status: PinterestDraftStatus.FAILED },
-        data: { status: PinterestDraftStatus.APPROVED, error: null },
-      });
-      if (requeued.count === 0) {
-        return NextResponse.json({ error: "Only failed drafts can be retried" }, { status: 409 });
-      }
-
-      const draft = await publishPinterestDraft(id);
-      return NextResponse.json({ draft: serializePinterestDraft(draft) });
-    }
-
     if (action === "reject") {
       const rejected = await db.pinterestContentDraft.updateMany({
         where: {

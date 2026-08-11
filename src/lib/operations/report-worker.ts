@@ -7,6 +7,8 @@ import { db } from "@/lib/db";
 import { getOperationsConfig } from "./config";
 import { getGa4Snapshot } from "./ga4";
 import { buildOperationsReport } from "./report";
+import { readResendConfig } from "@/lib/server/resend-config";
+import { SITE_NAME } from "@/lib/site";
 
 function beijingDateKey(date: Date): string {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -90,11 +92,15 @@ export async function generateDailyOperationsReport(now = new Date()) {
     deliveryResult = { status: "skipped", reason: "RESEND_API_KEY is not configured." };
   } else {
     try {
+      const { from } = readResendConfig({
+        RESEND_API_KEY: apiKey,
+        RESEND_FROM_EMAIL: process.env.OPERATIONS_REPORT_FROM || process.env.RESEND_FROM_EMAIL,
+      });
       const resend = new Resend(apiKey);
       const result = await resend.emails.send({
-        from: process.env.OPERATIONS_REPORT_FROM || "MythRealms <onboarding@resend.dev>",
+        from,
         to: config.reporting.recipient,
-        subject: `MythRealms operations report - ${dateKey}`,
+        subject: `${SITE_NAME} operations report - ${dateKey}`,
         text: report.text,
         html: report.html,
       }, { idempotencyKey: `operations-report/${dateKey}` });

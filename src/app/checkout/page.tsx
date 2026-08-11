@@ -92,7 +92,7 @@ interface PayPalNamespace {
   }) => PayPalButtonsComponent;
 }
 
-interface MythRealmsWindow extends Window {
+interface MaverenneWindow extends Window {
   paypal?: PayPalNamespace;
   __mythrealmsOrderId?: string;
 }
@@ -434,7 +434,7 @@ export default function CheckoutPage() {
 
       <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg p-4 mb-6 text-sm text-[var(--text-secondary)]">
         <strong className="text-[var(--accent)]">Crafted to Order</strong> —
-        Each MythRealms piece is handcrafted upon order. Please allow{" "}
+        Each Maverenne piece is handcrafted upon order. Please allow{" "}
         <strong>2-3 weeks</strong> for production and delivery. You will receive
         updates at every stage.
       </div>
@@ -743,7 +743,7 @@ function PayPalButton({
     if (!paypalClientId) return;
     if (!sdkReady) return;
     const container = document.getElementById("paypal-button-container");
-    const paypalWindow = window as MythRealmsWindow;
+    const paypalWindow = window as MaverenneWindow;
     const paypal = paypalWindow.paypal;
     if (!container || !paypal?.Buttons) {
       return schedulePayPalUnavailable(setPaypalError);
@@ -882,7 +882,7 @@ function PayPalButton({
           src={sdkUrl}
           strategy="afterInteractive"
           onReady={() => {
-            const paypal = (window as MythRealmsWindow).paypal;
+            const paypal = (window as MaverenneWindow).paypal;
             if (!paypal?.Buttons) {
               setButtonReady(false);
               setPaypalError("PayPal could not be loaded. Please refresh and try again.");

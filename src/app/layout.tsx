@@ -7,13 +7,15 @@ import { ScrollRevealEnhancer } from "@/components/ui/ScrollRevealEnhancer";
 import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl, siteUrl } from "@/lib/site";
 
+const DEFAULT_SOCIAL_IMAGE = absoluteUrl("/brand/maverenne-og-default.png");
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: `${BRAND.name} | ${BRAND.descriptor} for Everyday Moments`,
   description: BRAND.promise,
   keywords: ["pearl jewelry", "pearl earrings", "pearl necklace", "pearl bracelet", "pearl ring", "freshwater pearl jewelry", "everyday pearl jewelry", "baroque pearl jewelry"],
   icons: {
-    icon: "/icon.svg",
+    icon: "/icon-192.png",
     apple: "/apple-icon.png",
   },
   verification: {
@@ -27,13 +29,13 @@ export const metadata: Metadata = {
     description: BRAND.promise,
     type: "website",
     siteName: BRAND.name,
-    images: [{ url: absoluteUrl("/images/brand/hero/pearl-earrings-editorial.png"), width: 1024, height: 1024, alt: `${BRAND.name} jewelry and accessories` }],
+    images: [{ url: DEFAULT_SOCIAL_IMAGE, width: 1200, height: 630, alt: BRAND.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${BRAND.name} | ${BRAND.descriptor} for Everyday Moments`,
     description: BRAND.promise,
-    images: [absoluteUrl("/images/brand/hero/pearl-earrings-editorial.png")],
+    images: [DEFAULT_SOCIAL_IMAGE],
   },
   robots: {
     index: true,

@@ -35,7 +35,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: EditPageProps): Promise<Metadata> {
   const edit = getEditOrNotFound((await params).slug);
-  const title = `${edit.title} | Pearl Jewelry Edit | MythRealms`;
+  const title = `${edit.title} | Pearl Jewelry Edit | Maverenne`;
   const image = absoluteUrl(edit.heroImage);
   const canonical = absoluteUrl(edit.route);
 

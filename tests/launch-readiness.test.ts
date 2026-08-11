@@ -14,22 +14,21 @@ import {
 const env = {
   NODE_ENV: "test",
   DATABASE_URL: "postgresql://sentinel-db",
-  NEXT_PUBLIC_APP_URL: "https://mythrealms-shop.vercel.app",
-  AUTH_URL: "https://mythrealms-shop.vercel.app",
+  NEXT_PUBLIC_APP_URL: "https://www.maverenne.com",
+  AUTH_URL: "https://www.maverenne.com",
   LAUNCH_ALLOW_VERCEL_APP_URL: "true",
   PAYPAL_API_BASE: "https://api-m.paypal.com",
   NEXT_PUBLIC_PAYPAL_CLIENT_ID: "sentinel-client",
   PAYPAL_CLIENT_SECRET: "sentinel-secret",
   PAYPAL_WEBHOOK_ID: "sentinel-webhook",
   RESEND_API_KEY: "sentinel-resend",
-  RESEND_FROM_EMAIL: "MythRealms <orders@mythrealms.shop>",
-  SUPPORT_EMAIL: "support@maverenne.com",
+  RESEND_FROM_EMAIL: "Maverenne <orders@example.net>",
 } satisfies NodeJS.ProcessEnv;
 
 function dependencies(
   webhook: Record<string, unknown> = {
     id: "sentinel-webhook",
-    url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
+    url: "https://www.maverenne.com/api/webhooks/paypal",
     event_types: [
       { name: "PAYMENT.CAPTURE.COMPLETED", status: "ENABLED" },
       { name: "PAYMENT.CAPTURE.REFUNDED", status: "ENABLED" },
@@ -93,7 +92,6 @@ test("every required environment variable fails closed when missing", async (t) 
     "PAYPAL_WEBHOOK_ID",
     "RESEND_API_KEY",
     "RESEND_FROM_EMAIL",
-    "SUPPORT_EMAIL",
   ]) {
     await t.test(key, async () => {
       const next = { ...env, [key]: "" };
@@ -115,7 +113,6 @@ test("every required environment variable rejects placeholders", async (t) => {
     PAYPAL_WEBHOOK_ID: "your-webhook-id",
     RESEND_API_KEY: "placeholder-resend-key",
     RESEND_FROM_EMAIL: "placeholder",
-    SUPPORT_EMAIL: "support@example.com",
   })) {
     await t.test(key, async () => {
       const report = await runLaunchReadiness(
@@ -126,19 +123,6 @@ test("every required environment variable rejects placeholders", async (t) => {
       assert.equal(readinessExitCode(report), 1);
     });
   }
-});
-
-test("production readiness rejects the non-deliverable support fallback", async () => {
-  const report = await runLaunchReadiness(
-    { ...env, SUPPORT_EMAIL: "support@maverenne.invalid" },
-    dependencies().value,
-  );
-
-  assert.equal(report.ok, false);
-  assert.equal(
-    report.checks.find((item) => item.id === "environment")?.status,
-    "fail",
-  );
 });
 
 test("rejects common launch placeholders before provider access", async (t) => {
@@ -181,7 +165,14 @@ test("rejects unsafe origins without making provider calls", async (t) => {
     ["loopback IPv6", { NEXT_PUBLIC_APP_URL: "https://[::1]" }],
     ["public path", { NEXT_PUBLIC_APP_URL: "https://mythrealms.shop/store" }],
     ["public query", { NEXT_PUBLIC_APP_URL: "https://mythrealms.shop?preview=1" }],
-    ["known Vercel host without approval", { LAUNCH_ALLOW_VERCEL_APP_URL: "false" }],
+    [
+      "known Vercel host without approval",
+      {
+        NEXT_PUBLIC_APP_URL: "https://mythrealms-shop.vercel.app",
+        AUTH_URL: "https://mythrealms-shop.vercel.app",
+        LAUNCH_ALLOW_VERCEL_APP_URL: "false",
+      },
+    ],
     [
       "other Vercel host even with approval",
       {
@@ -262,7 +253,7 @@ test("fails independently on webhook ID, URL, or event mismatch", async (t) => {
   for (const [name, webhook] of [
     ["ID", {
       id: "other",
-      url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
+      url: "https://www.maverenne.com/api/webhooks/paypal",
       event_types: [
         { name: "PAYMENT.CAPTURE.COMPLETED", status: "ENABLED" },
         { name: "PAYMENT.CAPTURE.REFUNDED", status: "ENABLED" },
@@ -278,17 +269,17 @@ test("fails independently on webhook ID, URL, or event mismatch", async (t) => {
     }],
     ["refunded event", {
       id: "sentinel-webhook",
-      url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
+      url: "https://www.maverenne.com/api/webhooks/paypal",
       event_types: [{ name: "PAYMENT.CAPTURE.COMPLETED", status: "ENABLED" }],
     }],
     ["completed event", {
       id: "sentinel-webhook",
-      url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
+      url: "https://www.maverenne.com/api/webhooks/paypal",
       event_types: [{ name: "PAYMENT.CAPTURE.REFUNDED", status: "ENABLED" }],
     }],
     ["completed event disabled", {
       id: "sentinel-webhook",
-      url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
+      url: "https://www.maverenne.com/api/webhooks/paypal",
       event_types: [
         { name: "PAYMENT.CAPTURE.COMPLETED", status: "DISABLED" },
         { name: "PAYMENT.CAPTURE.REFUNDED", status: "ENABLED" },
@@ -296,7 +287,7 @@ test("fails independently on webhook ID, URL, or event mismatch", async (t) => {
     }],
     ["refunded event missing status", {
       id: "sentinel-webhook",
-      url: "https://mythrealms-shop.vercel.app/api/webhooks/paypal",
+      url: "https://www.maverenne.com/api/webhooks/paypal",
       event_types: [
         { name: "PAYMENT.CAPTURE.COMPLETED", status: "ENABLED" },
         { name: "PAYMENT.CAPTURE.REFUNDED" },

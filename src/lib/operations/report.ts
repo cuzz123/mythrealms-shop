@@ -1,3 +1,5 @@
+import { SITE_NAME } from "@/lib/site";
+
 export type Ga4ReportSection =
   | { configured: false; reason: string }
   | {
@@ -45,7 +47,7 @@ export function buildOperationsReport(
   input: OperationsReportInput,
 ): OperationsReportDocument {
   const lines = [
-    `MythRealms operations report - ${input.dateKey}`,
+    `${SITE_NAME} operations report - ${input.dateKey}`,
     "",
     `Sales: ${input.sales.orders} orders, ${input.sales.paidOrders} paid, ${formatUsd(input.sales.revenueCents)} paid revenue.`,
     `Sourcing: ${input.sourcing.created} candidates, ${input.sourcing.approved} approved, ${input.sourcing.dropshipping} support dropshipping.`,
@@ -66,6 +68,6 @@ export function buildOperationsReport(
     dateKey: input.dateKey,
     sections: input,
     text: lines.join("\n"),
-    html: `<!doctype html><html><body style="font-family:Arial,sans-serif;color:#201e1a"><h1>MythRealms Operations Report</h1><p>${escapeHtml(input.dateKey)}</p><ul><li><strong>Sales:</strong> ${input.sales.orders} orders, ${input.sales.paidOrders} paid, ${formatUsd(input.sales.revenueCents)} paid revenue</li><li><strong>Sourcing:</strong> ${input.sourcing.created} candidates, ${input.sourcing.approved} approved, ${input.sourcing.dropshipping} support dropshipping</li><li><strong>Inbox:</strong> ${input.inbox.autoReplied} auto-replied, ${input.inbox.drafts} awaiting review, ${input.inbox.failed} failed</li><li><strong>GA4:</strong> ${ga4Html}</li></ul><h2>Issues</h2><ul>${issuesHtml}</ul></body></html>`,
+    html: `<!doctype html><html><body style="font-family:Arial,sans-serif;color:#201e1a"><h1>${SITE_NAME} Operations Report</h1><p>${escapeHtml(input.dateKey)}</p><ul><li><strong>Sales:</strong> ${input.sales.orders} orders, ${input.sales.paidOrders} paid, ${formatUsd(input.sales.revenueCents)} paid revenue</li><li><strong>Sourcing:</strong> ${input.sourcing.created} candidates, ${input.sourcing.approved} approved, ${input.sourcing.dropshipping} support dropshipping</li><li><strong>Inbox:</strong> ${input.inbox.autoReplied} auto-replied, ${input.inbox.drafts} awaiting review, ${input.inbox.failed} failed</li><li><strong>GA4:</strong> ${ga4Html}</li></ul><h2>Issues</h2><ul>${issuesHtml}</ul></body></html>`,
   };
 }

@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       typeof body?.email === "string" &&
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim())
         ? body.email.trim().toLowerCase()
-        : "guest@mythrealms.invalid";
+        : "guest@invalid.local";
     const discountCode =
       typeof body?.discountCode === "string" && body.discountCode.trim()
         ? body.discountCode.trim().toUpperCase()

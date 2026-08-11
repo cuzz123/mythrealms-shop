@@ -6,19 +6,19 @@ import { CATEGORIES } from "@/lib/1688-products";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "All Collections | MythRealms",
-  description: "Explore MythRealms pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.",
+  title: "All Collections | Maverenne",
+  description: "Explore Maverenne pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.",
   alternates: { canonical: absoluteUrl("/collections") },
   openGraph: {
     type: "website",
     url: absoluteUrl("/collections"),
-    title: "Pearl Jewelry Collections | MythRealms",
-    description: "Explore MythRealms pearl earrings, necklaces, bracelets, and rings.",
+    title: "Pearl Jewelry Collections | Maverenne",
+    description: "Explore Maverenne pearl earrings, necklaces, bracelets, and rings.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pearl Jewelry Collections | MythRealms",
-    description: "Explore MythRealms pearl earrings, necklaces, bracelets, and rings.",
+    title: "Pearl Jewelry Collections | Maverenne",
+    description: "Explore Maverenne pearl earrings, necklaces, bracelets, and rings.",
   },
 };
 
@@ -39,7 +39,7 @@ export default function CollectionsPage() {
       <div className="relative rounded-2xl overflow-hidden mb-16">
         <Image
           src="/images/collections/collections-hero.webp"
-          alt="MythRealms pearl jewelry collection"
+          alt="Maverenne pearl jewelry collection"
           fill
           sizes="(max-width:768px) 100vw, 1280px"
           className="object-cover"
@@ -74,7 +74,7 @@ export default function CollectionsPage() {
                 {cat.image ? (
                   <Image
                     src={cat.image}
-                    alt={`${cat.name} — MythRealms`}
+                    alt={`${cat.name} — Maverenne`}
                     fill
                     sizes="(max-width:1024px) 100vw, 50vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-700"

@@ -30,7 +30,7 @@ function MediaNodeComponent({ data, selected, id }: NodeProps<MediaNodeType>) {
     if (!src) return;
     const a = document.createElement("a");
     a.href = src;
-    a.download = `mythrealms-${type}-${Date.now()}.${type === "video" ? "mp4" : "png"}`;
+    a.download = `maverenne-${type}-${Date.now()}.${type === "video" ? "mp4" : "png"}`;
     a.target = "_blank";
     a.rel = "noopener";
     a.click();

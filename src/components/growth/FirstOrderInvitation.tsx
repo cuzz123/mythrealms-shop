@@ -3,8 +3,8 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Check, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { BRAND } from "@/lib/brand-identity";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
+import { SITE_NAME } from "@/lib/site";
 
 export const FIRST_ORDER_INVITATION_DELAY_MS = 20_000;
 export const FIRST_ORDER_INVITATION_COOLDOWN_DAYS = 14;
@@ -29,7 +29,7 @@ export function getFirstOrderInvitationCopy(campaignCode?: string): InvitationCo
 
   return {
     title: "Notes from the coast.",
-    description: `Subscribe for new pearl arrivals, thoughtful stories, and quiet notes from ${BRAND.name}.`,
+    description: `Subscribe for new pearl arrivals, thoughtful stories, and quiet notes from ${SITE_NAME}.`,
     submitLabel: "Subscribe",
   };
 }
@@ -51,9 +51,11 @@ export function shouldShowFirstOrderInvitation({
   return now >= dismissedAt + cooldownDays * 24 * 60 * 60 * 1000;
 }
 
-function getStoredTimestamp(storageKey: string): number | null {
+type ReadableStorage = Pick<Storage, "getItem">;
+
+function getStoredTimestamp(storage: ReadableStorage, storageKey: string): number | null {
   try {
-    const value = window.localStorage.getItem(storageKey);
+    const value = storage.getItem(storageKey);
     if (value === null) return null;
     const timestamp = Number(value);
     return Number.isFinite(timestamp) ? timestamp : null;
@@ -62,12 +64,31 @@ function getStoredTimestamp(storageKey: string): number | null {
   }
 }
 
-function getSessionShown(): boolean {
+function getSessionShown(storage: ReadableStorage): boolean {
   try {
-    return window.sessionStorage.getItem(SESSION_STORAGE_KEY) === "true";
+    return storage.getItem(SESSION_STORAGE_KEY) === "true";
   } catch {
     return false;
   }
+}
+
+export function shouldShowFirstOrderInvitationFromStorage({
+  now,
+  localStorage,
+  sessionStorage,
+  cooldownDays = FIRST_ORDER_INVITATION_COOLDOWN_DAYS,
+}: {
+  now: number;
+  localStorage: ReadableStorage;
+  sessionStorage: ReadableStorage;
+  cooldownDays?: number;
+}): boolean {
+  return shouldShowFirstOrderInvitation({
+    now,
+    dismissedAt: getStoredTimestamp(localStorage, DISMISSAL_STORAGE_KEY),
+    sessionShown: getSessionShown(sessionStorage),
+    cooldownDays,
+  });
 }
 
 function markSessionShown() {
@@ -117,8 +138,12 @@ export function FirstOrderInvitation({
       return;
     }
 
-    const dismissedAt = getStoredTimestamp(DISMISSAL_STORAGE_KEY);
-    if (!shouldShowFirstOrderInvitation({ now: Date.now(), dismissedAt, sessionShown: getSessionShown(), cooldownDays })) {
+    if (!shouldShowFirstOrderInvitationFromStorage({
+      now: Date.now(),
+      localStorage: window.localStorage,
+      sessionStorage: window.sessionStorage,
+      cooldownDays,
+    })) {
       return;
     }
 
@@ -190,7 +215,7 @@ export function FirstOrderInvitation({
       >
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase text-[var(--accent)]">{BRAND.name} Notes</p>
+            <p className="text-xs font-semibold uppercase text-[var(--accent)]">{SITE_NAME} Notes</p>
             <h2 id="first-order-invitation-title" className="mt-3 font-serif text-2xl font-medium text-[var(--text)]">
               {copy.title}
             </h2>

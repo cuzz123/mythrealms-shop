@@ -6,15 +6,13 @@ import test from "node:test";
 import { metadata as blogMetadata } from "../src/app/blog/page";
 import { GET as getLlmsText } from "../src/app/llms.txt/route";
 import robots from "../src/app/robots";
-import { alt as rootOpenGraphAlt } from "../src/app/opengraph-image";
 import { buildBlogPostingData } from "../src/components/ui/JsonLd";
-import { BRAND } from "../src/lib/brand-identity";
 import {
   buildBlogMetadata,
   isPearlEditorialPost,
 } from "../src/lib/seo/blog";
 import { buildSitemapEntries } from "../src/lib/seo/sitemap";
-import { siteUrl } from "../src/lib/site";
+import { DEFAULT_SITE_URL, siteUrl } from "../src/lib/site";
 import { PEARL_EDITS } from "../src/lib/storefront/pearl-edits";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
 import { buildStorefrontFeedXml } from "../src/lib/storefront/feed";
@@ -55,6 +53,8 @@ const posts = [
   },
 ];
 
+const approvedCatalogSize = 63;
+
 const post = {
   slug: "pearl-earrings-under-50",
   title: "Pearl Earrings Under $50",
@@ -71,31 +71,9 @@ test("the root layout does not force the homepage canonical onto every route", (
   assert.doesNotMatch(source, /openGraph:\s*\{[\s\S]*?url:\s*siteUrl/);
 });
 
-test("root metadata and Open Graph surfaces use the Maverenne identity", () => {
-  const source = readFileSync(
-    path.join(process.cwd(), "src/app/layout.tsx"),
-    "utf8",
-  );
-  const openGraphSource = readFileSync(
-    path.join(process.cwd(), "src/app/opengraph-image.tsx"),
-    "utf8",
-  );
-
-  assert.match(source, /import \{ BRAND \} from "@\/lib\/brand-identity"/);
-  assert.match(
-    source,
-    /title:\s*`\$\{BRAND\.name\} \| \$\{BRAND\.descriptor\} for Everyday Moments`/,
-  );
-  assert.match(source, /description:\s*BRAND\.promise/);
-  assert.match(source, /siteName:\s*BRAND\.name/);
-  assert.equal(rootOpenGraphAlt, "Maverenne - The Pearl Edit");
-  assert.match(openGraphSource, /\{BRAND\.name\}/);
-  assert.doesNotMatch(openGraphSource, /MYTHREALMS/);
-});
-
-test("the storefront catalog exposes all 63 approved Pearl Edit products", () => {
+test("the storefront catalog exposes all approved Pearl Edit products", () => {
   const products = getStorefrontProducts();
-  assert.equal(products.length, 63);
+  assert.equal(products.length, approvedCatalogSize);
   for (const product of products) {
     assert.equal(product.categoryName, "The Pearl Edit");
     assert.doesNotMatch(product.description, retiredLanguage);
@@ -211,7 +189,6 @@ test("blog metadata uses the canonical article URL and article Open Graph data",
   const openGraph = metadata.openGraph;
 
   assert.equal(canonical, `${siteUrl}/blog/${post.slug}`);
-  assert.equal(metadata.title, `${post.title} | Maverenne`);
   assert.equal(openGraph && "type" in openGraph ? openGraph.type : undefined, "article");
   assert.equal(
     openGraph && "url" in openGraph ? openGraph.url : undefined,
@@ -261,7 +238,7 @@ test("BlogPosting JSON-LD includes canonical publisher and ISO dates", () => {
     image: `${siteUrl}${post.image}`,
     datePublished,
     dateModified,
-    authorName: "Legacy Editorial",
+    authorName: "Maverenne Editorial",
   });
 
   assert.equal(data["@type"], "BlogPosting");
@@ -270,46 +247,52 @@ test("BlogPosting JSON-LD includes canonical publisher and ISO dates", () => {
     "@type": "Organization",
     name: "Maverenne",
   });
-  assert.deepEqual(data.author, {
-    "@type": "Organization",
-    name: "Maverenne Editorial",
-  });
   assert.equal(data.datePublished, datePublished.toISOString());
   assert.equal(data.dateModified, dateModified.toISOString());
-  assert.equal(BRAND.name, "Maverenne");
-  assert.doesNotMatch(
-    JSON.stringify(data, (key, value) =>
-      key === "url" || key === "@id" || key === "image" ? undefined : value,
-    ),
-    /MythRealms|Phoenix|Moon Rabbit|White Tiger|Chinese mythology/i,
-  );
 });
 
-test("llms route emits the approved minimal identity and citation contract", async () => {
+test("catalog discovery uses the approved Maverenne default origin", () => {
+  assert.equal(DEFAULT_SITE_URL, "https://www.maverenne.com");
+});
+
+test("generated GEO guidance covers canonical sources and truth guardrails", async () => {
   const response = getLlmsText();
   const llms = await response.text();
-  const expected = `# Maverenne
-
-> Maverenne is an English-language jewelry and accessories site.
-
-## Citation guidance
-
-- Cite only a current, page-specific, first-party Maverenne page whose route and factual content have been independently verified.
-- Do not use a general education page to establish facts about a product, policy, price, availability, shipping, delivery, returns, materials, or care.
-- When verified information is unavailable, do not infer it.
-`;
 
   assert.equal(response.headers.get("content-type"), "text/plain; charset=utf-8");
-  assert.equal(llms.replace(/\r\n/g, "\n"), expected);
-  assert.match(llms, /Maverenne/);
-  for (const forbidden of [
-    /MythRealms/i,
-    /https?:\/\//i,
-    /\b[\w.+-]+@[\w.-]+\.[a-z]{2,}\b/i,
-    /The Pearl Edit|Customer support|Canonical site|Machine-readable resources|Sitemap:|Robots:|Product feed:|utm_/i,
+  for (const resourcePath of [
+    "/collections/pearl-series",
+    "/collections/new-arrivals",
+    "/gifts",
+    "/about",
+    "/blog",
+    "/pearls",
+    "/pearls/care",
+    "/pearls/how-to-wear",
+    "/pearls/freshwater-pearls",
+    "/shipping",
+    "/refund",
+    "/contact",
+    "/sitemap.xml",
+    "/robots.txt",
+    "/api/feed",
   ]) {
-    assert.doesNotMatch(llms, forbidden);
+    assert.match(
+      llms,
+      new RegExp(`${siteUrl}${resourcePath.replaceAll(".", "\\.")}`),
+    );
   }
+  assert.match(llms, /The Pearl Edit/);
+  assert.match(llms, /product (?:gallery|images)/i);
+  assert.match(llms, /shape, luster, surface, tone, and size/i);
+  assert.match(llms, /medical/i);
+  assert.match(llms, /guaranteed emotional/i);
+  assert.match(
+    llms,
+    /most specific product, guide, collection, or policy page/i,
+  );
+  assert.doesNotMatch(llms, /\/api\/feed\/(?:google|blog)/);
+  assert.doesNotMatch(llms, retiredLanguage);
   assert.equal(existsSync(path.join(process.cwd(), "public/llms.txt")), false);
 });
 

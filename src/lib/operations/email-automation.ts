@@ -1,4 +1,4 @@
-import { BRAND } from "@/lib/brand-identity";
+import { SITE_NAME } from "@/lib/site";
 
 export type EmailAutomationCategory =
   | "ORDER_STATUS"
@@ -200,14 +200,14 @@ function buildFaqDraft(category: "SIZE_FAQ" | "CARE_FAQ"): MessageDraft {
     return {
       subject: "Re: Sizing help",
       body:
-        `Hello,\n\nThanks for reaching out. Please use only the measurements stated on the relevant product page. If a detail is not stated there, it is not confirmed.\n\nBest,\n${BRAND.name}`,
+        `Hello,\n\nThanks for reaching out. For sizing questions, please compare the item measurements with a ring or piece that already fits you well before placing the order. If you share the specific product and the measurement you are comparing against, we can review it with you.\n\nBest,\n${SITE_NAME}`,
     };
   }
 
   return {
     subject: "Re: Jewelry care",
     body:
-      `Hello,\n\nThanks for your message. We recommend wiping pearl jewelry with a soft cloth after wear, keeping it dry, and storing it separately from harder pieces to help avoid surface damage.\n\nBest,\n${BRAND.name}`,
+      `Hello,\n\nThanks for your message. We recommend wiping pearl jewelry with a soft cloth after wear, keeping it dry, and storing it separately from harder pieces to help avoid surface damage.\n\nBest,\n${SITE_NAME}`,
   };
 }
 
@@ -217,7 +217,7 @@ function buildOrderAutoReply(order: OrderRecordForAutomation): MessageDraft {
   return {
     subject: `Re: Order ${orderReference}`,
     body:
-      `Hello,\n\nThanks for checking in about order ${orderReference}. Your order is marked as shipped, and the tracking number currently on file is ${order.trackingNumber?.trim()}.\n\nIf you need another review after checking the latest carrier scan, reply to this message and our team can take a closer look.\n\nBest,\n${BRAND.name}`,
+      `Hello,\n\nThanks for checking in about order ${orderReference}. Your order is marked as shipped, and the tracking number currently on file is ${order.trackingNumber?.trim()}.\n\nIf you need another review after checking the latest carrier scan, reply to this message and our team can take a closer look.\n\nBest,\n${SITE_NAME}`,
   };
 }
 
@@ -229,7 +229,7 @@ function buildPendingOrderDraft(order: OrderRecordForAutomation | null): Message
   return {
     subject: `Re: ${order ? `Order ${order.displayReference?.trim() || order.id.slice(-8)}` : "Your message"}`,
     body:
-      `Hello,\n\nThank you for your message about ${orderReference}. We need to review the details internally and will follow up again once it is available. We are not able to confirm a shipping or delivery timeline from this draft.\n\nBest,\n${BRAND.name}`,
+      `Hello,\n\nThank you for your message about ${orderReference}. We need to review the details internally and will follow up again once it is available. We are not able to confirm a shipping or delivery timeline from this draft.\n\nBest,\n${SITE_NAME}`,
   };
 }
 
@@ -257,7 +257,7 @@ function buildHighRiskDraft(
   return {
     subject: `Re: ${order ? `Order ${order.displayReference?.trim() || order.id.slice(-8)}` : "Your message"}`,
     body:
-      `Hello,\n\nThank you for your ${reasonByCategory[category]}${orderReference}. Our team needs to review the details before responding further, and we will review the details and follow up as soon as possible.\n\nBest,\n${BRAND.name}`,
+      `Hello,\n\nThank you for your ${reasonByCategory[category]}${orderReference}. Our team needs to review the details before responding further, and we will review the details and follow up as soon as possible.\n\nBest,\n${SITE_NAME}`,
   };
 }
 

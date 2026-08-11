@@ -4,6 +4,7 @@ import {
   parseConsent,
   type ConsentState,
 } from "@/lib/analytics/consent";
+import { readUtmAttribution } from "@/lib/analytics/attribution";
 
 export interface TrackingTarget {
   gtag?: (...args: unknown[]) => void;
@@ -121,6 +122,16 @@ function browserConfiguredPlatforms(): ConfiguredPlatforms {
     meta: Boolean(process.env.NEXT_PUBLIC_META_PIXEL_ID),
     pinterest: Boolean(process.env.NEXT_PUBLIC_PINTEREST_TAG_ID),
   };
+}
+
+function browserUtmAttribution(): Record<string, string> {
+  if (typeof window === "undefined") return {};
+
+  try {
+    return readUtmAttribution(window.sessionStorage);
+  } catch {
+    return {};
+  }
 }
 
 function gaItem(product: TrackingProduct, quantity?: number): GaItem {
@@ -423,7 +434,11 @@ function trackGaGrowthEvent(
   configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
 ): boolean {
   if (!configured.ga || !consent.analytics) return false;
-  return dispatchOrQueue("ga", ["event", eventName, payload], target);
+  return dispatchOrQueue(
+    "ga",
+    ["event", eventName, { ...payload, ...browserUtmAttribution() }],
+    target,
+  );
 }
 
 export function trackViewItemList(
@@ -479,6 +494,59 @@ export function trackViewEdit(
   configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
 ): boolean {
   return trackGaGrowthEvent("view_edit", buildViewEditPayload(edit), target, consent, configured);
+}
+
+export function trackQuizComplete(
+  archetype: string,
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent(
+    "quiz_complete",
+    { archetype },
+    target,
+    consent,
+    configured,
+  );
+}
+
+export function trackQuizStart(
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent("quiz_start", {}, target, consent, configured);
+}
+
+export function trackQuizCtaClick(
+  archetype: string,
+  destinationUrl: string,
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent(
+    "quiz_cta_click",
+    { archetype, destination_url: destinationUrl },
+    target,
+    consent,
+    configured,
+  );
+}
+
+export function trackNewsletterSubscribe(
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent(
+    "newsletter_subscribe",
+    { method: "newsletter" },
+    target,
+    consent,
+    configured,
+  );
 }
 
 export function trackBeginCheckout(

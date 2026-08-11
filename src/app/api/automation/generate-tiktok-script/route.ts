@@ -45,7 +45,7 @@ function buildScript(product: (typeof PRODUCTS)[0], format: ScriptFormat): Tikto
       productName: name,
       format: "unboxing",
       duration: "15-20s",
-      hook: `[ASMR] Unboxing ${name} from MythRealms`,
+      hook: `[ASMR] Unboxing ${name} from Maverenne`,
       scenes: [
         {
           time: "0-3s",
@@ -80,7 +80,7 @@ function buildScript(product: (typeof PRODUCTS)[0], format: ScriptFormat): Tikto
         "intentionjewelry",
         "quietluxury",
       ],
-      caption: `Unboxing ${name} from MythRealms. ${intention}. ${shortDesc.slice(0, 100)} #pearljewelry #jewelryunboxing #intentionjewelry`,
+      caption: `Unboxing ${name} from Maverenne. ${intention}. ${shortDesc.slice(0, 100)} #pearljewelry #jewelryunboxing #intentionjewelry`,
     };
   }
 
@@ -126,7 +126,7 @@ function buildScript(product: (typeof PRODUCTS)[0], format: ScriptFormat): Tikto
         "jewelrytok",
       ],
       caption:
-        "Which guardian archetype matches your current season? Take the MythRealms quiz and find the pearl or gemstone piece that fits. #guardianquiz #jewelrytok",
+        "Which guardian archetype matches your current season? Take the Maverenne quiz and find the pearl or gemstone piece that fits. #guardianquiz #jewelrytok",
     };
   }
 
@@ -159,7 +159,7 @@ function buildScript(product: (typeof PRODUCTS)[0], format: ScriptFormat): Tikto
         time: "25-35s",
         visual: "Show guardian quiz or product page on phone, then final beauty shot.",
         audio: "Soft resolve: 'Find the one that fits this season.'",
-        textOverlay: "MythRealms - Link in bio",
+        textOverlay: "Maverenne - Link in bio",
       },
     ],
     hashtags: [

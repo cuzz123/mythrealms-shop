@@ -1,5 +1,5 @@
 // POST /api/automation/generate-pin
-// Generate Pinterest pin copy for MythRealms products.
+// Generate Pinterest pin copy for Maverenne products.
 
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdminApi } from "@/lib/server/admin-auth";
@@ -23,9 +23,9 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.PIN_AI_API_KEY || process.env.AGNES_API_KEY;
     if (!apiKey) {
       return NextResponse.json({
-        title: `${name} | MythRealms Intention Jewelry`,
-        description: `Discover ${name} from MythRealms: pearl and gemstone jewelry made for calm, renewal, boundaries, and soft power. Free shipping on orders over $69.99.`,
-        link: `https://mythrealms-shop.vercel.app/products/${productSlug || ""}`,
+        title: `${name} | Maverenne Intention Jewelry`,
+        description: `Discover ${name} from Maverenne: pearl and gemstone jewelry made for calm, renewal, boundaries, and soft power. Free shipping on orders over $69.99.`,
+        link: `https://www.maverenne.com/products/${productSlug || ""}`,
         board: "Pearl & Gemstone Intention Jewelry",
         tags: fallbackTags,
       });
@@ -33,8 +33,8 @@ export async function POST(request: NextRequest) {
 
     const prompt =
       mood === "story"
-        ? `Write Pinterest copy for ${name} from MythRealms, a pearl and gemstone jewelry brand built around modern guardian archetypes and intention. Do not claim 14k gold, sterling silver, healing, medical effects, or guaranteed spiritual outcomes. Title max 100 characters. Description max 500 characters. Include a soft CTA. Format as JSON {"title":"...","description":"..."}`
-        : `Write Pinterest copy for ${name} from MythRealms. Focus on ${mood || "pearl and gemstone styling, intention, and everyday wear"}. Do not claim 14k gold, sterling silver, healing, medical effects, or guaranteed spiritual outcomes. Format as JSON {"title":"...","description":"..."}`;
+        ? `Write Pinterest copy for ${name} from Maverenne, a pearl and gemstone jewelry brand built around modern guardian archetypes and intention. Do not claim 14k gold, sterling silver, healing, medical effects, or guaranteed spiritual outcomes. Title max 100 characters. Description max 500 characters. Include a soft CTA. Format as JSON {"title":"...","description":"..."}`
+        : `Write Pinterest copy for ${name} from Maverenne. Focus on ${mood || "pearl and gemstone styling, intention, and everyday wear"}. Do not claim 14k gold, sterling silver, healing, medical effects, or guaranteed spiritual outcomes. Format as JSON {"title":"...","description":"..."}`;
 
     const res = await fetch("https://apihub.agnes-ai.com/v1/chat/completions", {
       method: "POST",
@@ -58,11 +58,11 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({
-      title: parsed?.title || `${name} | MythRealms`,
+      title: parsed?.title || `${name} | Maverenne`,
       description:
         parsed?.description ||
         `${name}. Pearl and gemstone jewelry for calm, renewal, boundaries, and soft power. Free shipping over $69.99.`,
-      link: `https://mythrealms-shop.vercel.app/products/${productSlug || ""}`,
+      link: `https://www.maverenne.com/products/${productSlug || ""}`,
       board: mood === "story" ? "Guardian Archetype Jewelry" : "Pearl & Gemstone Jewelry",
       tags: fallbackTags,
     });

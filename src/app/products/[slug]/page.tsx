@@ -26,7 +26,7 @@ export async function generateMetadata({
   const product = getStorefrontProductBySlug(slug);
   if (!product) {
     return {
-      title: "Product Not Found | MythRealms",
+      title: "Product Not Found | Maverenne",
       robots: { index: false, follow: false },
     };
   }
@@ -34,7 +34,7 @@ export async function generateMetadata({
   const description = product.description.slice(0, 155);
   const url = absoluteUrl(`/products/${product.slug}`);
   return {
-    title: `${product.name} | MythRealms Pearl Jewelry`,
+    title: `${product.name} | Maverenne Pearl Jewelry`,
     description,
     alternates: { canonical: url },
     openGraph: {

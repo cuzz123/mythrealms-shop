@@ -10,11 +10,15 @@ const credentialConsumers = [
   { file: "scripts/gen-covers.py", variable: "AGNES_API_KEY" },
   { file: "scripts/generate_product_images.py", variable: "AGNES_API_KEY" },
   { file: "scripts/regenerate_luxury.py", variable: "AGNES_API_KEY" },
-  { file: "scripts/publish-pins.py", variable: "PINTEREST_ACCESS_TOKEN" },
 ] as const;
 
+const retiredNoGoScripts = ["scripts/publish-pins.py"] as const;
+
 test("tracked automation scripts never ship credential literals", () => {
-  for (const { file } of credentialConsumers) {
+  for (const file of [
+    ...credentialConsumers.map(({ file }) => file),
+    ...retiredNoGoScripts,
+  ]) {
     const source = readFileSync(path.join(repositoryRoot, file), "utf8");
 
     assert.equal(

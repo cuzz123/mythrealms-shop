@@ -8,7 +8,7 @@ import { resolveSeedAdminConfig } from "../prisma/seed-admin-config";
 const repositoryRoot = path.resolve(import.meta.dirname, "..");
 
 const publiclyExposedOrOperatorFacingFiles = [
-  "public/guides/orders.html",
+  "docs/company/archive/legacy-public-static-2026-08-10/public/guides/orders.html",
   "README.md",
   "prisma/seed.ts",
 ];

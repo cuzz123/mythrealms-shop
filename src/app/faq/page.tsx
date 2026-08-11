@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { HelpCircle, Minus, Plus } from "lucide-react";
+import { SITE_NAME } from "@/lib/site";
 
 const faqs = [
   {
@@ -17,17 +18,17 @@ const faqs = [
   },
   {
     q: "Why does delivery take longer than a big marketplace?",
-    a: "MythRealms is a lean launch, so we do not hold deep inventory for every style. Many pieces are prepared after ordering through trusted jewelry suppliers and partner workshops. This keeps the collection focused and avoids over-ordering before demand is proven.",
+    a: `${SITE_NAME} is a lean launch, so we do not hold deep inventory for every style. Many pieces are prepared after ordering through trusted jewelry suppliers and partner workshops. This keeps the collection focused and avoids over-ordering before demand is proven.`,
     cat: "shipping",
   },
   {
     q: "What is your return policy?",
-    a: "We offer a 30-day return window. Items must be unused and in original packaging. Start a return through the returns page or contact mythrealms@outlook.com.",
+    a: "We offer a 30-day return window. Items must be unused and in original packaging. Start a return through the returns page or use the contact form.",
     cat: "returns",
   },
   {
     q: "My item arrived damaged. What should I do?",
-    a: "Email mythrealms@outlook.com within 48 hours of delivery with your order number and clear photos. We will review it quickly and help with a replacement or refund.",
+    a: "Use the contact form within 48 hours of delivery with your order number and clear photos. We will review it and provide next steps.",
     cat: "returns",
   },
   {
@@ -92,12 +93,12 @@ const faqs = [
   },
   {
     q: "Are there physical stores?",
-    a: "MythRealms is online-only for now. This lets us keep the launch focused, test demand style by style, and avoid unnecessary retail markup.",
+    a: `${SITE_NAME} is online-only for now. This keeps the launch focused while demand is evaluated style by style.`,
     cat: "order",
   },
   {
     q: "Do you offer wholesale or bulk orders?",
-    a: "For boutique, studio, or event inquiries, email mythrealms@outlook.com with the styles and quantities you are considering.",
+    a: "For boutique, studio, or event inquiries, use the contact form with the styles and quantities you are considering.",
     cat: "order",
   },
 ];
@@ -190,7 +191,7 @@ export default function FAQPage() {
         <h3 className="mb-2 font-serif text-2xl font-bold text-[var(--text)]">Still have questions?</h3>
         <p className="mb-4 text-sm text-[var(--text-muted)]">We usually respond within 24 hours.</p>
         <a
-          href="mailto:mythrealms@outlook.com"
+          href="/contact"
           className="inline-block rounded-full bg-[var(--accent)] px-8 py-3 font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]"
         >
           Contact Us

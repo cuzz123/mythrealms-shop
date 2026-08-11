@@ -39,7 +39,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       <aside className="w-64 bg-[#0A0808] text-white flex-shrink-0 hidden lg:flex flex-col">
         <div className="p-6 border-b border-white/10">
           <Link href="/" className="font-serif text-xl font-bold">
-            MythRealms
+            Maverenne
           </Link>
           <p className="text-xs text-white/40 mt-1">Admin Panel</p>
         </div>

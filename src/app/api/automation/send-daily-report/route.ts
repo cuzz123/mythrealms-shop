@@ -5,12 +5,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { requireCron } from "@/lib/automation-auth";
 import { getErrorMessage } from "@/lib/error-message";
+import { SITE_NAME, siteUrl } from "@/lib/site";
+import { readAutomationEmailConfig } from "@/lib/operations/automation-email-config";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "zheng111321@gmail.com";
-const BRAND = "MythRealms";
+const BRAND = SITE_NAME;
 
 function buildHtml(date: string, metrics: Record<string, unknown>, alerts: string[]): string {
   const itemsHtml = Object.entries(metrics)
@@ -24,7 +25,7 @@ function buildHtml(date: string, metrics: Record<string, unknown>, alerts: strin
     ? alerts.map((a) => `<p style="color:#c0392b;font-size:13px;">&#9888; ${a}</p>`).join("")
     : "";
 
-  const base = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
+  const base = siteUrl;
 
   return `<!DOCTYPE html>
 <html><head><meta charset="utf-8"></head>
@@ -50,6 +51,11 @@ function buildHtml(date: string, metrics: Record<string, unknown>, alerts: strin
 export async function GET(request: NextRequest) {
   const unauthorized = requireCron(request);
   if (unauthorized) return unauthorized;
+
+  let emailConfig: ReturnType<typeof readAutomationEmailConfig>;
+  try { emailConfig = readAutomationEmailConfig(); } catch {
+    return NextResponse.json({ error: "Automation email is not configured" }, { status: 503 });
+  }
 
   try {
     const [ordersToday, ordersPending, totalOrders, lowStock, totalProducts] = await Promise.all([
@@ -88,11 +94,11 @@ export async function GET(request: NextRequest) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${emailConfig.apiKey}`,
       },
       body: JSON.stringify({
-        from: "MythRealms <onboarding@resend.dev>",
-        to: ADMIN_EMAIL,
+        from: emailConfig.from,
+        to: emailConfig.recipient,
         subject: `${BRAND} Daily Report — ${date}`,
         html,
       }),

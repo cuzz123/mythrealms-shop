@@ -6,7 +6,7 @@ import {
   SupportEmailError,
 } from "@/lib/server/support-email";
 
-const SUPPORT_EMAIL = process.env.SUPPORT_EMAIL || "mythrealms@outlook.com";
+const SUPPORT_EMAIL = process.env.SUPPORT_EMAIL?.trim();
 
 function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (character) => {
@@ -31,6 +31,9 @@ export async function POST(request: NextRequest) {
     maxRequests: 3,
   });
   if (rateLimitResponse) return rateLimitResponse;
+  if (!SUPPORT_EMAIL) {
+    return NextResponse.json({ error: "Support email is not configured" }, { status: 503 });
+  }
 
   try {
     const body = (await request.json()) as Record<string, unknown>;

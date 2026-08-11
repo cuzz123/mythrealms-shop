@@ -12,10 +12,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { q } = await searchParams;
   return {
-    title: q ? `Search: ${q} | MythRealms` : "Search | MythRealms",
+    title: q ? `Search: ${q} | Maverenne` : "Search | Maverenne",
     description: q
-      ? `Search MythRealms pearl jewelry for "${q}".`
-      : "Search the MythRealms Pearl Edit for rings, bracelets, earrings, and necklaces.",
+      ? `Search Maverenne pearl jewelry for "${q}".`
+      : "Search the Maverenne Pearl Edit for rings, bracelets, earrings, and necklaces.",
   };
 }
 
@@ -68,7 +68,7 @@ export default async function SearchPage({
 
       <div className="mb-12 text-center">
         <h1 className="mb-3 font-serif text-4xl font-bold text-[var(--text)]">
-          {query ? `Search: "${query}"` : "Search MythRealms"}
+          {query ? `Search: "${query}"` : "Search Maverenne"}
         </h1>
         <p className="mx-auto max-w-lg text-[var(--text-muted)]">
           {query

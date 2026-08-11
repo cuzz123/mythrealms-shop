@@ -1,14 +1,16 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Check, Loader2 } from "lucide-react";
+import { trackNewsletterSubscribe } from "@/lib/tracking";
 
 export function NewsletterForm({ tone = "light" }: { tone?: "light" | "dark" }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState("");
   const errorId = useId();
+  const subscriptionTracked = useRef(false);
   const isDark = tone === "dark";
 
   async function handleSubmit(event: React.FormEvent) {
@@ -29,6 +31,10 @@ export function NewsletterForm({ tone = "light" }: { tone?: "light" | "dark" }) 
         throw new Error(data.error || "Something went wrong");
       }
       setStatus("success");
+      if (!subscriptionTracked.current) {
+        trackNewsletterSubscribe();
+        subscriptionTracked.current = true;
+      }
     } catch (submissionError: unknown) {
       setStatus("error");
       setError(submissionError instanceof Error ? submissionError.message : "Failed to subscribe");

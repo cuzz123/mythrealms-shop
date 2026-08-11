@@ -53,7 +53,7 @@ test("Phase 1 invitation and homepage product cards use the shared public brand"
   const productCard = source("src/components/product/ProductCard.tsx");
 
   assert.match(copy.description, new RegExp(BRAND.name));
-  assert.match(invitation, /\{BRAND\.name\} Notes/);
+  assert.match(invitation, /\{SITE_NAME\} Notes/);
   assert.match(productCard, /\$\{BRAND\.name\} pearl jewelry/);
 });
 

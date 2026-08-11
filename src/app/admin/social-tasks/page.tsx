@@ -1,13 +1,13 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { CheckCircle2, Circle, ChevronDown, ChevronRight } from "lucide-react";
 import { PinterestDraftQueue } from "@/components/admin/PinterestDraftQueue";
-import { useSocialTaskStorage } from "@/lib/client/social-task-storage";
 
 // ====== TASK DEFINITIONS ======
 interface Task {
   id: string; label: string; detail: string; freq: "daily" | "weekly" | "monthly";
-  guide?: string;
+  guideStatus?: "archived";
 }
 
 interface Category {
@@ -18,35 +18,35 @@ const CATEGORIES: Category[] = [
   {
     icon: "\u{1F4CC}", name: "Pinterest",
     tasks: [
-      { id: "pin-browse", label: "浏览首页推荐 3 分钟", detail: "模拟真实用户行为", freq: "daily", guide: "/guides/pinterest.html" },
-      { id: "pin-save", label: "搜索 + 保存 5-8 条 Pin", detail: "搜 gold jewelry / mythology art / crystal bracelet", freq: "daily", guide: "/guides/pinterest.html" },
-      { id: "pin-like", label: "点赞 3-5 条 + 关注 2-3 个账号", detail: "点心形图标，关注同品类账号", freq: "daily", guide: "/guides/pinterest.html" },
-      { id: "pin-post", label: "发布 1-3 条原创 Pin", detail: "用 pinterest-batch-1-zh.md 模板", freq: "daily", guide: "/guides/pinterest.html" },
-      { id: "pin-vertical", label: "Canva 做 2 张竖版 2:3 图", detail: "1000x1500，产品图 + 文字，品牌色 #0F0D0E", freq: "weekly", guide: "/guides/canva.html" },
-      { id: "pin-analytics", label: "查看企业分析", detail: "本周展示次数和点击最多的 3 条 Pin", freq: "weekly", guide: "/guides/pinterest.html" },
+      { id: "pin-browse", label: "浏览首页推荐 3 分钟", detail: "模拟真实用户行为", freq: "daily", guideStatus: "archived" },
+      { id: "pin-save", label: "搜索 + 保存 5-8 条 Pin", detail: "搜 gold jewelry / mythology art / crystal bracelet", freq: "daily", guideStatus: "archived" },
+      { id: "pin-like", label: "点赞 3-5 条 + 关注 2-3 个账号", detail: "点心形图标，关注同品类账号", freq: "daily", guideStatus: "archived" },
+      { id: "pin-post", label: "Internal candidate review（NO-GO）", detail: "仅审校唯一产品候选；submitted = 0，published = 0", freq: "daily", guideStatus: "archived" },
+      { id: "pin-vertical", label: "Canva 做 2 张竖版 2:3 图", detail: "1000x1500，产品图 + 文字，品牌色 #0F0D0E", freq: "weekly", guideStatus: "archived" },
+      { id: "pin-analytics", label: "查看企业分析", detail: "本周展示次数和点击最多的 3 条 Pin", freq: "weekly", guideStatus: "archived" },
     ],
   },
   {
     icon: "\u{1F4F1}", name: "TikTok",
     tasks: [
-      { id: "tt-browse", label: "浏览 For You 15 分钟", detail: "正常刷视频，完播/点赞/收藏", freq: "daily", guide: "/guides/tiktok.html" },
-      { id: "tt-check-ip", label: "检查 IP 稳定性", detail: "whatismyipaddress.com 确认 IP 没变", freq: "daily", guide: "/guides/tiktok.html" },
-      { id: "tt-post", label: "发布视频 (每周 3-4 条)", detail: "用 tiktok-30day-calendar-zh.md 脚本", freq: "weekly", guide: "/guides/tiktok.html" },
+      { id: "tt-browse", label: "浏览 For You 15 分钟", detail: "正常刷视频，完播/点赞/收藏", freq: "daily", guideStatus: "archived" },
+      { id: "tt-check-ip", label: "检查 IP 稳定性", detail: "whatismyipaddress.com 确认 IP 没变", freq: "daily", guideStatus: "archived" },
+      { id: "tt-post", label: "发布视频 (每周 3-4 条)", detail: "用 tiktok-30day-calendar-zh.md 脚本", freq: "weekly", guideStatus: "archived" },
     ],
   },
   {
     icon: "\u{1F50D}", name: "SEO",
     tasks: [
-      { id: "seo-console", label: "查看 Search Console", detail: "展示次数/点击率变化，新搜索词", freq: "daily", guide: "/guides/seo.html" },
-      { id: "seo-gmc", label: "检查 GMC 审核状态", detail: "Google Merchant Center → 产品 → 未核准数量", freq: "daily", guide: "/guides/gmc.html" },
-      { id: "seo-blog", label: "发布 1 篇新博客", detail: "长尾关键词 + 答案胶囊, 300-500 字", freq: "weekly", guide: "/guides/seo.html" },
+      { id: "seo-console", label: "查看 Search Console", detail: "展示次数/点击率变化，新搜索词", freq: "daily", guideStatus: "archived" },
+      { id: "seo-gmc", label: "检查 GMC 审核状态", detail: "Google Merchant Center → 产品 → 未核准数量", freq: "daily", guideStatus: "archived" },
+      { id: "seo-blog", label: "发布 1 篇新博客", detail: "长尾关键词 + 答案胶囊, 300-500 字", freq: "weekly", guideStatus: "archived" },
     ],
   },
   {
     icon: "\u{1F916}", name: "GEO",
     tasks: [
-      { id: "geo-test", label: "测试 AI 引用", detail: "ChatGPT 搜 mythical jewelry chinese mythology", freq: "weekly", guide: "/guides/geo.html" },
-      { id: "geo-reddit", label: "Reddit/Quora 回答 1 个问题", detail: "搜 mythology jewelry，回答并附链接", freq: "weekly", guide: "/guides/geo.html" },
+      { id: "geo-test", label: "测试 AI 引用", detail: "ChatGPT 搜 mythical jewelry chinese mythology", freq: "weekly", guideStatus: "archived" },
+      { id: "geo-reddit", label: "Reddit/Quora 回答 1 个问题", detail: "搜 mythology jewelry，回答并附链接", freq: "weekly", guideStatus: "archived" },
     ],
   },
   {
@@ -67,9 +67,9 @@ const CATEGORIES: Category[] = [
   {
     icon: "\u{1F4E6}", name: "Operations",
     tasks: [
-      { id: "ops-orders", label: "检查新订单", detail: "Admin → Orders → PAID → SHIPPED", freq: "daily", guide: "/guides/orders.html" },
-      { id: "ops-emails", label: "回复客户邮件", detail: "检查 mythrealms@outlook.com", freq: "daily", guide: "/guides/orders.html" },
-      { id: "ops-stock", label: "检查低库存产品", detail: "库存 < 5 的产品决定是否补货", freq: "weekly", guide: "/guides/orders.html" },
+      { id: "ops-orders", label: "检查新订单", detail: "Admin → Orders → PAID → SHIPPED", freq: "daily", guideStatus: "archived" },
+      { id: "ops-emails", label: "回复客户邮件", detail: "使用联系表单处理新消息", freq: "daily", guideStatus: "archived" },
+      { id: "ops-stock", label: "检查低库存产品", detail: "库存 < 5 的产品决定是否补货", freq: "weekly", guideStatus: "archived" },
     ],
   },
   {
@@ -83,7 +83,23 @@ const CATEGORIES: Category[] = [
 
 // ====== COMPONENT ======
 export default function SocialTasksPage() {
-  const { completed, expanded, setCompleted, setExpanded } = useSocialTaskStorage();
+  const [completed, setCompleted] = useState<Record<string, string>>({}); // taskId -> date
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+
+  // Load from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("mythrealms-tasks");
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time compatibility hydration from the established admin key.
+    if (saved) setCompleted(JSON.parse(saved));
+    const exp = localStorage.getItem("mythrealms-tasks-expanded");
+    if (exp) setExpanded(JSON.parse(exp));
+  }, []);
+
+  // Save to localStorage
+  useEffect(() => {
+    localStorage.setItem("mythrealms-tasks", JSON.stringify(completed));
+    localStorage.setItem("mythrealms-tasks-expanded", JSON.stringify(expanded));
+  }, [completed, expanded]);
 
   const today = new Date().toISOString().slice(0, 10);
   const isToday = (date: string) => date === today;
@@ -200,8 +216,8 @@ export default function SocialTasksPage() {
                           <span className="block text-xs text-[var(--text-muted)] mt-0.5">
                             {task.freq === "daily" ? "每日" : task.freq === "weekly" ? "每周" : "每月"}
                             {" · "}{task.detail}
-                            {task.guide && (
-                              <>{" · "}<a href={task.guide} target="_blank" className="text-[var(--accent)] underline underline-offset-2 hover:text-[var(--accent-hover)]" onClick={(e) => e.stopPropagation()}>操作指南 →</a></>
+                            {task.guideStatus === "archived" && (
+                              <>{" · "}<span>操作指南已归档，等待审核后的替代版本。</span></>
                             )}
                           </span>
                         </div>

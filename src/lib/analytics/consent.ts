@@ -1,5 +1,5 @@
 export const CONSENT_STORAGE_KEY = "cookie-consent";
-export const CONSENT_CHANGED_EVENT = "mythrealms:consent-changed";
+export const CONSENT_CHANGED_EVENT = "maverenne:consent-changed";
 
 export interface ConsentState {
   analytics: boolean;

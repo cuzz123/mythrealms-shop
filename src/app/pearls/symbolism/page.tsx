@@ -7,7 +7,7 @@ import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
 import { PEARL_EDITS } from "@/lib/storefront/pearl-edits";
 import { absoluteUrl } from "@/lib/site";
 
-const title = "Pearl Symbolism in Style and Gifting | MythRealms";
+const title = "Pearl Symbolism in Style and Gifting | Maverenne";
 const description = "A neutral look at how pearls can carry personal style, memory, and occasion in a gift or an everyday jewelry choice.";
 const canonical = absoluteUrl("/pearls/symbolism");
 const image = HOMEPAGE_MEDIA.everyday;

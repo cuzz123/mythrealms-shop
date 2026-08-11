@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Unsubscribed — MythRealms",
+  title: "Unsubscribed — Maverenne",
   robots: { index: false },
 };
 
@@ -13,7 +13,7 @@ export default function UnsubscribePage() {
         You have been unsubscribed
       </h1>
       <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">
-        You will no longer receive marketing emails from MythRealms. If this was
+        You will no longer receive marketing emails from Maverenne. If this was
         a mistake, you can re-subscribe at any time from your account settings.
       </p>
       <Link

@@ -8,19 +8,19 @@ import { isPearlEditorialPost } from "@/lib/seo/blog";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Pearl Jewelry Journal | MythRealms",
-  description: "Pearl jewelry guidance on styling, care, gifting, fit, and shipping from MythRealms.",
+  title: "Pearl Jewelry Journal | Maverenne",
+  description: "Pearl jewelry guidance on styling, care, gifting, fit, and shipping from Maverenne.",
   alternates: { canonical: absoluteUrl("/blog") },
   openGraph: {
     type: "website",
     url: absoluteUrl("/blog"),
-    title: "Pearl Jewelry Journal | MythRealms",
-    description: "Pearl jewelry guidance on styling, care, gifting, fit, and shipping from MythRealms.",
+    title: "Pearl Jewelry Journal | Maverenne",
+    description: "Pearl jewelry guidance on styling, care, gifting, fit, and shipping from Maverenne.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pearl Jewelry Journal | MythRealms",
-    description: "Pearl jewelry guidance on styling, care, gifting, fit, and shipping from MythRealms.",
+    title: "Pearl Jewelry Journal | Maverenne",
+    description: "Pearl jewelry guidance on styling, care, gifting, fit, and shipping from Maverenne.",
   },
 };
 
@@ -49,7 +49,7 @@ export default async function BlogPage() {
                 <Image src={post.image} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" unoptimized={post.image.startsWith("http")} />
               ) : (
                 <div className="w-full h-full bg-[var(--border-light)] flex items-center justify-center">
-                  <span className="text-[var(--text-muted)] text-sm">MythRealms</span>
+                  <span className="text-[var(--text-muted)] text-sm">Maverenne</span>
                 </div>
               )}
             </div>
@@ -58,7 +58,7 @@ export default async function BlogPage() {
               <h2 className="font-serif text-xl font-bold mt-2 mb-2 leading-tight group-hover:text-[var(--primary)] transition-colors">{post.title}</h2>
               <p className="text-sm text-[var(--text-muted)] line-clamp-2 mb-4">{post.excerpt}</p>
               <div className="flex items-center gap-4 text-xs text-[var(--text-muted)] pt-4 border-t border-[var(--border-light)]">
-                <span className="font-medium text-[var(--text-secondary)]">{post.author?.name || "MythRealms"}</span>
+                <span className="font-medium text-[var(--text-secondary)]">{post.author?.name || "Maverenne"}</span>
                 <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
               </div>
             </div>

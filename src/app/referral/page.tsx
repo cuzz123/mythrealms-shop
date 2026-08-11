@@ -19,7 +19,7 @@ export default function ReferralPage() {
 
   const referralCode = useMemo(() => generateReferralCode(), []);
   const baseUrl =
-    typeof window !== "undefined" ? window.location.origin : "https://mythrealms-shop.vercel.app";
+    typeof window !== "undefined" ? window.location.origin : "https://www.maverenne.com";
   const referralLink = `${baseUrl}/checkout?ref=${referralCode}`;
 
   const handleCopy = async () => {
@@ -39,9 +39,9 @@ export default function ReferralPage() {
     }
   };
 
-  const emailBody = `I found MythRealms, a pearl jewelry shop built around The Pearl Edit and guardian archetypes. Use this link to get $10 off your first order:\n\n${referralLink}\n\nTake the quiz or browse the pearl collection.`;
-  const shareEmailLink = `mailto:?subject=${encodeURIComponent("Join MythRealms - Get $10 off your first order")}&body=${encodeURIComponent(emailBody)}`;
-  const shareWhatsAppLink = `https://wa.me/?text=${encodeURIComponent(`I found MythRealms and The Pearl Edit. Use my referral link to get $10 off your first pearl jewelry order: ${referralLink}`)}`;
+  const emailBody = `I found Maverenne, a pearl jewelry shop built around The Pearl Edit and guardian archetypes. Use this link to get $10 off your first order:\n\n${referralLink}\n\nTake the quiz or browse the pearl collection.`;
+  const shareEmailLink = `mailto:?subject=${encodeURIComponent("Join Maverenne - Get $10 off your first order")}&body=${encodeURIComponent(emailBody)}`;
+  const shareWhatsAppLink = `https://wa.me/?text=${encodeURIComponent(`I found Maverenne and The Pearl Edit. Use my referral link to get $10 off your first pearl jewelry order: ${referralLink}`)}`;
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-12">
@@ -56,7 +56,7 @@ export default function ReferralPage() {
       <div className="relative mb-12 h-[300px] overflow-hidden rounded-2xl md:h-[360px]">
         <Image
           src="/images/gifts/referral-hero.webp"
-          alt="MythRealms referral program"
+          alt="Maverenne referral program"
           fill
           sizes="(max-width:768px) 100vw, 896px"
           className="object-cover"
@@ -69,7 +69,7 @@ export default function ReferralPage() {
           </span>
           <h1 className="mb-3 font-serif text-3xl font-bold text-white">Give $10, Get $10</h1>
           <p className="mx-auto max-w-md leading-relaxed text-white/70">
-            Share MythRealms with someone who loves pearl jewelry. When they make
+            Share Maverenne with someone who loves pearl jewelry. When they make
             their first purchase, you both get $10 off.
           </p>
         </div>

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "generatedOn": "2026-08-10",
+  "generator": "scripts/generate-maverenne-brand-assets.mjs",
+  "sourceMaster": "public/brand/maverenne-mark.svg",
+  "sourceMethod": "deterministic_local_sharp_svg_rasterization",
+  "rightsStatus": "internal_original_brand_artwork__internal_use_only__not_a_product_or_seo_image__legal_review_not_a_publication_clearance",
+  "restrictions": [
+    "No external input, network access, image-generation service, product image, historical Pinterest asset, or SEO image is used.",
+    "This is an internal original brand-artwork record, not a legal rights clearance or publication approval."
+  ],
+  "assets": [
+    {
+      "path": "public/brand/maverenne-mark.svg",
+      "mimeType": "image/svg+xml",
+      "width": 64,
+      "height": 64,
+      "sha256": "ef5219305449ebb27d5e8b758c248d4cc189cadab46195159bfff45a0ca4d959"
+    },
+    {
+      "path": "public/icon.svg",
+      "mimeType": "image/svg+xml",
+      "width": 64,
+      "height": 64,
+      "sha256": "ef5219305449ebb27d5e8b758c248d4cc189cadab46195159bfff45a0ca4d959"
+    },
+    {
+      "path": "src/app/favicon.ico",
+      "mimeType": "image/x-icon",
+      "variants": [
+        "16x16",
+        "32x32",
+        "48x48"
+      ],
+      "sha256": "e1fba3944e8fcba305237323fd1552404ca2ec20246c3ef80c8a468a80380715"
+    },
+    {
+      "path": "public/apple-icon.png",
+      "width": 180,
+      "height": 180,
+      "mimeType": "image/png",
+      "sha256": "699ec0d66e78b8fe604a03880a51e472c2b214e7e11c93c8a067042f66c3fd45"
+    },
+    {
+      "path": "public/icon-192.png",
+      "width": 192,
+      "height": 192,
+      "mimeType": "image/png",
+      "sha256": "60f1180d7a5354494393901bc5fddc9e3cb2cf5d6334f3be3d675da98046061d"
+    },
+    {
+      "path": "public/icon-512.png",
+      "width": 512,
+      "height": 512,
+      "mimeType": "image/png",
+      "sha256": "9544b9752abcf59487fda7cb3372fdaa0b84a583eadd6b8ba666315fcb5a221e"
+    },
+    {
+      "path": "public/brand/maverenne-og-default.png",
+      "width": 1200,
+      "height": 630,
+      "mimeType": "image/png",
+      "sha256": "99b98b830cb0b8b3043036c619e7d3197fcdc880c206743c5e7987e05140df42"
+    }
+  ]
+}

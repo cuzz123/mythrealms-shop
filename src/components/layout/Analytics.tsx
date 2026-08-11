@@ -12,12 +12,13 @@ import {
   reportAiReferralOnce,
   shouldReportAiReferral,
 } from "@/lib/analytics/referral";
+import { captureFirstUtmAttribution } from "@/lib/analytics/attribution";
 import { flushTrackingQueue } from "@/lib/tracking";
 
 const TRACKING_READY_EVENTS = {
-  ga: "mythrealms:ga-ready",
-  meta: "mythrealms:meta-ready",
-  pinterest: "mythrealms:pinterest-ready",
+  ga: "maverenne:ga-ready",
+  meta: "maverenne:meta-ready",
+  pinterest: "maverenne:pinterest-ready",
 } as const;
 
 type AnalyticsWindow = Window & {
@@ -88,6 +89,16 @@ export function Analytics() {
     }
   }, [consent.analytics, gaInitialized]);
 
+  useEffect(() => {
+    if (!consent.analytics) return;
+
+    try {
+      captureFirstUtmAttribution(window.location.href, window.sessionStorage);
+    } catch {
+      // Tracking remains consent-gated when browser storage is unavailable.
+    }
+  }, [consent.analytics]);
+
   if (!gaId && !pixelId && !pinterestId) return null;
 
   return (
@@ -103,7 +114,7 @@ export function Analytics() {
             strategy="afterInteractive"
             onReady={() => flushTrackingQueue("ga")}
           >
-            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}');window.dispatchEvent(new Event('mythrealms:ga-ready'))`}
+            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}');window.dispatchEvent(new Event('maverenne:ga-ready'))`}
           </Script>
         </>
       )}
@@ -114,7 +125,7 @@ export function Analytics() {
             strategy="afterInteractive"
             onReady={() => flushTrackingQueue("meta")}
           >
-            {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${pixelId}');fbq('track','PageView');window.dispatchEvent(new Event('mythrealms:meta-ready'))`}
+            {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${pixelId}');fbq('track','PageView');window.dispatchEvent(new Event('maverenne:meta-ready'))`}
           </Script>
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element -- Tracking pixels require literal noscript images. */}
@@ -135,7 +146,7 @@ export function Analytics() {
             strategy="afterInteractive"
             onReady={() => flushTrackingQueue("pinterest")}
           >
-            {`!function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");pintrk('load','${pinterestId}');pintrk('page');window.dispatchEvent(new Event('mythrealms:pinterest-ready'))`}
+            {`!function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");pintrk('load','${pinterestId}');pintrk('page');window.dispatchEvent(new Event('maverenne:pinterest-ready'))`}
           </Script>
           <noscript>
             {/* eslint-disable-next-line @next/next/no-img-element -- Tracking pixels require literal noscript images. */}

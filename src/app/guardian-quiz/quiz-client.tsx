@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, RotateCcw, Sparkles } from "lucide-react";
 import { getStorefrontProductBySlug } from "@/lib/storefront/catalog";
 import { productDisplayName } from "@/lib/brand";
+import {
+  trackQuizComplete,
+  trackQuizCtaClick,
+  trackQuizStart,
+} from "@/lib/tracking";
 
 type Archetype = "phoenix" | "moon-rabbit" | "white-tiger" | "azure-dragon" | "nine-tailed-fox" | "black-tortoise";
 
@@ -93,8 +98,14 @@ export function GuardianQuizClient() {
   const [step, setStep] = useState(0);
   const [scores, setScores] = useState<Record<Archetype, number>>({} as Record<Archetype, number>);
   const [result, setResult] = useState<Archetype | null>(null);
+  const quizStartedTracked = useRef(false);
+  const quizCompletionTracked = useRef(false);
 
   function handleAnswer(option: (typeof questions)[number]["options"][number]) {
+    if (!quizStartedTracked.current) {
+      trackQuizStart();
+      quizStartedTracked.current = true;
+    }
     const nextScores = { ...scores };
     option.archetypes.forEach((archetype) => {
       nextScores[archetype] = (nextScores[archetype] || 0) + 1;
@@ -107,7 +118,12 @@ export function GuardianQuizClient() {
     }
 
     const winner = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0]?.[0] as Archetype;
-    setResult(winner || "moon-rabbit");
+    const archetype = winner || "moon-rabbit";
+    if (!quizCompletionTracked.current) {
+      trackQuizComplete(archetype);
+      quizCompletionTracked.current = true;
+    }
+    setResult(archetype);
   }
 
   function reset() {
@@ -143,7 +159,7 @@ export function GuardianQuizClient() {
           </div>
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link href="/collections/pearl-series" className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-8 py-3 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]">
+            <Link href="/collections/pearl-series" onClick={() => trackQuizCtaClick(result, "/collections/pearl-series")} className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-8 py-3 text-sm font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]">
               Shop The Pearl Edit <ArrowRight className="h-4 w-4" />
             </Link>
             <button onClick={reset} className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] px-8 py-3 text-sm font-semibold text-[var(--text-secondary)] transition hover:border-[var(--text)]">

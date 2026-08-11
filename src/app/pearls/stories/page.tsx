@@ -8,8 +8,8 @@ import { isPearlStoryPost } from "@/lib/seo/blog";
 import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
 import { absoluteUrl } from "@/lib/site";
 
-const title = "Pearl Stories | MythRealms";
-const description = "A focused reading list of current MythRealms stories about styling, care, gifting, and choosing pearl jewelry.";
+const title = "Pearl Stories | Maverenne";
+const description = "A focused reading list of current Maverenne stories about styling, care, gifting, and choosing pearl jewelry.";
 const canonical = absoluteUrl("/pearls/stories");
 const image = HOMEPAGE_MEDIA.courtyard;
 
@@ -58,7 +58,7 @@ export default async function PearlStoriesPage() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase text-[var(--accent)]">Current reading</p>
-            <h2 id="current-stories-title" className="mt-3 font-serif text-3xl font-medium text-[var(--text)]">From the MythRealms journal</h2>
+            <h2 id="current-stories-title" className="mt-3 font-serif text-3xl font-medium text-[var(--text)]">From the Maverenne journal</h2>
           </div>
           <Link href="/blog" className="border-b border-[var(--accent)] pb-1 text-sm font-semibold text-[var(--accent)] hover:text-[var(--accent-hover)]">View all journal posts</Link>
         </div>

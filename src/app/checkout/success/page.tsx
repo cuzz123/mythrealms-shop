@@ -15,8 +15,8 @@ import { safeJsonParse } from "@/lib/utils";
 import { SuccessTracker } from "./tracker";
 
 export const metadata: Metadata = {
-  title: "Checkout Status | MythRealms",
-  description: "Check the latest payment and fulfillment status for your MythRealms order.",
+  title: "Checkout Status | Maverenne",
+  description: "Check the latest payment and fulfillment status for your Maverenne order.",
 };
 
 export default async function CheckoutSuccessPage({

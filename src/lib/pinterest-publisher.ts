@@ -5,45 +5,33 @@ export type PinterestPinInput = {
   imageUrl: string;
 };
 
-type PinterestApiResponse = {
-  id?: string;
-  message?: string;
-  code?: number;
-};
+export const PINTEREST_PUBLISHING_DISABLED_MESSAGE =
+  "Pinterest external publishing is disabled for this internal-only local candidate.";
 
-export async function publishPinterestPin(input: PinterestPinInput): Promise<{ pinId: string }> {
-  const token =
-    process.env.PINTEREST_API_TOKEN ||
-    (await cookies()).get("pinterest_access_token")?.value;
-  const boardId = process.env.PINTEREST_BOARD_ID;
+export const PINTEREST_PUBLISHING_DISABLED_STATUS = 503;
 
-  if (!token || !boardId) {
-    throw new Error("Pinterest API is not configured");
-  }
+export type PinterestPublishEntrypoint =
+  | "direct_publish"
+  | "daily_automation"
+  | "pinterest_cron"
+  | "admin_publish"
+  | "admin_retry"
+  | "admin_ui"
+  | "n8n_adapter";
 
-  const response = await fetch("https://api.pinterest.com/v5/pins", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: input.title,
-      description: input.description,
-      link: input.link,
-      board_id: boardId,
-      media_source: {
-        source_type: "image_url",
-        url: input.imageUrl,
-      },
-    }),
-  });
-
-  const body = (await response.json().catch(() => ({}))) as PinterestApiResponse;
-  if (!response.ok || !body.id) {
-    throw new Error(body.message || `Pinterest API request failed (${response.status})`);
-  }
-
-  return { pinId: body.id };
+export function getPinterestPublishBlock(entrypoint: PinterestPublishEntrypoint) {
+  return {
+    error: PINTEREST_PUBLISHING_DISABLED_MESSAGE,
+    status: "internal_only_publish_blocked" as const,
+    entrypoint,
+    attempted: 0,
+    published: 0,
+  };
 }
-import { cookies } from "next/headers";
+
+export async function publishPinterestPin(
+  input: PinterestPinInput,
+): Promise<{ pinId: string }> {
+  void input;
+  throw new Error(PINTEREST_PUBLISHING_DISABLED_MESSAGE);
+}

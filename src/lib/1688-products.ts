@@ -1,4 +1,4 @@
-// 1688 Products  - MythRealms
+// 1688 Products  - Maverenne
 export type ProductImageRoles = {
   primary: string;
   alternate?: string;

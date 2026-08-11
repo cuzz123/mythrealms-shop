@@ -5,15 +5,20 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { requireCron } from "@/lib/automation-auth";
 import { getErrorMessage } from "@/lib/error-message";
+import { SITE_NAME, siteUrl } from "@/lib/site";
+import { readAutomationEmailConfig } from "@/lib/operations/automation-email-config";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "zheng111321@gmail.com";
-
 export async function GET(request: NextRequest) {
   const unauthorized = requireCron(request);
   if (unauthorized) return unauthorized;
+
+  let emailConfig: ReturnType<typeof readAutomationEmailConfig>;
+  try { emailConfig = readAutomationEmailConfig(); } catch {
+    return NextResponse.json({ error: "Automation email is not configured" }, { status: 503 });
+  }
 
   try {
     const lowStockVariants = await db.variant.findMany({
@@ -35,7 +40,7 @@ export async function GET(request: NextRequest) {
       }, { status: 200 });
     }
 
-    const base = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
+    const base = siteUrl;
 
     const rowsHtml = lowStockVariants
       .map(
@@ -55,7 +60,7 @@ export async function GET(request: NextRequest) {
 <body style="margin:0;padding:0;background:#f8f5f2;font-family:Arial,sans-serif;">
 <div style="max-width:560px;margin:0 auto;padding:40px 20px;">
   <div style="text-align:center;padding-bottom:24px;">
-    <h1 style="font-family:Georgia,serif;font-size:26px;color:#1A1814;margin:0;">MythRealms</h1>
+    <h1 style="font-family:Georgia,serif;font-size:26px;color:#1A1814;margin:0;">${SITE_NAME}</h1>
     <p style="font-size:12px;color:#8B7E6B;">Low Stock Alert</p>
   </div>
   <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e8e3db;">
@@ -76,7 +81,7 @@ export async function GET(request: NextRequest) {
       <tbody>${rowsHtml}</tbody>
     </table>
   </div>
-  <p style="font-size:10px;color:#c4bab0;text-align:center;margin:20px 0 0;">Automated stock alert from MythRealms operations pipeline.</p>
+  <p style="font-size:10px;color:#c4bab0;text-align:center;margin:20px 0 0;">Automated stock alert from ${SITE_NAME} operations pipeline.</p>
 </div>
 </body></html>`;
 
@@ -84,12 +89,12 @@ export async function GET(request: NextRequest) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${emailConfig.apiKey}`,
       },
       body: JSON.stringify({
-        from: "MythRealms <onboarding@resend.dev>",
-        to: ADMIN_EMAIL,
-        subject: `MythRealms Stock Alert — ${lowStockVariants.length} items low`,
+        from: emailConfig.from,
+        to: emailConfig.recipient,
+        subject: `${SITE_NAME} Stock Alert — ${lowStockVariants.length} items low`,
         html,
       }),
     });

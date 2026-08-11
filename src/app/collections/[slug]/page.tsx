@@ -34,19 +34,19 @@ export async function generateMetadata({
   const { slug } = await params;
   const query = await searchParams;
   if (slug !== "pearl-series" && !RETIRED_COLLECTION_SLUGS.has(slug)) {
-    return { title: "Collection Not Found | MythRealms", robots: { index: false } };
+    return { title: "Collection Not Found | Maverenne", robots: { index: false } };
   }
 
   const messaging = categoryMessaging["pearl-series"];
   const description = messaging.description.slice(0, 155);
   const hasQuery = Object.values(query).some(Boolean);
   return {
-    title: `${messaging.name} | MythRealms`,
+    title: `${messaging.name} | Maverenne`,
     description,
     robots: hasQuery ? { index: false, follow: true } : undefined,
     alternates: { canonical: `${siteUrl}/collections/pearl-series` },
     openGraph: {
-      title: `${messaging.name} | MythRealms`,
+      title: `${messaging.name} | Maverenne`,
       description,
       url: `${siteUrl}/collections/pearl-series`,
       type: "website",

@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   if (unauthorized) return unauthorized;
 
   try {
-    const base = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
+    const base = process.env.NEXT_PUBLIC_APP_URL || "https://www.maverenne.com";
     const active = PRODUCTS.filter((p) => p.isActive && p.inStock);
     const library = active.map((p) => buildPin(p, base));
 

@@ -1,7 +1,7 @@
 import type { Product } from "@/lib/1688-products";
 import { absoluteImageUrl } from "@/lib/images";
 import { productDisplayName } from "@/lib/brand";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, SITE_NAME } from "@/lib/site";
 import { getStorefrontProducts } from "@/lib/storefront/catalog";
 
 const fallbackTags = [
@@ -36,9 +36,9 @@ export async function generatePinterestContent(product: Product, mood = "styling
   if (!apiKey) return fallback;
 
   const prompt = [
-    `Write Pinterest copy for ${name} from MythRealms.`,
-    `Focus on ${mood}, pearl styling, and everyday wear.`,
-    "Do not claim precious-metal specifications, healing, medical effects, or guaranteed spiritual outcomes.",
+    `Write Pinterest copy for ${name} from ${SITE_NAME}.`,
+    `Focus on visible design details and ${mood} styling context.`,
+    "Do not infer materials, pricing, availability, delivery, benefits, or outcomes.",
     "Use a warm editorial tone. Title: 100 characters maximum. Description: 500 characters maximum. Include a soft CTA.",
     'Return only valid JSON: {"title":"...","description":"..."}.',
   ].join(" ");
@@ -75,11 +75,10 @@ export async function generatePinterestContent(product: Product, mood = "styling
 }
 
 function buildFallbackContent(product: Product, name: string): PinterestContent {
-  const intention = sanitizeCopy(product.intention || "Everyday intention", 48);
-  const description = `${name} from The Pearl Edit brings light-catching pearl detail to everyday styling. A thoughtful choice for ${intention.toLowerCase()}, quiet confidence, and meaningful gifting. Explore the piece.`;
+  const description = `${name} from ${SITE_NAME}. Explore the visible pearl details in an everyday styling context. View the piece.`;
 
   return {
-    title: sanitizeCopy(`${name} | The Pearl Edit`, 100),
+    title: sanitizeCopy(`${name} | ${SITE_NAME}`, 100),
     description: sanitizeCopy(description, 500),
     imageUrl: absoluteImageUrl(product.image),
     link: absoluteUrl(`/products/${product.slug}`),

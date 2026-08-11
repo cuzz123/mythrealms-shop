@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { getDailyKeyword, SEO_KEYWORDS } from "@/lib/seo-keywords";
+import { absoluteUrl, SITE_NAME, siteUrl } from "@/lib/site";
 
 const AGNES_KEY = process.env.AGNES_API_KEY || "";
 const AGNES_CHAT_URL = "https://apihub.agnes-ai.com/v1/chat/completions";
@@ -71,13 +72,13 @@ Requirements:
 - Structure: Introduction, 3-5 H2 sections, Conclusion
 - Tone: Warm, knowledgeable, approachable, like a thoughtful jewelry editor
 - Include: 1-2 practical tips the reader can use immediately
-- Mention: MythRealms as a pearl and gemstone jewelry brand naturally in 1-2 places
+- Mention: ${SITE_NAME} naturally in 1-2 places
 - Do not claim medical effects, guaranteed healing, guaranteed spiritual outcomes, or material details not supplied
-- If discussing crystals or intention, frame them as symbolic/personal ritual language
+- Keep the topic to pearl jewelry and editorial pearl guidance
 - Do not write a hard sales pitch
 - Format: Return clean markdown. First line = title prefixed with "# ". Then blank line, then body.
 
-Target audience: Women 25-45 interested in pearl jewelry, gemstone styling, symbolic intention, and meaningful everyday accessories.`;
+Target audience: Readers interested in pearl jewelry and thoughtful styling guidance.`;
 
   const res = await fetch(AGNES_CHAT_URL, {
     method: "POST",
@@ -128,7 +129,7 @@ Target audience: Women 25-45 interested in pearl jewelry, gemstone styling, symb
       slug,
       excerpt: excerpt || title,
       content: body,
-      category: "pearl-gemstone-guides",
+      category: "pearl-guides",
       image: imageUrl,
     },
   });
@@ -180,7 +181,7 @@ async function generateFeaturedImage(title: string): Promise<string | null> {
       },
       body: JSON.stringify({
         model: "agnes-image-2.1-flash",
-        prompt: `Minimalist editorial jewelry photograph for "${title}". Pearl and gemstone mood, soft natural light, elegant composition, no text overlay, magazine quality.`,
+        prompt: `Minimalist editorial pearl jewelry photograph for "${title}". Soft natural light, elegant composition, no text overlay.`,
         n: 1,
         size: "1024x1024",
       }),
@@ -201,14 +202,13 @@ async function pingIndexNow(slug: string): Promise<void> {
   if (!indexNowKey) return;
 
   try {
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
     await fetch("https://api.indexnow.org/indexnow", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        host: new URL(appUrl).hostname,
+        host: new URL(siteUrl).hostname,
         key: indexNowKey,
-        urlList: [`${appUrl}/blog/${slug}`],
+        urlList: [absoluteUrl(`/blog/${slug}`)],
       }),
     });
   } catch {

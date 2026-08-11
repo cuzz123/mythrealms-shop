@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { type StorefrontProduct } from "@/lib/storefront/catalog";
@@ -154,7 +154,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
     toast.success(wishlisted ? "Removed from wishlist" : "Added to wishlist!");
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.maverenne.com";
 
   return (
     <div className="product-purchase-page max-w-7xl mx-auto px-6 py-10">

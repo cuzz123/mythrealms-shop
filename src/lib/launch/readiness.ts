@@ -35,14 +35,13 @@ const REQUIRED = [
   "PAYPAL_WEBHOOK_ID",
   "RESEND_API_KEY",
   "RESEND_FROM_EMAIL",
-  "SUPPORT_EMAIL",
 ] as const;
 
 function configured(value: string | undefined): value is string {
   const trimmed = value?.trim();
   return Boolean(
     trimmed &&
-      !/your-|placeholder|postgresql:\/\/user:password|\.example\b|example\.com|\.invalid\b|change[-_]?me|replace[-_]?me|\btodo\b|\btbd\b/i.test(trimmed),
+      !/your-|placeholder|postgresql:\/\/user:password|\.example\b|example\.com|change[-_]?me|replace[-_]?me|\btodo\b|\btbd\b/i.test(trimmed),
   );
 }
 
@@ -63,7 +62,6 @@ function isLoopbackHostname(hostname: string): boolean {
 
 function safeOrigin(
   value: string | undefined,
-  allowKnownTemporaryOrigin = false,
 ): URL | null {
   try {
     if (!configured(value)) return null;
@@ -84,13 +82,7 @@ function safeOrigin(
     ) {
       return null;
     }
-    if (
-      url.hostname.endsWith(".vercel.app") &&
-      !(
-        allowKnownTemporaryOrigin &&
-        url.hostname === "mythrealms-shop.vercel.app"
-      )
-    ) {
+    if (url.hostname.endsWith(".vercel.app")) {
       return null;
     }
     return url;
@@ -130,13 +122,8 @@ export async function runLaunchReadiness(
     "Set every required launch variable to a non-placeholder value.",
   );
 
-  const allowKnownTemporaryOrigin =
-    env.LAUNCH_ALLOW_VERCEL_APP_URL === "true";
-  const appUrl = safeOrigin(
-    env.NEXT_PUBLIC_APP_URL,
-    allowKnownTemporaryOrigin,
-  );
-  const authUrl = safeOrigin(env.AUTH_URL, allowKnownTemporaryOrigin);
+  const appUrl = safeOrigin(env.NEXT_PUBLIC_APP_URL);
+  const authUrl = safeOrigin(env.AUTH_URL);
   const appUrlsMatch =
     Boolean(appUrl && authUrl) && appUrl?.origin === authUrl?.origin;
   addCheck(

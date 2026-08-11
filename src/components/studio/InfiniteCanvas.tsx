@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useRef } from "react";
 import {
@@ -169,7 +169,7 @@ function CanvasInner() {
               <Sparkles className="w-4 h-4 text-[var(--accent)]" />
             </div>
             <div>
-              <h1 className="font-serif text-sm font-semibold text-[var(--text)] leading-none">MythRealms Studio</h1>
+              <h1 className="font-serif text-sm font-semibold text-[var(--text)] leading-none">Maverenne Studio</h1>
               <p className="text-[10px] text-[var(--text-muted)] mt-0.5">Infinite Canvas · AI Image & Video</p>
             </div>
           </div>

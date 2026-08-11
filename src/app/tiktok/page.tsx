@@ -7,8 +7,8 @@ import { LazyImage } from "@/components/ui/LazyImage";
 import { formatPrice } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Find Your Guardian | MythRealms",
-  description: "TikTok visitors: take the MythRealms guardian quiz and discover a pearl jewelry path through The Pearl Edit.",
+  title: "Find Your Guardian | Maverenne",
+  description: "TikTok visitors: take the Maverenne guardian quiz and discover a pearl jewelry path through The Pearl Edit.",
 };
 
 const starterSlugs = ["pearl-series-01", "pearl-series-05", "pearl-series-13", "pearl-series-17"];

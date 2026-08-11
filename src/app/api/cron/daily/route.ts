@@ -14,8 +14,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireCron } from "@/lib/automation-auth";
 import {
   createDailyPinterestDraft,
-  publishDuePinterestDrafts,
 } from "@/lib/pinterest-drafts";
+import { PINTEREST_PUBLISHING_DISABLED_MESSAGE } from "@/lib/pinterest-publisher";
 import {
   processPendingMailboxEvents,
   renewOutlookSubscriptions,
@@ -42,14 +42,15 @@ export async function GET(req: NextRequest) {
     results.seo = { error: String(e) };
   }
 
-  // Task 2: Create a daily Pinterest review draft and publish approved, due items.
+  // Task 2: Create an internal review draft. Pinterest publishing is disabled.
   try {
     const generated = await createDailyPinterestDraft();
-    const published = await publishDuePinterestDrafts();
     results.pinterest = {
       generated: generated.created,
       draftId: generated.draft.id,
-      ...published,
+      status: "internal_only_publish_blocked",
+      published: 0,
+      message: PINTEREST_PUBLISHING_DISABLED_MESSAGE,
     };
   } catch (e) {
     results.pinterest = { error: String(e) };

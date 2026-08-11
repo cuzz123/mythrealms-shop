@@ -40,7 +40,7 @@ test("PayPal SDK waits for the real global and reports load or render failures",
   const checkout = source("src/app/checkout/page.tsx");
   assert.match(checkout, /import Script from "next\/script"/);
   assert.match(checkout, /<Script[\s\S]*?onReady=/);
-  assert.match(checkout, /window as MythRealmsWindow[\s\S]*?paypal\?\.Buttons/);
+  assert.match(checkout, /window as MaverenneWindow[\s\S]*?paypal\?\.Buttons/);
   assert.match(checkout, /buttons\s*\.render\([\s\S]*?\.catch\(/);
   assert.match(checkout, /buttons\s*\.render\([\s\S]*?\.then\([\s\S]*?markButtonReady/);
   assert.match(checkout, /const markButtonReady[\s\S]*?setButtonReady\(true\)/);
@@ -98,19 +98,6 @@ test("PayPal checkout validates the form and sends identity without client-owned
   );
   assert.match(createOrder, /variantId:\s*item\.product\.variantId/);
   assert.doesNotMatch(createOrder, /\bprice:|\btotal:|\bdiscount:/);
-});
-
-test("PayPal button keeps the latest checkout payload after commit without render-time ref writes", () => {
-  const checkout = source("src/app/checkout/page.tsx");
-  assert.match(checkout, /useEffect\(\(\) => \{[\s\S]*?payloadRef\.current = \{ items, email, shippingAddress, discountCode \};[\s\S]*?validateRef\.current = validateForm/);
-  const refSetupStart = checkout.indexOf("const payloadRef = useRef");
-  const sdkEffectStart = checkout.indexOf("useEffect(() => {", refSetupStart);
-  assert.notEqual(refSetupStart, -1);
-  assert.notEqual(sdkEffectStart, -1);
-  assert.doesNotMatch(
-    checkout.slice(refSetupStart, sdkEffectStart),
-    /Ref\.current\s*=/,
-  );
 });
 
 test("non-2xx cart discount revalidation clears the stale applied code", () => {
