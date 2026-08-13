@@ -79,3 +79,17 @@ test("product card action surfaces remain bound to their existing handlers", () 
   assert.match(source, /onClick=\{handleToggleWishlist\}/);
   assert.match(source, /onClick=\{handleQuickAdd\}/);
 });
+
+test("product cards keep mobile actions tap-safe, separated, and motion-safe", () => {
+  const source = readFileSync("src/components/product/ProductCard.tsx", "utf8");
+
+  const wishlistControl = source.match(/onClick=\{handleToggleWishlist\}[\s\S]*?aria-label=\{wishlisted/);
+  const quickAddControl = source.match(/onClick=\{handleQuickAdd\}[\s\S]*?aria-label=\{`Add/);
+
+  assert.ok(wishlistControl);
+  assert.ok(quickAddControl);
+  assert.match(wishlistControl[0], /max-sm:h-11\s+max-sm:w-11/);
+  assert.match(quickAddControl[0], /max-sm:h-11\s+max-sm:w-11/);
+  assert.match(quickAddControl[0], /max-sm:top-16/);
+  assert.match(source, /motion-reduce:transition-none/);
+});
