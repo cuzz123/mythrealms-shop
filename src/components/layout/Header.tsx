@@ -266,7 +266,7 @@ export function Header() {
             onClick={openCart}
             aria-label={`Shopping cart, ${itemCount} items`}
             title="Shopping cart"
-            className={`relative flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${overlayControlClass}`}
+            className={`relative flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${overlayControlClass}`}
           >
             <ShoppingBag size={20} strokeWidth={1.8} className={justAdded ? "cart-slide-up" : ""} />
             {itemCount > 0 && (

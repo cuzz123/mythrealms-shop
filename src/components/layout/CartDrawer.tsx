@@ -10,7 +10,6 @@ import { getStorefrontProducts } from "@/lib/storefront/catalog";
 import { productDisplayName } from "@/lib/brand";
 import { imageUrl } from "@/lib/images";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
-import { FreeShippingProgress } from "@/components/storefront/FreeShippingProgress";
 
 export function CartDrawer() {
   const isOpen = useCartUIStore((state) => state.isOpen);
@@ -83,9 +82,6 @@ export function CartDrawer() {
         ) : (
           <>
             <div className="flex-1 overflow-y-auto px-5 sm:px-6">
-              <div id="free-shipping-progress" className="border-b border-[var(--border)] py-4">
-                <FreeShippingProgress subtotal={subtotal} className="border-0 bg-[var(--surface-alt)]" />
-              </div>
               <ul className="divide-y divide-[var(--border)]">
                 {items.map((item) => (
                   <li

@@ -23,13 +23,22 @@ test("search overlay remains a focused modal with an explicit close control", ()
   assert.match(overlay, /aria-label="Close search"/);
 });
 
-test("cart drawer preserves focus, cart updates, routes, and progress treatment", () => {
+test("cart drawer preserves focus, cart updates, and routes without introducing shipping policy messaging", () => {
   const drawer = source("src/components/layout/CartDrawer.tsx");
 
   assert.match(drawer, /useDialogFocus/);
   assert.match(drawer, /updateQuantity/);
   assert.match(drawer, /removeItem/);
-  assert.match(drawer, /free-shipping-progress/);
+  assert.doesNotMatch(drawer, /FreeShippingProgress|free-shipping-progress|free shipping/i);
   assert.match(drawer, /href="\/cart"/);
   assert.match(drawer, /href="\/checkout"/);
+});
+
+test("header cart control keeps a 44px minimum mobile target", () => {
+  const header = source("src/components/layout/Header.tsx");
+
+  assert.match(
+    header,
+    /aria-label=\{`Shopping cart, \$\{itemCount\} items`\}[\s\S]*?className=\{`relative flex h-11 w-11/,
+  );
 });
