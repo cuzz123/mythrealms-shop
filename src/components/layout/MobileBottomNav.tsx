@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ShoppingBag, Heart, Home, Compass, User } from "lucide-react";
 import { useCartUIStore } from "@/lib/cart";
-import { useWishlistStore } from "@/lib/wishlist";
 
 export function MobileBottomNav() {
   const pathname = usePathname();
@@ -24,18 +23,18 @@ export function MobileBottomNav() {
   };
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0A0808] border-t border-[var(--border)] safe-area-bottom">
-      <div className="flex items-center justify-around h-14">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--border)]/70 bg-[var(--surface-raised)]/95 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] shadow-[0_-1px_0_rgba(20,18,15,0.04)] backdrop-blur-md lg:hidden">
+      <div className="flex h-14 items-center justify-around">
         {links.map((link) => {
           const Icon = link.icon;
           const active = link.href ? isActive(link.href) : false;
           return link.onClick ? (
-            <button key={link.label} onClick={link.onClick} className="flex flex-col items-center justify-center gap-0.5 px-3 py-1 text-[var(--text-muted)] hover:text-[var(--accent)] transition">
+            <button key={link.label} onClick={link.onClick} className="flex min-h-11 min-w-11 flex-col items-center justify-center gap-0.5 rounded-[var(--radius-sm)] px-3 py-1 text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-alt)] hover:text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]">
               <Icon className="w-5 h-5" strokeWidth={1.8} />
               <span className="text-[10px]">{link.label}</span>
             </button>
           ) : (
-            <Link key={link.href} href={link.href!} className={`flex flex-col items-center justify-center gap-0.5 px-3 py-1 transition ${active ? "text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-[var(--accent)]"}`}>
+            <Link key={link.href} href={link.href!} className={`flex min-h-11 min-w-11 flex-col items-center justify-center gap-0.5 rounded-[var(--radius-sm)] px-3 py-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] ${active ? "text-[var(--accent)]" : "text-[var(--text-muted)] hover:bg-[var(--surface-alt)] hover:text-[var(--accent)]"}`}>
               <Icon className="w-5 h-5" strokeWidth={1.8} />
               <span className="text-[10px]">{link.label}</span>
             </Link>

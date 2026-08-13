@@ -10,6 +10,7 @@ import { getStorefrontProducts } from "@/lib/storefront/catalog";
 import { productDisplayName } from "@/lib/brand";
 import { imageUrl } from "@/lib/images";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
+import { FreeShippingProgress } from "@/components/storefront/FreeShippingProgress";
 
 export function CartDrawer() {
   const isOpen = useCartUIStore((state) => state.isOpen);
@@ -47,20 +48,20 @@ export function CartDrawer() {
       />
       <aside
         ref={panelRef}
-        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-[420px] flex-col bg-[var(--surface-raised)] shadow-[var(--shadow-xl)]"
+        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-[440px] flex-col border-l border-[var(--border)] bg-[var(--surface-raised)] shadow-[var(--shadow-xl)]"
         role="dialog"
         aria-modal="true"
         aria-label={`Shopping cart with ${itemCount} items`}
       >
-        <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
-          <h2 className="font-serif text-lg font-semibold text-[var(--text)]">
+        <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-5 sm:px-6">
+          <h2 className="font-serif text-xl font-semibold tracking-[0.01em] text-[var(--text)]">
             Your Cart ({itemCount})
           </h2>
           <button
             ref={closeRef}
             type="button"
             onClick={closeCart}
-            className="flex h-9 w-9 items-center justify-center text-[var(--text-muted)] transition hover:bg-[var(--border-light)] hover:text-[var(--text)]"
+            className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-alt)] hover:text-[var(--text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
             aria-label="Close cart"
           >
             <X className="h-5 w-5" />
@@ -81,17 +82,20 @@ export function CartDrawer() {
           </div>
         ) : (
           <>
-            <div className="flex-1 overflow-y-auto px-5">
+            <div className="flex-1 overflow-y-auto px-5 sm:px-6">
+              <div id="free-shipping-progress" className="border-b border-[var(--border)] py-4">
+                <FreeShippingProgress subtotal={subtotal} className="border-0 bg-[var(--surface-alt)]" />
+              </div>
               <ul className="divide-y divide-[var(--border)]">
                 {items.map((item) => (
                   <li
                     key={`${item.product.id}-${item.product.variantId ?? "default"}`}
-                    className="flex gap-3 py-4"
+                    className="flex gap-4 py-5"
                   >
                     <Link
                       href={`/products/${item.product.slug}`}
                       onClick={closeCart}
-                      className="relative h-20 w-20 shrink-0 overflow-hidden bg-[var(--border-light)]"
+                      className="relative h-20 w-20 shrink-0 overflow-hidden rounded-[var(--radius-sm)] bg-[var(--border-light)]"
                     >
                       <Image
                         src={imageUrl(item.product.image)}
@@ -105,7 +109,7 @@ export function CartDrawer() {
                       <Link
                         href={`/products/${item.product.slug}`}
                         onClick={closeCart}
-                        className="line-clamp-2 text-sm font-medium text-[var(--text)]"
+                        className="line-clamp-2 text-sm font-medium text-[var(--text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
                       >
                         {item.product.name}
                       </Link>
@@ -113,7 +117,7 @@ export function CartDrawer() {
                         {formatPrice(item.product.price)}
                       </p>
                       <div className="mt-3 flex items-center gap-3">
-                        <div className="flex items-center border border-[var(--border)]">
+                        <div className="flex items-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)]">
                           <button
                             type="button"
                             onClick={() =>
@@ -123,7 +127,7 @@ export function CartDrawer() {
                                 item.quantity - 1,
                               )
                             }
-                            className="flex h-8 w-8 items-center justify-center"
+                            className="flex h-11 w-11 items-center justify-center rounded-l-[var(--radius-sm)] transition-colors hover:bg-[var(--surface-alt)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
                             aria-label={`Decrease quantity of ${item.product.name}`}
                           >
                             <Minus className="h-3.5 w-3.5" />
@@ -140,7 +144,7 @@ export function CartDrawer() {
                                 item.quantity + 1,
                               )
                             }
-                            className="flex h-8 w-8 items-center justify-center"
+                            className="flex h-11 w-11 items-center justify-center rounded-r-[var(--radius-sm)] transition-colors hover:bg-[var(--surface-alt)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
                             aria-label={`Increase quantity of ${item.product.name}`}
                           >
                             <Plus className="h-3.5 w-3.5" />
@@ -151,7 +155,7 @@ export function CartDrawer() {
                           onClick={() =>
                             removeItem(item.product.id, item.product.variantId)
                           }
-                          className="flex h-8 w-8 items-center justify-center text-[var(--text-muted)] hover:text-[var(--sale)]"
+                          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-alt)] hover:text-[var(--sale)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
                           aria-label={`Remove ${item.product.name} from cart`}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -163,8 +167,8 @@ export function CartDrawer() {
               </ul>
 
               {recommended.length > 0 && (
-                <section className="border-t border-[var(--border)] py-4" aria-labelledby="cart-recommendations">
-                  <h3 id="cart-recommendations" className="mb-3 text-xs font-semibold uppercase text-[var(--text-muted)]">
+                <section className="border-t border-[var(--border)] py-5" aria-labelledby="cart-recommendations">
+                  <h3 id="cart-recommendations" className="mb-3 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text-muted)]">
                     You May Also Like
                   </h3>
                   <div className="grid grid-cols-3 gap-3">
@@ -173,9 +177,9 @@ export function CartDrawer() {
                         key={product.id}
                         href={`/products/${product.slug}`}
                         onClick={closeCart}
-                        className="min-w-0"
+                        className="min-w-0 rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
                       >
-                        <div className="relative aspect-square overflow-hidden bg-[var(--border-light)]">
+                        <div className="relative aspect-square overflow-hidden rounded-[var(--radius-sm)] bg-[var(--border-light)]">
                           <Image
                             src={imageUrl(product.image)}
                             alt={productDisplayName(product)}
@@ -194,7 +198,7 @@ export function CartDrawer() {
               )}
             </div>
 
-            <div className="border-t border-[var(--border)] px-5 py-4">
+            <div className="border-t border-[var(--border)] bg-[var(--surface)] px-5 py-5 sm:px-6">
               <div className="mb-4 flex items-center justify-between text-sm">
                 <span>Subtotal</span>
                 <strong>{formatPrice(subtotal)}</strong>
@@ -202,14 +206,14 @@ export function CartDrawer() {
               <Link
                 href="/cart"
                 onClick={closeCart}
-                className="flex h-11 items-center justify-center bg-[var(--primary)] text-sm font-semibold text-white"
+                className="flex h-11 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--primary)] text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2"
               >
                 View Cart
               </Link>
               <Link
                 href="/checkout"
                 onClick={closeCart}
-                className="mt-2 flex h-11 items-center justify-center border border-[var(--accent)] text-sm font-semibold text-[var(--accent)]"
+                className="mt-2 flex h-11 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--accent)] text-sm font-semibold text-[var(--accent)] transition-colors hover:bg-[var(--surface-alt)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2"
               >
                 Checkout
               </Link>

@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
 import { searchStorefrontProducts } from "@/lib/storefront/search";
@@ -60,7 +60,7 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
         aria-expanded={isOpen}
         aria-controls="search-overlay"
         title="Search products"
-        className={`flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${isScrolled ? "text-gray-700 hover:bg-gray-100 hover:text-gray-900" : "text-white/80 hover:bg-white/10 hover:text-white focus-visible:ring-offset-transparent"}`}
+        className={`flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${isScrolled ? "text-[var(--text-secondary)] hover:bg-[var(--surface-alt)] hover:text-[var(--text)]" : "text-white/80 hover:bg-white/10 hover:text-white focus-visible:ring-offset-transparent"}`}
       >
         <Search className="w-5 h-5" />
       </button>
@@ -68,7 +68,7 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-[200] bg-black/40 animate-fade-in"
+          className="fixed inset-0 z-[200] overflow-y-auto bg-[var(--overlay)] px-4 py-5 animate-fade-in sm:px-6 sm:py-12"
           onClick={() => setIsOpen(false)}
           role="dialog"
           aria-modal="true"
@@ -77,39 +77,41 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
         >
           <div
             ref={dialogRef}
-            className="bg-white rounded-xl shadow-2xl max-w-xl mx-auto mt-24 overflow-hidden animate-slide-up"
+            className="mx-auto w-full max-w-2xl overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface-raised)] text-[var(--text)] shadow-[var(--shadow-xl)] animate-slide-up sm:mt-12"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Input */}
-            <form onSubmit={handleSubmit} className="flex items-center gap-3 px-5 py-4 border-b border-gray-200">
-              <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
+            <form onSubmit={handleSubmit} className="flex items-center gap-3 border-b border-[var(--border)] px-4 py-3 sm:px-5">
+              <Search className="h-5 w-5 shrink-0 text-[var(--text-muted)]" />
               <input
                 ref={inputRef}
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search pearl jewelry..."
-                className="flex-1 border-none outline-none text-base bg-transparent text-gray-900 placeholder:text-gray-400"
+                className="min-w-0 flex-1 border-none bg-transparent text-base text-[var(--text)] outline-none placeholder:text-[var(--text-muted)]"
               />
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="text-xs text-gray-400 px-2 py-1 hover:text-gray-700"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-alt)] hover:text-[var(--text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
+                aria-label="Close search"
+                title="Close search"
               >
-                ESC
+                <X className="h-5 w-5" />
               </button>
             </form>
 
             {/* Results */}
-            <div className="max-h-80 overflow-y-auto">
+            <div className="max-h-[min(28rem,calc(100vh-10rem))] overflow-y-auto">
               {query.length < 2 ? (
-                <div className="p-8 text-center">
-                  <p className="text-[28px] font-serif text-gray-300">
+                <div className="p-8 text-center sm:p-10">
+                  <p className="font-serif text-2xl text-[var(--text-muted)] sm:text-[28px]">
                     Search pearl rings, bracelets, earrings...
                   </p>
                 </div>
               ) : results.length === 0 ? (
-                <div className="p-6 text-center text-sm text-gray-400">
+                <div className="p-6 text-center text-sm text-[var(--text-muted)]">
                   No results found for &ldquo;{query}&rdquo;
                 </div>
               ) : (
@@ -118,9 +120,9 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
                     key={result.id}
                     href={`/products/${result.slug}`}
                     onClick={() => { setIsOpen(false); setQuery(""); }}
-                    className="flex items-center gap-4 px-5 py-3 hover:bg-gray-50 transition border-b border-gray-100 last:border-b-0"
+                    className="flex min-h-[72px] items-center gap-4 border-b border-[var(--border)] px-4 py-3 transition-colors last:border-b-0 hover:bg-[var(--surface-alt)] sm:px-5"
                   >
-                    <div className="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-[var(--radius-sm)] bg-[var(--surface-alt)]">
                       {result.image && (result.image.startsWith("http") || result.image.startsWith("/")) ? (
                         <Image
                           src={imageUrl(result.image)}
@@ -131,27 +133,27 @@ export function SearchOverlay({ isScrolled }: { isScrolled?: boolean }) {
                           unoptimized={result.image.startsWith("http")}
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-[10px]">
+                        <div className="flex h-full w-full items-center justify-center text-[10px] text-[var(--text-muted)]">
                           N/A
                         </div>
                       )}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium truncate text-gray-900">{result.name}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="truncate text-sm font-medium text-[var(--text)]">{result.name}</p>
+                      <p className="text-xs text-[var(--text-secondary)]">
                         {result.category} — {formatPrice(result.price)}
                       </p>
                     </div>
-                    <Search className="w-4 h-4 text-gray-300 flex-shrink-0" />
+                    <Search className="h-4 w-4 shrink-0 text-[var(--text-muted)]" />
                   </Link>
                 ))
               )}
             </div>
 
             {/* Footer */}
-            <div className="px-5 py-3 border-t border-gray-100 bg-gray-50">
-              <p className="text-xs text-gray-400 text-center">
-                Press <kbd className="px-1.5 py-0.5 bg-white border border-gray-200 rounded text-[10px] text-gray-700">Ctrl+K</kbd> to open search anytime
+            <div className="border-t border-[var(--border)] bg-[var(--surface-alt)] px-4 py-3 sm:px-5">
+              <p className="text-center text-xs text-[var(--text-muted)]">
+                Press <kbd className="rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface-raised)] px-1.5 py-0.5 text-[10px] text-[var(--text-secondary)]">Ctrl+K</kbd> to open search anytime
               </p>
             </div>
           </div>
