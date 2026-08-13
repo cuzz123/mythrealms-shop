@@ -5,6 +5,7 @@ import test from "node:test";
 import {
   HOMEPAGE_MEDIA,
   HOMEPAGE_CATEGORY_LINKS,
+  HOMEPAGE_EDITORIAL_DIPTYCH,
   HOMEPAGE_EDITORIAL_LINKS,
   homepageEditorialSources,
 } from "../src/lib/homepage-editorial";
@@ -91,4 +92,23 @@ test("homepage editorial data keeps approved routes and avoids new retail claims
 
   assert.doesNotMatch(source, /\/gifts#(?:under-50|under-70|everyday|statement)/);
   assert.doesNotMatch(source, /(?:in stock|limited stock|best seller|sale|discount|% off)/i);
+});
+
+test("homepage diptych keeps the approved local media and new-arrivals destination", () => {
+  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.primaryImage, HOMEPAGE_MEDIA.everyday);
+  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.detailImage, HOMEPAGE_MEDIA.courtyard);
+  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.href, "/collections/new-arrivals");
+});
+
+test("homepage moment routes retain their approved destinations", () => {
+  const source = readFileSync(resolve("src/components/home/HomepageOccasionEdit.tsx"), "utf8");
+
+  for (const [label, href] of [
+    ["For Everyday", "/collections/pearl-series"],
+    ["For a New Chapter", "/gifts"],
+    ["Just Because", "/collections/new-arrivals"],
+    ["Small Gifts", "/gifts"],
+  ]) {
+    assert.match(source, new RegExp(`label: "${label}", href: "${href.replace("/", "\\/")}"`));
+  }
 });

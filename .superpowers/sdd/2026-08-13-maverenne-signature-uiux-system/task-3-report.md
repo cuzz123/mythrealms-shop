@@ -62,3 +62,42 @@ Result: exit 0.
 
 - No prior RED evidence was available from the inherited worktree; this report records that gap rather than reconstructing it.
 - The required browser E2E suite was updated as a source contract but was not run in this takeover; the focused unit/navigation suite, scoped lint, and diff integrity check were run.
+
+## Fix round 1/5 — test-contract hardening
+
+### Scope
+
+Test-only changes were made to `tests/signature-homepage.test.tsx`, `tests/homepage-editorial.test.ts`, and `e2e/release-surfaces.spec.ts`. No production implementation change was needed.
+
+### RED
+
+The strengthened unit source contracts passed immediately against the existing implementation, so no implementation RED result exists for this round. The first focused browser run exposed two errors in the newly written mobile DOM assertion and interval probe filtering; those were corrected in the tests before the clean rerun below. They did not identify a homepage implementation defect.
+
+### Added coverage
+
+- The server-rendered page still proves marker order, one H1, and one diptych.
+- The client-only hero source contract now requires the exact `preload={index === 0}` mapping inside the slide image loop, and requires each manual control to map `slide` and `index` to `setActiveSlide(index)`, its `Show ${slide.eyebrow}` label, and `aria-current` state.
+- Editorial data locks the diptych to `HOMEPAGE_MEDIA.everyday`, `HOMEPAGE_MEDIA.courtyard`, and `/collections/new-arrivals`; approved moment routes are explicitly retained.
+- Browser coverage asserts the diptych destination, complete mobile marker DOM/visual order, and the diptych mobile child order of primary image, text, detail image, then action.
+- The reduced-motion browser contract wraps `setInterval` before the app loads and verifies no 7000ms carousel interval is registered. The installed Playwright typings did not expose a deterministic clock API, so this init-time probe avoids an eight-second wait while failing if the guard is removed.
+
+### Verification
+
+```powershell
+npx playwright test e2e/release-surfaces.spec.ts --grep "homepage (renders the Maverenne signature|keeps its marker sequence|hero does not register|moment route definitions)" --project=chromium
+```
+
+Result: 4 passed.
+
+```powershell
+node --import tsx --test tests/homepage-editorial.test.ts tests/signature-homepage.test.tsx tests/storefront-navigation.test.ts
+```
+
+Result: 16 passed, 0 failed.
+
+```powershell
+pnpm exec eslint src/app/page.tsx src/components/home src/lib/homepage-editorial.ts tests/signature-homepage.test.tsx tests/homepage-editorial.test.ts e2e/release-surfaces.spec.ts
+git diff --check
+```
+
+Result: both exit 0.

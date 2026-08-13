@@ -1,4 +1,6 @@
 import { expect, test, type APIRequestContext, type Locator, type Page } from "@playwright/test";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 import {
   getRelatedGuideProducts,
@@ -481,19 +483,90 @@ test.describe("release surfaces", () => {
       "href",
       "/collections/pearl-series",
     );
+    await expect(page.getByRole("link", { name: "Explore new arrivals" })).toHaveAttribute(
+      "href",
+      "/collections/new-arrivals",
+    );
     await expect(page.locator('a[href="/guardian-quiz"]')).toHaveCount(0);
     await expect(page.getByText(/Guardian/i)).toHaveCount(0);
   });
 
-  test("homepage hero remains stable when reduced motion is requested", async ({ page }) => {
+  test("homepage keeps its marker sequence in DOM and visual order on mobile", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+
+    const markers = page.locator("[data-homepage-section]");
+    await expect(markers).toHaveCount(8);
+    expect(await markers.evaluateAll((sections) =>
+      sections.map((section) => section.getAttribute("data-homepage-section")),
+    )).toEqual([
+      "homepage-signature-hero",
+      "homepage-category-index",
+      "homepage-editorial-diptych",
+      "homepage-primary-edit",
+      "homepage-story-band",
+      "homepage-editorial-links",
+      "homepage-secondary-edit",
+      "homepage-newsletter-letter",
+    ]);
+
+    const topOffsets = await markers.evaluateAll((sections) =>
+      sections.map((section) => section.getBoundingClientRect().top),
+    );
+    expect(topOffsets).toEqual([...topOffsets].sort((left, right) => left - right));
+
+    const diptych = page.locator('[data-homepage-section="homepage-editorial-diptych"]');
+    expect(await diptych.evaluate((section) => {
+      const [layout] = Array.from(section.children);
+      const [primary, content] = Array.from(layout.children);
+      const [text, detail, action] = Array.from(content.children);
+      return {
+        primary: primary.querySelector("img")?.tagName,
+        heading: text.querySelector("h2")?.textContent,
+        detail: detail.querySelector("img")?.tagName,
+        href: action.getAttribute("href"),
+      };
+    })).toEqual({
+      primary: "IMG",
+      heading: "Shop by moment",
+      detail: "IMG",
+      href: "/collections/new-arrivals",
+    });
+  });
+
+  test("homepage moment route definitions retain their approved destinations", () => {
+    const source = readFileSync(resolve("src/components/home/HomepageOccasionEdit.tsx"), "utf8");
+
+    for (const [label, href] of [
+      ["For Everyday", "/collections/pearl-series"],
+      ["For a New Chapter", "/gifts"],
+      ["Just Because", "/collections/new-arrivals"],
+      ["Small Gifts", "/gifts"],
+    ]) {
+      expect(source).toContain(`label: "${label}", href: "${href}"`);
+    }
+  });
+
+  test("homepage hero does not register its 7-second rotation under reduced motion", async ({ page }) => {
+    await page.addInitScript(() => {
+      const originalSetInterval = window.setInterval;
+      const registrations: unknown[] = [];
+      Object.defineProperty(window, "__homepageHeroIntervals", { value: registrations, configurable: true });
+      window.setInterval = ((handler: TimerHandler, timeout?: number, ...args: unknown[]) => {
+        registrations.push({ handler, timeout, args });
+        return originalSetInterval(() => undefined, timeout);
+      }) as typeof window.setInterval;
+    });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
 
     const controls = page.getByRole("button", { name: /Show / });
     await expect(controls).toHaveCount(3);
     await expect(controls.first()).toHaveAttribute("aria-current", "true");
-    await page.waitForTimeout(250);
-    await expect(controls.first()).toHaveAttribute("aria-current", "true");
+    expect(await page.evaluate(() =>
+      (window as Window & { __homepageHeroIntervals?: { timeout?: number }[] }).__homepageHeroIntervals
+        ?.filter(({ timeout }) => timeout === 7000).length ?? 0,
+    )).toBe(0);
   });
 
   test("homepage keeps the existing first-viewport style hint", async ({ page }) => {

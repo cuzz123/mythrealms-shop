@@ -34,11 +34,19 @@ test("homepage composes exactly one editorial diptych section", () => {
   assert.equal((html.match(/data-homepage-section=\"homepage-editorial-diptych\"/g) ?? []).length, 1);
 });
 
-test("homepage hero keeps its interactive state boundary and only preloads the initial slide", () => {
+test("homepage hero source contract keeps client controls mapped to each slide and only preloads slide zero", () => {
   const source = readFileSync(resolve("src/components/home/HomepageHero.tsx"), "utf8");
 
   assert.match(source, /^"use client";/);
-  assert.match(source, /preload=\{index === 0\}/);
+  assert.match(
+    source,
+    /HOMEPAGE_HERO_SLIDES\.map\(\(slide, index\) => \(\s*<Image[\s\S]*?preload=\{index === 0\}/,
+  );
+  assert.doesNotMatch(source, /preload=\{(?:true|index !== 0|index >= 0)\}/);
   assert.match(source, /prefers-reduced-motion: reduce/);
-  assert.match(source, /setActiveSlide/);
+  assert.match(
+    source,
+    /HOMEPAGE_HERO_SLIDES\.map\(\(slide, index\) => \(\s*<button[\s\S]*?onClick=\{\(\) => setActiveSlide\(index\)\}[\s\S]*?aria-label=\{`Show \$\{slide\.eyebrow\}`\}[\s\S]*?aria-current=\{index === activeSlide\}/,
+  );
+  assert.match(source, /const hero = HOMEPAGE_HERO_SLIDES\[activeSlide\];/);
 });
