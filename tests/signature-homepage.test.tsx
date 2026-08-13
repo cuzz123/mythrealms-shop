@@ -50,3 +50,10 @@ test("homepage hero source contract keeps client controls mapped to each slide a
   );
   assert.match(source, /const hero = HOMEPAGE_HERO_SLIDES\[activeSlide\];/);
 });
+
+test("scroll reveals do not reserve a blank first viewport gap", () => {
+  const source = readFileSync(resolve("src/components/ui/ScrollRevealEnhancer.tsx"), "utf8");
+
+  assert.match(source, /\{ threshold: 0\.01, rootMargin: "0px" \}/);
+  assert.doesNotMatch(source, /threshold: 0\.15, rootMargin: "0px 0px -10% 0px"/);
+});

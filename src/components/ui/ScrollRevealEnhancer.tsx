@@ -23,7 +23,7 @@ export function ScrollRevealEnhancer() {
               observers.delete(observer);
             }
           },
-          { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+          { threshold: 0.01, rootMargin: "0px" },
         );
 
         element.dataset.revealReady = "true";
