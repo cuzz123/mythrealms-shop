@@ -45,8 +45,17 @@ export const HOMEPAGE_MEDIA = {
     alt: "Model in pale linen wearing pearl jewelry outdoors",
   },
   earrings: {
-    src: "/images/brand/hero/pearl-earrings-editorial.png",
-    alt: "Model wearing shell-and-pearl drop earrings in warm studio light",
+    src: "/images/brand/home/category-earrings-model-v3.png",
+    alt: "Model wearing pearl drop earrings in a sunlit limestone courtyard",
+    objectPosition: "center center",
+  },
+  giftGuide: {
+    src: "/images/brand/home/editorial-gift-guide-model-v3.png",
+    alt: "Model selecting a pearl gift at a sunlit limestone table",
+  },
+  pearlKnowledge: {
+    src: "/images/brand/home/editorial-pearl-knowledge-model-v3.png",
+    alt: "Model examining a pearl necklace at a sunlit limestone table",
   },
   necklaces: {
     src: "/images/brand/home/hero-necklace-model-v2.png",
@@ -85,14 +94,14 @@ export const HOMEPAGE_EDITORIAL_LINKS = [
     title: "Choose by the way they wear it.",
     copy: "Pearl gifts under $50 and $70, plus everyday and statement edits.",
     href: "/gifts",
-    image: HOMEPAGE_MEDIA.earrings,
+    image: HOMEPAGE_MEDIA.giftGuide,
   },
   {
     label: "Pearl Knowledge",
     title: "Care, styling, and freshwater pearls.",
     copy: "Straight answers for choosing and looking after pearl jewelry.",
     href: "/pearls",
-    image: HOMEPAGE_MEDIA.seaside,
+    image: HOMEPAGE_MEDIA.pearlKnowledge,
     links: [
       { label: "Pearl Guide", href: "/pearls" },
       { label: "Pearl Care", href: "/pearls/care" },

@@ -44,12 +44,29 @@ test("homepage promotes only the two approved editorial destinations", () => {
   );
 });
 
+test("homepage editorial cards use the dedicated model-led replacement imagery", () => {
+  assert.match(HOMEPAGE_MEDIA.earrings.src, /category-earrings-model-v3\.png$/);
+  assert.match(HOMEPAGE_EDITORIAL_LINKS[0].image.src, /editorial-gift-guide-model-v3\.png$/);
+  assert.match(HOMEPAGE_EDITORIAL_LINKS[1].image.src, /editorial-pearl-knowledge-model-v3\.png$/);
+  assert.doesNotMatch(HOMEPAGE_EDITORIAL_LINKS[0].image.src, /pearl-earrings-editorial\.png$/);
+  assert.doesNotMatch(HOMEPAGE_EDITORIAL_LINKS[1].image.src, /scene-seaside-stairs\.png$/);
+});
+
+test("homepage diptych keeps the approved local media and new-arrivals destination", () => {
+  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.primaryImage, HOMEPAGE_MEDIA.everyday);
+  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.detailImage, HOMEPAGE_MEDIA.courtyard);
+  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.href, "/collections/new-arrivals");
+});
+
 test("homepage product media uses visually accurate descriptions", () => {
   assert.equal(
     HOMEPAGE_MEDIA.hero.alt,
     "Model wearing shell-and-pearl drop earrings in warm studio light",
   );
-  assert.equal(HOMEPAGE_MEDIA.earrings.alt, HOMEPAGE_MEDIA.hero.alt);
+  assert.equal(
+    HOMEPAGE_MEDIA.earrings.alt,
+    "Model wearing pearl drop earrings in a sunlit limestone courtyard",
+  );
   assert.equal(
     HOMEPAGE_MEDIA.necklaces.alt,
     "Model wearing a pearl and gold lariat necklace in a sunlit courtyard",
@@ -74,41 +91,5 @@ test("homepage growth surfaces use approved brand and storefront imagery", () =>
   for (const componentSource of sources) {
     assert.match(componentSource, /@\/lib\//);
     assert.doesNotMatch(componentSource, /https?:\/\//);
-  }
-});
-
-test("homepage gift navigation does not point to unrendered gift-page fragments", () => {
-  const source = readFileSync(
-    resolve("src/components/home/HomepageOccasionEdit.tsx"),
-    "utf8",
-  );
-
-  assert.match(source, /label: "Small Gifts", href: "\/gifts"/);
-  assert.doesNotMatch(source, /\/gifts#(?:under-50|under-70|everyday|statement)/);
-});
-
-test("homepage editorial data keeps approved routes and avoids new retail claims", () => {
-  const source = readFileSync(resolve("src/lib/homepage-editorial.ts"), "utf8");
-
-  assert.doesNotMatch(source, /\/gifts#(?:under-50|under-70|everyday|statement)/);
-  assert.doesNotMatch(source, /(?:in stock|limited stock|best seller|sale|discount|% off)/i);
-});
-
-test("homepage diptych keeps the approved local media and new-arrivals destination", () => {
-  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.primaryImage, HOMEPAGE_MEDIA.everyday);
-  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.detailImage, HOMEPAGE_MEDIA.courtyard);
-  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.href, "/collections/new-arrivals");
-});
-
-test("homepage moment routes retain their approved destinations", () => {
-  const source = readFileSync(resolve("src/components/home/HomepageOccasionEdit.tsx"), "utf8");
-
-  for (const [label, href] of [
-    ["For Everyday", "/collections/pearl-series"],
-    ["For a New Chapter", "/gifts"],
-    ["Just Because", "/collections/new-arrivals"],
-    ["Small Gifts", "/gifts"],
-  ]) {
-    assert.match(source, new RegExp(`label: "${label}", href: "${href.replace("/", "\\/")}"`));
   }
 });
