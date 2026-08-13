@@ -95,7 +95,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 loading="lazy"
                 onError={() => setPrimaryFailed(true)}
-                className={`object-cover transition-[opacity,transform] duration-300 group-hover:scale-[1.02] group-focus-within:scale-[1.02] ${
+                className={`object-cover transition-[opacity,transform] duration-300 motion-reduce:transition-none group-hover:scale-[1.02] group-focus-within:scale-[1.02] ${
                   showAlternateImage
                     ? "opacity-100 group-hover:opacity-0 group-focus-within:opacity-0"
                     : "opacity-100"
@@ -109,7 +109,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   loading="lazy"
                   onError={() => setAlternateFailed(true)}
-                  className="object-cover opacity-0 transition-[opacity,transform] duration-300 group-hover:scale-[1.02] group-hover:opacity-100 group-focus-within:scale-[1.02] group-focus-within:opacity-100"
+                  className="object-cover opacity-0 transition-[opacity,transform] duration-300 motion-reduce:transition-none group-hover:scale-[1.02] group-hover:opacity-100 group-focus-within:scale-[1.02] group-focus-within:opacity-100"
                 />
               )}
             </>
@@ -162,7 +162,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
       <button
         type="button"
         onClick={handleToggleWishlist}
-        className="absolute right-3 top-3 z-10 flex h-8 w-8 translate-y-1 cursor-pointer items-center justify-center rounded-full bg-white/80 text-[var(--sale)] opacity-0 shadow-md backdrop-blur-sm transition-[opacity,transform] duration-200 hover:bg-white group-hover:translate-y-0 group-hover:opacity-100 max-sm:translate-y-0 max-sm:opacity-100"
+        className="absolute right-3 top-3 z-10 flex h-8 w-8 translate-y-1 cursor-pointer items-center justify-center rounded-full bg-white/80 text-[var(--sale)] opacity-0 shadow-md backdrop-blur-sm transition-[opacity,transform] duration-200 motion-reduce:transition-none hover:bg-white group-hover:translate-y-0 group-hover:opacity-100 max-sm:h-11 max-sm:w-11 max-sm:translate-y-0 max-sm:opacity-100"
         aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
       >
         <Heart className={`h-4 w-4 ${wishlisted ? "fill-current" : ""}`} />
@@ -171,7 +171,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
       <button
         type="button"
         onClick={handleQuickAdd}
-        className="absolute bottom-[72px] right-3 z-10 flex h-9 w-9 translate-y-2 cursor-pointer items-center justify-center rounded-full bg-white/90 text-[var(--text)] opacity-0 shadow-md backdrop-blur-sm transition-[opacity,transform] duration-200 hover:bg-white hover:text-[var(--primary)] group-hover:translate-y-0 group-hover:opacity-100 max-sm:bottom-auto max-sm:top-14 max-sm:translate-y-0 max-sm:bg-[var(--accent)] max-sm:text-[var(--bg)] max-sm:opacity-100 max-sm:hover:bg-[var(--accent-hover)]"
+        className="absolute bottom-[72px] right-3 z-10 flex h-9 w-9 translate-y-2 cursor-pointer items-center justify-center rounded-full bg-white/90 text-[var(--text)] opacity-0 shadow-md backdrop-blur-sm transition-[opacity,transform] duration-200 motion-reduce:transition-none hover:bg-white hover:text-[var(--primary)] group-hover:translate-y-0 group-hover:opacity-100 max-sm:bottom-auto max-sm:top-16 max-sm:h-11 max-sm:w-11 max-sm:translate-y-0 max-sm:bg-[var(--accent)] max-sm:text-[var(--bg)] max-sm:opacity-100 max-sm:hover:bg-[var(--accent-hover)]"
         aria-label={`Add ${product.name} to cart`}
       >
         <ShoppingBag className="h-4 w-4" />

@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import Link from "next/link";
 import { ProductCard } from "@/components/product/ProductCard";
+import { EditorialDivider } from "@/components/storefront/EditorialDivider";
 import { categoryMessaging, productDisplayName } from "@/lib/brand";
 import {
   getProductType,
@@ -158,20 +159,33 @@ export function Collection1688({
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
-            <div key={product.slug} data-product-type={getProductType(product)}>
-              <ProductCard
-                product={{
-                  id: product.id,
-                  name: productDisplayName(product),
-                  slug: product.slug,
-                  images: product.images,
-                  imageRoles: product.imageRoles,
-                  variants: [{ price: product.price }],
-                  comparePrice: product.compareAt ?? null,
-                }}
-              />
-            </div>
+          {products.map((product, index) => (
+            <Fragment key={product.slug}>
+              <div data-product-type={getProductType(product)}>
+                <ProductCard
+                  product={{
+                    id: product.id,
+                    name: productDisplayName(product),
+                    slug: product.slug,
+                    images: product.images,
+                    imageRoles: product.imageRoles,
+                    variants: [{ price: product.price }],
+                    comparePrice: product.compareAt ?? null,
+                  }}
+                />
+              </div>
+              {products.length >= 12 && index === 7 && (
+                <EditorialDivider
+                  image={{
+                    src: "/images/brand/editorial/scene-seaside-stairs.png",
+                    alt: "Sunlit limestone steps near the sea",
+                  }}
+                  eyebrow="Maverenne Notes"
+                  title="Made for the life around them."
+                  description="A quiet pause between pieces."
+                />
+              )}
+            </Fragment>
           ))}
         </div>
       )}

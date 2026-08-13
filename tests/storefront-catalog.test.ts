@@ -143,6 +143,17 @@ test("catalog results cannot mutate the source collection or lookups", () => {
   assert.ok(!freshProduct.images.includes("/tampered.webp"));
 });
 
+test("collection-ready catalog reads remain an ordered product-only array", () => {
+  const products = getStorefrontProducts();
+
+  assert.ok(products.length >= 12);
+  assert.ok(products.every((product) => typeof product.id === "string"));
+  assert.deepEqual(
+    products.map((product) => product.slug),
+    getStorefrontProducts().map((product) => product.slug),
+  );
+});
+
 test("the calm tide pilot uses its complete editorial gallery without changing other pearl source galleries", () => {
   const pilot = getStorefrontProductBySlug("pearl-series-01");
   assert.ok(pilot);
