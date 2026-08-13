@@ -12,6 +12,10 @@ html {
 }
 
 :root {
+  --content-wide: 80rem;
+  --content-reading: 48rem;
+  --section-space: clamp(4rem, 7vw, 7rem);
+  --signature-rule: color-mix(in srgb, var(--text) 22%, transparent);
   --warm-white: #f7f3eb;
   --charcoal: #18201f;
   --sea-green: #315d58;
@@ -126,10 +130,37 @@ h4 { line-height: 1.3; }
 
 /* Respect user preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  .signature-motion {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .animate-fade-in,
   .animate-slide-up,
   .animate-slide-down,
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+.signature-hero-image {
+  object-position: var(--signature-object-position, center);
+}
+
+@media (min-width: 640px) {
+  .signature-hero-image {
+    object-position: var(--signature-object-position-sm, var(--signature-object-position, center));
+  }
+}
+
+@media (min-width: 768px) {
+  .signature-hero-image {
+    object-position: var(--signature-object-position-md, var(--signature-object-position-sm, var(--signature-object-position, center)));
+  }
+}
+
+@media (min-width: 1024px) {
+  .signature-hero-image {
+    object-position: var(--signature-object-position-lg, var(--signature-object-position-md, var(--signature-object-position-sm, var(--signature-object-position, center))));
+  }
 }
 
 /* Visible by default until client-side enhancement is active. */
