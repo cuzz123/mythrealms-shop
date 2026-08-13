@@ -23,6 +23,19 @@ const TYPE_FILTERS: Array<{ value?: StorefrontProductType; label: string }> = [
   { value: "eyewear-chains", label: "Eyewear Chains" },
 ];
 
+type CollectionRenderEntry<T> =
+  | { kind: "product"; product: T }
+  | { kind: "editorial-divider" };
+
+export function collectionRenderOrder<T>(products: readonly T[]): CollectionRenderEntry<T>[] {
+  return products.flatMap((product, index) => [
+    { kind: "product" as const, product },
+    ...(products.length >= 12 && index === 7
+      ? [{ kind: "editorial-divider" as const }]
+      : []),
+  ]);
+}
+
 export function Collection1688({
   slug,
   initialType,
@@ -159,22 +172,23 @@ export function Collection1688({
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((product, index) => (
-            <Fragment key={product.slug}>
-              <div data-product-type={getProductType(product)}>
+          {collectionRenderOrder(products).map((entry) =>
+            entry.kind === "product" ? (
+              <div key={entry.product.slug} data-product-type={getProductType(entry.product)}>
                 <ProductCard
                   product={{
-                    id: product.id,
-                    name: productDisplayName(product),
-                    slug: product.slug,
-                    images: product.images,
-                    imageRoles: product.imageRoles,
-                    variants: [{ price: product.price }],
-                    comparePrice: product.compareAt ?? null,
+                    id: entry.product.id,
+                    name: productDisplayName(entry.product),
+                    slug: entry.product.slug,
+                    images: entry.product.images,
+                    imageRoles: entry.product.imageRoles,
+                    variants: [{ price: entry.product.price }],
+                    comparePrice: entry.product.compareAt ?? null,
                   }}
                 />
               </div>
-              {products.length >= 12 && index === 7 && (
+            ) : (
+              <Fragment key="editorial-divider">
                 <EditorialDivider
                   image={{
                     src: "/images/brand/editorial/scene-seaside-stairs.png",
@@ -184,9 +198,9 @@ export function Collection1688({
                   title="Made for the life around them."
                   description="A quiet pause between pieces."
                 />
-              )}
-            </Fragment>
-          ))}
+              </Fragment>
+            ),
+          )}
         </div>
       )}
     </div>
