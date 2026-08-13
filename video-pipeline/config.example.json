@@ -1,0 +1,16 @@
+{
+  "width": 1080,
+  "height": 1920,
+  "fps": 60,
+  "scene_threshold": 0.35,
+  "min_scene_seconds": 0.8,
+  "match_threshold": 0.6,
+  "assets_dir": "assets",
+  "work_dir": "work",
+  "final_dir": "final",
+  "draft_dir_name": "jianying_draft",
+  "caption": {
+    "max_chars_per_line": 18,
+    "max_lines": 2
+  }
+}

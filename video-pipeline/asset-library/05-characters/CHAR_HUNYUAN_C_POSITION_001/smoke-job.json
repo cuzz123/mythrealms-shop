@@ -1,0 +1,6 @@
+{
+  "job_id": null,
+  "request_id": "d3ace06f-2c1d-48bd-b844-f88699b09ddb",
+  "kind": "contract_smoke_front_only",
+  "image_field": "ImageUrl:string"
+}

@@ -11,6 +11,8 @@ export function buildSitemapEntries(
   baseUrl: string,
   products: StorefrontProduct[],
   posts: SitemapPost[],
+  editPaths: readonly string[] = [],
+  discoveryPaths: readonly string[] = [],
 ): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, changeFrequency: "weekly", priority: 1 },
@@ -46,6 +48,16 @@ export function buildSitemapEntries(
       lastModified: post.updatedAt,
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    ...editPaths.map((path) => ({
+      url: `${baseUrl}${path}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...discoveryPaths.map((path) => ({
+      url: `${baseUrl}${path}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 

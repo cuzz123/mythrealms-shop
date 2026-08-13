@@ -6,8 +6,8 @@ import {
 } from "resend";
 
 import { readResendConfig } from "./server/resend-config";
-
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
+import { BRAND } from "./brand-identity";
+import { siteUrl } from "./site";
 
 const BRAND_COLOR = "#1A1814";
 const ACCENT = "#D4A84B";
@@ -119,7 +119,7 @@ function OrderConfirmationTemplate(
   <!-- Header -->
   <div style="text-align:center;padding-bottom:32px;">
     <h1 style="font-family:Georgia,serif;font-size:28px;color:${BRAND_COLOR};margin:0 0 6px;font-weight:600;">
-      MythRealms
+      ${BRAND.name}
     </h1>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:${MUTED};margin:0;letter-spacing:0.5px;">
       The Pearl Edit. Everyday light.
@@ -164,8 +164,8 @@ function OrderConfirmationTemplate(
 
     <!-- CTA -->
     <div style="text-align:center;margin-top:28px;">
-      <a href="${APP_URL}/track-order" style="display:inline-block;padding:12px 36px;background:${BRAND_COLOR};color:#fff;text-decoration:none;border-radius:9999px;font-family:Arial,sans-serif;font-size:14px;font-weight:600;">
-        Track Your Order
+      <a href="${siteUrl}/contact" style="display:inline-block;padding:12px 36px;background:${BRAND_COLOR};color:#fff;text-decoration:none;border-radius:9999px;font-family:Arial,sans-serif;font-size:14px;font-weight:600;">
+        Contact Us
       </a>
     </div>
   </div>
@@ -173,15 +173,15 @@ function OrderConfirmationTemplate(
   <!-- Footer -->
   <div style="text-align:center;padding-top:24px;">
     <p style="font-family:Arial,sans-serif;font-size:12px;color:${MUTED};margin:0 0 4px;line-height:1.6;">
-      A shipping confirmation with tracking information will follow once your order ships.
+      If a detail is not stated on the relevant product or policy page, it is not confirmed.
     </p>
     <p style="font-family:Arial,sans-serif;font-size:11px;color:#b0a69a;margin:0;line-height:1.6;">
-      MythRealms - Pearl jewelry from The Pearl Edit.<br/>
-      <a href="${APP_URL}/returns" style="color:${ACCENT};text-decoration:none;">Returns Policy</a> &middot;
-      <a href="${APP_URL}/contact" style="color:${ACCENT};text-decoration:none;">Contact Us</a>
+      ${BRAND.name} - ${BRAND.descriptor}.<br/>
+      <a href="${siteUrl}/refund" style="color:${ACCENT};text-decoration:none;">Current Return Policy</a> &middot;
+      <a href="${siteUrl}/contact" style="color:${ACCENT};text-decoration:none;">Contact Us</a>
     </p>
     <p style="font-family:Arial,sans-serif;font-size:10px;color:#c4bab0;margin:16px 0 0;">
-      You received this email because you placed an order at MythRealms.<br/>
+      You received this email because you placed an order at ${BRAND.name}.<br/>
       If you did not place this order, please contact us immediately.
     </p>
   </div>
@@ -201,7 +201,7 @@ function AbandonedCartTemplate(cartUrl: string): string {
 
   <div style="text-align:center;padding-bottom:28px;">
     <h1 style="font-family:Georgia,serif;font-size:24px;color:${BRAND_COLOR};margin:0 0 4px;font-weight:600;">
-      MythRealms
+      ${BRAND.name}
     </h1>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:${MUTED};margin:0;">
       The Pearl Edit. Everyday light.
@@ -213,18 +213,18 @@ function AbandonedCartTemplate(cartUrl: string): string {
       Your cart is waiting
     </h2>
     <p style="font-family:Arial,sans-serif;font-size:14px;color:${MUTED};margin:0 0 6px;line-height:1.6;">
-      You left some items behind. They're still reserved for you — but not forever.
+      You left some items behind. Return to your cart whenever you are ready.
     </p>
     <a href="${cartUrl}" style="display:inline-block;padding:14px 36px;background:${BRAND_COLOR};color:#fff;text-decoration:none;border-radius:9999px;font-family:Arial,sans-serif;font-size:15px;font-weight:600;margin-top:20px;">
       Complete Your Order
     </a>
     <p style="font-family:Arial,sans-serif;font-size:11px;color:#b0a69a;margin:20px 0 0;">
-      <a href="${APP_URL}/collections/pearl-series" style="color:${ACCENT};text-decoration:none;">Browse The Pearl Edit</a> if you want to compare another piece.
+      <a href="${siteUrl}/collections/pearl-series" style="color:${ACCENT};text-decoration:none;">Browse The Pearl Edit</a> if you want to compare another piece.
     </p>
   </div>
 
   <p style="font-family:Arial,sans-serif;font-size:10px;color:#c4bab0;text-align:center;margin:20px 0 0;">
-    You received this email because you started checkout at MythRealms.<br/>
+    You received this email because you started checkout at ${BRAND.name}.<br/>
     No longer interested? Just ignore this message.
   </p>
 

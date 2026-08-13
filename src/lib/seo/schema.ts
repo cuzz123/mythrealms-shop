@@ -1,8 +1,8 @@
 import type { StorePolicyFacts } from "@/lib/storefront/policies";
+import { BRAND } from "@/lib/brand-identity";
 
 const SCHEMA_CONTEXT = "https://schema.org";
-const BRAND_NAME = "MythRealms";
-const EDITORIAL_AUTHOR = "MythRealms Editorial";
+const EDITORIAL_AUTHOR = `${BRAND.name} Editorial`;
 const BUSINESS_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const;
 
 type VerifiedSchemaObject = Readonly<Record<string, unknown>>;
@@ -25,6 +25,12 @@ export type AboutPageSchemaInput = Readonly<{
 export type CollectionSchemaInput = Readonly<{
   name: string;
   description: string;
+  url: string;
+  products: readonly Readonly<{ name: string; url: string }>[];
+}>;
+
+export type ItemListSchemaInput = Readonly<{
+  name: string;
   url: string;
   products: readonly Readonly<{ name: string; url: string }>[];
 }>;
@@ -84,7 +90,7 @@ export function buildArticleSchema(input: ArticleSchemaInput) {
     },
     publisher: {
       "@type": "Organization",
-      name: BRAND_NAME,
+      name: BRAND.name,
     },
   } as const;
 }
@@ -119,6 +125,22 @@ export function buildCollectionSchema(input: CollectionSchemaInput) {
   } as const;
 }
 
+export function buildItemListSchema(input: ItemListSchemaInput) {
+  return {
+    "@context": SCHEMA_CONTEXT,
+    "@type": "ItemList",
+    name: input.name,
+    url: input.url,
+    numberOfItems: input.products.length,
+    itemListElement: input.products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: product.name,
+      url: product.url,
+    })),
+  } as const;
+}
+
 export function buildProductSchema(input: ProductSchemaInput) {
   return {
     "@context": SCHEMA_CONTEXT,
@@ -129,7 +151,7 @@ export function buildProductSchema(input: ProductSchemaInput) {
     ...(input.sku ? { sku: input.sku } : {}),
     brand: {
       "@type": "Brand",
-      name: input.brand ?? BRAND_NAME,
+      name: input.brand ?? BRAND.name,
     },
     ...(input.category ? { category: input.category } : {}),
     offers: {
@@ -188,7 +210,7 @@ export function buildOrganizationSchema(input: OrganizationSchemaInput) {
   const shippingService = input.policyFacts
     ? {
         "@type": "ShippingService",
-        name: "MythRealms Standard Shipping",
+        name: `${BRAND.name} Standard Shipping`,
         url: `${baseUrl}/shipping`,
         description: `US standard shipping costs $${input.policyFacts.standardShippingFlatRateUsd.toFixed(2)} below $${input.policyFacts.freeShippingThresholdUsd.toFixed(2)} and is free for orders of $${input.policyFacts.freeShippingThresholdUsd.toFixed(2)} or more, with ${input.policyFacts.handlingBusinessDays.min}-${input.policyFacts.handlingBusinessDays.max} business-day handling and ${input.policyFacts.usStandardTransitBusinessDays.min}-${input.policyFacts.usStandardTransitBusinessDays.max} business-day transit.`,
         fulfillmentType: "https://schema.org/FulfillmentTypeDelivery",
@@ -262,7 +284,7 @@ export function buildOrganizationSchema(input: OrganizationSchemaInput) {
   return {
     "@context": SCHEMA_CONTEXT,
     "@type": ["Organization", "OnlineStore"],
-    name: BRAND_NAME,
+    name: BRAND.name,
     url: input.url,
     logo: input.logo,
     ...(input.description ? { description: input.description } : {}),

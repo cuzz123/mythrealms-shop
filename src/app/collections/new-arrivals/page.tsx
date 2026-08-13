@@ -5,14 +5,15 @@ import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { RelatedProducts } from "@/components/editorial/RelatedProducts";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { productDisplayName } from "@/lib/brand";
+import { BRAND } from "@/lib/brand-identity";
 import { getNewArrivalProducts } from "@/lib/editorial/gifts";
 import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
 import { buildCollectionSchema } from "@/lib/seo/schema";
 import { absoluteUrl } from "@/lib/site";
 
-const title = "New Pearl Jewelry Arrivals | MythRealms";
+const title = `New Pearl Jewelry Arrivals | ${BRAND.name}`;
 const description =
-  "Explore recently added pearl jewelry currently active and in stock in the MythRealms catalog.";
+  `Explore recently added pearl jewelry currently active and in stock in the ${BRAND.name} catalog.`;
 const heroImage = {
   ...HOMEPAGE_MEDIA.everyday,
   objectPosition: "center 38%",

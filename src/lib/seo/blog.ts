@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { absoluteImageUrl } from "@/lib/images";
+import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl } from "@/lib/site";
 
 interface BlogMetadataPost {
@@ -18,8 +19,13 @@ interface BlogEditorialPost {
   category: string;
 }
 
+export type PearlStoryPost = BlogEditorialPost;
+
 const RETIRED_EDITORIAL_LANGUAGE =
   /\bcrystals?\b|\bgemstones?\b|\bobsidian\b|\bamethyst\b|rose quartz|tiger'?s eye|aventurine|chakra|energy healing|the serenity collection|balance\s*&\s*light|the intention stones|the archetypes|curated singles|emotional balance/i;
+
+const PEARL_STORY_TOPIC =
+  /\b(style|styling|care|gift|gifting|wear|wearing|choose|choosing|layer|layering|occasion|freshwater)\b/i;
 
 export function isPearlEditorialPost(post: BlogEditorialPost): boolean {
   const searchableText = [
@@ -34,6 +40,16 @@ export function isPearlEditorialPost(post: BlogEditorialPost): boolean {
     !RETIRED_EDITORIAL_LANGUAGE.test(searchableText);
 }
 
+export function isPearlStoryPost(post: PearlStoryPost): boolean {
+  return isPearlEditorialPost(post) && PEARL_STORY_TOPIC.test([
+    post.slug,
+    post.title,
+    post.excerpt,
+    post.content,
+    post.category,
+  ].join(" "));
+}
+
 export function buildBlogMetadata({
   slug,
   title,
@@ -44,7 +60,7 @@ export function buildBlogMetadata({
   const images = image ? [{ url: absoluteImageUrl(image) }] : [];
 
   return {
-    title: `${title} | MythRealms`,
+    title: `${title} | ${BRAND.name}`,
     description: excerpt,
     alternates: { canonical: url },
     openGraph: {

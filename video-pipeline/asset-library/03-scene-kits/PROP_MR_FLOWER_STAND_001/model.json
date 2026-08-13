@@ -1,0 +1,19 @@
+{
+  "id": "PROP_MR_FLOWER_STAND_001",
+  "asset_type": "scene_prop_flower_stand",
+  "status": "available_static",
+  "version": "v1",
+  "generator": "Tencent Hunyuan 3D web",
+  "source_trace": {
+    "reference_asset": "06-reference-inputs/mythrealms-pearl-modeling/PROP_MR_FLOWER_STAND_001",
+    "original_download": "D:/mythrealms-shop/huanyuan_model/65850450fdda91b92b1ff0b9b7fc079b.glb"
+  },
+  "files": {
+    "glb": "source/hunyuan-web/MR_FLOWER_STAND.glb",
+    "blender_preview": "MR_FLOWER_STAND.blend",
+    "thumbnail": "Thumbnail.png"
+  },
+  "dimensions_m": [0.9327, 0.4989, 0.7496],
+  "usage": ["花店场景", "前景遮挡", "生活方式产品陈列", "场景尺度参考"],
+  "limitations": ["静态单网格", "花材不可单独替换", "不含花材摆动或物理模拟"]
+}

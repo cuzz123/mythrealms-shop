@@ -1,0 +1,16 @@
+{
+  "project": "MythRealms_Luxury_Product_Reveal_001",
+  "format": "9:16",
+  "fps": 30,
+  "duration_seconds": 6,
+  "product": "PROD_REPLACE_WITH_APPROVED_ID",
+  "character": "CHAR_COUTURE_CENTER_001",
+  "scene": "SET_GLASSHOUSE_NIGHT_001",
+  "camera": "CAM_SLOW_PUSH_MACRO_85MM_001",
+  "lighting": "LIGHT_MOON_GOLD_001",
+  "action": "ACT_HEAD_TURN_SLOW_001",
+  "style": "STYLE_MYTHREALMS_LUXURY_001",
+  "imports": {"product": "link", "character": "link", "scene": "link", "lighting": "link", "camera": "append", "action": "append", "style": "append"},
+  "output": {"mode": "preview", "width": 540, "height": 960, "frame_range": [1, 180]},
+  "validation": ["产品资产必须为approved后才能正式渲染", "先输出低清预览", "确认焦点、耳部可见性和产品比例后再输出正式版本"]
+}

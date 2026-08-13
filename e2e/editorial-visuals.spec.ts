@@ -1,5 +1,92 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
+test("Quiet Light tokens and system font stacks are applied", async ({ page }) => {
+  await page.goto("/");
+
+  const styles = await page.evaluate(() => {
+    const root = getComputedStyle(document.documentElement);
+    const heading = document.createElement("h1");
+    heading.textContent = "Quiet Light";
+    document.body.appendChild(heading);
+
+    return {
+      tokens: {
+        background: root.getPropertyValue("--background").trim(),
+        surface: root.getPropertyValue("--surface").trim(),
+        surfaceAlt: root.getPropertyValue("--surface-alt").trim(),
+        text: root.getPropertyValue("--text").trim(),
+        textSecondary: root.getPropertyValue("--text-secondary").trim(),
+        accent: root.getPropertyValue("--accent").trim(),
+        primary: root.getPropertyValue("--primary").trim(),
+        border: root.getPropertyValue("--border").trim(),
+      },
+      bodyFont: getComputedStyle(document.body).fontFamily,
+      headingFont: getComputedStyle(heading).fontFamily,
+    };
+  });
+
+  expect(styles.tokens).toEqual({
+    background: "#f7f3eb",
+    surface: "#fffdf8",
+    surfaceAlt: "#eee6da",
+    text: "#292622",
+    textSecondary: "#6d655d",
+    accent: "#a98758",
+    primary: "#b99863",
+    border: "#ddd2c4",
+  });
+  expect(styles.headingFont).toBe(
+    '"Iowan Old Style", Baskerville, "Times New Roman", serif',
+  );
+  expect(styles.bodyFont).toBe("Inter, ui-sans-serif, system-ui, sans-serif");
+});
+
+test("Quiet Light keeps small accent text readable and keyboard focus visible", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const accentTextColors = await page.evaluate(() => {
+    return [
+      ["text-xs", "text-[var(--accent)]"],
+      ["text-sm", "text-[var(--accent)]"],
+      ["text-[10px]", "text-[var(--accent)]"],
+      ["text-[11px]", "text-[var(--accent)]"],
+      ["", "text-[var(--accent)]"],
+      ["text-sm", "text-[var(--accent)]/80"],
+    ].map(([sizeClass, colorClass]) => {
+      const text = document.createElement("p");
+      text.className = [sizeClass, colorClass].filter(Boolean).join(" ");
+      text.textContent = "Supporting detail";
+      document.body.appendChild(text);
+      return getComputedStyle(text).color;
+    });
+  });
+
+  expect(accentTextColors).toEqual([
+    "rgb(109, 101, 93)",
+    "rgb(109, 101, 93)",
+    "rgb(109, 101, 93)",
+    "rgb(109, 101, 93)",
+    "rgb(109, 101, 93)",
+    "rgb(109, 101, 93)",
+  ]);
+
+  const homeLink = page.getByRole("link", { name: "Maverenne home" });
+  for (let index = 0; index < 10; index += 1) {
+    if (await homeLink.evaluate((node) => node === document.activeElement)) break;
+    await page.keyboard.press("Tab");
+  }
+  await expect(homeLink).toBeFocused();
+  const focusIndicator = await homeLink.evaluate((node) => {
+    const style = getComputedStyle(node);
+    return { boxShadow: style.boxShadow, outlineStyle: style.outlineStyle };
+  });
+  expect(
+    focusIndicator.boxShadow !== "none" || focusIndicator.outlineStyle !== "none",
+  ).toBe(true);
+});
+
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
     await expect(async () => {
@@ -24,7 +111,7 @@ async function scrollToTop(page: Page) {
 async function freezeFooterYear(page: Page) {
   const copyright = page
     .locator("footer")
-    .getByText(/^© \d{4} MythRealms\. All rights reserved\.$/);
+    .getByText(/^© \d{4} Maverenne\. All rights reserved\.$/);
   await expect(copyright).toHaveCount(1);
   await copyright.evaluate((node) => {
     node.textContent = node.textContent?.replace(/© \d{4}/, "© 2000") ?? "";
@@ -33,7 +120,7 @@ async function freezeFooterYear(page: Page) {
 
 async function waitForCanonicalAnnouncement(page: Page) {
   await expect(page.getByRole("region", { name: "Announcement" })).toContainText(
-    "Free shipping over $69.99 | 30-day returns",
+    "Come back to yourself. | Jewelry & Accessories",
   );
 }
 

@@ -2,9 +2,10 @@
 """MythRealms Pinterest Auto-Publisher — batch publish 28 pins"""
 
 import requests, time, sys, os
+from required_env import require_env
 
 # === CONFIG ===
-TOKEN = "pina_AEA3SIAYADL2UBYAGDAMQDZC7274XHQBACGSPQPW2FUGSXWMA4GMAQS4B56LIXKKOMMLH563PBXOEWGUKGTZL7SFYDDUJ2QA"
+TOKEN = require_env("PINTEREST_ACCESS_TOKEN")
 BOARD_ID = "1137370149584940020"
 BASE_URL = "https://mythrealms-shop.vercel.app"
 IMAGE_BASE = f"{BASE_URL}/images/pins"

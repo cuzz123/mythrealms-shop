@@ -1,24 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getStorefrontProductBySlug, type StorefrontProduct } from "@/lib/storefront/catalog";
 import { productDisplayName } from "@/lib/brand";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { formatPrice } from "@/lib/utils";
 import { Clock } from "lucide-react";
+import { useRecentlyViewedSlugs } from "@/lib/client/recently-viewed";
 
 export function RecentlyViewed() {
-  const [slugs, setSlugs] = useState<string[]>([]);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("mythrealms-recently-viewed");
-      if (raw) {
-        const parsed: string[] = JSON.parse(raw);
-        setSlugs(parsed.slice(0, 4));
-      }
-    } catch { /* ignore */ }
-  }, []);
+  const slugs = useRecentlyViewedSlugs();
 
   const products = slugs
     .map(getStorefrontProductBySlug)

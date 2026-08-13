@@ -4,13 +4,15 @@ import {
   buildArticleSchema,
   buildBreadcrumbListSchema,
   buildFAQPageSchema,
+  buildItemListSchema,
   buildOrganizationSchema,
   buildProductSchema,
   type ArticleSchemaInput,
+  type ItemListSchemaInput,
   type ProductSchemaInput,
 } from "@/lib/seo/schema";
+import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl, siteUrl } from "@/lib/site";
-import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
 
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
@@ -40,7 +42,7 @@ export function buildBlogPostingData({
   image,
   datePublished,
   dateModified,
-  authorName,
+  authorName: _authorName,
 }: BlogPostingDataProps): Record<string, unknown> {
   return {
     "@context": "https://schema.org/",
@@ -51,8 +53,8 @@ export function buildBlogPostingData({
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     datePublished: datePublished.toISOString(),
     dateModified: dateModified.toISOString(),
-    author: { "@type": "Person", name: authorName },
-    publisher: { "@type": "Organization", name: "MythRealms" },
+    author: { "@type": "Organization", name: `${BRAND.name} Editorial` },
+    publisher: { "@type": "Organization", name: BRAND.name },
   };
 }
 
@@ -74,7 +76,7 @@ export function ProductJsonLd({
   sku,
   availability = "InStock",
   url,
-  brand = "MythRealms",
+  brand = BRAND.name,
   category,
 }: ProductSchemaProps) {
   return (
@@ -99,6 +101,10 @@ export function ArticleJsonLd(input: ArticleSchemaInput) {
   return <JsonLd data={buildArticleSchema(input)} />;
 }
 
+export function ItemListJsonLd(input: ItemListSchemaInput) {
+  return <JsonLd data={buildItemListSchema(input)} />;
+}
+
 interface BreadcrumbSchemaProps {
   items: readonly { name: string; url: string }[];
 }
@@ -108,22 +114,22 @@ export function BreadcrumbJsonLd({ items }: BreadcrumbSchemaProps) {
 }
 
 export function OrganizationJsonLd() {
+  const { contactPoint: _unverifiedContactPoint, ...organization } =
+    buildOrganizationSchema({
+      url: siteUrl,
+      logo: absoluteUrl("/apple-icon.png"),
+      contactEmail: "",
+      description: BRAND.promise,
+      knowsAbout: [
+        "Pearl jewelry",
+        "Jewelry styling",
+        "Pearl care",
+      ],
+    });
+
   return (
     <JsonLd
-      data={buildOrganizationSchema({
-        url: siteUrl,
-        logo: absoluteUrl("/apple-icon.png"),
-        contactEmail: "mythrealms@outlook.com",
-        description:
-          "An online pearl jewelry shop offering pearl earrings, necklaces, bracelets, and rings with an easy, editorial point of view.",
-        knowsAbout: [
-          "Pearl jewelry",
-          "Jewelry styling",
-          "Pearl care",
-        ],
-        sameAs: ["https://instagram.com/mythrealms.shop"],
-        policyFacts: STORE_POLICY_FACTS,
-      })}
+      data={organization}
     />
   );
 }
@@ -140,7 +146,7 @@ export function WebSiteJsonLd() {
   const data = {
     "@context": "https://schema.org/",
     "@type": "WebSite",
-    name: "MythRealms",
+    name: BRAND.name,
     url: siteUrl,
     inLanguage: "en",
     potentialAction: {

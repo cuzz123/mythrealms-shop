@@ -2,8 +2,9 @@
 """Generate 4 collection cover images via Agnes API — 4:3 landscape, dark editorial style"""
 
 import requests, os, time, base64
+from required_env import require_env
 
-AGNES_KEY = "sk-N6xBOlG5L3XFU7blmlkdOSGawJo6D6kUpNcMd6QqbNHxDbDx"
+AGNES_KEY = require_env("AGNES_API_KEY")
 API = "https://apihub.agnes-ai.com/v1/images/generations"
 OUT = "/mnt/d/mythrealms-shop/public/images/test-covers"
 os.makedirs(OUT, exist_ok=True)

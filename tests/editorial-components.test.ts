@@ -7,6 +7,7 @@ import { EditorialHero } from "../src/components/editorial/EditorialHero";
 import { EditorialLinkBand } from "../src/components/editorial/EditorialLinkBand";
 import { GuideLayout } from "../src/components/editorial/GuideLayout";
 import { RelatedProducts } from "../src/components/editorial/RelatedProducts";
+import { BRAND } from "../src/lib/brand-identity";
 import { PEARL_GUIDES } from "../src/lib/editorial/guides";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
 
@@ -74,12 +75,15 @@ test("guide layout keeps its visible editorial sections in the approved order", 
     }),
   );
 
+  const renderedDirectAnswer = renderToStaticMarkup(
+    createElement("span", null, PEARL_GUIDES.care.directAnswer),
+  ).slice("<span>".length, -"</span>".length);
   const breadcrumbIndex = html.indexOf('aria-label="Breadcrumb"');
-  const heroIndex = html.indexOf("Put pearls on after cosmetics");
+  const heroIndex = html.indexOf(renderedDirectAnswer);
   const contentsIndex = html.indexOf("Table of contents");
   const articleIndex = html.indexOf("<article");
   const faqIndex = html.indexOf("Frequently asked questions");
-  const bylineIndex = html.indexOf("MythRealms Editorial");
+  const bylineIndex = html.indexOf(`${BRAND.name} Editorial`);
   const relatedGuidesIndex = html.indexOf("Related guides");
   const relatedProductsIndex = html.indexOf("Related products");
 
@@ -88,6 +92,7 @@ test("guide layout keeps its visible editorial sections in the approved order", 
   assert.ok(heroIndex < contentsIndex);
   assert.ok(contentsIndex < articleIndex);
   assert.ok(articleIndex < faqIndex);
+  assert.ok(bylineIndex >= 0);
   assert.ok(faqIndex < bylineIndex);
   assert.ok(bylineIndex < relatedGuidesIndex);
   assert.ok(relatedGuidesIndex < relatedProductsIndex);

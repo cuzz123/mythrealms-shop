@@ -57,6 +57,7 @@ export function quoteStorefrontCart(lines: CheckoutLineInput[]): BaseQuote {
       quantity: line.quantity,
       unitPriceCents,
       lineTotalCents: unitPriceCents * line.quantity,
+      ...(line.giftNote ? { giftNote: line.giftNote } : {}),
     };
   });
 

@@ -1,0 +1,91 @@
+{
+  "brand": {
+    "name": "MythRealms",
+    "category": "pearl jewelry",
+    "visual_keywords": [
+      "luxury jewelry ad",
+      "cinematic realism",
+      "warm greenhouse light",
+      "romantic but premium",
+      "high-detail pearls and metal"
+    ]
+  },
+  "product": {
+    "name": "Pearl and emerald bracelet",
+    "image": "D:/mythrealms-shop/public/images/products/1688-shop/pearl-series/pearl-series-11-detail1.webp",
+    "must_keep": [
+      "white pearls",
+      "pearl flower clusters",
+      "deep green beads",
+      "gold clasp",
+      "small gold charm",
+      "bracelet is always worn on the model's left wrist"
+    ],
+    "avoid": [
+      "right wrist bracelet",
+      "bracelet disappearing",
+      "wrong bead colors",
+      "extra jewelry replacing the product",
+      "text",
+      "watermark",
+      "logo"
+    ]
+  },
+  "model": {
+    "description": "adult female model, soft facial features, wavy dark brown hair, cream silk or lace dress",
+    "consistency_rules": [
+      "same model across all frames",
+      "same hairstyle",
+      "same dress",
+      "same left wrist bracelet",
+      "natural hands and fingers"
+    ]
+  },
+  "scene": {
+    "description": "sunlit vintage greenhouse room with tall windows, warm golden light, shallow depth of field",
+    "style_variants": [
+      "sunlit vintage greenhouse",
+      "moonlit glass conservatory",
+      "surreal pearl garden",
+      "dark luxury editorial studio",
+      "rainy window cinematic close-up"
+    ]
+  },
+  "storyboard": {
+    "rows": 4,
+    "cols": 3,
+    "target_width": 1080,
+    "target_height": 1920,
+    "frame_count": 12,
+    "default_seconds": 4,
+    "segments": [
+      { "from": 1, "to": 2, "seconds": 4, "motion": "medium-speed establishing dolly-in toward the model and left wrist bracelet" },
+      { "from": 2, "to": 3, "seconds": 4, "motion": "continue the same medium-speed dolly-in as the model turns slightly toward camera" },
+      { "from": 3, "to": 4, "seconds": 4, "motion": "smooth face-to-wrist reveal, bracelet remains clear on the left wrist" },
+      { "from": 4, "to": 5, "seconds": 3, "motion": "short elegant pose change, no lingering stillness" },
+      { "from": 5, "to": 6, "seconds": 4, "motion": "camera glides closer from portrait to product detail" },
+      { "from": 6, "to": 7, "seconds": 5, "motion": "slow premium macro movement across pearls, green beads, and gold details" },
+      { "from": 7, "to": 8, "seconds": 5, "motion": "left wrist moves near warm window light while product stays stable and readable" },
+      { "from": 8, "to": 9, "seconds": 3, "motion": "brief natural posture adjustment with consistent camera speed" },
+      { "from": 9, "to": 10, "seconds": 4, "motion": "return to emotional portrait while keeping left wrist bracelet visible" },
+      { "from": 10, "to": 11, "seconds": 5, "motion": "model lifts the left wrist closer to her face in one continuous luxury ad motion" },
+      { "from": 11, "to": 12, "seconds": 3, "motion": "clean final hold with subtle camera settle and product sparkle" }
+    ]
+  },
+  "video_prompt": {
+    "base": "Realistic high-end jewelry commercial. Keep the same adult female model, same hairstyle, same cream dress, same warm window scene, and the same bracelet on the left wrist. Preserve face size, wrist size, bracelet size, lighting, color, depth of field, and material details from first frame to last frame. No sudden zoom-in, zoom-out, reframing, resizing, crop change, jump cut, flicker, warped hands, distorted fingers, melted face, disappearing bracelet, text, watermark, or logo.",
+    "language": "en"
+  },
+  "providers": {
+    "seedance": {
+      "model_for_tests": "seedance-2.0-fast",
+      "model_for_final": "seedance-2.0",
+      "test_resolution": "480p",
+      "final_resolution": "720p"
+    },
+    "xiaoyunque": {
+      "mode": "first_last_frame",
+      "note": "Upload adjacent frame pairs from the normalized output folder."
+    }
+  }
+}

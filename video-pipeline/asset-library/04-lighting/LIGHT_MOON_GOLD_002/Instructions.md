@@ -1,0 +1,3 @@
+# LIGHT_MOON_GOLD_002
+
+Link 此母资产；将产品放入 `PRODUCT_SLOT__REPLACE_ME`。

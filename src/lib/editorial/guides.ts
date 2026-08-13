@@ -3,6 +3,9 @@ import {
   getStorefrontProducts,
   type StorefrontProduct,
 } from "@/lib/storefront/catalog";
+import { BRAND } from "@/lib/brand-identity";
+
+const EDITORIAL_AUTHOR = `${BRAND.name} Editorial` as const;
 
 export type GuideSlug = "care" | "how-to-wear" | "freshwater-pearls";
 
@@ -26,13 +29,15 @@ export type PearlGuide = Readonly<{
   eyebrow: string;
   directAnswer: string;
   image: { src: string; alt: string; objectPosition?: string };
-  author: "MythRealms Editorial";
+  author: typeof EDITORIAL_AUTHOR;
   published: "2026-07-18";
-  updated: "2026-07-18";
+  updated: "2026-07-18" | "2026-07-26";
   sections: readonly GuideSection[];
   faq: readonly { question: string; answer: string }[];
   relatedTypes: readonly ("earrings" | "necklaces" | "bracelets" | "rings")[];
   sources: readonly { label: string; href: string }[];
+  editorialStatus?: "candidate";
+  evidenceBoundary?: string;
 }>;
 
 export type PearlHubFaq = Readonly<{
@@ -43,8 +48,13 @@ export type PearlHubFaq = Readonly<{
 
 const GIA_CARE_URL = "https://my.gia.edu/faqs/gia-faq-about-gemstones-how-to-care-for-pearls";
 const GIA_JEWELRY_CARE_URL = "https://www.gia.edu/articles/gia-news-research-tips-caring-jewelry";
+const GIA_PEARL_CARE_URL = "https://www.gia.edu/gia-news-research/pearl-care-cleaning";
 const GIA_PEARL_TYPES_URL = "https://www.gia.edu/pearl-description";
 const GIA_PEARL_BUYING_URL = "https://www.gia.edu/pearl/buyers-guide";
+const FTC_PEARL_BUYING_URL = "https://consumer.ftc.gov/articles/buying-gemstones-diamonds-and-pearls";
+const FTC_JEWELRY_BUYING_URL = "https://consumer.ftc.gov/articles/buying-platinum-gold-and-silver-jewelry";
+const GOOGLE_HELPFUL_CONTENT_URL = "https://developers.google.com/search/docs/fundamentals/creating-helpful-content";
+const FTC_JEWELRY_ADVERTISING_URL = "https://www.ftc.gov/business-guidance/resources/loupe-advertising-diamond-gemstones-pearls";
 
 export const PEARL_HUB_FAQ: readonly PearlHubFaq[] = [
   {
@@ -65,19 +75,19 @@ export const PEARL_HUB_FAQ: readonly PearlHubFaq[] = [
 export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
   care: {
     slug: "care",
-    title: "Pearl Care",
-    seoTitle: "How to Care for Pearl Jewelry",
-    description: "A practical routine for wearing, cleaning, and storing pearl jewelry.",
+    title: "How to Care for Pearl Jewelry",
+    seoTitle: "How to Care for Pearl Jewelry | Pearl Care Guide",
+    description: "Learn general pearl jewelry care: when to put it on, how to wipe it after wear, and why heat, chemicals, steam, and ultrasonic cleaning need care.",
     eyebrow: "Pearl Guide",
-    directAnswer: "Put pearls on after cosmetics, fragrance, and hair products. After wear, wipe the piece with a soft, clean cloth. If it is cleaned or gets wet, let it air-dry fully before storage. Store pearls flat in a soft pouch or cloth, separate from harder jewelry and away from heat and overly dry environments. Never hang strands.",
+    directAnswer: "Care for pearl jewelry by putting it on after cosmetics and fragrance, wiping it with a very soft clean cloth after wear, and keeping it away from chemicals, high heat, steam, ultrasonic cleaners, and rough contact. These are general precautions, not item instructions. Use item-specific care only if it is explicitly stated on the exact item page; otherwise, do not infer it.",
     image: {
       src: "/images/brand/hero/pearl-bracelet-editorial.png",
       alt: "Gold wire pearl bracelet displayed on dark fabric",
       objectPosition: "center",
     },
-    author: "MythRealms Editorial",
+    author: EDITORIAL_AUTHOR,
     published: "2026-07-18",
-    updated: "2026-07-18",
+    updated: "2026-07-26",
     sections: [
       {
         id: "daily-routine",
@@ -91,9 +101,9 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       {
         id: "cleaning",
         heading: "How should pearl jewelry be cleaned?",
-        answer: "Use a soft cloth for routine care and avoid household cleaners.",
+        answer: "Use a very soft, clean cloth for general routine care. Use item-specific directions only if they are explicitly stated on the exact item page; otherwise, do not infer that water or a cleaner is suitable.",
         paragraphs: [
-          "Do not use abrasive cloths, ultrasonic cleaners, or harsh cleaning products on pearls. If a piece needs more than a gentle wipe, ask a qualified jeweler for advice.",
+          "Do not use abrasive cloths, ultrasonic cleaners, steam cleaners, or harsh cleaning products on pearls. A finished piece may include other components with different care limits, so contact support or ask a qualified jeweler when the exact item page does not state the needed information.",
         ],
       },
       {
@@ -130,7 +140,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       },
       {
         question: "Can pearl jewelry be cleaned in an ultrasonic cleaner?",
-        answer: "Do not use an ultrasonic cleaner for pearls. Use a soft cloth for routine care instead.",
+        answer: "Do not use an ultrasonic or steam cleaner for pearls. Use a very soft, clean cloth for general routine care. Only use item-specific directions if they are explicitly stated on the exact item page.",
       },
       {
         question: "How should I store pearl jewelry?",
@@ -141,85 +151,72 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
     sources: [
       { label: "GIA: How should I care for my pearls?", href: GIA_CARE_URL },
       { label: "GIA: Tips on caring for jewelry", href: GIA_JEWELRY_CARE_URL },
+      { label: "GIA: Pearl care and cleaning guide", href: GIA_PEARL_CARE_URL },
+      { label: "FTC: Advertising diamonds, gemstones, and pearls", href: FTC_JEWELRY_ADVERTISING_URL },
     ],
   },
   "how-to-wear": {
     slug: "how-to-wear",
-    title: "How to Wear Pearls",
-    seoTitle: "How to Wear Pearl Jewelry",
-    description: "A placement-first guide to combining pearl jewelry with daily outfits.",
+    title: "How to Wear Pearl Jewelry Every Day",
+    seoTitle: "How to Wear Pearl Jewelry Every Day | Pearl Guide",
+    description: "Learn simple ways to style pearl jewelry with everyday outfits, from proportion and repetition to occasion-aware finishing touches. General styling guidance only.",
     eyebrow: "Pearl Guide",
-    directAnswer: "Choose where you want the pearl detail to sit first, then consider its scale against your neckline and outfit. Earrings bring the focus near the face, necklaces work with the line of a collar, and bracelets or rings add detail around everyday hand movement. Begin with one focal piece before adding another.",
+    directAnswer: "Wear pearl jewelry as one visible detail within an outfit you already like. Start with the neckline, color, and texture of your clothes, then decide whether you want a quieter accent or a clearer focal point. These are personal styling choices, not claims about a product's material, comfort, fit, durability, or suitability.",
     image: {
       src: "/images/brand/hero/pearl-earrings-editorial.png",
       alt: "Model wearing pearl earrings",
       objectPosition: "center",
     },
-    author: "MythRealms Editorial",
+    author: EDITORIAL_AUTHOR,
     published: "2026-07-18",
-    updated: "2026-07-18",
+    updated: "2026-07-26",
+    editorialStatus: "candidate",
+    evidenceBoundary: "Preference-based styling language only. This candidate does not establish product material, composition, dimensions, fastening, fit, comfort, price, availability, delivery, or return eligibility.",
     sections: [
       {
-        id: "earrings",
-        heading: "How do I choose pearl earrings for my face?",
-        answer: "Compare earring scale and length near your face instead of treating face shape as a fixed rule.",
+        id: "everyday-clothes",
+        heading: "How can I begin with the clothes I reach for most?",
+        answer: "Start with an outfit that already feels like you, then decide where one jewelry detail belongs.",
         paragraphs: [
-          "Studs and small drops keep the focus near the ear. Longer drops add a vertical line and move with the wearer.",
-          "Facial proportions differ, so use a mirror or product dimensions to compare where a stud, short drop, or longer drop ends. Choose the scale and line that feel balanced to you rather than relying on a universal face-shape rule.",
-          "For a coordinated look, keep other jewelry simple or repeat one metal tone already used in the earrings.",
+          "Start with an outfit that already feels like you: a familiar shirt, knit, jacket, or dress. Notice where the eye lands first, then add one jewelry detail near that area or choose a quieter placement elsewhere. There is no universal rule for formal or casual dressing; the useful test is whether the combination feels balanced to you.",
         ],
       },
       {
-        id: "necklaces",
-        heading: "How do I match a pearl necklace to a neckline?",
-        answer: "Choose the necklace length after checking the neckline it will sit against.",
+        id: "contrast-or-repetition",
+        heading: "How can I use contrast or repetition without a prescribed formula?",
+        answer: "Try a repeated line or soft tone, or use one clear accent against a familiar outfit.",
         paragraphs: [
-          "A close necklace works with open necklines when you want the jewelry near the collarbone. A longer pendant or lariat leaves more space between the neckline and the focal point.",
+          "You might repeat a rounded line, echo a soft tone, or place a light-catching detail beside a textured fabric. You might also choose contrast: one clear accent against a simple, familiar outfit. Treat these as options to try in a mirror, not evidence that a pictured item has a particular finish, scale, weight, or real-world fit.",
         ],
       },
       {
-        id: "wrist-and-hand",
-        heading: "How do I style pearls at the wrist and hand?",
-        answer: "Bracelets and rings add detail where the hands are already active.",
+        id: "verified-information",
+        heading: "How can I keep the final choice grounded in verified information?",
+        answer: "Move from styling inspiration to the exact product and policy information before a purchase.",
         paragraphs: [
-          "Use one bracelet or ring as the main detail, then add other pieces only when they do not compete for the same attention. Check that a bracelet is comfortable for writing, carrying, and other regular movement.",
+          "Before a purchase, move from styling inspiration to the exact product page. Check the verified details that matter to you, and use the current policy pages for order-specific questions. A guide cannot confirm composition, dimensions, fastening, price, availability, delivery, return eligibility, or how an item will feel when worn.",
         ],
-      },
-      {
-        id: "daily-wardrobes",
-        heading: "How can pearls work for casual and formal occasions?",
-        answer: "Build from one pearl piece, then adjust its scale and placement to the occasion and outfit.",
-        paragraphs: [
-          "With a plain shirt, knit, or jacket, pearl jewelry can be the clearest detail. With a patterned or detailed outfit, a smaller piece often keeps the overall look easier to read.",
-          "For formal occasions, the same placement-first approach still applies: check the neckline, choose one focal piece, and add another only when the two placements do not compete.",
-        ],
-        table: {
-          headers: ["Placement", "Visual effect"],
-          rows: [
-            ["Near the face", "Draws attention to earrings or short necklaces."],
-            ["At the collarbone", "Keeps the focal point close to the neckline."],
-            ["At the wrist or hand", "Adds detail that appears during everyday movement."],
-          ],
-        },
       },
     ],
     faq: [
       {
-        question: "How do I choose a necklace length?",
-        answer: "Start with the neckline, then choose where you want the focal point to sit.",
+        question: "Can pearl jewelry work with casual clothes?",
+        answer: "It can be styled as a single detail beside everyday clothes. Start with your own proportions, colors, and textures rather than a fixed dress-code rule.",
       },
       {
-        question: "Can I wear pearls with casual clothes?",
-        answer: "Yes. Start with one piece and adjust the scale to the rest of the outfit.",
+        question: "How do I decide between a quieter or more visible look?",
+        answer: "Choose one focal area, look at the full outfit, and remove or add a detail until the balance feels right to you.",
       },
       {
-        question: "How many pearl pieces should I wear together?",
-        answer: "Use one piece as the focus, then add another only when the placements do not compete.",
+        question: "Can a photo tell me whether an item will fit or feel comfortable?",
+        answer: "No. Use the exact product page for verified information, and do not infer fit, weight, closure, material, or skin compatibility from imagery.",
       },
     ],
     relatedTypes: ["earrings", "necklaces", "bracelets", "rings"],
     sources: [
-      { label: "GIA: Pearl buyer's guide", href: GIA_PEARL_BUYING_URL },
+      { label: "Google Search Central: Creating helpful, reliable, people-first content", href: GOOGLE_HELPFUL_CONTENT_URL },
+      { label: "FTC: Buying gemstones, diamonds, and pearls", href: FTC_PEARL_BUYING_URL },
+      { label: "FTC: Buying platinum, gold, and silver jewelry", href: FTC_JEWELRY_BUYING_URL },
     ],
   },
   "freshwater-pearls": {
@@ -234,7 +231,7 @@ export const PEARL_GUIDES: Readonly<Record<GuideSlug, PearlGuide>> = {
       alt: "Pearl necklace displayed on a black jewelry stand",
       objectPosition: "center",
     },
-    author: "MythRealms Editorial",
+    author: EDITORIAL_AUTHOR,
     published: "2026-07-18",
     updated: "2026-07-18",
     sections: [

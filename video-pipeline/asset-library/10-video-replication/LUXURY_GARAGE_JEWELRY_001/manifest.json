@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "id": "LUXURY_GARAGE_JEWELRY_001",
+  "status": "ready_for_user_qc",
+  "format": "9:16",
+  "fps": 30,
+  "generation_surface": "Xiaoyunque Seedance 2.0 Fast",
+  "generation_mode": "I2V first-frame",
+  "minimum_clip_duration_seconds": 4,
+  "credits_per_second": 11,
+  "credits_per_take": 44,
+  "reference_video": {
+    "path": "D:/Chrome_Download/v03c76g10004d97q32qljht2pve1.750.mp4",
+    "duration_seconds": 15.046,
+    "transfer_rules": [
+      "Transfer only pacing, camera grammar, blocking and reveal order.",
+      "Do not transfer the source performers, wardrobe, vehicle branding, logos or dialogue."
+    ]
+  },
+  "visual_bible": {
+    "world": "real Mediterranean hotel motor court at blue hour; charcoal concrete, warm limestone arches, cool fluorescent ceiling strips, unbranded charcoal vintage coupe",
+    "prohibited": [
+      "cutout composite", "generated text", "logos", "watermarks", "extra jewelry", "bags", "cups", "tables", "books", "vases", "flowers"
+    ],
+    "continuity": [
+      "Keep each character face, hair, suit palette and product combination unchanged.",
+      "Keep jewelry rigid and recognizable; no morphing or added pieces.",
+      "Use one primary camera move and one visible action per four-second shot."
+    ]
+  },
+  "cast": [
+    {
+      "id": "A",
+      "turnaround": "characters/CHAR_A_EAST_ASIAN_BLACK_SUIT_turnaround-v1.png",
+      "products": ["new-series-gold-shell-teardrops", "new-series-purple-gem-bangle", "new-series-black-drop-pearl-choker"]
+    },
+    {
+      "id": "B",
+      "turnaround": "characters/CHAR_B_BLACK_IVORY_SUIT_turnaround-v1.png",
+      "products": ["new-series-mother-of-pearl-cluster-earrings", "new-series-leaf-turquoise-pearl-cuff", "new-series-pearl-y-lariat"]
+    },
+    {
+      "id": "C",
+      "turnaround": "characters/CHAR_C_COOL_BLONDE_GLASSES_CHAIN_turnaround-v3.png",
+      "products": ["new-series-pearl-glasses-chain", "new-series-baroque-pearl-hoops", "new-series-pearl-jade-bracelet"],
+      "identity_lock": "thin unbranded gold wire-frame glasses; pearl glasses chain visibly attached to both temples, not a necklace"
+    },
+    {
+      "id": "D",
+      "turnaround": "characters/CHAR_D_OLIVE_CREAM_SUIT_turnaround-v1.png",
+      "products": ["new-series-white-shell-triple-drops", "new-series-shell-twist-pearl-cuff", "new-series-pearl-drop-choker"]
+    }
+  ],
+  "assets": {
+    "environment": "scene/ENV_LUXURY_HOTEL_MOTOR_COURT_bluehour-v1.png",
+    "cast_reference_board": "references/CAST_REFERENCE_BOARD_v2_COOL_BLONDE.jpg",
+    "director_board": "director-board/LGJ_director-board-v2.png",
+    "top_down_blocking": "blocking/LGJ_top-down-blocking-v1.png"
+  },
+  "shots": [
+    {
+      "id": "S1",
+      "role": "hook",
+      "first_frame": "first-frames/FF_LGJ_01_LEAD_BY_COUPE-v1.png",
+      "duration_seconds": 4,
+      "cost_credits": 44,
+      "source_function": "lead performer holds the frame beside vehicle before the ensemble reveal",
+      "camera_contract": "50mm chest-height frame; controlled 3% slider drift left-to-right; end at the same three-quarter pose",
+      "motion_contract": "0-1s inhale and hold eye contact; 1-3s shift weight once toward the coupe; 3-4s earrings make one tiny settle and stop",
+      "seedance_prompt_zh": "@图片1 是首帧，锁定角色 A 的脸、黑色西装、金贝水滴耳环、紫色宝石手镯、黑珍珠颈链，以及蓝调地中海酒店车库和无品牌深灰复古轿车。4 秒单镜头，保持 50mm 胸口高度三分之二身构图，摄影机只做不超过 3% 的极慢横向滑轨。0-1 秒她吸气并保持直视镜头；1-3 秒身体只向车身轻微移重一次；3-4 秒完全停稳，耳环只因头部极小移动摆动一次后静止。首饰结构、脸、发型、服装、车库与车体不得变化。不要换脸、不要新增首饰或人物，不要文字、logo、包、杯子、桌子、花、音乐。环境声仅远处空调低鸣与非常轻的鞋跟摩擦声。"
+    },
+    {
+      "id": "S2",
+      "role": "product-proof",
+      "first_frame": "first-frames/FF_LGJ_02_GLASSES_CHAIN_CLOSE-v2.png",
+      "duration_seconds": 4,
+      "cost_credits": 44,
+      "source_function": "glasses close-up replaces the source glasses-character stare",
+      "camera_contract": "85mm locked chest-up portrait; focus stays on both glasses temples and pearl chain",
+      "motion_contract": "0-2s direct gaze; 2-3s thumb and forefinger release the blazer edge; 3-4s pearl chain makes one short gravity-driven swing then rests",
+      "seedance_prompt_zh": "@图片1 是首帧，锁定角色 C 的雀斑红发、细金属框眼镜、两侧都连接在镜腿上的珍珠眼镜链、巴洛克珍珠耳环、玉珠手链与深灰西装。4 秒单镜头，保持 85mm 胸上近景，摄影机完全锁定，焦点始终清楚覆盖双侧镜腿连接点与珍珠眼镜链。0-2 秒她透过镜片直视镜头；2-3 秒右手从西装翻领轻轻松开；3-4 秒眼镜链受重力只轻摆一次然后停住。眼镜链不是项链，必须连接在两侧镜腿；不换脸、不加首饰、不加人或道具，不要文字、logo、音乐。环境声只有远处车库风声。"
+    },
+    {
+      "id": "S3",
+      "role": "motion-reset",
+      "first_frame": "first-frames/FF_LGJ_03_LOW_ANGLE_ENTRY-v1.png",
+      "duration_seconds": 4,
+      "cost_credits": 44,
+      "source_function": "low-angle character entrance and stop",
+      "camera_contract": "35mm low camera from hip height; slow 4% forward tracking; retain open polished floor foreground",
+      "motion_contract": "0-2.5s take two measured steps from the arch; 2.5-3.2s stop with one shoulder leading; 3.2-4s hold still",
+      "seedance_prompt_zh": "@图片1 是首帧，锁定角色 D 的低髻、奶油色西装、白贝三连耳环、贝壳扭纹珍珠手镯和珍珠坠颈链，以及蓝调车库空间。4 秒单镜头，保持 35mm 低机位全身构图，摄影机只做不超过 4% 的慢速前移，保留前景地面反光。0-2.5 秒她从暖色石灰岩拱门方向向镜头走两步；2.5-3.2 秒在画面右侧停下，右肩略向前；3.2-4 秒完全停稳。耳环与手镯只做符合步伐的一次小幅惯性摆动。脸、首饰结构、服装与空间不可变化；不要新增人物、车标、文字、logo、道具或音乐。"
+    },
+    {
+      "id": "S4",
+      "role": "group-end",
+      "first_frame": "first-frames/FF_LGJ_04_GROUP_TABLEAU-v2.png",
+      "duration_seconds": 4,
+      "cost_credits": 44,
+      "source_function": "wide ensemble tableau around vehicle",
+      "camera_contract": "35mm low wide shot; locked camera; preserve all four full bodies and their spacing",
+      "motion_contract": "0-2s all four hold gaze; 2-3s only A shifts her front foot and C's glasses chain settles; 3-4s everyone locks into the final tableau",
+      "seedance_prompt_zh": "@图片1 是首帧，锁定四位模特的位置、脸、服装与各自首饰组合：左侧 B 的白色西装和珍珠簇耳环、第二位 A 的黑色西装和金贝耳环、第三位 C 的眼镜与珍珠眼镜链、右侧 D 的奶油色西装与白贝三连耳环。4 秒单镜头，保持 35mm 低机位全身群像，摄影机完全锁定，四人之间的距离和深灰无品牌复古轿车位置不能变化。0-2 秒四人保持看向镜头；2-3 秒只允许 A 轻移前脚，C 的眼镜链微小摆动一次；3-4 秒全员停成最终群像。不得换脸、串换首饰或新增人物、首饰、车标、文字、logo、道具。不要音乐，环境声仅为远处车库空气声。"
+    }
+  ],
+  "edit_contracts": [
+    "S1 03.4s -> S2 00.0s: hard cut on A's eye contact; carry a quiet fluorescent hum as a J-cut.",
+    "S2 03.6s -> S3 00.0s: hard cut on the pearl-chain settle; retain the warm arch tone for six frames.",
+    "S3 03.5s -> S4 00.0s: match cut from D's stopped stance to the group tableau; add one soft heel-click at the cut."
+  ],
+  "budget": {
+    "first_take_credits": 176,
+    "recommended_retry_policy": "Approve a shot if identity, product geometry and the single action are stable. Retry one variable only; cap at one retry per shot.",
+    "maximum_with_one_retry_each": 352
+  },
+  "created_at": "2026-07-22"
+}

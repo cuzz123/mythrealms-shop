@@ -10,6 +10,11 @@ import { useWishlistStore } from "@/lib/wishlist";
 import { SearchOverlay } from "./SearchOverlay";
 import { useDialogFocus } from "@/lib/client/use-dialog-focus";
 import {
+  takePendingMenuFocus,
+  useHeaderVisualState,
+} from "@/lib/client/header-state";
+import { BRAND } from "@/lib/brand-identity";
+import {
   HEADER_LINKS,
   HEADER_MENUS,
   type HeaderMenuId,
@@ -21,20 +26,18 @@ type DesktopMenu = HeaderMenuId | null;
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenu, setDesktopMenu] = useState<DesktopMenu>(null);
-  const [pendingMenuFocus, setPendingMenuFocus] = useState<DesktopMenu>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
   const { data: session } = useSession();
   const pathname = usePathname();
   const itemCount = useCartStore((state) => state.itemCount());
   const openCart = useCartUIStore((state) => state.openCart);
   const wishlistCount = useWishlistStore((state) => state.count());
   const user = session?.user;
-  const isHome = pathname === "/";
-  const isOverlay = isHome && !isScrolled;
+  const isOverlay = useHeaderVisualState(pathname) === "overlay";
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileCloseRef = useRef<HTMLButtonElement>(null);
   const desktopNavigationRef = useRef<HTMLElement>(null);
   const previousPathname = useRef(pathname);
+  const pendingMenuFocusRef = useRef<DesktopMenu>(null);
   const menuTriggerRefs = useRef<Record<Exclude<DesktopMenu, null>, HTMLButtonElement | null>>({
     shop: null,
     gifts: null,
@@ -54,23 +57,11 @@ export function Header() {
   });
 
   useEffect(() => {
-    if (!isHome) {
-      setIsScrolled(true);
-      return;
-    }
-
-    const onScroll = () => setIsScrolled(window.scrollY > window.innerHeight * 0.5);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
-
-  useEffect(() => {
     if (previousPathname.current === pathname) return;
 
     previousPathname.current = pathname;
     setDesktopMenu(null);
-    setPendingMenuFocus(null);
+    pendingMenuFocusRef.current = null;
   }, [pathname]);
 
   useEffect(() => {
@@ -79,7 +70,7 @@ export function Header() {
     const closeOnPointerOutside = (event: PointerEvent) => {
       if (!desktopNavigationRef.current?.contains(event.target as Node)) {
         setDesktopMenu(null);
-        setPendingMenuFocus(null);
+        pendingMenuFocusRef.current = null;
       }
     };
 
@@ -88,11 +79,12 @@ export function Header() {
   }, [desktopMenu]);
 
   useEffect(() => {
-    if (!desktopMenu || pendingMenuFocus !== desktopMenu) return;
+    const menuToFocus = takePendingMenuFocus(pendingMenuFocusRef.current, desktopMenu);
+    if (!menuToFocus) return;
 
-    menuPanelRefs.current[desktopMenu]?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
-    setPendingMenuFocus(null);
-  }, [desktopMenu, pendingMenuFocus]);
+    pendingMenuFocusRef.current = null;
+    menuPanelRefs.current[menuToFocus]?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
+  }, [desktopMenu]);
 
   const [justAdded, setJustAdded] = useState(false);
   const previousItemCount = useRef(itemCount);
@@ -115,15 +107,15 @@ export function Header() {
   const closeDesktopMenu = (restoreFocus = false) => {
     const menuToClose = desktopMenu;
     setDesktopMenu(null);
-    setPendingMenuFocus(null);
+    pendingMenuFocusRef.current = null;
     if (restoreFocus && menuToClose) {
       window.requestAnimationFrame(() => menuTriggerRefs.current[menuToClose]?.focus());
     }
   };
 
   const openMenuAndFocusFirstItem = (menu: Exclude<DesktopMenu, null>) => {
+    pendingMenuFocusRef.current = menu;
     setDesktopMenu(menu);
-    setPendingMenuFocus(menu);
   };
 
   const overlayControlClass = isOverlay
@@ -133,29 +125,24 @@ export function Header() {
   return (
     <header
       data-visual-state={isOverlay ? "overlay" : "solid"}
-      className={`sticky top-0 left-0 right-0 z-40 h-16 transition-colors duration-200 ${
+      className={`sticky top-0 left-0 right-0 z-40 h-[72px] border-b transition-colors duration-200 ${
         isOverlay
-          ? "bg-transparent text-white"
-          : "bg-[var(--surface)]/95 text-[var(--text)] shadow-sm backdrop-blur-md"
+          ? "border-transparent bg-transparent text-white"
+          : "border-[var(--border)]/70 bg-[var(--surface)]/95 text-[var(--text)] shadow-[0_1px_0_rgba(20,18,15,0.04)] backdrop-blur-md"
       }`}
     >
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2"
-          aria-label="MythRealms home"
+          className="flex min-h-11 shrink-0 items-center gap-2.5 rounded-[var(--radius-sm)] px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2"
+          aria-label={`${BRAND.name} home`}
         >
-          <svg viewBox="0 0 28 28" fill="none" aria-hidden="true" className="h-7 w-7" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 2L22 10L14 26L6 10L14 2Z" fill="currentColor" fillOpacity="0.92" />
-            <path d="M14 8L18 12L14 20L10 12L14 8Z" fill="var(--primary)" fillOpacity="0.9" />
-            <circle cx="14" cy="5" r="1.5" fill="currentColor" />
-          </svg>
-          <span className="font-serif text-[19px] font-semibold tracking-normal sm:text-[22px]">MythRealms</span>
+          <span className="font-serif text-[22px] font-semibold tracking-[0.015em] sm:text-[26px]">{BRAND.name}</span>
         </Link>
 
         <nav
           ref={desktopNavigationRef}
-          className="hidden items-center gap-1 lg:flex"
+          className="hidden items-center gap-0.5 lg:flex"
           aria-label="Main navigation"
           onBlur={(event) => {
             if (!event.currentTarget.contains(event.relatedTarget as Node)) setDesktopMenu(null);
@@ -185,7 +172,7 @@ export function Header() {
                       openMenuAndFocusFirstItem(menu.id);
                     }
                   }}
-                  className={`inline-flex items-center gap-1 px-3 py-2.5 text-[15px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${
+                  className={`inline-flex min-h-11 items-center gap-1 rounded-[var(--radius-sm)] px-3 py-2.5 text-[15px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${
                     isOverlay
                       ? "text-white hover:bg-white/15"
                       : isActive(menu.links)
@@ -210,7 +197,7 @@ export function Header() {
                         closeDesktopMenu(true);
                       }
                     }}
-                    className="absolute left-1/2 top-full z-50 grid w-[440px] max-w-[90vw] -translate-x-1/2 grid-cols-2 bg-[var(--surface)] p-3 text-[var(--text)] shadow-lg animate-slide-down"
+                    className="absolute left-1/2 top-[calc(100%+0.5rem)] z-50 grid w-[440px] max-w-[90vw] -translate-x-1/2 grid-cols-2 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface-raised)] p-3 text-[var(--text)] shadow-[var(--shadow-xl)] animate-slide-down"
                   >
                     {menu.links.map((link) => (
                       <Link
@@ -218,7 +205,7 @@ export function Header() {
                         href={link.href}
                         role="menuitem"
                         onClick={() => setDesktopMenu(null)}
-                        className={`px-4 py-3 text-[14px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--muted-blue)] hover:bg-[var(--surface-alt)] ${
+                        className={`rounded-[var(--radius-sm)] px-4 py-3 text-[14px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--muted-blue)] hover:bg-[var(--surface-alt)] ${
                           pathname.startsWith(link.href.split("?")[0]) ? "font-medium text-[var(--accent)]" : "text-[var(--text)]"
                         }`}
                       >
@@ -234,7 +221,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`px-3 py-2.5 text-[15px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${
+              className={`inline-flex min-h-11 items-center rounded-[var(--radius-sm)] px-3 py-2.5 text-[15px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${
                 isOverlay
                   ? "text-white hover:bg-white/15"
                   : isActive([link])
@@ -279,7 +266,7 @@ export function Header() {
             onClick={openCart}
             aria-label={`Shopping cart, ${itemCount} items`}
             title="Shopping cart"
-            className={`relative flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${overlayControlClass}`}
+            className={`relative flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 ${overlayControlClass}`}
           >
             <ShoppingBag size={20} strokeWidth={1.8} className={justAdded ? "cart-slide-up" : ""} />
             {itemCount > 0 && (
@@ -309,7 +296,8 @@ export function Header() {
           aria-modal="true"
           aria-label="Navigation menu"
         >
-          <div className="sticky top-0 z-10 flex h-[72px] items-center justify-end bg-[var(--surface)]/95 px-4 backdrop-blur-sm">
+          <div className="sticky top-0 z-10 flex h-[72px] items-center justify-between border-b border-[var(--border)]/70 bg-[var(--surface)]/95 px-4 backdrop-blur-sm">
+            <span className="font-serif text-xl font-semibold tracking-[0.015em]">{BRAND.name}</span>
             <button
               ref={mobileCloseRef}
               type="button"
@@ -322,7 +310,7 @@ export function Header() {
             </button>
           </div>
 
-          <nav className="flex flex-col gap-2 px-6 pt-4" aria-label="Mobile navigation">
+          <nav className="flex flex-col gap-2 px-5 pt-5 sm:px-6" aria-label="Mobile navigation">
             {HEADER_MENUS.map((menu) => (
               <div key={menu.id} className="py-2">
                 <div className="px-3 py-2 text-sm font-semibold uppercase tracking-normal text-[var(--text-muted)]">{menu.label}</div>
@@ -331,7 +319,7 @@ export function Header() {
                     key={link.label}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block rounded-[var(--radius-sm)] px-6 py-3.5 text-base font-medium text-[var(--text)] transition-colors hover:bg-[var(--surface-alt)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--muted-blue)]"
+                    className="block min-h-11 rounded-[var(--radius-sm)] px-6 py-3.5 text-base font-medium text-[var(--text)] transition-colors hover:bg-[var(--surface-alt)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--muted-blue)]"
                   >
                     {link.label}
                   </Link>
@@ -343,7 +331,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="rounded-[var(--radius-sm)] px-3 py-3.5 text-base font-medium text-[var(--text)] transition-colors hover:bg-[var(--surface-alt)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--muted-blue)]"
+                className="min-h-11 rounded-[var(--radius-sm)] px-3 py-3.5 text-base font-medium text-[var(--text)] transition-colors hover:bg-[var(--surface-alt)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--muted-blue)]"
               >
                 {link.label}
               </Link>
@@ -351,7 +339,7 @@ export function Header() {
           </nav>
 
           <div className="flex justify-center px-6 py-10">
-            <span className="font-serif text-lg font-semibold tracking-normal text-[var(--text-muted)]">MythRealms</span>
+            <span className="font-serif text-lg font-semibold tracking-normal text-[var(--text-muted)]">{BRAND.name}</span>
           </div>
         </div>
       )}

@@ -8,12 +8,13 @@
     "start": "next start",
     "lint": "eslint",
     "test:unit": "node --import tsx --test",
+    "brand:audit-routes": "node --import tsx scripts/audit-brand-routes.ts",
     "launch:check": "node --env-file-if-exists=.env --import tsx scripts/launch-check.ts",
     "seed": "npx tsx prisma/seed.ts",
     "db:push": "npx prisma db push",
-    "db:generate": "npx prisma generate",
+    "db:generate": "prisma generate",
     "db:studio": "npx prisma studio",
-    "postinstall": "npx prisma generate"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",

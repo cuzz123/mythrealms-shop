@@ -1,0 +1,121 @@
+{
+  "project": {
+    "id": "garage-five-role-seedance",
+    "title": "Garage Five Role Remake",
+    "output": {
+      "aspectRatio": "16:9",
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "durationSeconds": 15.046
+    }
+  },
+  "sourceVideo": {
+    "path": "D:/Chrome_Download/v03c76g10004d97q32qljht2pve1.750.mp4",
+    "purpose": "AI Studio video reference for shot cadence, camera language, and cut timing"
+  },
+  "roles": [
+    {
+      "id": "left2_glasses",
+      "path": null,
+      "traits": ["blonde updo", "gold glasses", "ivory dress", "pearl accessories"]
+    },
+    {
+      "id": "left1_sage",
+      "path": null,
+      "traits": ["blonde half-up hair", "sage green gown", "pale earrings"]
+    },
+    {
+      "id": "center_navy",
+      "path": null,
+      "traits": ["blonde updo", "navy off-shoulder gown", "pearl necklace"]
+    },
+    {
+      "id": "right1_black",
+      "path": null,
+      "traits": ["curly brunette updo", "black velvet gown", "rose gold drape", "pearl earrings"]
+    },
+    {
+      "id": "right2_gold",
+      "path": null,
+      "traits": ["curly brunette updo", "gold satin gown", "gold jewelry"]
+    }
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "time": { "start": "00:00", "end": "00:02", "frames": [1, 48] },
+      "leadRole": "right1_black",
+      "iclone": {
+        "blocking": "Place the right1 proxy beside the car, head lowered at the start, then lift gaze toward camera. Keep the bat hidden.",
+        "camera": "Medium close framing, subject on the right half of frame, car edge on the left, subtle arc move and slight push-in.",
+        "focus": "Start on torso and settle on the face."
+      },
+      "seedance": {
+        "referenceInputs": ["sourceVideo", "right1_black"],
+        "instruction": "Preserve the right1 face, curly brunette updo, black velvet gown and rose-gold drape. Use the iClone camera composition and motion."
+      },
+      "status": "pending"
+    },
+    {
+      "id": "S02",
+      "time": { "start": "00:02", "end": "00:05", "frames": [49, 120] },
+      "leadRole": "left2_glasses",
+      "iclone": {
+        "blocking": "Place left2 in the foreground. Rotate the head toward camera and hold a controlled, distant expression.",
+        "camera": "Rapid cut to a glasses close-up, then a controlled push-in to an extreme close-up.",
+        "focus": "Rack focus to the eyes behind the glasses; background fully soft."
+      },
+      "seedance": {
+        "referenceInputs": ["sourceVideo", "left2_glasses"],
+        "instruction": "Preserve the gold glasses, blonde updo, ivory dress, and pearl accessories. The final focus must stay on the eyes."
+      },
+      "status": "pending"
+    },
+    {
+      "id": "S03",
+      "time": { "start": "00:05", "end": "00:09", "frames": [121, 216] },
+      "leadRole": "right1_black",
+      "iclone": {
+        "blocking": "Reveal a metallic bat on right1 shoulder. Keep one hand visibly gripping the handle and settle into a confident shoulder pose.",
+        "camera": "Fast transition from the prior close-up into a foreground medium close shot. Keep face, shoulders, and bat readable together.",
+        "focus": "Face is sharp; bat and car remain legible with shallow depth of field."
+      },
+      "seedance": {
+        "referenceInputs": ["sourceVideo", "right1_black"],
+        "instruction": "Preserve right1 identity and wardrobe. Metallic bat rests naturally across the shoulder without changing shape or leaving the hand."
+      },
+      "status": "pending"
+    },
+    {
+      "id": "S04",
+      "time": { "start": "00:09", "end": "00:12", "frames": [217, 288] },
+      "leadRole": "center_navy",
+      "iclone": {
+        "blocking": "Place center_navy in front of the luxury car with one relaxed leg and a poised, commanding stance.",
+        "camera": "Low-to-level reveal, then settle into a medium portrait with the car clearly behind the role.",
+        "focus": "Settle on the center role face after the reveal."
+      },
+      "seedance": {
+        "referenceInputs": ["sourceVideo", "center_navy"],
+        "instruction": "Preserve blonde updo, navy off-shoulder gown, pearl necklace, and the poised center-role silhouette."
+      },
+      "status": "pending"
+    },
+    {
+      "id": "S05",
+      "time": { "start": "00:12", "end": "00:15", "frames": [289, 360] },
+      "leadRole": "group",
+      "iclone": {
+        "blocking": "Arrange left2, left1, center_navy, right1, right2 from left to right. Put right1 just left of center with the bat, center_navy in front of the car.",
+        "camera": "Centered symmetrical wide shot. All five bodies and the car must remain inside the frame.",
+        "focus": "Moderate depth of field so all five roles remain readable."
+      },
+      "seedance": {
+        "referenceInputs": ["sourceVideo", "left2_glasses", "left1_sage", "center_navy", "right1_black", "right2_gold"],
+        "instruction": "Preserve five distinct identities, gowns, hairstyles, jewelry, and final left-to-right placement. No role merging or duplicated faces."
+      },
+      "status": "pending"
+    }
+  ]
+}

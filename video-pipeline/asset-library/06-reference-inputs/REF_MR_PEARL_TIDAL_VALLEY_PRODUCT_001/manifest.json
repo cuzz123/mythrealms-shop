@@ -1,0 +1,35 @@
+{
+  "id": "REF_MR_PEARL_TIDAL_VALLEY_PRODUCT_001",
+  "title": "Pearl Tidal Valley Segment 5 Product Reveal",
+  "status": "ready",
+  "created_at": "2026-07-17",
+  "aspect_ratio": "16:9",
+  "duration_seconds": 12,
+  "continuity_from": "REF_MR_PEARL_TIDAL_VALLEY_RUN_001",
+  "character": "CHAR_MR_TALENT_AUBURN_SATIN_001",
+  "product_reference": "assets/product-imagery/style-references/product-pearl-necklace-linen.png",
+  "references": [
+    {"role": "product_design_lock", "file": "references/product-design-reference.png"},
+    {"role": "worn_reveal", "file": "references/necklace-reveal-anchor.png"},
+    {"role": "touch_motion", "file": "references/pendant-touch-anchor.png"},
+    {"role": "hero_macro", "file": "references/pendant-hero-anchor.png"}
+  ],
+  "shots": [
+    {"id": "S05A", "timecode": "00:40-00:44", "primary_reference": "worn_reveal"},
+    {"id": "S05B", "timecode": "00:44-00:48", "primary_reference": "touch_motion"},
+    {"id": "S05C", "timecode": "00:48-00:52", "primary_reference": "hero_macro"}
+  ],
+  "deliverables": {
+    "prompts": "prompts/seedance-s05.md",
+    "board": "board/pearl-tidal-valley-product-board.png",
+    "accessibility_text": "board/pearl-tidal-valley-product-board.txt"
+  },
+  "checksums": {
+    "references/product-design-reference.png": "e787f2690f3826bac67fa22c76f9a24db2db21ac014adcd6726689d3d25395d9",
+    "references/necklace-reveal-anchor.png": "b19c1a1f0537cf0b5cd9b7c6fe7665a2bde25ab0c2d6891d5bfbc35d6dd09d27",
+    "references/pendant-touch-anchor.png": "97265b39cb74c4031812555e5a1c19f711275a549561685c9723e52c6b4fa758",
+    "references/pendant-hero-anchor.png": "76a5edd5dcb6a0e9b06b4f068bc56eb5c315dc059d7d859d451f5affdbe54167",
+    "board/pearl-tidal-valley-product-board.png": "96a7887129f4264ffd1e14a9f128f24cd5ed9ab4ce125f874f1490d4fed6d0e4"
+  },
+  "asset_library_path": "video-pipeline/asset-library/06-reference-inputs/REF_MR_PEARL_TIDAL_VALLEY_PRODUCT_001"
+}

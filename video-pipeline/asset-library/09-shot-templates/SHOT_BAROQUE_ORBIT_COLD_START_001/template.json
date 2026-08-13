@@ -1,0 +1,330 @@
+{
+  "schema_version": "1.0",
+  "id": "SHOT_BAROQUE_ORBIT_COLD_START_001",
+  "name": "巴洛克轨道耳环｜真实地中海冷启动广告",
+  "category": "shot_template",
+  "status": "approved_first_frames",
+  "version": "v4",
+  "format": "9:16",
+  "fps": 30,
+  "planned_edit_duration_seconds": 10.5,
+  "generation_surface": "Xiaoyunque Seedance 2.0 Fast",
+  "generation_mode": "I2V first-frame",
+  "minimum_clip_duration_seconds": 4,
+  "credits_per_second": 11,
+  "credits_per_take": 44,
+  "recommended_base_takes": 4,
+  "recommended_base_cost_credits": 176,
+  "daily_three_take_cost_credits": 132,
+  "product": {
+    "id": "new-series-003",
+    "name": "The Baroque Orbit - Earrings",
+    "slug": "new-series-baroque-pearl-hoops",
+    "source_references": [
+      "../../../../public/images/products/new-series/new-series-baroque-pearl-hoops/main.jpg",
+      "../../../../public/images/products/new-series/new-series-baroque-pearl-hoops/detail-05.jpg"
+    ],
+    "geometry_locks": [
+      "polished gold circular hoop",
+      "tiny green stones on the hoop front",
+      "one connecting ring",
+      "irregular white baroque pearl drop",
+      "tiny terminal gold bead"
+    ]
+  },
+  "visual_bible": {
+    "intent": "让观众相信这是一次真实地中海度假地的珠宝拍摄，而不是影棚合成图。",
+    "character_lock": "同一位成年黑发模特，湿润后梳头发，真实皮肤纹理，宽松白色亚麻衬衫。",
+    "environment_asset_id": "ENV_MR_OLIVE_COURTYARD_001",
+    "environment_lock": "海岸石灰岩、橄榄树、暖色自然日照和清晰叶影。",
+    "camera_family": "50-85mm natural editorial portrait and macro product photography",
+    "light_lock": "late-afternoon directional sun from frame left with olive-leaf shadow breakup",
+    "prohibited": [
+      "cups",
+      "books",
+      "tables",
+      "chairs",
+      "vases",
+      "flowers",
+      "unrelated jewelry",
+      "generated text",
+      "logos",
+      "plastic skin",
+      "studio sweep",
+      "CGI look"
+    ]
+  },
+  "slots": [
+    "PRODUCT_IDENTITY",
+    "CHARACTER_IDENTITY",
+    "ENVIRONMENT",
+    "FIRST_FRAME",
+    "CAMERA_CONTRACT",
+    "MOTION_CONTRACT",
+    "AUDIO_INTENT",
+    "TAKE_LEDGER"
+  ],
+  "thumbnail": "Thumbnail.png",
+  "frames": [
+    {
+      "frame_id": "FF_BAROQUE_ORBIT_01_MACRO_HOOK",
+      "role": "lifestyle_macro_hook",
+      "path": "first-frames/FF_BAROQUE_ORBIT_01_MACRO_HOOK-v2.png",
+      "prompt_version": "v2",
+      "approval_status": "approved",
+      "animate": true,
+      "animation_priority": 1,
+      "target_duration_seconds": 4,
+      "edit_use": "generate 4s and trim to the strongest 1.0-1.5s opening beat",
+      "allocation": {
+        "primary": "model and earring identity",
+        "secondary": "one restrained gaze and earring motion beat",
+        "economized": "camera travel, hand action and background activity"
+      },
+      "camera_contract": "Locked 85mm macro portrait framing with no more than a 2 percent push-in; keep the eye, ear and complete earring sharp.",
+      "motion_contract": "One blink and a tiny gaze shift toward the light; one loose hair strand moves; the earring sways once by inertia and settles; hands remain outside frame.",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定人物身份、真实肤质、眼睛、耳朵、白色亚麻衣领、耳环和光线。4秒单镜头，保持当前85mm微距人像构图，机位基本锁定，只允许不超过2%的极慢推进。0-1.5秒模特自然眨眼一次，视线轻微转向光线；1.5-3秒一缕发丝受轻风移动，耳环因头部极小位移轻摆一次；3-4秒全部停稳。双手不得进入画面。保持金色圆环、绿色碎石、不规则白色巴洛克珍珠和末端金珠完全不变，不换脸、不磨皮、不新增首饰或道具。环境声只有轻风与很远的海浪，不要音乐。",
+      "seedance_take_ids": []
+    },
+    {
+      "frame_id": "FF_BAROQUE_ORBIT_02_SUSPENDED_HERO",
+      "role": "limestone_pair_hero",
+      "path": "first-frames/FF_BAROQUE_ORBIT_02_SUSPENDED_HERO-v2.png",
+      "prompt_version": "v2",
+      "approval_status": "approved",
+      "animate": true,
+      "animation_priority": 2,
+      "target_duration_seconds": 4,
+      "allocation": {
+        "primary": "product identity",
+        "secondary": "olive-leaf and highlight motion",
+        "economized": "scene density and product displacement"
+      },
+      "camera_contract": "85mm macro feel; one controlled push-in of about 5 percent; end on the foreground hoop stones and pearl texture.",
+      "motion_contract": "Olive leaves and their shadows move gently; the earrings stay resting on the limestone; only physically plausible reflections change.",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定耳环结构、数量和场景。4秒单镜头，从当前竖屏构图开始，85mm微距感，镜头极慢推进约5%，终点停在前景耳环的绿色碎石与珍珠纹理。橄榄叶受轻风小幅摆动，叶影在石面缓慢移动，珍珠和金属只发生真实高光变化；两只耳环始终贴着石面，不滚动、不漂浮。保持金色圆环、绿色碎石、不规则白色巴洛克珍珠和末端金珠完全不变，不新增物体，不变形。环境声只有轻风和极弱海浪，不要音乐。",
+      "seedance_take_ids": []
+    },
+    {
+      "frame_id": "FF_BAROQUE_ORBIT_03_WEARING_PROFILE",
+      "role": "authentic_model_wearing_portrait",
+      "path": "first-frames/FF_BAROQUE_ORBIT_03_WEARING_PROFILE-v2.png",
+      "prompt_version": "v2",
+      "approval_status": "approved",
+      "animate": true,
+      "animation_priority": 3,
+      "target_duration_seconds": 4,
+      "allocation": {
+        "primary": "model and earring identity",
+        "secondary": "one restrained human micro-action",
+        "economized": "camera travel, hand action and background activity"
+      },
+      "camera_contract": "Locked 50-85mm portrait framing with no more than a 2 percent push-in; keep the visible ear and earring sharp.",
+      "motion_contract": "One blink, a small breath and a 3-5 degree head turn toward the light; the earring sways once by inertia and settles; hands remain outside frame.",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定人物身份、真实肤质、发型、白色亚麻衬衫、耳环和石灰岩场景。4秒单镜头，保持当前50-85mm头肩构图，机位基本锁定，只允许不超过2%的缓慢推进。0-1.5秒模特自然眨眼一次并轻吸气；1.5-3秒头部朝光线方向缓慢转动约3-5度；3-4秒停稳，耳环因惯性轻摆一次后静止。始终露出完整耳环，双手不得进入画面。保持金色圆环、绿色碎石、不规则白色巴洛克珍珠和末端金珠完全不变；不改变脸、服装、背景和光向，不新增首饰或道具。环境声只有轻风与远处海浪，不要音乐。",
+      "seedance_take_ids": []
+    },
+    {
+      "frame_id": "FF_BAROQUE_ORBIT_04_COASTAL_MODEL_END",
+      "role": "coastal_model_brand_end_frame",
+      "path": "first-frames/FF_BAROQUE_ORBIT_04_COASTAL_MODEL_END-v3.png",
+      "prompt_version": "v3",
+      "approval_status": "approved",
+      "animate": true,
+      "animation_priority": 4,
+      "target_duration_seconds": 4,
+      "edit_use": "generate 4s and trim to a 1.5-2.0s emotional brand ending; add logo and CTA in post only",
+      "copy_safe_area": "upper-left and upper-center",
+      "allocation": {
+        "primary": "model, earring identity and copy-safe composition",
+        "secondary": "sea-breeze motion in hair, linen and earring",
+        "economized": "camera travel, hand action and scene density"
+      },
+      "camera_contract": "50-85mm rear three-quarter portrait; one slow pull-back of about 3 percent; preserve the model on the right third and the open sea copy-safe area on the left.",
+      "motion_contract": "The model breathes and shifts her gaze farther toward the horizon; sea breeze moves loose hair ends and linen; the visible earring sways once and settles; hands remain outside frame.",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位模特、真实肤质、湿润后梳黑发、白色亚麻衬衫、可见耳环、石灰岩海岸和左侧海天留白。4秒单镜头，保持50-85mm背后三分侧人像构图，镜头从当前画面极慢后撤约3%，模特始终位于右侧三分之一，左侧文案安全区保持干净。0-2秒模特自然呼吸，视线缓慢移向更远的海平线；2-4秒海风带动发尾和亚麻衣领轻微移动，可见耳环轻摆一次后停稳。双手不得进入画面，模特不要转向镜头。保持金色圆环、绿色碎石、不规则白色巴洛克珍珠和末端金珠完全不变，不换脸、不新增首饰、人物或道具。环境声只有轻风与远处海浪，不要音乐。",
+      "seedance_take_ids": []
+    }
+  ],
+  "variant_sets": [
+    {
+      "variant_id": "BAROQUE_ORBIT_REAL_LOCATION_AB_001",
+      "name": "真实拱廊与庭院 A/B",
+      "status": "approved_first_frames",
+      "intent": "用真实人物和连续地中海场景替代悬浮产品或抠图式构图；A 抓停留，B 用场景和人物完成情绪收尾。",
+      "frames": [
+        {
+          "frame_id": "FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK",
+          "role": "real_location_lookback_hook",
+          "path": "first-frames/FF_BAROQUE_ORBIT_05_ARCH_LOOKBACK_HOOK-v1.png",
+          "approval_status": "approved",
+          "target_duration_seconds": 4,
+          "cost_credits": 44,
+          "camera_contract": "85mm 近景人像，机位锁定，只允许不超过 2% 的极慢推进；耳朵和完整耳环保持清晰。",
+          "motion_contract": "0-1 秒自然眨眼一次；1-3 秒视线略微掠向镜头外的光线，发尾被轻风带动；3-4 秒停稳，耳环因极小转头惯性轻摆一次后静止。",
+          "seedance_prompt_zh": "@图片1 是首帧并锁定同一位模特、真实肤质、湿润后梳黑发、白色亚麻衬衫、耳环、石灰岩拱廊、橄榄叶和海岸自然光。4秒单镜头，保持当前85mm近景人像构图，机位基本锁定，只允许不超过2%的极慢推进。0-1秒模特自然眨眼一次；1-3秒视线轻微掠向画面外的光线，发尾被轻风带动；3-4秒全部停稳，耳环因极小转头惯性轻摆一次后静止。始终保持可见耳朵和完整耳环清晰。保持金色绿色碎石耳扣、一个小金色连接环、一颗不规则白色巴洛克珍珠和珍珠末端金珠完全不变，不换脸、不磨皮、不新增首饰、人物或道具。环境声只有轻风和远处海浪，不要音乐。"
+        },
+        {
+          "frame_id": "FF_BAROQUE_ORBIT_06_COURTYARD_WALK_END",
+          "role": "real_courtyard_brand_end",
+          "path": "first-frames/FF_BAROQUE_ORBIT_06_COURTYARD_WALK_END-v1.png",
+          "approval_status": "approved",
+          "target_duration_seconds": 4,
+          "cost_credits": 44,
+          "copy_safe_area": "upper-left pale wall",
+          "camera_contract": "50mm 中景，机位锁定；只允许约 2% 的缓慢后撤，保持人物在右侧三分之一和左侧空白墙面。",
+          "motion_contract": "0-2 秒模特向前走一小步后自然回望；2-4 秒橄榄叶影和亚麻衣角受轻风移动，耳环轻摆一次后停稳。",
+          "seedance_prompt_zh": "@图片1 是首帧并锁定同一位模特、真实肤质、湿润后梳黑发、白色亚麻衬衫、可见耳环、地中海石灰岩庭院、橄榄树和暖色自然光。4秒单镜头，保持当前50mm中景构图，机位基本锁定，只允许约2%的缓慢后撤；模特始终位于右侧三分之一，左上浅色墙面保持干净作为后期文案安全区。0-2秒模特向前走一小步后自然回望；2-4秒橄榄叶影和亚麻衣角被轻风带动，耳环轻摆一次后停稳。保持金色绿色碎石耳扣、一个小金色连接环、一颗不规则白色巴洛克珍珠和珍珠末端金珠完全不变，不换脸、不新增首饰、人物、杯子、桌子、书、花瓶或花卉。环境声只有轻风与远处海浪，不要音乐。"
+        }
+      ]
+    }
+  ],
+  "production_batch_plan": [
+    {
+      "day": 1,
+      "slot": 1,
+      "source_frame_id": "FF_BAROQUE_ORBIT_01_MACRO_HOOK",
+      "purpose": "dynamic macro hook",
+      "duration_seconds": 4,
+      "cost_credits": 44
+    },
+    {
+      "day": 1,
+      "slot": 2,
+      "source_frame_id": "FF_BAROQUE_ORBIT_02_SUSPENDED_HERO",
+      "purpose": "primary product hero",
+      "duration_seconds": 4,
+      "cost_credits": 44
+    },
+    {
+      "day": 1,
+      "slot": 3,
+      "source_frame_id": "FF_BAROQUE_ORBIT_03_WEARING_PROFILE",
+      "purpose": "primary wearing portrait",
+      "duration_seconds": 4,
+      "cost_credits": 44
+    },
+    {
+      "day": 2,
+      "slot": 1,
+      "source_frame_id": "FF_BAROQUE_ORBIT_04_COASTAL_MODEL_END",
+      "purpose": "dynamic coastal model brand ending",
+      "duration_seconds": 4,
+      "cost_credits": 44
+    }
+  ],
+  "tiktok_distribution": {
+    "objective": "cold-start traffic to the independent product page",
+    "audience_language": "English",
+    "landing_path": "/products/new-series-baroque-pearl-hoops",
+    "organic_utm_query": "utm_source=tiktok&utm_medium=organic&utm_campaign=baroque_orbit_cold_start&utm_content=organic_house_v1",
+    "paid_utm_query": "utm_source=tiktok&utm_medium=paid_social&utm_campaign=baroque_orbit_cold_start&utm_content=organic_house_v1",
+    "paid_cta": "Shop Now",
+    "edit_timeline": [
+      {
+        "start_seconds": 0.0,
+        "end_seconds": 1.3,
+        "source_frame_id": "FF_BAROQUE_ORBIT_01_MACRO_HOOK",
+        "on_screen_copy": "Not perfectly round."
+      },
+      {
+        "start_seconds": 1.3,
+        "end_seconds": 3.8,
+        "source_frame_id": "FF_BAROQUE_ORBIT_02_SUSPENDED_HERO",
+        "on_screen_copy": "That's the point."
+      },
+      {
+        "start_seconds": 3.8,
+        "end_seconds": 7.4,
+        "source_frame_id": "FF_BAROQUE_ORBIT_03_WEARING_PROFILE",
+        "on_screen_copy": "The Baroque Orbit"
+      },
+      {
+        "start_seconds": 7.4,
+        "end_seconds": 10.5,
+        "source_frame_id": "FF_BAROQUE_ORBIT_04_COASTAL_MODEL_END",
+        "on_screen_copy": "See the pair. Link in bio."
+      }
+    ],
+    "caption_variants": [
+      {
+        "id": "caption_traffic_a",
+        "recommended": true,
+        "text": "Not perfectly round. That's the point. Meet The Baroque Orbit: irregular pearl drops, green accents, and a silhouette made to catch the light. Discover the new series through the link in bio."
+      },
+      {
+        "id": "caption_engagement_b",
+        "recommended": false,
+        "text": "Would you wear these with sunlit linen or an all-black evening look? The Baroque Orbit pairs irregular pearl drops with green accents. See the pair through the link in bio."
+      },
+      {
+        "id": "caption_price_c",
+        "recommended": false,
+        "text": "The Baroque Orbit. Irregular pearl drops. Green accents. $44.99 USD. See the exact pair in our new series through the link in bio."
+      }
+    ],
+    "pinned_comment": "The exact pair shown is The Baroque Orbit. Open the link in our bio and choose New Series.",
+    "hashtags": [
+      "#BaroquePearls",
+      "#PearlEarrings",
+      "#JewelryStyle",
+      "#StatementEarrings",
+      "#MythRealms"
+    ],
+    "music_plan": {
+      "license_source": "TikTok Commercial Music Library only, or an owned original track with documented rights",
+      "selection_timing": "Choose and log the exact track on publishing day because availability varies by region and account.",
+      "primary": {
+        "style": "instrumental organic house / Balearic downtempo",
+        "tempo_bpm": "100-104",
+        "sound_palette": "dry hand percussion, muted bass, airy plucked strings, restrained warm pad, no vocals",
+        "reason": "Keeps the Mediterranean lifestyle mood while providing clear edit beats and enough forward motion for product discovery.",
+        "edit_cues_seconds": [
+          0.0,
+          1.3,
+          3.8,
+          7.4,
+          10.5
+        ],
+        "cml_search_recipe": "Select target region and commercial placements; search Fashion or Lifestyle, Electronic, Chill or Dynamic, 0-20 seconds; prefer a track with a soft pickup and clear downbeats near the planned cuts."
+      },
+      "ab_variant": {
+        "style": "minimal fashion percussion",
+        "tempo_bpm": "112-116",
+        "sound_palette": "tight kick, rim click, muted synth pulse, no vocals",
+        "test_purpose": "Test a more TikTok-native, click-oriented pace without changing visuals or caption."
+      },
+      "brand_variant": {
+        "style": "coastal ambient instrumental",
+        "tempo_bpm": "86-92",
+        "sound_palette": "soft pulse, airy texture, sparse plucked notes, no vocals",
+        "test_purpose": "Use for organic brand storytelling, not as the first traffic-focused version."
+      },
+      "post_audio": "Generate every Seedance clip without music. Add one continuous CML track in post; keep sea and wind low underneath and place one restrained jewelry chime at 1.3 seconds."
+    },
+    "publishing_test": {
+      "first_post": "caption_traffic_a with primary music",
+      "first_review_window_hours": 24,
+      "do_not_change_together": "When testing, change music or caption or opening copy, never all three at once.",
+      "diagnosis": {
+        "weak_early_retention": "Repair the first 1.3 seconds and opening copy.",
+        "strong_watch_weak_click": "Strengthen CTA and verify the product-page match.",
+        "clicks_weak_landing_views": "Check mobile page speed, redirects and landing-page clarity."
+      },
+      "paid_follow_up": "If organic watch quality is acceptable, use Promote website visits or Ads Manager Landing Page View with the direct product path, TikTok Pixel and the paid UTM query."
+    }
+  },
+  "review_gate": {
+    "accept": [
+      "product geometry stays stable in every frame",
+      "model identity and natural skin remain stable",
+      "one primary camera move only",
+      "no new props or generated text",
+      "end state is usable for editing"
+    ],
+    "repair_rule": "Change one variable per retake. Day 1 uses three takes for frames 01-03. Generate frame 04 in Day 2 slot 1, then use the other two expiring daily slots for one-variable repairs or the next product.",
+    "after_three_failures": "Stop rerolling; simplify the motion contract or composite the product layer in post."
+  },
+  "created_at": "2026-07-16",
+  "updated_at": "2026-07-19"
+}

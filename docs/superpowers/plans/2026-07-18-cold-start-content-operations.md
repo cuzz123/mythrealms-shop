@@ -1,127 +1,127 @@
-# MythRealms 90-Day Content Operations Implementation Plan
+# MythRealms 90 天内容运营实施计划
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **面向智能体执行者：** 必须使用 `superpowers:subagent-driven-development`（推荐）或 `superpowers:executing-plans` 子技能，按任务逐项执行本计划。所有步骤均使用复选框（`- [ ]`）语法跟踪进度。
 
-**Goal:** Produce and operate a US-facing, AI-assisted organic content system that can generate 10-20 paid orders in 90 days while protecting product truth and the remaining 2,000 RMB operating budget.
+**目标：** 建立一套面向美国市场、由 AI 辅助的有机内容运营体系，在保护产品真实性和剩余 2,000 元运营预算的前提下，于 90 天内获得 10-20 个真实付费订单。
 
-**Architecture:** TikTok is the testing surface, Instagram Reels reuses proven video, Pinterest compounds product/style discovery, and the journal turns validated questions into searchable assets. Four visually distinct products form the first test matrix; behavior data chooses the eventual hero SKU.
+**整体架构：** TikTok 作为内容测试平台，Instagram Reels 复用已验证的视频，Pinterest 持续积累产品与穿搭发现流量，Journal 则把经过验证的用户问题沉淀为可搜索的内容资产。首轮使用四款视觉差异明显的产品构成测试矩阵，最终根据用户行为数据选出主推 SKU。
 
-**Tech Stack:** Existing image-generation tools, Seedance 2.0, TikTok, Instagram Reels, Pinterest, GA4, existing MythRealms video-pipeline assets.
+**技术栈：** 现有生图工具、Seedance 2.0、TikTok、Instagram Reels、Pinterest、GA4，以及 MythRealms 现有视频生产流程资产。
 
-## Global Constraints
+## 全局约束
 
-- US audience only; English public copy.
-- No new AI subscription during the 90-day test.
-- Do not buy samples during initial validation, but obtain supplier image permission before publishing supplier photos.
-- Never change product shape, color, scale, pearl count, stone layout, connector, chain geometry, or accessory structure in AI output.
-- Do not claim freshwater/saltwater pearl, precious-metal purity, handmade process, origin, durability, waterproofing, healing effect, or scarcity without documentation.
-- Do not fabricate reviews, orders, before/after evidence, customer videos, or unboxing.
-- Use AI and commercial-content disclosures where required, and commercial-safe audio only.
-- Every post receives a human review before publishing. Automation may prepare drafts and reports, not perform engagement spam.
-- Budget reserve: 1,100 RMB fulfillment float, 400 RMB refund/replacement reserve, 300 RMB conditional retargeting, 100 RMB essential assets, 100 RMB contingency.
+- 仅面向美国受众；对外内容统一使用英文。
+- 90 天测试期内不新增任何 AI 工具订阅。
+- 初始验证阶段不购买样品，但发布供应商图片前必须获得图片使用许可。
+- AI 输出不得改变产品形状、颜色、比例、珍珠数量、宝石排列、连接件、链条结构或配饰结构。
+- 未取得文件证明时，不得宣称产品为淡水珍珠、海水珍珠、特定纯度贵金属、手工制作、特定产地、耐用、防水、具有疗愈效果或数量稀缺。
+- 不得伪造评论、订单、使用前后对比证据、客户视频或开箱内容。
+- 按平台要求添加 AI 内容及商业内容披露，并且只使用可商用音频。
+- 每条内容发布前必须经过人工审核。自动化仅可用于准备草稿和报告，不得用于垃圾式互动。
+- 预算预留：1,100 元履约周转金、400 元退款或补发准备金、300 元条件式再营销预算、100 元必要素材预算、100 元应急预算。
 
 ---
 
-### Task 1: Lock the four-product test set and source-of-truth packs
+### 任务 1：锁定四款测试产品及其事实依据包
 
-**Outputs:** Four approved product packs and one product-fact sheet per SKU.
+**交付物：** 四份通过审核的产品资料包，以及每个 SKU 对应的一份产品事实表。
 
-Use these existing products and landing pages:
+使用以下现有产品和落地页：
 
-| Working name | Product slug | Initial role | Existing shot package |
+| 工作名称 | 产品 slug | 首轮测试定位 | 现有镜头包 |
 | --- | --- | --- | --- |
-| Violet Rain | `new-series-purple-gem-pearl-drops` | Dramatic color / statement earring | `SHOT_VIOLET_RAIN_COLD_START_001` |
-| Moon Disc | `new-series-round-shell-disc-drops` | Movement / iridescence | `SHOT_MOON_DISC_COLD_START_001` |
-| Turquoise Leaf | `new-series-leaf-turquoise-pearl-cuff` | Wrist styling / color | `SHOT_TURQUOISE_LEAF_COLD_START_001` |
-| Falling Pearl | `new-series-pearl-y-lariat` | Minimal necklace / evening styling | `SHOT_FALLING_PEARL_COLD_START_001` |
+| Violet Rain | `new-series-purple-gem-pearl-drops` | 强烈色彩／个性耳饰 | `SHOT_VIOLET_RAIN_COLD_START_001` |
+| Moon Disc | `new-series-round-shell-disc-drops` | 动态感／虹彩效果 | `SHOT_MOON_DISC_COLD_START_001` |
+| Turquoise Leaf | `new-series-leaf-turquoise-pearl-cuff` | 手腕穿搭／色彩点缀 | `SHOT_TURQUOISE_LEAF_COLD_START_001` |
+| Falling Pearl | `new-series-pearl-y-lariat` | 极简项链／晚宴穿搭 | `SHOT_FALLING_PEARL_COLD_START_001` |
 
-- [ ] **Step 1: Create a fact sheet for each product**
+- [ ] **步骤 1：为每款产品建立事实表**
 
-Record only supplier-supported values: source image paths, visible components, selling price, product dimensions if verified, available variants, stock handling, fulfillment cost estimate, delivery estimate, and return constraints.
+只记录供应商资料能够支持的信息：源图片路径、肉眼可见的组件、销售价格、经过核实的产品尺寸、可选款式、库存处理方式、预计履约成本、预计配送时间和退货限制。
 
-- [ ] **Step 2: Obtain and record supplier image permission**
+- [ ] **步骤 2：取得并记录供应商图片使用许可**
 
-Store the date, supplier contact, permission scope, and source URL privately. A missing response is not permission.
+私下保存许可日期、供应商联系人、许可范围和源链接。未收到回复不等于获得许可。
 
-- [ ] **Step 3: Validate every landing page against the supplier gallery**
+- [ ] **步骤 3：对照供应商图库核验每个落地页**
 
-Check product name, price, photos, description, in-stock state, shipping wording, return wording, and mobile checkout. Pause any SKU whose actual fulfillment data cannot support the page.
+检查产品名称、价格、图片、描述、库存状态、配送文案、退货文案和移动端结账流程。若实际履约信息无法支持页面承诺，则暂停该 SKU。
 
-- [ ] **Step 4: Complete the existing four shot packages**
+- [ ] **步骤 4：完成现有四个镜头包**
 
-Execute `docs/superpowers/plans/2026-07-17-four-product-tiktok-first-frame-batch.md`. Inspect every generated frame at full resolution and reject identity drift before Seedance generation.
+执行 `docs/superpowers/plans/2026-07-17-four-product-tiktok-first-frame-batch.md`。以全分辨率检查每一张生成画面，在进入 Seedance 视频生成前淘汰所有产品身份漂移的素材。
 
 ---
 
-### Task 2: Build six repeatable content formats
+### 任务 2：建立六种可重复使用的内容形式
 
-**Outputs:** Six templates, each with two hook variants and one direct landing page.
+**交付物：** 六套内容模板，每套包含两个 Hook 版本，并指向一个直接落地页。
 
-Use this launch mix:
+首发内容组合如下：
 
-1. `Macro proof`: product detail in frame 1, movement reveals texture.
-2. `A/B choice`: two products or two styling moods; asks for a concrete choice.
-3. `POV styling`: one situation, one product, one outfit result.
-4. `Price/style`: literal price and occasion without competitor comparison.
-5. `Trust answer`: shipping, returns, AI imagery, or what the buyer receives.
-6. `Brand world`: a 10-15 second fashion vignette that reveals a real product in the first two seconds.
+1. `Macro proof`：第一帧直接展示产品细节，通过运动揭示材质和纹理。
+2. `A/B choice`：展示两款产品或两种穿搭氛围，引导用户做出明确选择。
+3. `POV styling`：一个场景、一款产品、一个最终穿搭效果。
+4. `Price/style`：直接说明价格和适用场合，不与竞品比较。
+5. `Trust answer`：回答配送、退货、AI 图片或买家实际会收到什么等信任问题。
+6. `Brand world`：10-15 秒的时尚短片，并在前两秒展示真实产品。
 
-- [ ] **Step 1: Create two hook variants for each format**
+- [ ] **步骤 1：为每种形式制作两个 Hook 版本**
 
-The visual first frame changes; the body and CTA stay constant. Examples:
+只改变第一帧视觉，主体内容和 CTA 保持一致。例如：
 
 ```text
 A: The color changes when you move.
 B: Watch the shell catch green, then pink.
 ```
 
-- [ ] **Step 2: Use the single-video structure**
+- [ ] **步骤 2：统一采用单条视频结构**
 
 ```text
-0-2s: product or explicit question
-2-6s: occasion, choice, or tension
-6-15s: readable product/styling result
-last 2s: soft CTA + MythRealms
+0-2 秒：展示产品或提出明确问题
+2-6 秒：呈现场合、选择或冲突点
+6-15 秒：清晰展示产品或穿搭结果
+最后 2 秒：柔和 CTA + MythRealms
 ```
 
-- [ ] **Step 3: Apply the visual QA gate**
+- [ ] **步骤 3：执行视觉质量门禁**
 
-Reject a render for product drift, extra jewelry, malformed hands/ears, unreadable product, artificial skin, generated text, impossible motion, frame jitter, watermark, or a crop hidden by platform UI.
+出现以下任一问题即淘汰素材：产品漂移、多出首饰、手或耳朵畸形、产品无法看清、皮肤质感失真、生成文字、不可能的运动、画面抖动、水印，或主体被平台界面遮挡。
 
-- [ ] **Step 4: Apply the copy QA gate**
+- [ ] **步骤 4：执行文案质量门禁**
 
-Every caption must state a real styling idea or question, use at most 3-5 relevant hashtags, avoid luxury-brand imitation language, avoid unsupported materials, and point to the exact product shown.
+每条 Caption 必须提供一个真实的穿搭思路或具体问题；只使用 3-5 个相关 Hashtag；避免模仿奢侈品牌的语言；不使用未经证实的材质描述；并指向画面中展示的准确产品。
 
 ---
 
-### Task 3: Execute the first 14-day publishing sprint
+### 任务 3：执行首个 14 天发布冲刺
 
-**Cadence:** TikTok daily, Reels 4 per week, Pinterest 4-6 per week. Publish at 8:00 PM US Eastern Time (5:00 PM Pacific) for the first seven days, then adjust using actual audience analytics.
+**发布频率：** TikTok 每天 1 条，Reels 每周 4 条，Pinterest 每周 4-6 条。前七天统一在美国东部时间晚上 8:00（太平洋时间下午 5:00）发布，之后再根据真实受众数据调整。
 
-| Day | TikTok post | On-screen hook | CTA / landing | Reuse |
+| 天数 | TikTok 内容 | 画面 Hook | CTA／落地页 | 复用方式 |
 | ---: | --- | --- | --- | --- |
-| 1 | Moon Disc macro movement | `The color changes when you move.` | `See the full pair in bio.` Direct Moon Disc URL in post/profile where available | Reel D2; Pin macro still |
-| 2 | Violet Rain wearing profile | `Pearls, but after midnight.` | `Would you wear these: yes or no?` Product URL | Pin profile still |
-| 3 | A/B: Moon Disc vs Violet Rain | `Silver light or violet light?` | `Comment A or B.` Pearl Edit collection | Reel same day |
-| 4 | Falling Pearl neckline reveal | `One line. One falling pearl.` | `See how it sits.` Product URL | Pin full-product still |
-| 5 | Trust: AI scene vs product reference | `The scene is AI. The product details are checked against supplier views.` | `Supplier views appear first on the product page.` Product URL | Reel; no sales pressure |
-| 6 | Turquoise Leaf sleeve reveal | `Made for sunlit skin.` | `Save this for summer styling.` Product URL | Pin wrist crop |
-| 7 | POV outfit result, Violet Rain | `POV: your black dress needed one thing.` | `The Violet Rain pair is linked.` Product URL | Reel D8 |
-| 8 | Recut best D1-D7 opening with faster reveal | Use winning hook, change first frame only | Same landing as winner | Pin winner frame |
-| 9 | Price/style, best earring | `$39-$59 pearl styling for an evening look.` Use actual product price on publish day | `See today's price on the product page.` | Reel |
-| 10 | A/B: Turquoise Leaf vs Falling Pearl | `Wrist detail or neckline detail?` | `Comment wrist or necklace.` Collection URL | Two Pins |
-| 11 | Moon Disc product-only movement | `No outfit. Just the color shift.` | `Save for your next dinner look.` Product URL | Reel D12 |
-| 12 | Trust: US delivery process | `What happens after you order from MythRealms?` | State only verified handling and delivery windows; link Shipping page | Policy Pin |
-| 13 | Violet Rain pair proof | `Would you style these with black or ivory?` | `Comment black or ivory.` Product URL | Reel |
-| 14 | Four-product rapid choice | `Pick one: 1, 2, 3, or 4.` | `The Pearl Edit is in bio.` Collection URL | Pinterest four-tile collage only if each product remains exact |
+| 1 | Moon Disc 微距动态 | `The color changes when you move.` | `See the full pair in bio.` 在帖子或主页允许的位置直接放 Moon Disc 链接 | 第 2 天复用为 Reel；微距静帧制作 Pin |
+| 2 | Violet Rain 佩戴侧面 | `Pearls, but after midnight.` | `Would you wear these: yes or no?` 产品链接 | 侧面静帧制作 Pin |
+| 3 | A/B：Moon Disc 对比 Violet Rain | `Silver light or violet light?` | `Comment A or B.` Pearl Edit 合集页 | 当天复用为 Reel |
+| 4 | Falling Pearl 领口展示 | `One line. One falling pearl.` | `See how it sits.` 产品链接 | 完整产品静帧制作 Pin |
+| 5 | 信任内容：AI 场景对比产品参考图 | `The scene is AI. The product details are checked against supplier views.` | `Supplier views appear first on the product page.` 产品链接 | 复用为 Reel；不强化销售 |
+| 6 | Turquoise Leaf 袖口展示 | `Made for sunlit skin.` | `Save this for summer styling.` 产品链接 | 手腕裁切图制作 Pin |
+| 7 | POV 穿搭结果：Violet Rain | `POV: your black dress needed one thing.` | `The Violet Rain pair is linked.` 产品链接 | 第 8 天复用为 Reel |
+| 8 | 重剪第 1-7 天最佳开场，加快产品揭示 | 使用胜出的 Hook，仅更换第一帧 | 沿用胜出内容的落地页 | 胜出画面制作 Pin |
+| 9 | 最佳耳饰的价格／穿搭内容 | `$39-$59 pearl styling for an evening look.` 发布当天必须使用产品实际价格 | `See today's price on the product page.` | 复用为 Reel |
+| 10 | A/B：Turquoise Leaf 对比 Falling Pearl | `Wrist detail or neckline detail?` | `Comment wrist or necklace.` 合集页链接 | 制作两条 Pin |
+| 11 | Moon Disc 纯产品动态 | `No outfit. Just the color shift.` | `Save for your next dinner look.` 产品链接 | 第 12 天复用为 Reel |
+| 12 | 信任内容：美国订单配送流程 | `What happens after you order from MythRealms?` | 只说明已经核实的处理和配送时效；链接至 Shipping 页面 | 制作政策说明 Pin |
+| 13 | Violet Rain 成对产品展示 | `Would you style these with black or ivory?` | `Comment black or ivory.` 产品链接 | 复用为 Reel |
+| 14 | 四款产品快速选择 | `Pick one: 1, 2, 3, or 4.` | `The Pearl Edit is in bio.` 合集页链接 | 只有在四款产品均保持准确时，才制作 Pinterest 四宫格拼图 |
 
-- [ ] **Step 1: Prepare each post 24 hours before publication**
+- [ ] **步骤 1：每条内容至少提前 24 小时准备**
 
-Record filename, product, concept, hook version, caption, disclosure, audio source, CTA URL, and UTM content value.
+记录文件名、产品、创意概念、Hook 版本、Caption、披露信息、音频来源、CTA 链接和 UTM content 值。
 
-- [ ] **Step 2: Use direct English captions**
+- [ ] **步骤 2：使用直接明确的英文 Caption**
 
-Caption patterns:
+Caption 模板：
 
 ```text
 Pearls, but after midnight. Would you wear the Violet Rain pair with black or ivory? AI-created scene; product reference views are on the product page. #pearljewelry #earringstyle #eveningstyle
@@ -131,86 +131,86 @@ Pearls, but after midnight. Would you wear the Violet Rain pair with black or iv
 The shell shifts from green to pink as it moves. Save this for your next dinner look. #pearlearrings #jewelrystyling #outfitdetails
 ```
 
-- [ ] **Step 3: Pin a useful first comment**
+- [ ] **步骤 3：置顶一条有用的首评**
 
-Use the exact product name and link direction, not a generic slogan:
+使用准确的产品名称和链接指引，不使用空泛口号：
 
 ```text
 Product: The Moon Disc. Supplier-reference views appear first on the product page; link in bio.
 ```
 
-- [ ] **Step 4: Record 2-hour and 24-hour results**
+- [ ] **步骤 4：记录发布后 2 小时和 24 小时的数据**
 
-Capture views, average watch time, completion rate, likes, saves, comments, profile visits, link clicks, US sessions, product views, add-to-carts, and orders. Do not delete a low-view post during the first 24 hours unless it contains an error or policy risk.
-
----
-
-### Task 4: Run the weekly content production loop
-
-**Output:** One approved seven-day queue and one Friday decision record each week.
-
-- [ ] **Monday: choose evidence-backed briefs**
-
-Select 7 TikTok briefs from last week's top two hooks, top two products by qualified product-page visits/add-to-carts, one unanswered comment, and one new controlled test.
-
-- [ ] **Tuesday: create first frames and product stills**
-
-Generate only the assets required by the seven briefs. Review product identity before paying for video generation.
-
-- [ ] **Wednesday: generate video variants**
-
-Use Seedance in short segments. Change one variable per test: first frame, hook text, scene, or CTA. Do not change all variables in one comparison.
-
-- [ ] **Thursday: edit and compliance review**
-
-Add readable captions inside platform safe areas, commercial-safe audio, disclosure, exact CTA, and UTM link. Export clean masters without platform watermarks.
-
-- [ ] **Friday: schedule and review data**
-
-Schedule drafts, then review the previous seven days. Record keep/iterate/stop for every concept and product.
-
-- [ ] **Weekend: engage and capture questions**
-
-Reply manually to product questions and turn repeated questions into next week's trust video or journal brief.
+记录播放量、平均观看时长、完播率、点赞、收藏、评论、主页访问、链接点击、美国会话数、产品浏览、加购和订单。除非内容存在错误或平台政策风险，否则不要在发布后 24 小时内删除低播放内容。
 
 ---
 
-### Task 5: Apply the 90-day phase rules
+### 任务 4：执行每周内容生产循环
 
-#### Days 1-14: establish a baseline
+**交付物：** 每周一份审核通过的七天发布队列，以及一份周五决策记录。
 
-- [ ] Publish 14 TikToks, 8 Reels, and 8-12 Pins.
-- [ ] Test six concepts with two openings each.
-- [ ] Success signal: one post over 1,000 views or at least 10 profile/site visits.
-- [ ] If neither occurs, keep cadence flat and improve first-two-second product visibility.
+- [ ] **周一：选择有数据依据的 Brief**
 
-#### Days 15-35: find the hook/product pair
+根据上周排名前二的 Hook、按有效产品页访问和加购计算的前两款产品、一个尚未回答的评论，以及一个新的受控测试，选出 7 条 TikTok Brief。
 
-- [ ] Stop the bottom 50% of concepts by qualified traffic, not likes alone.
-- [ ] Make three variants of each of the top two hooks.
-- [ ] Reduce brand films to one per week.
-- [ ] Publish one high-intent journal article per week.
-- [ ] Target 100-250 cumulative qualified US visits, 5-10 subscribers, 3+ add-to-carts, and the first 1-3 orders.
+- [ ] **周二：制作第一帧和产品静帧**
 
-#### Days 36-60: concentrate around one candidate hero SKU
+只生成这 7 个 Brief 所需的素材。在付费生成视频前，先审核产品身份是否准确。
 
-- [ ] Choose the hero by product-page visits, add-to-cart rate, checkout starts, refund risk, and unit economics.
-- [ ] Allocate content 60% hero, 20% companion/entry product, 20% new tests.
-- [ ] Target 300-500 cumulative qualified visits, 8-15 add-to-carts, and 4-8 cumulative orders.
+- [ ] **周三：生成视频变体**
 
-#### Days 61-90: replicate verified signals
+使用 Seedance 分短段生成。每次测试只改变一个变量：第一帧、Hook 文案、场景或 CTA。一次对比中不得同时改变所有变量。
 
-- [ ] Build a `3 hooks x 2 visual treatments x 2 CTAs = 12 asset` matrix around the winner.
-- [ ] Repurpose winners into Reels, Pins, article lead media, and product-page video.
-- [ ] End target: 70-90 TikToks, 35-45 Reels, 45-60 Pins, 8-10 journal/guidance pages, 700-1,500 qualified US visits, and 10-20 paid orders.
+- [ ] **周四：剪辑与合规审核**
+
+在平台安全区内添加清晰字幕、可商用音频、披露信息、准确 CTA 和 UTM 链接。导出不含平台水印的干净母版。
+
+- [ ] **周五：排期并复盘数据**
+
+安排发布草稿，然后复盘过去七天数据。对每个创意和产品记录“保留／迭代／停止”结论。
+
+- [ ] **周末：互动并收集问题**
+
+人工回复产品问题，把重复出现的问题转化为下周的信任类视频或 Journal Brief。
 
 ---
 
-### Task 6: Turn validated audience questions into SEO/GEO content
+### 任务 5：执行 90 天分阶段规则
 
-**Output:** One article per week from days 15-90, each tied to a measured question and real products.
+#### 第 1-14 天：建立基线
 
-Publish in this priority order unless social comments reveal stronger demand:
+- [ ] 发布 14 条 TikTok、8 条 Reels 和 8-12 条 Pins。
+- [ ] 测试六种内容概念，每种测试两个开场。
+- [ ] 成功信号：至少一条内容播放超过 1,000，或获得至少 10 次主页／网站访问。
+- [ ] 如果两个信号都没有出现，保持发布频率不变，优先提高前两秒的产品可见度。
+
+#### 第 15-35 天：找到有效的 Hook 与产品组合
+
+- [ ] 按有效流量而非只看点赞，停止表现最差的 50% 内容概念。
+- [ ] 为排名前二的 Hook 各制作三个变体。
+- [ ] 品牌短片减少到每周一条。
+- [ ] 每周发布一篇高购买意图 Journal 文章。
+- [ ] 目标：累计获得 100-250 次有效美国访问、5-10 个订阅用户、至少 3 次加购，以及首批 1-3 个订单。
+
+#### 第 36-60 天：集中测试一款候选主推 SKU
+
+- [ ] 根据产品页访问、加购率、发起结账数、退款风险和单位经济性选择主推产品。
+- [ ] 内容分配调整为：60% 主推产品、20% 搭配或入门产品、20% 新测试。
+- [ ] 目标：累计获得 300-500 次有效访问、8-15 次加购，以及累计 4-8 个订单。
+
+#### 第 61-90 天：复制已验证的有效信号
+
+- [ ] 围绕胜出产品建立 `3 个 Hook x 2 种视觉处理 x 2 个 CTA = 12 条素材` 的测试矩阵。
+- [ ] 将胜出内容复用为 Reels、Pins、文章首屏媒体和产品页视频。
+- [ ] 最终目标：发布 70-90 条 TikTok、35-45 条 Reels、45-60 条 Pins、8-10 个 Journal／指南页面；获得 700-1,500 次有效美国访问，以及 10-20 个付费订单。
+
+---
+
+### 任务 6：把经过验证的受众问题转化为 SEO／GEO 内容
+
+**交付物：** 第 15-90 天期间每周发布一篇文章，每篇均关联一个经过数据验证的问题和真实产品。
+
+除非社交平台评论显示出更强的需求，否则按以下优先级发布：
 
 1. `Pearl Earrings Under $50: A Styling Guide`
 2. `What to Wear with Statement Pearl Earrings`
@@ -221,101 +221,101 @@ Publish in this priority order unless social comments reveal stronger demand:
 7. `How to Style Baroque Pearl Earrings for an Evening Outfit`
 8. `Freshwater Pearl vs Mother-of-Pearl: What Buyers Should Know`
 
-- [ ] **Step 1: Verify every factual claim before drafting**
+- [ ] **步骤 1：起草前核实每一项事实陈述**
 
-The final topic requires sourced educational distinctions and must not classify a MythRealms product without supplier proof.
+最后一个选题需要引用可靠来源解释知识差异；没有供应商证明时，不得把 MythRealms 产品归入某种材质类别。
 
-- [ ] **Step 2: Use the answer-first article structure**
+- [ ] **步骤 2：使用“答案优先”的文章结构**
 
 ```text
-direct answer -> suitable buyers/occasions -> decision factors -> product examples -> cautions -> FAQ -> relevant product CTA
+直接回答 -> 适合的买家／场合 -> 决策因素 -> 产品示例 -> 注意事项 -> FAQ -> 相关产品 CTA
 ```
 
-- [ ] **Step 3: Add internal links and one measurable CTA**
+- [ ] **步骤 3：添加内部链接和一个可衡量的 CTA**
 
-Link to one relevant guide, one policy page where useful, and no more than three directly relevant products. Add UTM tags only to external campaign links, not normal internal links.
+链接至一篇相关指南，并在适用时链接一个政策页面；直接关联的产品不超过三款。UTM 参数只添加到外部营销活动链接，不添加到普通站内链接。
 
-- [ ] **Step 4: Review performance after 28 days**
+- [ ] **步骤 4：在发布 28 天后复盘表现**
 
-Track impressions, clicks, guide-to-product click-through, add-to-carts, and assisted orders. Refresh only when facts, products, or observed queries justify it.
+跟踪曝光、点击、指南到产品页的点击率、加购和辅助转化订单。只有当事实、产品或观察到的搜索问题发生变化时才更新文章。
 
 ---
 
-### Task 7: Use the weekly funnel diagnosis rules
+### 任务 7：使用每周漏斗诊断规则
 
-**Output:** One explicit action for the next week; never a vague “post more” conclusion.
+**交付物：** 为下一周确定一个明确动作，绝不使用含糊的“多发内容”作为结论。
 
-| Observed result | Diagnosis | Next action |
+| 观察结果 | 诊断 | 下一步动作 |
 | --- | --- | --- |
-| Low views and low watch time | First frame/hook failure | Make product larger by frame 1; shorten setup; test two new openings |
-| Views but no profile visits | Content entertains without product intent | Name the item/occasion earlier; make CTA concrete |
-| Profile visits but no site clicks | Bio positioning or link mismatch | Use literal pearl-jewelry bio and collection link; align pinned videos |
-| Site clicks but few product views | Landing mismatch or slow/unclear mobile page | Direct-link exact SKU; inspect mobile performance and hero content |
-| 100 qualified visits with no subscribe/add-to-cart | Trust, price, image, or shipping problem | Audit product truth, delivery, returns, price, and checkout confidence |
-| 300 product views with add-to-cart rate under 2% | Weak product-market offer | Pause the SKU; do not use ads to force it |
-| 10 add-to-carts but little checkout | Cart/fees/delivery friction | Inspect shipping cost, delivery promise, discount clarity, and mobile cart |
-| 5 checkout starts with no payment | Payment or trust blocker | Test payment on mobile and inspect errors/policy visibility |
-| Orders with serious item mismatch | Supplier/AI truth failure | Delist immediately and protect refund reserve |
+| 播放低且观看时长低 | 第一帧／Hook 失败 | 第一帧放大产品；缩短铺垫；测试两个新开场 |
+| 有播放但没有主页访问 | 内容有娱乐性，但缺少产品意图 | 更早说出产品名称或场合；让 CTA 更具体 |
+| 有主页访问但没有网站点击 | Bio 定位或链接不匹配 | 使用直白的珍珠首饰 Bio 和合集链接；统一置顶视频定位 |
+| 有网站点击但产品页访问少 | 落地页不匹配，或移动端缓慢／不清晰 | 直接链接准确 SKU；检查移动端性能和首屏内容 |
+| 100 次有效访问后仍无订阅／加购 | 信任、价格、图片或配送问题 | 审核产品真实性、配送、退货、价格和结账信心 |
+| 300 次产品浏览后加购率低于 2% | 产品市场匹配或优惠力度不足 | 暂停该 SKU；不得用广告强推 |
+| 10 次加购但很少发起结账 | 购物车、费用或配送阻力 | 检查运费、配送承诺、优惠说明和移动端购物车 |
+| 5 次发起结账但没有付款 | 支付或信任障碍 | 在移动端测试支付，检查报错和政策可见性 |
+| 有订单但实物严重不符 | 供应商或 AI 真实性失控 | 立即下架，并保护退款准备金 |
 
-- [ ] **Step 1: Compare products on qualified metrics**
+- [ ] **步骤 1：使用有效指标比较产品**
 
-Use product views, add-to-cart rate, checkout rate, paid conversion, expected gross margin, and service risk. Likes are supporting evidence only.
+使用产品浏览、加购率、结账率、付费转化率、预计毛利和售后风险进行比较。点赞只能作为辅助证据。
 
-- [ ] **Step 2: Stop concepts consistently below median**
+- [ ] **步骤 2：停止持续低于中位数的内容概念**
 
-After four controlled variants remain below the channel median for views and clicks, stop the concept for at least two weeks.
+某个概念的四个受控变体在播放和点击上仍低于渠道中位数时，至少暂停该概念两周。
 
-- [ ] **Step 3: Preserve a test log**
+- [ ] **步骤 3：保存测试日志**
 
-For every decision, record date, sample size, winning/losing variable, action, and the earliest date it can be reconsidered.
-
----
-
-### Task 8: Enforce budget and advertising gates
-
-- [ ] **Step 1: Reconcile cash every week**
-
-Record paid orders, supplier purchase cost, domestic China shipping, inspection/repacking, international shipping, payment fees, refunds/replacements, and available fulfillment float.
-
-- [ ] **Step 2: Keep the 300 RMB ad reserve locked through day 60**
-
-Do not start TikTok Ads. Consider a seven-day Meta retargeting test only after all of these are true:
-
-- At least 300 US sessions in the latest 30 days.
-- At least 5 add-to-carts or 1 organic paid order.
-- `view_item`, `add_to_cart`, `begin_checkout`, and `purchase` verified.
-- One piece of content demonstrably sends product-page visits.
-- The hero SKU's maximum allowable acquisition cost is known.
-
-- [ ] **Step 3: Abort an eligible retargeting test when economics fail**
-
-If spend reaches one order's available gross margin without a purchase, pause immediately. If the audience is too small for delivery, do not broaden to cold traffic.
+每次决策都记录日期、样本量、胜出／失败变量、采取的动作，以及最早可重新评估的日期。
 
 ---
 
-### Task 9: Make the day-90 decision
+### 任务 8：执行预算和广告投放门槛
 
-- [ ] **Step 1: Continue only with evidence**
+- [ ] **步骤 1：每周核对现金情况**
 
-Use these outcomes:
+记录付费订单、供应商采购成本、中国境内运费、质检和重新包装、国际运费、支付手续费、退款／补发，以及可用履约周转金。
 
-- Fewer than 3 orders after 700+ qualified visits and fewer than 15 add-to-carts: do not add ad spend; reassess product/trust/fulfillment.
-- 4-9 orders: keep the winner, buy a real sample, replace uncertain AI details with real content, then run a second validation stage.
-- 10-20 orders: buy samples of the hero and companion product, validate quality/fulfillment, build real UGC/product footage, and only then expand paid tests.
+- [ ] **步骤 2：第 60 天前锁定 300 元广告储备**
 
-- [ ] **Step 2: Archive the losing test assets without deleting evidence**
+不要启动 TikTok Ads。只有同时满足以下全部条件时，才考虑进行为期七天的 Meta 再营销测试：
 
-Mark them inactive in the operating log, preserve their metrics, and avoid quietly recycling failed creative as “new.”
+- 最近 30 天内至少有 300 次美国会话。
+- 至少有 5 次加购或 1 个自然流量付费订单。
+- 已验证 `view_item`、`add_to_cart`、`begin_checkout` 和 `purchase` 事件。
+- 至少有一条内容能够明确带来产品页访问。
+- 已知主推 SKU 可承受的最高获客成本。
 
-- [ ] **Step 3: Produce a one-page decision memo**
+- [ ] **步骤 3：经济性不成立时立即终止符合条件的再营销测试**
 
-Include orders, revenue, variable fulfillment cost, refunds, qualified US visits, funnel rates, winning product, winning hook, top objection, next budget, and explicit continue/adjust/stop decision.
+如果广告花费达到一个订单可用毛利但仍未产生购买，立即暂停。如果受众规模太小导致广告无法投放，不得扩大至冷流量。
 
-### Completion Criteria
+---
 
-- Four launch product truth packs are approved and linked to exact landing pages.
-- The first 14 days are published and measured without increasing cadence reactively.
-- Weekly keep/iterate/stop decisions are based on qualified funnel metrics.
-- 8-10 useful journal/guidance pages are produced from validated questions.
-- The remaining 2,000 RMB stays inside the agreed envelopes.
-- At day 90, the project either reaches 10-20 real paid orders or produces a clear evidence-based stop/adjust decision.
+### 任务 9：做出第 90 天决策
+
+- [ ] **步骤 1：只依据证据决定是否继续**
+
+按以下结果执行：
+
+- 获得 700 次以上有效访问后仍少于 3 个订单，且加购少于 15 次：不要增加广告支出；重新评估产品、信任和履约。
+- 获得 4-9 个订单：保留胜出产品，购买真实样品，用真实内容替换不确定的 AI 细节，然后进行第二阶段验证。
+- 获得 10-20 个订单：购买主推产品和搭配产品样品，验证质量与履约，制作真实 UGC／产品视频，之后才扩大付费测试。
+
+- [ ] **步骤 2：归档失败测试素材，但不要删除证据**
+
+在运营日志中将其标记为停用，保留相关指标，不得悄悄把失败创意重新包装成“新内容”循环使用。
+
+- [ ] **步骤 3：输出一页决策备忘录**
+
+包含订单数、收入、可变履约成本、退款、有效美国访问、漏斗转化率、胜出产品、胜出 Hook、首要异议、下一阶段预算，以及明确的“继续／调整／停止”决定。
+
+### 完成标准
+
+- 四款首发产品的真实性资料包均已通过审核，并链接至准确落地页。
+- 首个 14 天发布计划已执行并完成数据记录，未因短期表现而冲动增加频率。
+- 每周“保留／迭代／停止”决策均基于有效漏斗指标。
+- 根据经过验证的问题产出 8-10 个有用的 Journal／指南页面。
+- 剩余 2,000 元预算始终控制在约定范围内。
+- 到第 90 天时，项目获得 10-20 个真实付费订单，或形成一份基于明确证据的停止／调整决策。

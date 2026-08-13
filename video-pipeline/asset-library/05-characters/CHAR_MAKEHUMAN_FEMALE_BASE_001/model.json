@@ -1,0 +1,51 @@
+{
+  "id": "CHAR_MAKEHUMAN_FEMALE_BASE_001",
+  "status": "available",
+  "role": "female_human_base_mesh_pre_rig",
+  "format": ["blend", "png", "obj", "proxy"],
+  "source": {
+    "project": "MakeHuman Community",
+    "body_asset": {
+      "name": "female_generic proxy mesh",
+      "url": "https://github.com/makehumancommunity/makehuman-assets/blob/master/base/proxymeshes/female_generic/female_generic.obj",
+      "local_file": "female_generic.obj"
+    },
+    "hair_asset": {
+      "name": "long01 hair",
+      "url": "https://github.com/makehumancommunity/makehuman-assets/blob/master/base/hair/long01/long01.obj",
+      "local_file": "long01_hair.obj"
+    },
+    "license_record": "https://static.makehumancommunity.org/about/license.html"
+  },
+  "license": {
+    "type": "CC0-1.0-core-assets",
+    "attribution_required": false,
+    "library_rule": "Retain this source record. Third-party clothing, hair, skins and textures must be licensed individually before inclusion."
+  },
+  "geometry": {
+    "body_vertices": 13868,
+    "body_polygons": 13866,
+    "hair_vertices": 3239,
+    "normalized_height_m": 1.7,
+    "up_axis": "Z",
+    "character_forward": "-Y",
+    "ground_plane": "Z=0"
+  },
+  "rig": {
+    "status": "unrigged",
+    "target_standard": "CHAR_HUMAN_MASTER_RIG_001",
+    "required_before_motion_use": [
+      "A-pose alignment test",
+      "weight-paint validation",
+      "shoulder, elbow, knee and finger deformation review"
+    ]
+  },
+  "files": {
+    "preview_blend": "Preview.blend",
+    "thumbnail": "Thumbnail.png",
+    "source_body": "female_generic.obj",
+    "source_hair": "long01_hair.obj",
+    "source_proxy_definition": "female_generic.proxy"
+  },
+  "quality_boundary": "A legal, neutral female body and hair foundation for previs and look-development. It is not yet a final luxury-ad character: it has no production facial detail, skin texture set, clothing, complete character rig or approved animation weights."
+}

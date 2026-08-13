@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "id": "SHOT_GOLD_SHELL_TEARDROPS_COLD_START_001",
+  "name": "Gold Shell Teardrops｜真实海岸四镜头",
+  "category": "shot_template",
+  "status": "approved_first_frames",
+  "version": "v2",
+  "format": "9:16",
+  "fps": 30,
+  "generation_surface": "Xiaoyunque Seedance 2.0 Fast",
+  "generation_mode": "I2V first-frame",
+  "minimum_clip_duration_seconds": 4,
+  "credits_per_second": 11,
+  "credits_per_take": 44,
+  "product": {
+    "slug": "new-series-gold-shell-teardrops",
+    "name": "Gold Shell Teardrops",
+    "source_references": [
+      "../../../../public/images/products/new-series/new-series-gold-shell-teardrops/main.jpg",
+      "../../../../public/images/products/new-series/new-series-gold-shell-teardrops/detail-01.jpg"
+    ],
+    "geometry_locks": [
+      "one upright oval gold filigree relief stud",
+      "one small gold connector ring",
+      "one teardrop-shaped creamy white mother-of-pearl shell pendant",
+      "two narrow vertical rows of tiny irregular rice pearls and polished gold beads"
+    ]
+  },
+  "visual_bible": {
+    "character_lock": "成年深棕肤色短卷发模特，真实皮肤纹理，象牙白亚麻衬衫。",
+    "environment_lock": "真实地中海石灰岩拱廊与海岸露台，橄榄叶影，傍晚自然光。",
+    "prohibited": ["cutout composite", "generated text", "logos", "extra jewelry", "cups", "tables", "books", "chairs", "vases", "flowers", "studio sweep"]
+  },
+  "frames": [
+    {
+      "frame_id": "FF_GOLD_SHELL_TEARDROPS_01_ARCH_HOOK",
+      "role": "wearing_portrait_hook",
+      "path": "first-frames/FF_GOLD_SHELL_TEARDROPS_01_ARCH_HOOK-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "camera_contract": "85mm 近景人像，机位锁定，只允许不超过2%的极慢推进；完整耳环必须清晰。",
+      "motion_contract": "自然眨眼一次，视线轻微移动，发梢受轻风带动，耳环只摆动一次后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定模特身份、真实肤质、短卷发、白色亚麻衬衫、完整耳环、石灰岩拱廊和海岸自然光。4秒单镜头，保持当前85mm近景人像构图，机位基本锁定，只允许不超过2%的极慢推进。0-1秒模特自然眨眼一次；1-3秒视线轻微移向画面外的光线，发梢被轻风带动；3-4秒全部停稳，耳环只因极小头部位移轻摆一次后静止。保持一枚金色椭圆镂空浮雕耳钉、一个小金色连接环、一颗水滴形乳白贝壳吊坠，以及两条由米粒珍珠和金珠构成的竖向包边完全不变；不换脸、不磨皮、不新增首饰、人物或道具。环境声只有轻风和远处海浪，不要音乐。"
+    },
+    {
+      "frame_id": "FF_GOLD_SHELL_TEARDROPS_02_TERRACE_END",
+      "role": "coastal_brand_end",
+      "path": "first-frames/FF_GOLD_SHELL_TEARDROPS_02_TERRACE_END-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "copy_safe_area": "upper-left sea and sky",
+      "camera_contract": "50mm 膝上中景，机位锁定，最多约2%缓慢后撤；人物留在右侧三分之一。",
+      "motion_contract": "自然呼吸，视线向海平线略移动，衣角和橄榄叶影轻微移动，耳环轻摆一次后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位模特、真实肤质、短卷发、白色亚麻衬衫、可见耳环、石灰岩海岸露台、橄榄树和海天自然光。4秒单镜头，保持当前50mm膝上中景构图，机位基本锁定，只允许约2%的缓慢后撤；人物始终位于右侧三分之一，左上天空与海面保持干净作为后期文案安全区。0-2秒模特自然呼吸，视线轻微移向海平线；2-4秒衣角和橄榄叶影被轻风带动，耳环只轻摆一次后停稳。保持一枚金色椭圆镂空浮雕耳钉、一个小金色连接环、一颗水滴形乳白贝壳吊坠，以及两条由米粒珍珠和金珠构成的竖向包边完全不变；不换脸、不新增首饰、人物、杯子、桌子、书、花瓶或花卉。环境声只有轻风与远处海浪，不要音乐。"
+    },
+    {
+      "frame_id": "FF_GOLD_SHELL_TEARDROPS_03_ARCH_PROFILE",
+      "role": "arch_profile_midbeat",
+      "path": "first-frames/FF_GOLD_SHELL_TEARDROPS_03_ARCH_PROFILE-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "camera_contract": "50mm 侧面近景，机位锁定，焦点保持在耳朵与完整耳环。",
+      "motion_contract": "视线朝海平线略移，发丝受轻风移动，耳环只轻摆一次后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位深棕肤色短卷发模特、真实肤质、象牙白亚麻、完整耳环、石灰岩拱门和海景。4秒单镜头，保持当前50mm侧面近景构图，机位完全锁定，焦点始终在耳朵与完整耳环。0-2秒模特视线朝海平线轻微移动；2-4秒发丝被轻风带动，耳环只轻摆一次后停稳。保持金色椭圆镂空浮雕耳钉、一个小金色连接环、一颗水滴形乳白贝壳吊坠，以及两条由米粒珍珠和金珠构成的竖向包边完全不变；不新增首饰、人物、杯子、桌子、书、花瓶、花卉或其他道具。环境声只有轻风和远处海浪，不要音乐。"
+    },
+    {
+      "frame_id": "FF_GOLD_SHELL_TEARDROPS_04_SEA_END",
+      "role": "sea_copy_safe_end",
+      "path": "first-frames/FF_GOLD_SHELL_TEARDROPS_04_SEA_END-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "copy_safe_area": "left sea and sky",
+      "camera_contract": "50mm 偏近人像，机位锁定，只允许约2%缓慢后撤；人物在右侧，左侧海天留白。",
+      "motion_contract": "模特自然呼吸并向海面略看，耳环轻摆一次后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位深棕肤色短卷发模特、真实肤质、白色亚麻衬衫、完整耳环、石灰岩露台和左侧海天留白。4秒单镜头，保持当前50mm偏近人像构图，机位基本锁定，只允许约2%的缓慢后撤；人物保持在右侧，左侧海面与天空保持干净作为后期文案安全区。0-2秒模特自然呼吸并向海面略看；2-4秒耳环只轻摆一次后停稳。保持金色椭圆镂空浮雕耳钉、一个小金色连接环、一颗水滴形乳白贝壳吊坠，以及两条由米粒珍珠和金珠构成的竖向包边完全不变；不新增首饰、人物、杯子、桌子、书、花瓶、花卉或其他道具。环境声只有轻风和远处海浪，不要音乐。"
+    }
+  ],
+  "created_at": "2026-07-19",
+  "updated_at": "2026-07-19"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "REF_MR_PEARL_TIDAL_VALLEY_OPENING_001",
+  "title": "珍珠潮汐谷首段分镜",
+  "status": "ready",
+  "created_at": "2026-07-17",
+  "source": {
+    "video": "D:/视频素材/抖音爆款/9cac57b8c711eb815d9bc0d15c01a29c.mp4",
+    "design_spec": "docs/superpowers/specs/2026-07-17-pearl-tidal-valley-opening-storyboard-design.md"
+  },
+  "aspect_ratio": "16:9",
+  "duration_seconds": 12,
+  "references": [
+    {
+      "role": "world",
+      "file": "references/world-anchor.png",
+      "controls": ["geography", "time_of_day", "sea_palette", "first_frame"]
+    },
+    {
+      "role": "ravine",
+      "file": "references/ravine-anchor.png",
+      "controls": ["ravine_geography", "basalt", "sea_channel", "first_frame"]
+    },
+    {
+      "role": "villa",
+      "file": "references/villa-anchor.png",
+      "controls": ["architecture", "cliff_geography", "window_layout", "first_frame"]
+    },
+    {
+      "role": "material",
+      "file": "references/material-anchor.png",
+      "controls": ["wet_basalt", "sea_foam", "mother_of_pearl_layers"]
+    }
+  ],
+  "shots": [
+    {"id": "S01A", "timecode": "00:00-00:04", "primary_reference": "world"},
+    {"id": "S01B", "timecode": "00:04-00:08", "primary_reference": "ravine"},
+    {"id": "S01C", "timecode": "00:08-00:12", "primary_reference": "villa", "material_reference": "material"}
+  ],
+  "deliverables": {
+    "prompts": "prompts/seedance-s01.md",
+    "board": "board/pearl-tidal-valley-opening-board.png",
+    "accessibility_text": "board/pearl-tidal-valley-opening-board.txt"
+  },
+  "checksums": {
+    "references/world-anchor.png": "6e763da39e04107b84f3b0a951711891425873cb2422a366b0c1f03067ac2eb6",
+    "references/ravine-anchor.png": "d39242d72cb9730ddf1ad7c984ac4c003bc88c2c194a44487678e27c6ee3986d",
+    "references/villa-anchor.png": "cfb6f321d53451342ae8359a8840007d76ac52fcbe7b75fdd672b0d8f664e447",
+    "references/material-anchor.png": "847426622e19e261130c403349d1611d01eb2b78537abbc192f3119d073ac6ff",
+    "board/pearl-tidal-valley-opening-board.png": "330f68c8e6669f42dc3585af6be32f8c8deec89b196d9657bc1b001f9e22c20a"
+  },
+  "asset_library_path": "video-pipeline/asset-library/06-reference-inputs/REF_MR_PEARL_TIDAL_VALLEY_OPENING_001"
+}

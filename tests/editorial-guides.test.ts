@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { BRAND } from "../src/lib/brand-identity";
 import { PEARL_GUIDES, PEARL_HUB_FAQ } from "../src/lib/editorial/guides";
 
 test("pearl guide registry contains complete, citable articles", () => {
@@ -9,8 +10,9 @@ test("pearl guide registry contains complete, citable articles", () => {
     "freshwater-pearls",
   ]);
   for (const guide of Object.values(PEARL_GUIDES)) {
-    assert.equal(guide.author, "MythRealms Editorial");
-    assert.match(guide.updated, /^2026-07-18$/);
+    assert.equal(guide.author, `${BRAND.name} Editorial`);
+    assert.match(guide.published, /^2026-07-18$/);
+    assert.match(guide.updated, /^2026-07-(18|26)$/);
     assert.ok(guide.sections.length >= 3);
     assert.ok(guide.faq.length >= 3);
     assert.ok(guide.sources.every((source) => source.href.startsWith("https://")));

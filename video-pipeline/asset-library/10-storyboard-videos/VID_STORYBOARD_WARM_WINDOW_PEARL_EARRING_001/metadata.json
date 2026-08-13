@@ -1,0 +1,29 @@
+{
+  "schema": "mythrealms.local-asset.v1",
+  "id": "VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001",
+  "title": "暖金窗光花瓣珍珠耳环分镜 6s",
+  "asset_type": "storyboard-video",
+  "status": "available",
+  "imported_at": "2026-07-17T03:47:35+00:00",
+  "library_path": "10-storyboard-videos/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001",
+  "origin": {
+    "kind": "file",
+    "path": "D:\\Chrome_Download\\storyboard_6s_v2.mp4",
+    "size_bytes": 7640794,
+    "sha256": "f999ff5488e691af84c1d6e226f5fe29d6a83ed6b8bee610fed687772c763d21"
+  },
+  "source_files": [
+    {
+      "name": "storyboard_6s_v2.mp4",
+      "library_path": "10-storyboard-videos/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001/source/storyboard_6s_v2.mp4",
+      "size_bytes": 7640794,
+      "sha256": "f999ff5488e691af84c1d6e226f5fe29d6a83ed6b8bee610fed687772c763d21"
+    }
+  ],
+  "preview": {
+    "thumbnail": "10-storyboard-videos/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001/Thumbnail.jpg",
+    "video": "10-storyboard-videos/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001/Preview.mp4"
+  },
+  "project_snapshot": null,
+  "obsidian_card": "01-资产卡/VID_STORYBOARD_WARM_WINDOW_PEARL_EARRING_001｜暖金窗光花瓣珍珠耳环分镜 6s.md"
+}

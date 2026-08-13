@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useEffectEvent, type RefObject } from "react";
 
 const FOCUSABLE_SELECTOR = [
   "a[href]",
@@ -24,8 +24,7 @@ export function useDialogFocus({
   containerRef,
   initialFocusRef,
 }: DialogFocusOptions) {
-  const closeRef = useRef(onClose);
-  closeRef.current = onClose;
+  const onCloseEvent = useEffectEvent(onClose);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -44,7 +43,7 @@ export function useDialogFocus({
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
-        closeRef.current();
+        onCloseEvent();
         return;
       }
       if (event.key !== "Tab" || !containerRef.current) return;

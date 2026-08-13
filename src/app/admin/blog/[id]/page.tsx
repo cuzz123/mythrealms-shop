@@ -45,6 +45,16 @@ export default function EditBlogPostPage() {
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
   const [preview, setPreview] = useState(false);
 
+  function fillPost(post: BlogPostPayload) {
+    setTitle(post.title || "");
+    setSlug(post.slug || "");
+    setCategory(post.category || "");
+    setExcerpt(post.excerpt || "");
+    setContent(post.content || "");
+    setImage(post.image || "");
+    setSlugManuallyEdited(true); // edit mode: don't auto-slug on initial load
+  }
+
   useEffect(() => {
     async function load() {
       try {
@@ -60,16 +70,6 @@ export default function EditBlogPostPage() {
     }
     load();
   }, [postId]);
-
-  function fillPost(post: BlogPostPayload) {
-    setTitle(post.title || "");
-    setSlug(post.slug || "");
-    setCategory(post.category || "");
-    setExcerpt(post.excerpt || "");
-    setContent(post.content || "");
-    setImage(post.image || "");
-    setSlugManuallyEdited(true); // edit mode: don't auto-slug on initial load
-  }
 
   const handleTitleChange = useCallback(
     (value: string) => {

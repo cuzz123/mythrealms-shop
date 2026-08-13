@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
 import {
   HOMEPAGE_MEDIA,
   HOMEPAGE_CATEGORY_LINKS,
+  HOMEPAGE_EDITORIAL_DIPTYCH,
   HOMEPAGE_EDITORIAL_LINKS,
   homepageEditorialSources,
 } from "../src/lib/homepage-editorial";
@@ -51,7 +52,7 @@ test("homepage product media uses visually accurate descriptions", () => {
   assert.equal(HOMEPAGE_MEDIA.earrings.alt, HOMEPAGE_MEDIA.hero.alt);
   assert.equal(
     HOMEPAGE_MEDIA.necklaces.alt,
-    "Pearl necklace displayed on a black jewelry stand",
+    "Model wearing a pearl and gold lariat necklace in a sunlit courtyard",
   );
   assert.equal(
     HOMEPAGE_MEDIA.bracelets.alt,
@@ -61,4 +62,53 @@ test("homepage product media uses visually accurate descriptions", () => {
     HOMEPAGE_MEDIA.eyewear.alt,
     "Pearl eyewear chain attached to eyeglasses on a dark background",
   );
+});
+
+test("homepage growth surfaces use approved brand and storefront imagery", () => {
+  const sources = [
+    "src/components/home/HomepageOccasionEdit.tsx",
+    "src/components/home/HomepageGiftSets.tsx",
+    "src/components/home/HomepageWhyPearls.tsx",
+  ].map((path) => readFileSync(resolve(path), "utf8"));
+
+  for (const componentSource of sources) {
+    assert.match(componentSource, /@\/lib\//);
+    assert.doesNotMatch(componentSource, /https?:\/\//);
+  }
+});
+
+test("homepage gift navigation does not point to unrendered gift-page fragments", () => {
+  const source = readFileSync(
+    resolve("src/components/home/HomepageOccasionEdit.tsx"),
+    "utf8",
+  );
+
+  assert.match(source, /label: "Small Gifts", href: "\/gifts"/);
+  assert.doesNotMatch(source, /\/gifts#(?:under-50|under-70|everyday|statement)/);
+});
+
+test("homepage editorial data keeps approved routes and avoids new retail claims", () => {
+  const source = readFileSync(resolve("src/lib/homepage-editorial.ts"), "utf8");
+
+  assert.doesNotMatch(source, /\/gifts#(?:under-50|under-70|everyday|statement)/);
+  assert.doesNotMatch(source, /(?:in stock|limited stock|best seller|sale|discount|% off)/i);
+});
+
+test("homepage diptych keeps the approved local media and new-arrivals destination", () => {
+  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.primaryImage, HOMEPAGE_MEDIA.everyday);
+  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.detailImage, HOMEPAGE_MEDIA.courtyard);
+  assert.equal(HOMEPAGE_EDITORIAL_DIPTYCH.href, "/collections/new-arrivals");
+});
+
+test("homepage moment routes retain their approved destinations", () => {
+  const source = readFileSync(resolve("src/components/home/HomepageOccasionEdit.tsx"), "utf8");
+
+  for (const [label, href] of [
+    ["For Everyday", "/collections/pearl-series"],
+    ["For a New Chapter", "/gifts"],
+    ["Just Because", "/collections/new-arrivals"],
+    ["Small Gifts", "/gifts"],
+  ]) {
+    assert.match(source, new RegExp(`label: "${label}", href: "${href.replace("/", "\\/")}"`));
+  }
 });

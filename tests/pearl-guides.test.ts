@@ -4,6 +4,10 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import PearlHubPage, { metadata as hubMetadata } from "../src/app/pearls/page";
+import HowToWearPearlsPage, {
+  metadata as howToWearMetadata,
+} from "../src/app/pearls/how-to-wear/page";
+import { BRAND } from "../src/lib/brand-identity";
 import { PEARL_GUIDES, PEARL_HUB_FAQ } from "../src/lib/editorial/guides";
 import { absoluteUrl } from "../src/lib/site";
 import { getProductType } from "../src/lib/storefront/catalog";
@@ -15,9 +19,9 @@ function parseJsonLd(html: string): Array<Record<string, unknown>> {
 }
 
 const EXPECTED_TITLES = {
-  care: "How to Care for Pearl Jewelry | MythRealms",
-  "how-to-wear": "How to Wear Pearl Jewelry | MythRealms",
-  "freshwater-pearls": "What Are Freshwater Cultured Pearls? | MythRealms",
+  care: "How to Care for Pearls | Pearl Care Guide",
+  "how-to-wear": `How to Wear Pearl Jewelry Every Day | Pearl Guide | ${BRAND.name}`,
+  "freshwater-pearls": `What Are Freshwater Cultured Pearls? | ${BRAND.name}`,
 } as const;
 
 for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>) {
@@ -29,6 +33,17 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
     const image = absoluteUrl(guide.image.src);
 
     assert.equal(route.metadata.title, EXPECTED_TITLES[slug]);
+    if (slug === "care") {
+      assert.equal(
+        route.metadata.description,
+        "Read general pearl care guidance on cleaning, heat, chemicals, and storage boundaries. Check the exact item record for item-specific instructions.",
+      );
+      assert.equal(route.metadata.alternates?.canonical, canonical);
+      assert.equal(route.metadata.openGraph?.url, canonical);
+      assert.equal((route.metadata.twitter as { card?: string } | undefined)?.card, "summary");
+      assert.equal("images" in (route.metadata.openGraph ?? {}), false);
+      return;
+    }
     assert.equal(route.metadata.description, guide.description);
     assert.equal(route.metadata.alternates?.canonical, canonical);
     assert.equal(route.metadata.openGraph?.url, canonical);
@@ -44,7 +59,7 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
 }
 
 test("hub metadata and visible content use the approved registries and truthful hero", () => {
-  const title = "Pearl Jewelry Guide: Care, Styling & Freshwater Pearls | MythRealms";
+  const title = `Pearl Jewelry Guide: Care, Styling & Freshwater Pearls | ${BRAND.name}`;
   const heroSrc = "/images/brand/editorial/model-short-bob-blue-linen.png";
   const heroAlt = "Model in pale linen wearing pearl jewelry outdoors";
   const html = renderToStaticMarkup(createElement(PearlHubPage));
@@ -93,10 +108,15 @@ test("each guide opens with a 40-70 word direct answer", () => {
 });
 
 test("guide registry records truthful publication and update dates separately", () => {
+  const expectedUpdated = {
+    care: "2026-07-26",
+    "how-to-wear": "2026-07-26",
+    "freshwater-pearls": "2026-07-18",
+  } as const;
   for (const guide of Object.values(PEARL_GUIDES)) {
     const published = (guide as typeof guide & { published?: string }).published;
     assert.equal(published, "2026-07-18", `${guide.slug}: published`);
-    assert.equal(guide.updated, "2026-07-18", `${guide.slug}: updated`);
+    assert.equal(guide.updated, expectedUpdated[guide.slug], `${guide.slug}: updated`);
   }
 });
 
@@ -118,14 +138,49 @@ test("guide pillars explicitly cover the approved care, styling, and pearl-type 
   assert.match(care, /swim/i);
 
   const styling = JSON.stringify(PEARL_GUIDES["how-to-wear"]);
-  assert.match(styling, /facial proportion/i);
-  assert.match(styling, /formal occasion/i);
+  assert.match(styling, /contrast or repetition/i);
+  assert.match(styling, /exact product page/i);
 
   const freshwater = JSON.stringify(PEARL_GUIDES["freshwater-pearls"]);
   for (const pearlType of ["Akoya", "South Sea", "Tahitian"]) {
     assert.match(freshwater, new RegExp(pearlType));
   }
   assert.match(freshwater, /https:\/\/www\.gia\.edu\/pearl-description/);
+});
+
+test("the how-to-wear candidate keeps its reviewed styling boundary in metadata, rendered copy, schema, and internal links", () => {
+  const guide = PEARL_GUIDES["how-to-wear"];
+  const html = renderToStaticMarkup(createElement(HowToWearPearlsPage));
+  const schemas = parseJsonLd(html);
+  const article = schemas.find((schema) => schema["@type"] === "Article");
+  const faq = schemas.find((schema) => schema["@type"] === "FAQPage");
+  const breadcrumb = schemas.find((schema) => schema["@type"] === "BreadcrumbList");
+
+  assert.equal(howToWearMetadata.title, `How to Wear Pearl Jewelry Every Day | Pearl Guide | ${BRAND.name}`);
+  assert.equal(howToWearMetadata.description, guide.description);
+  assert.equal(guide.editorialStatus, "candidate");
+  assert.match(guide.evidenceBoundary ?? "", /does not establish product material/i);
+  assert.equal(howToWearMetadata.alternates?.canonical, absoluteUrl("/pearls/how-to-wear"));
+  assert.match(howToWearMetadata.alternates?.canonical ?? "", /mythrealms-shop\.vercel\.app/);
+  assert.doesNotMatch(howToWearMetadata.alternates?.canonical ?? "", /maverenne/i);
+  assert.match(html, /begin with the clothes I reach for most/i);
+  assert.match(html, /keep the final choice grounded in verified information/i);
+  assert.match(html, /A guide cannot confirm composition, dimensions, fastening, price, availability, delivery, return eligibility, or how an item will feel when worn\./);
+  assert.match(html, /href="\/pearls"/);
+  assert.match(html, /href="\/pearls\/care"/);
+  assert.doesNotMatch(html, /href="\/pearls\/pearl-earrings-buying-guide"/);
+  assert.ok(article);
+  assert.equal(article.headline, guide.title);
+  assert.equal(article.description, guide.directAnswer);
+  assert.ok(faq);
+  assert.deepEqual(
+    (faq.mainEntity as Array<{ name: string; acceptedAnswer: { text: string } }>).map(
+      ({ name, acceptedAnswer }) => ({ question: name, answer: acceptedAnswer.text }),
+    ),
+    guide.faq,
+  );
+  assert.ok(breadcrumb);
+  assert.match(JSON.stringify(breadcrumb), /\/pearls\/how-to-wear/);
 });
 
 test("one selector returns 4-6 active in-stock products matching each guide", async () => {
@@ -155,14 +210,25 @@ for (const slug of Object.keys(PEARL_GUIDES) as Array<keyof typeof PEARL_GUIDES>
 
     assert.equal((html.match(/<h1/g) ?? []).length, 1);
     assert.doesNotMatch(html, /<main/);
+    if (slug === "care") {
+      assert.match(html, /How to Care for Pearls/);
+      assert.match(html, /Frequently asked questions/);
+      assert.ok(article);
+      assert.equal(article.headline, "How to Care for Pearls");
+      assert.equal("datePublished" in article, false);
+      assert.equal("dateModified" in article, false);
+      assert.ok(faq);
+      return;
+    }
     assert.match(html, /Table of contents/);
     assert.match(html, /Frequently asked questions/);
-    assert.match(html, /MythRealms Editorial/);
+    assert.match(html, new RegExp(`${BRAND.name} Editorial`));
     assert.match(html, /Published July 18, 2026/);
-    assert.match(html, /Updated July 18, 2026/);
+    assert.match(html, new RegExp(`Updated ${new Date(`${guide.updated}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}`));
     assert.match(html, /rel="noopener noreferrer"/);
     assert.match(html, /Related guides/);
-    assert.match(html, /Related products/);
+    if (slug === "freshwater-pearls") assert.match(html, /Related products/);
+    else assert.doesNotMatch(html, /Related products/);
     assert.match(html, /"@type":"Article"/);
     assert.match(html, /"@type":"BreadcrumbList"/);
     assert.match(html, /"@type":"FAQPage"/);

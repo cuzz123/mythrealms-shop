@@ -10,8 +10,13 @@ import {
 } from "@/lib/checkout/validation";
 import { db } from "@/lib/db";
 import { applyRateLimit } from "@/lib/server/rate-limit";
+import { BRAND } from "@/lib/brand-identity";
 
 const PAYPAL_API = process.env.PAYPAL_API_BASE || "https://api-m.paypal.com";
+
+export function buildPayPalDescription(orderId: string): string {
+  return `${BRAND.name} Order #${orderId.slice(-8)}`;
+}
 
 function errorResponse(error: unknown) {
   if (error instanceof CheckoutInputError || error instanceof CheckoutQuoteError) {
@@ -86,7 +91,7 @@ export async function POST(request: NextRequest) {
               value: (quote.totalCents / 100).toFixed(2),
             },
             custom_id: order.id,
-            description: `MythRealms Order #${order.id.slice(-8)}`,
+            description: buildPayPalDescription(order.id),
           },
         ],
         application_context: {

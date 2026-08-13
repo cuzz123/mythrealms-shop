@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 
 import { GuideLayout } from "@/components/editorial/GuideLayout";
 import { ArticleJsonLd, BreadcrumbJsonLd, FAQPageJsonLd } from "@/components/ui/JsonLd";
-import { getRelatedGuideProducts, PEARL_GUIDES } from "@/lib/editorial/guides";
+import { BRAND } from "@/lib/brand-identity";
+import { PEARL_GUIDES } from "@/lib/editorial/guides";
 import { absoluteUrl } from "@/lib/site";
 
 const guide = PEARL_GUIDES["how-to-wear"];
 const canonical = absoluteUrl("/pearls/how-to-wear");
 const image = absoluteUrl(guide.image.src);
-const title = `${guide.seoTitle} | MythRealms`;
+const title = `${guide.seoTitle} | ${BRAND.name}`;
 
 export const metadata: Metadata = {
   title,
@@ -46,7 +47,7 @@ export default function HowToWearPearlsPage() {
       <BreadcrumbJsonLd items={breadcrumbs.map((item) => ({ name: item.label, url: absoluteUrl(item.href) }))} />
       <ArticleJsonLd title={guide.title} description={guide.directAnswer} url={canonical} image={image} datePublished={guide.published} dateModified={guide.updated} />
       <FAQPageJsonLd questions={guide.faq} />
-      <GuideLayout breadcrumbs={breadcrumbs} guide={guide} relatedGuides={relatedGuides} relatedProducts={getRelatedGuideProducts(guide)} />
+      <GuideLayout breadcrumbs={breadcrumbs} guide={guide} relatedGuides={relatedGuides} relatedProducts={[]} />
     </div>
   );
 }

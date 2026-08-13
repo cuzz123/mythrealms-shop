@@ -1,0 +1,31 @@
+{
+  "id": "REF_MR_PEARL_TIDAL_VALLEY_WOMAN_001",
+  "title": "珍珠潮汐谷第二段：拥有一切的女人",
+  "status": "ready",
+  "created_at": "2026-07-17",
+  "aspect_ratio": "16:9",
+  "duration_seconds": 8,
+  "continuity_from": "REF_MR_PEARL_TIDAL_VALLEY_OPENING_001",
+  "character": "CHAR_MR_TALENT_AUBURN_SATIN_001",
+  "references": [
+    {"role": "character_identity", "file": "references/heroine-anchor.png"},
+    {"role": "interior_environment", "file": "references/interior-anchor.png"},
+    {"role": "portrait_expression", "file": "references/profile-anchor.png"}
+  ],
+  "shots": [
+    {"id": "S02A", "timecode": "00:08-00:12", "primary_reference": "character_identity"},
+    {"id": "S02B", "timecode": "00:12-00:16", "primary_reference": "portrait_expression"}
+  ],
+  "deliverables": {
+    "prompts": "prompts/seedance-s02.md",
+    "board": "board/pearl-tidal-valley-woman-board.png",
+    "accessibility_text": "board/pearl-tidal-valley-woman-board.txt"
+  },
+  "checksums": {
+    "references/heroine-anchor.png": "41c110406f69f85c355b90d12c6fbf8bf1fada839cdf2cfb1ed6fb2aa076435a",
+    "references/interior-anchor.png": "4660f082ee6014bdd9ff281a7df16e734d0c34f2b668d0feaf26e8823805a335",
+    "references/profile-anchor.png": "75681416187904eaf198cb3acc2c83aeb95e490314177c34619ff46de334d628",
+    "board/pearl-tidal-valley-woman-board.png": "0ec9fdd417d0e2f49845b6e512af88bffcf6e6fa424483160a7113558fd98522"
+  },
+  "asset_library_path": "video-pipeline/asset-library/06-reference-inputs/REF_MR_PEARL_TIDAL_VALLEY_WOMAN_001"
+}

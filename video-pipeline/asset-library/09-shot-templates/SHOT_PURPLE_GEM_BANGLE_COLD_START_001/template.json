@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "id": "SHOT_PURPLE_GEM_BANGLE_COLD_START_001",
+  "name": "Purple Gem Bangle｜暮色釉砖四镜头",
+  "category": "shot_template",
+  "status": "approved_first_frames",
+  "version": "v1",
+  "format": "9:16",
+  "fps": 30,
+  "generation_surface": "Xiaoyunque Seedance 2.0 Fast",
+  "generation_mode": "I2V first-frame",
+  "minimum_clip_duration_seconds": 4,
+  "credits_per_second": 11,
+  "credits_per_take": 44,
+  "product": {
+    "slug": "new-series-purple-gem-bangle",
+    "name": "Purple Gem Bangle",
+    "source_references": ["../../../../public/images/products/new-series/new-series-purple-gem-bangle/main.jpg", "../../../../public/images/products/new-series/new-series-purple-gem-bangle/detail-03.jpg"],
+    "geometry_locks": ["polished gold open bangle", "central cluster of rough-cut irregular purple amethyst stones", "two flanking rounded white pearl cabochons", "tiny violet and iridescent crystal pavé around every front station"]
+  },
+  "visual_bible": {
+    "character_lock": "成年东亚短黑发模特，真实皮肤纹理，炭灰色丝质衬衫与阔腿裤。",
+    "environment_lock": "真实蓝绿色釉砖庭院、石灰岩台阶和蓝调暮色，一盏暖色壁灯。",
+    "prohibited": ["cutout composite", "generated text", "logos", "rings", "watches", "extra bracelets", "cups", "tables", "books", "chairs", "vases", "flowers", "studio sweep"]
+  },
+  "frames": [
+    {
+      "frame_id": "FF_PURPLE_GEM_BANGLE_01_PARAPET_HOOK",
+      "role": "wrist_portrait_hook",
+      "path": "first-frames/FF_PURPLE_GEM_BANGLE_01_PARAPET_HOOK-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "camera_contract": "85mm 人物手腕近景，机位锁定，只允许不超过2%的极慢推进；手镯三段结构始终清晰。",
+      "motion_contract": "自然眨眼和呼吸一次，手腕只旋转约3度，水晶高光随真实光线移动后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位东亚短黑发模特、真实肤质、炭灰丝质衬衫、手腕、紫宝石手镯、蓝绿色釉砖庭院和暮色光线。4秒单镜头，保持当前85mm人物手腕近景构图，机位基本锁定，只允许不超过2%的极慢推进。0-1秒模特自然眨眼并呼吸一次；1-3秒手腕只向壁灯方向旋转约3度；3-4秒全部停稳，水晶高光只发生真实光线变化。保持金色开口手镯、中央不规则紫水晶簇、两侧白色珍珠和紫色虹彩水钻包边完全不变；不新增戒指、手表、手镯或道具。环境声只有夜风和很远的城市环境声，不要音乐。"
+    },
+    {
+      "frame_id": "FF_PURPLE_GEM_BANGLE_02_TILE_WALK",
+      "role": "tile_courtyard_walk",
+      "path": "first-frames/FF_PURPLE_GEM_BANGLE_02_TILE_WALK-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "copy_safe_area": "upper-left teal tiled wall",
+      "camera_contract": "50mm 人物中景，机位锁定，只允许约2%缓慢后撤；人物在右侧，左侧釉砖墙保持干净。",
+      "motion_contract": "模特向前走半步后停下，佩戴手自然摆动一次并停止。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位东亚短黑发模特、真实肤质、炭灰丝质衬衫和阔腿裤、紫宝石手镯、蓝绿色釉砖庭院、石灰岩台阶和暮色壁灯。4秒单镜头，保持当前50mm人物中景构图，机位基本锁定，只允许约2%的缓慢后撤；人物保持在右侧，左侧釉砖墙保持干净作为后期文案安全区。0-2秒模特向前走半步；2-4秒停下，佩戴手自然摆动一次后静止。保持金色开口手镯、中央不规则紫水晶簇、两侧白色珍珠和紫色虹彩水钻包边完全不变；不新增戒指、手表、手镯或道具。环境声只有夜风和远处环境声，不要音乐。"
+    },
+    {
+      "frame_id": "FF_PURPLE_GEM_BANGLE_03_WALL_BRUSH",
+      "role": "material_motion_detail",
+      "path": "first-frames/FF_PURPLE_GEM_BANGLE_03_WALL_BRUSH-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "camera_contract": "85mm 手臂动作特写，机位锁定，焦点锁在手镯和釉砖反光。",
+      "motion_contract": "手背沿釉砖表面轻掠约10厘米后停住；水晶反射和丝质袖口只做物理可见的细微变化。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定炭灰丝质袖口、真实手部、紫宝石手镯、蓝绿色釉砖墙和暖色壁灯反光。4秒单镜头，保持当前85mm手臂动作特写构图，机位完全锁定，焦点始终在手镯和釉砖反光。0-2秒手背沿釉砖表面轻掠约10厘米；2-4秒停住，水晶反射和丝质袖口只发生物理真实的细微变化。保持金色开口手镯、中央不规则紫水晶簇、两侧白色珍珠和紫色虹彩水钻包边完全不变；不新增戒指、手表、手镯或道具。环境声只有夜风和极轻布料摩擦声，不要音乐。"
+    },
+    {
+      "frame_id": "FF_PURPLE_GEM_BANGLE_04_TILED_ARCH_END",
+      "role": "twilight_brand_end",
+      "path": "first-frames/FF_PURPLE_GEM_BANGLE_04_TILED_ARCH_END-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "copy_safe_area": "upper-left teal tiled arch",
+      "camera_contract": "35mm 环境人像，机位锁定，只允许约2%极慢后撤；人物在右侧，左侧釉砖拱门保留空白。",
+      "motion_contract": "模特自然呼吸并将视线转向画面外壁灯，佩戴手腕轻转一次后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位东亚短黑发模特、真实肤质、炭灰丝质衬衫和阔腿裤、紫宝石手镯、蓝绿色釉砖拱门、石灰岩台阶和暮色壁灯。4秒单镜头，保持当前35mm环境人像构图，机位基本锁定，只允许约2%的极慢后撤；人物保持在右侧，左上釉砖墙保持干净作为后期文案安全区。0-2秒模特自然呼吸并将视线转向画面外壁灯；2-4秒佩戴手腕轻转一次后停稳。保持金色开口手镯、中央不规则紫水晶簇、两侧白色珍珠和紫色虹彩水钻包边完全不变；不新增戒指、手表、手镯、人物或道具。环境声只有夜风和远处环境声，不要音乐。"
+    }
+  ],
+  "created_at": "2026-07-19",
+  "updated_at": "2026-07-19"
+}

@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BRAND } from "@/lib/brand-identity";
 
 const MESSAGES = [
-  "Free shipping over $69.99 | 30-day returns",
-  "The Pearl Edit | Rings, bracelets, earrings and necklaces",
+  `${BRAND.tagline} | ${BRAND.descriptor}`,
+  "The Pearl Edit | Thoughtful pieces for everyday moments",
 ];
 
 export function AnnouncementBar() {

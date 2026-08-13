@@ -2,102 +2,37 @@
 
 import Link from "next/link";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
+import { BRAND } from "@/lib/brand-identity";
 import { FOOTER_GROUPS } from "@/lib/storefront/navigation";
-
-const socialLinks = [
-  {
-    label: "TikTok",
-    href: "https://tiktok.com/@mythrealms.shop",
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
-        <path d="M12.5 3h-1.75v8.5a1.5 1.5 0 11-1.5-1.5V8.25a3.25 3.25 0 103.25 3.25V5.5a4.25 4.25 0 002.5.8V4.55a2.5 2.5 0 01-2.5-1.55z" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: "Instagram",
-    href: "https://instagram.com/mythrealms.shop",
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
-        <rect x="1.5" y="1.5" width="15" height="15" rx="4" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="9" cy="9" r="3.5" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="13.5" cy="4.5" r="0.9" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: "Facebook",
-    href: "https://facebook.com/mythrealms.shop",
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
-        <path d="M10.5 16v-5.5h1.85l.28-2.15H10.5V7c0-.59.15-1 .98-1H12.7V3.82a15 15 0 00-1.62-.07c-1.52 0-2.56.93-2.56 2.63v1.47H6.5v2.15h2.02V16h1.98z" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: "YouTube",
-    href: "https://youtube.com/@mythrealms",
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" className="h-4 w-4" aria-hidden="true">
-        <path
-          d="M15.66 5.47a1.88 1.88 0 00-1.32-1.33C13.03 3.75 9 3.75 9 3.75s-4.03 0-5.34.39A1.88 1.88 0 002.34 5.47 22.9 22.9 0 002 9c0 1.24.11 2.4.34 3.53a1.88 1.88 0 001.32 1.33c1.31.39 5.34.39 5.34.39s4.03 0 5.34-.39a1.88 1.88 0 001.32-1.33c.23-1.13.34-2.29.34-3.53s-.11-2.4-.34-3.53z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-        <path d="M7.5 11.35l3.5-2.35L7.5 6.65v4.7z" fill="currentColor" />
-      </svg>
-    ),
-  },
-];
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--charcoal)] text-[var(--announcement-text)]">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-10 border-y border-white/15 py-10 sm:grid-cols-2 lg:grid-cols-5">
-          <div className="space-y-4">
-            <Link href="/" className="inline-block">
-              <span className="font-serif text-xl font-semibold tracking-normal text-white">MythRealms</span>
+    <footer className="border-t border-[var(--border)] bg-[var(--charcoal)] text-[var(--announcement-text)]">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div className="grid grid-cols-1 gap-x-10 gap-y-12 border-y border-white/15 py-12 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="space-y-5 lg:pr-5">
+            <Link href="/" className="inline-block rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]">
+              <span className="font-serif text-2xl font-semibold tracking-[0.015em] text-white">{BRAND.name}</span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-[#B0A590]">
-              An edited collection of pearl rings, bracelets, earrings, and necklaces for everyday light and easy styling.
+              {BRAND.tagline}
             </p>
-            <div className="flex items-center gap-3">
-              {socialLinks.map(({ label, href, icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  title={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-[#b7c2bd] transition-colors hover:border-white/65 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
-                >
-                  {icon}
-                </a>
-              ))}
-            </div>
-            <div className="space-y-4 pt-2 text-sm text-[#b7c2bd]">
-              <p>New pearl pieces, styling notes, and subscriber-only offers.</p>
+            <div className="space-y-4 border-t border-white/15 pt-5 text-sm text-[#b7c2bd]">
+              <p className="font-serif text-base font-semibold text-white">{BRAND.newsletterTitle}</p>
+              <p>New pieces and styling notes, sent occasionally.</p>
               <NewsletterForm tone="dark" />
-              <div className="space-y-2 pt-2">
-                <a href="mailto:mythrealms@outlook.com" className="inline-block text-white transition-colors hover:text-[var(--accent)]">
-                  mythrealms@outlook.com
-                </a>
-                <p>Mon &ndash; Fri, 9am &ndash; 6pm EST</p>
-              </div>
             </div>
           </div>
 
           {FOOTER_GROUPS.map((group) => (
             <div key={group.label}>
-              <h3 className="mb-5 font-serif text-sm font-semibold tracking-normal text-white uppercase">{group.label}</h3>
+              <h3 className="mb-5 font-serif text-sm font-semibold tracking-[0.08em] text-white uppercase">{group.label}</h3>
               <ul className="space-y-3">
                 {group.links.map(({ label, href }) => (
                   <li key={label}>
                     <Link
                       href={href}
-                      className="block py-2 text-sm text-[#b7c2bd] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
+                      className="block rounded-[var(--radius-sm)] py-2 text-sm text-[#b7c2bd] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)]"
                     >
                       {label}
                     </Link>
@@ -110,9 +45,8 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/15">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-[#b7c2bd] sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} MythRealms. All rights reserved.</p>
-          <p>Secure checkout in USD</p>
+        <div className="mx-auto flex max-w-7xl justify-center px-5 py-6 text-xs text-[#b7c2bd] sm:px-6 lg:px-8">
+          <p>&copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.</p>
         </div>
       </div>
     </footer>

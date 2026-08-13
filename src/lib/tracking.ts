@@ -171,6 +171,69 @@ export function buildPurchasePayload(
   };
 }
 
+export interface TrackingList {
+  id: string;
+  name: string;
+  items: CartProduct[];
+}
+
+export interface TrackingPromotion {
+  id: string;
+  name: string;
+}
+
+export interface TrackingEdit {
+  id: string;
+  name: string;
+}
+
+export function buildViewItemListPayload(list: TrackingList) {
+  return {
+    item_list_id: list.id,
+    item_list_name: list.name,
+    items: list.items.map((item) => gaItem(item, item.quantity)),
+  };
+}
+
+export function buildSelectItemPayload(
+  list: Pick<TrackingList, "id" | "name">,
+  product: CartProduct,
+) {
+  return {
+    item_list_id: list.id,
+    item_list_name: list.name,
+    items: [gaItem(product, product.quantity)],
+  };
+}
+
+export function buildViewPromotionPayload(promotion: TrackingPromotion) {
+  return {
+    promotion_id: promotion.id,
+    promotion_name: promotion.name,
+  };
+}
+
+export function buildSelectPromotionPayload(promotion: TrackingPromotion) {
+  return {
+    promotion_id: promotion.id,
+    promotion_name: promotion.name,
+  };
+}
+
+export function buildAddGiftNotePayload(product: Pick<TrackingProduct, "id" | "name">) {
+  return {
+    item_id: product.id,
+    item_name: product.name,
+  };
+}
+
+export function buildViewEditPayload(edit: TrackingEdit) {
+  return {
+    edit_id: edit.id,
+    edit_name: edit.name,
+  };
+}
+
 function eventKey(args: unknown[]): string {
   return JSON.stringify(args);
 }
@@ -350,6 +413,72 @@ export function trackAddToCart(
   }
 
   return accepted;
+}
+
+function trackGaGrowthEvent(
+  eventName: string,
+  payload: Record<string, unknown>,
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  if (!configured.ga || !consent.analytics) return false;
+  return dispatchOrQueue("ga", ["event", eventName, payload], target);
+}
+
+export function trackViewItemList(
+  list: TrackingList,
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent("view_item_list", buildViewItemListPayload(list), target, consent, configured);
+}
+
+export function trackSelectItem(
+  list: Pick<TrackingList, "id" | "name">,
+  product: CartProduct,
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent("select_item", buildSelectItemPayload(list, product), target, consent, configured);
+}
+
+export function trackViewPromotion(
+  promotion: TrackingPromotion,
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent("view_promotion", buildViewPromotionPayload(promotion), target, consent, configured);
+}
+
+export function trackSelectPromotion(
+  promotion: TrackingPromotion,
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent("select_promotion", buildSelectPromotionPayload(promotion), target, consent, configured);
+}
+
+export function trackAddGiftNote(
+  product: Pick<TrackingProduct, "id" | "name">,
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent("add_gift_note", buildAddGiftNotePayload(product), target, consent, configured);
+}
+
+export function trackViewEdit(
+  edit: TrackingEdit,
+  target: TrackingTarget | undefined = browserTarget(),
+  consent: ConsentState = browserConsent(),
+  configured: ConfiguredPlatforms = browserConfiguredPlatforms(),
+): boolean {
+  return trackGaGrowthEvent("view_edit", buildViewEditPayload(edit), target, consent, configured);
 }
 
 export function trackBeginCheckout(

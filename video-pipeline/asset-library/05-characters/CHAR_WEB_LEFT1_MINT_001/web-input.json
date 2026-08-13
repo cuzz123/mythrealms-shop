@@ -1,0 +1,12 @@
+{
+  "asset_id": "CHAR_WEB_LEFT1_MINT_001",
+  "status": "ingested_model_available",
+  "reference_original": "D:\\Chrome_Download\\角色图\\左1.jpg",
+  "views": {
+    "front": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_WEB_LEFT1_MINT_001\\source\\three-view-crops\\front.jpg",
+    "right_front": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_WEB_LEFT1_MINT_001\\source\\three-view-crops\\right_front.jpg",
+    "back": "D:\\mythrealms-shop\\video-pipeline\\asset-library\\05-characters\\CHAR_WEB_LEFT1_MINT_001\\source\\three-view-crops\\back.jpg"
+  },
+  "generation_policy": "Model ingested from Hunyuan 3D web download. Keep inputs for traceability; do not regenerate unless quality review fails.",
+  "generated_model": "source/hunyuan-web/LEFT1_MINT_FULLBODY.glb"
+}

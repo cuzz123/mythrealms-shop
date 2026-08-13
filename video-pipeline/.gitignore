@@ -1,0 +1,11 @@
+assets/*
+work/*
+final/*
+temp/
+temp_clips/
+render_cache/
+*.log
+
+!assets/.gitkeep
+!work/.gitkeep
+!final/.gitkeep

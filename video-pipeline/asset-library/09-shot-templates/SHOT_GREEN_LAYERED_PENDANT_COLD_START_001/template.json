@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "id": "SHOT_GREEN_LAYERED_PENDANT_COLD_START_001",
+  "name": "Green Layered Pendant｜海岸冷启动四镜头",
+  "category": "shot_template",
+  "status": "approved_first_frames",
+  "version": "v2",
+  "format": "9:16",
+  "fps": 30,
+  "generation_surface": "Xiaoyunque Seedance 2.0 Fast",
+  "generation_mode": "I2V first-frame",
+  "minimum_clip_duration_seconds": 4,
+  "credits_per_second": 11,
+  "credits_per_take": 44,
+  "product": {
+    "slug": "new-series-green-layered-pendant-necklace",
+    "name": "Green Layered Pendant Necklace",
+    "source_references": ["../../../../public/images/products/new-series/new-series-green-layered-pendant-necklace/main.jpg"],
+    "geometry_locks": ["short strand of translucent deep-green round beads and gold links", "longer matching green-bead chain", "irregular open gold pendant loop", "one irregular white baroque pearl drop"]
+  },
+  "visual_bible": {
+    "character_lock": "成年橄榄肤色深发模特，真实皮肤纹理，象牙白高领亚麻上衣。",
+    "environment_lock": "真实地中海石灰岩门廊与海岸露台，橄榄叶影，金色自然光。",
+    "prohibited": ["cutout composite", "generated text", "logos", "extra jewelry", "cups", "tables", "books", "chairs", "vases", "flowers", "studio sweep"]
+  },
+  "frames": [
+    {
+      "frame_id": "FF_GREEN_LAYERED_PENDANT_01_DOORWAY_HOOK",
+      "role": "layered_necklace_hook",
+      "path": "first-frames/FF_GREEN_LAYERED_PENDANT_01_DOORWAY_HOOK-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "camera_contract": "85mm 半身近景，机位锁定，只允许不超过2%的极慢推进；两层项链和吊坠始终清晰。",
+      "motion_contract": "模特自然眨眼和呼吸一次，发梢与叶影轻动，吊坠只产生一次真实惯性摆动。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定模特身份、真实肤质、深色头发、象牙白高领亚麻上衣、双层绿珠项链、石灰岩门廊和海岸自然光。4秒单镜头，保持当前85mm半身近景构图，机位基本锁定，只允许不超过2%的极慢推进。0-1秒模特自然眨眼并呼吸一次；1-3秒发梢和橄榄叶影受轻风轻微移动；3-4秒全部停稳，吊坠只因极小身体呼吸产生一次真实惯性摆动后静止。保持短层深绿色圆珠金链、长层同款绿珠金链、不规则开放式金色吊环和一颗白色巴洛克珍珠吊坠完全不变；不换脸、不磨皮、不新增首饰、人物或道具。环境声只有轻风和远处海浪，不要音乐。"
+    },
+    {
+      "frame_id": "FF_GREEN_LAYERED_PENDANT_02_TERRACE_END",
+      "role": "coastal_walk_brand_end",
+      "path": "first-frames/FF_GREEN_LAYERED_PENDANT_02_TERRACE_END-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "copy_safe_area": "upper-left sea and sky",
+      "camera_contract": "50mm 中景，机位锁定，只允许约2%缓慢后撤；人物和项链在右侧，左上留出文案安全区。",
+      "motion_contract": "模特向前走半步并看向海平线，衣角和发梢受轻风移动，吊坠摆动一次后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位模特、真实肤质、深色头发、象牙白高领亚麻上衣、双层绿珠项链、石灰岩海岸露台、橄榄树和海天自然光。4秒单镜头，保持当前50mm中景构图，机位基本锁定，只允许约2%的缓慢后撤；人物始终位于右侧，左上天空与海面保持干净作为后期文案安全区。0-2秒模特向前走半步并自然看向海平线；2-4秒衣角和发梢被轻风带动，吊坠只摆动一次后停稳。保持短层深绿色圆珠金链、长层同款绿珠金链、不规则开放式金色吊环和一颗白色巴洛克珍珠吊坠完全不变；不换脸、不新增首饰、人物、杯子、桌子、书、花瓶或花卉。环境声只有轻风与远处海浪，不要音乐。"
+    },
+    {
+      "frame_id": "FF_GREEN_LAYERED_PENDANT_03_COURTYARD_WALK",
+      "role": "courtyard_side_walk",
+      "path": "first-frames/FF_GREEN_LAYERED_PENDANT_03_COURTYARD_WALK-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "camera_contract": "50mm 自然侧面中景，机位锁定，不推进；让人物从当前构图平稳经过，项链保持完整可读。",
+      "motion_contract": "0-2秒模特沿当前方向平稳走半步；2-4秒步伐停下，发梢受轻风后摆并回落，吊坠只摆动一次后停稳。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位模特、真实肤质、深色长发、象牙白高领亚麻上衣、双层绿珠项链、石灰岩拱廊、橄榄叶影和远处海岸。4秒单镜头，保持当前50mm侧面中景构图，机位完全锁定，不推进、不摇移。0-2秒模特沿当前方向平稳走半步；2-4秒步伐停下，发梢受轻风后摆并回落，吊坠只摆动一次后停稳。保持短层深绿色圆珠金链、长层同款绿珠金链、不规则开放式金色吊环和一颗白色巴洛克珍珠吊坠完全不变；不换脸、不新增首饰、人物或道具。环境声只有轻风和远处海浪，不要音乐。"
+    },
+    {
+      "frame_id": "FF_GREEN_LAYERED_PENDANT_04_ROOFTOP_PAUSE",
+      "role": "sunset_rooftop_brand_end",
+      "path": "first-frames/FF_GREEN_LAYERED_PENDANT_04_ROOFTOP_PAUSE-v1.png",
+      "approval_status": "approved",
+      "target_duration_seconds": 4,
+      "cost_credits": 44,
+      "copy_safe_area": "upper-left sea and sky",
+      "camera_contract": "35mm 环境中景，机位锁定，只允许约2%极慢后撤；保留左上广阔海天和右侧人物。",
+      "motion_contract": "模特自然呼吸，视线向远处海岸略移动；橄榄叶和发丝受海风轻动，吊坠只轻摆一次后静止。",
+      "seedance_prompt_zh": "@图片1 是首帧并锁定同一位模特、真实肤质、深色盘发、象牙白高领亚麻上衣、双层绿珠项链、石灰岩屋顶、橄榄树、日落海岸和左侧海天留白。4秒单镜头，保持当前35mm环境中景构图，机位基本锁定，只允许约2%的极慢后撤；人物始终保持在右侧，左上天空和海面保持干净作为后期文案安全区。0-2秒模特自然呼吸，视线向远处海岸略移动；2-4秒橄榄叶和发丝受海风轻微摆动，吊坠只轻摆一次后静止。保持短层深绿色圆珠金链、长层同款绿珠金链、不规则开放式金色吊环和一颗白色巴洛克珍珠吊坠完全不变；不换脸、不新增首饰、人物、杯子、桌子、书、花瓶或花卉。环境声只有轻风和远处海浪，不要音乐。"
+    }
+  ],
+  "created_at": "2026-07-19",
+  "updated_at": "2026-07-19"
+}

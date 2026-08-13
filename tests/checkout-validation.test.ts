@@ -46,10 +46,12 @@ function assertInvalid(mutator: (request: ReturnType<typeof validRequest>) => vo
 }
 
 test("normalizes valid checkout input and drops client-owned totals", () => {
-  const result = parseCheckoutRequest(validRequest());
+  const request = validRequest();
+  Object.assign(request.items[0], { giftNote: "  For Ada  " });
+  const result = parseCheckoutRequest(request);
 
   assert.deepEqual(result, {
-    items: [{ productId: "1688-001", quantity: 1 }],
+    items: [{ productId: "1688-001", quantity: 1, giftNote: "For Ada" }],
     email: "buyer@example.com",
     shippingAddress: {
       name: "Ada Lovelace",
@@ -62,6 +64,18 @@ test("normalizes valid checkout input and drops client-owned totals", () => {
     },
     discountCode: "PEARL10",
   });
+});
+
+test("rejects an oversized gift note and drops an empty one", () => {
+  assertInvalid((request) => {
+    Object.assign(request.items[0], { giftNote: "a".repeat(241) });
+  });
+
+  const request = validRequest();
+  Object.assign(request.items[0], { giftNote: "   " });
+  assert.deepEqual(parseCheckoutRequest(request).items, [
+    { productId: "1688-001", quantity: 1 },
+  ]);
 });
 
 test("rejects empty and oversized carts", () => {

@@ -7,6 +7,7 @@ import {
   getStorefrontProductBySlug,
   getStorefrontProducts,
 } from "../src/lib/storefront/catalog";
+import { shouldShowStickyAddToCart } from "../src/components/storefront/StickyAddToCart";
 
 const EXPECTED_TYPES = {
   rings: ["pearl-series-01", "pearl-series-02", "pearl-series-03"],
@@ -60,18 +61,38 @@ const EXPECTED_TYPES = {
     "new-series-classic-pearl-chain",
     "new-series-turquoise-bead-chain",
   ],
+  "hair-accessories": [
+    "new-series-white-floral-hair-stick",
+    "new-series-white-flower-wood-stick",
+    "new-series-pearl-cluster-hair-claw",
+    "new-series-gold-pearl-hair-stick",
+    "new-series-pearl-flower-u-pin",
+    "new-series-pearl-bar-hair-clip",
+    "new-series-shell-chip-hair-clip",
+    "new-series-wood-flower-hair-stick",
+    "new-series-daisy-chain-hair-stick",
+    "new-series-wood-pearl-hair-stick",
+    "new-series-gold-star-hair-stick",
+    "new-series-star-flower-hair-clip",
+    "new-series-chain-flower-hair-pin",
+    "new-series-flower-pearl-hair-clip",
+    "new-series-pink-flower-hair-clip",
+    "new-series-blue-flower-bow-hair-clip",
+    "new-series-blue-teardrop-hair-stick",
+    "new-series-dragonfly-hair-clip",
+  ],
 } as const;
 
 const NEW_SERIES_SLUGS = Object.values(EXPECTED_TYPES)
   .flat()
   .filter((slug) => slug.startsWith("new-series-"));
 
-test("storefront exposes the 20 core products and 25 approved new-series products", () => {
+test("storefront exposes the 20 core products and 43 approved new-series products", () => {
   const products = getStorefrontProducts();
 
-  assert.equal(products.length, 45);
-  assert.equal(new Set(products.map((product) => product.id)).size, 45);
-  assert.equal(new Set(products.map((product) => product.slug)).size, 45);
+  assert.equal(products.length, 63);
+  assert.equal(new Set(products.map((product) => product.id)).size, 63);
+  assert.equal(new Set(products.map((product) => product.slug)).size, 63);
   assert.ok(
     products.every(
       (product) =>
@@ -98,7 +119,7 @@ test("every storefront product has a deterministic merchandise type", () => {
   }
 
   const classified = Object.values(EXPECTED_TYPES).flat();
-  assert.equal(classified.length, 45);
+  assert.equal(classified.length, 63);
   assert.deepEqual(
     [...classified].sort(),
     getStorefrontProducts().map((product) => product.slug).sort(),
@@ -113,13 +134,24 @@ test("catalog results cannot mutate the source collection or lookups", () => {
   original.slug = "curated-singles-01";
   original.images.push("/tampered.webp");
 
-  assert.equal(getStorefrontProducts().length, 45);
+  assert.equal(getStorefrontProducts().length, 63);
   assert.equal(getStorefrontProductBySlug("curated-singles-01"), undefined);
 
   const freshProduct = getStorefrontProductById(original.id);
   assert.ok(freshProduct);
   assert.notEqual(freshProduct.slug, "curated-singles-01");
   assert.ok(!freshProduct.images.includes("/tampered.webp"));
+});
+
+test("collection-ready catalog reads remain an ordered product-only array", () => {
+  const products = getStorefrontProducts();
+
+  assert.ok(products.length >= 12);
+  assert.ok(products.every((product) => typeof product.id === "string"));
+  assert.deepEqual(
+    products.map((product) => product.slug),
+    getStorefrontProducts().map((product) => product.slug),
+  );
 });
 
 test("the calm tide pilot uses its complete editorial gallery without changing other pearl source galleries", () => {
@@ -168,30 +200,14 @@ test("the calm tide pilot uses its complete editorial gallery without changing o
 });
 
 test("approved new-series products use their own approved galleries", () => {
-  assert.equal(NEW_SERIES_SLUGS.length, 25);
+  assert.equal(NEW_SERIES_SLUGS.length, 43);
 
   for (const slug of NEW_SERIES_SLUGS) {
     const product = getStorefrontProductBySlug(slug);
     assert.ok(product, `Expected approved new-series product ${slug}`);
     const sourceRoot = `/images/products/new-series/${slug}/`;
     const editorialRoot = `${sourceRoot}editorial-v1-`;
-    const expectedPrimary = [
-      "new-series-white-shell-flower-drops", "new-series-gold-shell-teardrops",
-      "new-series-baroque-pearl-hoops", "new-series-purple-gem-pearl-drops",
-      "new-series-white-petal-flower-earrings", "new-series-mother-of-pearl-cluster-earrings",
-      "new-series-white-shell-triple-drops", "new-series-round-shell-disc-drops",
-      "new-series-pearl-jade-bracelet", "new-series-purple-gem-bangle",
-      "new-series-shell-twist-pearl-cuff", "new-series-leaf-turquoise-pearl-cuff",
-      "new-series-leaf-pearl-bracelet", "new-series-round-shell-gold-cuff",
-      "new-series-purple-stone-pendant-necklace", "new-series-pearl-y-lariat",
-      "new-series-green-layered-pendant-necklace", "new-series-pearl-dreamcatcher-lariat",
-      "new-series-pearl-drop-choker", "new-series-multi-strand-pearl-choker",
-      "new-series-black-drop-pearl-choker", "new-series-pearl-glasses-chain",
-      "new-series-shell-drop-glasses-chain", "new-series-classic-pearl-chain",
-      "new-series-turquoise-bead-chain",
-    ].includes(slug)
-      ? `${editorialRoot}01-hero.png`
-      : `${sourceRoot}main.jpg`;
+    const expectedPrimary = `${editorialRoot}01-hero.png`;
     assert.equal(product.image, expectedPrimary);
     assert.ok(product.images.length >= 1);
     assert.ok(
@@ -208,6 +224,13 @@ test("storefront products expose truthful card image roles", () => {
 
   assert.equal(editorialCore?.imageRoles?.wearing, "/images/products/1688-shop/pearl-series/pearl-series-13-editorial-v1-03-worn.png");
   assert.equal(editorialWorn?.imageRoles?.wearing, "/images/products/1688-shop/pearl-series/pearl-series-18-editorial-v1-03-worn.png");
-  assert.equal(newSeries?.imageRoles?.wearing, undefined);
+  assert.equal(newSeries?.imageRoles?.wearing, "/images/products/new-series/new-series-round-shell-disc-drops/editorial-v1-03-worn.png");
   assert.equal(newSeries?.imageRoles?.primary, newSeries?.images[0]);
+});
+
+test("sticky purchase controls remain absent when the product is unavailable", () => {
+  assert.equal(shouldShowStickyAddToCart(false, false, true), false);
+  assert.equal(shouldShowStickyAddToCart(true, true, true), false);
+  assert.equal(shouldShowStickyAddToCart(true, false, false), false);
+  assert.equal(shouldShowStickyAddToCart(true, false, true), true);
 });

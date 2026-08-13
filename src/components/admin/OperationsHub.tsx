@@ -9,6 +9,7 @@ import {
   Send,
   X,
 } from "lucide-react";
+import { loadOperationsSnapshot, type OperationsSnapshot } from "@/lib/client/admin-resource-loaders";
 
 type Candidate = {
   id: string;
@@ -78,34 +79,58 @@ export function OperationsHub() {
   const [outlookStatus, setOutlookStatus] = useState<string>("未连接");
   const [form, setForm] = useState(initialForm);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState(true);
   const [message, setMessage] = useState("");
+
+  const applySnapshot = useCallback((snapshot: OperationsSnapshot<
+    Candidate[],
+    { events?: InboxEvent[]; connection?: { status?: string } },
+    Report[]
+  >) => {
+    if (snapshot.candidates) setCandidates(snapshot.candidates);
+    if (snapshot.inbox) {
+      setEvents(snapshot.inbox.events ?? []);
+      setOutlookStatus(snapshot.inbox.connection?.status ?? "未连接");
+    }
+    if (snapshot.reports) setReports(snapshot.reports);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    void loadOperationsSnapshot<
+      Candidate[],
+      { events?: InboxEvent[]; connection?: { status?: string } },
+      Report[]
+    >()
+      .then((snapshot) => {
+        if (active) applySnapshot(snapshot);
+      })
+      .catch(() => {
+        if (active) setMessage("运营数据暂时无法读取，请稍后刷新。");
+      })
+      .finally(() => {
+        if (active) setBusy(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [applySnapshot]);
 
   const refresh = useCallback(async () => {
     setBusy(true);
     try {
-      const [candidateResponse, inboxResponse, reportResponse] = await Promise.all([
-        fetch("/api/admin/operations/candidates"),
-        fetch("/api/admin/operations/inbox"),
-        fetch("/api/admin/operations/reports"),
-      ]);
-      if (candidateResponse.ok) setCandidates(await candidateResponse.json());
-      if (inboxResponse.ok) {
-        const inbox = await inboxResponse.json();
-        setEvents(inbox.events ?? []);
-        setOutlookStatus(inbox.connection?.status ?? "未连接");
-      }
-      if (reportResponse.ok) setReports(await reportResponse.json());
+      const snapshot = await loadOperationsSnapshot<
+        Candidate[],
+        { events?: InboxEvent[]; connection?: { status?: string } },
+        Report[]
+      >();
+      applySnapshot(snapshot);
     } catch {
       setMessage("运营数据暂时无法读取，请稍后刷新。");
     } finally {
       setBusy(false);
     }
-  }, []);
-
-  useEffect(() => {
-    void refresh();
-  }, [refresh]);
+  }, [applySnapshot]);
 
   async function createCandidate(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

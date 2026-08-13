@@ -3,10 +3,8 @@ import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import GiftsPage, {
-  GiftProductSections,
-  metadata as giftsMetadata,
-} from "../src/app/gifts/page";
+import GiftsPage, { metadata as giftsMetadata } from "../src/app/gifts/page";
+import { GiftProductSections } from "../src/components/editorial/GiftProductSections";
 import NewArrivalsPage, {
   metadata as arrivalsMetadata,
 } from "../src/app/collections/new-arrivals/page";
@@ -18,6 +16,7 @@ import {
   selectNewArrivalProducts,
 } from "../src/lib/editorial/gifts";
 import { HOMEPAGE_MEDIA } from "../src/lib/homepage-editorial";
+import { BRAND } from "../src/lib/brand-identity";
 import { absoluteUrl } from "../src/lib/site";
 
 test("gift and new-arrival routes declare unique social and canonical metadata", () => {
@@ -28,36 +27,25 @@ test("gift and new-arrival routes declare unique social and canonical metadata",
   );
   assert.ok(giftsMetadata.openGraph && giftsMetadata.twitter);
   assert.ok(arrivalsMetadata.openGraph && arrivalsMetadata.twitter);
-  assert.equal(giftsMetadata.title, "Pearl Jewelry Gifts | MythRealms Gift Guide");
-  assert.equal(arrivalsMetadata.title, "New Pearl Jewelry Arrivals | MythRealms");
+  assert.equal(giftsMetadata.title, `Pearl Jewelry Gift Guide | Everyday Giving | ${BRAND.name}`);
+  assert.equal(arrivalsMetadata.title, `New Pearl Jewelry Arrivals | ${BRAND.name}`);
   assert.match(JSON.stringify(giftsMetadata.twitter), /summary_large_image/);
   assert.match(JSON.stringify(arrivalsMetadata.twitter), /summary_large_image/);
 });
 
-test("gifts route renders the approved four edits and truthful support links", () => {
+test("gifts route renders the evergreen gift checklist and truthful support links", () => {
   const html = renderToStaticMarkup(createElement(GiftsPage));
 
-  assert.match(html, /<h1[^>]*>Pearl gifts, chosen by how they will be worn\.<\/h1>/);
-  for (const id of ["under-50", "under-70", "everyday", "statement"]) {
-    assert.match(html, new RegExp(`id="${id}"`));
-  }
-  assert.match(html, /Under \$50/);
-  assert.match(html, /Under \$70/);
+  assert.match(html, /<h1[^>]*>A Pearl Jewelry Gift Guide for Everyday Giving<\/h1>/);
+  assert.match(html, /id="gift-method"/);
+  assert.match(html, /Gift checklist/);
   assert.match(html, /href="\/shipping"/);
-  assert.match(html, /href="\/returns"/);
-  assert.match(html, /href="\/pearls\/care"/);
-  assert.match(html, /"@type":"CollectionPage"/);
-  assert.match(html, /"@type":"ItemList"/);
+  assert.match(html, /href="\/refund"/);
+  assert.match(html, /href="\/pearls\/how-to-wear"/);
+  assert.match(html, /"@type":"FAQPage"/);
+  assert.doesNotMatch(html, /href="\/products\/|"@type":"(?:CollectionPage|ItemList)"/);
   assert.doesNotMatch(html, /best seller|most loved|top rated/i);
   assert.doesNotMatch(html, /<main(?:\s|>)/);
-
-  const productHeadingIds = ["under-50", "under-70", "everyday", "statement"].map(
-    (id) => `${id}-products-title`,
-  );
-  for (const headingId of productHeadingIds) {
-    assert.equal((html.match(new RegExp(`id="${headingId}"`, "g")) ?? []).length, 1);
-    assert.match(html, new RegExp(`aria-labelledby="${headingId}"`));
-  }
 });
 
 test("gift sections omit empty edits completely", () => {

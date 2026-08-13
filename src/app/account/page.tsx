@@ -5,6 +5,11 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { User, Mail, LogOut, ShoppingBag, Package, ArrowRight } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
+import {
+  getAccountSessionKey,
+  loadAccountOrders,
+  loadLoyaltyPoints,
+} from "@/lib/client/account-resource";
 
 interface OrderItem {
   id: string;
@@ -30,30 +35,42 @@ interface Order {
 
 export default function AccountPage() {
   const { data: session, status } = useSession();
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [ordersLoading, setOrdersLoading] = useState(false);
-  const [ordersError, setOrdersError] = useState("");
+  const [ordersResource, setOrdersResource] = useState<{
+    sessionKey: string | null;
+    orders: Order[];
+    error: string;
+  }>({ sessionKey: null, orders: [], error: "" });
   const [points, setPoints] = useState(0);
+  const sessionKey = status === "authenticated" ? getAccountSessionKey(session) : null;
+  const ordersLoading = Boolean(sessionKey && ordersResource.sessionKey !== sessionKey);
+  const orders = ordersResource.sessionKey === sessionKey ? ordersResource.orders : [];
+  const ordersError = ordersResource.sessionKey === sessionKey ? ordersResource.error : "";
 
   useEffect(() => {
-    if (status === "authenticated") {
-      setOrdersLoading(true);
-      setOrdersError("");
-      fetch("/api/account/orders")
-        .then((res) => {
-          if (!res.ok) throw new Error("Failed to load orders");
-          return res.json();
-        })
-        .then((data) => setOrders(data.orders || []))
-        .catch((err) => setOrdersError(err.message || "Failed to load orders"))
-        .finally(() => setOrdersLoading(false));
-      // Fetch loyalty points
-      fetch("/api/account/loyalty")
-        .then((res) => res.json())
-        .then((data) => setPoints(data.points || 0))
-        .catch(() => {});
-    }
-  }, [status]);
+    if (!sessionKey) return;
+    let active = true;
+    void loadAccountOrders<Order>()
+      .then((nextOrders) => {
+        if (active) setOrdersResource({ sessionKey, orders: nextOrders, error: "" });
+      })
+      .catch((error) => {
+        if (active) {
+          setOrdersResource({
+            sessionKey,
+            orders: [],
+            error: error instanceof Error ? error.message : "Failed to load orders",
+          });
+        }
+      });
+    void loadLoyaltyPoints()
+      .then((nextPoints) => {
+        if (active) setPoints(nextPoints);
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, [sessionKey]);
 
   // --- Not logged in ---
   if (status === "unauthenticated") {

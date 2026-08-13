@@ -10,7 +10,7 @@ type HomepagePearlEditProps = {
 
 export function HomepagePearlEdit({ products }: HomepagePearlEditProps) {
   return (
-    <section className="bg-[var(--bg)] py-16 md:py-24" aria-labelledby="pearl-edit-title">
+    <section data-homepage-section="homepage-primary-edit" className="bg-[var(--bg)] py-16 md:py-24" aria-labelledby="pearl-edit-title">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
@@ -24,20 +24,24 @@ export function HomepagePearlEdit({ products }: HomepagePearlEditProps) {
           </Link>
         </div>
         <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-5">
-          {products.map((product) => (
-            <ProductCard
-              key={product.slug}
-              product={{
-                id: product.id,
-                name: productDisplayName(product),
-                slug: product.slug,
-                images: [product.imageRoles?.primary || product.image],
-                imageRoles: product.imageRoles,
-                variants: [{ price: product.price }],
-                comparePrice: product.compareAt ?? null,
-              }}
-            />
-          ))}
+          {products.map((product) => {
+            const primaryImage = product.imageRoles?.primary || product.image;
+
+            return (
+              <ProductCard
+                key={product.slug}
+                product={{
+                  id: product.id,
+                  name: productDisplayName(product),
+                  slug: product.slug,
+                  images: [primaryImage],
+                  imageRoles: product.imageRoles,
+                  variants: [{ price: product.price }],
+                  comparePrice: product.compareAt ?? null,
+                }}
+              />
+            );
+          })}
         </div>
       </div>
     </section>

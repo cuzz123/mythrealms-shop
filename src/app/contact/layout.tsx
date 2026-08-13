@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact MythRealms",
-  description: "Contact MythRealms customer support for help with an order, product, shipping, return, or general question.",
+  title: `Contact ${BRAND.name}`,
+  description: `Contact ${BRAND.name} customer support for help with an order, product, or general question.`,
   alternates: { canonical: absoluteUrl("/contact") },
   openGraph: {
     type: "website",
     url: absoluteUrl("/contact"),
-    title: "Contact MythRealms",
-    description: "Get in touch with MythRealms customer support.",
+    title: `Contact ${BRAND.name}`,
+    description: `Get in touch with ${BRAND.name} customer support.`,
   },
 };
 

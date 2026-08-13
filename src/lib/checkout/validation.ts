@@ -8,6 +8,7 @@ import type {
 const MAX_LINES = 20;
 const MAX_LINE_QUANTITY = 10;
 const MAX_TOTAL_QUANTITY = 50;
+const MAX_GIFT_NOTE_LENGTH = 240;
 
 export class CheckoutInputError extends Error {
   readonly status = 400;
@@ -31,6 +32,21 @@ function requiredString(
     throw new CheckoutInputError(`${label} is required`);
   }
   return value.trim();
+}
+
+function parseGiftNote(value: unknown): string | undefined {
+  if (value === undefined) return undefined;
+  if (typeof value !== "string") {
+    throw new CheckoutInputError("Gift note must be text");
+  }
+
+  const note = value.trim();
+  if (note.length > MAX_GIFT_NOTE_LENGTH) {
+    throw new CheckoutInputError(
+      `Gift note cannot exceed ${MAX_GIFT_NOTE_LENGTH} characters`,
+    );
+  }
+  return note || undefined;
 }
 
 function parseItems(value: unknown): CheckoutLineInput[] {
@@ -67,7 +83,8 @@ function parseItems(value: unknown): CheckoutLineInput[] {
       throw new CheckoutInputError("Selected product variant is unavailable");
     }
 
-    return { productId, quantity };
+    const giftNote = parseGiftNote(candidate.giftNote);
+    return { productId, quantity, ...(giftNote ? { giftNote } : {}) };
   });
 
   const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);

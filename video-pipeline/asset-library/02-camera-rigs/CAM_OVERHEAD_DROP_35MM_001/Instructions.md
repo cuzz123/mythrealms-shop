@@ -1,0 +1,3 @@
+# CAM_OVERHEAD_DROP_35MM_001
+
+Draft Camera Rig。使用时 Append 相机 Rig，Link 正式产品到 `PRODUCT_SLOT__REPLACE_ME`，并移动 `FOCUS_TARGET__PRODUCT`。

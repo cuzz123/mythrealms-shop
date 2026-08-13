@@ -2,9 +2,9 @@
 
 /* System font stacks — no Google Fonts dependency, builds anywhere */
 @theme {
-  --font-serif: Georgia, "Times New Roman", ui-serif, serif;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-body: Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -12,26 +12,31 @@ html {
 }
 
 :root {
-  --warm-white: #f7f5ef;
+  --content-wide: 80rem;
+  --content-reading: 48rem;
+  --section-space: clamp(4rem, 7vw, 7rem);
+  --signature-rule: color-mix(in srgb, var(--text) 22%, transparent);
+  --warm-white: #f7f3eb;
   --charcoal: #18201f;
   --sea-green: #315d58;
   --muted-blue: #637e89;
   --terracotta: #a9503d;
-  --bg: var(--warm-white);
+  --background: #f7f3eb;
+  --bg: var(--background);
   --surface: #fffdf8;
   --surface-raised: #f1efe6;
-  --surface-alt: #e9e8df;
-  --text: #1d2423;
-  --text-secondary: #5e6966;
+  --surface-alt: #eee6da;
+  --text: #292622;
+  --text-secondary: #6d655d;
   --text-muted: #78817d;
-  --accent: var(--sea-green);
+  --accent: #a98758;
   --accent-hover: #234944;
-  --primary: #b78b44;
+  --primary: #b99863;
   --primary-hover: #9c7335;
   --sale: var(--terracotta);
   --sale-bg: #f7e6df;
   --success: #407a62;
-  --border: #d8d6cf;
+  --border: #ddd2c4;
   --border-light: #e9e7df;
   --announcement-bg: #18201f;
   --announcement-text: #e8ebe5;
@@ -69,7 +74,7 @@ html {
 
 
 body {
-  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--leading-body);
   color: var(--text); background: var(--bg);
@@ -83,8 +88,25 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+@media (max-width: 767px) {
+  .product-purchase-page {
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .sticky-add-to-cart {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 50;
+    border-top: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    box-shadow: 0 -8px 24px rgba(29, 36, 35, 0.1);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
 h1, h2, h3, h4, .font-serif {
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-serif);
 }
 
 h1 { line-height: var(--leading-heading); letter-spacing: var(--tracking-display); }
@@ -108,10 +130,37 @@ h4 { line-height: 1.3; }
 
 /* Respect user preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  .signature-motion {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .animate-fade-in,
   .animate-slide-up,
   .animate-slide-down,
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+.signature-hero-image {
+  object-position: var(--signature-object-position, center);
+}
+
+@media (min-width: 640px) {
+  .signature-hero-image {
+    object-position: var(--signature-object-position-sm, var(--signature-object-position, center));
+  }
+}
+
+@media (min-width: 768px) {
+  .signature-hero-image {
+    object-position: var(--signature-object-position-md, var(--signature-object-position-sm, var(--signature-object-position, center)));
+  }
+}
+
+@media (min-width: 1024px) {
+  .signature-hero-image {
+    object-position: var(--signature-object-position-lg, var(--signature-object-position-md, var(--signature-object-position-sm, var(--signature-object-position, center))));
+  }
 }
 
 /* Visible by default until client-side enhancement is active. */
@@ -151,11 +200,17 @@ h4 { line-height: 1.3; }
 
 @layer utilities {
   .font-serif {
-    font-family: var(--font-serif), Georgia, serif;
+    font-family: var(--font-serif);
   }
   .font-body {
-    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body);
   }
+}
+
+/* Keep champagne gold for non-text accents; static accent-text utilities use readable copy color. */
+[class~="text-[var(--accent)]"],
+[class~="text-[var(--accent)]/80"] {
+  color: var(--text-secondary);
 }
 
 /* Animation keyframes for homepage */

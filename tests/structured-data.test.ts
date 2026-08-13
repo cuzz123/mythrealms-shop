@@ -5,7 +5,15 @@ import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { JsonLd, ProductJsonLd } from "../src/components/ui/JsonLd";
+import {
+  buildBlogPostingData,
+  JsonLd,
+  OrganizationJsonLd,
+  WebSiteJsonLd,
+  ProductJsonLd,
+} from "../src/components/ui/JsonLd";
+import { BlogPostJsonLd as SeoBlogPostJsonLd } from "../src/components/ui/SeoJsonLd";
+import { BRAND } from "../src/lib/brand-identity";
 import {
   buildAboutPageSchema,
   buildArticleSchema,
@@ -31,11 +39,11 @@ test("article schema mirrors visible editorial facts", () => {
   assert.equal(schema["@type"], "Article");
   assert.deepEqual(schema.author, {
     "@type": "Organization",
-    name: "MythRealms Editorial",
+    name: "Maverenne Editorial",
   });
   assert.deepEqual(schema.publisher, {
     "@type": "Organization",
-    name: "MythRealms",
+    name: "Maverenne",
   });
   assert.equal(schema.headline, "How to Care for Pearl Jewelry");
 });
@@ -62,8 +70,8 @@ test("collection schema contains only supplied product URLs", () => {
 
 test("about schema identifies the page without inventing a founder", () => {
   const schema = buildAboutPageSchema({
-    name: "About MythRealms",
-    description: "The MythRealms pearl point of view.",
+    name: "About Maverenne",
+    description: "The Maverenne point of view.",
     url: "https://example.com/about",
   });
 
@@ -81,10 +89,13 @@ test("product schema contains only verified commerce facts", () => {
     sku: "sku-1",
     availability: "InStock",
     url: "https://example.com/products/pearl-drop-earrings",
-    brand: "MythRealms",
   });
 
   assert.equal(schema["@type"], "Product");
+  assert.deepEqual(schema.brand, {
+    "@type": "Brand",
+    name: "Maverenne",
+  });
   assert.deepEqual(schema.image, ["https://example.com/product.jpg"]);
   assert.deepEqual(schema.offers, {
     "@type": "Offer",
@@ -137,6 +148,7 @@ test("ProductJsonLd emits exactly one Product object with its legacy InStock def
 
   assert.equal((html.match(/application\/ld\+json/g) || []).length, 1);
   assert.equal((html.match(/"@type":"Product"/g) || []).length, 1);
+  assert.match(html, /"brand":\{"@type":"Brand","name":"Maverenne"\}/);
   assert.match(html, /https:\/\/schema\.org\/InStock/);
 });
 
@@ -175,9 +187,20 @@ test("organization schema accepts verified policy data without inventing people"
   });
 
   assert.deepEqual(schema["@type"], ["Organization", "OnlineStore"]);
+  assert.equal(schema.name, "Maverenne");
   assert.equal(schema.url, "https://example.com");
   assert.equal(schema.contactPoint.email, "support@example.com");
   assert.equal("founder" in schema, false);
+});
+
+test("public organization JSON-LD omits unverified shipping and return policies", () => {
+  const html = renderToStaticMarkup(createElement(OrganizationJsonLd));
+  const match = html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/);
+
+  assert.ok(match, "expected an organization JSON-LD script");
+  const schema = JSON.parse(match[1]) as Record<string, unknown>;
+  assert.equal("hasShippingService" in schema, false);
+  assert.equal("hasMerchantReturnPolicy" in schema, false);
 });
 
 test("organization schema mirrors optional verified policy objects", () => {
@@ -267,6 +290,10 @@ test("organization policy schema distinguishes shipping bands and return reasons
     Object.keys(returns).filter((key) => /returnShippingFeesAmount$/i.test(key)),
     [],
   );
+  assert.doesNotMatch(
+    JSON.stringify(schema),
+    /"name":"(?:MythRealms|Phoenix|Moon Rabbit|White Tiger)/i,
+  );
 });
 
 test("JsonLd safely escapes less-than characters", () => {
@@ -278,4 +305,50 @@ test("JsonLd safely escapes less-than characters", () => {
 
   assert.match(html, /\\u003c\/script>/);
   assert.doesNotMatch(html, /<\/script><script>/);
+});
+
+test("editorial schemas derive their public identity from Maverenne", () => {
+  const data = buildBlogPostingData({
+    headline: "How to Style Pearl Earrings",
+    description: "A practical styling guide.",
+    url: "https://example.com/blog/how-to-style-pearl-earrings",
+    datePublished: new Date("2026-07-01T00:00:00Z"),
+    dateModified: new Date("2026-07-02T00:00:00Z"),
+    authorName: "Legacy Editorial",
+  });
+
+  assert.deepEqual(data.author, {
+    "@type": "Organization",
+    name: "Maverenne Editorial",
+  });
+  assert.deepEqual(data.publisher, {
+    "@type": "Organization",
+    name: "Maverenne",
+  });
+  assert.equal(BRAND.name, "Maverenne");
+  assert.doesNotMatch(
+    JSON.stringify(data),
+    /MythRealms|Phoenix|Moon Rabbit|White Tiger|Chinese mythology/i,
+  );
+});
+
+test("rendered WebSite and alternate BlogPosting schemas expose only Maverenne entity names", () => {
+  const websiteHtml = renderToStaticMarkup(createElement(WebSiteJsonLd));
+  const articleHtml = renderToStaticMarkup(
+    createElement(SeoBlogPostJsonLd, {
+      title: "How to Style Pearl Earrings",
+      excerpt: "A practical styling guide.",
+      datePublished: "2026-07-01",
+      author: "Legacy Editorial",
+      url: "https://example.com/blog/how-to-style-pearl-earrings",
+    }),
+  );
+
+  for (const html of [websiteHtml, articleHtml]) {
+    assert.match(html, /"name":"Maverenne/);
+    assert.doesNotMatch(
+      html,
+      /"name":"(?:MythRealms|Phoenix|Moon Rabbit|White Tiger)/i,
+    );
+  }
 });

@@ -1,0 +1,10 @@
+{
+  "purpose": "visual_reference_only",
+  "assets": [
+    {"id":"CHAR_CENTER_NAVY_001","role":"center","files":["CHAR_CENTER_NAVY_001/three_views.jpg","CHAR_CENTER_NAVY_001/expressions_and_views.jpg"],"locks":["blonde low bun","navy off-shoulder gown","pearl butterfly necklace"]},
+    {"id":"CHAR_RIGHT_JET_001","role":"right_1","files":["CHAR_RIGHT_JET_001/three_views.jpg"],"locks":["dark curly updo","black velvet gown","gold pearl earrings"]},
+    {"id":"CHAR_RIGHT_GOLD_001","role":"right_2","files":["CHAR_RIGHT_GOLD_001/three_views.jpg"],"locks":["dark curly updo","gold gown","gold pearl jewelry"]},
+    {"id":"CHAR_LEFT_SAGE_001","role":"left_1","files":["CHAR_LEFT_SAGE_001/three_views.jpg"],"locks":["light blonde long hair","sage green gown","drop earrings"]},
+    {"id":"CHAR_LEFT_GLASSES_001","role":"left_2","files":["CHAR_LEFT_GLASSES_001/three_views.jpg"],"locks":["blonde low bun","round glasses","cream gown","long pearl earrings"]}
+  ]
+}

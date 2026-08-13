@@ -2,6 +2,7 @@ export interface CheckoutLineInput {
   productId: string;
   variantId?: string;
   quantity: number;
+  giftNote?: string;
 }
 
 export interface ShippingAddressInput {
@@ -35,6 +36,7 @@ export interface QuotedLine {
   quantity: number;
   unitPriceCents: number;
   lineTotalCents: number;
+  giftNote?: string;
 }
 
 export interface BaseQuote {

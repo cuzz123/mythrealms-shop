@@ -1,0 +1,3 @@
+preview=VISUAL_HULL_match.png
+visible_silhouette_iou_percent=90.28
+method=masked_right_mannequin_silhouette_only

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MythRealms影视资产条目",
+  "type": "object",
+  "required": ["id", "name", "category", "status", "version", "source_paths", "usage"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
+    "name": {"type": "string"},
+    "category": {"enum": ["product", "camera_rig", "scene", "lighting", "character", "motion", "style", "fx", "shot_template"]},
+    "status": {"enum": ["planned", "draft", "approved", "deprecated"]},
+    "version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "source_paths": {"type": "array", "items": {"type": "string"}},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "usage": {
+      "type": "object",
+      "required": ["default_import", "suitable_for"],
+      "properties": {
+        "default_import": {"enum": ["link", "append", "copy"]},
+        "suitable_for": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "quality_gate": {"type": "array", "items": {"type": "string"}},
+    "notes": {"type": "string"}
+  },
+  "additionalProperties": false
+}

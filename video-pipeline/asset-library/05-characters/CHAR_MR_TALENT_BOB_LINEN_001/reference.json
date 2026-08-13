@@ -1,0 +1,26 @@
+{
+  "id": "CHAR_MR_TALENT_BOB_LINEN_001",
+  "asset_type": "female_editorial_character_reference",
+  "status": "reference_ready_for_hunyuan_web",
+  "version": "v1",
+  "generator": "Codex image generation",
+  "created_at": "2026-07-15",
+  "description": "短深色波波头、暖橄榄肤色、白色亚麻衬衫与阔腿裤。",
+  "files": {
+    "original_reference": "source/generated-reference/original-reference.png",
+    "turnaround_sheet": "source/generated-turnaround/turnaround-sheet.png",
+    "front": "source/three-view-crops/front.jpg",
+    "left_45": "source/three-view-crops/left_front.jpg",
+    "back": "source/three-view-crops/back.jpg",
+    "thumbnail": "Thumbnail.png"
+  },
+  "hunyuan_web_upload_order": [
+    "front.jpg",
+    "left_front.jpg",
+    "back.jpg"
+  ],
+  "limitations": [
+    "这是图像参考资产，不含 GLB、FBX、骨骼或动作。",
+    "进入混元图生3D后仍需检查发丝、手指、衣物与背面的一致性。"
+  ]
+}

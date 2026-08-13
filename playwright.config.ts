@@ -1,6 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const baseURL = process.env.BASE_URL || 'http://127.0.0.1:3001';
+const localWebServerEnv = Object.fromEntries(
+  Object.entries(process.env).filter(
+    (entry): entry is [string, string] => typeof entry[1] === 'string',
+  ),
+);
 
 export default defineConfig({
   testDir: './e2e',
@@ -30,6 +35,12 @@ export default defineConfig({
     : {
         command: 'npm run dev -- --hostname 127.0.0.1 --port 3001',
         url: baseURL,
+        env: {
+          ...localWebServerEnv,
+          AUTH_SECRET:
+            process.env.AUTH_SECRET ||
+            'playwright-local-only-secret-not-for-production',
+        },
         reuseExistingServer: !process.env.CI,
         timeout: 60_000,
       },

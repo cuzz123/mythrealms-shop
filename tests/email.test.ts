@@ -210,6 +210,10 @@ test("passes configured sender and idempotency key to the transport", async () =
   );
   assert.equal(payload?.from, "MythRealms <orders@example.com>");
   assert.equal(payload?.to, "buyer@example.com");
+  const customerCopy = String(payload?.html).replace(/href="[^"]*"/g, "");
+  assert.match(customerCopy, /Maverenne/);
+  assert.doesNotMatch(customerCopy, /MythRealms/i);
+  assert.doesNotMatch(customerCopy, /tracking information will follow/i);
   assert.equal(requestOptions?.idempotencyKey, "order-confirmation/order-123");
 });
 
