@@ -10,7 +10,7 @@ export function HomepageCategoryStories() {
   const indexLinks = HOMEPAGE_CATEGORY_LINKS.slice(3);
 
   return (
-    <ScrollReveal as="section" className="bg-[var(--surface-alt)] py-16 md:py-24" aria-labelledby="pearl-edit-categories-title">
+    <ScrollReveal as="section" data-homepage-section="homepage-category-index" className="bg-[var(--surface-alt)] py-16 md:py-24" aria-labelledby="pearl-edit-categories-title">
       <div className="mx-auto max-w-7xl px-6">
         <p className="text-xs font-semibold uppercase text-[var(--accent)]">{BRAND.descriptor}</p>
         <div className="mt-3 flex flex-wrap items-end justify-between gap-5">

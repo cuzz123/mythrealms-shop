@@ -85,3 +85,10 @@ test("homepage gift navigation does not point to unrendered gift-page fragments"
   assert.match(source, /label: "Small Gifts", href: "\/gifts"/);
   assert.doesNotMatch(source, /\/gifts#(?:under-50|under-70|everyday|statement)/);
 });
+
+test("homepage editorial data keeps approved routes and avoids new retail claims", () => {
+  const source = readFileSync(resolve("src/lib/homepage-editorial.ts"), "utf8");
+
+  assert.doesNotMatch(source, /\/gifts#(?:under-50|under-70|everyday|statement)/);
+  assert.doesNotMatch(source, /(?:in stock|limited stock|best seller|sale|discount|% off)/i);
+});

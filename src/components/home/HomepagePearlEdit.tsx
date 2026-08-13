@@ -10,7 +10,7 @@ type HomepagePearlEditProps = {
 
 export function HomepagePearlEdit({ products }: HomepagePearlEditProps) {
   return (
-    <section className="bg-[var(--bg)] py-16 md:py-24" aria-labelledby="pearl-edit-title">
+    <section data-homepage-section="homepage-primary-edit" className="bg-[var(--bg)] py-16 md:py-24" aria-labelledby="pearl-edit-title">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>

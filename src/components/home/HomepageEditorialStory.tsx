@@ -9,7 +9,7 @@ export function HomepageEditorialStory() {
   const everyday = HOMEPAGE_MEDIA.everyday;
 
   return (
-    <section className="bg-[var(--surface)]" aria-labelledby="pearl-guide-title">
+    <section data-homepage-section="homepage-story-band" className="bg-[var(--surface)]" aria-labelledby="pearl-guide-title">
       <div className="grid lg:grid-cols-2">
         <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[38rem]">
           <Image src={seaside.src} alt={seaside.alt} fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />

@@ -10,7 +10,7 @@ type HomepageGiftSetsProps = {
 
 export function HomepageGiftSets({ products }: HomepageGiftSetsProps) {
   return (
-    <section className="bg-[var(--bg)] py-16 md:py-24" aria-labelledby="gift-sets-title">
+    <section data-homepage-section="homepage-secondary-edit" className="bg-[var(--bg)] py-16 md:py-24" aria-labelledby="gift-sets-title">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div className="max-w-xl">

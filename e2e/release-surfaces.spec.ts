@@ -447,28 +447,31 @@ test.describe("release surfaces", () => {
     });
   }
 
-  test("homepage preserves the Maverenne section order without Guardian", async ({ page }) => {
+  test("homepage renders the Maverenne signature section sequence without Guardian", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
 
-    const expectedHeadings = [
-      "A little something for yourself.",
-      "The Pearl Edit",
-      "Shop by moment",
-      "Pieces for everyday light.",
-      "Come back to yourself.",
-      "Everyday notes",
-      "A quiet note for you.",
+    const expectedMarkers = [
+      "homepage-signature-hero",
+      "homepage-category-index",
+      "homepage-editorial-diptych",
+      "homepage-primary-edit",
+      "homepage-story-band",
+      "homepage-editorial-links",
+      "homepage-secondary-edit",
+      "homepage-newsletter-letter",
     ];
     const positions: number[] = [];
 
-    for (const name of expectedHeadings) {
-      const heading = page.getByRole("heading", { name, exact: true }).first();
-      await expect(heading).toBeVisible();
-      positions.push(await heading.evaluate((node) => node.getBoundingClientRect().top));
+    for (const marker of expectedMarkers) {
+      const section = page.locator(`[data-homepage-section="${marker}"]`);
+      await expect(section).toHaveCount(1);
+      positions.push(await section.evaluate((node) => node.getBoundingClientRect().top));
     }
 
     expect(positions).toEqual([...positions].sort((left, right) => left - right));
+    await expect(page.locator("h1")).toHaveCount(1);
+    await expectNoHorizontalOverflow(page);
 
     await expect(page.getByRole("link", { name: "Find Your Piece" })).toHaveAttribute(
       "href",
@@ -478,17 +481,19 @@ test.describe("release surfaces", () => {
       "href",
       "/collections/pearl-series",
     );
-    for (const [label, href] of [
-      ["For Everyday", "/collections/pearl-series"],
-      ["For a New Chapter", "/gifts"],
-      ["Just Because", "/collections/new-arrivals"],
-      ["Small Gifts", "/gifts"],
-    ] as const) {
-      await expect(page.getByRole("link", { name: label, exact: true })).toHaveAttribute("href", href);
-    }
-
     await expect(page.locator('a[href="/guardian-quiz"]')).toHaveCount(0);
     await expect(page.getByText(/Guardian/i)).toHaveCount(0);
+  });
+
+  test("homepage hero remains stable when reduced motion is requested", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+
+    const controls = page.getByRole("button", { name: /Show / });
+    await expect(controls).toHaveCount(3);
+    await expect(controls.first()).toHaveAttribute("aria-current", "true");
+    await page.waitForTimeout(250);
+    await expect(controls.first()).toHaveAttribute("aria-current", "true");
   });
 
   test("homepage keeps the existing first-viewport style hint", async ({ page }) => {

@@ -101,6 +101,16 @@ export const HOMEPAGE_EDITORIAL_LINKS = [
   },
 ] as const;
 
+export const HOMEPAGE_EDITORIAL_DIPTYCH = {
+  primaryImage: HOMEPAGE_MEDIA.everyday,
+  detailImage: HOMEPAGE_MEDIA.courtyard,
+  eyebrow: "Everyday moments",
+  title: "Shop by moment",
+  description: "A few considered starting points for the pieces that stay close through ordinary plans and special tables.",
+  href: "/collections/new-arrivals",
+  linkLabel: "Explore new arrivals",
+} as const;
+
 export function homepageEditorialSources(): string[] {
   return [...new Set([...Object.values(HOMEPAGE_MEDIA), ...HOMEPAGE_HERO_SLIDES].map(({ src }) => src))];
 }
