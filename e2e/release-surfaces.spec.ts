@@ -629,6 +629,37 @@ test.describe("release surfaces", () => {
     await expectImagesLoaded(page.locator("#main-content img"));
   });
 
+  test("mobile product purchase entry keeps its gallery controls, primary action, and cart opening intact", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/products/new-series-pearl-glasses-chain");
+
+    const galleryPosition = page.locator("[data-gallery-position]");
+    await expect(galleryPosition).toHaveText("1 / 3");
+    await expect(galleryPosition).toHaveAttribute("aria-live", "polite");
+
+    const nextImage = page.getByRole("button", { name: /Next product image, 1 of 3/ });
+    await nextImage.focus();
+    await page.keyboard.press("Enter");
+    await expect(galleryPosition).toHaveText("2 / 3");
+
+    const primaryAdd = page.getByTestId("primary-add-to-cart");
+    await primaryAdd.scrollIntoViewIfNeeded();
+    await expect(primaryAdd).toBeVisible();
+
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    const stickyAdd = page.getByTestId("sticky-add-to-cart");
+    await expect(stickyAdd).toBeVisible();
+    const mobileNav = page.locator("nav").filter({
+      has: page.getByRole("button", { name: "Cart" }),
+    });
+    expect((await stickyAdd.boundingBox())?.y + (await stickyAdd.boundingBox())?.height).toBeLessThanOrEqual(
+      (await mobileNav.boundingBox())?.y ?? 0,
+    );
+
+    await stickyAdd.getByRole("button", { name: /Add .* to cart/ }).click();
+    await expect(page.getByRole("dialog", { name: /Shopping cart with 1 items/ })).toBeVisible();
+  });
+
   test("guardian quiz resolves to three live pearl products", async ({ page }) => {
     await page.goto("/guardian-quiz");
     await page.getByRole("button", { name: "A fresh start after an ending." }).click();

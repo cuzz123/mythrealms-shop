@@ -16,6 +16,28 @@ import { ComplementaryProducts } from "@/components/storefront/ComplementaryProd
 import { FreeShippingProgress } from "@/components/storefront/FreeShippingProgress";
 import { StickyAddToCart } from "@/components/storefront/StickyAddToCart";
 
+function PurchaseFacts({ description, benefitTriplet }: { description: string; benefitTriplet: string }) {
+  return (
+    <div className="space-y-3 text-sm leading-relaxed text-[var(--text-muted)]">
+      <p>{description}</p>
+      <p className="text-[var(--accent)]">{benefitTriplet}</p>
+      <p>See the product photography for finish, construction, and scale details.</p>
+      <p>Use the full gallery to compare shape, setting, scale, and finish before ordering.</p>
+    </div>
+  );
+}
+
+function LearningLinks() {
+  return (
+    <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold">
+      <Link href="/pearls/care" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">How to care for pearl jewelry</Link>
+      <Link href="/pearls/how-to-wear" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">How to wear pearls</Link>
+      <Link href="/pearls/freshwater-pearls" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">What are freshwater pearls?</Link>
+      <Link href="/gifts" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">Shop pearl gifts</Link>
+    </div>
+  );
+}
+
 export function Product1688({ product }: { product: StorefrontProduct }) {
   const slug = product.slug;
   const [activeIdx, setActiveIdx] = useState(0);
@@ -187,9 +209,16 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         {/* Gallery */}
-        <div>
+        <div className="lg:sticky lg:top-6 lg:self-start">
           <div className="relative aspect-square rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
             <LazyImage src={mainImg} alt={displayName} fill sizes="(max-width:1024px) 100vw, 50vw" priority className="object-cover" containerClassName="absolute inset-0" />
+            <p
+              aria-live="polite"
+              data-gallery-position
+              className="absolute bottom-3 left-3 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white"
+            >
+              {activeIdx + 1} / {images.length}
+            </p>
             {images.length > 1 && (
               <>
                 <button type="button" aria-label={`Previous product image, ${activeIdx + 1} of ${images.length}`} onClick={() => setActiveIdx(i => i > 0 ? i-1 : images.length-1)} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors">
@@ -219,7 +248,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
         </div>
 
         {/* Product Info */}
-        <div>
+        <div data-purchase-summary>
           <p className="text-xs text-[var(--accent)] uppercase tracking-wider font-medium">{realm}</p>
           <div className="flex items-start gap-2 mt-1.5">
             <h1 className="font-serif text-2xl lg:text-3xl font-bold text-[var(--text)] flex-1">{displayName}</h1>
@@ -267,11 +296,8 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
           </p>
           <FreeShippingProgress subtotal={p.price * quantity} className="mt-4" />
 
-          <div className="mt-5 space-y-3 text-sm text-[var(--text-muted)] leading-relaxed">
-            <p>{displayDescription}</p>
-            <p className="text-[var(--accent)]">{benefitTriplet}</p>
-            <p>See the product photography for finish, construction, and scale details.</p>
-            <p>Use the full gallery to compare shape, setting, scale, and finish before ordering.</p>
+          <div className="mt-5">
+            <PurchaseFacts description={displayDescription} benefitTriplet={benefitTriplet} />
             {p.category !== "curated-singles" && (
               <p className="text-[var(--accent)]/80 italic">
                 From the {p.categoryName} - chosen for the {realm.toLowerCase()} realm.
@@ -409,21 +435,22 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
             <span>Gift-ready packaging</span>
           </div>
 
-          {/* Story link */}
-          <a
-            href="/about"
-            className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group"
-          >
-            <span className="text-sm font-medium text-[var(--text)]">
-              The story behind The Pearl Edit -{" "}
-              <span className="text-[var(--accent)] group-hover:underline">
-                Read Our Story
+          <div data-product-longform>
+            {/* Story link */}
+            <a
+              href="/about"
+              className="flex items-center gap-3 p-4 bg-[#1A1812] border border-[#3A3220] rounded-lg mt-6 hover:border-[var(--accent)]/40 transition-colors cursor-pointer group"
+            >
+              <span className="text-sm font-medium text-[var(--text)]">
+                The story behind The Pearl Edit -{" "}
+                <span className="text-[var(--accent)] group-hover:underline">
+                  Read Our Story
+                </span>
               </span>
-            </span>
-          </a>
+            </a>
 
-          {/* ===== PRODUCT DETAILS ACCORDION ===== */}
-          <div className="mt-6 border border-[var(--border)] rounded-lg overflow-hidden">
+            {/* ===== PRODUCT DETAILS ACCORDION ===== */}
+            <div className="mt-6 border border-[var(--border)] rounded-lg overflow-hidden">
             <button
               type="button"
               onClick={() => setDetailsOpen(!detailsOpen)}
@@ -457,27 +484,15 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
                 </div>
               </div>
             )}
-          </div>
-
-          <section className="mt-8" aria-labelledby="learn-about-your-pearls-title">
-            <h3 id="learn-about-your-pearls-title" className="font-serif text-xl font-medium text-[var(--text)]">
-              Learn about your pearls
-            </h3>
-            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold">
-              <Link href="/pearls/care" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">
-                How to care for pearl jewelry
-              </Link>
-              <Link href="/pearls/how-to-wear" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">
-                How to wear pearls
-              </Link>
-              <Link href="/pearls/freshwater-pearls" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">
-                What are freshwater pearls?
-              </Link>
-              <Link href="/gifts" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">
-                Shop pearl gifts
-              </Link>
             </div>
-          </section>
+
+            <section className="mt-8" aria-labelledby="learn-about-your-pearls-title">
+              <h3 id="learn-about-your-pearls-title" className="font-serif text-xl font-medium text-[var(--text)]">
+                Learn about your pearls
+              </h3>
+              <LearningLinks />
+            </section>
+          </div>
         </div>
       </div>
 

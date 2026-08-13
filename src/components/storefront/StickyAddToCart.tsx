@@ -70,7 +70,11 @@ export function StickyAddToCart({
   }
 
   return (
-    <div className="sticky-add-to-cart md:hidden" data-testid="sticky-add-to-cart">
+    <div
+      className="sticky-add-to-cart md:hidden"
+      data-testid="sticky-add-to-cart"
+      style={{ bottom: "calc(4.5rem + env(safe-area-inset-bottom, 0px))" }}
+    >
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3">
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium text-[var(--text)]">{label}</p>
