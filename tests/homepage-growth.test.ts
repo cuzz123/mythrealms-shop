@@ -13,20 +13,20 @@ import { BRAND } from "../src/lib/brand-identity";
 const source = (relativePath: string) =>
   readFileSync(resolve(relativePath), "utf8");
 
-test("homepage appends the growth bands after the existing editorial sections", () => {
+test("homepage preserves the approved signature editorial sequence before growth bands", () => {
   const page = source("src/app/page.tsx");
   const categoryIndex = page.indexOf("<HomepageCategoryStories />");
-  const occasionIndex = page.indexOf("<HomepageOccasionEdit");
+  const diptychIndex = page.indexOf("<EditorialDiptych");
   const pearlEditIndex = page.indexOf("<HomepagePearlEdit");
   const editorialIndex = page.indexOf("<HomepageEditorialStory />");
   const giftIndex = page.indexOf("<HomepageGiftSets");
 
   assert.ok(categoryIndex >= 0);
-  assert.ok(occasionIndex > categoryIndex);
-  assert.ok(pearlEditIndex > occasionIndex);
+  assert.ok(diptychIndex > categoryIndex);
+  assert.ok(pearlEditIndex > diptychIndex);
   assert.ok(editorialIndex > pearlEditIndex);
   assert.ok(giftIndex > editorialIndex);
-  assert.doesNotMatch(page, /HomepageGuardian|HomepageWhyPearls/);
+  assert.doesNotMatch(page, /HomepageOccasionEdit|HomepageGuardian|HomepageWhyPearls/);
 });
 
 test("global providers preserve children without mounting the first-order invitation", () => {
