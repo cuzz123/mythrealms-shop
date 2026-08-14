@@ -95,7 +95,7 @@ test("new-arrivals social metadata and hero share the truthful Mediterranean ima
   assert.ok(openGraph.includes(image.alt));
   assert.ok(twitter.includes(imageUrl));
   assert.ok(twitter.includes(image.alt));
-  assert.ok(html.includes(encodeURIComponent(image.src)));
+  assert.ok(html.includes(`src="${image.src}"`));
   assert.match(html, new RegExp(`alt="${image.alt}"`));
 });
 
