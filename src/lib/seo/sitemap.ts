@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { ACTIVE_PURCHASE_GUIDE_SLUGS } from "@/lib/editorial/purchase-guides";
 import type { StorefrontProduct } from "@/lib/storefront/catalog";
 
 export interface SitemapPost {
@@ -56,6 +57,11 @@ export function buildSitemapEntries(
     })),
     ...discoveryPaths.map((path) => ({
       url: `${baseUrl}${path}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...ACTIVE_PURCHASE_GUIDE_SLUGS.map((slug) => ({
+      url: `${baseUrl}/pearls/${slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),

@@ -13,6 +13,10 @@ import {
   PEARL_HUB_FAQ,
   type GuideSlug,
 } from "@/lib/editorial/guides";
+import {
+  ACTIVE_PURCHASE_GUIDE_SLUGS,
+  PURCHASE_GUIDES,
+} from "@/lib/editorial/purchase-guides";
 import { HOMEPAGE_MEDIA } from "@/lib/homepage-editorial";
 import { absoluteUrl } from "@/lib/site";
 
@@ -105,6 +109,30 @@ export default function PearlHubPage() {
                 </Link>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[var(--border)] bg-[var(--surface)]" aria-labelledby="purchase-guides-title">
+        <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
+          <p className="text-xs font-semibold uppercase text-[var(--accent)]">Purchase guides</p>
+          <h2 id="purchase-guides-title" className="mt-3 max-w-2xl font-serif text-3xl font-medium text-[var(--text)] sm:text-4xl">
+            Choose by the decision in front of you.
+          </h2>
+          <div className="mt-8 grid gap-px bg-[var(--border)] sm:grid-cols-2 lg:grid-cols-3">
+            {ACTIVE_PURCHASE_GUIDE_SLUGS.map((slug) => {
+              const guide = PURCHASE_GUIDES[slug];
+              return (
+                <article key={guide.slug} className="bg-[var(--bg)] p-6">
+                  <h3 className="font-serif text-2xl font-medium text-[var(--text)]">
+                    <Link href={`/pearls/${guide.slug}`} className="hover:text-[var(--accent)]">
+                      {guide.h1}
+                    </Link>
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">{guide.description}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
