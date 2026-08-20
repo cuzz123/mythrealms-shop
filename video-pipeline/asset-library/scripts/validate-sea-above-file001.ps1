@@ -9,6 +9,23 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..\..')).Path
+[double]$takeDurationToleranceSeconds = 0.15
+
+$requiredAnchorRoles = [ordered]@{
+    product_source_main = 'video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/main.jpg'
+    product_source_detail = 'video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/detail-05.jpg'
+    product_lock = 'video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/views/product-lock.png'
+    character_turnaround = 'video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/character-turnaround.png'
+    character_expressions = 'video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/expression-sheet.png'
+    character_earring_profile = 'video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/earring-profile.png'
+    memory_pair = 'video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_MEMORY_PAIR_001/source/memory-pair-lock.png'
+    environment_world = 'video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/world-anchor.png'
+    environment_reverse_rain = 'video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/reverse-rain-street.png'
+    environment_sky_sea = 'video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/sky-sea-upward.png'
+    fx_reverse_rain = 'video-pipeline/asset-library/08-fx/FX_MR_REVERSE_RAIN_001/source/direction-lock.png'
+    fx_mother_shadow = 'video-pipeline/asset-library/08-fx/FX_MR_SKY_SEA_MOTHER_001/source/mother-shadow-lock.png'
+    fx_mother_eye = 'video-pipeline/asset-library/08-fx/FX_MR_SKY_SEA_MOTHER_001/source/mother-eye-lock.png'
+}
 
 function Resolve-InputPath {
     param(
@@ -57,6 +74,88 @@ function Assert-ExactValue {
 
     if ($Actual -ne $Expected) {
         throw "$Label mismatch (expected '$Expected', got '$Actual')"
+    }
+}
+
+function Assert-TrueBoolean {
+    param(
+        [Parameter(Mandatory = $false)]
+        [object]$Value,
+        [Parameter(Mandatory = $true)]
+        [string]$Label
+    )
+
+    if ($Value -isnot [bool] -or $Value -ne $true) {
+        throw "$Label must be the Boolean value true"
+    }
+}
+
+function Get-ImmutableMediaExpectations {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object]$Contract
+    )
+
+    return [pscustomobject]@{
+        takes = [pscustomobject]@{
+            width = $Contract.format.width
+            height = $Contract.format.height
+            fps = $Contract.format.fps
+            duration_seconds = $Contract.seedance.seconds_per_take
+            duration_tolerance_seconds = $takeDurationToleranceSeconds
+            requires_audio = $true
+        }
+        audio = [pscustomobject]@{
+            sample_rate = 48000
+            channels = 2
+            min_seconds = $Contract.format.min_seconds
+            max_seconds = $Contract.format.max_seconds
+        }
+        deliverables = [pscustomobject]@{
+            master = [pscustomobject]@{
+                width = $Contract.format.width
+                height = $Contract.format.height
+                fps = $Contract.format.fps
+                min_seconds = $Contract.format.min_seconds
+                max_seconds = $Contract.format.max_seconds
+                requires_audio = $true
+            }
+            exports = [pscustomobject]@{
+                width = 1080
+                height = 1920
+                fps = $Contract.format.fps
+                min_seconds = $Contract.format.min_seconds
+                max_seconds = $Contract.format.max_seconds
+                requires_audio = $true
+            }
+        }
+    }
+}
+
+function Assert-MediaChecks {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object]$Actual,
+        [Parameter(Mandatory = $true)]
+        [object]$Expected,
+        [Parameter(Mandatory = $true)]
+        [string]$Label
+    )
+
+    foreach ($property in @('width', 'height', 'fps', 'duration_seconds', 'duration_tolerance_seconds', 'min_seconds', 'max_seconds')) {
+        if ($Expected.PSObject.Properties.Name -contains $property) {
+            Assert-ExactValue -Actual $Actual.$property -Expected $Expected.$property -Label "$Label.$property"
+        }
+    }
+
+    if ($Expected.PSObject.Properties.Name -contains 'requires_audio') {
+        Assert-TrueBoolean -Value $Actual.requires_audio -Label "$Label.requires_audio"
+    }
+
+    foreach ($property in @('sample_rate', 'channels')) {
+        if ($Expected.PSObject.Properties.Name -contains $property) {
+            Assert-ExactValue -Actual $Actual.$property -Expected $Expected.$property -Label "$Label.$property"
+        }
     }
 }
 
@@ -175,10 +274,31 @@ function Assert-Contract {
     Assert-ExactValue -Actual $Contract.seedance.approved_base_credits -Expected 572 -Label 'seedance.approved_base_credits'
     Assert-ExactValue -Actual $Contract.seedance.max_rejected_takes_per_shot -Expected 3 -Label 'seedance.max_rejected_takes_per_shot'
 
-    if (-not [bool]$Contract.release_gate.requires_blind_review -or
-        -not [bool]$Contract.release_gate.requires_clean_loop -or
-        -not [bool]$Contract.release_gate.requires_bilingual_exports) {
-        throw 'release_gate mismatch'
+    Assert-TrueBoolean -Value $Contract.release_gate.requires_blind_review -Label 'release_gate.requires_blind_review'
+    Assert-TrueBoolean -Value $Contract.release_gate.requires_clean_loop -Label 'release_gate.requires_clean_loop'
+    Assert-TrueBoolean -Value $Contract.release_gate.requires_bilingual_exports -Label 'release_gate.requires_bilingual_exports'
+}
+
+function Assert-AnchorDeclarations {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object]$Manifest
+    )
+
+    foreach ($roleName in $requiredAnchorRoles.Keys) {
+        $roleProperty = $Manifest.asset_roles.PSObject.Properties[$roleName]
+        if ($null -eq $roleProperty) {
+            throw "Missing required anchor role: $roleName"
+        }
+
+        Assert-ExactValue -Actual ([string]$roleProperty.Value) -Expected $requiredAnchorRoles[$roleName] -Label "asset_roles.$roleName"
+    }
+
+    $declaredAnchorFiles = @($Manifest.dependencies.anchor_files | ForEach-Object { [string]$_ })
+    foreach ($requiredPath in $requiredAnchorRoles.Values) {
+        if ($declaredAnchorFiles -notcontains $requiredPath) {
+            throw "Missing required anchor dependency path: $requiredPath"
+        }
     }
 }
 
@@ -219,21 +339,13 @@ function Assert-Manifest {
         Assert-ExactValue -Actual $record.accepted_take_path -Expected "takes/accepted/$shotId.mp4" -Label "$shotId accepted_take_path"
     }
 
-    $takesMedia = $Manifest.media_checks.takes
-    [void](Get-PositiveNumber -Value $takesMedia.width -Label 'media_checks.takes.width')
-    [void](Get-PositiveNumber -Value $takesMedia.height -Label 'media_checks.takes.height')
-    [void](Get-PositiveNumber -Value $takesMedia.fps -Label 'media_checks.takes.fps')
-    [void](Get-PositiveNumber -Value $takesMedia.duration_seconds -Label 'media_checks.takes.duration_seconds')
-    [void](Get-PositiveNumber -Value $takesMedia.duration_tolerance_seconds -Label 'media_checks.takes.duration_tolerance_seconds')
-    if (-not [bool]$takesMedia.requires_audio) {
-        throw 'media_checks.takes.requires_audio must be true'
-    }
+    Assert-AnchorDeclarations -Manifest $Manifest
 
-    $audioMedia = $Manifest.media_checks.audio
-    [void](Get-PositiveNumber -Value $audioMedia.sample_rate -Label 'media_checks.audio.sample_rate')
-    [void](Get-PositiveNumber -Value $audioMedia.channels -Label 'media_checks.audio.channels')
-    [void](Get-PositiveNumber -Value $audioMedia.min_seconds -Label 'media_checks.audio.min_seconds')
-    [void](Get-PositiveNumber -Value $audioMedia.max_seconds -Label 'media_checks.audio.max_seconds')
+    $mediaExpectations = Get-ImmutableMediaExpectations -Contract $Contract
+    Assert-MediaChecks -Actual $Manifest.media_checks.takes -Expected $mediaExpectations.takes -Label 'media_checks.takes'
+    Assert-MediaChecks -Actual $Manifest.media_checks.audio -Expected $mediaExpectations.audio -Label 'media_checks.audio'
+    Assert-MediaChecks -Actual $Manifest.media_checks.deliverables.master -Expected $mediaExpectations.deliverables.master -Label 'media_checks.deliverables.master'
+    Assert-MediaChecks -Actual $Manifest.media_checks.deliverables.exports -Expected $mediaExpectations.deliverables.exports -Label 'media_checks.deliverables.exports'
 }
 
 function Get-FFProbeJson {
@@ -347,8 +459,8 @@ function Assert-AssetRoles {
         [object]$Manifest
     )
 
-    foreach ($role in $Manifest.asset_roles.PSObject.Properties) {
-        [void](Assert-FileAtRoot -RelativePath ([string]$role.Value) -RootPath $repositoryRoot -Label "anchor $($role.Name)")
+    foreach ($roleName in $requiredAnchorRoles.Keys) {
+        [void](Assert-FileAtRoot -RelativePath $requiredAnchorRoles[$roleName] -RootPath $repositoryRoot -Label "anchor $roleName")
     }
 }
 
@@ -394,7 +506,7 @@ function Assert-AcceptedTakes {
         [Parameter(Mandatory = $true)]
         [object]$Contract,
         [Parameter(Mandatory = $true)]
-        [object]$Manifest
+        [object]$ExpectedMedia
     )
 
     foreach ($shotId in $Contract.shot_ids) {
@@ -403,22 +515,22 @@ function Assert-AcceptedTakes {
             throw "Missing accepted take $shotId"
         }
 
-        Assert-VideoMedia -Path $take -Label $shotId -Expected $Manifest.media_checks.takes
+        Assert-VideoMedia -Path $take -Label $shotId -Expected $ExpectedMedia
     }
 }
 
 function Assert-Deliverables {
     param(
         [Parameter(Mandatory = $true)]
-        [object]$Manifest
+        [object]$ExpectedMedia
     )
 
     $master = Join-Path $resolvedPackageRoot 'deliverables/file001-master-2160x3840-prores.mov'
     $english = Join-Path $resolvedPackageRoot 'deliverables/file001-en-1080x1920.mp4'
     $chinese = Join-Path $resolvedPackageRoot 'deliverables/file001-zh-1080x1920.mp4'
-    Assert-VideoMedia -Path $master -Label 'master deliverable' -Expected $Manifest.media_checks.deliverables.master
-    Assert-VideoMedia -Path $english -Label 'English deliverable' -Expected $Manifest.media_checks.deliverables.exports
-    Assert-VideoMedia -Path $chinese -Label 'Chinese deliverable' -Expected $Manifest.media_checks.deliverables.exports
+    Assert-VideoMedia -Path $master -Label 'master deliverable' -Expected $ExpectedMedia.master
+    Assert-VideoMedia -Path $english -Label 'English deliverable' -Expected $ExpectedMedia.exports
+    Assert-VideoMedia -Path $chinese -Label 'Chinese deliverable' -Expected $ExpectedMedia.exports
 }
 
 try {
@@ -433,10 +545,11 @@ try {
     $manifest = Read-JsonFile -Path $manifestPath -Label 'asset-pack manifest'
     Assert-Contract -Contract $contract
     Assert-Manifest -Manifest $manifest -Contract $contract
+    $mediaExpectations = Get-ImmutableMediaExpectations -Contract $contract
 
     switch ($Mode) {
         'takes' {
-            Assert-AcceptedTakes -Contract $contract -Manifest $manifest
+            Assert-AcceptedTakes -Contract $contract -ExpectedMedia $mediaExpectations.takes
             Write-Output 'takes: PASS; accepted_takes: 9/9'
         }
         'anchors' {
@@ -445,23 +558,23 @@ try {
             Write-Output "anchors: PASS; first_frames: $($anchorCounts.FirstFrames)/9; prompts: $($anchorCounts.Prompts)/9"
         }
         'release' {
-            Assert-AcceptedTakes -Contract $contract -Manifest $manifest
+            Assert-AcceptedTakes -Contract $contract -ExpectedMedia $mediaExpectations.takes
             Assert-AssetRoles -Manifest $manifest
             [void](Assert-ShotAnchors -Manifest $manifest)
             Assert-RequiredPackageFiles -Manifest $manifest
-            Assert-AudioMedia -Path (Join-Path $resolvedPackageRoot 'audio/mix-34s.wav') -Label 'audio mix' -Expected $manifest.media_checks.audio
-            Assert-Deliverables -Manifest $manifest
+            Assert-AudioMedia -Path (Join-Path $resolvedPackageRoot 'audio/mix-34s.wav') -Label 'audio mix' -Expected $mediaExpectations.audio
+            Assert-Deliverables -ExpectedMedia $mediaExpectations.deliverables
             Write-Output 'release: PASS'
         }
         default {
             # Package mode is the complete dependency gate used before release work begins.
             # It intentionally fails fast while the package is still being assembled.
-            Assert-AcceptedTakes -Contract $contract -Manifest $manifest
+            Assert-AcceptedTakes -Contract $contract -ExpectedMedia $mediaExpectations.takes
             Assert-AssetRoles -Manifest $manifest
             [void](Assert-ShotAnchors -Manifest $manifest)
             Assert-RequiredPackageFiles -Manifest $manifest
-            Assert-AudioMedia -Path (Join-Path $resolvedPackageRoot 'audio/mix-34s.wav') -Label 'audio mix' -Expected $manifest.media_checks.audio
-            Assert-Deliverables -Manifest $manifest
+            Assert-AudioMedia -Path (Join-Path $resolvedPackageRoot 'audio/mix-34s.wav') -Label 'audio mix' -Expected $mediaExpectations.audio
+            Assert-Deliverables -ExpectedMedia $mediaExpectations.deliverables
             Write-Output 'package: PASS'
         }
     }
