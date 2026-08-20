@@ -18,7 +18,7 @@
 - Target duration is 28–34 seconds. Do not add explanatory footage solely to reach 34 seconds.
 - The first visible frame shows rain moving upward; no logo, fade-in, price, or product name may precede it.
 - Preserve Baroque Orbit geometry: gold hoop, green stones, one connector ring, one irregular white baroque pearl, and one terminal gold bead.
-- Keep adult protagonist identity, eye structure, dark wet hair, ivory-grey structured coat, and natural skin stable across shots.
+- Keep the unequivocally adult 21–24 protagonist identity, blue-green eye structure, wet center-parted blonde hair, fitted light camisole, high-waisted short skirt, body proportions, and natural skin stable across shots.
 - Sky-sea height, underside orientation, storm-cyan palette, light direction, and upward gravity remain consistent.
 - Show only Mother shadow and one eye. No complete creature, blood, injury, parasites, gore, superhero beams, or generic magic particles.
 - Generated footage contains no text, logos, watermarks, prices, or UI. Add typography in post.
@@ -191,11 +191,11 @@ git commit -m "assets: lock Baroque Orbit product identity"
 
 - [ ] **Step 1: Generate character-turnaround.png**
 
-Generate the same fictional adult woman in front, both profiles, and rear three-quarter views. Lock age 25–35, dark rain-wet hair, natural skin, restrained makeup, ivory-grey structured coat, realistic ears/hands, no jewelry, neutral grey daylight, 85mm editorial realism.
+Generate the same fictional adult woman in front, both profiles, and rear three-quarter views. Lock unequivocally adult age 21–24, youthful striking beauty, blue-green eyes, wet center-parted blonde hair, natural skin, restrained makeup, tall-looking slim athletic-hourglass proportions, a refined fitted light camisole with a high-waisted short skirt, bare arms and legs, realistic ears/hands, no jewelry, neutral grey daylight, and premium British cold-elegant 85mm editorial realism. No outer layer, jacket, sheer fabric, lingerie styling, or nightclub styling.
 
 - [ ] **Step 2: Generate expression-sheet.png and earring-profile.png**
 
-Expressions: neutral observation, delayed recognition, contained fear, upward resolve. The profile uses Task 2 product lock; only the right ear wears one exact Baroque Orbit earring. Do not change face, coat, wet-hair pattern, ear anatomy, or product geometry.
+Expressions: neutral observation, delayed recognition, contained fear, upward resolve. The profile uses Task 2 product lock; only the right ear wears one exact Baroque Orbit earring. Do not change face, eye colour, youthful age read, camisole/skirt outfit, body proportions, wet-blonde-hair pattern, ear anatomy, or product geometry.
 
 - [ ] **Step 3: Generate memory-pair-lock.png**
 
