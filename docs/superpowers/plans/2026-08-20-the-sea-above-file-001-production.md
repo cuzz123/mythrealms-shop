@@ -265,6 +265,10 @@ git commit -m "assets: establish Sea Above world anchors"
 
 Each is derived from accepted anchors. S01 reads at feed thumbnail size. S02/S08 preserve protagonist and earring. S03–S05 share geography, sea height, light, and Mother scale. S06/S07 share memory identities. S09 is a clean plate without generated text. Save S01.png through S09.png and a numbered 3×3 overview.png.
 
+- [ ] **Step 2A: Stop for user first-frame approval**
+
+Present all nine full-resolution frames plus overview.png to the user. Report the identity and world-continuity checks for each frame. Do not write the final Seedance prompt pack or complete director-card.md until the user explicitly approves the first-frame set; requested repairs return only the affected frame and its dependent continuity frames to Step 2.
+
 - [ ] **Step 3: Write nine Seedance cards**
 
 Every prompts/seedance-sNN.md contains exact uploads, role of each upload, four-second Chinese prompt, negative constraints, camera contract, motion contract, end state, edit range, audio intent, take ledger, and acceptance/rejection notes. One principal camera move and one principal supernatural event only.
@@ -279,6 +283,10 @@ S09 post typography is exact and must not be paraphrased:
 THE SEA HAS CHOSEN AGAIN.
 MAVERENNE // RECOVERED TIDE FILE 001
 ~~~
+
+- [ ] **Step 4A: Stop for final director-card acceptance**
+
+Present the completed director card, nine prompt cards, cut map, audio map, bilingual dialogue, and distribution copy to the user. Task 6 is blocked until the user explicitly accepts the director card as final.
 
 - [ ] **Step 5: Extend manifest and validate anchors**
 
@@ -307,7 +315,7 @@ git commit -m "assets: storyboard Sea Above FILE 001"
 
 - [ ] **Step 1: Request action-time paid confirmation**
 
-Show exact base budget: nine primary takes plus second takes for S01, S02, S05, S08 = 13 × 44 = 572 credits. Do not press Generate without confirmation.
+First verify that Task 5 records explicit user acceptance of the final director card. Then show exact base budget: nine primary takes plus second takes for S01, S02, S05, S08 = 13 × 44 = 572 credits. Do not press Generate without both approvals.
 
 - [ ] **Step 2: Generate in dependency order**
 
