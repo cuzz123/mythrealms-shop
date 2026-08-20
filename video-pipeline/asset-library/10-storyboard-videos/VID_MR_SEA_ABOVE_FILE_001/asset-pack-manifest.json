@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.0",
+  "id": "VID_MR_SEA_ABOVE_FILE_001",
+  "title": "FILE 001 — THE PEARL THAT ANSWERED",
+  "contract_path": "video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/production-contract.json",
+  "asset_roles": {
+    "product_source_main": "video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/main.jpg",
+    "product_source_detail": "video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/detail-05.jpg",
+    "product_lock": "video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/views/product-lock.png",
+    "character_turnaround": "video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/character-turnaround.png",
+    "character_expressions": "video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/expression-sheet.png",
+    "character_earring_profile": "video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/earring-profile.png",
+    "memory_pair": "video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_MEMORY_PAIR_001/source/memory-pair-lock.png",
+    "environment_world": "video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/world-anchor.png",
+    "environment_reverse_rain": "video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/reverse-rain-street.png",
+    "environment_sky_sea": "video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/sky-sea-upward.png",
+    "fx_reverse_rain": "video-pipeline/asset-library/08-fx/FX_MR_REVERSE_RAIN_001/source/direction-lock.png",
+    "fx_mother_shadow": "video-pipeline/asset-library/08-fx/FX_MR_SKY_SEA_MOTHER_001/source/mother-shadow-lock.png",
+    "fx_mother_eye": "video-pipeline/asset-library/08-fx/FX_MR_SKY_SEA_MOTHER_001/source/mother-eye-lock.png"
+  },
+  "dependencies": {
+    "anchor_files": [
+      "video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/main.jpg",
+      "video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/detail-05.jpg",
+      "video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/views/product-lock.png",
+      "video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/character-turnaround.png",
+      "video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/expression-sheet.png",
+      "video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/earring-profile.png",
+      "video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_MEMORY_PAIR_001/source/memory-pair-lock.png",
+      "video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/world-anchor.png",
+      "video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/reverse-rain-street.png",
+      "video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/sky-sea-upward.png",
+      "video-pipeline/asset-library/08-fx/FX_MR_REVERSE_RAIN_001/source/direction-lock.png",
+      "video-pipeline/asset-library/08-fx/FX_MR_SKY_SEA_MOTHER_001/source/mother-shadow-lock.png",
+      "video-pipeline/asset-library/08-fx/FX_MR_SKY_SEA_MOTHER_001/source/mother-eye-lock.png"
+    ],
+    "package_files": {
+      "markdown": [
+        "README.md",
+        "cut-map.md",
+        "first-frames/README.md",
+        "prompts/README.md",
+        "prompts/seedance-s01.md",
+        "prompts/seedance-s02.md",
+        "prompts/seedance-s03.md",
+        "prompts/seedance-s04.md",
+        "prompts/seedance-s05.md",
+        "prompts/seedance-s06.md",
+        "prompts/seedance-s07.md",
+        "prompts/seedance-s08.md",
+        "prompts/seedance-s09.md",
+        "director-card.md",
+        "distribution.md"
+      ],
+      "json": [
+        "production-contract.json",
+        "asset-pack-manifest.json"
+      ],
+      "images": [
+        "first-frames/S01.png",
+        "first-frames/S02.png",
+        "first-frames/S03.png",
+        "first-frames/S04.png",
+        "first-frames/S05.png",
+        "first-frames/S06.png",
+        "first-frames/S07.png",
+        "first-frames/S08.png",
+        "first-frames/S09.png",
+        "first-frames/overview.png"
+      ],
+      "audio": [
+        "audio/mix-34s.wav"
+      ],
+      "subtitles": [
+        "subtitles/file001-en.srt",
+        "subtitles/file001-zh.srt"
+      ],
+      "takes": [
+        "takes/accepted/S01.mp4",
+        "takes/accepted/S02.mp4",
+        "takes/accepted/S03.mp4",
+        "takes/accepted/S04.mp4",
+        "takes/accepted/S05.mp4",
+        "takes/accepted/S06.mp4",
+        "takes/accepted/S07.mp4",
+        "takes/accepted/S08.mp4",
+        "takes/accepted/S09.mp4"
+      ],
+      "deliverables": [
+        "deliverables/file001-master-2160x3840-prores.mov",
+        "deliverables/file001-en-1080x1920.mp4",
+        "deliverables/file001-zh-1080x1920.mp4"
+      ]
+    }
+  },
+  "shots": [
+    {
+      "id": "S01",
+      "edit_start_seconds": 0.0,
+      "edit_end_seconds": 2.3,
+      "narrative_job": "Reverse-rain rule",
+      "generated_motion": "Puddle droplets rise while crowd removes jewelry",
+      "first_frame_path": "first-frames/S01.png",
+      "prompt_path": "prompts/seedance-s01.md",
+      "accepted_take_path": "takes/accepted/S01.mp4"
+    },
+    {
+      "id": "S02",
+      "edit_start_seconds": 2.3,
+      "edit_end_seconds": 5.8,
+      "narrative_job": "Pearl answers",
+      "generated_motion": "Exact earring turns toward sky; sound empties",
+      "first_frame_path": "first-frames/S02.png",
+      "prompt_path": "prompts/seedance-s02.md",
+      "accepted_take_path": "takes/accepted/S02.mp4"
+    },
+    {
+      "id": "S03",
+      "edit_start_seconds": 5.8,
+      "edit_end_seconds": 10.5,
+      "narrative_job": "Reveal sky-sea",
+      "generated_motion": "Camera rises along one water column",
+      "first_frame_path": "first-frames/S03.png",
+      "prompt_path": "prompts/seedance-s03.md",
+      "accepted_take_path": "takes/accepted/S03.mp4"
+    },
+    {
+      "id": "S04",
+      "edit_start_seconds": 10.5,
+      "edit_end_seconds": 13.7,
+      "narrative_job": "Establish scale",
+      "generated_motion": "Vast Mother shadow crosses; daylight dims",
+      "first_frame_path": "first-frames/S04.png",
+      "prompt_path": "prompts/seedance-s04.md",
+      "accepted_take_path": "takes/accepted/S04.mp4"
+    },
+    {
+      "id": "S05",
+      "edit_start_seconds": 13.7,
+      "edit_end_seconds": 17.8,
+      "narrative_job": "Eye opens",
+      "generated_motion": "Pearl-textured eye opens beneath sky-sea",
+      "first_frame_path": "first-frames/S05.png",
+      "prompt_path": "prompts/seedance-s05.md",
+      "accepted_take_path": "takes/accepted/S05.mp4"
+    },
+    {
+      "id": "S06",
+      "edit_start_seconds": 17.8,
+      "edit_end_seconds": 21.2,
+      "narrative_job": "Childhood memory",
+      "generated_motion": "Child holds adult hand; exact earring visible",
+      "first_frame_path": "first-frames/S06.png",
+      "prompt_path": "prompts/seedance-s06.md",
+      "accepted_take_path": "takes/accepted/S06.mp4"
+    },
+    {
+      "id": "S07",
+      "edit_start_seconds": 21.2,
+      "edit_end_seconds": 25.2,
+      "narrative_job": "Memory erased",
+      "generated_motion": "Adult face refracts and disappears in rising water",
+      "first_frame_path": "first-frames/S07.png",
+      "prompt_path": "prompts/seedance-s07.md",
+      "accepted_take_path": "takes/accepted/S07.mp4"
+    },
+    {
+      "id": "S08",
+      "edit_start_seconds": 25.2,
+      "edit_end_seconds": 31.2,
+      "narrative_job": "Mother reversal",
+      "generated_motion": "Pearl whispers; city pearls light; iris changes",
+      "first_frame_path": "first-frames/S08.png",
+      "prompt_path": "prompts/seedance-s08.md",
+      "accepted_take_path": "takes/accepted/S08.mp4"
+    },
+    {
+      "id": "S09",
+      "edit_start_seconds": 31.2,
+      "edit_end_seconds": 34.0,
+      "narrative_job": "Archive and loop",
+      "generated_motion": "Black archive card; one drop rises into S01",
+      "first_frame_path": "first-frames/S09.png",
+      "prompt_path": "prompts/seedance-s09.md",
+      "accepted_take_path": "takes/accepted/S09.mp4"
+    }
+  ],
+  "media_checks": {
+    "takes": {
+      "width": 2160,
+      "height": 3840,
+      "fps": 24,
+      "duration_seconds": 4,
+      "duration_tolerance_seconds": 0.15,
+      "requires_audio": true
+    },
+    "audio": {
+      "sample_rate": 48000,
+      "channels": 2,
+      "min_seconds": 28,
+      "max_seconds": 34
+    },
+    "deliverables": {
+      "master": {
+        "width": 2160,
+        "height": 3840,
+        "fps": 24,
+        "min_seconds": 28,
+        "max_seconds": 34,
+        "requires_audio": true
+      },
+      "exports": {
+        "width": 1080,
+        "height": 1920,
+        "fps": 24,
+        "min_seconds": 28,
+        "max_seconds": 34,
+        "requires_audio": true
+      }
+    }
+  }
+}

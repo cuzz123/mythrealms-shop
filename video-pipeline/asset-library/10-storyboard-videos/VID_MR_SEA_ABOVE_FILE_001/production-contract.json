@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "id": "VID_MR_SEA_ABOVE_FILE_001",
+  "title": "FILE 001 — THE PEARL THAT ANSWERED",
+  "format": {
+    "width": 2160,
+    "height": 3840,
+    "fps": 24,
+    "min_seconds": 28,
+    "max_seconds": 34
+  },
+  "product_id": "PROD_MR_BAROQUE_ORBIT_EARRINGS_001",
+  "character_id": "CHAR_MR_TIDE_ARCHIVIST_001",
+  "environment_id": "ENV_MR_SEA_ABOVE_OLD_CITY_001",
+  "fx_ids": [
+    "FX_MR_REVERSE_RAIN_001",
+    "FX_MR_SKY_SEA_MOTHER_001"
+  ],
+  "shot_ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09"
+  ],
+  "seedance": {
+    "seconds_per_take": 4,
+    "credits_per_take": 44,
+    "approved_base_takes": 13,
+    "approved_base_credits": 572,
+    "max_rejected_takes_per_shot": 3
+  },
+  "release_gate": {
+    "requires_blind_review": true,
+    "requires_clean_loop": true,
+    "requires_bilingual_exports": true
+  }
+}
