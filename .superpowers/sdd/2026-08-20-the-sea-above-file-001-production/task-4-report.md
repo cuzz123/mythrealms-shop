@@ -2,7 +2,7 @@
 
 Date: 2026-08-21
 
-Status: ACCEPTED — six final PNG anchors copied to the workspace and visually inspected.
+Status: ACCEPTED — six final PNG anchors copied to the workspace and visually inspected; independent review repair round complete.
 
 ## Scope and execution
 
@@ -21,9 +21,9 @@ The current production contract and asset-pack manifest remain unchanged; Task 5
 | Asset | Generated source path | Workspace output path | SHA-256 | Visual decision |
 | --- | --- | --- | --- | --- |
 | world-anchor.png | C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-f4fe0615-5268-42f3-96a5-4fd642770ae2.png | video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/world-anchor.png | 466654B43A560F8A8EBAD4D5E2CC266B9AB604C95246915D032EBB8B1085F2DA | ACCEPT |
-| reverse-rain-street.png | C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-cd5d1561-7bb3-4750-93aa-1bac279e83e3.png | video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/reverse-rain-street.png | F909A71B464CE46CB47552DEA3F19104EBE3EEA8909CB9F075DB5E7902BF8D12 | ACCEPT |
-| sky-sea-upward.png | C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-aed886f4-e5d4-48d1-bab0-013bd6dc70c7.png (repair output) | video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/sky-sea-upward.png | 2C491CB4DECC0E476E3B3E3D294295618F20C5B4884147C8C6CC60EE39D7CEEF | ACCEPT after single-variable stream-shape repair |
-| direction-lock.png | C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-aed49367-3424-4887-adb8-8a7395fc0fff.png | video-pipeline/asset-library/08-fx/FX_MR_REVERSE_RAIN_001/source/direction-lock.png | 21C53058A42446AA9AED2BCFA9DBE0BB3813F2323C09E98D15A342BCA4A54634 | ACCEPT |
+| reverse-rain-street.png | C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-b6cd12f8-da28-4fff-9d87-b50dd3d19727.png (independent review repair) | video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/reverse-rain-street.png | D40CF0217DCB547F86657873B5661412BE7B5B2FD8BF840CB4B18682E0F5E9E4 | ACCEPT after single-variable suction-stream repair |
+| sky-sea-upward.png | C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-efa571b1-f1ac-4d95-9fb7-b36ac10b4c03.png (independent review repair) | video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/sky-sea-upward.png | 1B5B5672481D8695F2BE400BC4AD78E54FB8640CD137D4BF2A870DC736E59E22 | ACCEPT after lower-origin framing repair |
+| direction-lock.png | C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-a95a7d86-0e55-422a-ba65-19bd4a7e50a3.png (independent review repair) | video-pipeline/asset-library/08-fx/FX_MR_REVERSE_RAIN_001/source/direction-lock.png | 6B24BC8AAA9873EC075BDEC3B6D5F3F1CF2C438B2114DD034D779BD4A29910AB | ACCEPT after single-variable suction-stream repair |
 | mother-shadow-lock.png | C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-0f0a6f49-6ee1-4932-b78c-f77880f0e851.png | video-pipeline/asset-library/08-fx/FX_MR_SKY_SEA_MOTHER_001/source/mother-shadow-lock.png | F73D87A010296CF5BB284F93546944EAA1D36C4CFB947F7D8DB2A483A71C6825 | ACCEPT |
 | mother-eye-lock.png | C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-256cc5a9-a6d4-4122-9efb-27498d8d6778.png (repair output) | video-pipeline/asset-library/08-fx/FX_MR_SKY_SEA_MOTHER_001/source/mother-eye-lock.png | 069AD46BA6EBCF1B40A33F4886913262B9B277E09D947802C60040BC246FCF56 | ACCEPT after single-variable crop/visibility repair |
 
@@ -31,7 +31,7 @@ All six final files are 941x1672 RGB PNGs (near 9:16, no alpha). They are refere
 
 ## Prompt provenance
 
-The following are the exact prompt bodies submitted to built-in image_gen. Input image paths are listed separately in each prompt section. Generated output paths above identify the corresponding source artifact.
+The following are the exact prompt bodies submitted to built-in image_gen. Input image paths are listed separately in each prompt section. Generated output paths above identify the corresponding source artifact. The first-round prompts and rejected outputs remain as provenance; current reverse-rain and upward-view outputs are superseded by the independent review repair round below.
 
 ### 1. world-anchor.png — accepted generation
 
@@ -186,15 +186,100 @@ QA decision: ACCEPTED. Only a partial pearl-textured iris/eyelid crescent remain
 | Asset | Geography continuity | Direction / scale | Mother partial gate | Text / brand gate | Decision |
 | --- | --- | --- | --- | --- | --- |
 | world-anchor.png | PASS: one narrow wet brick/limestone lane; overhead sea underside | PASS: far suspended ocean, natural light | N/A; no eye | PASS: no readable text or logos | ACCEPT |
-| reverse-rain-street.png | PASS: same street and sea height | PASS: puddle splash crowns and droplets leave ground upward | N/A | PASS | ACCEPT |
-| sky-sea-upward.png | PASS after repair: same walls, roofline, sea height and palette | PASS after repair: one irregular connected stream travels upward | N/A | PASS | ACCEPT |
-| direction-lock.png | PASS: same lane and overhead sea | PASS: splash crown plus ground-to-sky droplet path | N/A | PASS | ACCEPT |
+| reverse-rain-street.png | PASS after independent repair: same street and sea height | PASS: one foreground puddle pulls an irregular tapered stream upward; elongated droplets have tails; no impact crown | N/A | PASS | ACCEPT |
+| sky-sea-upward.png | PASS after independent repair: same walls, roofline, sea height and palette | PASS: pavement origin is in frame and one continuous stream reaches the overhead sea; no descending waterfall | N/A | PASS | ACCEPT |
+| direction-lock.png | PASS after independent repair: same lane and overhead sea | PASS: one suction origin, irregular stream, and sparse stretched droplets make ground-to-sky direction legible | N/A | PASS | ACCEPT |
 | mother-shadow-lock.png | PASS: same lane and sea underside | PASS: broad city-scale dimming shadow | PASS: shadow only, no anatomy | PASS | ACCEPT |
 | mother-eye-lock.png | PASS after repair: same lane and sea underside | PASS: eye fragment presses against water from above | PASS after repair: one cropped nacre crescent only | PASS | ACCEPT |
 
 ## Rejection criteria carried forward
 
-Reject downward rain; any ground-level ocean; conflicting streets, sea heights, light directions, or palettes; multiple suns; fantasy castles; recognizable IP; readable brands or generated text; protagonists in these environment/FX anchors; full Mother face/body; second eye; hands, teeth, tentacles, fins, wings, scales, or skin; magic beams; particle soup; bead/pearl-chain water; warm orange-teal grading; and any loss of the narrow British coastal old-city geography.
+Reject downward rain; ordinary downward-impact crowns; symmetric splash crowns; radial impact rings; disconnected floating streams; lower pavement origins cropped out of upward-view plates; waterfall-like water descending from the overhead sea; any ground-level ocean; conflicting streets, sea heights, light directions, or palettes; multiple suns; fantasy castles; recognizable IP; readable brands or generated text; protagonists in these environment/FX anchors; full Mother face/body; second eye; hands, teeth, tentacles, fins, wings, scales, or skin; magic beams; particle soup; bead/pearl-chain water; warm orange-teal grading; and any loss of the narrow British coastal old-city geography.
+
+## Independent review repair round — 2026-08-21
+
+Independent review held the first-round reverse-rain and upward-view plates for three visual failures: reverse direction was not unambiguous because of symmetric impact crowns and repeated spheres; the direction lock used a bead/pearl-chain read; and the upward-view lower pavement origin was out of frame. Only the three water/geography plates below were edited. World anchor and both Mother images were not touched.
+
+### A. reverse-rain-street.png — independent review repair
+
+Input image: edit target video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/reverse-rain-street.png, inspected with view_image before editing.
+
+Use case: precise-object-edit
+Asset type: repair of a reverse-rain street continuity anchor for a vertical dark-fantasy short film
+Input images: Image 1: edit target; preserve this exact narrow British coastal old-city street, red-brown brick facades, wet limestone paving, modest unbranded shopfront glass, far suspended ocean underside, cold storm-cyan palette, and diffuse natural light direction.
+Primary request: Change only the reverse-rain water behavior. Replace the many repeated spherical droplets and every symmetric splash crown with one dominant irregular liquid stream anchored visibly to one shallow foreground pavement puddle near the lower center. At the puddle origin, the water surface must be pulled inward and elongated upward by suction: a narrow tapered neck rises out of the puddle, with asymmetrical stretched filaments and a few uneven lobes peeling toward the sky. Above it, use only a small number of elongated droplets with tapered trailing tails below each droplet, clearly showing ground-to-sky travel. The stream must read as one continuous irregular pull from pavement toward the overhead ocean.
+Scene/backdrop: same single lane and buildings as Image 1; keep the ocean far overhead with its underside facing the city.
+Subject: reverse-rain water effect only; no person, protagonist, Mother eye, or creature.
+Style/medium: live-action photorealistic water VFX reference, physically plausible refraction, sharp wet stone and brick texture, restrained uncanny realism.
+Composition/framing: vertical 9:16 low 30mm street view; keep the street corridor readable, place one suction puddle in the lower foreground and one narrow irregular stream leading upward through the center; retain a visible far overhead ocean destination. No collage.
+Lighting/mood: same cold overcast daylight filtered through seawater, one consistent soft direction, quiet alarm.
+Color palette: wet limestone grey-white, weathered brick brown, storm cyan, deep ocean blue, low-saturation cold green, natural neutral reflections.
+Materials/textures: realistic puddle surface, inward-pulling suction deformation, tapered liquid neck, stretched droplets with tails below, sparse droplets only, wet glass and masonry, natural seawater caustics.
+Constraints: preserve all street geometry, shopfront placement, sea height, underside orientation, palette, light direction, and camera perspective except for the water effect. The upward direction must be unambiguous in a still.
+Avoid: ordinary downward rainfall, downward-impact crown, symmetric splash crown, radial impact ring, many separate streams, repeated perfect spheres, bead chain, pearl or necklace pattern, waterfall descending from the overhead ocean, water falling toward the pavement, ground-level ocean, multiple suns, fantasy castle, recognizable IP, beams, particle soup, text, logo, watermark.
+Output intent: final reverse-rain continuity reference with one readable ground-to-sky suction stream.
+
+Generated source: C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-b6cd12f8-da28-4fff-9d87-b50dd3d19727.png
+
+Workspace output: video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/reverse-rain-street.png
+
+QA decision: ACCEPTED. One shallow foreground puddle visibly pulls inward into a tapered irregular stream; a few elongated droplets carry trailing tails below them; no ordinary impact crown, symmetric crown, bead chain, or top-down waterfall remains. Hash: D40CF0217DCB547F86657873B5661412BE7B5B2FD8BF840CB4B18682E0F5E9E4.
+
+Superseded first-round source/hash: C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-cd5d1561-7bb3-4750-93aa-1bac279e83e3.png / F909A71B464CE46CB47552DEA3F19104EBE3EEA8909CB9F075DB5E7902BF8D12. Rejected in this review round for symmetric splash crowns, repeated spheres, and ambiguous still direction.
+
+### B. direction-lock.png — independent review repair
+
+Input images: Image 1: edit target video-pipeline/asset-library/08-fx/FX_MR_REVERSE_RAIN_001/source/direction-lock.png; Image 2: repaired reverse-rain-street.png continuity reference. Both were inspected with view_image before editing.
+
+Use case: precise-object-edit
+Asset type: repair of the reverse-rain FX direction lock for a vertical dark-fantasy short film
+Input images: Image 1: edit target; preserve its exact British coastal old-city street, wet limestone, red-brown brick, shopfront glass, overhead ocean underside, camera axis, cold storm-cyan palette, and diffuse light. Image 2: repaired reverse-rain-street continuity reference; use only its single ground-anchored suction-stream behavior and irregular liquid language.
+Primary request: Change only the water FX in Image 1. Replace the centered bead/pearl-chain and the ordinary symmetric splash crown with one clearly anchored irregular liquid stream rising from a single shallow pavement puddle in the lower foreground. The puddle origin must show upward suction deformation: the rim pulls inward and rises into an asymmetrical tapered neck, not an impact splash. The neck narrows into a slightly wavering liquid filament; add only three or four uneven elongated droplets along the path, each with a tapered trailing tail below it to indicate ground-to-sky travel. The stream must remain visibly connected to the puddle and point toward the far overhead sea, without water descending from the sea.
+Scene/backdrop: same lane and buildings as Image 1, same distant suspended ocean underside; no people or protagonist.
+Subject: one reverse-rain stream and puddle only.
+Style/medium: live-action photorealistic water VFX reference, crisp natural refraction and wet stone, restrained uncanny realism.
+Composition/framing: vertical 9:16 low street view; keep one central foreground puddle and its full ground-to-sea path readable; preserve the street corridor and ocean height; no collage.
+Lighting/mood: same cold natural daylight filtered through seawater, one consistent soft direction.
+Color palette: wet limestone grey-white, weathered brick brown, storm cyan, deep ocean blue, low-saturation cold green, natural reflections.
+Materials/textures: irregular liquid sheet and neck, elongated droplets with tails, sparse water only, wet paving, brick and glass, natural seawater caustics.
+Constraints: keep all architecture, camera perspective, sea height, underside orientation, palette, and light direction unchanged. Make upward direction unambiguous in a still.
+Avoid: ordinary downward-impact crown, symmetric splash crown, radial impact ring, many separate streams, repeated perfect spheres, bead chain, pearl or necklace pattern, waterfall descending from overhead sea, downward rainfall, water falling to pavement, ground-level ocean, multiple suns, fantasy castle, recognizable IP, beams, particle soup, text, logo, watermark.
+Output intent: clean FX direction lock whose ground origin and upward travel can be read instantly.
+
+Generated source: C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-a95a7d86-0e55-422a-ba65-19bd4a7e50a3.png
+
+Workspace output: video-pipeline/asset-library/08-fx/FX_MR_REVERSE_RAIN_001/source/direction-lock.png
+
+QA decision: ACCEPTED. The still now has one suction origin and a sparse central path of elongated droplets with tails; the old symmetric impact crown and bead-chain pattern are gone. Hash: 6B24BC8AAA9873EC075BDEC3B6D5F3F1CF2C438B2114DD034D779BD4A29910AB.
+
+Superseded first-round source/hash: C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-aed49367-3424-4887-adb8-8a7395fc0fff.png / 21C53058A42446AA9AED2BCFA9DBE0BB3813F2323C09E98D15A342BCA4A54634. Rejected in this review round for symmetric impact crown and repeated bead/pearl-chain spheres.
+
+### C. sky-sea-upward.png — independent review framing repair
+
+Input images: Image 1: edit target video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/sky-sea-upward.png; Image 2: repaired reverse-rain-street.png continuity reference. Both were inspected with view_image before editing.
+
+Use case: precise-object-edit
+Asset type: repair of the upward sky-sea geography anchor for a vertical dark-fantasy short film
+Input images: Image 1: edit target; preserve its exact British coastal old-city wall geometry, roofline, overhead ocean underside, storm-cyan palette, wet materials, and diffuse daylight direction. Image 2: repaired reverse-rain street continuity reference; use only its ground-anchored suction origin and irregular liquid behavior as a continuity guide.
+Primary request: Change only the vertical composition and lower-origin visibility. Pull the camera slightly wider and lower so the frame includes a clear strip of wet limestone pavement at the bottom and one shallow foreground puddle at the lower center. The existing central water path must visibly begin in that puddle with inward suction deformation and a tapered irregular stream, then continue without a break through the middle of the street toward the distant suspended ocean underside. Keep the full ocean underside destination visible in the upper half. The path must read as ground-to-sea in one still.
+Scene/backdrop: the same single narrow British coastal old-city street from Image 1, with recognizable brick walls and roofline side anchors; no landmarks, people, or signage.
+Subject: one connected reverse-rain stream from a pavement puddle to the overhead ocean; no protagonist, Mother eye, or creature.
+Style/medium: live-action photorealistic location/VFX reference, realistic wet limestone, brick, glass, seawater texture, and physically plausible liquid refraction.
+Composition/framing: vertical 9:16 wide 28mm upward street view; bottom 15–20 percent includes pavement and the suction puddle; the stream is centered and continuous; upper half still shows the far underside-facing ocean; no crop that removes either origin or destination.
+Lighting/mood: same cold daylight filtered through seawater, one consistent soft direction, restrained awe and alarm.
+Color palette: wet limestone grey-white, weathered brick brown, storm cyan, deep ocean blue, low-saturation cold green, natural reflections.
+Materials/textures: shallow puddle with inward pulled rim, tapered connected liquid neck, sparse stretched droplets with tails below, wet brick and glass, natural underwater caustics.
+Constraints: preserve street geography, sea height, underside orientation, palette, light direction, and all non-water architecture. Make the entire ground-to-sea direction legible. No generated text or logo.
+Avoid: lower origin out of frame, disconnected floating stream, ordinary downward-impact crown, symmetric splash crown, radial impact ring, repeated perfect spheres, bead chain, pearl or necklace pattern, waterfall descending from overhead sea, downward rain, ground-level ocean, multiple suns, fantasy castle, recognizable IP, beams, particle soup, text, watermark.
+Output intent: final upward-view geography plate with both pavement origin and overhead sea destination visible.
+
+Generated source: C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-efa571b1-f1ac-4d95-9fb7-b36ac10b4c03.png
+
+Workspace output: video-pipeline/asset-library/03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/sky-sea-upward.png
+
+QA decision: ACCEPTED. Wet pavement and the suction puddle are now visible at the bottom, and one continuous irregular stream reaches the overhead sea; no disconnected floating path, symmetric crown, bead chain, or descending waterfall remains. Hash: 1B5B5672481D8695F2BE400BC4AD78E54FB8640CD137D4BF2A870DC736E59E22.
+
+Superseded first-round source/hash: C:\Users\11458\.codex\generated_images\01a0201d-8fe9-71e2-a2a4-aa242513e609\exec-aed886f4-e5d4-48d1-bab0-013bd6dc70c7.png / 2C491CB4DECC0E476E3B3E3D294295618F20C5B4884147C8C6CC60EE39D7CEEF. Rejected in this review round because the lower pavement origin was out of frame.
 
 ## Verification commands
 
@@ -216,6 +301,16 @@ Visual inspection:
 
     view_image was run on each final workspace PNG after copy. The six final outputs passed the subject, composition, texture, continuity, and avoid-list checks recorded above.
 
+Independent-review visual inspection:
+
+    view_image was run on reverse-rain-street.png, direction-lock.png, and sky-sea-upward.png after the repair outputs were copied. Each now shows a visible pavement suction origin, an irregular ground-to-sky liquid path, and no ordinary downward-impact crown or descending overhead waterfall.
+
+Current repair hash check:
+
+    reverse-rain-street.png  D40CF0217DCB547F86657873B5661412BE7B5B2FD8BF840CB4B18682E0F5E9E4
+    direction-lock.png       6B24BC8AAA9873EC075BDEC3B6D5F3F1CF2C438B2114DD034D779BD4A29910AB
+    sky-sea-upward.png       1B5B5672481D8695F2BE400BC4AD78E54FB8640CD137D4BF2A870DC736E59E22
+
 Validator results (expected red state while later Task 5/6 outputs are absent):
 
     & 'video-pipeline/asset-library/scripts/validate-sea-above-file001.ps1' -Mode anchors
@@ -229,5 +324,5 @@ These failures are dependency-gate failures after the contract and anchor paths 
 ## Concerns for parent review
 
 - The generated reference plates are 941x1672 (near 9:16), not 2160x3840; they are intended as image-to-video/reference anchors and should be upscaled or used as references in later production, not treated as final 4K deliverables.
-- The direction-lock and repaired sky-sea-upward include sparse round droplets as physically plausible water; they are not intended to read as jewelry, but later motion prompts should explicitly preserve irregular liquid behavior.
+- The repaired water plates intentionally use sparse elongated droplets with tapered tails and irregular liquid necks; later motion prompts should preserve this ground-to-sky suction behavior and avoid adding symmetric impact crowns or bead chains.
 - The shadow and eye plates are intentionally darker than the world anchor so the Mother scale reads through light loss; later shots must keep exposure changes restrained and avoid a black-frame jump.
