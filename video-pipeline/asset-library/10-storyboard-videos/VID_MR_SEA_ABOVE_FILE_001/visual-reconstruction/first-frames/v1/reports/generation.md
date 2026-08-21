@@ -509,3 +509,199 @@ Final normalized masters:
 
 Source outputs and all rejection history remain in C:/Users/11458/.codex/generated_images/01a0259c-d021-7523-94ba-aa92ec43f541/. No source was overwritten; no Git index operation was performed.
 ```
+
+## S08
+
+Reference roles: ordered positive inputs for the accepted base generation.
+1. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S02.png` — accepted present-day Candidate B, cream wardrobe, wet British-city, right-ear product-continuity anchor. SHA-256: `1735B4A689978024A0D218B8D2763069DC96E5BD8C76503AEABCDD3824C81CEF`.
+2. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/characters/candidate-b-dangerous-curiosity.png` — exact adult Candidate B identity, pale-gold wet blonde hair, blue eyes, and fixed cream/white camisole, cream/white structured short skirt, and white flats. SHA-256: `2CA5B608255BD2BE4DB3701CFFDA4EF4C5BA407F9CB85C7325ED37D84DF966F9`.
+3. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/views/product-lock.png` — exact Baroque Orbit product truth: gold hoop with green stones, one connector, one irregular white baroque pearl, and terminal gold bead. SHA-256: `0B8671FAFCD9481DD53FC10EFB8ACC4671B901ABA647BF7C273069A01793517B`.
+4. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S04.png` — accepted city-wide sea height, storm light, and restrained diffuse Mother shadow scale. SHA-256: `0FB67CAE9707E51CF02A79F908EC0729036CCDB086EB665EDC00BC659617486D`.
+5. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S05.png` — accepted sea/light scale and partial-presence restraint only; no literal eye or creature was copied. SHA-256: `2859CC09F89EC3995B5A1B1BD76742921D847B6C91625BC041CA45402D9B9E4B`.
+
+Preflight reference inspection: all five ordered generation references above were inspected with `view_image` at full resolution and at 270×480. The three immutable product-truth views were also inspected at full resolution and at 270×480; `source/main.jpg` SHA-256 `DD12F12A092965A08AB9096DC3E4E79925779B641B29142B4194FF1C8BDF950F` and `source/detail-05.jpg` SHA-256 `73855F92B3426DE9428042561DF8AD5BD5A4EB98496BD31F2934ECEA6C67E2E5` were inspected but were not supplied because built-in imagegen accepts at most five local references; the supplied `product-lock.png` is the exact product-truth composite. No legacy first frame, old character/environment/FX asset, old memory pair, rejected prior frame, or style-test was supplied as a positive input.
+
+Negative-history exclusions:
+- every legacy image under `first-frames/` outside `visual-reconstruction/first-frames/v1/`;
+- all `05-characters/CHAR_MR_TIDE_` assets;
+- all `03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001` assets;
+- all `08-fx/FX_MR_` assets;
+- `v1/continuity/memory-pair-v1.png`, all prior S08 sources, and all rejected S08 repair sources as positive inputs.
+
+### Base generation (S08) — rejected
+
+Generated source: `C:/Users/11458/.codex/generated_images/01a025c9-6bba-7143-8ca5-890b2c5f820e/exec-f211458e-01d2-4648-9ad8-28d99bb6cde3.png`.
+Source metadata: PNG, 941×1672, RGB/3 channels, sRGB, 8-bit uchar, no alpha. Source SHA-256: `4AEBAE9980D45CDDC702FF545F64CAFEFEE0AA8A583C6FEB94EFBB0CF73ACE5F`.
+Inspection: full-resolution source and 270×480 source thumbnail inspected with `view_image`. Candidate B adult identity, wet pale-gold hair, blue eyes, cream camisole/skirt, white flats, storm-lit city, overhead sea and restrained Mother scale were strong. The visible iris response was subtle and the right-ear pearl was present, but pearls responding across near/middle/far city depth were not readable; only the protagonist earring was evident.
+Decision: REJECTED by focused narrative review. No source was overwritten and this source was not used for later repair except as the immediate edit target for Repair 1.
+
+Exact base prompt:
+```text
+Use case: photorealistic-natural
+Asset type: vertical 9:16 live-action first-frame still for FILE 001, shot S08 “Mother reversal”; cinematic production frame, not a product poster.
+
+Input images, in this exact positive-reference order:
+Image 1: accepted v1 S02, the primary present-day Candidate B / cream wardrobe / wet British-city / right-ear product-continuity anchor.
+Image 2: approved Candidate B casting board, exact unequivocally adult identity and fixed wardrobe reference.
+Image 3: immutable Baroque Orbit product-lock view, exact product geometry/material truth.
+Image 4: accepted v1 S04, established city-wide overhead-sea height, storm light, and restrained partial Mother shadow language.
+Image 5: accepted v1 S05, established sea/light scale and partial-presence restraint only; do not reproduce a literal eye or creature.
+Use these only as positive guidance, never as literal collage. Do not use any legacy first frame, old character/environment/FX asset, old memory pair, rejected candidate, or style-test image.
+
+Scene/backdrop: the same rain-dark British coastal old-city street and layered city depth established by S02, with wet limestone paving, old stone and brick facades, distant unbranded shopfront lights, and the enormous dark teal overhead ocean at the same height and lower boundary as S04/S05. Multiple city layers recede behind the subject: near wet street, middle-distance buildings and adult pedestrians, far rooftops and a hazy skyline. A broad diffuse partial Mother occlusion is only a subdued atmospheric dimming across the far overhead sea, partly outside frame; no anatomy or full creature is visible.
+
+Primary request: a prestige live-action close-to-medium vertical frame at the moment the adult Candidate B turns from alarm toward dangerous curiosity and quiet resolve. She is clearly adult and beautiful in a natural, unretouched way: pale-gold wet blonde hair in clumps, vivid blue eyes, defined jaw, real skin pores and damp highlights. Keep the exact fixed wardrobe wherever visible: refined opaque cream/white camisole, cream/white structured high-waisted short skirt, and white practical flats if her lower body enters frame. No jacket, no gray or charcoal skirt, no restyle. Place her off-axis within the street depth, not centered like a poster or runway. Her visible anatomical right ear carries exactly one Baroque Orbit earring, physically worn and readable: one gold hoop/arc set with green stones, the correct small connector, one irregular white baroque pearl, and one tiny terminal gold bead. No second earring or other jewelry.
+
+Narrative action and restrained invisible VFX: the iris of one visible blue eye begins a very subtle physically plausible change — a small natural iris-sector shift from blue toward a muted sea-green/gray inner ring, as if light and tissue are responding, not a glowing symbol. Keep pupil, sclera, eyelids, and eye anatomy normal; the change is subtle enough to be photographic. Across the layered city depth, a few separate real pearls on distant earrings answer the same upward pull: tiny nacre highlights and a barely perceptible upward cant, physically motivated by reverse gravity, with no sparkle bursts. These distant pearls must be small, sparse, and embedded in real adult background figures; do not turn the frame into a jewellery display. The overhead ocean and subdued Mother occlusion remain the source of the cool reflected light.
+
+Style/medium: grounded prestige live-action, invisible VFX, real British location photography, ARRI Alexa 35 / fine 35 mm character, 35–50 mm spherical lens feel, realistic anatomy, skin pores, wet-hair clumps, imperfect cloth seams, soft highlight roll-off, organic grain, natural atmospheric perspective. Cold sea-cyan is restrained and motivated only by the overhead water; skin, stone, cream cloth, gold and pearl remain natural.
+
+Composition/framing: vertical 9:16, eye-level to slightly low observational camera, medium close-up or medium three-quarter view with face and visible right ear sharp and the street falling through at least three depth layers. Candidate B occupies an off-center third with negative space toward the overhead sea; include enough torso/wardrobe continuity to show the cream camisole and skirt where visible, and white flats only if full lower body is visible. Keep the product legible without macro/product-poster framing. Let background pearls respond at different depths as small, readable accents. No symmetrical centred composition.
+
+Lighting/mood: storm dusk with soft natural skin exposure, blue-green reflected light from the overhead sea, restrained warm window and street-lamp accents, a quiet shift from fear to recognition/resolve. The Mother presence is felt as diffuse partial atmospheric occlusion only.
+
+Constraints: one standalone clean still; no text, title, logo, product name, price, subtitle, watermark or graphic overlay. Candidate B is unequivocally adult. Preserve her identity, fixed cream/white outfit, white flats, natural anatomy, and exact Baroque Orbit geometry. Keep the iris change subtle and pearl responses physically plausible, sparse and distant. No product poster, no beauty-campaign retouching.
+
+Avoid: superhero beams, lasers, glowing eyes, luminous or self-emitting jewellery, halo, magic symbols, excessive particles, sparkle soup, neon cyan grade, full Mother, literal eye or creature, face/body/limb/tentacle reveal, monster anatomy, floating jewelry display, extra pearls, extra earrings, redesigned jewellery, missing connector, missing terminal bead, generic round pearl, chain substitution, wrong wardrobe, gray skirt, jacket, identity drift, child, age drift, plastic skin/hair, wax retouching, oil paint, concept art, glossy CGI, poster symmetry, centred runway pose, generated text, signage, logo, price, watermark.
+```
+
+### Repair 1 (S08) — rejected, normal-gravity pearls
+
+Repair variable: add only a few real pearl responses attached to existing adult background jewelry in near/middle/far depth; preserve all other pixels in spirit, including Candidate B's blue-base iris with a fine muted gold inner ring.
+Generated source: `C:/Users/11458/.codex/generated_images/01a025c9-6bba-7143-8ca5-890b2c5f820e/exec-2faee401-54b8-481e-a5e3-5339eb8e97d5.png`.
+Source metadata: PNG, 941×1672, RGB/3 channels, sRGB, 8-bit uchar, no alpha. Source SHA-256: `A9E75AD630181DCDC3CEE43BD2A88CA295880BEA63FD2517458FAEDA28F434D6`.
+Inspection: full-resolution source and 270×480 source thumbnail inspected with `view_image`. Near/middle/far pearls were present, but all pendants hung normally or were touched by people; no anomalous upward motion was readable at thumbnail size.
+Decision: REJECTED. This source was used only as the immediate edit target for Repair 2.
+
+Exact Repair 1 prompt:
+```text
+Use case: precise-object-edit
+Asset type: content-preserving vertical 9:16 live-action FILE 001 S08 first-frame repair
+Input images: Image 1 is the sole edit target: the current S08 generated frame. Use no other image or reference.
+
+Primary request: change only one narrative variable — make the existing crowd's pearl response readable across layered city depth. Preserve the exact current frame, subject, composition, camera, crop, British old-city street, overhead ocean height and texture, diffuse partial Mother dimming, storm dusk light, wet materials, and live-action prestige-film look. Preserve Candidate B's exact adult identity, pale-gold wet hair, natural skin, blue eyes, cream camisole, cream structured short skirt, white flats where visible, and the exact single right-ear Baroque Orbit earring. Preserve the current iris as blue at its base with only a very fine muted gold inner ring; do not recolor it brown or green and do not increase its glow.
+
+Add only a few tiny, real pearl responses attached to existing adult background jewelry, distributed by depth:
+- near depth: one adult at the near right edge or front-right crowd has a small irregular pearl earring or pendant visibly held just off the ear/chest, lifted a few millimetres upward by the same reverse pull;
+- middle depth: one existing adult in the middle street crowd has a small irregular pearl earring with a barely perceptible upward cant and a tiny taut attachment;
+- far depth: one existing distant adult/figure has one pinprick-sized pale pearl catching a small highlight as it tilts upward, still attached to real jewelry.
+Each response must remain physically attached to or held by an adult, with a short believable connector/chain or finger grip, and the motion cue is a subtle upward cant/tension, not floating. Keep the pearls small, sparse, matte-nacreous and naturally lit; the three depth layers must be distinguishable at a production still / 270x480 thumbnail but never dominate the frame.
+
+Constraints: change only those few background jewelry responses; everything else remains pixel-stable in spirit. Keep exactly one standalone image, no new foreground subject, no jewelry display, no product advertisement, no extra pearls beyond the few attached to existing adults, no extra people, no redesigned protagonist earring. No text, title, logo, product name, price, subtitle, watermark, graphic overlay, beam, glow or particles.
+
+Avoid: floating loose pearls, strings of pearls, pearl rain, particle soup, sparkle bursts, luminous jewelry, superhero beams, magical symbols, background jewelry poster, extra earrings on Candidate B, product redesign, detached unheld gems, generic beads, large pearls, dominant foreground jewelry, iris recolor, brown or green eye, glowing eye, altered face, altered wardrobe, altered city, altered ocean, altered Mother anatomy, concept art, glossy CGI, text, logo, watermark.
+```
+
+### Repair 2 (S08) — rejected, protagonist/near pearl still normal gravity
+
+Repair variable: change only pearl physics; make Candidate B's pearl and exactly 2–3 existing adult background pendants visibly lift upward/off the chest toward the overhead sea with taut connectors; no hands, glow, loose beads, extra jewelry, or other scene changes.
+Generated source: `C:/Users/11458/.codex/generated_images/01a025c9-6bba-7143-8ca5-890b2c5f820e/exec-98482495-0273-45cd-ab5d-685a50deac5c.png`.
+Source metadata: PNG, 941×1672, RGB/3 channels, sRGB, 8-bit uchar, no alpha. Source SHA-256: `7A6F6A993709226B9CC53D881DBB6EBDD0A0BA3E5957D4B49518605FD5E1B2EF`.
+Inspection: full-resolution source and 270×480 source thumbnail inspected with `view_image`. The central middle-distance necklace was visibly pulled diagonally upward and the near/far responses existed, but Candidate B's pearl and the right-front pearl still read close to normal vertical hanging at thumbnail size.
+Decision: REJECTED. This source was used only as the immediate edit target for Repair 3.
+
+Exact Repair 2 prompt:
+```text
+Use case: precise-object-edit
+Asset type: content-preserving vertical 9:16 live-action FILE 001 S08 second pearl-physics repair
+Input images: Image 1 is the sole edit target: the current S08 repair-1 frame. Use no other image or reference.
+
+Primary request: change only the pearl physics. Keep the current frame's Candidate B identity, blue-base iris with a fine muted gold inner ring, pale-gold wet hair, natural anatomy, exact cream camisole and cream structured short skirt, white flats where visible, exact right-ear Baroque Orbit construction, camera/crop/composition, British old-city street, layered depth, overhead-ocean height/texture, diffuse partial Mother dimming, storm light, wet materials, background adults and prestige live-action quality unchanged.
+
+Make the anomalous action unmistakable but restrained: the protagonist's irregular white Baroque Orbit pearl drop visibly pulls upward and slightly away from her neck/shoulder toward the overhead sea, with its single connector/attachment stretched taut and a tiny physically plausible upward motion blur or displaced water droplets. Do not add a second protagonist earring.
+
+Also make exactly 2–3 existing adult background pearl pendants in near/middle/far depth visibly respond in the same upward direction toward the overhead sea. Each must be a real irregular pearl attached to a real earring or pendant, measurably lifted upward/off the wearer's chest or ear against gravity; the short connector or chain is taut and points upward. One near pearl is readable on the right-front adult, one middle pearl is readable on the central/midground adult, and one far pearl is only a tiny but visible upward-tilted highlight on a distant adult. Use restrained motion blur or a few displaced droplets along each upward path to make the motion readable in a still. They must not be held by hands and must remain physically attached, not loose.
+
+Keep the action sparse, subtle and photographic: no glow, no sparkle, no beams, no particle field, no floating loose beads, no symmetrical jewellery display. Preserve the crowd as ordinary adults in the same positions and clothing. No additional people, props, jewellery, or product-poster framing.
+
+Constraints: change only the direction/attachment physics of the existing few pearl pendants; preserve all identity, wardrobe, facial expression, iris color, earring geometry, city, ocean, Mother restraint, lighting and composition. No text, title, logo, product name, price, subtitle, watermark, graphic overlay.
+
+Avoid: normal gravity hanging pendants, hands touching or holding the pearls, slack chains, downward pendants, loose floating beads, pearl rain, strings of pearls, extra jewellery, jewellery display, oversized pearls, glowing jewellery, luminous eyes, superhero beams, magic symbols, excessive particles, neon cyan, full Mother, creature anatomy, identity drift, wardrobe drift, changed background, concept art, glossy CGI, generated text, logo or watermark.
+```
+
+### Repair 3 (S08) — accepted
+
+Repair variable: only pearl physics. Candidate B's complete existing Baroque Orbit pearl drop is visibly displaced up/right toward the sea by at least 30–45° from the normal gravity line, with the connector/hoop readable and taut but not deformed; the right-front pearl is pulled in the same direction; the middle response remains unchanged. No new pearl count, light, particles, or hand-held action.
+Generated source: `C:/Users/11458/.codex/generated_images/01a025c9-6bba-7143-8ca5-890b2c5f820e/exec-bacfb7ab-d2c9-4b52-99c7-9f6cbaa1ffd4.png`.
+Source metadata: PNG, 941×1672, RGB/3 channels, sRGB, 8-bit uchar, no alpha. Source SHA-256: `0CEFFA51C93DE60A38FD134373FB3CEA37F0C8117B2AA98D307ACA4F00F40D79`.
+Accepted output: `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S08.png`.
+Final metadata: PNG, 2160×3840, RGB/3 channels, sRGB, 8-bit uchar, no alpha. Final SHA-256: `9EA57F5E8013E3485420ECDB4B3388AE393DF084FAA862E214C789C55069BE63`.
+Inspection: source and normalized master were inspected with `view_image` at full resolution and 270×480. At thumbnail scale, Candidate B's pearl is measurably pulled up/right from the ear, the right-front adult's pearl pulls in the same direction, and the middle-distance necklace remains visibly taut/upward; the near/middle/far response layers are readable without glow, beams, particles, loose beads, or hands holding them. Candidate B remains unequivocally adult with pale-gold wet hair, blue-base eye and subtle inner-ring response, cream camisole/skirt, and the established city/sea/Mother scale. No text, logo, watermark, creature, or product-poster layout is present.
+Decision: ACCEPTED by parent pixel review. Repair 3 is the only S08 source promoted to v1; all earlier S08 sources remain rejected evidence and were not overwritten.
+
+Exact Repair 3 prompt:
+```text
+Use case: precise-object-edit
+Asset type: content-preserving vertical 9:16 live-action FILE 001 S08 third pearl-physics repair
+Input images: Image 1 is the sole edit target: the current S08 repair-2 frame. Use no other image or reference.
+
+Primary request: change only the direction and tension of the already-existing pearl pendants. Preserve the current frame's Candidate B identity, blue-base iris with only a fine muted gold inner ring, pale-gold wet hair, natural anatomy, exact cream camisole and cream structured short skirt, white flats where visible, exact British old-city composition/crop/camera, layered crowd depth, overhead-ocean height/texture, diffuse partial Mother dimming, storm light, wet materials, and prestige live-action look. Do not alter any non-jewelry pixels in spirit.
+
+Critical action lock: move Candidate B's complete existing Baroque Orbit pearl drop clearly up and to the right toward the overhead sea, at least 30–45 degrees off the normal gravity line. Keep the full irregular white pearl drop intact, with its tiny terminal gold bead visible, and keep its exact connector/hoop clearly visible, taut but not stretched, bent, duplicated or redesigned. The pearl must be visibly displaced to the right/up from the ear and neck instead of hanging vertically below the lobe. Preserve the green-stone gold hoop/arc and one correct connector.
+
+Make the existing right-front adult's already-visible pearl pendant pull in the same up-right direction at least 30–45 degrees, with its real attachment/short connector taut and the irregular pearl lifted off the chest. Keep the existing middle-distance upward-pulled pearl/chain exactly as it is; do not add or remove any jewelry. The visible near/middle/far responses stay sparse and physically attached to their adult wearers, no hands holding them.
+
+No change to pearl count, people count, clothing, faces, background, ocean, Mother, light, or composition. No new effects. Motion may be conveyed only by the measurable up-right displacement and slight restrained motion blur or a couple of displaced water droplets already consistent with the current frame.
+
+Constraints: one standalone still; exact product geometry remains one hoop with green stones, one connector, one irregular pearl and terminal bead. No text, title, logo, watermark, product poster, glow, beams, particles, sparkle, floating loose beads, hands touching/holding, pearl rain, or extra jewelry.
+
+Avoid: Candidate B pearl still hanging straight down, right-front pearl still hanging straight down, slack connector, deformed hoop, stretched/morphed pearl, missing terminal bead, generic round bead, added pearls, duplicated jewelry, normal-gravity pendants, hand-held pendants, luminous jewelry, glowing eye, superhero beam, magic symbols, excessive particles, neon cyan, identity drift, wardrobe drift, altered city/ocean/Mother, concept art, glossy CGI, generated text, logo, watermark.
+```
+
+## S09
+
+Reference roles: none. S09 intentionally used no local positive image input to prevent a person, face, creature, jewellery, city landmark, generated title, or old environment from leaking into the clean atmospheric loop plate. Established rain/sea palette and physical realism were specified textually. No legacy first frame, old character/environment/FX asset, old memory pair, rejected candidate, or style-test was supplied.
+
+Generated source: `C:/Users/11458/.codex/generated_images/01a025c9-6bba-7143-8ca5-890b2c5f820e/exec-5e6f921f-bea4-41bf-abbd-79a5f07e1d86.png`.
+Source metadata: PNG, 941×1672, RGB/3 channels, sRGB, 8-bit uchar, no alpha. Source SHA-256: `0762BC60B3F510E221784DF16DEF3C5293BE5D02BDEE589EC87390F1A1E4FA18`.
+Accepted output: `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S09.png`.
+Final metadata: PNG, 2160×3840, RGB/3 channels, sRGB, 8-bit uchar, no alpha. Final SHA-256: `30B5BA18C829C773B70AB702DE4BDE579BFDECEBF9E699E58B46B85339FFDCF7`.
+Inspection: source and normalized master were inspected with `view_image` at full resolution and 270×480. Exactly one small real water droplet is visible with one restrained upward trail through a near-black slate/sea atmospheric field. There is no second droplet, falling rain, spray, particle field, creature, eye, face, person, body, jewellery, text, title, archive label, subtitle, logo, watermark, or fantasy/cosmic material. The droplet's lower trail makes the upward motion legible and its luminance can hard-cut/loop toward S01.
+Decision: ACCEPTED by parent pixel review. No repair was needed.
+
+Exact prompt:
+```text
+Use case: photorealistic-natural
+Asset type: dark atmospheric vertical 9:16 live-action first-frame plate for FILE 001 shot S09, designed to hard-cut or loop back to the opening S01
+
+Primary request: create a nearly black, photographic atmospheric plate with a deep storm-sea / wet-air texture and one isolated real water droplet traveling upward through the frame. The single droplet is the only discrete object and the only motion cue: a small irregular spherical droplet with a short soft upward motion trail, physically refracting the dim sea-light as it rises from lower center toward upper center. Keep the droplet subtle, natural and wet, with realistic surface tension and a faint displaced haze trail. It must read as rising, not falling.
+
+Scene/backdrop: dark rain-darkened air and distant suspended-sea atmosphere in the established FILE 001 palette: charcoal, deep slate, muted sea-green/blue-black, very restrained cold reflected light, almost no visible location detail. Use soft layered water haze and low-contrast photographic grain to preserve luminance continuity with the S01 overhead sea. The plate should feel like an in-camera live-action atmospheric insert, not a title card or graphic.
+
+Composition/framing: vertical 9:16, minimal negative-space composition, near-black field with a subtle diagonal luminance gradient and barely perceptible wet atmospheric depth. Place exactly one droplet slightly below center, angled upward along a clean path toward the sea-light above. Keep the droplet small enough for a restrained loop and visually compatible with S01 at a hard cut. No framing border, no labels, no graphic design.
+
+Style/medium: grounded prestige live-action, macro-to-atmospheric photographic capture, real water droplet, invisible VFX, soft highlight roll-off, organic fine grain, physically plausible refraction and motion blur. Keep the established rain/sea palette and physical realism; no fantasy illustration or synthetic render.
+
+Lighting/mood: almost black exposure, quiet suspended breath before the next event, one faint cool sea reflection on the droplet and a barely visible slate-blue atmospheric gradient. No luminous source, no glowing object.
+
+Text (verbatim): none. Absolutely no text, title, logo, archive label, subtitle, caption, watermark, signage, letters or symbols.
+
+Constraints: exactly one real water droplet, exactly one upward motion trail, no other droplets, rain, spray, particles or floating objects. No creature, jewellery, face, person, hand, body, city landmark or readable object. The plate must remain a clean photographic insert with no generated typography.
+
+Avoid: generic AI fantasy, cosmic space, stars, galaxies, magical sparks, dust, particle soup, multiple droplets, falling rain, water curtain, splash, bubbles, lens flare, glowing orb, beam, creature, eye, face, person, hand, body, jewellery, pearl, product display, cityscape, title card, archive card, labels, logos, subtitles, watermark, concept art, oil paint, glossy CGI, neon cyan, bright blue background, poster composition.
+```
+
+## Overview — deterministic 3×3 review sheet
+
+Reference roles: accepted v1 masters only; no generated assembly and no rejected/legacy input. Ordered cells are exactly row 1 `S01 S02 S03`, row 2 `S04 S05 S06`, row 3 `S07 S08 S09`. Source master hashes used by the assembly: S01 `648A878F37C37174BAE380F866759FFE7ECC9ADE0B95F89B21D0C572F0179B62`; S02 `1735B4A689978024A0D218B8D2763069DC96E5BD8C76503AEABCDD3824C81CEF`; S03 `A8EDA6644D619203052414020988A3AEAEA2B0078358CA749006FCCE6EE0682B`; S04 `0FB67CAE9707E51CF02A79F908EC0729036CCDB086EB665EDC00BC659617486D`; S05 `2859CC09F89EC3995B5A1B1BD76742921D847B6C91625BC041CA45402D9B9E4B`; S06 `8C1BC21DE27A472BD612FF8F7ADC2CB86A5858B203B84C86B8B0ECFF9E566E60`; S07 `12BEEC8F95D538728096D1A83C7B07AF021FFA1BCE1E0273AAF038FE1497E9C4`; S08 `9EA57F5E8013E3485420ECDB4B3388AE393DF084FAA862E214C789C55069BE63`; S09 `30B5BA18C829C773B70AB702DE4BDE579BFDECEBF9E699E58B46B85339FFDCF7`.
+
+Exact assembly command (run from repository root; repository `sharp` 0.34.5):
+```powershell
+node -e 'const sharp=require("sharp"); const root="video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/",files=["S01.png","S02.png","S03.png","S04.png","S05.png","S06.png","S07.png","S08.png","S09.png"].map(f=>root+f),out=root+"3x3-overview.png",w=360,h=640,labelH=28,gap=24,labels=["S01","S02","S03","S04","S05","S06","S07","S08","S09"]; (async()=>{const cells=await Promise.all(files.map(f=>sharp(f).resize(w,h,{fit:"cover",position:"centre",kernel:"lanczos3"}).toColourspace("srgb").removeAlpha().png().toBuffer())); const layers=[]; for(let i=0;i<9;i++){const col=i%3,row=Math.floor(i/3),left=col*(w+gap),top=row*(labelH+h+gap); layers.push({input:cells[i],left,top:top+labelH}); const labelSvg="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\""+w+"\" height=\""+labelH+"\"><rect width=\"100%\" height=\"100%\" fill=\"#000\"/><text x=\""+(w/2)+"\" y=\"20\" text-anchor=\"middle\" fill=\"#fff\" font-family=\"Arial, sans-serif\" font-size=\"18\" font-weight=\"700\">"+labels[i]+"</text></svg>"; layers.push({input:Buffer.from(labelSvg),left,top});} await sharp({create:{width:1128,height:2052,channels:3,background:{r:0,g:0,b:0}}}).composite(layers).toColourspace("srgb").removeAlpha().png().toFile(out); console.log("assembled",out)})().catch(e=>{console.error(e);process.exit(1)})'
+```
+
+Assembly geometry: each accepted master was resized to an untouched 360×640 RGB/sRGB cell with `fit: cover`, `position: centre`, and `kernel: lanczos3`. Each cell has an opaque black 28 px label gutter above it; 24 px opaque black gutters separate columns and rows. Canvas is 1128×2052 RGB/sRGB PNG. Labels `S01`–`S09` are white SVG text confined to black gutters; no label pixel overlaps a master image cell. The output was inspected with `view_image` at full resolution and at 270×480 (contain and cover review thumbnails).
+
+Overview output: `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/3x3-overview.png`.
+Overview metadata: PNG, 1128×2052, RGB/3 channels, sRGB, 8-bit uchar, no alpha. SHA-256: `C1873A5816AFB0E233E74969CD9EB376D8B44E66FA3430E683177E50CAB38213`.
+Overview inspection: full-resolution review confirms exact S01/S02/S03 / S04/S05/S06 / S07/S08/S09 order, labels are legible in opaque black gutters only, and accepted master pixels are not overpainted. Thumbnail review preserves the complete 3×3 hierarchy and label slots. No generative assembly was used.
+
+## Task 5 final v1 outputs
+
+| Output | Path | Metadata | SHA-256 |
+| --- | --- | --- | --- |
+| S08.png | `visual-reconstruction/first-frames/v1/S08.png` | PNG, 2160×3840, RGB/3 channels, sRGB, no alpha | `9EA57F5E8013E3485420ECDB4B3388AE393DF084FAA862E214C789C55069BE63` |
+| S09.png | `visual-reconstruction/first-frames/v1/S09.png` | PNG, 2160×3840, RGB/3 channels, sRGB, no alpha | `30B5BA18C829C773B70AB702DE4BDE579BFDECEBF9E699E58B46B85339FFDCF7` |
+| 3x3-overview.png | `visual-reconstruction/first-frames/v1/3x3-overview.png` | PNG, 1128×2052, RGB/3 channels, sRGB, no alpha | `C1873A5816AFB0E233E74969CD9EB376D8B44E66FA3430E683177E50CAB38213` |
+
+No contract, manifest, accepted S01–S07 master, continuity asset, legacy first frame, or Git index was changed by Task 5. Temporary 270×480 inspection thumbnails are outside the v1 package and are not deliverables.
