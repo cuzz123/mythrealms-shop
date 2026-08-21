@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "package_id": "VID_MR_SEA_ABOVE_FILE_001_FIRST_FRAMES_V1",
+  "status": "candidate_awaiting_user_approval",
+  "master": { "width": 2160, "height": 3840, "format": "png", "channels": 3, "colour_space": "srgb" },
+  "selected_character": { "id": "B", "path": "video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/characters/candidate-b-dangerous-curiosity.png", "sha256": "2CA5B608255BD2BE4DB3701CFFDA4EF4C5BA407F9CB85C7325ED37D84DF966F9" },
+  "product_truth": [
+    { "path": "video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/main.jpg", "sha256": "DD12F12A092965A08AB9096DC3E4E79925779B641B29142B4194FF1C8BDF950F" },
+    { "path": "video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/detail-05.jpg", "sha256": "73855F92B3426DE9428042561DF8AD5BD5A4EB98496BD31F2934ECEA6C67E2E5" },
+    { "path": "video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/views/product-lock.png", "sha256": "0B8671FAFCD9481DD53FC10EFB8ACC4671B901ABA647BF7C273069A01793517B" }
+  ],
+  "approved_world": [
+    { "path": "video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png", "sha256": "ED50178C514FD0A970D2586DAA40A1C3662F6EAF3EAD1539447D396E138B003F" },
+    { "path": "video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-portrait-crop-test.png", "sha256": "D3F17599C0D188A57CF2420DAC93976E3943123F3109ACEA4D653D2908843204" },
+    { "path": "video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-02-evacuation-square.png", "sha256": "18EB077D2A339E37D21E3828695A75BFACF92DC64FE938B834A05A202E0F280D" },
+    { "path": "video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-03-s01-street-hook.png", "sha256": "B72AAFB5E8360E8CCD850E953DFD927778C8862354B446029FA59DC585E563DD" },
+    { "path": "video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-04-rooftops-under-mother.png", "sha256": "9E06CBFBFA3C067436BD2E62C601A22CD1612504139DEEEE9739330BCE023490" },
+    { "path": "video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-05-cliffs-harbour-ocean.png", "sha256": "12AB7C54014E2217F103657879DF23BB12411ABCC897AB90414F7B4224B446D3" }
+  ],
+  "version_directory": "v1",
+  "shots": ["S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08", "S09"],
+  "continuity_assets": ["v1/continuity/memory-pair-v1.png"],
+  "overview": "v1/3x3-overview.png",
+  "reports": [
+    "v1/reports/generation.md",
+    "v1/reports/character-product-review.md",
+    "v1/reports/world-narrative-review.md",
+    "v1/reports/final-visual-review.md"
+  ],
+  "forbidden_positive_input_prefixes": ["first-frames/", "05-characters/CHAR_MR_TIDE_", "03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001", "08-fx/FX_MR_"]
+}
