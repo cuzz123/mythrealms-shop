@@ -496,10 +496,10 @@ function Mask-NegativeHistoryExclusions {
     $lines = $Text -split "`r?`n"
 
     foreach ($line in $lines) {
-        $isNegativeMarker = $line -match '(?i)^\s*(?:[-*]\s*)?(?:\|\s*)?(?:negative[-\s]?history|rejected[-\s]?history|historical\s+exclusions?|negative\s+inputs?)(?:\s+exclusions?)?[^:：|]*[:：|]'
+        $isNegativeMarker = $line -match '(?i)^\s*(?:(?:#{1,6}\s*)|(?:\d+[.)]\s+)|(?:[-*]\s*)|(?:\|\s*))?(?:negative[-\s]?history|rejected[-\s]?history|historical\s+exclusions?|negative\s+inputs?)(?:\s+exclusions?)?(?:\s*[:：|].*)?\s*$'
         if ($isNegativeMarker) {
             [void]$maskedLines.Add(($line -replace '[^\r\n]', ' '))
-            $inNegativeBlock = $line.TrimEnd().EndsWith(':') -or $line.TrimEnd().EndsWith('|')
+            $inNegativeBlock = $line -notmatch '(?i)[:：|]\s*\S'
             continue
         }
 
@@ -508,10 +508,12 @@ function Mask-NegativeHistoryExclusions {
                 [void]$maskedLines.Add(($line -replace '[^\r\n]', ' '))
                 continue
             }
-            if ($line -match '^\s*#{1,6}\s+' -or $line -match '^\s*(?:[-*]\s*)?[A-Za-z][A-Za-z0-9 _-]*\s*[:：]') {
+            if ($line -match '^\s*#{1,6}\s+' -or
+                $line -match '^\s*(?:[-*]\s*)?[A-Za-z][A-Za-z0-9 _-]*\s*[:：]' -or
+                $line -match '(?i)^\s*\d+[.)]\s+(?:positive\s+references?|reference\s+roles?|positive\s+inputs?)\s*[:：]') {
                 $inNegativeBlock = $false
             }
-            elseif ($line -match '^\s*(?:[-*]\s+|`|\|)') {
+            elseif ($line -match '^\s*(?:[-*]\s+|\d+[.)]\s+|`|\|)') {
                 [void]$maskedLines.Add(($line -replace '[^\r\n]', ' '))
                 continue
             }
@@ -557,7 +559,9 @@ function Find-ForbiddenPositivePrefix {
                 if ($prefix -ieq 'first-frames/') {
                     $beforeMatch = $line.Substring(0, $match.Index)
                     $afterPrefix = $match.Value.Substring($prefix.Length)
-                    $isV1Namespace = $beforeMatch -match '(?i)(?:^|/)visual-reconstruction/$' -and $afterPrefix -match '(?i)^v1/'
+                    $isCanonicalV1Prefix = $beforeMatch -match '(?i)(?:^|[\s`"''(<\[|])(?:[A-Za-z0-9_.:-]+/)*visual-reconstruction/$'
+                    $isPackageRelativeV1Prefix = $beforeMatch -match '(?i)(?:^|[\s`"''(<\[|])$'
+                    $isV1Namespace = $afterPrefix -match '(?i)^v1/' -and ($isCanonicalV1Prefix -or $isPackageRelativeV1Prefix)
                     if ($isV1Namespace) {
                         continue
                     }

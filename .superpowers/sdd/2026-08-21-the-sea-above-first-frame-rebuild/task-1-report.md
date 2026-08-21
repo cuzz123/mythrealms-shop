@@ -94,3 +94,42 @@ pwsh -NoProfile -File video-pipeline/asset-library/scripts/validate-sea-above-fi
 ```
 
 Result: exit `1`, listing only the absent v1 masters, continuity anchor, overview, and four v1 reports; no Sharp, JSON, or root-resolution crash text was emitted.
+
+## Fix round 2/5 report
+
+The path-token classifier now accepts canonical v1 paths wherever Markdown places them:
+
+- repository/package form: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S01.png`
+- package-relative form: `visual-reconstruction/first-frames/v1/S01.png`
+- first-frames package form: `first-frames/v1/S01.png`
+- direct v1 form: `v1/S01.png` (which has no forbidden `first-frames/` prefix)
+
+The focused scanner fixtures put the canonical forms and the legacy `first-frames/S01.png` form in bullet, prose, table, and inline-code wrappers. The exact result was:
+
+```text
+V1_LEGACY_CLASSIFIER=PASS
+```
+
+Negative-history masking was expanded for headings with or without a colon and numbered continuations. The exact fixtures covered:
+
+```text
+## Negative-history exclusions
+1. first-frames/S01.png
+2. 05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/character-turnaround.png
+
+1. Negative-history exclusions
+1. first-frames/S01.png
+2. 08-fx/FX_MR_REVERSE_RAIN_001/source/direction-lock.png
+
+- Negative-history exclusions
+1) first-frames/S01.png
+2) 03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/source/world-anchor.png
+```
+
+Each produced zero forbidden-input hits. A following numbered `Positive references: first-frames/S02.png` line remained visible and produced exactly one hit, proving that positive references are not masked by the preceding exclusion heading. The exact result was:
+
+```text
+NEGATIVE_HISTORY_VARIANTS=PASS (headings with/without colon; numbered continuations; positive reference not masked)
+```
+
+The expected-red package check remains exit `1` with only missing v1 assets/reports after these scanner changes.
