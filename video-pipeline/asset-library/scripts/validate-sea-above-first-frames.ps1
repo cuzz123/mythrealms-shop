@@ -53,22 +53,6 @@ function Get-PropertyValue {
     return ,$property.Value
 }
 
-function Test-HasProperty {
-    param(
-        [Parameter(Mandatory = $false)]
-        [AllowNull()]
-        [object]$Object,
-        [Parameter(Mandatory = $true)]
-        [string]$Name
-    )
-
-    if ($null -eq $Object) {
-        return $false
-    }
-
-    return $null -ne $Object.PSObject.Properties[$Name]
-}
-
 function Test-NonEmptyString {
     param(
         [Parameter(Mandatory = $false)]
@@ -283,12 +267,15 @@ function Validate-HashedInput {
 function Invoke-SharpMetadata {
     param(
         [Parameter(Mandatory = $true)]
-        [string]$Path
+        [string]$Path,
+        [Parameter(Mandatory = $true)]
+        [string]$RepositoryRoot
     )
 
     $nodeScript = @'
-const sharp = require('sharp');
-const imagePath = process.argv[1];
+const repositoryRoot = process.argv[1];
+const imagePath = process.argv[2];
+const sharp = require(require.resolve('sharp', { paths: [repositoryRoot] }));
 sharp(imagePath).metadata().then((metadata) => {
   process.stdout.write(JSON.stringify({
     format: metadata.format ?? null,
@@ -303,7 +290,7 @@ sharp(imagePath).metadata().then((metadata) => {
 });
 '@
 
-    $nodeOutput = & node -e $nodeScript -- $Path 2>&1
+    $nodeOutput = & node -e $nodeScript -- $RepositoryRoot $Path 2>&1
     $nodeExitCode = $LASTEXITCODE
     $metadataText = (($nodeOutput | ForEach-Object { [string]$_ }) -join [Environment]::NewLine).Trim()
 
@@ -350,7 +337,7 @@ function Validate-Image {
 
     $metadata = $null
     try {
-        $metadata = Invoke-SharpMetadata -Path ([string]$FullPath)
+        $metadata = Invoke-SharpMetadata -Path ([string]$FullPath) -RepositoryRoot $repositoryRoot
     }
     catch {
         Add-ValidationError -Path $RelativePath -Reason $_.Exception.Message
@@ -498,59 +485,91 @@ function Test-ReportReferenceRoleField {
     return $false
 }
 
+function Mask-NegativeHistoryExclusions {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Text
+    )
+
+    $maskedLines = [System.Collections.Generic.List[string]]::new()
+    $inNegativeBlock = $false
+    $lines = $Text -split "`r?`n"
+
+    foreach ($line in $lines) {
+        $isNegativeMarker = $line -match '(?i)^\s*(?:[-*]\s*)?(?:\|\s*)?(?:negative[-\s]?history|rejected[-\s]?history|historical\s+exclusions?|negative\s+inputs?)(?:\s+exclusions?)?[^:：|]*[:：|]'
+        if ($isNegativeMarker) {
+            [void]$maskedLines.Add(($line -replace '[^\r\n]', ' '))
+            $inNegativeBlock = $line.TrimEnd().EndsWith(':') -or $line.TrimEnd().EndsWith('|')
+            continue
+        }
+
+        if ($inNegativeBlock) {
+            if ([string]::IsNullOrWhiteSpace($line)) {
+                [void]$maskedLines.Add(($line -replace '[^\r\n]', ' '))
+                continue
+            }
+            if ($line -match '^\s*#{1,6}\s+' -or $line -match '^\s*(?:[-*]\s*)?[A-Za-z][A-Za-z0-9 _-]*\s*[:：]') {
+                $inNegativeBlock = $false
+            }
+            elseif ($line -match '^\s*(?:[-*]\s+|`|\|)') {
+                [void]$maskedLines.Add(($line -replace '[^\r\n]', ' '))
+                continue
+            }
+            else {
+                $inNegativeBlock = $false
+            }
+        }
+
+        [void]$maskedLines.Add($line)
+    }
+
+    return ($maskedLines -join "`n")
+}
+
 function Find-ForbiddenPositivePrefix {
     param(
         [Parameter(Mandatory = $true)]
-        [string]$Section,
+        [string]$Text,
         [Parameter(Mandatory = $true)]
         [object[]]$Prefixes
     )
 
-    $hits = [System.Collections.Generic.List[string]]::new()
-    $inPositiveReferenceBlock = $false
+    $hits = [System.Collections.Generic.List[object]]::new()
+    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+    $scanText = Mask-NegativeHistoryExclusions -Text $Text
+    $lines = $scanText -split "`r?`n"
 
-    foreach ($line in ($Section -split "`r?`n")) {
-        $trimmed = $line.Trim()
-        if ([string]::IsNullOrWhiteSpace($trimmed)) {
-            $inPositiveReferenceBlock = $false
-            continue
-        }
-
-        $startsPositiveField = $line -match '(?i)^\s*(?:[-*]\s*)?(?:positive\s+(?:references?|inputs?)(?:\s+[^:：]*)?|reference(?:[_\-\s]+)roles?|reference(?:[_\-\s]+)role(?:\s+map)?)\s*:'
-        if ($startsPositiveField) {
-            $inPositiveReferenceBlock = $true
-        }
-        elseif ($inPositiveReferenceBlock -and $line -match '^\s*#{1,6}\s+') {
-            $inPositiveReferenceBlock = $false
-        }
-        elseif ($inPositiveReferenceBlock -and $line -match '^\s*[-*]\s+') {
-            if ($line -match '(?i)negative|rejected|excluded|history|forbidden|output|generated\s+source|accepted') {
-                $inPositiveReferenceBlock = $false
-            }
-        }
-        elseif ($inPositiveReferenceBlock -and $line -notmatch '^\s+') {
-            $inPositiveReferenceBlock = $false
-        }
-
-        $isExcludedLine = $line -match '(?i)negative|rejected|excluded|history|forbidden|output\s+path|accepted\s+output|generated\s+source|repair\s+prompt|rejection\s+reason'
-        if ($isExcludedLine) {
-            continue
-        }
-
-        $isReferenceLine = $inPositiveReferenceBlock -or $line -match '(?i)positive\s+(?:reference|input)|reference\s+role|reference_role|input\s+role'
-        if (-not $isReferenceLine) {
-            continue
-        }
-
+    for ($lineIndex = 0; $lineIndex -lt $lines.Count; $lineIndex++) {
+        $line = $lines[$lineIndex].Replace('\', '/')
         foreach ($prefixValue in $Prefixes) {
             if (-not (Test-NonEmptyString -Value $prefixValue)) {
                 continue
             }
 
             $prefix = ([string]$prefixValue).Replace('\', '/')
-            if ($line.Replace('\', '/').IndexOf($prefix, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
-                if (-not $hits.Contains($prefix)) {
-                    [void]$hits.Add($prefix)
+            $pattern = '(?i)(?<![A-Za-z0-9_.-])' + [regex]::Escape($prefix) + '[^\s`"''<>()[\]|,;]+'
+            foreach ($match in [regex]::Matches($line, $pattern)) {
+                $candidatePath = $match.Value.TrimEnd([char[]]".!?:;")
+                if ([string]::IsNullOrWhiteSpace($candidatePath)) {
+                    continue
+                }
+
+                if ($prefix -ieq 'first-frames/') {
+                    $beforeMatch = $line.Substring(0, $match.Index)
+                    $afterPrefix = $match.Value.Substring($prefix.Length)
+                    $isV1Namespace = $beforeMatch -match '(?i)(?:^|/)visual-reconstruction/$' -and $afterPrefix -match '(?i)^v1/'
+                    if ($isV1Namespace) {
+                        continue
+                    }
+                }
+
+                $key = "$prefix|$($lineIndex + 1)|$candidatePath"
+                if ($seen.Add($key)) {
+                    [void]$hits.Add([pscustomobject]@{
+                        Prefix = $prefix
+                        Path = $candidatePath
+                        Line = $lineIndex + 1
+                    })
                 }
             }
         }
@@ -780,10 +799,11 @@ if (Test-NonEmptyString -Value $generationReportValue) {
                     Add-ValidationError -Path $sectionPath -Reason 'missing reference-role field'
                 }
 
-                $forbiddenHits = Find-ForbiddenPositivePrefix -Section $sectionText -Prefixes $forbiddenPrefixes
-                foreach ($forbiddenHit in $forbiddenHits) {
-                    Add-ValidationError -Path $sectionPath -Reason "forbidden positive-input prefix found in provenance: $forbiddenHit"
-                }
+            }
+
+            $forbiddenHits = Find-ForbiddenPositivePrefix -Text ([string]$generationText) -Prefixes $forbiddenPrefixes
+            foreach ($forbiddenHit in $forbiddenHits) {
+                Add-ValidationError -Path ([string]$generationReportValue) -Reason "forbidden positive-input path at generation.md line $($forbiddenHit.Line): $($forbiddenHit.Path) (prefix $($forbiddenHit.Prefix))"
             }
         }
     }

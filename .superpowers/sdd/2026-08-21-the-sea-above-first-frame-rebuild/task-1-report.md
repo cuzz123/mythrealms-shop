@@ -56,3 +56,41 @@ The pre-existing dirty legacy first-frame/style-test files, staged legacy report
 ## Commit
 
 The three owned paths are staged with pathspecs only. The commit SHA is returned in the task handoff after the pathspec-limited commit; it is not duplicated here because embedding a commit ID in the committed report would make the evidence self-referential.
+
+## Fix round 1/5 report
+
+The reported Important findings (verbatim) were:
+
+1. `validate-sea-above-first-frames.ps1:545-552` performs substring matching for contract forbidden prefix `first-frames/`, which also matches legitimate `visual-reconstruction/first-frames/v1/`; match the legacy path specifically or exempt the v1 namespace.
+2. Lines `519-541` scan only colon-prefixed reference blocks/certain indented bullets and reset on blank/non-indented lines; forbidden paths in Markdown tables, prose, or separated lines can pass. Make provenance path detection fail-closed across the complete `generation.md` content while avoiding false positives on the explicitly declared negative-history exclusions.
+3. Line `306` resolves sharp from caller CWD instead of repository root; resolve/import sharp from the resolved repository root so running from outside the repo works.
+
+The fixes are: legacy `first-frames/` is rejected except inside the approved `visual-reconstruction/first-frames/v1/` namespace; the complete `generation.md` text is scanned after masking only explicitly declared negative-history exclusion blocks; and Node resolves `sharp` with `require.resolve('sharp', { paths: [repositoryRoot] })`, where `repositoryRoot` is passed from the PowerShell root resolved via `$PSScriptRoot`.
+
+The unused `Test-HasProperty` helper was removed while making the validator changes.
+
+### Focused covering evidence
+
+The in-memory fixture harness loaded the validator helpers and produced:
+
+```text
+PROVENANCE_SCANNER_FIXTURES=PASS (v1 allowed; table/prose/separated legacy paths rejected; negative-history exclusions ignored)
+```
+
+Coverage included an accepted `visual-reconstruction/first-frames/v1/S01.png` provenance path, forbidden legacy `first-frames/S01.png` in a Markdown table, forbidden `05-characters/CHAR_MR_TIDE_...` in prose, forbidden `08-fx/FX_MR_...` on a separated line, and all four forbidden prefixes inside an explicitly labelled `Negative-history exclusions` block without false positives.
+
+The Sharp resolver was exercised from `C:\Windows` against an approved world PNG using the repository-root argument and produced:
+
+```text
+SHARP_OUTSIDE_REPO=PASS (sharp resolved from repository root)
+```
+
+The full validator was also invoked from `C:\Windows` with a temporary `v1/S01.png` fixture. It reached Sharp successfully and returned the expected media error (`width mismatch (expected 2160, got 2560); height mismatch (expected 3840, got 1080)`) rather than a module-resolution crash. The temporary fixture was removed and the v1 directory returned to its absent baseline.
+
+After cleanup, the required expected-red command was rerun:
+
+```powershell
+pwsh -NoProfile -File video-pipeline/asset-library/scripts/validate-sea-above-first-frames.ps1
+```
+
+Result: exit `1`, listing only the absent v1 masters, continuity anchor, overview, and four v1 reports; no Sharp, JSON, or root-resolution crash text was emitted.
