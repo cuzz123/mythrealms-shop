@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "package_id": "VID_MR_SEA_ABOVE_FILE_001_VISUAL_RECONSTRUCTION",
+  "status": "candidate_only",
+  "forbid_promotion_without_user_selection": true,
+  "characters": {
+    "directory": "characters",
+    "files": [
+      "candidate-a-cold-intelligence.png",
+      "candidate-b-dangerous-curiosity.png",
+      "candidate-c-luminous-resilience.png"
+    ],
+    "overview": "characters/casting-overview.png",
+    "width": 1080,
+    "height": 1920,
+    "channels": 3
+  },
+  "world": {
+    "directory": "world",
+    "files": [
+      { "path": "scene-01-city-beneath-sea.png", "width": 2560, "height": 1080 },
+      { "path": "scene-01-portrait-crop-test.png", "width": 1080, "height": 1920 },
+      { "path": "scene-02-evacuation-square.png", "width": 1920, "height": 1080 },
+      { "path": "scene-03-s01-street-hook.png", "width": 1080, "height": 1920 },
+      { "path": "scene-04-rooftops-under-mother.png", "width": 1920, "height": 1080 },
+      { "path": "scene-05-cliffs-harbour-ocean.png", "width": 2560, "height": 1080 }
+    ],
+    "overview": "world/world-overview.png",
+    "channels": 3
+  },
+  "reports": [
+    "reports/character-generation.md",
+    "reports/world-generation.md",
+    "reports/character-review.md",
+    "reports/world-review.md"
+  ]
+}
