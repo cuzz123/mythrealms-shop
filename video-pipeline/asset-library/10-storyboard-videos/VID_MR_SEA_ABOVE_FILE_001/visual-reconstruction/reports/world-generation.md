@@ -6,7 +6,7 @@ Status: candidate-only; no scene is promoted to an accepted production path
 
 ## Method and input boundary
 
-Each scene's initial candidate was generated with the built-in image generation tool, one call per distinct scene, with no image input. Only Scene 02 and Scene 05 then used their own newly generated candidate/source as the positive input for one documented single-target repair each. No old or rejected environment, first-frame, style-test, protagonist, or unrelated project raster image was supplied as a positive input. No CLI/API fallback, video generation, or paid generation was used.
+Each scene's initial candidate was generated with the built-in image generation tool, one call per distinct scene, with no image input. Scene 01, Scene 02, Scene 03 and Scene 05 then used their own current candidate/source as the positive input for documented single-target repairs; Scene 01 had one independent-review water-physics/Mother repair, Scene 02 had one sky-and-suction repair, Scene 03 had one jewelry-state repair, and Scene 05 had an earlier banner cleanup followed by one independent-review water-physics repair using its immediately preceding final. No old or rejected environment, first-frame, style-test, protagonist, or unrelated project raster image was supplied as a positive input. No CLI/API fallback, video generation, or paid generation was used.
 
 The generated source files remain under `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e`. Final project outputs are under `visual-reconstruction/world/`. Sharp was used with `fit: "cover"`, `position: "centre"`, Lanczos resizing, sRGB conversion, alpha removal, and PNG output; no geometric stretching was used. Masters were inspected at full resolution before and after normalization.
 
@@ -32,20 +32,57 @@ Avoid: oil painting, matte painting, game concept art, swimming-pool ceiling, fl
 - Generated source: `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-e4edd9b0-2c9e-40cf-b194-061cf7f5d1ec.png`
 - Source SHA-256: `552F878834A24F6657A40CF561FA1C500173626B6CE779DB9C31C7ADE1BA0D0C`
 - Source metadata: PNG, 1536×1024, sRGB, 3 channels, 8-bit uchar, no alpha
-- Final output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png`
-- Final SHA-256: `E3B44314DD700B297E36021791D84B0D25B88012128998F0D3FE14A85AF25468`
-- Final metadata: PNG, 2560×1080, sRGB, 3 channels, 8-bit uchar, no alpha
-- Inspection evidence: full-horizon ocean underside; dense districts; civic clock tower; harbour and rail/road corridors; cranes and vessels; distant cliffs; rooftop foreground with tiny people; visible traffic/light points; numerous irregular ground-to-sky filaments. This is more than five independent scale cues and reads as a kilometre-scale city rather than one street. The centre corridor remains usable for a later 9:16 crop.
-- Rejected source: none. Repair prompt: none.
+- Pre-round1 final output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png`
+- Pre-round1 final SHA-256: `E3B44314DD700B297E36021791D84B0D25B88012128998F0D3FE14A85AF25468`
+- Pre-round1 final metadata: PNG, 2560×1080, sRGB, 3 channels, 8-bit uchar, no alpha
+- Pre-round1 inspection evidence: full-horizon ocean underside; dense districts; civic clock tower; harbour and rail/road corridors; cranes and vessels; distant cliffs; rooftop foreground with tiny people; visible traffic/light points; long irregular ground-to-sky filaments. This is more than five independent scale cues and reads as a kilometre-scale city rather than one street. The centre corridor remained usable for a 9:16 crop.
+- Rejected source: independent review round 1 rejected this pre-round1 final because long twisted filaments read as waterspout/tornado funnels and the Mother shadow was indistinct from the ocean wave texture. Repair prompt: none for the initial candidate; the targeted repair is recorded below.
 
 ### Portrait crop proof
 
-- Derivation source: the same Scene 01 generated source above; no second generation and no positive reference.
-- Output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-portrait-crop-test.png`
-- SHA-256: `AB348FF496CF8DDA51A3154E12E94A7742BDBBBCB171401CBD240B2326D59322`
-- Metadata: PNG, 1080×1920, sRGB, 3 channels, 8-bit uchar, no alpha
-- Inspection evidence: centre crop retains the overhead ocean, civic tower and dense city, harbour/river depth, multiple rising filaments, rooftop foreground and two tiny people; it is a useful 9:16 composition corridor.
-- Rejected source: none. Repair prompt: none.
+- Derivation source: the pre-round1 Scene 01 final above; no second generation and no positive reference for the initial proof.
+- Pre-round1 output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-portrait-crop-test.png`
+- Pre-round1 SHA-256: `AB348FF496CF8DDA51A3154E12E94A7742BDBBBCB171401CBD240B2326D59322`
+- Pre-round1 metadata: PNG, 1080×1920, sRGB, 3 channels, 8-bit uchar, no alpha
+- Pre-round1 inspection evidence: centre crop retains the overhead ocean, civic tower and dense city, harbour/river depth, multiple rising filaments, rooftop foreground and two tiny people; it was a useful 9:16 composition corridor before round1 repair.
+- Rejected source: the pre-round1 Scene 01 final was superseded after independent review round 1; the replacement proof is recorded below.
+
+### Independent review round 1 — targeted water-physics and Mother repair
+
+Independent review rejected the pre-round1 Scene 01 final because its long twisted filaments read as waterspout/tornado funnels and the Mother shadow was too indistinct from the ocean wave texture. The following single edit used only that current Scene 01 candidate as the sole positive edit target; no other image was supplied.
+
+#### Exact repair prompt
+
+```text
+Use case: precise-object-edit
+Asset type: content-preserving epic ultra-wide live-action science-fiction disaster city-under-sea panorama
+Input images: Image 1 is the sole edit target: the current Scene 01 candidate. Use no other image or reference.
+Primary request: change only the overhead water-physics details and the abstract Mother pressure cue while preserving the exact city panorama. Replace every long twisted tornado-like or waterspout-like funnel with many smaller irregular tapered reverse-rain filaments and torn sheets whose LOWER origins are visibly attached to multiple real roads, rooftops, gutters, river edges and harbour surfaces; each filament must narrow, break and disappear upward into the overhead ocean. Reverse direction must read in the still from grounded origins to sky-sea, with no vortex rotation, funnel cone, splash crown, ordinary waterspout or conventional rain column. Add one broad, incomplete city-block-scale diffuse Mother shadow/pressure band inside the overhead ocean, crossing multiple city districts and visibly separable from wave texture as a soft moving pressure depression, but dissolving at both ends and containing no anatomy whatsoever.
+Scene/backdrop: preserve the existing real British coastal city beneath an enormous kilometre-scale inverted ocean: exact clocktower and civic skyline, dense city blocks, harbour and river, road corridors with traffic, wet rooftop foreground, people/scale cues, ships, working cranes, distant cliffs and full-horizon water underside.
+Style/medium: grounded live-action prestige science-fiction disaster photography with invisible VFX integration, ARRI Alexa 35 / fine 35 mm film character, natural wet materials, realistic atmospheric perspective, no concept-art or synthetic render look.
+Composition/framing: preserve exact 14–18 mm rectilinear ultra-wide framing, full horizon, clocktower position, harbour/river geometry, road axes, rooftop foreground and the central crop-safe 9:16 corridor. Do not crop, stretch, reframe, mirror or symmetrize.
+Lighting/mood: preserve storm-dark exposure, practical city and harbour warmth, transmitted underwater caustics, soft highlight roll-off and believable scale. The Mother pressure band is a broad low-contrast darkening/pressure distortion within the ocean, not a creature silhouette.
+Materials/textures: wet slate and masonry, glass, roads, realistic traffic lights, rough harbour water, fine suspended sediment, torn translucent water filaments and physically coherent reflections.
+Constraints: change only the water filaments/sheets and the single abstract pressure band; preserve all buildings, clocktower, roads, rooftops, people, ships, cranes, cliffs, city scale, ocean boundary, perspective, lighting and live-action realism. No text, logos or watermark.
+Avoid: long twisted funnels, tornadoes, waterspouts, vortex rotation, funnel cones, perfect columns, splash crowns, downward ordinary rain, horizontal-only water, magic beams, glowing energy, particle soup, anatomy, eye, face, limb, tentacle, teeth, head, torso, complete silhouette, rounded creature outline, multiple shadow lobes, oil painting, matte painting, game concept art, glossy CGI, altered skyline, removed harbour, missing people, crop, stretch, mirror, watermark.
+```
+
+#### Repaired provenance and output
+
+- Pre-repair final output rejected by independent review: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png`
+- Pre-repair final SHA-256: `E3B44314DD700B297E36021791D84B0D25B88012128998F0D3FE14A85AF25468`
+- Pre-repair final metadata: PNG, 2560×1080, sRGB, 3 channels, 8-bit uchar, no alpha
+- Repair source: `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-9eb00ea3-c026-4e97-a5d7-a5ed5e1aae04.png`
+- Repair source SHA-256: `ACB48C9CE96CEC07F87752684FBF5B9E370F67A172ADDFFC97127A76B918F71C`
+- Repair source metadata: PNG, 1928×815, sRGB, 3 channels, 8-bit uchar, no alpha
+- Final output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png`
+- Final SHA-256: `ED50178C514FD0A970D2586DAA40A1C3662F6EAF3EAD1539447D396E138B003F`
+- Final metadata: PNG, 2560×1080, sRGB, 3 channels, 8-bit uchar, no alpha
+- Portrait crop proof: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-portrait-crop-test.png`
+- Portrait crop proof SHA-256: `D3F17599C0D188A57CF2420DAC93976E3943123F3109ACEA4D653D2908843204`
+- Portrait crop metadata: PNG, 1080×1920, sRGB, 3 channels, 8-bit uchar, no alpha
+- Inspection evidence: the full-resolution replacement preserves the clocktower, dense city/harbour, roads, rooftop foreground, ships, cranes, cliffs, people/scale cues, full-horizon ocean and crop-safe central corridor. Numerous smaller irregular filaments and torn sheets visibly attach to roads, roofs, gutters, river and harbour before narrowing/breaking upward; no long twisted funnel, vortex rotation, funnel cone, splash crown or conventional waterspout is visible. A broad incomplete low-contrast pressure band crosses multiple districts inside the ocean and dissolves at both ends without eye, face, limb, tentacle, teeth, head, torso or complete silhouette. The band remains a review risk because its separation from wave texture is subtle at overview scale.
+- Rejected reason for prior final: independent review found waterspout-like long twisted funnels and an indistinct Mother shadow.
 
 ## Scene 02 — Evacuation Square
 
@@ -114,14 +151,49 @@ Avoid: centred fashion posing, perfect water columns, splash crowns, bead string
 
 ### Provenance and output
 
-- Generated source: `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-dcaf23a7-8dc4-4450-aef2-9621b987adfe.png`
-- Source SHA-256: `A03CB919CF303F1B58A381C5E58785E332EA43E30CA65FF1608C2138BE950B7F`
-- Source metadata: PNG, 941×1672, sRGB, 3 channels, 8-bit uchar, no alpha
+- Initial generated source: `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-dcaf23a7-8dc4-4450-aef2-9621b987adfe.png`
+- Initial source SHA-256: `A03CB919CF303F1B58A381C5E58785E332EA43E30CA65FF1608C2138BE950B7F`
+- Initial source metadata: PNG, 941×1672, sRGB, 3 channels, 8-bit uchar, no alpha
+- Pre-repair final output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-03-s01-street-hook.png`
+- Pre-repair final SHA-256: `4593D17518ED3BF42E53EFD20F9DF17A91D0B4FCEAAF0F566AB7D98C6273A65B`
+- Pre-repair final metadata: PNG, 1080×1920, sRGB, 3 channels, 8-bit uchar, no alpha
+- Pre-repair inspection evidence: anonymous blonde stand-in was still and off-axis on the left third, layered adult crowds fled through foreground, midground and distance, and the right-foreground civilian held a pendant while chain contact with the neck remained ambiguous. Multiple irregular puddle/gutter filaments visibly originated on the paving and tapered upward into the enormous overhead sea.
+- Rejected source: independent review round 1 rejected the pre-repair final because the right-foreground jewelry state did not unambiguously prove the necklace was already removed and held away from the neck; chain contact/hand-at-collar ambiguity remained. The targeted repair is recorded below.
+
+### Independent review round 1 — targeted jewelry-state repair
+
+Independent review rejected the pre-repair Scene 03 final for ambiguous necklace removal. The following strict single-variable edit used only the current Scene 03 candidate as the sole positive edit target; no other image was supplied.
+
+#### Exact repair prompt
+
+```text
+Use case: precise-object-edit
+Asset type: content-preserving vertical live-action science-fiction disaster street hook
+Input images: Image 1 is the sole edit target: the current Scene 03 candidate. Use no other image or reference.
+Primary request: change ONLY the right-foreground civilian's jewelry state. Her bare neck and collarbones must have absolutely no chain, necklace, pendant, bead or jewelry touching, crossing or encircling them. She must visibly hold the complete removed necklace/chain as one loose closed loop with its pendant in one extended hand, clearly suspended at least 20–30 cm away from her neck and chest. The loop and pendant must be fully visible, separated from clothing and skin; her other hand must also be away from her neck. The still must unambiguously read already removed and held away, not unfastening, touching collar, ear-covering or chain still attached.
+Scene/backdrop: preserve the exact existing wet British coastal street beneath the enormous overhead ocean, historic buildings, cars, practical street lights, layered fleeing crowd, puddle/gutter suction and all ground-to-sky water behavior.
+Subject: preserve the anonymous off-axis blonde adult stand-in on the left exactly; preserve the right-foreground civilian's identity, face, hair, clothing, body placement and expression except for the jewelry state and hand placement required above.
+Style/medium: grounded live-action prestige science-fiction disaster photography with invisible VFX, natural wet skin/fabric, realistic hands and jewelry, no glossy CGI, no poster styling.
+Composition/framing: preserve exact vertical 9:16 composition, camera perspective, crop, buildings, cars, fleeing crowd, overhead sea, street depth and lighting. Do not crop, stretch, reframe, mirror, add or remove people.
+Lighting/mood: preserve existing storm-dark exposure, practical street warmth, wet reflections and transmitted underwater light.
+Materials/textures: preserve rain-darkened coats, wet paving, realistic metal necklace and pendant, natural skin, hair and fingers.
+Constraints: change only the right foreground civilian's necklace attachment/removal state and the minimum hand pose needed to display the complete loose loop away from the neck; no chain segment may remain on the neck or collarbone. Preserve every other pixel-level subject, action, composition, building, car, person, water filament and lighting invariant as far as possible. No text, logos or watermark.
+Avoid: chain touching neck, chain encircling neck, partial necklace, unfastening gesture, hands at collar, hands covering ears or face, bead-string artifact, fused fingers, extra fingers, extra jewelry, duplicate pendant, hidden loop, floating jewelry, altered blonde stand-in, face drift, anatomy drift, changed crowd, changed buildings/cars, ordinary rain, glossy CGI, oil painting, matte painting, game concept art, crop, stretch, mirror, watermark.
+```
+
+#### Repaired provenance and output
+
+- Pre-repair final output rejected by independent review: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-03-s01-street-hook.png`
+- Pre-repair final SHA-256: `4593D17518ED3BF42E53EFD20F9DF17A91D0B4FCEAAF0F566AB7D98C6273A65B`
+- Pre-repair final metadata: PNG, 1080×1920, sRGB, 3 channels, 8-bit uchar, no alpha
+- Repair source: `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-3c89ba06-c3c7-4fc2-ae70-6073731921c4.png`
+- Repair source SHA-256: `44252A57EDA443B6B8E229C1E681F10CD806460591F038EFCF010E03048B2A96`
+- Repair source metadata: PNG, 941×1672, sRGB, 3 channels, 8-bit uchar, no alpha
 - Final output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-03-s01-street-hook.png`
-- Final SHA-256: `4593D17518ED3BF42E53EFD20F9DF17A91D0B4FCEAAF0F566AB7D98C6273A65B`
+- Final SHA-256: `B72AAFB5E8360E8CCD850E953DFD927778C8862354B446029FA59DC585E563DD`
 - Final metadata: PNG, 1080×1920, sRGB, 3 channels, 8-bit uchar, no alpha
-- Inspection evidence: anonymous blonde stand-in is still and off-axis on the left third, with face withheld and no casting claim; layered adult crowds flee through foreground, midground and distance; a separate right-foreground civilian clearly holds a removed pendant necklace away from the neck; multiple irregular puddle/gutter filaments visibly originate on the paving and taper upward into the enormous overhead sea, with grounded lower tails and suction sources readable in the still. No centred fashion pose, perfect water column, splash crown, bead string, ordinary rain field, readable signage, duplicated face pattern, or motion-dependent direction was observed.
-- Rejected source: none. Repair prompt: none.
+- Inspection evidence: the right-foreground civilian's neck and collarbones are bare with no chain contact; the complete closed necklace loop and pendant hang from one extended hand visibly away from the neck/chest, while the other hand is away from the neck. The anonymous off-axis blonde stand-in, fleeing crowd, buildings, cars, lighting, overhead ocean and ground-origin upward suction remain. No bead-string artifact, fused fingers, extra jewelry, duplicate pendant, face drift or anatomy drift was observed.
+- Rejected reason for prior final: independent review found the necklace removal state ambiguous because chain contact and a hand-at-collar gesture could still be read as unfastening.
 
 ## Scene 04 — Rooftops Under the Mother
 
@@ -182,26 +254,60 @@ Avoid: oil painting, matte painting, game concept art, swimming-pool ceiling, fl
 - Inspection evidence: true ultra-wide asymmetric coastline; wet cliff foreground with people; road vehicles; working harbour with numerous vessels and cranes; dense skyline with civic towers; broad rising harbour/river sheets and filaments; overhead ocean depth and sediment/light fields. The ground-to-sky relationship and at least five world-scale cues read in one still. The repaired final was re-inspected at full resolution and contains no cliff-top banner, letter-like marks, text, logo, or watermark.
 - Rejected source: the initial Scene 05 candidate was not rejected for world composition; it received one targeted repair solely because a small far-left cliff-top banner contained letter-like generated marks. Repair prompt: `Use case: precise-object-edit; Asset type: repaired ultra-wide live-action science-fiction disaster coastal panorama; Primary request: edit this newly generated Scene 05 image by removing only the small banner/sign and all letter-like marks at the far-left cliff-top edge; seamlessly continue the wet cliff, mist, distant atmosphere and tiny people so there is no sign, text, logo, watermark or artificial patch; Input images: Image 1: edit target, the newly generated Scene 05 candidate; no other references; Constraints: change only the far-left cliff-top banner/sign and letter-like marks; preserve the exact existing composition, perspective, framing, wet cliffs, harbour, river, city skyline, cranes, vessels, vehicles, people, overhead ocean, rising sheets and filaments, lighting, colour, scale and realistic live-action photographic texture; no new objects; no text or logos anywhere; Avoid: generated signage, readable writing, logos, watermarks, painting, matte painting, glossy CGI, altered coastline, changed skyline, changed water, changed people, extra detail, crop, stretch.`
 
+### Independent review round 1 — targeted water-physics repair
+
+The independent review rejected the prior Scene 05 final for content, not framing: its vertical strands read predominantly as downward-hanging sediment and its harbour turbulence did not unmistakably show broad reverse flow originating at the harbour/river surface and connecting upward into the overhead sea. The prior final was retained as the sole positive edit target for one content-preserving repair; no other image was supplied.
+
+#### Exact repair prompt
+
+```text
+Use case: precise-object-edit
+Asset type: content-preserving epic ultra-wide live-action science-fiction disaster coastal panorama
+Input images: Image 1 is the sole edit target: the current Scene 05 candidate. Use no other image or reference.
+Primary request: change only the harbour and river water physics so reverse flow is unmistakable in this still frame. Create multiple broad, irregular, upward-curving water sheets rising directly from distinct visible harbour/river surface points around boats, quays and the working waterfront. Each sheet must have a clearly visible lower origin attached to the water surface, widen and fold as it lifts, break into irregular tapered filaments, and visibly narrow/rise into and connect with the underside of the enormous overhead ocean. Show at least three separate ground-to-sky suction paths with both bottom and top connections readable; use broad wet surfaces and broken edge strands, never narrow tornado funnels.
+Scene/backdrop: preserve the existing wet British coastal city panorama exactly: dark layered cliff at left, working harbour and river, dense illuminated city skyline, civic towers, cranes, vessels, vehicles and tiny people, under the same kilometer-scale inverted ocean with depth, suspended sediment and transmitted underwater light.
+Style/medium: grounded live-action prestige science-fiction disaster photography with invisible VFX, natural wet materials, physically coherent scale and light, ARRI Alexa 35 / fine 35 mm film character, restrained cyan only in motivated caustics.
+Composition/framing: preserve the exact existing asymmetrical 14–18 mm rectilinear ultra-wide framing, coastline geometry, skyline positions, harbour layout, boats, cranes, road, vehicles and people. Do not crop, stretch, reframe, mirror or symmetrize.
+Lighting/mood: preserve storm-dark exposure, practical harbour/city warmth, soft highlight roll-off and the existing believable atmospheric perspective. Remove the dominance of downward-hanging sediment curtains; the visible water motion must read upward from harbour/river to sky-sea without animation.
+Materials/textures: real wet cliff rock and grass, slate/brick/limestone/steel, rough harbour water, translucent heavy sheets with foamless torn edges, droplets and suspended sediment integrated with the overhead sea.
+Constraints: change only water behavior and the minimum local occlusion needed to make the upward attachments legible; preserve all existing cliffs, harbour/river, buildings, towers, cranes, boats, vehicles, people, ocean boundary, camera perspective, realism, scale and lighting. No text, logos or watermark.
+Avoid: downward rain or sediment dominance, horizontal-only turbulence, ordinary vessel wakes as the main effect, ordinary waterspout funnels, narrow tornadoes, perfect columns, symmetric splash crowns, magical beams, glowing energy, particle soup, glossy CGI, oil painting, matte painting, game concept art, fantasy panorama, altered skyline, removed boats, duplicated buildings, new objects, crop, stretch, mirror, watermark.
+```
+
+#### Repaired provenance and output
+
+- Pre-repair final output rejected by independent review: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-05-cliffs-harbour-ocean.png`
+- Pre-repair final SHA-256: `6C1688E735492652C4CDCF22825ADA6FEF628175507D7E9E9B9FC1A43B7B1DCC`
+- Pre-repair final metadata: PNG, 2560×1080, sRGB, 3 channels, 8-bit uchar, no alpha
+- Repair source: `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-5bfb9241-b553-474c-bc47-78a302e53a73.png`
+- Repair source SHA-256: `4AA9D962BBB689B8230E6199EE6B1842466BAED90CD4FFEBF9DFEC7A6FCDA36B`
+- Repair source metadata: PNG, 1928×815, sRGB, 3 channels, 8-bit uchar, no alpha
+- Final output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-05-cliffs-harbour-ocean.png`
+- Final SHA-256: `473CD2AE4D52DCB72B1FA7DF9946012C3B00A618F4E3AAA4ADDECD82BEB86251`
+- Final metadata: PNG, 2560×1080, sRGB, 3 channels, 8-bit uchar, no alpha
+- Inspection evidence: the repaired full-resolution still preserves the wet cliff, working harbour/river, dense city skyline, civic towers, cranes, vessels, road, vehicles, people, asymmetrical ultra-wide perspective and overhead ocean. Four broad irregular upward-curving water sheets have visible harbour/river origins around quays and boats, broken tapered filaments, and readable top connections into the sea underside; downward sediment curtains no longer dominate. The broad arcs are intentionally prominent for still-frame reverse-flow proof and remain a review risk for possible large water-wall/fountain interpretation, but no narrow tornado funnel, perfect column, magic beam, text, logo or watermark is visible.
+- Rejected reason for prior final: independent review found downward-hanging sediment dominance and horizontal/ordinary harbour turbulence without unmistakable harbour-to-ocean reverse-flow paths.
+
 ## Deterministic overview
 
 - Output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/world-overview.png`
-- SHA-256: `B507A4F2257903BDF93F6D6C76E62AFECE515E3BA4941D1CC25B494CA36A76B3`
+- SHA-256: `B77F2D557A2819EF9A37DA22EF373DEE82B8640F6CB43B694657E515CCDBE6E3`
 - Metadata: PNG, 2560×1440, sRGB, 3 channels, 8-bit uchar, no alpha
 - Construction: Sharp-created black RGB canvas; deterministic five-cell layout in `01`, `02`, `03` top row and `04`, `05` bottom row. White labels are confined to 64-pixel black top gutters; source masters are only composited into contained previews and remain unchanged.
 - Inspection evidence: all labels are legible and outside image pixels; all five scenes are identifiable at overview scale, with the portrait street frame remaining visibly vertical.
 
 ## Rejection and repair ledger
 
-Two targeted repairs are recorded. Scene 02 received one identity-preserving edit to replace ordinary storm sky/rain-like strings with a dark kilometre-wide inverted ocean and irregular grounded suction while preserving crowd/architecture/jewellery gestures. Scene 05 received one identity-preserving edit to remove a letter-like cliff-top banner while preserving world-scale content. Both repair targets were newly generated candidates, not old or rejected assets. Existing rejected environment, first-frame, style-test, and protagonist images were not opened or supplied to generation.
+Five targeted repairs are recorded. Scene 01 received one independent-review edit to replace waterspout-like funnels with grounded reverse-rain filaments and clarify the diffuse Mother pressure band. Scene 02 received one identity-preserving edit to replace ordinary storm sky/rain-like strings with a dark kilometre-wide inverted ocean and irregular grounded suction while preserving crowd/architecture/jewellery gestures. Scene 03 received one strict single-variable edit to make the removed necklace loop and bare neck unambiguous. Scene 05 first received one identity-preserving edit to remove a letter-like cliff-top banner, then one independent-review repair to make harbour-to-ocean reverse flow unmistakable while preserving world-scale content. All repair targets were the current scene candidate or immediately preceding final, not old project assets; no old rejected environment, first-frame, style-test, or protagonist image was used as a positive input. Existing rejected project images were not opened or supplied to generation.
 
 ## Output inventory
 
 | Output | Contract dimensions | Channels | SHA-256 |
 | --- | ---: | ---: | --- |
-| `scene-01-city-beneath-sea.png` | 2560×1080 | 3 | `E3B44314DD700B297E36021791D84B0D25B88012128998F0D3FE14A85AF25468` |
-| `scene-01-portrait-crop-test.png` | 1080×1920 | 3 | `AB348FF496CF8DDA51A3154E12E94A7742BDBBBCB171401CBD240B2326D59322` |
+| `scene-01-city-beneath-sea.png` | 2560×1080 | 3 | `ED50178C514FD0A970D2586DAA40A1C3662F6EAF3EAD1539447D396E138B003F` |
+| `scene-01-portrait-crop-test.png` | 1080×1920 | 3 | `D3F17599C0D188A57CF2420DAC93976E3943123F3109ACEA4D653D2908843204` |
 | `scene-02-evacuation-square.png` | 1920×1080 | 3 | `18EB077D2A339E37D21E3828695A75BFACF92DC64FE938B834A05A202E0F280D` |
-| `scene-03-s01-street-hook.png` | 1080×1920 | 3 | `4593D17518ED3BF42E53EFD20F9DF17A91D0B4FCEAAF0F566AB7D98C6273A65B` |
+| `scene-03-s01-street-hook.png` | 1080×1920 | 3 | `B72AAFB5E8360E8CCD850E953DFD927778C8862354B446029FA59DC585E563DD` |
 | `scene-04-rooftops-under-mother.png` | 1920×1080 | 3 | `9E06CBFBFA3C067436BD2E62C601A22CD1612504139DEEEE9739330BCE023490` |
-| `scene-05-cliffs-harbour-ocean.png` | 2560×1080 | 3 | `6C1688E735492652C4CDCF22825ADA6FEF628175507D7E9E9B9FC1A43B7B1DCC` |
-| `world-overview.png` | 2560×1440 | 3 | `B507A4F2257903BDF93F6D6C76E62AFECE515E3BA4941D1CC25B494CA36A76B3` |
+| `scene-05-cliffs-harbour-ocean.png` | 2560×1080 | 3 | `473CD2AE4D52DCB72B1FA7DF9946012C3B00A618F4E3AAA4ADDECD82BEB86251` |
+| `world-overview.png` | 2560×1440 | 3 | `B77F2D557A2819EF9A37DA22EF373DEE82B8640F6CB43B694657E515CCDBE6E3` |
