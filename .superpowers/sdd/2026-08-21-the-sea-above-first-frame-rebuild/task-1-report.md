@@ -169,3 +169,70 @@ ROUND3_MARKER_FIXTURES=PASS (4 cases)
 ```
 
 The expected-red package validator was rerun after the parser fix and returned exit `1` with only the absent v1 masters, continuity anchor, overview, and four v1 reports; no parse, Sharp, JSON, or repository-root crash text was emitted.
+
+## Fix round 4/5 report
+
+Task 2 integration reopened Task 1 because the populated `generation.md` contains empty first, middle, and trailing lines. `-split "`r?`n"` preserves those empty elements, and `Mask-NegativeHistoryExclusions` passed each one to `Get-NegativeHistoryMarkerMatch`'s mandatory `[string]$Line` parameter. PowerShell therefore stopped with `Cannot bind argument to parameter 'Line' because it is an empty string` before the forbidden-prefix scan could run.
+
+The validator now permits an empty marker line with `[AllowEmptyString()]`. Empty and whitespace-only lines retain their existing masking/state behavior; the negative-history block still ends only at the existing positive-reference/heading transitions, and all non-excluded text remains visible to forbidden positive-input scanning. The SHA field matcher also accepts the existing Task 2 sentence form (`SHA-256: \`<64 hex>\`.`) while still rejecting a non-64-hex value; `generation.md` itself was not edited.
+
+### Focused covering evidence
+
+An in-memory harness loaded the validator helpers and exercised both scanner behavior and state transitions with these ten fixtures:
+
+- positive section: empty first line, empty middle line, empty last line, consecutive blank lines, and whitespace-only lines;
+- negative-history section: the same five line layouts, with forbidden historical paths masked and a following `Positive references:` path still detected.
+
+The exact result was:
+
+```text
+PASS: EMPTY_LINE_FIXTURES (10 cases)
+```
+
+A separate focused report-field fixture accepted the existing 64-hex SHA sentence with trailing punctuation and rejected a 63-hex value:
+
+```text
+PASS: SHA_FIELD_SENTENCE_FIXTURE
+```
+
+The actual package validator was rerun without changing Task 2 files:
+
+```powershell
+pwsh -NoProfile -File video-pipeline/asset-library/scripts/validate-sea-above-first-frames.ps1
+```
+
+It exited `1` and listed only the still-incomplete package state: missing review reports, missing `S04`–`S09`, missing continuity/overview assets, and missing `S04`–`S09` sections in `generation.md`. S01–S03 produced no errors, and there was no empty-line, JSON, Sharp, or repository-root crash:
+
+```text
+ERROR: v1/reports/character-product-review.md — missing report file
+ERROR: v1/reports/world-narrative-review.md — missing report file
+ERROR: v1/reports/final-visual-review.md — missing report file
+ERROR: v1/S04.png — missing file
+ERROR: v1/S05.png — missing file
+ERROR: v1/S06.png — missing file
+ERROR: v1/S07.png — missing file
+ERROR: v1/S08.png — missing file
+ERROR: v1/S09.png — missing file
+ERROR: v1/continuity/memory-pair-v1.png — missing file
+ERROR: v1/3x3-overview.png — missing file
+ERROR: v1/reports/generation.md#S04 — missing shot section in generation.md
+ERROR: v1/reports/generation.md#S05 — missing shot section in generation.md
+ERROR: v1/reports/generation.md#S06 — missing shot section in generation.md
+ERROR: v1/reports/generation.md#S07 — missing shot section in generation.md
+ERROR: v1/reports/generation.md#S08 — missing shot section in generation.md
+ERROR: v1/reports/generation.md#S09 — missing shot section in generation.md
+EXIT=1
+```
+
+### Scope protection
+
+The uncommitted Task 2 files were byte-preserved across the fix. SHA-256 before and after remained identical:
+
+| File | SHA-256 |
+| --- | --- |
+| `v1/S01.png` | `4966E7EE0933627F59C8B90DB2D5BF19251D62045BB4B40DF3C573F308F7D179` |
+| `v1/S02.png` | `102DC6825098EF085B8452C37E64FF7BF019FDBBB8F006683E7F7D6D423E7568` |
+| `v1/S03.png` | `E5A8D849CE4318F54B3301D79A2A27F10BA0A0151577DDFFA8AE33D54B373D73` |
+| `v1/reports/generation.md` | `7CC4E651C69258DBA84925F189796E2AE3F9F09DE9D636F5E7B86988CC15CDD8` |
+
+Unrelated legacy dirty files, the staged legacy report, and `scripts/__pycache__/` were not edited or staged. `git diff --check` passed for the validator and this report.

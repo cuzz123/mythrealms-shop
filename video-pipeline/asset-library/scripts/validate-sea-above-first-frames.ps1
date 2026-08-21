@@ -447,7 +447,7 @@ function Test-ReportShaField {
         [string]$Section
     )
 
-    $pattern = '(?im)^\s*(?:[-*]\s*)?[^\r\n]*SHA[-\s]?256\s*[:：]\s*[`"'']?([0-9A-Fa-f]{64})[`"'']?\s*$'
+    $pattern = '(?im)^\s*(?:[-*]\s*)?[^\r\n]*SHA[-\s]?256\s*[:：]\s*[`"'']?([0-9A-Fa-f]{64})[`"'']?(?:[.,;:!?。！？])?\s*$'
     return [regex]::IsMatch($Section, $pattern)
 }
 
@@ -488,6 +488,7 @@ function Test-ReportReferenceRoleField {
 function Get-NegativeHistoryMarkerMatch {
     param(
         [Parameter(Mandatory = $true)]
+        [AllowEmptyString()]
         [string]$Line
     )
 
