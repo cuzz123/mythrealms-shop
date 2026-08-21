@@ -1,7 +1,9 @@
 # FILE 001 — S01–S09 First-Frame Rebuild Design
 
-Date: 2026-08-21  
-Status: User-approved specification  
+Date: 2026-08-21
+
+Status: User-approved specification
+
 Project: Maverenne — `FILE 001: THE PEARL THAT ANSWERED`
 
 ## 1. Objective and Boundary
@@ -156,4 +158,3 @@ The v1 package passes only when:
 - the user explicitly approves the nine full-resolution frames and overview.
 
 After presenting the completed v1 package, production stops. The final director card requires a separate approved phase. Any paid Seedance generation requires a separate action-time confirmation immediately before credits are consumed.
-
