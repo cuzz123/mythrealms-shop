@@ -1,0 +1,209 @@
+# Sea Above first-frame v1 generation — Task 2
+
+Date: 2026-08-21 (Asia/Shanghai)
+Base commit: `954771dc3fc20646b82e82253c39021c61577bee`
+Generator: built-in `image_gen` only; one generation call per distinct frame; no CLI/API fallback.
+Master contract: 2160×3840 PNG, RGB (3 channels), sRGB, no stretching.
+
+The generated source files remain in the Codex generated-images directory. Each accepted project master was produced with `sharp` using aspect-preserving `resize({ width: 2160, height: 3840, fit: 'cover', position: 'centre' })`, `toColourspace('srgb')`, `removeAlpha()`, and PNG output. The source aspect ratio was already near 9:16, so the cover operation removes only the minimal edge difference and does not stretch geometry.
+
+## S01
+
+Reference roles: Candidate B is the identity and fixed-wardrobe reference; approved Scene 03 is the present-day wet British-city, fleeing-crowd, and reverse-water world reference.
+
+Positive references:
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/characters/candidate-b-dangerous-curiosity.png` — identity, pale-gold wet blonde hair, vivid blue eyes, cream camisole, cream structured high-waisted short skirt, and white practical flats. SHA-256: `2CA5B608255BD2BE4DB3701CFFDA4EF4C5BA407F9CB85C7325ED37D84DF966F9`.
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-03-s01-street-hook.png` — approved wet-stone British-city street, fleeing crowd, and reverse-water geography. SHA-256: `B72AAFB5E8360E8CCD850E953DFD927778C8862354B446029FA59DC585E563DD`.
+
+Negative-history exclusions:
+- `first-frames/S01.png` and every other legacy first-frame image.
+- `05-characters/CHAR_MR_TIDE_ARCHIVIST_001/` and all old character assets.
+- `03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/` and all old environment assets.
+- `08-fx/FX_MR_REVERSE_RAIN_001/` and all old FX assets.
+- `v1/continuity/memory-pair-v1.png` and the old memory pair.
+
+Generated source path: `C:/Users/11458/.codex/generated_images/01a02500-ccb6-7f91-b31e-c2898be18672/exec-35016712-e3ef-43b4-a2df-71ad51dbd95f.png`
+Generated source metadata: PNG, 941×1672, 3 channels, sRGB, no alpha. Generated source SHA-256: `886114B18C3CA634E350DF4B048562DA051F865DAA4D5DFFD67C5CDC14AA2CC7`.
+Accepted output path: `visual-reconstruction/first-frames/v1/S01.png`
+Accepted output metadata: PNG, 2160×3840, 3 channels/RGB, sRGB, no alpha. SHA-256: `4966E7EE0933627F59C8B90DB2D5BF19251D62045BB4B40DF3C573F308F7D179`.
+
+Original visual inspection: rejected by independent review. The full source and normalized master were inspected with `view_image`; a 270×480 thumbnail was also inspected. Candidate B, the cream outfit, wet stone, fleeing crowd, and street-origin reverse water were strong, but the approved overhead ocean was not readable: the sky read as storm clouds. Foreground crowd gestures mostly read as covering ears rather than removing jewellery and holding it away from the body. No generated text, logo, or watermark was present.
+
+Original rejection reason: overhead ocean boundary not readable; at least one foreground adult did not clearly hold removed jewellery away from their body; crowd gestures were ambiguous.
+Targeted repairs: Repair 1 adds one concrete world/prop-gesture change — make the overhead sea occupy the upper sky with a visible water boundary, and make a foreground civilian visibly hold a removed pendant away from their body — while preserving Candidate B, the fixed cream outfit, street geography, and reverse-water origins. The rejected source and master were preserved as evidence above and were not used as positive inputs for the repair.
+
+Exact prompt:
+```text
+Use case: photorealistic-natural
+Asset type: vertical live-action first frame for a 9:16 story video, shot S01 present-day hook
+Input images: Image 1: identity and fixed wardrobe reference for the same fictional adult Candidate B; Image 2: approved present-day British-city wet-street and reverse-water world reference. Use both as positive references, never as literal image copies.
+Scene/backdrop: a real wet stone street in a present-day British city at natural storm-light dusk, old stone tenements and shopfronts receding behind a broad street, reflective puddles and gutters, a fleeing crowd moving through the depth of frame. Several civilians in wet coats are visibly removing earrings or necklaces as the jewellery is pulled upward toward the sea.
+Subject: the same fictional adult Candidate B identity, pale-gold wet blonde hair in clumps, vivid blue eyes, natural skin texture, cream camisole, cream structured high-waisted short skirt, white practical flats. She stands off-axis and still as an observant witness, slightly turned toward the impossible water, braced and alert, never a fashion pose; keep her face and body natural and consistent with Candidate B.
+Composition/framing: observational live-action camera, vertical 9:16, 28–35 mm lens, medium-wide full-body framing, heroine placed off-centre with asymmetrical negative space and crowd depth. Make reverse gravity unmistakable even at a 270x480 thumbnail: multiple irregular translucent water filaments visibly originate at separate ground points — puddles, gutter mouths, and wet coat hems — and travel upward in broken streams toward the distant sea/horizon. Each filament has a clear lower ground origin and rising direction, with droplets climbing upward and no rain streaks falling from above.
+Lighting/mood: real natural storm light, cool slate and sea-green sky with restrained warm practical lamps, wet stone reflections, documentary observational tension.
+Materials/textures: physically plausible wet wool and leather coats, real stone and asphalt microtexture, skin pores, wet hair clumps, liquid surface tension and splash detail.
+Text (verbatim): none; no generated text, logos, captions, or watermarks.
+Constraints: preserve Candidate B identity and the exact fixed cream outfit and white flats; show no jewellery on the heroine; keep the crowd fleeing and removing jewellery; make every water filament irregular, sparse, visibly rooted in the street, and travelling upward toward the sea. Photorealistic live-action frame, not a fashion editorial.
+Avoid: ordinary falling rain, vertical rain curtains, decorative light beams, symmetrical centred tunnel, clean studio backdrop, polished beauty-ad retouching, fantasy illustration, CGI look, extra jewellery on heroine, generated text, logos, watermarks, legacy first-frame images, old character/environment/FX assets, or the memory-pair asset.
+```
+
+### Repair 1 — accepted replacement
+
+Repair variable: make the overhead ocean occupy the upper sky with a clearly readable water boundary and make one foreground civilian visibly hold removed jewellery away from their body. Candidate B identity, cream outfit, street geography, natural storm light, and irregular upward ground origins remain unchanged.
+
+Positive references and roles:
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/characters/candidate-b-dangerous-curiosity.png` — Candidate B identity and fixed cream wardrobe. SHA-256: `2CA5B608255BD2BE4DB3701CFFDA4EF4C5BA407F9CB85C7325ED37D84DF966F9`.
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-03-s01-street-hook.png` — approved wet British-city and overhead-sea street geography. SHA-256: `B72AAFB5E8360E8CCD850E953DFD927778C8862354B446029FA59DC585E563DD`.
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png` — approved city scale and overhead-ocean boundary. SHA-256: `ED50178C514FD0A970D2586DAA40A1C3662F6EAF3EAD1539447D396E138B003F`.
+
+Rejected source evidence retained: `C:/Users/11458/.codex/generated_images/01a02500-ccb6-7f91-b31e-c2898be18672/exec-35016712-e3ef-43b4-a2df-71ad51dbd95f.png` (941×1672 PNG/RGB/sRGB, SHA-256 `886114B18C3CA634E350DF4B048562DA051F865DAA4D5DFFD67C5CDC14AA2CC7`) and prior normalized `visual-reconstruction/first-frames/v1/S01.png` (2160×3840 PNG/RGB/sRGB, SHA-256 `4966E7EE0933627F59C8B90DB2D5BF19251D62045BB4B40DF3C573F308F7D179`). Neither rejected artifact was supplied as a positive reference.
+
+Generated source path: `C:/Users/11458/.codex/generated_images/01a02500-ccb6-7f91-b31e-c2898be18672/exec-1b06cd66-41f6-4193-8c6b-02ad045cd951.png`
+Generated source metadata: PNG, 941×1672, 3 channels, sRGB, no alpha. Generated source SHA-256: `0F1172CF537F5B99A7F99C1BAF9A10120BBFBB6E77F5C025981AE7B8686EBADC`.
+Accepted output path: `visual-reconstruction/first-frames/v1/S01.png`
+Accepted output metadata: PNG, 2160×3840, 3 channels/RGB, sRGB, no alpha. SHA-256: `648A878F37C37174BAE380F866759FFE7ECC9ADE0B95F89B21D0C572F0179B62`.
+
+Visual inspection: accepted. The full source, normalized master, and 270×480 thumbnail were inspected with `view_image`. The upper sky is a continuous dark teal overhead ocean with layered wave ridges, foam, depth, and a distinct boundary separate from storm clouds. Candidate B remains natural, off-axis, and in the fixed cream camisole, structured high-waisted short skirt, and white flats. A foreground adult at right visibly extends a hand away from their torso holding a removed dangling pendant by its hook; the gesture remains readable at thumbnail size and is not an ear-covering gesture. Fleeing civilians, irregular ground-origin upward filaments, wet stone, and natural storm light hold. No generated text, logo, or watermark is present.
+
+Rejection reason: none — accepted on the first repair source.
+Targeted repair prompt: the exact prompt used for this accepted repair is below.
+
+Exact repair prompt:
+```text
+Use case: photorealistic-natural
+Asset type: vertical live-action first frame for a 9:16 story video, shot S01 present-day hook replacement
+Input images: Image 1: identity and fixed wardrobe reference for the same fictional adult Candidate B; Image 2: approved present-day British-city street with a clearly overhead ocean reference; Image 3: approved city-beneath-sea scale reference. Use only these as positive references; do not use any rejected first frame or prior generated frame.
+Scene/backdrop: a real wet stone street in a present-day British city under the approved Sea Above world rule. The upper half of the sky is unmistakably occupied by a physically coherent ocean above the city: a broad dark teal water surface spans from left edge to right edge, with a clearly readable lower boundary, layered wave ridges, translucent depth, suspended foam, and blue-green refracted storm light. The lower edge of this overhead sea is visibly separate from ordinary slate clouds; it must read as a massive ocean body overhead, not cloud, mist, or a decorative ceiling. Old stone tenements and shopfronts recede down the wet street beneath it.
+Subject: the same fictional adult Candidate B identity, pale-gold wet blonde hair in clumps, vivid blue eyes, cream camisole, cream structured high-waisted short skirt, and white practical flats. She is off-axis and still at mid-left as an alert witness, slightly turned toward the overhead sea, braced and natural, never a fashion pose. A separate foreground adult civilian in a wet dark coat is clearly visible at the right edge in three-quarter view: one arm is extended away from their torso into open space, and their hand is unmistakably holding a small removed gold earring or necklace pendant by its hook, visibly separated from their ear and chest; their other hand is not covering the ear. The gesture must read at a 270x480 thumbnail as jewellery being removed and held away, not as covering ears.
+Action and FX: the crowd is fleeing down the street. Multiple irregular translucent water filaments visibly originate at distinct ground points — a foreground puddle, gutter mouths, and wet coat hems — and climb upward toward the overhead sea with broken streams and droplets. Show clear lower origins and unmistakable upward direction; no ordinary rain falling from above.
+Composition/framing: observational live-action camera, vertical 9:16, 28–35 mm lens, medium-wide full-body Candidate B framing with asymmetrical negative space and deep crowd perspective. Keep the overhead ocean boundary within the frame and large enough to remain obvious at thumbnail size. Keep the foreground civilian’s extended hand and removed jewellery unobscured and readable. Place the reverse-water filaments off-axis and irregular rather than as a centred tunnel.
+Lighting/mood: real natural storm light filtered through the overhead sea, cool slate and sea-green tones, restrained warm street lamps, wet stone reflections, documentary observational tension.
+Materials/textures: real wet stone and asphalt microtexture, wet wool and leather coats, skin pores, wet hair clumps, physically plausible liquid surface tension, refracted light and foam under the ocean surface.
+Text (verbatim): none; no generated text, logos, captions, or watermarks.
+Constraints: preserve Candidate B identity and exact fixed cream outfit and white flats; no jewellery on Candidate B; keep the foreground adult visibly holding removed jewellery away from their body; make the overhead ocean’s lower boundary, wave texture, and blue-green depth unmistakable; keep all reverse-water filaments visibly rooted in the street and travelling upward. Photorealistic live-action frame, not a fashion editorial or concept painting.
+Avoid: storm-cloud-only sky, ordinary falling rain, gestures that only cover ears, hidden or fused jewellery, jewellery held against the body, vertical rain curtains, decorative light beams, swimming-pool interior, smooth flat blue ceiling, centred tunnel, symmetrical portal, polished beauty-ad retouching, fantasy illustration, CGI look, generated text, logos, watermarks, any rejected first-frame image, old character/environment/FX assets, or the memory-pair asset.
+```
+
+## S02
+
+Reference roles: Candidate B is the identity/ear/wardrobe reference; product `main.jpg`, `detail-05.jpg`, and `product-lock.png` are the immutable Baroque Orbit geometry references; accepted S01 is continuity for wet hair, skin texture, storm light, and street atmosphere.
+
+Positive references:
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/characters/candidate-b-dangerous-curiosity.png` — identity, natural face/ear anatomy, wet pale-gold hair, and fixed cream wardrobe. SHA-256: `2CA5B608255BD2BE4DB3701CFFDA4EF4C5BA407F9CB85C7325ED37D84DF966F9`.
+- `video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/main.jpg` — overall Baroque Orbit product construction. SHA-256: `DD12F12A092965A08AB9096DC3E4E79925779B641B29142B4194FF1C8BDF950F`.
+- `video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/detail-05.jpg` — close detail of the green-stone gold segment, connector, irregular pearl, and terminal bead. SHA-256: `73855F92B3426DE9428042561DF8AD5BD5A4EB98496BD31F2934ECEA6C67E2E5`.
+- `video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/views/product-lock.png` — immutable product-lock geometry and material reference. SHA-256: `0B8671FAFCD9481DD53FC10EFB8ACC4671B901ABA647BF7C273069A01793517B`.
+- `visual-reconstruction/first-frames/v1/S01.png` — accepted generated continuity reference for wet hair, skin texture, storm light, and present-day atmosphere; not a replacement identity source. SHA-256: `4966E7EE0933627F59C8B90DB2D5BF19251D62045BB4B40DF3C573F308F7D179`.
+
+Negative-history exclusions:
+- `first-frames/S02.png` and every other legacy first-frame image.
+- `05-characters/CHAR_MR_TIDE_ARCHIVIST_001/` and all old character assets.
+- `03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/` and all old environment assets.
+- `08-fx/FX_MR_REVERSE_RAIN_001/` and all old FX assets.
+- `v1/continuity/memory-pair-v1.png` and the old memory pair.
+
+Generated source path: `C:/Users/11458/.codex/generated_images/01a02500-ccb6-7f91-b31e-c2898be18672/exec-823503c2-9d43-43db-838e-0f0ae8daa111.png`
+Generated source metadata: PNG, 941×1672, 3 channels, sRGB, no alpha. Generated source SHA-256: `CA179DD73A2B1F177543CC2795396A761FDB191D6DF8EA554D50F3DF5A1C4EB9`.
+Accepted output path: `visual-reconstruction/first-frames/v1/S02.png`
+Accepted output metadata: PNG, 2160×3840, 3 channels/RGB, sRGB, no alpha. SHA-256: `102DC6825098EF085B8452C37E64FF7BF019FDBBB8F006683E7F7D6D423E7568`.
+
+Visual inspection: accepted. The full source and normalized master were inspected with `view_image`. The right-profile/three-quarter close-up keeps natural face and ear anatomy, wet-hair clumps, skin texture, and S01 storm light. Exactly one Baroque Orbit is in focus on the near ear: the green-stone gold segment, small gold connector ring, irregular nacreous baroque pearl, and tiny terminal bead are all present. There is no extra pearl, missing terminal, wrong connector, mirrored construction, deformed ear, duplicate earring, or beauty-ad retouching. No generated text, logo, or watermark is present.
+
+Rejection reason: none — accepted on the first generated source.
+Targeted repairs: none; no rejected source or repair call was required.
+
+Exact prompt:
+```text
+Use case: photorealistic-natural
+Asset type: vertical live-action first frame for a 9:16 story video, shot S02 product reveal
+Input images: Image 1: Candidate B identity, wet pale-gold hair, and fixed wardrobe reference; Image 2: Baroque Orbit overall product construction reference; Image 3: Baroque Orbit close-detail reference; Image 4: immutable product-lock geometry reference; Image 5: accepted S01 continuity reference for light, wet hair, skin texture, and present-day storm world. Use these as positive references only and preserve the exact product truth.
+Scene/backdrop: the same natural storm-light present-day British-city street atmosphere as accepted S01, soft wet-stone reflections and a distant cold sea glow, restrained background detail so the ear and earring remain the focal point.
+Subject: the same fictional adult Candidate B identity, right-profile to three-quarter close-up, pale-gold wet blonde hair in realistic clumps partially swept behind the near ear, vivid blue eye visible, natural face and ear anatomy, pores and wet skin texture, cream camisole edge barely visible. She is beginning to angle her head toward the sea with quiet alarm and curiosity, not posing.
+Product: exactly one Baroque Orbit earring worn on the near visible ear and kept in sharp focus. Match the product-lock exactly: a slim gold hoop/arc set with its row of vivid green stones, one small gold connector ring, one irregular luminous baroque pearl drop with its asymmetrical organic silhouette, and one tiny gold terminal bead at the pearl tip. Keep the hoop, green stones, connector ring, pearl, and terminal bead as one coherent single construction; do not redesign, simplify, mirror, duplicate, or add a second pearl.
+Composition/framing: vertical 9:16, right-profile/three-quarter close-up, 35–40 mm observational live-action lens, near ear in the forward focal plane, earring large enough for the green stones, connector, pearl shape, and terminal bead to be unambiguous; head angled slightly toward the sea, natural shoulder and neck perspective, no beauty-ad crop.
+Lighting/mood: continue S01’s cool natural storm light with soft wet reflections, realistic specular highlights on gold, green stones, and nacre, no glamour retouching.
+Materials/textures: real skin pores, fine wet-hair clumps and stray strands, believable cartilage and earlobe, brushed and polished gold, individually readable green stones, iridescent baroque pearl ridges, tiny terminal bead.
+Text (verbatim): none; no generated text, logos, captions, or watermarks.
+Constraints: preserve Candidate B identity, natural ear anatomy, wet-hair clumps, skin texture, and S01 storm light; change only the shot scale/profile and show the exact single Baroque Orbit construction in focus. Product geometry is immutable.
+Avoid: missing green stones, wrong connector, extra pearl, missing terminal bead, mirrored construction, deformed ear, duplicated earrings, invented chains or charms, beauty-ad retouching, waxy skin, generic hoop, smooth round pearl, CGI illustration, text, logos, watermarks, legacy first-frame images, old character/environment/FX assets, or the memory-pair asset.
+```
+
+## S03
+
+Reference roles: approved Scene 01, Scene 03, and Scene 05 are geography references for city scale, wet street, harbour/ocean horizon, and depth; accepted S01 is continuity for storm light and a small/partial Candidate B presence only, never identity replacement.
+
+Positive references:
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png` — approved city-to-ocean scale and above-sea geography. SHA-256: `ED50178C514FD0A970D2586DAA40A1C3662F6EAF3EAD1539447D396E138B003F`.
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-03-s01-street-hook.png` — approved wet-street and reverse-water geography. SHA-256: `B72AAFB5E8360E8CCD850E953DFD927778C8862354B446029FA59DC585E563DD`.
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-05-cliffs-harbour-ocean.png` — approved cliffs, harbour, and horizon geography. SHA-256: `12AB7C54014E2217F103657879DF23BB12411ABCC897AB90414F7B4224B446D3`.
+- `visual-reconstruction/first-frames/v1/S01.png` — accepted generated continuity for storm light, wet stone, and a small/partial Candidate B presence only; not identity replacement. SHA-256: `4966E7EE0933627F59C8B90DB2D5BF19251D62045BB4B40DF3C573F308F7D179`.
+
+Negative-history exclusions:
+- `first-frames/S03.png` and every other legacy first-frame image.
+- `05-characters/CHAR_MR_TIDE_ARCHIVIST_001/` and all old character assets.
+- `03-scene-kits/ENV_MR_SEA_ABOVE_OLD_CITY_001/` and all old environment assets.
+- `08-fx/FX_MR_REVERSE_RAIN_001/` and all old FX assets.
+- `v1/continuity/memory-pair-v1.png` and the old memory pair.
+
+Generated source path: `C:/Users/11458/.codex/generated_images/01a02500-ccb6-7f91-b31e-c2898be18672/exec-04e4669b-6957-4a2f-9120-7a081ded2cba.png`
+Generated source metadata: PNG, 941×1672, 3 channels, sRGB, no alpha. Generated source SHA-256: `5CBB67587BED3E4F247E8292901FE8E563858AECE62302D4912FDCBCA4A889E3`.
+Accepted output path: `visual-reconstruction/first-frames/v1/S03.png`
+Accepted output metadata: PNG, 2160×3840, 3 channels/RGB, sRGB, no alpha. SHA-256: `E5A8D849CE4318F54B3301D79A2A27F10BA0A0151577DDFFA8AE33D54B373D73`.
+
+Original visual inspection: rejected by independent review. The full source and normalized master were inspected with `view_image`; a 270×480 thumbnail was also inspected. The low 14–18 mm reveal had a clear street-origin stream but depicted a normal ocean on the ground-level horizon plus a waterspout; it did not show the required ocean spanning the entire sky above the city. No generated text, logo, or watermark was present.
+
+Original rejection reason: lower horizon read as an ordinary ocean; the overhead Sea Above world rule was absent; the water column read as a waterspout rather than a single filament entering the overhead sea.
+Targeted repairs: Repair 1 changes one concrete world-geography variable — replace the ground-level ocean/waterspout with a terrestrial land-and-city horizon beneath a continuous overhead ocean and one street-to-sky filament entering it — while preserving low 14–18 mm framing, depth cues, and a small Candidate B scale cue. The rejected source and master were preserved as evidence above and were not used as positive inputs for the repair.
+
+Exact prompt:
+```text
+Use case: photorealistic-natural
+Asset type: vertical live-action first frame for a 9:16 story video, shot S03 world reveal
+Input images: Image 1: approved city-beneath-sea geography reference; Image 2: approved wet British-city street and reverse-water geography reference; Image 3: approved cliffs-harbour-ocean horizon geography reference; Image 4: accepted S01 continuity reference for storm light, wet stone, and a small/partial Candidate B presence only. Use the world images for geography, never as identity replacement.
+Scene/backdrop: a real present-day British stone street seen from a low camera position, opening through old architecture to a horizon-spanning ocean beyond the city. The impossible sea is a physically coherent distant body of water and high atmospheric wave field, not an indoor ceiling. Keep open natural sky and real weather between the buildings; no swimming-pool roof.
+Subject: Candidate B is only a small or partial off-axis glimpse at the extreme side or lower edge, never the main subject and never a fashion pose. The geography and reverse-water event carry the frame.
+Composition/framing: vertical 9:16, low 14–18 mm live-action reveal, strong foreground wet cobbles and gutter, broad asymmetrical view that avoids a centred tunnel. One and only one irregular reverse-rain path is the readable action: a broken translucent stream with droplets, splash fragments, and visible origin in a specific foreground puddle/gutter, rising away from camera along the street perspective and continuing unbroken toward the distant horizon-spanning ocean. The path must have an unmistakable lower ground origin and upward/away direction. Preserve at least three real architectural depth cues: foreground stone joints and puddle, midground rowhouses/lamps/cars and converging street, background harbour skyline/cliffs and a distinct ocean horizon. The path is off-centre, not a decorative symmetrical column.
+Lighting/mood: real natural storm light, cool sea-green and slate tones with sparse warm windows and lamps, physically plausible wet reflections and atmospheric perspective.
+Materials/textures: real wet stone, gutter water, masonry, window glass, distant harbour haze, wave translucency, imperfect weather detail; live-action photography, not matte-painting concept art.
+Text (verbatim): none; no generated text, logos, captions, or watermarks.
+Constraints: keep exactly one connected reverse-rain path from foreground ground origin to horizon ocean; make vertical direction legible; keep architecture physically grounded and asymmetric; preserve world geography from the approved references and S01 storm-light continuity. The ocean must read as a real horizon-spanning sea phenomenon, not a roof or pool.
+Avoid: swimming-pool ceiling, decorative water roof, indoor pool, flat matte painting, centred tunnel, symmetrical portal, multiple competing water paths, ordinary falling rain, unexplained water columns with no ground origin, unclear vertical direction, generic fantasy city, excessive CGI sheen, generated text, logos, watermarks, legacy first-frame images, old character/environment/FX assets, or the memory-pair asset.
+```
+
+### Repair 1 — accepted replacement
+
+Repair variable: replace the ground-level ocean/waterspout with a terrestrial land-and-city horizon beneath a continuous overhead ocean and one street-to-sky filament entering it. Low 14–18 mm framing, architecture depth cues, wet street, and a small Candidate B scale cue remain unchanged.
+
+Positive references and roles:
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/characters/candidate-b-dangerous-curiosity.png` — Candidate B identity and fixed cream wardrobe scale cue. SHA-256: `2CA5B608255BD2BE4DB3701CFFDA4EF4C5BA407F9CB85C7325ED37D84DF966F9`.
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png` — approved overhead-ocean world rule and city scale. SHA-256: `ED50178C514FD0A970D2586DAA40A1C3662F6EAF3EAD1539447D396E138B003F`.
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-03-s01-street-hook.png` — approved wet street and overhead-sea relationship. SHA-256: `B72AAFB5E8360E8CCD850E953DFD927778C8862354B446029FA59DC585E563DD`.
+- `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-05-cliffs-harbour-ocean.png` — approved cliffs/harbour architecture and depth cues; used for land/city structure, not a ground-level ocean horizon. SHA-256: `12AB7C54014E2217F103657879DF23BB12411ABCC897AB90414F7B4224B446D3`.
+
+Rejected source evidence retained: `C:/Users/11458/.codex/generated_images/01a02500-ccb6-7f91-b31e-c2898be18672/exec-04e4669b-6957-4a2f-9120-7a081ded2cba.png` (941×1672 PNG/RGB/sRGB, SHA-256 `5CBB67587BED3E4F247E8292901FE8E563858AECE62302D4912FDCBCA4A889E3`) and prior normalized `visual-reconstruction/first-frames/v1/S03.png` (2160×3840 PNG/RGB/sRGB, SHA-256 `E5A8D849CE4318F54B3301D79A2A27F10BA0A0151577DDFFA8AE33D54B373D73`). Neither rejected artifact was supplied as a positive reference.
+
+Generated source path: `C:/Users/11458/.codex/generated_images/01a02500-ccb6-7f91-b31e-c2898be18672/exec-edd25562-c4fd-46c2-b473-0e9a54f0b4de.png`
+Generated source metadata: PNG, 941×1672, 3 channels, sRGB, no alpha. Generated source SHA-256: `F2A24050C4B920E0CB4BC3C188765DECB605E46FDAB15FF35FC0E929FBB2033B`.
+Accepted output path: `visual-reconstruction/first-frames/v1/S03.png`
+Accepted output metadata: PNG, 2160×3840, 3 channels/RGB, sRGB, no alpha. SHA-256: `A62C632DF07882106D191B03054B38B8F28F9B7EB65008D1CC866A70BC279F01`.
+
+Visual inspection: accepted. The full source, normalized master, and 270×480 thumbnail were inspected with `view_image`. A single irregular filament is traceable from a foreground puddle through the terrestrial city/land horizon and into a massive overhead ocean spanning the upper sky. The lower horizon is rooftops, towers, and distant land/cliffs with no ordinary ground-level ocean; the suspended sea has a clear boundary, layered wave texture, foam, and depth. Foreground wet cobbles/gutter, midground rowhouses/lamps/cars, and background city/land supply depth cues. Candidate B is only a small partial off-axis scale cue. The filament is not a waterspout, tornado, waterfall, rain curtain, or decorative column. No generated text, logo, or watermark is present.
+
+Rejection reason: none — accepted on the first repair source.
+Targeted repair prompt: the exact prompt used for this accepted repair is below.
+
+Exact repair prompt:
+```text
+Use case: photorealistic-natural
+Asset type: vertical live-action first frame for a 9:16 story video, shot S03 world reveal replacement
+Input images: Image 1: Candidate B identity and fixed cream wardrobe reference; Image 2: approved city-beneath-sea geography and overhead-ocean reference; Image 3: approved wet British-city street and above-city sea reference; Image 4: approved cliffs/harbour architecture and depth reference. Use only these positive references; do not use any rejected first frame or prior generated frame.
+Scene/backdrop: the approved Sea Above world rule is literal and unmistakable. A present-day British stone city street rises toward a lower geographic horizon made only of rooftops, towers, distant hills/cliffs, and land/city silhouettes. Above that ordinary land-and-city horizon, the upper half to two-thirds of the sky is occupied by a massive physically coherent ocean suspended overhead: a broad dark teal underside spans the entire frame from left edge to right edge, with an unmistakable lower water boundary, layered wave ridges, suspended foam, translucent depth, and refracted blue-green storm light. The overhead sea is not cloud, mist, a swimming-pool roof, or a normal ocean at ground level. Do not put any open ocean or water horizon on the ground-level horizon; keep the ordinary geographic horizon terrestrial and urban.
+Subject: Candidate B is only a small or partial off-axis glimpse at the extreme lower edge, wearing the fixed cream camisole and cream structured high-waisted short skirt if visible, with pale-gold wet hair. She is a scale cue, never the main subject and never a fashion pose. The world geometry and one reverse-water connection carry the frame.
+Action and FX: one and only one irregular translucent reverse-rain filament starts at a clearly visible foreground street puddle/gutter origin, rises away from camera through the city perspective, passes the land-and-city horizon, and visibly enters the underside of the overhead ocean. The single filament is broken, rope-thin-to-medium, with droplets climbing upward and sparse splash fragments; it is not a waterspout, tornado, waterfall, rain curtain, or decorative column. No second competing filament.
+Composition/framing: vertical 9:16, low 14–18 mm live-action reveal, broad asymmetrical composition avoiding a centred tunnel. Keep the foreground puddle/gutter origin in frame, the lower terrestrial horizon readable, the entire overhead ocean boundary visible, and the single filament traceable from bottom to sky-sea. Preserve at least three real depth cues: foreground wet cobbles and gutter, midground rowhouses/lamps/cars and converging street, background rooftops/towers/distant land or cliffs. Place the filament off-centre.
+Lighting/mood: real natural storm light filtered through the suspended ocean, cool sea-green and slate tones with restrained warm windows and lamps, physically plausible wet reflections and atmospheric perspective.
+Materials/textures: real wet stone, gutter water, masonry, window glass, distant land haze, detailed wave translucency, suspended foam, and imperfect weather texture; live-action photography, not matte-painting concept art.
+Text (verbatim): none; no generated text, logos, captions, or watermarks.
+Constraints: show an overhead ocean spanning the sky with a visible lower boundary; keep the lower horizon ordinary land/city, not ocean; show exactly one connected street-to-sky filament entering the overhead sea; preserve Candidate B only as a small partial continuity cue and preserve the approved world geography. Make vertical direction unambiguous at a 270x480 thumbnail.
+Avoid: normal sea at ground-level horizon, ocean-only skyline, waterspout, tornado, waterfall, multiple reverse-rain paths, ordinary falling rain, cloud-only sky, decorative water roof, swimming-pool ceiling, flat matte painting, centred tunnel, symmetrical portal, unclear ground origin, unclear vertical direction, generic fantasy city, excessive CGI sheen, generated text, logos, watermarks, any rejected first-frame image, old character/environment/FX assets, or the memory-pair asset.
+```
