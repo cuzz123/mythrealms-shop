@@ -385,7 +385,9 @@ Reference roles:
 4. C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/views/product-lock.png — immutable product-lock geometry and material truth. SHA-256: 0B8671FAFCD9481DD53FC10EFB8ACC4671B901ABA647BF7C273069A01793517B.
 5. C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-03-s01-street-hook.png — approved narrow British coastal-city street geography and wet-stone architecture. SHA-256: B72AAFB5E8360E8CCD850E953DFD927778C8862354B446029FA59DC585E563DD.
 
-All five positive references were inspected with view_image at full resolution and at 270×480 before generation. The following were explicitly excluded as negative history and were not supplied as positive inputs:
+All five positive references were inspected with view_image at full resolution and at 270×480 before generation.
+
+Negative-history exclusions (legacy only; not supplied as positive inputs):
 - video-pipeline/asset-library/05-characters/CHAR_MR_TIDE_MEMORY_PAIR_001/source/memory-pair-lock.png (rejected legacy memory-pair asset; excluded from every positive generation input).
 - every legacy first-frame image under first-frames/;
 - all 05-characters/CHAR_MR_TIDE_ assets;
