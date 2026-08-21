@@ -285,3 +285,90 @@ There is exactly one magical water filament/path: a single narrow stream starts 
 
 Camera and character: photorealistic live-action, 14–18 mm vertical wide-angle feel without fisheye distortion, grounded eye-level perspective with strong depth from foreground paving to distant city and overhead sea. Candidate B may appear as a small partial foreground figure at the edge, wearing the same fixed cream outfit and looking upward; keep her anatomy natural and identity consistent. Rain and wet reflections are physical, with realistic scale. No text, logos, watermarks, duplicated people, or graphic overlays.
 ```
+
+## S04
+
+Reference roles: ordered positive inputs are listed below in generation order.
+1. `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S03.png` — accepted S03 continuity anchor for the established British coastal-city geography, overhead-ocean height and blue-green storm light, wet architecture, and irregular reverse-rain physics. SHA-256: `A8EDA6644D619203052414020988A3AEAEA2B0078358CA749006FCCE6EE0682B`.
+2. `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png` — approved district-scale city density and suspended-ocean world rule. SHA-256: `ED50178C514FD0A970D2586DAA40A1C3662F6EAF3EAD1539447D396E138B003F`.
+3. `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-04-rooftops-under-mother.png` — approved rooftops-under-Mother restrained shadow/dimming language. SHA-256: `9E06CBFBFA3C067436BD2E62C601A22CD1612504139DEEEE9739330BCE023490`.
+4. `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-05-cliffs-harbour-ocean.png` — approved cliffs, harbour, vessels, cranes, and long atmospheric depth. SHA-256: `12AB7C54014E2217F103657879DF23BB12411ABCC897AB90414F7B4224B446D3`.
+
+The product pearl/detail reference was displayed during preflight but was explicitly ignored for S04 and was not used as a positive generation input. All four positive local references above were inspected with `view_image` before generation and their roles were recorded. No Candidate B, product, legacy first-frame, old character/environment/FX, or memory-pair asset was supplied because S04 is a city-scale world frame with no visible character or product.
+
+Generated source path: `C:/Users/11458/.codex/generated_images/01a02574-0dc2-7843-b5b0-7f3f9d6e2e5c/exec-b53a472e-16ba-4a99-b2ec-a32d00de0837.png`
+Generated source metadata: PNG, 941×1672, 3 channels/RGB, sRGB, no alpha. Generated source SHA-256: `537C36DE4DB6B154BB9C5AA1305942C39E0E71B247AAAC26EAAD22265C6FDE5E`.
+Accepted output path: `visual-reconstruction/first-frames/v1/S04.png` (absolute workspace path `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S04.png`)
+Accepted output metadata: PNG, 2160×3840, 3 channels/RGB, sRGB, no alpha. SHA-256: `0FB67CAE9707E51CF02A79F908EC0729036CCDB086EB665EDC00BC659617486D`.
+
+Visual inspection: accepted on the first generation source. The full generated source, normalized master, and 270×480 thumbnail were inspected with `view_image`. The frame is a populated 14–18 mm city-scale view with a broad, diffuse, incomplete Mother shadow/occlusion crossing the upper ocean and dimming multiple districts; no recognizable anatomy is present. At least five scale cues are unambiguous: foreground wet rooftop parapet and chimneys, dense rows of stone tenements and streets, a distinct church/clock tower, multiple harbour cranes and vessels, distant cliffs/hills, plus tiny cars, pedestrians, and warm windows. The same overhead ocean height, boundary, wave texture, blue-green light, and irregular reverse-rain streams continue from S03. No eye, face, limb, teeth, tentacle, full silhouette, centred symmetry, empty city, generated text, logo, or watermark is present.
+
+Rejection reason: none — accepted on the first generation source.
+Targeted repairs: none. No repair call was made; the accepted source was normalized once with repository `sharp` using aspect-preserving `resize({ width: 2160, height: 3840, fit: 'cover', position: 'centre' })`, `toColourspace('srgb')`, `removeAlpha()`, and PNG output.
+
+Exact prompt:
+```text
+Use case: photorealistic-natural
+Asset type: vertical live-action first frame for a 9:16 story video, shot S04, establishing the Mother scale
+Input images: Image 1: accepted S03 continuity reference for the established British coastal-city geography, overhead ocean height and blue-green storm light, wet architecture, and irregular reverse-rain physics. Image 2: approved Scene 01 city-beneath-sea world reference for district-scale city density and suspended ocean. Image 3: approved Scene 04 rooftops-under-Mother world reference for the restrained dimming shadow across the city. Image 4: approved Scene 05 cliffs-harbour-ocean world reference for harbour, cliffs, cranes, and atmospheric depth. Image 5 is an unrelated pearl/product texture reference; ignore it completely for this shot. Use only Images 1–4 as positive visual references and do not copy them literally.
+
+Scene/backdrop: a real British coastal city at storm dusk, seen from a high but grounded 14–18 mm rectilinear ultra-wide viewpoint across several connected districts. Wet slate rooftops, stone tenements, narrow streets, terraces, a church/clock tower, harbour cranes, distant cliffs and hills, small warm windows, sparse moving cars and tiny pedestrians form one continuous lived-in city. The same immense dark teal overhead ocean established in accepted S03 spans the upper sky at the same height and light, with visible wave ridges, translucent depth, suspended foam, and a clear lower water boundary. Sparse irregular reverse-rain streams continue from gutters, rooftop edges, harbour surfaces, and streets upward into the overhead sea, with visible broken droplets and real scale.
+
+Primary request: an incomplete Mother presence is revealed only as a broad, non-anatomical, irregular moving shadow/occlusion crossing multiple city districts and dimming the underside of the overhead ocean. The shadow is partly outside frame and partly lost in atmospheric haze; it has no body outline, no anatomy, no identifiable creature parts, and no focal face. It should read as a colossal presence inferred by the city-wide light fall, not as a monster illustration.
+
+Composition/framing: vertical 9:16, 14–18 mm rectilinear live-action city-scale establishing frame, asymmetrical off-axis composition with the city filling the lower two-thirds and the ocean filling the upper third. Show at least five unambiguous scale cues at once: foreground rooftop parapet and chimney, rows of dense tenements and streets, a distinct church/clock tower, multiple harbour cranes and ships, distant cliffs/hills, plus tiny people/cars and window lights. Let the irregular shadow cross from one side across several districts rather than form a centred symmetric shape. Keep occupied city and layered depth; never an empty city, centred tunnel, or poster composition.
+
+Lighting/mood: natural overcast storm light, blue-green light motivated by the overhead sea, a broad physically plausible dimming pass under the incomplete shadow, restrained warm windows and harbour lights, soft atmospheric occlusion and real haze. The shadow should be darker and cooler than the surrounding sea but diffuse at its edges, with no glow or beam.
+
+Materials/textures: wet stone and slate, imperfect masonry, glass reflections, rooftop puddles, sea foam, water droplets, atmospheric perspective, subtle photographic grain, physically coherent scale and shadows; grounded live-action production photography with invisible VFX.
+
+Text (verbatim): none; no generated text, logos, captions, signage, prices, or watermarks.
+
+Constraints: preserve the accepted S03 sea height, lower land/city geography, blue-green storm palette, live-action realism, and irregular reverse-rain rule. The Mother remains incomplete and non-anatomical: shadow/occlusion only, partly off-frame, no recognizable body. Require a clearly inhabited multi-district city and at least five scale cues.
+
+Avoid: any eye, face, iris, pupil, sclera, mouth, teeth, tongue, jaw, head, skull, limb, arm, hand, finger, claw, tentacle, appendage, wing, full silhouette, complete body, creature outline, centred symmetry, centred tunnel, empty city, flat matte painting, concept art, glossy CGI, monster-poster framing, magic particles, energy beams, neon cyan grade, ordinary falling rain, smooth blue ceiling, duplicated buildings or people, generated text, logos, prices, watermarks, old first frames, legacy character/environment/FX assets, memory-pair asset, or product/jewellery imagery.
+```
+
+## S05
+
+Reference roles: ordered positive inputs are listed below in generation order.
+1. `visual-reconstruction/first-frames/v1/S04.png` — accepted S04 continuity anchor for city orientation, overhead-ocean height/light, diffuse Mother shadow language, wet rooftops, harbour, cliffs, and atmospheric scale. SHA-256: `0FB67CAE9707E51CF02A79F908EC0729036CCDB086EB665EDC00BC659617486D`.
+2. `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-01-city-beneath-sea.png` — approved city districts beneath the suspended ocean. SHA-256: `ED50178C514FD0A970D2586DAA40A1C3662F6EAF3EAD1539447D396E138B003F`.
+3. `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-04-rooftops-under-mother.png` — approved restrained Mother dimming/shadow language. SHA-256: `9E06CBFBFA3C067436BD2E62C601A22CD1612504139DEEEE9739330BCE023490`.
+4. `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-05-cliffs-harbour-ocean.png` — approved cliffs, harbour, vessels, and atmospheric depth. SHA-256: `12AB7C54014E2217F103657879DF23BB12411ABCC897AB90414F7B4224B446D3`.
+5. `video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/source/detail-05.jpg` — approved product detail used only as abstract irregular pearl/nacre microstructure inspiration within the biological iris; no jewellery construction was requested or copied. SHA-256: `73855F92B3426DE9428042561DF8AD5BD5A4EB98496BD31F2934ECEA6C67E2E5`.
+
+All five positive local references were inspected with `view_image` before generation and their roles were recorded above. Rejected first frames, old character/environment/FX assets, the old memory pair, and any product main/lock geometry were excluded from generation.
+
+Generated source path: `C:/Users/11458/.codex/generated_images/01a02574-0dc2-7843-b5b0-7f3f9d6e2e5c/exec-c1c4f9da-4525-431f-a473-53dac52fc5f7.png`
+Generated source metadata: PNG, 941×1672, 3 channels/RGB, sRGB, no alpha. Generated source SHA-256: `0DD0696F1E1554CD8A9E89B584DA7978D49EA38B49E19EBA59FB5B0E84052153`.
+Accepted output path: `visual-reconstruction/first-frames/v1/S05.png` (absolute workspace path `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S05.png`)
+Accepted output metadata: PNG, 2160×3840, 3 channels/RGB, sRGB, no alpha. SHA-256: `2859CC09F89EC3995B5A1B1BD76742921D847B6C91625BC041CA45402D9B9E4B`.
+
+Visual inspection: accepted on the first generation source. The full generated source, normalized master, and 270×480 thumbnail were inspected with `view_image`. Exactly one immense biological eye is visible beneath the overhead ocean, with only a partial wet sclera/iris/pupil slice exposed and the rest hidden by dark water, mist, and spray. The eye is distant and off-axis rather than a close-up or poster emblem. Scale is readable from the inhabited city and harbour: church/clock tower, dense roof planes and streets, multiple cranes and vessels, distant cliffs/hills, tiny cars/people, and warm windows. The iris contains restrained organic layered microstructure with a subtle nacre-like variation; it is not a pearl or jewellery collage. S04’s sea height, wave texture, dimmed blue-green light, wet city, and atmospheric depth remain coherent. No body, face, mouth, tentacle, beam, gore, magic particles, generated text, logo, or watermark is present.
+
+Rejection reason: none — accepted on the first generation source.
+Targeted repairs: none. No repair call was made; the accepted source was normalized once with repository `sharp` using aspect-preserving `resize({ width: 2160, height: 3840, fit: 'cover', position: 'centre' })`, `toColourspace('srgb')`, `removeAlpha()`, and PNG output.
+
+Exact prompt:
+```text
+Use case: photorealistic-natural
+Asset type: vertical live-action first frame for a 9:16 story video, shot S05, the restrained Mother eye reveal
+Input images: Image 1: accepted S04 continuity anchor; preserve its exact city orientation, overhead-ocean height and wave light, diffuse Mother shadow language, wet rooftops, harbour, cliffs, and atmospheric scale. Image 2: approved Scene 01 world reference for city districts beneath the suspended ocean. Image 3: approved Scene 04 world reference for restrained dimming and shadow. Image 4: approved Scene 05 world reference for cliffs, harbour, vessels, and long atmospheric depth. Image 5: approved Baroque Orbit detail; use it only as an abstract reference for subtle irregular nacre microstructure, never as jewellery or a literal pearl object. Use these five images as positive references in the stated roles; do not copy them literally and do not use any rejected first frame or legacy asset.
+
+Scene/backdrop: the same real British coastal city and storm dusk as accepted S04. Dense wet rooftops, old stone tenements, a distinct church/clock tower, harbour cranes and vessels, distant cliffs/hills, roads, tiny cars and pedestrians supply visible scale below the same immense dark teal ocean suspended overhead. Keep the broad overhead ocean at the same height and lower boundary as S04, with physically coherent wave ridges, translucent depth, suspended foam, and blue-green refracted light. Keep a softened remnant of the S04 dimming shadow around the water, but do not reveal a body.
+
+Primary request: beneath and partly hidden by the overhead ocean, reveal exactly one immense biological eye at extreme distance, large enough that its scale is inferred from the city landmarks and atmospheric perspective. Show only a partial slice of the wet eye — part of the sclera, one muted iris and pupil, and a narrow organic rim disappearing behind dark ocean water, haze, and spray — as if the rest is occluded outside the frame. The eye is not a close-up: the 14–18 mm city-scale composition and tiny architecture must remain dominant context. Place the eye off-axis and partly cropped, not as a centred emblem. Its iris has restrained layered organic microstructure with a faint nacre-like depth and soft pearlescent variation inspired only by the irregular pearl surface in Image 5; it is biological tissue, not a pearl, crystal, gem, or jewellery construction. No glow: all light is physically motivated by the overhead sea and storm atmosphere.
+
+Composition/framing: vertical 9:16, 14–18 mm rectilinear ultra-wide live-action view with asymmetrical depth. Keep lower two-thirds occupied by inhabited wet city and harbour; keep the overhead ocean and partial eye in the upper region behind atmospheric occlusion. Use church/clock tower, several cranes and vessels, dense roof planes, distant cliff edge, roads, and tiny humans/cars as explicit scale cues. The eye should be partially hidden by the ocean underside and mist so its perimeter is never fully visible; let city landmarks overlap or sit in front of portions of its distant form. Avoid poster framing or a giant isolated close-up.
+
+Lighting/mood: grounded storm dusk, cool slate and sea-green tones, subtle warm windows and harbour lights, diffuse shadow, wet surfaces, real atmospheric haze, subdued biological wetness, quiet dread and scale. The eye reflects the same blue-green sea light; it does not emit light.
+
+Materials/textures: live-action photography, wet stone and slate, imperfect masonry, glass reflections, water depth and foam, anatomically plausible eye tissue with moist surface and fine organic iris fibers, restrained layered nacre-like microtexture only within the iris, soft highlight roll-off, subtle film grain, invisible VFX.
+
+Text (verbatim): none; no generated text, logos, captions, signage, prices, or watermarks.
+
+Constraints: exactly one eye; partial and occluded; biological and wet but restrained; no surrounding face or body; preserve S04 city, sea height, light, reverse-rain/atmosphere, and scale. Keep the eye’s scale readable through at least five city/harbour landmarks and atmospheric distance. Image 5 contributes only abstract nacre microstructure inspiration; do not include any earring, gold hoop, green stones, connector, pearl drop, terminal bead, wood prop, or jewellery arrangement.
+
+Avoid: second eye, multiple eyes, full face, head, skull, brow, nose, cheek, mouth, teeth, tongue, jaw, body, torso, limb, arm, hand, claw, tentacle, appendage, full creature silhouette, complete monster, beam, laser, magic particles, energy aura, gore, blood, exposed flesh, glossy monster CGI, crystal eye, gemstone eye, literal pearl eye, jewellery collage, baroque ornament, poster framing, centred emblem, symmetrical composition, eye filling the entire frame, neon cyan grade, cartoon, illustration, concept art, flat matte painting, generated text, logos, prices, watermarks, old first frames, old character/environment/FX assets, or memory-pair asset.
+```
