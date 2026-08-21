@@ -485,6 +485,36 @@ function Test-ReportReferenceRoleField {
     return $false
 }
 
+function Get-NegativeHistoryMarkerMatch {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Line
+    )
+
+    $pattern = '(?i)^\s*(?:(?:#{1,6}\s*)|(?:\d+[.)]\s+)|(?:[-*]\s*)|(?:\|\s*))?(?<marker>negative[-\s]?history|rejected[-\s]?history|historical\s+exclusions?|negative\s+inputs?)(?:\s+exclusions?)?(?:\s*\([^)]*\))?(?<tail>.*)$'
+    $match = [regex]::Match($Line, $pattern)
+    if (-not $match.Success) {
+        return $null
+    }
+
+    $tail = $match.Groups['tail'].Value.Trim()
+    if (-not [string]::IsNullOrWhiteSpace($tail) -and $tail[0] -notin @(':', '：', '|')) {
+        return $null
+    }
+
+    return $match
+}
+
+function Test-PositiveReferenceHeading {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Line
+    )
+
+    $pattern = '(?i)^\s*(?:(?:#{1,6}\s*)|(?:\d+[.)]\s+)|(?:[-*]\s*)|(?:\|\s*))?(?:positive\s+(?:references?|inputs?|sources?)(?:\s+and\s+roles?)?|reference(?:[_\-\s]+)roles?|reference(?:[_\-\s]+)role(?:\s+map)?)(?:\s*\([^)]*\))?(?:\s*[:：|].*)?\s*$'
+    return [regex]::IsMatch($Line, $pattern)
+}
+
 function Mask-NegativeHistoryExclusions {
     param(
         [Parameter(Mandatory = $true)]
@@ -496,10 +526,11 @@ function Mask-NegativeHistoryExclusions {
     $lines = $Text -split "`r?`n"
 
     foreach ($line in $lines) {
-        $isNegativeMarker = $line -match '(?i)^\s*(?:(?:#{1,6}\s*)|(?:\d+[.)]\s+)|(?:[-*]\s*)|(?:\|\s*))?(?:negative[-\s]?history|rejected[-\s]?history|historical\s+exclusions?|negative\s+inputs?)(?:\s+exclusions?)?(?:\s*[:：|].*)?\s*$'
-        if ($isNegativeMarker) {
+        $negativeMarker = Get-NegativeHistoryMarkerMatch -Line $line
+        if ($null -ne $negativeMarker) {
             [void]$maskedLines.Add(($line -replace '[^\r\n]', ' '))
-            $inNegativeBlock = $line -notmatch '(?i)[:：|]\s*\S'
+            $tail = $negativeMarker.Groups['tail'].Value.Trim()
+            $inNegativeBlock = [string]::IsNullOrWhiteSpace($tail) -or $tail -match '^[:：]\s*$' -or $tail -match '^\|\s*(?:\|\s*)?$'
             continue
         }
 
@@ -508,7 +539,8 @@ function Mask-NegativeHistoryExclusions {
                 [void]$maskedLines.Add(($line -replace '[^\r\n]', ' '))
                 continue
             }
-            if ($line -match '^\s*#{1,6}\s+' -or
+            if ((Test-PositiveReferenceHeading -Line $line) -or
+                $line -match '^\s*#{1,6}\s+' -or
                 $line -match '^\s*(?:[-*]\s*)?[A-Za-z][A-Za-z0-9 _-]*\s*[:：]' -or
                 $line -match '(?i)^\s*\d+[.)]\s+(?:positive\s+references?|reference\s+roles?|positive\s+inputs?)\s*[:：]') {
                 $inNegativeBlock = $false

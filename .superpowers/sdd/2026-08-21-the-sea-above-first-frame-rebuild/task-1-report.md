@@ -133,3 +133,39 @@ NEGATIVE_HISTORY_VARIANTS=PASS (headings with/without colon; numbered continuati
 ```
 
 The expected-red package check remains exit `1` with only missing v1 assets/reports after these scanner changes.
+
+## Fix round 3/5 report
+
+The negative-history marker parser now recognizes plain and colon-terminated headings, Markdown headings, table cells, and parenthetically qualified headings without treating the leading table pipe as marker text. The exclusion block still ends before a recognized positive-reference heading or table cell, so positive references remain visible to the complete-text scanner.
+
+Focused fixtures and exact results:
+
+```text
+| Negative-history exclusions |
+- first-frames/S01.png
+1. 05-characters/CHAR_MR_TIDE_ARCHIVIST_001/source/character-turnaround.png
+=> 0 forbidden-input hits
+
+Negative-history exclusions (legacy only):
+- first-frames/S01.png
+=> 0 forbidden-input hits
+
+| Negative-history exclusions |
+| Positive references | first-frames/S02.png |
+=> 1 forbidden-input hit (first-frames/S02.png), proving the positive-reference table cell is not masked
+
+## Negative-history exclusions (legacy only)
+1. first-frames/S01.png
+### Positive references
+| first-frames/S02.png |
+=> 1 forbidden-input hit (first-frames/S02.png), proving the qualified-heading transition remains visible
+```
+
+The focused harness reported:
+
+```text
+ROUND2_REGRESSION_FIXTURES=PASS (15 cases)
+ROUND3_MARKER_FIXTURES=PASS (4 cases)
+```
+
+The expected-red package validator was rerun after the parser fix and returned exit `1` with only the absent v1 masters, continuity anchor, overview, and four v1 reports; no parse, Sharp, JSON, or repository-root crash text was emitted.
