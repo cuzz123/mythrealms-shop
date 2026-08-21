@@ -6,7 +6,7 @@ Status: candidate-only; no scene is promoted to an accepted production path
 
 ## Method and input boundary
 
-All five masters were generated with the built-in image generation tool, one call per distinct scene, with no image inputs. The only positive inputs were the approved written world rules in the reconstruction design and Task 3 brief. No rejected environment, first-frame, style-test, protagonist, or other raster image was supplied as a positive reference. No CLI/API fallback, video generation, paid generation, or image repair was used.
+Each scene's initial candidate was generated with the built-in image generation tool, one call per distinct scene, with no image input. Only Scene 02 and Scene 05 then used their own newly generated candidate/source as the positive input for one documented single-target repair each. No old or rejected environment, first-frame, style-test, protagonist, or unrelated project raster image was supplied as a positive input. No CLI/API fallback, video generation, or paid generation was used.
 
 The generated source files remain under `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e`. Final project outputs are under `visual-reconstruction/world/`. Sharp was used with `fit: "cover"`, `position: "centre"`, Lanczos resizing, sRGB conversion, alpha removal, and PNG output; no geometric stretching was used. Masters were inspected at full resolution before and after normalization.
 

@@ -20,7 +20,7 @@ No character, accepted-character, accepted-environment, first-frame, director-ca
 
 ## Generation and inspection result
 
-Five distinct scenes were generated with the built-in image-generation tool, one call per scene and no image inputs. Every generated source was inspected with `view_image` before normalization. Every final full-resolution output and the overview were inspected after Sharp processing.
+Each scene's initial candidate was generated with the built-in image-generation tool, one call per scene and no image input. Only Scene 02 and Scene 05 then used their own newly generated candidate/source as the positive input for one documented single-target repair each. Every generated source was inspected with `view_image` before normalization. Every final full-resolution output and the overview were inspected after Sharp processing.
 
 - Scene 01: accepted. Ultra-wide city beneath a horizon-spanning ocean with dense districts, civic tower, harbour, rail/road corridors, cranes, vessels, distant cliffs, tiny people/traffic and many irregular filaments. The 9:16 crop proof retains ocean, city, harbour, rooftop and multiple scale cues.
 - Scene 02: repaired after parent visual-gate rejection of the pre-edit master. The pre-edit crowd/jewellery composition was preserved while one identity-preserving edit replaced ordinary storm sky/rain-like strings with a dark kilometre-wide inverted ocean and irregular grounded suction sheets. Several foreground and midground adults still visibly unfasten or hold pearl necklaces away from necks; no obvious duplicated faces, repeated extras, crowd smear, ordinary sky/rain, or hands-only-covering-ears gesture survived the repaired full-resolution inspection.
@@ -29,7 +29,7 @@ Five distinct scenes were generated with the built-in image-generation tool, one
 - Scene 05: accepted. Asymmetrical cliffs, working harbour/river, skyline, cranes, vessels, vehicles and people coexist with a deep sedimented overhead sea; broad rising sheets/filaments show the ground-to-sky relationship.
 - Overview: accepted. Deterministic 2560×1440 black RGB canvas with cells `01`–`05`; labels are confined to 64-pixel black top gutters and masters remain unchanged.
 
-Scene 02 had one identity-preserving repair after the parent visual gate found ordinary storm sky and rain-like filaments; the sole positive edit target was the newly generated Scene 02 candidate. Scene 05 received one previously recorded targeted repair for a small letter-like cliff-top banner. No old rejected environment, first-frame, style-test, or protagonist image was used as a positive input.
+Scene 02 had one identity-preserving repair after the parent visual gate found ordinary storm sky and rain-like filaments; the sole positive edit target was its own newly generated Scene 02 candidate. Scene 05 received one targeted repair for a small letter-like cliff-top banner; the sole positive edit target was its own newly generated Scene 05 candidate/source. No old or rejected environment, first-frame, style-test, protagonist, or unrelated project image was used as a positive input.
 
 ## Final hashes
 
