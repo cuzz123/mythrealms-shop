@@ -6,7 +6,7 @@ Status: candidate-only; no scene is promoted to an accepted production path
 
 ## Method and input boundary
 
-Each scene's initial candidate was generated with the built-in image generation tool, one call per distinct scene, with no image input. Scene 01, Scene 02, Scene 03 and Scene 05 then used their own current candidate/source as the positive input for documented single-target repairs; Scene 01 had one independent-review water-physics/Mother repair, Scene 02 had one sky-and-suction repair, Scene 03 had one jewelry-state repair, and Scene 05 had an earlier banner cleanup followed by one independent-review water-physics repair using its immediately preceding final. No old or rejected environment, first-frame, style-test, protagonist, or unrelated project raster image was supplied as a positive input. No CLI/API fallback, video generation, or paid generation was used.
+Each scene's initial candidate was generated with the built-in image generation tool, one call per distinct scene, with no image input. Scene 01, Scene 02, Scene 03 and Scene 05 then used their own current candidate/source as the positive input for documented single-target repairs; Scene 01 had one independent-review water-physics/Mother repair, Scene 02 had one sky-and-suction repair, Scene 03 had one jewelry-state repair, and Scene 05 had an earlier banner cleanup, one independent-review water-physics repair using its immediately preceding final, and a second independent-review water-physics repair using the pre-arc source recorded below after the arc repair was rejected. No old or rejected environment, first-frame, style-test, protagonist, or unrelated project raster image was supplied as a positive input. No CLI/API fallback, video generation, or paid generation was used.
 
 The generated source files remain under `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e`. Final project outputs are under `visual-reconstruction/world/`. Sharp was used with `fit: "cover"`, `position: "centre"`, Lanczos resizing, sRGB conversion, alpha removal, and PNG output; no geometric stretching was used. Masters were inspected at full resolution before and after normalization.
 
@@ -288,17 +288,83 @@ Avoid: downward rain or sediment dominance, horizontal-only turbulence, ordinary
 - Inspection evidence: the repaired full-resolution still preserves the wet cliff, working harbour/river, dense city skyline, civic towers, cranes, vessels, road, vehicles, people, asymmetrical ultra-wide perspective and overhead ocean. Four broad irregular upward-curving water sheets have visible harbour/river origins around quays and boats, broken tapered filaments, and readable top connections into the sea underside; downward sediment curtains no longer dominate. The broad arcs are intentionally prominent for still-frame reverse-flow proof and remain a review risk for possible large water-wall/fountain interpretation, but no narrow tornado funnel, perfect column, magic beam, text, logo or watermark is visible.
 - Rejected reason for prior final: independent review found downward-hanging sediment dominance and horizontal/ordinary harbour turbulence without unmistakable harbour-to-ocean reverse-flow paths.
 
+### Independent review round 2 — anti-fountain water-physics repair
+
+Independent review round 2 rejected the preceding Scene 05 water-physics repair because four smooth repeated near-parabolic arcs and bright splash bases read as conventional giant fountains. That arc-repair final and its source were not used as positive input for the replacement below. The replacement used only the pre-arc Scene 05 source recorded above, which preserves the approved cliffs, harbour, city, ships, cranes, vehicles, people, lighting and composition without inheriting the arc geometry.
+
+The first round-2 result was self-rejected after full-resolution inspection: although it removed the parabolic arcs and bright crowns, several near-vertical paths still read as repeated fountain-like columns. It was not used as positive input for the final round-2 result. A second single-target edit again used only the pre-arc source.
+
+#### Exact intermediate round-2 repair prompt (self-rejected)
+
+```text
+Use case: precise-object-edit
+Asset type: content-preserving epic ultra-wide live-action science-fiction disaster coastal panorama
+Input images: Image 1 is the sole edit target and positive reference: the pre-arc Scene 05 candidate with wet cliffs, harbour, dense city, ships, cranes, vehicles, people and overhead ocean. Do not use the current arc-repair image or any other image.
+Primary request: change ONLY the water physics. Replace the existing downward sediment and turbulence with 6–9 non-repeating, ragged, torn, near-vertical water sheets and ribbons rising directly from varied harbour/river surface locations around boats and quays into the overhead ocean. Keep every path within about 15 degrees of vertical; vary widths, heights, spacing and interruption points. Shred each edge into droplets and broken strands; let some ribbons merge into the ocean underside. The still must prove upward suction through surface deformation, not trajectory: at every lower origin the harbour surface itself is visibly stretched upward into a concave dimple, trough or temporarily exposed dark depression, with no bright splash crown or foamy fountain base.
+Scene/backdrop: preserve the exact pre-arc panorama: wet layered cliff at left, working harbour and river, dense illuminated coastal city skyline and civic tower, cranes, boats, road vehicles, tiny people, practical lights, asymmetrical coastline and the enormous sedimented overhead ocean.
+Style/medium: grounded live-action prestige science-fiction disaster photography with invisible VFX, physically coherent water/light/scale, natural wet materials, ARRI Alexa 35 / fine 35 mm film character, restrained cyan caustics, no synthetic render look.
+Composition/framing: preserve the exact asymmetrical 14–18 mm rectilinear ultra-wide composition, camera height, coastline, skyline, harbour layout, ships, cranes, roads, vehicles and people. Do not crop, stretch, reframe, mirror or symmetrize.
+Lighting/mood: preserve storm-dark exposure, harbour/city warmth, atmospheric perspective and transmitted light through the overhead sea. Lower origins should be dark wet deformations with realistic reflections, not bright highlights.
+Materials/textures: real wet cliff rock and grass, stone, steel, rough harbour water, translucent torn sheets, suspended sediment and small droplets integrated with the ocean underside.
+Constraints: change only water behavior and minimum local occlusion needed to show the dark surface depressions; preserve every landscape, city, harbour, ship, crane, vehicle, person, light, camera and ocean invariant. No text, logos or watermark.
+Avoid: parabolic arcs, fountain trajectories, symmetrical spacing, repeated arches, giant fountains, bright fountain bases, splash crowns, narrow tornado funnels, vortex rotation, perfect columns, ordinary waterspouts, ordinary vessel wakes as the main effect, magical beams, glowing energy, particle soup, glossy CGI, oil painting, matte painting, game concept art, altered skyline, removed boats, new objects, crop, stretch, mirror, watermark.
+```
+
+#### Exact final round-2 repair prompt
+
+```text
+Use case: precise-object-edit.
+Asset type: content-preserving epic ultra-wide live-action science-fiction disaster coastal panorama.
+Image 1 is the sole positive reference: the pre-arc Scene 05 panorama with wet cliff, working harbour, dense coastal city, civic tower, ships, cranes, vehicles, people and the immense overhead ocean. Do not use any arc-repair candidate or any other image as reference.
+
+Change only the water physics. Preserve every cliff, building, tower, crane, ship, vehicle, person, practical light, road, harbour layout, camera position, asymmetrical coastline, overhead ocean and live-action exposure from Image 1.
+
+Create exactly 6–8 NON-REPEATING, broad torn water SHEETS/CURTAINS rising from the harbour or river surface toward the overhead sea. They are thin, irregular translucent planes and shredded hanging ribbons, not discrete jets or columns: vary their widths dramatically, heights, gaps, translucency and interruption points; edges fray into scattered droplets; no two have matching shape or spacing. Keep each overall rise near vertical, no more than about 15 degrees from vertical, with no lateral trajectory. Some fragments should merge into the underside of the ocean; others should stop and break apart. Make the reverse flow read through the still image: at each lower origin the actual harbour surface is pulled upward into a long dark concave trough/dimple, like a wet sheet being peeled from the water, with a temporarily exposed dark depression and stretched ripples extending into it. The surface deformation must continue into the thin sheet. No white spray, no splash crown and no bright base.
+
+Water appearance: dark heavy seawater, suspended sediment, realistic refraction, torn edges and gravity-broken droplets, integrated with the ocean underside. The sheets should feel like irregular reverse rain curtains, not water fountains. Use only a few broad sheets and many discontinuous fragments around them, leaving open water between them.
+
+Style: grounded live-action prestige science-fiction disaster photography, invisible VFX, physically coherent scale/light/materials, wet rock/steel/stone and natural harbour reflections, restrained cyan caustics, ARRI Alexa 35 / fine 35 mm film character. No synthetic render look.
+
+Composition: preserve the exact 14–18 mm rectilinear ultra-wide panorama and all landscape/city/harbour/ship/crane/vehicle/person details. Do not crop, stretch, reframe, mirror or symmetrize. No text, logos or watermark.
+
+Strictly avoid: any fountain, jet, geyser, spout, splash base, splash crown, upright column, repeated vertical pillar, parabolic arc, arch, trajectory, waterspout, tornado funnel, vortex, water cannon, magical beam, glowing energy, particle soup, ordinary wake, glossy CGI, matte/concept/game art, altered skyline or missing objects.
+```
+
+#### Repaired provenance and output
+
+- Arc-repair final rejected by independent review: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-05-cliffs-harbour-ocean.png`
+- Arc-repair final SHA-256: `473CD2AE4D52DCB72B1FA7DF9946012C3B00A618F4E3AAA4ADDECD82BEB86251`
+- Arc-repair final metadata: PNG, 2560×1080, sRGB, 3 channels, 8-bit uchar, no alpha
+- Arc-repair source not used as positive input: `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-5bfb9241-b553-474c-bc47-78a302e53a73.png`
+- Arc-repair source SHA-256: `4AA9D962BBB689B8230E6199EE6B1842466BAED90CD4FFEBF9DFEC7A6FCDA36B`
+- Sole positive source for both round-2 attempts: `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-a15bac1f-209f-4a32-9d23-4a4b871c8577.png`
+- Sole positive source SHA-256: `C30DA046B2C8256561931585609D1E9229A0718EF170AECADBAAC1C5DF49D126`
+- Sole positive source metadata: PNG, 1928×816, sRGB, 3 channels, 8-bit uchar, no alpha; this is the source associated with pre-arc final SHA-256 `6C1688E735492652C4CDCF22825ADA6FEF628175507D7E9E9B9FC1A43B7B1DCC`
+- Intermediate round-2 source (self-rejected): `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-d99c9cea-6446-49f9-af72-def1975f8cae.png`
+- Intermediate round-2 source SHA-256: `6298FF40EA24C29CD71417031F65C8EBF7B708789F170C5C5263D890B5B00F96`
+- Intermediate round-2 source metadata: PNG, 1927×816, sRGB, 3 channels, 8-bit uchar, no alpha
+- Intermediate round-2 normalized SHA-256: `973B10E4EB3D82D97CD8E964E35946970EF48A551FE666BAEDB312594A613D06`
+- Intermediate rejection: full-resolution inspection found no parabolic arcs or bright crowns, but repeated near-vertical paths still read too much like fountain columns; it was discarded and never used as a positive input.
+- Final round-2 repair source: `C:\Users\11458\.codex\generated_images\01a02344-d149-7241-b7c0-8f71c94ec11e\exec-158c08fc-5ba0-4886-8916-2209b1d2e383.png`
+- Final round-2 repair source SHA-256: `E6F8A794190292E5046904DE508FF178DAF9F11F874F4EA3A1C04EBE5EE5822A`
+- Final round-2 repair source metadata: PNG, 1928×816, sRGB, 3 channels, 8-bit uchar, no alpha
+- Final output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/scene-05-cliffs-harbour-ocean.png`
+- Final SHA-256: `12AB7C54014E2217F103657879DF23BB12411ABCC897AB90414F7B4224B446D3`
+- Final metadata: PNG, 2560×1080, sRGB, 3 channels, 8-bit uchar, no alpha
+- Inspection evidence: full-resolution inspection preserves the wet cliff and tiny people at left, working harbour and river, dense illuminated city skyline and civic tower, cranes, ships, road vehicles, practical lights, asymmetrical 14–18 mm composition and the full overhead ocean. The final water behavior is carried by 6–8 visibly non-repeating ragged near-vertical sheets/curtains plus broken fragments, with varied widths, interruptions and shredded droplet edges. Multiple lower origins show the harbour surface stretched into dark concave troughs/depressions with ripples pulled into them; some sheets merge into the ocean underside. No parabolic arc, repeated arch, bright splash crown/base, funnel, perfect column, ordinary wake, magical beam, glossy CGI, text or watermark is visible. Residual review risk: at some scales a few narrow fragments and dark deformations may still be interpreted as vertical suction columns, but the rejected smooth arcs and bright fountain bases are absent.
+- Rejected reason for the arc version: independent review found four smooth repeated near-parabolic arcs and bright splash bases that read as conventional giant fountains; the arc image was explicitly excluded from the round-2 positive-input boundary.
+
 ## Deterministic overview
 
 - Output: `video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/world/world-overview.png`
-- SHA-256: `B77F2D557A2819EF9A37DA22EF373DEE82B8640F6CB43B694657E515CCDBE6E3`
+- SHA-256: `060E8F17CE7882665FE789EE7FA4C41BA4738D5FBEEFD73B092A3A30F15FB725`
 - Metadata: PNG, 2560×1440, sRGB, 3 channels, 8-bit uchar, no alpha
 - Construction: Sharp-created black RGB canvas; deterministic five-cell layout in `01`, `02`, `03` top row and `04`, `05` bottom row. White labels are confined to 64-pixel black top gutters; source masters are only composited into contained previews and remain unchanged.
 - Inspection evidence: all labels are legible and outside image pixels; all five scenes are identifiable at overview scale, with the portrait street frame remaining visibly vertical.
 
 ## Rejection and repair ledger
 
-Five targeted repairs are recorded. Scene 01 received one independent-review edit to replace waterspout-like funnels with grounded reverse-rain filaments and clarify the diffuse Mother pressure band. Scene 02 received one identity-preserving edit to replace ordinary storm sky/rain-like strings with a dark kilometre-wide inverted ocean and irregular grounded suction while preserving crowd/architecture/jewellery gestures. Scene 03 received one strict single-variable edit to make the removed necklace loop and bare neck unambiguous. Scene 05 first received one identity-preserving edit to remove a letter-like cliff-top banner, then one independent-review repair to make harbour-to-ocean reverse flow unmistakable while preserving world-scale content. All repair targets were the current scene candidate or immediately preceding final, not old project assets; no old rejected environment, first-frame, style-test, or protagonist image was used as a positive input. Existing rejected project images were not opened or supplied to generation.
+Six targeted repairs are recorded. Scene 01 received one independent-review edit to replace waterspout-like funnels with grounded reverse-rain filaments and clarify the diffuse Mother pressure band. Scene 02 received one identity-preserving edit to replace ordinary storm sky/rain-like strings with a dark kilometre-wide inverted ocean and irregular grounded suction while preserving crowd/architecture/jewellery gestures. Scene 03 received one strict single-variable edit to make the removed necklace loop and bare neck unambiguous. Scene 05 received one identity-preserving edit to remove a letter-like cliff-top banner, one independent-review repair that was rejected for repeated fountain-like arcs, and a second independent-review repair using the pre-arc source to replace that geometry with ragged near-vertical suction curtains. All repair targets were the current scene candidate or immediately preceding final except the two round-2 Scene 05 attempts, which deliberately reused only the pre-arc source; no old rejected environment, first-frame, style-test, or protagonist image was used as a positive input. Existing rejected project images were not opened or supplied to generation.
 
 ## Output inventory
 
@@ -309,5 +375,5 @@ Five targeted repairs are recorded. Scene 01 received one independent-review edi
 | `scene-02-evacuation-square.png` | 1920×1080 | 3 | `18EB077D2A339E37D21E3828695A75BFACF92DC64FE938B834A05A202E0F280D` |
 | `scene-03-s01-street-hook.png` | 1080×1920 | 3 | `B72AAFB5E8360E8CCD850E953DFD927778C8862354B446029FA59DC585E563DD` |
 | `scene-04-rooftops-under-mother.png` | 1920×1080 | 3 | `9E06CBFBFA3C067436BD2E62C601A22CD1612504139DEEEE9739330BCE023490` |
-| `scene-05-cliffs-harbour-ocean.png` | 2560×1080 | 3 | `473CD2AE4D52DCB72B1FA7DF9946012C3B00A618F4E3AAA4ADDECD82BEB86251` |
-| `world-overview.png` | 2560×1440 | 3 | `B77F2D557A2819EF9A37DA22EF373DEE82B8640F6CB43B694657E515CCDBE6E3` |
+| `scene-05-cliffs-harbour-ocean.png` | 2560×1080 | 3 | `12AB7C54014E2217F103657879DF23BB12411ABCC897AB90414F7B4224B446D3` |
+| `world-overview.png` | 2560×1440 | 3 | `060E8F17CE7882665FE789EE7FA4C41BA4738D5FBEEFD73B092A3A30F15FB725` |
