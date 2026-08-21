@@ -1,0 +1,8 @@
+{
+  "status": "user_selected",
+  "character": "B",
+  "world_approved": true,
+  "approved_scene_ids": ["01", "02", "03", "04", "05"],
+  "selected_at": "2026-08-21T21:16:38+08:00",
+  "next_gate": "rebuild_S01-S09_first_frames"
+}
