@@ -1,8 +1,8 @@
 # Independent Luna Max World Review — FILE 001
 
-Date: 2026-08-21  
-Review range: `80c8f70d..8d2892c2`  
-Track: Task 3 — five world-scale scene candidates  
+Date: 2026-08-21
+Review range: `80c8f70d..8d2892c2`
+Track: Task 3 — five world-scale scene candidates
 Review scope: final full-resolution world masters, portrait crop proof, deterministic overview, focused provenance and metadata checks
 
 ## Decision

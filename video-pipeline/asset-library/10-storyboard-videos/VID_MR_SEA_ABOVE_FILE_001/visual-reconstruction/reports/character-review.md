@@ -1,8 +1,8 @@
 # FILE 001 — Independent Character Review
 
-Date: 2026-08-21  
-Reviewer: Luna Max (independent Task 4 character review)  
-Scope: Task 2 casting candidates and deterministic casting overview  
+Date: 2026-08-21
+Reviewer: Luna Max (independent Task 4 character review)
+Scope: Task 2 casting candidates and deterministic casting overview
 Decision: APPROVED — no Critical or Important findings
 
 This review is candidate-only. The contract remains `candidate_only`; no character is promoted without explicit user selection.
