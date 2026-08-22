@@ -705,3 +705,85 @@ Overview inspection: full-resolution review confirms exact S01/S02/S03 / S04/S05
 | 3x3-overview.png | `visual-reconstruction/first-frames/v1/3x3-overview.png` | PNG, 1128×2052, RGB/3 channels, sRGB, no alpha | `C1873A5816AFB0E233E74969CD9EB376D8B44E66FA3430E683177E50CAB38213` |
 
 No contract, manifest, accepted S01–S07 master, continuity asset, legacy first frame, or Git index was changed by Task 5. Temporary 270×480 inspection thumbnails are outside the v1 package and are not deliverables.
+
+## Focused S08 Luna Max fix — clean five-reference round (round 4/5) — rejected
+
+This was a wholly fresh generation, not an edit of any S08 source. Existing S08 masters and every prior S08 source were treated as negative history only.
+
+Ordered positive reference roles (maximum five):
+1. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S02.png` — primary natural Candidate B face/skin, wet hair, cream wardrobe and worn-product anchor. SHA-256: `1735B4A689978024A0D218B8D2763069DC96E5BD8C76503AEABCDD3824C81CEF`.
+2. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/characters/candidate-b-dangerous-curiosity.png` — immutable adult Candidate B identity and fixed cream/white wardrobe. SHA-256: `2CA5B608255BD2BE4DB3701CFFDA4EF4C5BA407F9CB85C7325ED37D84DF966F9`.
+3. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/views/product-lock.png` — immutable Baroque Orbit product truth. SHA-256: `0B8671FAFCD9481DD53FC10EFB8ACC4671B901ABA647BF7C273069A01793517B`.
+4. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S04.png` — accepted overhead sea height, storm light and restrained Mother scale. SHA-256: `0FB67CAE9707E51CF02A79F908EC0729036CCDB086EB665EDC00BC659617486D`.
+5. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S01.png` — accepted street/crowd depth, reverse-rain atmosphere and cream wardrobe continuity. SHA-256: `648A878F37C37174BAE380F866759FFE7ECC9ADE0B95F89B21D0C572F0179B62`.
+
+The product `source/main.jpg` (`DD12F12A092965A08AB9096DC3E4E79925779B641B29142B4194FF1C8BDF950F`) and `source/detail-05.jpg` (`73855F92B3426DE9428042561DF8AD5BD5A4EB98496BD31F2934ECEA6C67E2E5`) were inspected separately at full resolution and 270×480 but were not supplied because built-in imagegen accepts at most five local references. No legacy first frame, prior S08/repair source, old character/environment/FX asset, memory pair, rejected candidate or style test was supplied.
+
+Generated source: `C:/Users/11458/.codex/generated_images/01a0261f-0861-7de2-8732-954c75d10281/exec-0009024e-2c19-4b19-a8b2-ee7cfd0d2795.png`.
+Source metadata: PNG, 941×1672, RGB/3 channels, sRGB, 8-bit uchar, no alpha. Source SHA-256: `BD71B46FD4E574BB11AB565FC6CF2AC747C74C87E5E25F5779C25E32BC1A34D7`.
+Thumbnail inspection source: `C:/Users/11458/.codex/generated_images/01a0261f-0861-7de2-8732-954c75d10281/source-270x480.png` (derived inspection copy only; not a positive input or deliverable).
+
+Exact prompt:
+```text
+Use case: photorealistic-natural
+Asset type: one clean vertical 9:16 live-action FILE 001 first-frame still, shot S08 “Mother reversal”; cinematic production frame, not a product poster.
+
+Input images, exactly five positive references in this order: Image 1 accepted S02 as the primary natural face/skin, wet hair, cream outfit and exact worn right-ear product; Image 2 approved Candidate B casting board for immutable adult identity/wardrobe; Image 3 product-lock for immutable Baroque Orbit product truth; Image 4 accepted S04 for overhead sea height, storm light, British coastal-city scale and restrained diffuse Mother; Image 5 accepted S01 for street/crowd depth, reverse-rain atmosphere and cream wardrobe continuity. Use them as separate identity/product/world/composition references, never as collage. Do not use any prior S08, repair, legacy first frame, old character/environment/FX, memory pair or style-test image.
+
+Primary request: close 3/4-to-side ear-visible portrait of unequivocally adult Candidate B in a rain-dark British coastal old-city street under the same dark teal overhead sea. Preserve pale-gold wet hair, blue eyes with only a thin subtle muted-gold inner ring, cream/white camisole and structured cream/white high-waisted short skirt, natural unretouched pores, fine lines and separate rain droplets. Keep the street, ordinary layered crowd, wet stone, warm lamps, storm light and only a diffuse partial Mother shadow; no creature anatomy.
+
+Blocking product detail: exactly one complete Baroque Orbit earring on the anatomical right ear, large and sharp enough to inspect. It must show a textured irregular gold hoop with an unmistakable curved/open arc silhouette and visible inner opening (never a straight vertical green strip or rectangular bar), multiple distinct green stones seated along that curved hoop, one connector ring, one irregular asymmetrical baroque pearl and one tiny terminal gold bead. Preserve all parts, physically attached, taut 30–45 degrees upward toward the overhead sea; no second earring, generic drop, chain substitution, redesign or loose bead.
+
+Narrative physics: exactly three additional small irregular pearl pieces remain attached to existing adult earrings/pendants in clearly separated near, middle and far crowd layers, each with a visibly taut short connector pulling in the same upward direction. No hands holding them and no loose beads. Keep them sparse but readable at 270×480.
+
+Constraints: one standalone prestige live-action still; no text, title, logo, price, subtitle, watermark, overlay, glow, beams, lasers, particles, sparkle soup, neon cyan, product-poster staging, full Mother, extra people or duplicated faces. Skin and cloth must have only natural pores, fabric weave and separate rain droplets: absolutely no caustic projection, honeycomb, cellular, scale, mesh, net, lace-like, repeated embossed, tiled or patterned relief. No identity/age/wardrobe drift, jacket, gray skirt, plastic/wax skin, CGI or concept art.
+```
+
+Inspection: full source and 270×480 thumbnail were inspected with `view_image`. Candidate B identity, adult anatomy, blue eyes, cream wardrobe, natural pore/rain treatment, British street and overhead sea were present. However, the worn earring still collapsed into a narrow vertical green-stone strip; there was no unmistakable readable curved/open hoop arc with a visible inner opening, so the exact product lock failed. The additional pearl responses were not cleanly separable into readable near/middle/far attached, same-direction taut layers at thumbnail size.
+
+Decision: **REJECTED by fail-closed Luna Max review.** This source remains negative history only. Do not normalize, copy, promote, overwrite `v1/S08.png`, rebuild `v1/3x3-overview.png`, or change any accepted v1 master. The prior round 1–4 source hashes and decisions remain recorded above; this round 4/5 source adds no accepted output.
+
+## Focused S08 Luna Max fix — clean-fusion round (round 5/5) — rejected
+
+This was a wholly fresh Luna Max generation, not an edit of the bad-skin S08 source or any other S08 source. Existing S08 masters, all prior S08 sources, and all prior rejection evidence were treated as negative history only.
+
+Ordered positive reference roles (maximum five):
+1. `C:/Users/11458/.codex/generated_images/01a0262f-3e18-77e1-affb-44b033840d1b/exec-b5342d28-466f-499c-a9f9-c78b4939531d.png` — clean round-5 primary: adult Candidate B identity, left-facing side profile, exact open curved green-stone hoop, product structure, natural irregular pores, sparse rain droplets, plain wet cream satin, street/overhead-sea composition. SHA-256: `F126933A2435E1D0C7DDA0CF2C6FD36E14385C926A12968B2B1D5AE434C894FD`.
+2. `C:/Users/11458/.codex/generated_images/01a02637-b3d5-7cc3-8f7e-b626c0737a9e/exec-2c0c5b43-b92b-4d36-b03b-0dbf9275e9db.png` — physics-only support: strictly the image-left near-horizontal/slightly upward orientation of the attached main/middle/far pearls. Skin, face, hair, clothing, texture, and composition were explicitly excluded. SHA-256: `6B5ACFEAFB828E08EA7F754A1CE5CD711F11140B8B2EF9FDF61BF6A5D6BECD7D`.
+3. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/01-products/PROD_MR_BAROQUE_ORBIT_EARRINGS_001/views/product-lock.png` — immutable Baroque Orbit product geometry/material truth. SHA-256: `0B8671FAFCD9481DD53FC10EFB8ACC4671B901ABA647BF7C273069A01793517B`.
+4. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/first-frames/v1/S02.png` — accepted Candidate B natural face/skin, adult anatomy, subtle eye response, wet-city live-action continuity. SHA-256: `1735B4A689978024A0D218B8D2763069DC96E5BD8C76503AEABCDD3824C81CEF`.
+5. `C:/Users/11458/.codex/worktrees/2822/mythrealms-shop/video-pipeline/asset-library/10-storyboard-videos/VID_MR_SEA_ABOVE_FILE_001/visual-reconstruction/characters/candidate-b-dangerous-curiosity.png` — immutable adult Candidate B identity and fixed cream/white wardrobe. SHA-256: `2CA5B608255BD2BE4DB3701CFFDA4EF4C5BA407F9CB85C7325ED37D84DF966F9`.
+
+Generated source: `C:/Users/11458/.codex/generated_images/01a0264a-e7ec-7f53-b852-0771ba95203c/exec-fb749a44-3192-45b3-a297-cf3cfb8ea3d7.png`.
+Source metadata: PNG, 941×1672, RGB/3 channels, sRGB, 8-bit uchar, no alpha. Source SHA-256: `DF9CDABA0DCB2CFAB9A9F358336FC9193A26630A375E1C8745AAE32934E00AD9`.
+Thumbnail inspection source: `C:/Users/11458/.codex/generated_images/01a0264a-e7ec-7f53-b852-0771ba95203c/source-270x480.png` (derived inspection copy only; PNG, 270×480, RGB/3 channels, sRGB, no alpha, SHA-256 `5E81D22A69783DE4B077C9FDE1AB10238505D1ACABF82F0CE6BB455D87A7837D`; not a positive input or deliverable).
+
+Exact prompt:
+```text
+Use case: photorealistic-natural
+Asset type: one fresh vertical 9:16 Hollywood live-action production still for FILE 001 shot S08 “Mother reversal”; generate a new clean fusion, not an edit of any previous S08 frame.
+
+Input images, exactly five positive references in this order and with strict role separation:
+Image 1: CLEAN ROUND-5 PRIMARY REFERENCE. Copy its adult Candidate B identity, left-facing side profile, pale-gold wet hair, natural irregular pores, sparse separate rain droplets, plain wet cream satin wardrobe, wet British street/overhead-ocean composition, and especially its exact worn product: an open curved/oval gold hoop with a visible inner opening, distinct green stones seated along the arc, a connector ring, one irregular asymmetrical baroque pearl, and one tiny terminal gold bead.
+Image 2: PHYSICS-ONLY SUPPORT. Use strictly and only its image-left, near-horizontal/slightly upward orientations of the attached main, middle, and far pearl pieces, all pointing the same image-left direction with taut connectors. Do not copy Image 2 skin texture, cellular/honeycomb/swirl relief, face, hair, clothing, color treatment, or composition.
+Image 3: immutable product-lock reference for the exact gold/green-stone hoop, connector, irregular pearl, and terminal bead construction.
+Image 4: accepted S02 reference for Candidate B identity, adult anatomy, natural blue eye with a subtle thin muted-gold inner ring, and wet-city live-action continuity.
+Image 5: approved Candidate B casting/wardrobe reference for immutable adult identity, pale-gold wet hair, cream/white camisole and structured high-waisted cream/white short skirt, and white practical flats if visible.
+Use these as separate role references, never as a collage or pixel edit. Do not use any prior S08, repair, rejected, legacy, old character/environment/FX, memory-pair, or style-test image.
+
+Scene/backdrop: real rain-dark British coastal old-city street under the same enormous dark teal overhead ocean, with wet limestone/asphalt, old stone facades, ordinary layered adult crowd, distant warm lamps, and restrained diffuse partial Mother dimming only in the far overhead sea. Hollywood prestige live action with invisible VFX; physically coherent overhead ocean, no full creature.
+
+Subject and framing: unequivocally adult Candidate B in a clean 3/4-to-side profile facing image-right, ear fully visible and sharp, hair wet in separated natural clumps. Keep face, neck, shoulder and exposed skin photorealistic with natural irregular pores and sparse separate droplets only. Plain wet cream satin camisole/structured cream wardrobe, real fabric folds and weave; no surface pattern. Medium close portrait with enough street and three depth layers behind her for the pearl response to read at 270x480. Blue eye remains blue with only a very subtle thin muted-gold inner ring; no glow.
+
+PRODUCT LOCK — BLOCKING: exactly one complete earring on the visible anatomical right ear. The hoop must be an unmistakable open curved/oval gold arc with a clear empty inner opening, not a straight vertical strip, bar, chain, rectangle, or closed solid disk. Multiple distinct green stones are visibly set along the curved arc. Below the hoop: one small connector ring, one irregular asymmetrical white baroque pearl, and one tiny terminal gold bead. All five structural parts remain physically connected and readable; product is not redesigned, mirrored, duplicated, or replaced by a generic drop. The earring is taut and angles image-left/up toward the overhead sea while remaining attached to the ear.
+
+PEARL PHYSICS — BLOCKING: exactly three additional small irregular pearl pieces, one near, one middle, one far in the adult crowd depth. Each remains attached to an existing adult earring/pendant by a clearly visible short taut connector; no hands, no loose jewellery. All three pearls point in the same image-left near-horizontal direction, with slight upward angle, clearly anti-gravity and visibly separated by near/middle/far depth at full frame and 270x480. The main visible earring pearl and the three crowd pearls share that same image-left near-horizontal/slightly upward direction. Sparse, matte nacre, physically lit, no sparkle.
+
+Materials/style: live-action ARRI/Alexa-style capture, natural irregular skin pores, fine lines, damp hair strands, plain wet cream satin/fabric, separate rain droplets, wet stone microtexture, soft highlight roll-off, restrained cold sea reflection, organic grain. No beauty retouching, wax/plastic skin, CGI, concept art, or oil paint.
+
+Constraints: one standalone clean still, no text/title/logo/price/subtitle/watermark/overlay; no extra earrings, extra pearls, loose beads, chains, product poster, full Mother, creature anatomy, glow, beams, lasers, particles, magic symbols, neon cyan. Absolutely no cellular, honeycomb, swirl, scale, mesh, net, lace-like, caustic, tiled, embossed, repeated or patterned relief anywhere on skin, face, hair, clothing, fabric, pearl, or background. Preserve adult identity, side-profile world, exact open-hoop five-part product, plain natural surfaces, three same-left attached pearl directions, and overhead ocean scale.
+```
+
+Inspection: the full source and the derived 270×480 thumbnail were inspected with `view_image`. The Candidate B side profile, wet British street, overhead ocean, and cream wardrobe composition were present. However, the source has repeated cellular/honeycomb/caustic embossed relief across the face, exposed skin, hair-adjacent surfaces, and cream satin, violating the natural-pore/plain-fabric blocking constraint. The visible product again collapses into a narrow vertical green-stone strip with no unmistakable curved/open hoop arc or readable inner opening; the complete five-part product lock is not verifiable. The near/middle/far pearl responses are not cleanly separable at thumbnail size as three attached, same-image-left, near-horizontal/slightly upward, taut pieces.
+
+Decision: **REJECTED by fail-closed Luna Max review.** This source remains negative history only. No source normalization, `v1/S08.png` replacement, `v1/3x3-overview.png` rebuild, validator promotion, or other v1 change was performed.
