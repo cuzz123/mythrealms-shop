@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { absoluteImageUrl } from "@/lib/images";
 import { BRAND } from "@/lib/brand-identity";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, SITE_NAME } from "@/lib/site";
 
 interface BlogMetadataPost {
   slug: string;
@@ -24,6 +24,8 @@ export type PearlStoryPost = BlogEditorialPost;
 const RETIRED_EDITORIAL_LANGUAGE =
   /\bcrystals?\b|\bgemstones?\b|\bobsidian\b|\bamethyst\b|rose quartz|tiger'?s eye|aventurine|chakra|energy healing|the serenity collection|balance\s*&\s*light|the intention stones|the archetypes|curated singles|emotional balance/i;
 
+const RETIRED_BRAND_LANGUAGE = /myth\s*realms/i;
+
 const PEARL_STORY_TOPIC =
   /\b(style|styling|care|gift|gifting|wear|wearing|choose|choosing|layer|layering|occasion|freshwater)\b/i;
 
@@ -37,7 +39,15 @@ export function isPearlEditorialPost(post: BlogEditorialPost): boolean {
   ].join(" ");
 
   return /\bpearls?\b/i.test(searchableText) &&
-    !RETIRED_EDITORIAL_LANGUAGE.test(searchableText);
+    !RETIRED_EDITORIAL_LANGUAGE.test(searchableText) &&
+    !RETIRED_BRAND_LANGUAGE.test(searchableText);
+}
+
+export function getPublicBlogAuthorName(authorName: string | null | undefined): string {
+  const normalizedAuthorName = authorName?.trim();
+  return normalizedAuthorName && !RETIRED_BRAND_LANGUAGE.test(normalizedAuthorName)
+    ? normalizedAuthorName
+    : SITE_NAME;
 }
 
 export function isPearlStoryPost(post: PearlStoryPost): boolean {

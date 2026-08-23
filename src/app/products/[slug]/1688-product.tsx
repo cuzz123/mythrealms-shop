@@ -15,6 +15,8 @@ import { trackAddGiftNote, trackViewItem } from "@/lib/tracking";
 import { ComplementaryProducts } from "@/components/storefront/ComplementaryProducts";
 import { FreeShippingProgress } from "@/components/storefront/FreeShippingProgress";
 import { StickyAddToCart } from "@/components/storefront/StickyAddToCart";
+import { absoluteImageUrl } from "@/lib/images";
+import { absoluteUrl } from "@/lib/site";
 
 function PurchaseFacts({ description, benefitTriplet }: { description: string; benefitTriplet: string }) {
   return (
@@ -176,25 +178,23 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
     toast.success(wishlisted ? "Removed from wishlist" : "Added to wishlist!");
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mythrealms-shop.vercel.app";
-
   return (
     <div className="product-purchase-page max-w-7xl mx-auto px-6 py-10">
       {/* JSON-LD Structured Data */}
       <ProductJsonLd
         name={displayName}
         description={displayDescription}
-        images={p.images.map((image) => image.startsWith("http") ? image : `${siteUrl}${image}`)}
+        images={p.images.map((image) => absoluteImageUrl(image))}
         price={p.price}
         currency="USD"
         category={p.categoryName}
-        url={`${siteUrl}/products/${p.slug}`}
+        url={absoluteUrl(`/products/${p.slug}`)}
       />
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", url: `${siteUrl}/` },
-          { name: p.categoryName, url: `${siteUrl}/collections/${p.category}` },
-          { name: displayName, url: `${siteUrl}/products/${p.slug}` },
+          { name: "Home", url: absoluteUrl("/") },
+          { name: p.categoryName, url: absoluteUrl(`/collections/${p.category}`) },
+          { name: displayName, url: absoluteUrl(`/products/${p.slug}`) },
         ]}
       />
 

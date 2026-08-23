@@ -3,6 +3,7 @@ import {
   getStorefrontProducts,
   type StorefrontProductType,
 } from "@/lib/storefront/catalog";
+import { BRAND } from "@/lib/brand-identity";
 
 const PRODUCT_TYPE_LABELS: Record<StorefrontProductType, string> = {
   rings: "Pearl Rings",
@@ -53,7 +54,7 @@ ${images}
       <g:availability>in_stock</g:availability>
       <g:price>${regularPrice.toFixed(2)} USD</g:price>${salePrice}
       <g:condition>new</g:condition>
-      <g:brand>MythRealms</g:brand>
+      <g:brand>${escapeXml(BRAND.name)}</g:brand>
       <g:identifier_exists>no</g:identifier_exists>
       <g:google_product_category>Apparel &amp; Accessories &gt; Jewelry</g:google_product_category>
       <g:product_type>The Pearl Edit &gt; ${typeLabel}</g:product_type>
@@ -65,7 +66,7 @@ ${images}
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
-    <title>MythRealms - The Pearl Edit</title>
+    <title>${escapeXml(BRAND.name)} - The Pearl Edit</title>
     <link>${escapeXml(normalizedBaseUrl)}</link>
     <description>Pearl earrings, necklaces, bracelets, and rings for everyday wear.</description>
 ${items}

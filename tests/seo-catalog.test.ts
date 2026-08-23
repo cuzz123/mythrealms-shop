@@ -11,13 +11,14 @@ import { buildBlogPostingData } from "../src/components/ui/JsonLd";
 import { BRAND } from "../src/lib/brand-identity";
 import {
   buildBlogMetadata,
+  getPublicBlogAuthorName,
   isPearlEditorialPost,
 } from "../src/lib/seo/blog";
 import {
   SEO_FOUNDATION_LAST_MODIFIED,
   buildSitemapEntries,
 } from "../src/lib/seo/sitemap";
-import { siteUrl } from "../src/lib/site";
+import { SITE_NAME, siteUrl } from "../src/lib/site";
 import { ACTIVE_PURCHASE_GUIDE_SLUGS } from "../src/lib/editorial/purchase-guides";
 import { PEARL_EDITS } from "../src/lib/storefront/pearl-edits";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
@@ -122,6 +123,18 @@ test("the authoritative feed is pearl-only and contains every storefront SKU", (
   for (const product of products) {
     assert.match(xml, new RegExp(`/products/${product.slug}`));
   }
+});
+
+test("the storefront feed uses the approved Maverenne identity", () => {
+  const products = getStorefrontProducts();
+  const xml = buildStorefrontFeedXml("https://example.com");
+
+  assert.match(xml, /<title>Maverenne - The Pearl Edit<\/title>/);
+  assert.equal(
+    (xml.match(/<g:brand>Maverenne<\/g:brand>/g) || []).length,
+    products.length,
+  );
+  assert.doesNotMatch(xml, /MythRealms/i);
 });
 
 test("the sitemap contains canonical content, products, and journal articles once", () => {
@@ -308,6 +321,63 @@ test("the journal publication gate accepts pearl guidance and rejects retired co
     }),
     false,
   );
+});
+
+test("the journal publication gate rejects the retired brand in every public content field", () => {
+  const validPost = {
+    slug: "how-to-style-pearl-earrings",
+    title: "How to Style Pearl Earrings",
+    excerpt: "A practical guide to pearl styling.",
+    content: "Wear pearl jewelry with a soft, everyday outfit.",
+    category: "Pearl Styling",
+  };
+
+  for (const [field, marker] of [
+    ["slug", "mythrealms-pearl-guide"],
+    ["title", "Myth Realms Pearl Guide"],
+    ["excerpt", "A MythRealms pearl guide."],
+    ["content", "A guide from MYTH REALMS."],
+    ["category", "MythRealms Editorial"],
+  ] as const) {
+    assert.equal(
+      isPearlEditorialPost({ ...validPost, [field]: marker }),
+      false,
+      `retired brand must be rejected in ${field}`,
+    );
+  }
+});
+
+test("the public blog author helper preserves safe names and sanitizes retired or missing names", () => {
+  assert.equal(getPublicBlogAuthorName("Ava Chen"), "Ava Chen");
+
+  for (const authorName of [
+    undefined,
+    null,
+    "",
+    "   ",
+    "MythRealms Editorial",
+    "MYTH REALMS Editorial",
+  ]) {
+    assert.equal(getPublicBlogAuthorName(authorName), SITE_NAME, authorName ?? "missing");
+  }
+});
+
+test("database-backed blog pages use the public author helper for display and schema input", () => {
+  const archiveSource = readFileSync(
+    path.join(process.cwd(), "src/app/blog/page.tsx"),
+    "utf8",
+  );
+  const articleSource = readFileSync(
+    path.join(process.cwd(), "src/app/blog/[slug]/page.tsx"),
+    "utf8",
+  );
+
+  assert.match(archiveSource, /getPublicBlogAuthorName/);
+  assert.match(archiveSource, /getPublicBlogAuthorName\(post\.author\?\.name\)/);
+  assert.match(articleSource, /getPublicBlogAuthorName/);
+  assert.match(articleSource, /const authorName = getPublicBlogAuthorName\(post\.author\?\.name\)/);
+  assert.match(articleSource, /authorName=\{authorName\}/);
+  assert.match(articleSource, /<span>\{authorName\}<\/span>/);
 });
 
 test("BlogPosting JSON-LD includes canonical publisher and ISO dates", () => {

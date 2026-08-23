@@ -161,6 +161,23 @@ test("the product page renders exactly one ProductJsonLd wrapper", () => {
   assert.equal((source.match(/<ProductJsonLd\b/g) || []).length, 1);
 });
 
+test("the product page builds structured-data URLs through the approved site helpers", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/products/[slug]/1688-product.tsx"),
+    "utf8",
+  );
+
+  assert.match(source, /import \{ absoluteImageUrl \} from "@\/lib\/images"/);
+  assert.match(source, /import \{ absoluteUrl \} from "@\/lib\/site"/);
+  assert.match(source, /images=\{p\.images\.map\(\(image\) => absoluteImageUrl\(image\)\)\}/);
+  assert.match(source, /url=\{absoluteUrl\(`\/products\/\$\{p\.slug\}`\)\}/);
+  assert.match(source, /url: absoluteUrl\("\/"\)/);
+  assert.match(source, /url: absoluteUrl\(`\/collections\/\$\{p\.category\}`\)/);
+  assert.match(source, /url: absoluteUrl\(`\/products\/\$\{p\.slug\}`\)/);
+  assert.doesNotMatch(source, /NEXT_PUBLIC_APP_URL/);
+  assert.doesNotMatch(source, /vercel\.app/i);
+});
+
 test("breadcrumb and FAQ schema mirror supplied visible content", () => {
   const breadcrumb = buildBreadcrumbListSchema([
     { name: "Home", url: "https://example.com/" },

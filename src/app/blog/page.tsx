@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import Image from "next/image";
 import { absoluteUrl, SITE_NAME } from "@/lib/site";
-import { isPearlEditorialPost } from "@/lib/seo/blog";
+import { getPublicBlogAuthorName, isPearlEditorialPost } from "@/lib/seo/blog";
 
 export const dynamic = "force-dynamic";
 
@@ -58,7 +58,7 @@ export default async function BlogPage() {
               <h2 className="font-serif text-xl font-bold mt-2 mb-2 leading-tight group-hover:text-[var(--primary)] transition-colors">{post.title}</h2>
               <p className="text-sm text-[var(--text-muted)] line-clamp-2 mb-4">{post.excerpt}</p>
               <div className="flex items-center gap-4 text-xs text-[var(--text-muted)] pt-4 border-t border-[var(--border-light)]">
-                <span className="font-medium text-[var(--text-secondary)]">{post.author?.name || SITE_NAME}</span>
+                <span className="font-medium text-[var(--text-secondary)]">{getPublicBlogAuthorName(post.author?.name)}</span>
                 <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
               </div>
             </div>
