@@ -96,6 +96,11 @@ test("root metadata and Open Graph surfaces use the Maverenne identity", () => {
   assert.doesNotMatch(openGraphSource, /MYTHREALMS/);
 });
 
+test("the default site URL is the canonical Maverenne production host", async () => {
+  const { DEFAULT_SITE_URL } = await import("../src/lib/site");
+  assert.equal(DEFAULT_SITE_URL, "https://www.maverenne.com");
+});
+
 test("the storefront catalog exposes all 63 approved Pearl Edit products", () => {
   const products = getStorefrontProducts();
   assert.equal(products.length, 63);

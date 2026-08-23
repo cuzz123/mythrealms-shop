@@ -1,7 +1,7 @@
 import { BRAND } from "./brand-identity";
 
 export const SITE_NAME = BRAND.name;
-export const DEFAULT_SITE_URL = "https://mythrealms-shop.vercel.app";
+export const DEFAULT_SITE_URL = "https://www.maverenne.com";
 
 function normalizeSiteUrl(value: string): string {
   return value.replace(/\/+$/, "");
