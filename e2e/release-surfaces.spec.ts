@@ -90,6 +90,130 @@ async function expectSparseAbout(page: Page) {
   await expect(main.locator("img")).toHaveCount(0);
 }
 
+async function expectReviewedPearlCareRoute(
+  page: Page,
+  request: APIRequestContext,
+) {
+  const main = page.locator("#main-content");
+  const heading = page.getByRole("heading", {
+    level: 1,
+    name: "How to Care for Pearls",
+  });
+  const lead = main.locator("article h1 + p");
+  const canonical = absoluteUrl("/pearls/care");
+
+  await expect(page.locator("h1")).toHaveCount(1);
+  await expect(heading).toBeVisible();
+  await expect(lead).toBeVisible();
+
+  const schemas = await page
+    .locator('script[type="application/ld+json"]')
+    .evaluateAll((scripts) =>
+      scripts.map((script) => JSON.parse(script.textContent || "{}")),
+    );
+  const article = schemas.find((schema) => schema["@type"] === "Article");
+  const breadcrumb = schemas.find((schema) => schema["@type"] === "BreadcrumbList");
+  const faq = schemas.find((schema) => schema["@type"] === "FAQPage");
+
+  expect(article).toBeDefined();
+  expect(article).toMatchObject({
+    url: canonical,
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+  });
+  expect(article.datePublished).toBeUndefined();
+  expect(article.dateModified).toBeUndefined();
+  expect(article.author).toBeUndefined();
+  expect(article.image).toBeUndefined();
+
+  const visibleHeading = (await heading.textContent())?.trim();
+  const leadDescription = article.description;
+  expect(visibleHeading).toBe("How to Care for Pearls");
+  expect(article.headline).toBe(visibleHeading);
+  expect(leadDescription).toEqual(expect.any(String));
+  await expect(lead).toHaveText(leadDescription as string);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", canonical);
+
+  const visibleBreadcrumbs = await page
+    .getByRole("navigation", { name: "Breadcrumb" })
+    .locator('a, [aria-current="page"]')
+    .evaluateAll((items) =>
+      items.map((item) => ({
+        name: item.textContent?.trim(),
+        path:
+          item instanceof HTMLAnchorElement
+            ? new URL(item.href).pathname
+            : window.location.pathname,
+      })),
+    );
+  expect(visibleBreadcrumbs.at(-1)).toEqual({
+    name: "How to Care for Pearls",
+    path: "/pearls/care",
+  });
+  expect(breadcrumb).toBeDefined();
+  expect(
+    breadcrumb.itemListElement.map(
+      (item: { position: number; name: string; item: string }) => ({
+        position: item.position,
+        name: item.name,
+        path: new URL(item.item).pathname,
+      }),
+    ),
+  ).toEqual(
+    visibleBreadcrumbs.map((item, index) => ({ position: index + 1, ...item })),
+  );
+
+  const visibleFaq = await main.locator("dl dt").evaluateAll((questions) =>
+    questions.map((question) => ({
+      question: question.textContent?.trim() ?? "",
+      answer: question.parentElement?.querySelector("dd")?.textContent?.trim() ?? "",
+    })),
+  );
+  expect(visibleFaq.length).toBeGreaterThan(0);
+  expect(faq).toBeDefined();
+  expect(
+    faq.mainEntity.map(
+      (item: { name: string; acceptedAnswer: { text: string } }) => ({
+        question: item.name,
+        answer: item.acceptedAnswer.text,
+      }),
+    ),
+  ).toEqual(visibleFaq);
+
+  for (const name of [
+    "Frequently asked questions",
+    "Continue the pearl guide",
+    "Sources",
+  ]) {
+    await expect(main.getByRole("heading", { name, exact: true })).toBeVisible();
+  }
+  await expect(main.getByRole("heading", { name: "Table of contents" })).toHaveCount(0);
+  await expect(main.getByRole("heading", { name: "Related products" })).toHaveCount(0);
+  await expect(main.locator('a[href^="/products/"]')).toHaveCount(0);
+  await expect(main.locator("img")).toHaveCount(0);
+  await expect(main.getByText(`${BRAND.name} Editorial`, { exact: true })).toHaveCount(0);
+  await expect(main.getByText(/^Published /)).toHaveCount(0);
+  await expect(main.getByText(/^Updated /)).toHaveCount(0);
+
+  const sourceLinks = main.locator('a[href^="https://"]');
+  await expect(sourceLinks).toHaveCount(2);
+  for (let index = 0; index < (await sourceLinks.count()); index += 1) {
+    await expect(sourceLinks.nth(index)).toHaveAttribute("rel", "noopener noreferrer");
+  }
+
+  const hrefs = await internalHrefs(page);
+  expect(hrefs).toEqual(
+    expect.arrayContaining([
+      "/",
+      "/pearls",
+      "/contact",
+      "/pearls/how-to-wear",
+      "/pearls/freshwater-pearls",
+    ]),
+  );
+  await expectInternalLinksHealthy(request, hrefs);
+  await expectNoHorizontalOverflow(page);
+}
+
 function parseRenderedCurrency(text: string) {
   const markerIndexes = [...text.matchAll(/\$/g)].map((match) => match.index);
   const tokens = markerIndexes.flatMap((index) => {
@@ -177,11 +301,15 @@ test.describe("release surfaces", () => {
     }
   });
 
-  test("pearl guide routes expose visible editorial and machine-readable contracts", async ({ page }) => {
+  test("pearl guide routes expose visible editorial and machine-readable contracts", async ({ page, request }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     for (const guide of Object.values(PEARL_GUIDES)) {
       const published = (guide as typeof guide & { published?: string }).published;
       await page.goto(`/pearls/${guide.slug}`);
+      if (guide.slug === "care") {
+        await expectReviewedPearlCareRoute(page, request);
+        continue;
+      }
       await expect(page.locator("h1")).toHaveCount(1);
       const expectedHeading = guide.slug === "care" ? "How to Care for Pearls" : guide.title;
       await expect(page.getByRole("heading", { level: 1, name: expectedHeading })).toBeVisible();
@@ -289,7 +417,7 @@ test.describe("release surfaces", () => {
     }
   });
 
-  test("public editorial shell server-renders without JavaScript or a global skeleton", async ({ browser }) => {
+  test("public editorial shell server-renders without JavaScript or a global skeleton", async ({ browser, request }) => {
     test.setTimeout(120_000);
     const context = await browser.newContext({
       javaScriptEnabled: false,
@@ -360,6 +488,10 @@ test.describe("release surfaces", () => {
 
       for (const guide of Object.values(PEARL_GUIDES)) {
         await page.goto(`/pearls/${guide.slug}`);
+        if (guide.slug === "care") {
+          await expectReviewedPearlCareRoute(page, request);
+          continue;
+        }
         const expectedHeading = guide.slug === "care" ? "How to Care for Pearls" : guide.title;
         await expect(page.getByRole("heading", { level: 1, name: expectedHeading })).toBeVisible();
         await expect(page.getByText(guide.directAnswer, { exact: true })).toBeVisible();
