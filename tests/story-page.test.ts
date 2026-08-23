@@ -47,9 +47,16 @@ test("About renders only the approved neutral introduction and matching JSON-LD"
   assert.equal((html.match(/<h2\b/g) ?? []).length, 0);
   assert.match(visibleHtml, new RegExp(DESCRIPTION));
   assert.equal(visibleHtml.split(DESCRIPTION).length - 1, 1);
+  const internalLinks = [...visibleHtml.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/g)].map(
+    ([, href, label]) => ({ href, label }),
+  );
+  assert.deepEqual(internalLinks, [
+    { href: "/collections/pearl-series", label: "Explore the Pearl Series" },
+    { href: "/pearls", label: "Read the Pearl Guide" },
+  ]);
   assert.doesNotMatch(
     visibleHtml,
-    /<a\b|<img\b|MythRealms|Mediterranean|Pearl Edit|Product Reference|Editorial Styling/i,
+    /<img\b|MythRealms|Mediterranean|Pearl Edit|Product Reference|Editorial Styling/i,
   );
 
   const schemas = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map(

@@ -2,6 +2,7 @@ import { expect, test, type APIRequestContext, type Locator, type Page } from "@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
+import { BRAND } from "../src/lib/brand-identity";
 import {
   getRelatedGuideProducts,
   PEARL_GUIDES,
@@ -9,6 +10,9 @@ import {
 } from "../src/lib/editorial/guides";
 import { getNewArrivalProducts } from "../src/lib/editorial/gifts";
 import { absoluteUrl } from "../src/lib/site";
+import { getStorefrontProducts } from "../src/lib/storefront/catalog";
+
+const STOREFRONT_PRODUCT_COUNT = getStorefrontProducts().length;
 
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
@@ -61,6 +65,29 @@ async function expectNoHorizontalOverflow(page: Page) {
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth),
   ).toBeLessThanOrEqual(0);
+}
+
+async function expectSparseAbout(page: Page) {
+  const main = page.locator("#main-content");
+  await expect(main.getByRole("heading", { level: 1, name: "About Maverenne" })).toBeVisible();
+  await expect(
+    main.getByText(
+      "Thoughtful jewelry and accessories for everyday moments that feel like your own.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+
+  const internalLinks = main.locator('a[href^="/"]');
+  await expect(internalLinks).toHaveCount(2);
+  await expect(main.getByRole("link", { name: "Explore the Pearl Series" })).toHaveAttribute(
+    "href",
+    "/collections/pearl-series",
+  );
+  await expect(main.getByRole("link", { name: "Read the Pearl Guide" })).toHaveAttribute(
+    "href",
+    "/pearls",
+  );
+  await expect(main.locator("img")).toHaveCount(0);
 }
 
 function parseRenderedCurrency(text: string) {
@@ -156,7 +183,8 @@ test.describe("release surfaces", () => {
       const published = (guide as typeof guide & { published?: string }).published;
       await page.goto(`/pearls/${guide.slug}`);
       await expect(page.locator("h1")).toHaveCount(1);
-      await expect(page.getByRole("heading", { level: 1, name: guide.title })).toBeVisible();
+      const expectedHeading = guide.slug === "care" ? "How to Care for Pearls" : guide.title;
+      await expect(page.getByRole("heading", { level: 1, name: expectedHeading })).toBeVisible();
       await expect(page.locator("#main-content").getByText(guide.directAnswer, { exact: true })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Table of contents" })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Frequently asked questions" })).toBeVisible();
@@ -172,7 +200,7 @@ test.describe("release surfaces", () => {
         await expect(page.getByText(item.answer, { exact: true })).toBeVisible();
       }
       const main = page.locator("#main-content");
-      await expect(main.getByText("MythRealms Editorial", { exact: true })).toBeVisible();
+      await expect(main.getByText(`${BRAND.name} Editorial`, { exact: true })).toBeVisible();
       await expect(main.getByText("Published July 18, 2026", { exact: false })).toBeVisible();
       const updatedLabel = new Intl.DateTimeFormat("en-US", {
         month: "long",
@@ -290,13 +318,7 @@ test.describe("release surfaces", () => {
       expect(await page.locator("#main-content img").count()).toBeGreaterThan(0);
 
       await page.goto("/about");
-      await expect(page.getByRole("heading", { level: 1, name: "Pearls, edited for real life." })).toBeVisible();
-      await expect(page.getByRole("heading", { name: "Product reference and editorial styling" })).toBeVisible();
-      await expect(page.getByText(/some editorial images are digitally created/i)).toBeVisible();
-      await expect(page.getByRole("heading", { name: "Find your way into the edit." })).toBeVisible();
-      await expect(page.getByRole("link", { name: "Read the Pearl Guide" })).toHaveAttribute("href", "/pearls");
-      await expect(page.getByRole("link", { name: "Explore Gifts" })).toHaveAttribute("href", "/gifts");
-      expect(await page.locator("#main-content img").count()).toBeGreaterThanOrEqual(4);
+      await expectSparseAbout(page);
 
       await page.goto("/gifts");
       await expect(page.getByRole("heading", { level: 1, name: "A Pearl Jewelry Gift Guide for Everyday Giving" })).toBeVisible();
@@ -338,7 +360,8 @@ test.describe("release surfaces", () => {
 
       for (const guide of Object.values(PEARL_GUIDES)) {
         await page.goto(`/pearls/${guide.slug}`);
-        await expect(page.getByRole("heading", { level: 1, name: guide.title })).toBeVisible();
+        const expectedHeading = guide.slug === "care" ? "How to Care for Pearls" : guide.title;
+        await expect(page.getByRole("heading", { level: 1, name: expectedHeading })).toBeVisible();
         await expect(page.getByText(guide.directAnswer, { exact: true })).toBeVisible();
         await expect(page.getByRole("heading", { name: "Table of contents" })).toBeVisible();
         await expect(page.getByRole("heading", { name: guide.sections[0].heading })).toBeVisible();
@@ -587,10 +610,10 @@ test.describe("release surfaces", () => {
 
   test("homepage keeps canonical metadata, organization data, and the Pearl Guide without retired claims", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle("MythRealms | Pearl Jewelry for Everyday Light");
+    await expect(page).toHaveTitle(`${BRAND.name} | ${BRAND.descriptor} for Everyday Moments`);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://mythrealms-shop.vercel.app",
+      "https://www.maverenne.com",
     );
     await expect(page.getByRole("link", { name: "Read the guide" })).toHaveAttribute(
       "href",
@@ -718,13 +741,13 @@ test.describe("release surfaces", () => {
     expect(apiResponse.status()).toBe(404);
   });
 
-  test("SEO machine surfaces expose the same 45 approved products", async ({ request }) => {
+  test(`SEO machine surfaces expose the same ${STOREFRONT_PRODUCT_COUNT} approved products`, async ({ request }) => {
     const feed = await (await request.get("/api/feed")).text();
     const sitemap = await (await request.get("/sitemap.xml")).text();
     const robots = await (await request.get("/robots.txt")).text();
 
-    expect((feed.match(/<item>/g) || []).length).toBe(45);
-    expect((sitemap.match(/\/products\//g) || []).length).toBe(45);
+    expect((feed.match(/<item>/g) || []).length).toBe(STOREFRONT_PRODUCT_COUNT);
+    expect((sitemap.match(/\/products\//g) || []).length).toBe(STOREFRONT_PRODUCT_COUNT);
     expect(feed).not.toMatch(/crystal|gemstone|serenity|balance\s*&\s*light/i);
     expect(sitemap).toContain("/blog</loc>");
     expect(sitemap).not.toMatch(
@@ -733,16 +756,10 @@ test.describe("release surfaces", () => {
     expect(robots).toContain("Allow: /api/feed$");
   });
 
-  test("Story about page shows its disclosure and loaded imagery without horizontal overflow", async ({ page }) => {
+  test("About page keeps its sparse neutral contract without imagery", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/about");
-    await expect(
-      page.getByRole("heading", { name: "Pearls, edited for real life." }),
-    ).toBeVisible();
-    await expect(page.getByText(/some editorial images are digitally created/i)).toBeVisible();
-    const images = page.locator("#main-content img");
-    expect(await images.count()).toBeGreaterThanOrEqual(4);
-    await expectImagesLoaded(images);
+    await expectSparseAbout(page);
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth),
     ).toBeLessThanOrEqual(0);
@@ -756,9 +773,7 @@ test.describe("release surfaces", () => {
 
     await page.goto("/story");
     await expect(page).toHaveURL(/\/about$/);
-    await expect(
-      page.getByRole("heading", { name: "Pearls, edited for real life." }),
-    ).toBeVisible();
+    await expectSparseAbout(page);
   });
 
   test("editorial and utility surfaces stay truthful and use valid landmarks", async ({ page }) => {

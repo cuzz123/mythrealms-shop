@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { BreadcrumbJsonLd, JsonLd } from "@/components/ui/JsonLd";
 import { STORY_CONTENT } from "@/lib/editorial/story";
@@ -55,6 +56,16 @@ export default function AboutPage() {
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--text-secondary)]">
             {statement}
           </p>
+          <nav aria-label="About Maverenne links" className="mt-8">
+            <ul className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-[var(--accent)]">
+              <li>
+                <Link href="/collections/pearl-series">Explore the Pearl Series</Link>
+              </li>
+              <li>
+                <Link href="/pearls">Read the Pearl Guide</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       </section>
     </div>
