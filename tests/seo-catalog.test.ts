@@ -13,8 +13,12 @@ import {
   buildBlogMetadata,
   isPearlEditorialPost,
 } from "../src/lib/seo/blog";
-import { buildSitemapEntries } from "../src/lib/seo/sitemap";
+import {
+  SEO_FOUNDATION_LAST_MODIFIED,
+  buildSitemapEntries,
+} from "../src/lib/seo/sitemap";
 import { siteUrl } from "../src/lib/site";
+import { ACTIVE_PURCHASE_GUIDE_SLUGS } from "../src/lib/editorial/purchase-guides";
 import { PEARL_EDITS } from "../src/lib/storefront/pearl-edits";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
 import { buildStorefrontFeedXml } from "../src/lib/storefront/feed";
@@ -123,6 +127,17 @@ test("the authoritative feed is pearl-only and contains every storefront SKU", (
 test("the sitemap contains canonical content, products, and journal articles once", () => {
   const products = getStorefrontProducts();
   const entries = buildSitemapEntries(siteUrl, products, posts);
+  const expandedEntries = buildSitemapEntries(
+    siteUrl,
+    products,
+    posts,
+    PEARL_EDITS.map((edit) => edit.route),
+    ["/pearls/stories", "/pearls/symbolism"],
+  );
+  const sitemapSource = readFileSync(
+    path.join(process.cwd(), "src/lib/seo/sitemap.ts"),
+    "utf8",
+  );
   const urls = new Set(entries.map((entry) => entry.url));
   const expectedUrls = new Set([
     siteUrl,
@@ -142,6 +157,43 @@ test("the sitemap contains canonical content, products, and journal articles onc
   assert.equal([...urls].some((url) => url.includes("?")), false);
   assert.equal(entries.length, urls.size, "sitemap URLs must be unique");
   assert.deepEqual(urls, expectedUrls);
+
+  assert.ok(expandedEntries.every((entry) => entry.changeFrequency === undefined));
+  assert.ok(expandedEntries.every((entry) => entry.priority === undefined));
+  assert.doesNotMatch(sitemapSource, /new Date\(\s*\)/);
+
+  const entryFor = (route: string) => {
+    const entry = expandedEntries.find(({ url }) => url === `${siteUrl}${route}`);
+    assert.ok(entry, `missing ${route}`);
+    return entry;
+  };
+
+  assert.equal(
+    entryFor(`/products/${products[0].slug}`).lastModified,
+    SEO_FOUNDATION_LAST_MODIFIED,
+  );
+  for (const route of [
+    "/collections",
+    "/collections/pearl-series",
+    "/guardian-quiz",
+    "/blog",
+    "/faq",
+    "/size-guide",
+    ...PEARL_EDITS.map((edit) => edit.route),
+    "/pearls/stories",
+    "/pearls/symbolism",
+  ]) {
+    assert.equal(entryFor(route).lastModified, SEO_FOUNDATION_LAST_MODIFIED, route);
+  }
+  assert.equal(
+    entryFor(`/blog/${posts[0].slug}`).lastModified,
+    posts[0].updatedAt,
+  );
+  assert.equal(entryFor("/privacy").lastModified, undefined);
+  assert.equal(
+    entryFor(`/pearls/${ACTIVE_PURCHASE_GUIDE_SLUGS[0]}`).lastModified,
+    undefined,
+  );
 });
 
 test("navigation and sitemap expose only implemented pearl discovery routes", () => {

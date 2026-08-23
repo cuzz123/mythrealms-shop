@@ -3,6 +3,17 @@ import type { MetadataRoute } from "next";
 import { ACTIVE_PURCHASE_GUIDE_SLUGS } from "@/lib/editorial/purchase-guides";
 import type { StorefrontProduct } from "@/lib/storefront/catalog";
 
+export const SEO_FOUNDATION_LAST_MODIFIED = "2026-08-23";
+
+const STATIC_PATHS_WITH_LAST_MODIFIED = new Set([
+  "/collections",
+  "/collections/pearl-series",
+  "/guardian-quiz",
+  "/blog",
+  "/faq",
+  "/size-guide",
+]);
+
 export interface SitemapPost {
   slug: string;
   updatedAt: Date;
@@ -15,55 +26,54 @@ export function buildSitemapEntries(
   editPaths: readonly string[] = [],
   discoveryPaths: readonly string[] = [],
 ): MetadataRoute.Sitemap {
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, changeFrequency: "weekly", priority: 1 },
-    { url: `${baseUrl}/collections`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/collections/pearl-series`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/collections/new-arrivals`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/gifts`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${baseUrl}/guardian-quiz`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/pearls`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/pearls/care`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/pearls/how-to-wear`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/pearls/freshwater-pearls`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/blog`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${baseUrl}/about`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/faq`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/contact`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/size-guide`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/shipping`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${baseUrl}/refund`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${baseUrl}/privacy`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${baseUrl}/terms`, changeFrequency: "yearly", priority: 0.3 },
+  const staticPaths = [
+    "",
+    "/collections",
+    "/collections/pearl-series",
+    "/collections/new-arrivals",
+    "/gifts",
+    "/guardian-quiz",
+    "/pearls",
+    "/pearls/care",
+    "/pearls/how-to-wear",
+    "/pearls/freshwater-pearls",
+    "/blog",
+    "/about",
+    "/faq",
+    "/contact",
+    "/size-guide",
+    "/shipping",
+    "/refund",
+    "/privacy",
+    "/terms",
   ];
+  const staticPages: MetadataRoute.Sitemap = staticPaths.map((path) => ({
+    url: `${baseUrl}${path}`,
+    ...(STATIC_PATHS_WITH_LAST_MODIFIED.has(path)
+      ? { lastModified: SEO_FOUNDATION_LAST_MODIFIED }
+      : {}),
+  }));
 
   const entries: MetadataRoute.Sitemap = [
     ...staticPages,
     ...products.map((product) => ({
       url: `${baseUrl}/products/${product.slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
+      lastModified: SEO_FOUNDATION_LAST_MODIFIED,
     })),
     ...posts.map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
       lastModified: post.updatedAt,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
     })),
     ...editPaths.map((path) => ({
       url: `${baseUrl}${path}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
+      lastModified: SEO_FOUNDATION_LAST_MODIFIED,
     })),
     ...discoveryPaths.map((path) => ({
       url: `${baseUrl}${path}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
+      lastModified: SEO_FOUNDATION_LAST_MODIFIED,
     })),
     ...ACTIVE_PURCHASE_GUIDE_SLUGS.map((slug) => ({
       url: `${baseUrl}/pearls/${slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
     })),
   ];
 
