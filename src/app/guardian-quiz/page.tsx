@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, SITE_NAME } from "@/lib/site";
 import { GuardianQuizClient } from "./quiz-client";
 
 export const metadata: Metadata = {
-  title: "Find Your Guardian Archetype | MythRealms Quiz",
-  description: "Take the 3-question MythRealms quiz to discover a guardian archetype and a path into The Pearl Edit.",
+  title: `Find Your Guardian Archetype | ${SITE_NAME} Quiz`,
+  description: `Take the 3-question ${SITE_NAME} quiz to discover a guardian archetype and a path into The Pearl Edit.`,
   alternates: { canonical: absoluteUrl("/guardian-quiz") },
   openGraph: {
     type: "website",

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Markdown from "react-markdown"
 import { ArrowLeft } from "lucide-react";
 import { absoluteImageUrl } from "@/lib/images";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, SITE_NAME } from "@/lib/site";
 import { BlogPostingJsonLd } from "@/components/ui/JsonLd";
 import { buildBlogMetadata, isPearlEditorialPost } from "@/lib/seo/blog";
 
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 
   if (!post || !isPearlEditorialPost({ slug, ...post })) {
-    return { title: "Article Not Found | MythRealms", robots: { index: false, follow: false } };
+    return { title: `Article Not Found | ${SITE_NAME}`, robots: { index: false, follow: false } };
   }
 
   return buildBlogMetadata({ slug, ...post });
@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         image={post.image ? absoluteImageUrl(post.image) : undefined}
         datePublished={post.publishedAt}
         dateModified={post.updatedAt}
-        authorName={post.author?.name || "MythRealms"}
+        authorName={post.author?.name || SITE_NAME}
       />
       <div className="max-w-3xl mx-auto px-6 py-10">
       <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] mb-6">
@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <h1 className="font-serif text-4xl font-bold mt-2 mb-4 leading-tight text-[var(--text)]">{post.title}</h1>
 
       <div className="flex items-center gap-4 text-sm text-[var(--text-muted)] mb-8 pb-6 border-b border-[var(--border)]">
-        <span>{post.author?.name || "MythRealms"}</span>
+        <span>{post.author?.name || SITE_NAME}</span>
         <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
       </div>
 

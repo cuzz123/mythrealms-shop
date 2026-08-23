@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ProductCard } from "@/components/product/ProductCard";
 import { BreadcrumbJsonLd, ItemListJsonLd } from "@/components/ui/JsonLd";
 import { productDisplayName } from "@/lib/brand";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, SITE_NAME } from "@/lib/site";
 import {
   PEARL_EDITS,
   getPearlEditBySlug,
@@ -35,7 +35,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: EditPageProps): Promise<Metadata> {
   const edit = getEditOrNotFound((await params).slug);
-  const title = `${edit.title} | Pearl Jewelry Edit | MythRealms`;
+  const title = `${edit.title} | Pearl Jewelry Edit | ${SITE_NAME}`;
   const image = absoluteUrl(edit.heroImage);
   const canonical = absoluteUrl(edit.route);
 

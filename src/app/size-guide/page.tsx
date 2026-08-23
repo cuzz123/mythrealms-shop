@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, SITE_NAME } from "@/lib/site";
 import { Ruler, Info } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Bracelet Size Guide — MythRealms",
-  description: "Find your perfect bracelet size. Learn how to measure your wrist and choose between a snug or loose fit for your MythRealms bracelet.",
+  title: `Bracelet Size Guide — ${SITE_NAME}`,
+  description: `Find your perfect bracelet size. Learn how to measure your wrist and choose between a snug or loose fit for your ${SITE_NAME} bracelet.`,
   alternates: { canonical: absoluteUrl("/size-guide") },
 };
 
@@ -222,7 +222,7 @@ export default function SizeGuidePage() {
           Our support team is happy to help you find the right fit. Send us your wrist measurement and we will recommend the perfect size.
         </p>
         <a
-          href="mailto:mythrealms@outlook.com"
+          href="mailto:support@maverenne.invalid"
           className="inline-flex items-center gap-2 bg-[var(--primary)] text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-[var(--primary-hover)] transition"
         >
           <Info className="w-4 h-4" />

@@ -59,23 +59,22 @@ test("high-intent pages separate general guidance from unverified item and polic
   );
   assert.match(giftsHtml, /cannot make a delivery promise/i);
   assert.match(`${howToWearHtml}\n${careHtml}\n${giftsHtml}`, new RegExp(BRAND.name, "i"));
-  // The canonical origin remains on the legacy domain until the separately
-  // authorized domain cutover; customer-visible and schema brand names must
-  // already use the single Phase 1 identity.
+  // Customer-visible and schema brand names must use the single approved
+  // identity while each page keeps its own search intent.
   assert.doesNotMatch(
     `${howToWearHtml}\n${careHtml}\n${giftsHtml}`,
     /"name":"MythRealms(?: Editorial)?"|>MythRealms(?: Editorial)?</i,
   );
 });
 
-test("pearl care renders the approved general-care answer, legacy canonical, and matching structured data", () => {
+test("pearl care renders the approved general-care answer, canonical, and matching structured data", () => {
   const html = renderToStaticMarkup(createElement(PearlCarePage));
   const directAnswer = "General pearl-care guidance is to reduce contact with fragrance, cosmetics, heat, and harsh cleaners; wipe pearls with a very soft, clean cloth after wear; and avoid ultrasonic or steam cleaning. This is educational guidance for pearls, not a care instruction for any store item, setting, string, or finish.";
   const expectedDescription = "Read general pearl care guidance on cleaning, heat, chemicals, and storage boundaries. Check the exact item record for item-specific instructions.";
 
   assert.equal(careMetadata.title, "How to Care for Pearls | Pearl Care Guide");
   assert.equal(careMetadata.description, expectedDescription);
-  assert.equal(careMetadata.alternates?.canonical, "https://mythrealms-shop.vercel.app/pearls/care");
+  assert.equal(careMetadata.alternates?.canonical, "https://www.maverenne.com/pearls/care");
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   assert.match(html, /<h1[^>]*>How to Care for Pearls<\/h1>/);
   assert.match(html, new RegExp(directAnswer.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
@@ -98,7 +97,7 @@ test("pearl care renders the approved general-care answer, legacy canonical, and
 
   assert.equal(article?.headline, "How to Care for Pearls");
   assert.equal(article?.description, directAnswer);
-  assert.equal(article?.url, "https://mythrealms-shop.vercel.app/pearls/care");
+  assert.equal(article?.url, "https://www.maverenne.com/pearls/care");
   assert.equal("author" in (article ?? {}), false);
   assert.equal("datePublished" in (article ?? {}), false);
   assert.equal("image" in (article ?? {}), false);
@@ -113,7 +112,7 @@ test("pearl care renders the approved general-care answer, legacy canonical, and
   );
   assert.equal(
     ((breadcrumb?.itemListElement as Array<Record<string, unknown>>).at(-1)?.item),
-    "https://mythrealms-shop.vercel.app/pearls/care",
+    "https://www.maverenne.com/pearls/care",
   );
   for (const [href, label] of [
     ["https://www.gia.edu/gia-news-research/pearl-care-cleaning", "GIA Pearl Care and Cleaning Guide"],

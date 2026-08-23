@@ -8,7 +8,7 @@ import {
   STOREFRONT_PRODUCT_TYPES,
   type StorefrontProductType,
 } from "@/lib/storefront/catalog";
-import { siteUrl } from "@/lib/site";
+import { SITE_NAME, siteUrl } from "@/lib/site";
 import { buildCollectionSchema } from "@/lib/seo/schema";
 
 const RETIRED_COLLECTION_SLUGS = new Set([
@@ -34,19 +34,19 @@ export async function generateMetadata({
   const { slug } = await params;
   const query = await searchParams;
   if (slug !== "pearl-series" && !RETIRED_COLLECTION_SLUGS.has(slug)) {
-    return { title: "Collection Not Found | MythRealms", robots: { index: false } };
+    return { title: `Collection Not Found | ${SITE_NAME}`, robots: { index: false } };
   }
 
   const messaging = categoryMessaging["pearl-series"];
   const description = messaging.description.slice(0, 155);
   const hasQuery = Object.values(query).some(Boolean);
   return {
-    title: `${messaging.name} | MythRealms`,
+    title: `${messaging.name} | ${SITE_NAME}`,
     description,
     robots: hasQuery ? { index: false, follow: true } : undefined,
     alternates: { canonical: `${siteUrl}/collections/pearl-series` },
     openGraph: {
-      title: `${messaging.name} | MythRealms`,
+      title: `${messaging.name} | ${SITE_NAME}`,
       description,
       url: `${siteUrl}/collections/pearl-series`,
       type: "website",

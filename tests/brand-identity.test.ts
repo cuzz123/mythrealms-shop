@@ -22,6 +22,27 @@ const publicBrandFiles = [
   "../src/app/contact/layout.tsx",
 ] as const;
 
+const INDEXABLE_BRAND_FILES = [
+  "../src/app/collections/page.tsx",
+  "../src/app/collections/[slug]/page.tsx",
+  "../src/app/faq/layout.tsx",
+  "../src/app/faq/page.tsx",
+  "../src/app/blog/page.tsx",
+  "../src/app/blog/[slug]/page.tsx",
+  "../src/app/edits/[slug]/page.tsx",
+  "../src/app/size-guide/page.tsx",
+  "../src/app/guardian-quiz/page.tsx",
+  "../src/app/pearls/stories/page.tsx",
+  "../src/app/pearls/symbolism/page.tsx",
+] as const;
+
+test("indexable public route sources do not expose the retired brand", () => {
+  for (const relativePath of INDEXABLE_BRAND_FILES) {
+    const source = readFileSync(fileURLToPath(new URL(relativePath, import.meta.url)), "utf8");
+    assert.doesNotMatch(source, /MythRealms/i, relativePath);
+  }
+});
+
 test("public brand surfaces use Maverenne without legacy claims or identities", () => {
   const sources = new Map(publicBrandFiles.map((relativePath) => [
     relativePath,
