@@ -161,8 +161,8 @@ test("the how-to-wear candidate keeps its reviewed styling boundary in metadata,
   assert.equal(guide.editorialStatus, "candidate");
   assert.match(guide.evidenceBoundary ?? "", /does not establish product material/i);
   assert.equal(howToWearMetadata.alternates?.canonical, absoluteUrl("/pearls/how-to-wear"));
-  assert.match(howToWearMetadata.alternates?.canonical ?? "", /mythrealms-shop\.vercel\.app/);
-  assert.doesNotMatch(howToWearMetadata.alternates?.canonical ?? "", /maverenne/i);
+  assert.match(howToWearMetadata.alternates?.canonical ?? "", /www\.maverenne\.com/);
+  assert.doesNotMatch(howToWearMetadata.alternates?.canonical ?? "", /mythrealms-shop\.vercel\.app/i);
   assert.match(html, /begin with the clothes I reach for most/i);
   assert.match(html, /keep the final choice grounded in verified information/i);
   assert.match(html, /A guide cannot confirm composition, dimensions, fastening, price, availability, delivery, return eligibility, or how an item will feel when worn\./);
