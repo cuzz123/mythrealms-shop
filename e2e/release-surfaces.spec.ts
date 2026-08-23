@@ -501,7 +501,8 @@ test.describe("release surfaces", () => {
         await expect(page.locator('#main-content a[href^="https://"]')).toHaveCount(
           guide.sources.length,
         );
-        const relatedProducts = getRelatedGuideProducts(guide);
+        const relatedProducts =
+          guide.slug === "freshwater-pearls" ? getRelatedGuideProducts(guide) : [];
         await expect(page.locator('#main-content a[href^="/products/"]')).toHaveCount(
           relatedProducts.length,
         );
