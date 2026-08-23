@@ -221,13 +221,13 @@ export default function SizeGuidePage() {
         <p className="text-[var(--text-secondary)] mb-6 max-w-md mx-auto">
           Our support team is happy to help you find the right fit. Send us your wrist measurement and we will recommend the perfect size.
         </p>
-        <a
-          href="mailto:support@maverenne.invalid"
+        <Link
+          href="/contact"
           className="inline-flex items-center gap-2 bg-[var(--primary)] text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-[var(--primary-hover)] transition"
         >
           <Info className="w-4 h-4" />
           Ask About Sizing
-        </a>
+        </Link>
       </section>
 
     </div>

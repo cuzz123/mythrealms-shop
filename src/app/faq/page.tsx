@@ -5,8 +5,6 @@ import Link from "next/link";
 import { HelpCircle, Minus, Plus } from "lucide-react";
 import { BRAND } from "@/lib/brand-identity";
 
-const supportEmail = "support@maverenne.invalid";
-
 const faqs = [
   {
     q: "How long does shipping take?",
@@ -25,12 +23,12 @@ const faqs = [
   },
   {
     q: "What is your return policy?",
-    a: `We offer a 30-day return window. Items must be unused and in original packaging. Start a return through the returns page or contact ${supportEmail}.`,
+    a: "We offer a 30-day return window. Items must be unused and in original packaging. Start a return through the returns page or use our contact page.",
     cat: "returns",
   },
   {
     q: "My item arrived damaged. What should I do?",
-    a: `Email ${supportEmail} within 48 hours of delivery with your order number and clear photos. We will review it quickly and help with a replacement or refund.`,
+    a: "Use our contact page within 48 hours of delivery with your order number and clear photos. We will review it quickly and help with a replacement or refund.",
     cat: "returns",
   },
   {
@@ -100,7 +98,7 @@ const faqs = [
   },
   {
     q: "Do you offer wholesale or bulk orders?",
-    a: `For boutique, studio, or event inquiries, email ${supportEmail} with the styles and quantities you are considering.`,
+    a: "For boutique, studio, or event inquiries, use our contact page with the styles and quantities you are considering.",
     cat: "order",
   },
 ];
@@ -192,12 +190,12 @@ export default function FAQPage() {
       <div className="mt-16 border-t border-[var(--border)] pt-12 text-center">
         <h3 className="mb-2 font-serif text-2xl font-bold text-[var(--text)]">Still have questions?</h3>
         <p className="mb-4 text-sm text-[var(--text-muted)]">We usually respond within 24 hours.</p>
-        <a
-          href={`mailto:${supportEmail}`}
+        <Link
+          href="/contact"
           className="inline-block rounded-full bg-[var(--accent)] px-8 py-3 font-semibold text-[var(--bg)] transition hover:bg-[var(--accent-hover)]"
         >
           Contact Us
-        </a>
+        </Link>
       </div>
 
       {showStickyBar && (

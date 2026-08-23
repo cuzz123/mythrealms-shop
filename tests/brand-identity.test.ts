@@ -43,6 +43,19 @@ test("indexable public route sources do not expose the retired brand", () => {
   }
 });
 
+test("FAQ and size guide support CTAs route through the contact form", () => {
+  const supportFiles = [
+    "../src/app/faq/page.tsx",
+    "../src/app/size-guide/page.tsx",
+  ] as const;
+
+  for (const relativePath of supportFiles) {
+    const source = readFileSync(fileURLToPath(new URL(relativePath, import.meta.url)), "utf8");
+    assert.doesNotMatch(source, /\.invalid|mythrealms@/i, relativePath);
+    assert.match(source, /\/contact/, relativePath);
+  }
+});
+
 test("public brand surfaces use Maverenne without legacy claims or identities", () => {
   const sources = new Map(publicBrandFiles.map((relativePath) => [
     relativePath,
