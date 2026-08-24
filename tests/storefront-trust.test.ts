@@ -42,10 +42,11 @@ test("homepage pearl edit passes approved editorial image roles to product cards
   assert.match(edit, /imageRoles:\s*product\.imageRoles/);
 });
 
-test("homepage hero has intentional mobile and desktop image crops", () => {
+test("homepage hero keeps mobile cropping and desktop first-viewport reveal geometry", () => {
   const hero = source("src/components/home/HomepageHero.tsx");
   assert.match(hero, /aspect-\[4\/5\]/);
-  assert.match(hero, /lg:aspect-\[16\/9\]/);
+  assert.match(hero, /min-h-\[30rem\]/);
+  assert.match(hero, /lg:aspect-\[21\/10\]/);
   assert.match(hero, /sm:object-\[65%_center\]/);
 });
 

@@ -7,7 +7,10 @@ import {
   getStorefrontProductBySlug,
   getStorefrontProducts,
 } from "../src/lib/storefront/catalog";
-import { shouldShowStickyAddToCart } from "../src/components/storefront/StickyAddToCart";
+import {
+  shouldMarkPrimaryAsEncountered,
+  shouldShowStickyAddToCart,
+} from "../src/components/storefront/StickyAddToCart";
 
 const EXPECTED_TYPES = {
   rings: ["pearl-series-01", "pearl-series-02", "pearl-series-03"],
@@ -229,8 +232,19 @@ test("storefront products expose truthful card image roles", () => {
 });
 
 test("sticky purchase controls remain absent when the product is unavailable", () => {
-  assert.equal(shouldShowStickyAddToCart(false, false, true), false);
-  assert.equal(shouldShowStickyAddToCart(true, true, true), false);
-  assert.equal(shouldShowStickyAddToCart(true, false, false), false);
-  assert.equal(shouldShowStickyAddToCart(true, false, true), true);
+  assert.equal(shouldShowStickyAddToCart(false, false, true, true), false);
+  assert.equal(shouldShowStickyAddToCart(true, true, true, true), false);
+  assert.equal(shouldShowStickyAddToCart(true, false, false, true), false);
+  assert.equal(shouldShowStickyAddToCart(true, false, true, true), true);
+});
+
+test("sticky purchase control waits for the primary control to enter the viewport", () => {
+  assert.equal(shouldShowStickyAddToCart(true, false, true, false), false);
+});
+
+test("sticky purchase control treats a primary control passed above the viewport as encountered", () => {
+  assert.equal(shouldMarkPrimaryAsEncountered(false, false, 100), false);
+  assert.equal(shouldMarkPrimaryAsEncountered(false, false, -1), true);
+  assert.equal(shouldMarkPrimaryAsEncountered(false, true, 100), true);
+  assert.equal(shouldMarkPrimaryAsEncountered(true, false, 100), true);
 });

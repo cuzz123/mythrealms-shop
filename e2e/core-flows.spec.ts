@@ -1,6 +1,8 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
-import { HEADER_MENUS } from "../src/lib/storefront/navigation";
+import { BRAND } from "../src/lib/brand-identity";
+import { HOMEPAGE_CATEGORY_LINKS } from "../src/lib/homepage-editorial";
+import { HEADER_LINKS } from "../src/lib/storefront/navigation";
 
 async function expectImagesLoaded(images: Locator) {
   for (let index = 0; index < (await images.count()); index += 1) {
@@ -22,12 +24,10 @@ async function expectHeroContentWithinVisibleBounds(page: Page) {
   const hero = page.locator('[aria-labelledby="homepage-hero-title"]');
   const heroContent = [
     hero.getByText("Editorial / Summer 2026", { exact: true }),
-    hero.getByRole("heading", { name: "Pearls for sunlit days." }),
-    hero.getByText(
-      "Pearl jewelry selected for natural light, everyday movement, and the moments worth keeping.",
-      { exact: true },
-    ),
-    hero.getByRole("link", { name: "Shop the Pearl Edit" }),
+    hero.getByRole("heading", { name: BRAND.heroTitle, exact: true }),
+    hero.getByText(BRAND.heroDescription, { exact: true }),
+    hero.getByRole("link", { name: BRAND.primaryCta.label, exact: true }),
+    hero.getByRole("link", { name: BRAND.secondaryCta.label, exact: true }),
   ];
 
   for (const content of heroContent) {
@@ -92,12 +92,17 @@ test.describe("storefront release flows", () => {
 
   test("homepage shop by style links use approved pearl filters", async ({ page }) => {
     await page.goto("/");
-    const styleRegion = page.getByRole("region", { name: "Choose your starting point" });
-    await expect(styleRegion.getByRole("link", { name: "Everyday Pearl" })).toHaveAttribute("href", "/collections/pearl-series");
-    await expect(styleRegion.getByRole("link", { name: "Pearl Earrings" })).toHaveAttribute("href", "/collections/pearl-series?type=earrings");
-    await expect(styleRegion.getByRole("link", { name: "Pearl Necklaces" })).toHaveAttribute("href", "/collections/pearl-series?type=necklaces");
-    await expect(styleRegion.getByRole("link", { name: "Pearl Bracelets" })).toHaveAttribute("href", "/collections/pearl-series?type=bracelets");
-    await expect(styleRegion.getByRole("link", { name: "Pearl Eyewear Chains" })).toHaveAttribute("href", "/collections/pearl-series?type=eyewear-chains");
+    const categorySection = page.locator(
+      'section[aria-labelledby="pearl-edit-categories-title"]',
+    );
+    await expect(
+      categorySection.getByRole("heading", { name: "The Pearl Edit", exact: true }),
+    ).toBeVisible();
+    for (const { label, href } of HOMEPAGE_CATEGORY_LINKS) {
+      await expect(
+        categorySection.locator("a").filter({ hasText: label }).first(),
+      ).toHaveAttribute("href", href);
+    }
   });
 
   test("homepage promotes only the approved editorial destinations", async ({ page }) => {
@@ -114,16 +119,18 @@ test.describe("storefront release flows", () => {
   test("homepage reveal motion resolves and reduced motion stays visible", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.goto("/");
-    const sections = page.locator("[data-reveal-ready]");
-    await expect(sections.first()).toHaveAttribute("data-reveal-ready", "true");
-    await sections.first().scrollIntoViewIfNeeded();
-    await expect(sections.first()).toHaveAttribute("data-reveal-visible", "true");
+    const categorySection = page.locator(
+      'section[aria-labelledby="pearl-edit-categories-title"]',
+    );
+    await expect(categorySection).toHaveAttribute("data-reveal-ready", "true");
+    await categorySection.scrollIntoViewIfNeeded();
+    await expect(categorySection).toHaveAttribute("data-reveal-visible", "true");
 
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.reload();
-    await expect(sections.first()).toHaveAttribute("data-reveal-visible", "true");
+    await expect(categorySection).toHaveAttribute("data-reveal-visible", "true");
     await expect(
-      page.getByRole("heading", { name: "Choose your starting point" }),
+      categorySection.getByRole("heading", { name: "The Pearl Edit", exact: true }),
     ).toBeVisible();
   });
 
@@ -133,16 +140,17 @@ test.describe("storefront release flows", () => {
 
     try {
       await page.goto("/");
-      const reveal = page.locator('[aria-labelledby="shop-by-style-title"]');
+      const reveal = page.locator(
+        'section[aria-labelledby="pearl-edit-categories-title"]',
+      );
       await expect(reveal).toHaveAttribute("data-reveal-ready", "false");
       await expect(reveal).toHaveAttribute("data-reveal-visible", "true");
       await expect(
-        reveal.getByRole("heading", { name: "Choose your starting point" }),
+        reveal.getByRole("heading", { name: "The Pearl Edit", exact: true }),
       ).toBeVisible();
-      await expect(reveal.getByRole("link", { name: "Everyday Pearl" })).toHaveAttribute(
-        "href",
-        "/collections/pearl-series",
-      );
+      await expect(
+        reveal.locator("a").filter({ hasText: HOMEPAGE_CATEGORY_LINKS[0].label }).first(),
+      ).toHaveAttribute("href", HOMEPAGE_CATEGORY_LINKS[0].href);
     } finally {
       await context.close();
     }
@@ -154,9 +162,12 @@ test.describe("storefront release flows", () => {
     await expect(header).toHaveAttribute("data-visual-state", "overlay");
     await page.evaluate(() => window.scrollTo(0, window.innerHeight));
     await expect(header).toHaveAttribute("data-visual-state", "solid");
-    await expect(page.getByRole("button", { name: "Shop menu" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Gifts menu" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Discover menu" })).toBeVisible();
+    const mainNavigation = page.getByRole("navigation", { name: "Main navigation" });
+    for (const link of HEADER_LINKS) {
+      await expect(
+        mainNavigation.getByRole("link", { name: link.label, exact: true }),
+      ).toHaveAttribute("href", link.href);
+    }
 
     await page.goto("/about");
     await expect(page.locator("header[data-visual-state]")).toHaveAttribute(
@@ -165,11 +176,15 @@ test.describe("storefront release flows", () => {
     );
   });
 
-  test("shop navigation links to real pearl product-type filters", async ({ page }) => {
+  test("category navigation links to real pearl product-type filters", async ({ page }) => {
     await page.goto("/");
-    const shopMenu = page.getByRole("button", { name: "Shop menu" });
-    await shopMenu.click();
-    const earringsLink = page.getByRole("link", { name: "Pearl Earrings" }).first();
+    const categorySection = page.locator(
+      'section[aria-labelledby="pearl-edit-categories-title"]',
+    );
+    const earringsLink = categorySection
+      .locator("a")
+      .filter({ hasText: "Pearl Earrings" })
+      .first();
     await expect(earringsLink).toHaveAttribute(
       "href",
       "/collections/pearl-series?type=earrings",
@@ -196,48 +211,30 @@ test.describe("storefront release flows", () => {
     await expectImagesLoaded(editorialImages);
   });
 
-  test("desktop Shop, Gifts, and Discover menus open and navigate", async ({ page }) => {
-    for (const journey of [
-      { trigger: "Shop menu", item: "New Arrivals", path: "/collections/new-arrivals" },
-      { trigger: "Gifts menu", item: "All Gifts", path: "/gifts" },
-      { trigger: "Discover menu", item: "Pearl Knowledge", path: "/pearls" },
-    ]) {
+  test("desktop direct header links navigate to approved routes", async ({ page }) => {
+    for (const link of HEADER_LINKS) {
       await page.goto("/");
-      const trigger = page.getByRole("button", { name: journey.trigger });
-      await trigger.click();
-      await expect(trigger).toHaveAttribute("aria-expanded", "true");
-
-      const item = page.getByRole("menuitem", { name: journey.item });
-      await expect(item).toBeVisible();
-      await expect(item).toHaveAttribute("href", journey.path);
-
-      await page.locator("h1").click();
-      await expect(item).toHaveCount(0);
-      await expect(trigger).toHaveAttribute("aria-expanded", "false");
-
-      await trigger.click();
-      await expect(trigger).toHaveAttribute("aria-expanded", "true");
-      await expect(item).toBeVisible();
-      await item.click();
-      await expect(page).toHaveURL(new RegExp(`${journey.path.replaceAll("/", "\\/")}$`));
+      const directLink = page
+        .getByRole("navigation", { name: "Main navigation" })
+        .getByRole("link", { name: link.label, exact: true });
+      await expect(directLink).toHaveAttribute("href", link.href);
+      await directLink.click();
+      const path = link.href.split("?")[0].replaceAll("/", "\\/");
+      await expect(page).toHaveURL(new RegExp(`${path}(?:\\?.*)?$`));
     }
   });
 
-  test("desktop menu items return focus to their trigger on Escape", async ({ page }) => {
-    for (const menu of [
-      { triggerName: "Shop menu", menuId: "shop-menu", firstLink: "All Pearl Jewelry" },
-      { triggerName: "Gifts menu", menuId: "gifts-menu", firstLink: "All Gifts" },
-      { triggerName: "Discover menu", menuId: "discover-menu", firstLink: "Pearl Knowledge" },
-    ]) {
-      await page.goto("/");
-      const trigger = page.getByRole("button", { name: menu.triggerName });
-      const menuList = page.locator(`#${menu.menuId}`);
+  test("desktop direct header links remain keyboard focusable", async ({ page }) => {
+    await page.goto("/");
+    const mainNavigation = page.getByRole("navigation", { name: "Main navigation" });
+    const directLinks = HEADER_LINKS.map(({ label }) =>
+      mainNavigation.getByRole("link", { name: label, exact: true }),
+    );
 
-      await trigger.press("ArrowDown");
-      await expect(menuList.getByRole("menuitem", { name: menu.firstLink })).toBeFocused();
-      await page.keyboard.press("Escape");
-      await expect(menuList).toHaveCount(0);
-      await expect(trigger).toBeFocused();
+    await directLinks[0].focus();
+    for (let index = 0; index < directLinks.length; index += 1) {
+      await expect(directLinks[index]).toBeFocused();
+      if (index < directLinks.length - 1) await page.keyboard.press("Tab");
     }
   });
 
@@ -254,22 +251,18 @@ test.describe("storefront release flows", () => {
       const mobileDialog = page.getByRole("dialog", { name: "Navigation menu" });
       const closeButton = mobileDialog.getByRole("button", { name: "Close navigation menu" });
       await expect(mobileNav).toBeVisible();
-      for (const menu of HEADER_MENUS) {
-        await expect(mobileNav.getByText(menu.label, { exact: true })).toBeVisible();
-        for (const link of menu.links) {
-          await expect(mobileNav.getByRole("link", { name: link.label, exact: true })).toHaveAttribute(
-            "href",
-            link.href,
-          );
-        }
+      for (const link of HEADER_LINKS) {
+        await expect(
+          mobileNav.getByRole("link", { name: link.label, exact: true }),
+        ).toHaveAttribute("href", link.href);
       }
 
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth),
       ).toBeLessThanOrEqual(0);
 
-      const lastMenu = HEADER_MENUS[HEADER_MENUS.length - 1];
-      const lastRoute = lastMenu.links[lastMenu.links.length - 1];
+      const lastRoute = HEADER_LINKS.at(-1);
+      if (!lastRoute) throw new Error("HEADER_LINKS must expose a final mobile route");
       const lastLink = mobileNav.getByRole("link", {
         name: lastRoute.label,
         exact: true,
@@ -288,8 +281,8 @@ test.describe("storefront release flows", () => {
     const searchTrigger = page.getByRole("button", { name: "Search products" });
     await expect(searchTrigger).toHaveAttribute("title", "Search products");
     const searchBounds = await searchTrigger.boundingBox();
-    expect(searchBounds?.width).toBe(40);
-    expect(searchBounds?.height).toBe(40);
+    expect(searchBounds?.width).toBeGreaterThanOrEqual(44);
+    expect(searchBounds?.height).toBeGreaterThanOrEqual(44);
     await searchTrigger.click();
     const searchDialog = page.getByRole("dialog", { name: "Search products" });
     await expect(searchDialog).toBeVisible();
@@ -347,7 +340,6 @@ test.describe("storefront release flows", () => {
       ["Pearl Guide", "/pearls"],
       ["Pearl Care", "/pearls/care"],
       ["Our Story", "/about"],
-      ["Find Your Guardian", "/guardian-quiz"],
       ["Contact", "/contact"],
       ["Privacy", "/privacy"],
       ["Terms", "/terms"],
@@ -360,6 +352,9 @@ test.describe("storefront release flows", () => {
         href,
       );
     }
+    await expect(
+      footer.getByRole("link", { name: "Find Your Guardian", exact: true }),
+    ).toHaveCount(0);
   });
 
   test("newsletter announces a successful subscription", async ({ page }) => {

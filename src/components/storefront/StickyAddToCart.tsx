@@ -7,8 +7,17 @@ export function shouldShowStickyAddToCart(
   visible: boolean,
   primaryInViewport: boolean,
   isMobile: boolean,
+  primaryHasBeenInViewport: boolean,
 ): boolean {
-  return visible && !primaryInViewport && isMobile;
+  return visible && !primaryInViewport && isMobile && primaryHasBeenInViewport;
+}
+
+export function shouldMarkPrimaryAsEncountered(
+  alreadyEncountered: boolean,
+  isIntersecting: boolean,
+  boundingClientRectBottom: number,
+): boolean {
+  return alreadyEncountered || isIntersecting || boundingClientRectBottom <= 0;
 }
 
 interface StickyAddToCartProps {
@@ -27,6 +36,7 @@ export function StickyAddToCart({
   label,
 }: StickyAddToCartProps) {
   const [primaryInViewport, setPrimaryInViewport] = useState(true);
+  const [primaryHasBeenInViewport, setPrimaryHasBeenInViewport] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -39,6 +49,7 @@ export function StickyAddToCart({
       if (!visible || !mobileQuery.matches) {
         setIsMobile(false);
         setPrimaryInViewport(true);
+        setPrimaryHasBeenInViewport(false);
         return;
       }
 
@@ -46,11 +57,21 @@ export function StickyAddToCart({
       const primaryControl = document.getElementById("primary-add-to-cart");
       if (!primaryControl) {
         setPrimaryInViewport(true);
+        setPrimaryHasBeenInViewport(false);
         return;
       }
 
       observer = new IntersectionObserver(
-        ([entry]) => setPrimaryInViewport(entry.isIntersecting),
+        ([entry]) => {
+          setPrimaryInViewport(entry.isIntersecting);
+          setPrimaryHasBeenInViewport((alreadyEncountered) =>
+            shouldMarkPrimaryAsEncountered(
+              alreadyEncountered,
+              entry.isIntersecting,
+              entry.boundingClientRect.bottom,
+            ),
+          );
+        },
         { threshold: 0.15 },
       );
       observer.observe(primaryControl);
@@ -65,7 +86,7 @@ export function StickyAddToCart({
     };
   }, [visible]);
 
-  if (!shouldShowStickyAddToCart(visible, primaryInViewport, isMobile)) {
+  if (!shouldShowStickyAddToCart(visible, primaryInViewport, isMobile, primaryHasBeenInViewport)) {
     return null;
   }
 

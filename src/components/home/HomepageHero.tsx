@@ -25,7 +25,7 @@ export function HomepageHero() {
     <section
       data-homepage-section="homepage-signature-hero"
       data-signature-hero="true"
-      className="relative -mt-16 [--homepage-category-reveal:10rem] lg:[--homepage-category-reveal:18rem] aspect-[4/5] overflow-hidden bg-[#24312f] text-white sm:aspect-[3/2] lg:aspect-[16/9]"
+      className="relative -mt-16 w-full [--homepage-category-reveal:10rem] lg:[--homepage-category-reveal:18rem] aspect-[4/5] min-h-[30rem] overflow-hidden bg-[#24312f] text-white sm:aspect-[3/2] lg:aspect-[21/10]"
       aria-labelledby="homepage-hero-title"
     >
       {HOMEPAGE_HERO_SLIDES.map((slide, index) => (

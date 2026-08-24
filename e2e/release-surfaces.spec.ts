@@ -9,7 +9,7 @@ import {
   PEARL_HUB_FAQ,
 } from "../src/lib/editorial/guides";
 import { getNewArrivalProducts } from "../src/lib/editorial/gifts";
-import { absoluteUrl } from "../src/lib/site";
+import { absoluteUrl, DEFAULT_SITE_URL } from "../src/lib/site";
 import { getStorefrontProducts } from "../src/lib/storefront/catalog";
 
 const STOREFRONT_PRODUCT_COUNT = getStorefrontProducts().length;
@@ -100,7 +100,7 @@ async function expectReviewedPearlCareRoute(
     name: "How to Care for Pearls",
   });
   const lead = main.locator("article h1 + p");
-  const canonical = absoluteUrl("/pearls/care");
+  const canonical = new URL("/pearls/care", `${DEFAULT_SITE_URL}/`).toString();
 
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(heading).toBeVisible();
@@ -786,6 +786,12 @@ test.describe("release surfaces", () => {
   });
 
   test("mobile product purchase entry keeps its gallery controls, primary action, and cart opening intact", async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem(
+        "cookie-consent",
+        JSON.stringify({ necessary: true, analytics: false, marketing: false }),
+      );
+    });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/products/new-series-pearl-glasses-chain");
 
