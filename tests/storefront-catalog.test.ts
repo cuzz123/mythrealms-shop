@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import test from "node:test";
 
 import {
@@ -11,6 +13,7 @@ import {
   shouldMarkPrimaryAsEncountered,
   shouldShowStickyAddToCart,
 } from "../src/components/storefront/StickyAddToCart";
+import { NEW_SERIES_COPY_EVIDENCE } from "../src/lib/storefront/new-series-copy-evidence";
 
 const EXPECTED_TYPES = {
   rings: ["pearl-series-01", "pearl-series-02", "pearl-series-03"],
@@ -89,186 +92,6 @@ const EXPECTED_TYPES = {
 const NEW_SERIES_SLUGS = Object.values(EXPECTED_TYPES)
   .flat()
   .filter((slug) => slug.startsWith("new-series-"));
-
-type NewSeriesCopyEvidence = {
-  productType: keyof typeof EXPECTED_TYPES;
-  visibleTerms: readonly string[];
-};
-
-const NEW_SERIES_COPY_EVIDENCE: Record<string, NewSeriesCopyEvidence> = {
-  "new-series-white-shell-flower-drops": {
-    productType: "earrings",
-    visibleTerms: ["translucent white", "scalloped petals", "flower drops", "two flowers"],
-  },
-  "new-series-gold-shell-teardrops": {
-    productType: "earrings",
-    visibleTerms: ["pale petal-shaped", "gold-toned oval", "cream beads", "teardrop outline"],
-  },
-  "new-series-baroque-pearl-hoops": {
-    productType: "earrings",
-    visibleTerms: ["irregular luminous white drops", "round hoops", "uneven lower shapes", "organic"],
-  },
-  "new-series-purple-gem-pearl-drops": {
-    productType: "earrings",
-    visibleTerms: ["milky oval center", "violet border", "reflective points", "round violet stud"],
-  },
-  "new-series-white-petal-flower-earrings": {
-    productType: "earrings",
-    visibleTerms: ["four rounded white petals", "luminous bead", "close to the ear", "floral outline"],
-  },
-  "new-series-mother-of-pearl-cluster-earrings": {
-    productType: "earrings",
-    visibleTerms: ["layered pale petal forms", "bead grouping", "round lower charm", "clustered drop"],
-  },
-  "new-series-white-shell-triple-drops": {
-    productType: "earrings",
-    visibleTerms: ["three pale round shell-like discs", "gold-toned edge", "vertical drop", "repeated circles"],
-  },
-  "new-series-round-shell-disc-drops": {
-    productType: "earrings",
-    visibleTerms: ["dark green-gray upper discs", "iridescent lower discs", "pale bead clusters", "round surfaces"],
-  },
-  "new-series-pearl-jade-bracelet": {
-    productType: "bracelets",
-    visibleTerms: ["irregular pearl-like white beads", "smooth green oval accent", "gold-toned links", "wrist"],
-  },
-  "new-series-purple-gem-bangle": {
-    productType: "bracelets",
-    visibleTerms: ["faceted purple center", "pale round accents", "open warm gold-toned bangle", "straight rails"],
-  },
-  "new-series-shell-twist-pearl-cuff": {
-    productType: "bracelets",
-    visibleTerms: ["smooth pale round forms", "irregular shell-like accent", "coiled gold-toned line", "open arc"],
-  },
-  "new-series-leaf-turquoise-pearl-cuff": {
-    productType: "bracelets",
-    visibleTerms: ["turquoise-colored round accents", "pale irregular center", "looping gold-toned cuff", "leaf"],
-  },
-  "new-series-leaf-pearl-bracelet": {
-    productType: "bracelets",
-    visibleTerms: ["pearl-like white beads", "leaf-shaped gold-toned forms", "repeating wrist line", "botanical"],
-  },
-  "new-series-round-shell-gold-cuff": {
-    productType: "bracelets",
-    visibleTerms: ["pale bead accents", "leaf- and shell-shaped", "gold-toned forms", "rounded centers"],
-  },
-  "new-series-purple-stone-pendant-necklace": {
-    productType: "necklaces",
-    visibleTerms: ["faceted purple stone-like shape", "rounded gold-toned frame", "dark, mauve, and smoky beads", "pendant"],
-  },
-  "new-series-pearl-y-lariat": {
-    productType: "necklaces",
-    visibleTerms: ["fine gold-toned chain", "graduated pearl-like beads", "Y-shaped layout", "final round drop"],
-  },
-  "new-series-green-layered-pendant-necklace": {
-    productType: "necklaces",
-    visibleTerms: ["fine gold-toned chain", "alternating light cream rounded beads", "openwork center", "single lower bead"],
-  },
-  "new-series-pearl-dreamcatcher-lariat": {
-    productType: "necklaces",
-    visibleTerms: ["fine at the shoulders", "pearl-like beads", "openwork medallion", "long central drop"],
-  },
-  "new-series-pearl-drop-choker": {
-    productType: "necklaces",
-    visibleTerms: ["row of small pearl-like beads", "slim chain drops", "fringe edge", "front"],
-  },
-  "new-series-multi-strand-pearl-choker": {
-    productType: "necklaces",
-    visibleTerms: ["fine gold-toned chain", "many strands", "pearl-like beads", "varied lengths"],
-  },
-  "new-series-black-drop-pearl-choker": {
-    productType: "necklaces",
-    visibleTerms: ["pale close-set bead line", "gold-toned chains", "pointed front fringe", "descending chain lengths"],
-  },
-  "new-series-pearl-glasses-chain": {
-    productType: "eyewear-chains",
-    visibleTerms: ["rounded pearl-like beads", "fine gold-toned chain", "clear loops for glasses", "near the frames"],
-  },
-  "new-series-shell-drop-glasses-chain": {
-    productType: "eyewear-chains",
-    visibleTerms: ["fan-shaped shell-like pendant", "slim gold-toned chain", "clear loops", "scalloped edges"],
-  },
-  "new-series-classic-pearl-chain": {
-    productType: "eyewear-chains",
-    visibleTerms: ["evenly spaced pearl-like beads", "slim gold-toned line", "clear glasses loops", "front section"],
-  },
-  "new-series-turquoise-bead-chain": {
-    productType: "eyewear-chains",
-    visibleTerms: ["fine gold-toned line", "two vertical groups", "turquoise-colored beads", "clear loops for glasses"],
-  },
-  "new-series-white-floral-hair-stick": {
-    productType: "hair-accessories",
-    visibleTerms: ["white many-petaled flower", "slim gold-toned stick", "blue-green round center", "low twist"],
-  },
-  "new-series-white-flower-wood-stick": {
-    productType: "hair-accessories",
-    visibleTerms: ["dark wood-toned curved stick", "small white flower", "pearl-like hanging accent", "brown and ivory"],
-  },
-  "new-series-pearl-cluster-hair-claw": {
-    productType: "hair-accessories",
-    visibleTerms: ["irregular white pearl-like forms", "dense flower-like top", "gold-toned claw base", "petal-shaped pieces"],
-  },
-  "new-series-gold-pearl-hair-stick": {
-    productType: "hair-accessories",
-    visibleTerms: ["long, slim gold-toned stick", "elongated pearl-like accent", "open floral connector", "updo"],
-  },
-  "new-series-pearl-flower-u-pin": {
-    productType: "hair-accessories",
-    visibleTerms: ["five-petal flower", "rounded pearl-like center", "circular ring", "two long prongs"],
-  },
-  "new-series-pearl-bar-hair-clip": {
-    productType: "hair-accessories",
-    visibleTerms: ["three flower-like clusters", "gold-toned bar", "warmer center", "floral band"],
-  },
-  "new-series-shell-chip-hair-clip": {
-    productType: "hair-accessories",
-    visibleTerms: ["irregular pale shell-like pieces", "rounded bead accents", "gold-toned filigree base", "petal shapes"],
-  },
-  "new-series-wood-flower-hair-stick": {
-    productType: "hair-accessories",
-    visibleTerms: ["dark wood-toned stick", "two small floral ornaments", "pale drop", "long brown base"],
-  },
-  "new-series-daisy-chain-hair-stick": {
-    productType: "hair-accessories",
-    visibleTerms: ["pale daisy-like flower", "bright yellow middle", "two trailing gold-toned chains", "straight counterline"],
-  },
-  "new-series-wood-pearl-hair-stick": {
-    productType: "hair-accessories",
-    visibleTerms: ["dark openwork top", "long narrow stick", "three pearl-like drops", "separate gold-toned chains"],
-  },
-  "new-series-gold-star-hair-stick": {
-    productType: "hair-accessories",
-    visibleTerms: ["white five-petal flower", "amber-colored center", "branch-like details", "double-prong base"],
-  },
-  "new-series-star-flower-hair-clip": {
-    productType: "hair-accessories",
-    visibleTerms: ["pale pointed flower", "gold-toned bar", "soft pink rounded center", "pointed petals"],
-  },
-  "new-series-chain-flower-hair-pin": {
-    productType: "hair-accessories",
-    visibleTerms: ["small rounded cluster", "open rectangular frame", "fine gold-toned chains", "vertical path"],
-  },
-  "new-series-flower-pearl-hair-clip": {
-    productType: "hair-accessories",
-    visibleTerms: ["warm gold-toned bar", "pale irregular forms", "darker rounded accent", "wing-like spread"],
-  },
-  "new-series-pink-flower-hair-clip": {
-    productType: "hair-accessories",
-    visibleTerms: ["soft pink and white rounded forms", "compact floral group", "slim gold-toned clip", "blush note"],
-  },
-  "new-series-blue-flower-bow-hair-clip": {
-    productType: "hair-accessories",
-    visibleTerms: ["cool blue-green round accent", "pale petal-like forms", "warm gold-toned bar", "cool-warm contrast"],
-  },
-  "new-series-blue-teardrop-hair-stick": {
-    productType: "hair-accessories",
-    visibleTerms: ["round blue center", "radiating frame", "dark wood-toned stick", "pearl-like drops"],
-  },
-  "new-series-dragonfly-hair-clip": {
-    productType: "hair-accessories",
-    visibleTerms: ["pale textured wings", "green oval center", "deep violet round accents", "horizontal clip bar"],
-  },
-} as const;
 
 test("storefront exposes the 20 core products and 43 approved new-series products", () => {
   const products = getStorefrontProducts();
@@ -424,6 +247,20 @@ test("each new-series description matches its approved gallery evidence and prod
   }
 });
 
+test("new-series copy evidence stays independent from product source copy", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/lib/new-series-products.ts"),
+    "utf8",
+  );
+
+  assert.doesNotMatch(
+    source,
+    /new-series-copy-evidence|NEW_SERIES_COPY_EVIDENCE/,
+    "product source copy must not consume its review manifest",
+  );
+  assert.equal(Object.keys(NEW_SERIES_COPY_EVIDENCE).length, 43);
+});
+
 test("new-series products have explicit, distinct, substantive descriptions", () => {
   const products = NEW_SERIES_SLUGS.map((slug) => {
     const product = getStorefrontProductBySlug(slug);
@@ -444,6 +281,11 @@ test("new-series products have explicit, distinct, substantive descriptions", ()
     assert.ok(
       !product.description.includes("lighting and screens can affect how details appear"),
       `${product.slug} must not use the shared lighting disclaimer`,
+    );
+    assert.doesNotMatch(
+      product.description,
+      /approved image|image's own palette|source-supplied/i,
+      `${product.slug} must describe the product directly without internal review language`,
     );
   }
 });
@@ -532,7 +374,8 @@ test("new-series product copy avoids repeated long phrases and sentence template
 
   const repeatedSentenceOpenings = new Map<string, Set<string>>();
   for (const product of products) {
-    for (const sentence of product.description.split(/[.!?]+/).slice(1)) {
+    const descriptionWithoutName = product.description.replace(product.name, "");
+    for (const sentence of descriptionWithoutName.split(/[.!?]+/)) {
       const opening = sentence
         .trim()
         .toLowerCase()

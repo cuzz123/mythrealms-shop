@@ -294,7 +294,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
 
           {/* Delivery estimate */}
           <p className="mt-1.5 text-xs text-[var(--text-muted)]">
-            Free shipping over $69.99 - Delivery estimate shown at checkout
+            Free shipping on orders of {formatPrice(STORE_POLICY_FACTS.freeShippingThresholdUsd)} or more - Delivery estimate shown at checkout
           </p>
           <FreeShippingProgress subtotal={p.price * quantity} className="mt-4" />
 
@@ -430,7 +430,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
           )}
 
           <div className="mt-4 flex items-center gap-4 text-xs text-[var(--text-muted)]">
-            <span>Free shipping over $69.99</span>
+            <span>Free shipping on orders of {formatPrice(STORE_POLICY_FACTS.freeShippingThresholdUsd)} or more</span>
             <span>·</span>
             <span>30-day returns</span>
             <span>·</span>

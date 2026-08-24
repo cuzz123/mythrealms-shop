@@ -28,12 +28,12 @@
 - Modify: `src/lib/new-series-products.ts`
 - Modify: `tests/storefront-catalog.test.ts`
 
-- [ ] Add failing catalog tests proving all 43 New Series descriptions are explicit, unique, substantial, and free of the old shared source-photo disclaimer.
-- [ ] Run the focused test and record the expected failure.
-- [ ] Make description a required input for every New Series product and write distinct copy for all 43 products.
-- [ ] Ensure copy contains no unverified material, dimension, origin, certification, durability, or manufacturing claims.
-- [ ] Run focused catalog tests and `git diff --check`.
-- [ ] Review the full diff for product-to-description mismatches.
+- [x] Add failing catalog tests proving all 43 New Series descriptions are explicit, unique, substantial, and free of the old shared source-photo disclaimer.
+- [x] Run the focused test and record the expected failure.
+- [x] Make description a required input for every New Series product and write distinct copy for all 43 products.
+- [x] Ensure copy contains no unverified material, dimension, origin, certification, durability, or manufacturing claims.
+- [x] Run focused catalog tests and `git diff --check`.
+- [x] Review the full diff for product-to-description mismatches.
 
 ### Task 2: Verified Product Offer policies
 
@@ -44,23 +44,23 @@
 - Modify: `tests/structured-data.test.ts`
 - Modify if necessary: `tests/storefront-policies.test.ts`
 
-- [ ] Add failing tests for Google-compatible `shippingDetails` and `hasMerchantReturnPolicy` derived from `STORE_POLICY_FACTS`.
-- [ ] Run focused structured-data tests and record the expected failure.
-- [ ] Extend `ProductSchemaInput`, `buildProductSchema`, and `ProductJsonLd` with verified policy facts.
-- [ ] Emit US `OfferShippingDetails` with the current standard shipping rate and verified handling/transit windows.
-- [ ] Emit the existing verified MerchantReturnPolicy under the Offer.
-- [ ] Pass `STORE_POLICY_FACTS` from the product page; do not add ratings or reviews.
-- [ ] Run focused structured-data and storefront-policy tests plus `git diff --check`.
+- [x] Add failing tests for Google-compatible `shippingDetails` and `hasMerchantReturnPolicy` derived from `STORE_POLICY_FACTS`.
+- [x] Run focused structured-data tests and record the expected failure.
+- [x] Extend `ProductSchemaInput`, `buildProductSchema`, and `ProductJsonLd` with verified policy facts.
+- [x] Emit US `OfferShippingDetails` with the current standard shipping rate and verified handling/transit windows.
+- [x] Emit the existing verified MerchantReturnPolicy under the Offer.
+- [x] Pass `STORE_POLICY_FACTS` from the product page; do not add ratings or reviews.
+- [x] Run focused structured-data and storefront-policy tests plus `git diff --check`.
 
 ### Task 3: Integration verification and production release
 
 **Files:**
 - Modify only if a verified defect is found in release-owned paths.
 
-- [ ] Run all unit tests, lint, typecheck, and a fresh production build.
+- [x] Run all unit tests, lint, typecheck, and a fresh production build.
 - [ ] Run relevant Product/SEO Playwright tests and the complete Playwright suite if the isolated database prerequisites are available.
-- [ ] Audit production-candidate HTML for all 63 product URLs: 200, indexable, self-canonical, unique metadata, unique New Series descriptions, Product Offer shipping and return data, and zero review/rating fabrication.
-- [ ] Review the exact release diff and commit only release-owned files.
+- [x] Audit production-candidate HTML for all 63 product URLs: 200, indexable, self-canonical, unique metadata, unique New Series descriptions, Product Offer shipping and return data, and zero review/rating fabrication.
+- [x] Review the exact release diff and commit only release-owned files.
 - [ ] Push the candidate to remote `main` without force and wait for Vercel Production Ready.
 - [ ] Smoke-test `https://www.maverenne.com`, representative products, sitemap, robots, canonical, and Product JSON-LD.
 - [ ] Record unavailable Search Console counts as `not_available`, never `0`.

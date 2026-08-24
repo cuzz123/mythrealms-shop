@@ -147,14 +147,18 @@ export function buildProductSchema(input: ProductSchemaInput) {
   const shippingDetails = input.policyFacts && currency === "USD"
     ? {
         "@type": "OfferShippingDetails",
-        shippingRate: {
-          "@type": "MonetaryAmount",
-          value:
-            input.price >= input.policyFacts.freeShippingThresholdUsd
-              ? 0
-              : input.policyFacts.standardShippingFlatRateUsd,
-          currency,
-        },
+        shippingRate:
+          input.price >= input.policyFacts.freeShippingThresholdUsd
+            ? {
+                "@type": "MonetaryAmount",
+                value: 0,
+                currency,
+              }
+            : {
+                "@type": "MonetaryAmount",
+                maxValue: input.policyFacts.standardShippingFlatRateUsd,
+                currency,
+              },
         shippingDestination: {
           "@type": "DefinedRegion",
           addressCountry: "US",

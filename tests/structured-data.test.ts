@@ -151,7 +151,7 @@ test("product schema derives Google merchant policies from verified store facts"
     "@type": "OfferShippingDetails",
     shippingRate: {
       "@type": "MonetaryAmount",
-      value: 4.99,
+      maxValue: 4.99,
       currency: "USD",
     },
     shippingDestination: {
@@ -200,6 +200,55 @@ test("product schema emits free US shipping at the verified threshold", () => {
   assert.ok(schema.offers.shippingDetails);
   assert.equal(schema.offers.shippingDetails.shippingRate.value, 0);
   assert.equal(schema.offers.shippingDetails.shippingRate.currency, "USD");
+});
+
+test("product offers use a maximum below the order threshold and free value at or above it", () => {
+  const below = buildProductSchema({
+    name: "Pearl Collar",
+    description: "Pearl collar.",
+    images: ["https://example.com/collar.jpg"],
+    price: STORE_POLICY_FACTS.freeShippingThresholdUsd - 0.01,
+    currency: "USD",
+    availability: "InStock",
+    url: "https://example.com/products/pearl-collar-below",
+    policyFacts: STORE_POLICY_FACTS,
+  });
+  const at = buildProductSchema({
+    name: "Pearl Collar",
+    description: "Pearl collar.",
+    images: ["https://example.com/collar.jpg"],
+    price: STORE_POLICY_FACTS.freeShippingThresholdUsd,
+    currency: "USD",
+    availability: "InStock",
+    url: "https://example.com/products/pearl-collar-at",
+    policyFacts: STORE_POLICY_FACTS,
+  });
+  const above = buildProductSchema({
+    name: "Pearl Collar",
+    description: "Pearl collar.",
+    images: ["https://example.com/collar.jpg"],
+    price: STORE_POLICY_FACTS.freeShippingThresholdUsd + 0.01,
+    currency: "USD",
+    availability: "InStock",
+    url: "https://example.com/products/pearl-collar-above",
+    policyFacts: STORE_POLICY_FACTS,
+  });
+
+  assert.deepEqual(below.offers.shippingDetails?.shippingRate, {
+    "@type": "MonetaryAmount",
+    maxValue: STORE_POLICY_FACTS.standardShippingFlatRateUsd,
+    currency: "USD",
+  });
+  assert.deepEqual(at.offers.shippingDetails?.shippingRate, {
+    "@type": "MonetaryAmount",
+    value: 0,
+    currency: "USD",
+  });
+  assert.deepEqual(above.offers.shippingDetails?.shippingRate, {
+    "@type": "MonetaryAmount",
+    value: 0,
+    currency: "USD",
+  });
 });
 
 test("product schema omits USD-only policies for non-USD offers", () => {
@@ -263,7 +312,7 @@ test("ProductJsonLd forwards verified policy facts into the rendered Offer", () 
     "@type": "OfferShippingDetails",
     shippingRate: {
       "@type": "MonetaryAmount",
-      value: 4.99,
+      maxValue: 4.99,
       currency: "USD",
     },
     shippingDestination: {
@@ -297,6 +346,24 @@ test("ProductJsonLd forwards verified policy facts into the rendered Offer", () 
   });
 });
 
+test("ProductJsonLd omits USD-only policy objects from a rendered non-USD Offer", () => {
+  const html = renderToStaticMarkup(
+    createElement(ProductJsonLd, {
+      name: "Pearl Drop Earrings",
+      description: "Pearl drop earrings.",
+      images: ["https://example.com/product.jpg"],
+      price: 39.99,
+      currency: "GBP",
+      availability: "InStock",
+      url: "https://example.com/products/pearl-drop-earrings",
+      policyFacts: STORE_POLICY_FACTS,
+    }),
+  );
+
+  assert.doesNotMatch(html, /shippingDetails/);
+  assert.doesNotMatch(html, /hasMerchantReturnPolicy/);
+});
+
 test("the product page renders exactly one ProductJsonLd wrapper", () => {
   const source = readFileSync(
     path.join(process.cwd(), "src/app/products/[slug]/1688-product.tsx"),
@@ -317,6 +384,19 @@ test("the product page passes verified policy facts to ProductJsonLd", () => {
     /import \{ STORE_POLICY_FACTS \} from "@\/lib\/storefront\/policies"/,
   );
   assert.match(source, /policyFacts=\{STORE_POLICY_FACTS\}/);
+});
+
+test("the product page uses centralized order-level free-shipping wording", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/products/[slug]/1688-product.tsx"),
+    "utf8",
+  );
+
+  assert.doesNotMatch(source, /Free shipping over \$69\.99/i);
+  assert.equal(
+    (source.match(/Free shipping on orders of \{formatPrice\(STORE_POLICY_FACTS\.freeShippingThresholdUsd\)\} or more/g) || []).length,
+    2,
+  );
 });
 
 test("the product page builds structured-data URLs through the approved site helpers", () => {
@@ -368,14 +448,22 @@ test("organization schema accepts verified policy data without inventing people"
   assert.equal("founder" in schema, false);
 });
 
-test("public organization JSON-LD omits unverified shipping and return policies", () => {
+test("public organization JSON-LD includes verified shipping and return policies", () => {
   const html = renderToStaticMarkup(createElement(OrganizationJsonLd));
   const match = html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/);
 
   assert.ok(match, "expected an organization JSON-LD script");
   const schema = JSON.parse(match[1]) as Record<string, unknown>;
-  assert.equal("hasShippingService" in schema, false);
-  assert.equal("hasMerchantReturnPolicy" in schema, false);
+  assert.equal("hasShippingService" in schema, true);
+  assert.equal("hasMerchantReturnPolicy" in schema, true);
+  assert.equal(
+    (schema.hasShippingService as { name: string }).name,
+    "Maverenne Standard Shipping",
+  );
+  assert.equal(
+    (schema.hasMerchantReturnPolicy as { merchantReturnDays: number }).merchantReturnDays,
+    STORE_POLICY_FACTS.returnWindowDays,
+  );
 });
 
 test("organization schema mirrors optional verified policy objects", () => {

@@ -276,7 +276,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "necklace",
     price: 59.99,
     detailCount: 1,
-    description: "The Midnight Drop - Choker is shown as a pale close-set bead line with fine gold-toned chains dropping into a pointed front fringe. Against a black or charcoal top, the light beads take on the night-time contrast suggested by the name, while the image's own palette stays pale and warm. A simple neckline keeps the descending chain lengths easy to see.",
+    description: "The Midnight Drop - Choker is shown as a pale close-set bead line with fine gold-toned chains dropping into a pointed front fringe. Against a black or charcoal top, the light beads stand out in clear contrast. The pale, warm colors keep the pointed fringe connected. A simple neckline keeps the descending chain lengths easy to see.",
   }),
   createProduct({
     id: "new-series-022",
@@ -474,6 +474,6 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 43.99,
     detailCount: 0,
-    description: "The Jade Dragonfly - Hair Clip depicts pale textured wings around a green oval center, with deep violet round accents and a warm gold-toned body. Wing texture, color blocks, and the horizontal clip bar make the insect outline easy to recognize in the approved image. Near a side sweep or pinned-back section, the green and violet colors can sit against a simple neutral top.",
+    description: "The Jade Dragonfly - Hair Clip depicts pale textured wings around a green oval center, with deep violet round accents and a warm gold-toned body. Wing texture, color blocks, and the horizontal clip bar make the insect outline easy to recognize. Near a side sweep or pinned-back section, the green and violet colors can sit against a simple neutral top.",
   }),
 ];
