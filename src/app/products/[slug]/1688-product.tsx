@@ -482,7 +482,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold text-[var(--accent)] uppercase tracking-wider mb-1.5">Shipping Info</h4>
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Free standard shipping on orders over $69.99. Delivery timing is shown at checkout and can vary by destination and carrier.</p>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">Free standard shipping on orders of {formatPrice(STORE_POLICY_FACTS.freeShippingThresholdUsd)} or more. Delivery timing is shown at checkout and can vary by destination and carrier.</p>
                 </div>
               </div>
             )}

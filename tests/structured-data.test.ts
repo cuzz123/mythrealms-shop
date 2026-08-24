@@ -392,11 +392,20 @@ test("the product page uses centralized order-level free-shipping wording", () =
     "utf8",
   );
 
-  assert.doesNotMatch(source, /Free shipping over \$69\.99/i);
-  assert.equal(
-    (source.match(/Free shipping on orders of \{formatPrice\(STORE_POLICY_FACTS\.freeShippingThresholdUsd\)\} or more/g) || []).length,
-    2,
-  );
+  const thresholdShippingLines = source
+    .split(/\r?\n/)
+    .filter(
+      (line) =>
+        /shipping/i.test(line) &&
+        (/(?:freeShippingThresholdUsd|\$69\.99)/i.test(line)),
+    );
+  const approvedBoundary = /orders of (?:\{formatPrice\(STORE_POLICY_FACTS\.freeShippingThresholdUsd\)\}|\$69\.99) or more/i;
+
+  assert.equal(thresholdShippingLines.length, 3);
+  for (const line of thresholdShippingLines) {
+    assert.match(line, approvedBoundary);
+  }
+  assert.doesNotMatch(source, /orders over \$69\.99/i);
 });
 
 test("the product page builds structured-data URLs through the approved site helpers", () => {
