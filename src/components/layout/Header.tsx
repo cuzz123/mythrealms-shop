@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { ChevronDown, Heart, Menu, ShoppingBag, User, X } from "lucide-react";
 import { useCartStore, useCartUIStore } from "@/lib/cart";
 import { useWishlistStore } from "@/lib/wishlist";
@@ -26,12 +25,10 @@ type DesktopMenu = HeaderMenuId | null;
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenu, setDesktopMenu] = useState<DesktopMenu>(null);
-  const { data: session } = useSession();
   const pathname = usePathname();
   const itemCount = useCartStore((state) => state.itemCount());
   const openCart = useCartUIStore((state) => state.openCart);
   const wishlistCount = useWishlistStore((state) => state.count());
-  const user = session?.user;
   const isOverlay = useHeaderVisualState(pathname) === "overlay";
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileCloseRef = useRef<HTMLButtonElement>(null);
@@ -238,15 +235,11 @@ export function Header() {
           <SearchOverlay isScrolled={!isOverlay} />
           <Link
             href="/account"
-            aria-label={user ? `${user.name || "My account"} - View account` : "My account - Sign in"}
+            aria-label="My account"
             title="My account"
             className={`hidden h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--muted-blue)] focus-visible:ring-offset-2 sm:flex ${overlayControlClass}`}
           >
-            {user?.image ? (
-              <img src={user.image} alt={user.name || "User"} className="h-5 w-5 rounded-full object-cover" />
-            ) : (
-              <User size={20} strokeWidth={1.8} />
-            )}
+            <User size={20} strokeWidth={1.8} />
           </Link>
           <Link
             href="/wishlist"

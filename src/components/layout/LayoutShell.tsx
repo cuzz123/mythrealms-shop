@@ -1,5 +1,4 @@
 import { Toaster } from "react-hot-toast";
-import { Providers } from "@/app/providers";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -13,9 +12,7 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
     <>
       <div data-storefront-chrome="header">
         <AnnouncementBar />
-        <Providers>
-          <Header />
-        </Providers>
+        <Header />
       </div>
       <main id="main-content" className="min-h-screen pb-28 lg:pb-0">
         {children}
