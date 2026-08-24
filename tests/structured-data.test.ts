@@ -202,6 +202,22 @@ test("product schema emits free US shipping at the verified threshold", () => {
   assert.equal(schema.offers.shippingDetails.shippingRate.currency, "USD");
 });
 
+test("product schema omits USD-only policies for non-USD offers", () => {
+  const schema = buildProductSchema({
+    name: "Pearl Collar",
+    description: "Pearl collar.",
+    images: ["https://example.com/collar.jpg"],
+    price: 39.99,
+    currency: "GBP",
+    availability: "InStock",
+    url: "https://example.com/products/pearl-collar",
+    policyFacts: STORE_POLICY_FACTS,
+  });
+
+  assert.equal("shippingDetails" in schema.offers, false);
+  assert.equal("hasMerchantReturnPolicy" in schema.offers, false);
+});
+
 test("ProductJsonLd emits exactly one Product object with its legacy InStock default", () => {
   const html = renderToStaticMarkup(
     createElement(ProductJsonLd, {
@@ -219,6 +235,68 @@ test("ProductJsonLd emits exactly one Product object with its legacy InStock def
   assert.match(html, /https:\/\/schema\.org\/InStock/);
 });
 
+test("ProductJsonLd forwards verified policy facts into the rendered Offer", () => {
+  const html = renderToStaticMarkup(
+    createElement(ProductJsonLd, {
+      name: "Pearl Drop Earrings",
+      description: "Pearl drop earrings.",
+      images: ["https://example.com/product.jpg"],
+      price: 39.99,
+      currency: "USD",
+      availability: "InStock",
+      url: "https://example.com/products/pearl-drop-earrings",
+      policyFacts: STORE_POLICY_FACTS,
+    }),
+  );
+  const match = html.match(
+    /<script type="application\/ld\+json">([^<]+)<\/script>/,
+  );
+
+  assert.ok(match, "expected a Product JSON-LD script");
+  const schema = JSON.parse(match[1]) as {
+    offers: {
+      shippingDetails?: Record<string, unknown>;
+      hasMerchantReturnPolicy?: Record<string, unknown>;
+    };
+  };
+  assert.deepEqual(schema.offers.shippingDetails, {
+    "@type": "OfferShippingDetails",
+    shippingRate: {
+      "@type": "MonetaryAmount",
+      value: 4.99,
+      currency: "USD",
+    },
+    shippingDestination: {
+      "@type": "DefinedRegion",
+      addressCountry: "US",
+    },
+    deliveryTime: {
+      "@type": "ShippingDeliveryTime",
+      handlingTime: {
+        "@type": "QuantitativeValue",
+        minValue: 2,
+        maxValue: 5,
+        unitCode: "DAY",
+      },
+      transitTime: {
+        "@type": "QuantitativeValue",
+        minValue: 8,
+        maxValue: 14,
+        unitCode: "DAY",
+      },
+    },
+  });
+  assert.deepEqual(schema.offers.hasMerchantReturnPolicy, {
+    "@type": "MerchantReturnPolicy",
+    applicableCountry: "US",
+    returnPolicyCategory:
+      "https://schema.org/MerchantReturnFiniteReturnWindow",
+    merchantReturnDays: 30,
+    returnMethod: "https://schema.org/ReturnByMail",
+    returnFees: "https://schema.org/ReturnFeesCustomerResponsibility",
+  });
+});
+
 test("the product page renders exactly one ProductJsonLd wrapper", () => {
   const source = readFileSync(
     path.join(process.cwd(), "src/app/products/[slug]/1688-product.tsx"),
@@ -226,6 +304,19 @@ test("the product page renders exactly one ProductJsonLd wrapper", () => {
   );
 
   assert.equal((source.match(/<ProductJsonLd\b/g) || []).length, 1);
+});
+
+test("the product page passes verified policy facts to ProductJsonLd", () => {
+  const source = readFileSync(
+    path.join(process.cwd(), "src/app/products/[slug]/1688-product.tsx"),
+    "utf8",
+  );
+
+  assert.match(
+    source,
+    /import \{ STORE_POLICY_FACTS \} from "@\/lib\/storefront\/policies"/,
+  );
+  assert.match(source, /policyFacts=\{STORE_POLICY_FACTS\}/);
 });
 
 test("the product page builds structured-data URLs through the approved site helpers", () => {

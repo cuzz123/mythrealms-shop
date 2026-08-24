@@ -144,7 +144,7 @@ export function buildItemListSchema(input: ItemListSchemaInput) {
 
 export function buildProductSchema(input: ProductSchemaInput) {
   const currency = input.currency ?? "USD";
-  const shippingDetails = input.policyFacts
+  const shippingDetails = input.policyFacts && currency === "USD"
     ? {
         "@type": "OfferShippingDetails",
         shippingRate: {
@@ -176,7 +176,7 @@ export function buildProductSchema(input: ProductSchemaInput) {
         },
       }
     : undefined;
-  const hasMerchantReturnPolicy = input.policyFacts
+  const hasMerchantReturnPolicy = input.policyFacts && currency === "USD"
     ? {
         "@type": "MerchantReturnPolicy",
         applicableCountry: "US",
