@@ -135,6 +135,73 @@ test("product schema cannot silently claim omitted availability", () => {
   assert.equal("availability" in schema.offers, false);
 });
 
+test("product schema derives Google merchant policies from verified store facts", () => {
+  const schema = buildProductSchema({
+    name: "Pearl Drop Earrings",
+    description: "Pearl drop earrings.",
+    images: ["https://example.com/product.jpg"],
+    price: 39.99,
+    currency: "USD",
+    availability: "InStock",
+    url: "https://example.com/products/pearl-drop-earrings",
+    policyFacts: STORE_POLICY_FACTS,
+  });
+
+  assert.deepEqual(schema.offers.shippingDetails, {
+    "@type": "OfferShippingDetails",
+    shippingRate: {
+      "@type": "MonetaryAmount",
+      value: 4.99,
+      currency: "USD",
+    },
+    shippingDestination: {
+      "@type": "DefinedRegion",
+      addressCountry: "US",
+    },
+    deliveryTime: {
+      "@type": "ShippingDeliveryTime",
+      handlingTime: {
+        "@type": "QuantitativeValue",
+        minValue: 2,
+        maxValue: 5,
+        unitCode: "DAY",
+      },
+      transitTime: {
+        "@type": "QuantitativeValue",
+        minValue: 8,
+        maxValue: 14,
+        unitCode: "DAY",
+      },
+    },
+  });
+  assert.deepEqual(schema.offers.hasMerchantReturnPolicy, {
+    "@type": "MerchantReturnPolicy",
+    applicableCountry: "US",
+    returnPolicyCategory:
+      "https://schema.org/MerchantReturnFiniteReturnWindow",
+    merchantReturnDays: 30,
+    returnMethod: "https://schema.org/ReturnByMail",
+    returnFees: "https://schema.org/ReturnFeesCustomerResponsibility",
+  });
+});
+
+test("product schema emits free US shipping at the verified threshold", () => {
+  const schema = buildProductSchema({
+    name: "Pearl Collar",
+    description: "Pearl collar.",
+    images: ["https://example.com/collar.jpg"],
+    price: STORE_POLICY_FACTS.freeShippingThresholdUsd,
+    currency: "USD",
+    availability: "InStock",
+    url: "https://example.com/products/pearl-collar",
+    policyFacts: STORE_POLICY_FACTS,
+  });
+
+  assert.ok(schema.offers.shippingDetails);
+  assert.equal(schema.offers.shippingDetails.shippingRate.value, 0);
+  assert.equal(schema.offers.shippingDetails.shippingRate.currency, "USD");
+});
+
 test("ProductJsonLd emits exactly one Product object with its legacy InStock default", () => {
   const html = renderToStaticMarkup(
     createElement(ProductJsonLd, {

@@ -17,6 +17,7 @@ import { FreeShippingProgress } from "@/components/storefront/FreeShippingProgre
 import { StickyAddToCart } from "@/components/storefront/StickyAddToCart";
 import { absoluteImageUrl } from "@/lib/images";
 import { absoluteUrl } from "@/lib/site";
+import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
 
 function PurchaseFacts({ description, benefitTriplet }: { description: string; benefitTriplet: string }) {
   return (
@@ -189,6 +190,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
         currency="USD"
         category={p.categoryName}
         url={absoluteUrl(`/products/${p.slug}`)}
+        policyFacts={STORE_POLICY_FACTS}
       />
       <BreadcrumbJsonLd
         items={[

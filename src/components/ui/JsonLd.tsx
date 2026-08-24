@@ -78,6 +78,7 @@ export function ProductJsonLd({
   url,
   brand = BRAND.name,
   category,
+  policyFacts,
 }: ProductSchemaProps) {
   return (
     <JsonLd
@@ -92,6 +93,7 @@ export function ProductJsonLd({
         url,
         brand,
         category,
+        policyFacts,
       })}
     />
   );

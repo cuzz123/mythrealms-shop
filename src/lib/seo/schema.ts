@@ -46,6 +46,7 @@ export type ProductSchemaInput = Readonly<{
   url: string;
   brand?: string;
   category?: string;
+  policyFacts?: StorePolicyFacts;
 }>;
 
 export type BreadcrumbItem = Readonly<{
@@ -142,6 +143,51 @@ export function buildItemListSchema(input: ItemListSchemaInput) {
 }
 
 export function buildProductSchema(input: ProductSchemaInput) {
+  const currency = input.currency ?? "USD";
+  const shippingDetails = input.policyFacts
+    ? {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value:
+            input.price >= input.policyFacts.freeShippingThresholdUsd
+              ? 0
+              : input.policyFacts.standardShippingFlatRateUsd,
+          currency,
+        },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "US",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: input.policyFacts.handlingBusinessDays.min,
+            maxValue: input.policyFacts.handlingBusinessDays.max,
+            unitCode: "DAY",
+          },
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: input.policyFacts.usStandardTransitBusinessDays.min,
+            maxValue: input.policyFacts.usStandardTransitBusinessDays.max,
+            unitCode: "DAY",
+          },
+        },
+      }
+    : undefined;
+  const hasMerchantReturnPolicy = input.policyFacts
+    ? {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "US",
+        returnPolicyCategory:
+          "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: input.policyFacts.returnWindowDays,
+        returnMethod: input.policyFacts.returnMethod,
+        returnFees: input.policyFacts.returnFees,
+      }
+    : undefined;
+
   return {
     "@context": SCHEMA_CONTEXT,
     "@type": "Product",
@@ -157,12 +203,14 @@ export function buildProductSchema(input: ProductSchemaInput) {
     offers: {
       "@type": "Offer",
       url: input.url,
-      priceCurrency: input.currency ?? "USD",
+      priceCurrency: currency,
       price: input.price.toFixed(2),
       ...(input.availability
         ? { availability: `https://schema.org/${input.availability}` }
         : {}),
       itemCondition: "https://schema.org/NewCondition",
+      ...(shippingDetails ? { shippingDetails } : {}),
+      ...(hasMerchantReturnPolicy ? { hasMerchantReturnPolicy } : {}),
     },
   } as const;
 }
