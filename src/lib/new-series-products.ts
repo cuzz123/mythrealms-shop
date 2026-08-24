@@ -240,7 +240,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "necklace",
     price: 56.99,
     detailCount: 1,
-    description: "The Green Layer - Necklace is shown in the approved gallery as a fine gold-toned chain with alternating pale rounded beads, an openwork center, and a long pendant drop. The upper line stays spare. At the center, the chain gathers into a narrow Y shape and releases into a single lower bead. To bring the green note suggested by the title into an outfit, try sage, olive, or soft green clothing.",
+    description: "The Green Layer - Necklace pairs a fine gold-toned chain with alternating light cream rounded beads, an openwork center, and a long pendant drop. The upper line stays spare. At the center, the pale forms gather into a narrow Y shape and release into a single lower bead. For a title-inspired green note, try sage, olive, or soft green clothing.",
   }),
   createProduct({
     id: "new-series-018",
