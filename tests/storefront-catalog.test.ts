@@ -220,6 +220,30 @@ test("approved new-series products use their own approved galleries", () => {
   }
 });
 
+test("new-series products have explicit, distinct, substantive descriptions", () => {
+  const products = NEW_SERIES_SLUGS.map((slug) => {
+    const product = getStorefrontProductBySlug(slug);
+    assert.ok(product, `Expected approved new-series product ${slug}`);
+    return product;
+  });
+  const descriptions = products.map((product) => product.description.trim());
+
+  assert.equal(new Set(descriptions).size, 43);
+
+  for (const product of products) {
+    assert.ok(product.description.includes(product.name), `${product.slug} must name the product`);
+    assert.ok(product.description.length >= 220, `${product.slug} needs substantial copy`);
+    assert.ok(
+      !product.description.includes("Review every source-supplied product photo"),
+      `${product.slug} must not use the shared source-photo disclaimer`,
+    );
+    assert.ok(
+      !product.description.includes("lighting and screens can affect how details appear"),
+      `${product.slug} must not use the shared lighting disclaimer`,
+    );
+  }
+});
+
 test("storefront products expose truthful card image roles", () => {
   const editorialCore = getStorefrontProductBySlug("pearl-series-13");
   const editorialWorn = getStorefrontProductBySlug("pearl-series-18");
