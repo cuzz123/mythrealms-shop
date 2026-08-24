@@ -96,7 +96,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "earring design",
     price: 34.99,
     detailCount: 4,
-    description: "The Dewflower - Earrings pair translucent white flower drops with a softly rounded center and small pale bead accents. Fine gold-toned lines give the petal silhouette a light, airy finish, while the two-level drop adds movement around the face. Let the floral shape lead with a simple blouse, or echo it with a soft ivory dress for a quiet garden note.",
+    description: "The Dewflower - Earrings show translucent white flower drops with scalloped petals, small rounded accents, and warm gold-toned links at the top. Seen flat, the two flowers form an airy pair. Worn, the lower petals create a soft vertical line near the face. An ivory blouse keeps the pale colors quiet, while loose hair lets the floral outline remain visible.",
   }),
   createProduct({
     id: "new-series-002",
@@ -105,7 +105,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "earring design",
     price: 39.99,
     detailCount: 4,
-    description: "The Golden Petal - Earrings frame a pale, petal-shaped center with rows of small cream beads and a warm gold-toned oval rim. The teardrop profile reads polished and graphic in the close-up while keeping a soft, luminous palette. Style them with an open neckline or a clean knit so the oval drop becomes the outfit's warm focal point.",
+    description: "The Golden Petal - Earrings place a pale petal-shaped center inside a warm gold-toned oval edged with small cream beads. Their teardrop outline gives the front view a neat oval rhythm, with a brighter rim around the softer center. A dark neckline makes the light center easier to read; a clean knit keeps the look simple.",
   }),
   createProduct({
     id: "new-series-003",
@@ -114,7 +114,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "earring design",
     price: 44.99,
     detailCount: 6,
-    description: "The Baroque Orbit - Earrings contrast irregular luminous white drops with smooth round hoop forms. Each drop has a fluid, one-of-a-kind-looking outline, so the pair feels organic rather than perfectly geometric. Wear them with pulled-back hair and a crisp shirt when you want the sculptural silhouette to carry the look, or soften it with a draped neutral top.",
+    description: "The Baroque Orbit - Earrings set irregular luminous white drops beside smooth round hoops in warm gold-toned color. The curved hoops and uneven lower shapes create two different rhythms in one pair, so the silhouette reads organic in the close-up; pull hair behind the ears for an open view, or place the earrings against a crisp collar.",
   }),
   createProduct({
     id: "new-series-004",
@@ -123,7 +123,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "earring design",
     price: 42.99,
     detailCount: 4,
-    description: "The Violet Rain - Earrings set a milky oval center inside a saturated violet frame scattered with bright reflective accents. A matching round stud repeats the color above the drop, creating a clear top-to-bottom rhythm. They work as a statement with monochrome black or cream, and can bring a jewel-toned spark to a simple evening outfit.",
+    description: "The Violet Rain - Earrings combine a milky oval center with a saturated violet border and small reflective points around the edge. A round violet stud repeats the upper color. Together, the stud and drop read from top to bottom rather than as a single disc. Cream, black, or a muted lilac top gives the purple frame space.",
   }),
   createProduct({
     id: "new-series-005",
@@ -132,7 +132,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "earring design",
     price: 39.99,
     detailCount: 4,
-    description: "The White Garden - Earrings use four rounded white petal shapes around a small luminous bead, creating a clean floral silhouette with a gentle asymmetry. The pale surface catches the light without needing a busy setting. Pair them with a low bun and a soft shirt collar for a fresh daytime look, or let the simple flower brighten a darker dress.",
+    description: "The White Garden - Earrings use four rounded white petals around a small luminous bead, with each flower kept close to the ear. The soft translucence and simple symmetry give the pair a fresh floral outline without extra hanging parts. With hair gathered low, the petal shape stays open; a darker blouse supplies contrast.",
   }),
   createProduct({
     id: "new-series-006",
@@ -141,7 +141,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "earring design",
     price: 44.99,
     detailCount: 5,
-    description: "The Shell Bloom - Earrings gather overlapping pearly petal forms into a full cluster, with a small bead grouping at the top and a delicate round charm below. Their layered silhouette has a soft, botanical presence in the gallery. Keep the rest of the outfit pared back, then use the cluster as the single floral accent against linen-look neutrals or a sleek black top.",
+    description: "The Shell Bloom - Earrings gather layered pale petal forms, a small bead grouping, and a round lower charm into a clustered drop. Overlapping shapes make the pair feel full in the gallery, while the open spaces between petals keep the outline legible; let them sit beside a plain neckline, or use a black top to frame the pale cluster.",
   }),
   createProduct({
     id: "new-series-007",
@@ -150,7 +150,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "earring design",
     price: 42.99,
     detailCount: 4,
-    description: "The Triple Light - Earrings arrange three pale round shell-like discs in a descending line, each outlined by a warm gold-toned edge. The repeated circular rhythm makes the drop easy to read from the front, while the milky surface keeps it gentle. Wear them with a swept-back hairstyle and a narrow neckline to emphasize the vertical line, or pair with denim for contrast.",
+    description: "The Triple Light - Earrings line up three pale round shell-like discs, each framed by a warm gold-toned edge and joined in a vertical drop. The repeated circles make the length easy to follow, while the slightly pearly surfaces keep the color soft. A swept-back hairstyle shows the line clearly; denim brings a casual blue counterpoint.",
   }),
   createProduct({
     id: "new-series-008",
@@ -159,7 +159,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "earring design",
     price: 46.99,
     detailCount: 8,
-    description: "The Moon Disc - Earrings combine dark green-gray round discs with softly iridescent lower discs and small pale bead clusters at the joins. The changing surface color gives the pair a moody, atmospheric feel without relying on a complicated silhouette. Style them with a neutral monochrome look, or use the green and blush tones to bridge a printed scarf.",
+    description: "The Moon Disc - Earrings use dark green-gray upper discs, softly iridescent lower discs, and small pale bead clusters at the joins. Color changes across the round surfaces create the impression of moonlit layers. The outline stays round and easy to follow; neutral clothing lets the green and blush tones show, while a printed scarf can echo either shade.",
   }),
   createProduct({
     id: "new-series-009",
@@ -168,7 +168,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "bracelet",
     price: 44.99,
     detailCount: 4,
-    description: "The Green Current - Bracelet follows a softly irregular line of pearl-like white beads toward a smooth jade-colored oval accent. Warm gold-toned links and the contrasting green center give the wrist a calm, natural rhythm. Wear it alone with rolled sleeves when you want the center color to stand out, or layer it beside a plain chain for a more collected look.",
+    description: "The Green Current - Bracelet follows irregular pearl-like white beads to a smooth green oval accent, with warm gold-toned links joining the sections. At the wrist, the green center interrupts the pale rhythm and gives the bracelet a clear place to look first; a rolled sleeve keeps the oval visible, while a plain chain can sit nearby without competing.",
   }),
   createProduct({
     id: "new-series-010",
@@ -177,7 +177,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "bracelet",
     price: 49.99,
     detailCount: 5,
-    description: "The Violet Arc - Bracelet places a faceted purple center between pale round accents in a warm gold-toned open bangle. The straight arc keeps the silhouette clean while the violet focal point adds depth and color. Let it anchor a neutral sleeve, or repeat the purple with a small bag or scarf when dressing for an evening plan.",
+    description: "The Violet Arc - Bracelet places a faceted purple center between pale round accents on an open warm gold-toned bangle. Straight rails hold the shape apart from the faceted color, giving the wrist a simple arc with one concentrated point; it can sit over a neutral cuff, or a violet scarf can repeat the central color.",
   }),
   createProduct({
     id: "new-series-011",
@@ -186,7 +186,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "bracelet",
     price: 46.99,
     detailCount: 5,
-    description: "The Shell Twist - Bracelet wraps a twisted gold-toned line around smooth pale round forms and one irregular shell-like accent. The coiled texture creates a tactile visual contrast against the quiet white surfaces, giving the cuff an organic twist. Style it with a short sleeve so the open shape can be seen, or pair it with a simple watch for a mixed-texture stack.",
+    description: "The Shell Twist - Bracelet circles smooth pale round forms and one irregular shell-like accent with a visibly coiled gold-toned line. The winding texture changes along the cuff, contrasting with the quiet, rounded centers. A short sleeve reveals the open arc; a simple watch creates a measured mix of textures.",
   }),
   createProduct({
     id: "new-series-012",
@@ -195,7 +195,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "bracelet",
     price: 48.99,
     detailCount: 2,
-    description: "The Turquoise Leaf - Bracelet balances two turquoise-colored round accents and a pale irregular centerpiece within a looping gold-toned frame. The leaf-like sweep across the middle gives the cuff a directional shape rather than a plain band. Wear it with cream, denim, or warm brown tones to let the blue-green color read clearly, and keep nearby jewelry minimal.",
+    description: "The Turquoise Leaf - Bracelet brings turquoise-colored round accents and a pale irregular center into a looping gold-toned cuff whose middle sweep resembles a leaf. Blue-green color sits at both sides of the pale center, creating a balanced visual path around the wrist. The pale middle breaks up the cool color; cream or denim clothing keeps it legible, and nearby jewelry can stay minimal.",
   }),
   createProduct({
     id: "new-series-013",
@@ -204,7 +204,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "bracelet",
     price: 49.99,
     detailCount: 4,
-    description: "The Leaf Line - Bracelet alternates pearl-like white beads with airy leaf-shaped gold-toned forms, creating a repeating rhythm around the wrist. Rounded centers soften the linear framework, while the open leaf outlines add movement in the close-up. Pair it with a flowing blouse for a botanical mood, or use it as the delicate detail against a tailored jacket.",
+    description: "The Leaf Line - Bracelet alternates pearl-like white beads with open leaf-shaped gold-toned forms in a repeating wrist line. Each leaf outline leaves a little space around the rounded accents, giving the bracelet a drawn, botanical appearance in the image. A flowing blouse follows the plant-like rhythm; a tailored jacket provides a sharper counterpoint.",
   }),
   createProduct({
     id: "new-series-014",
@@ -213,7 +213,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "bracelet",
     price: 54.99,
     detailCount: 6,
-    description: "The Golden Shell - Bracelet traces a chain of pearl-like beads through several sculpted leaf or shell-shaped forms, with warm gold-toned lines enclosing the pale centers. Its repeating motifs make the bracelet feel like a small botanical drawing across the wrist. Wear it as the main accent with a simple sleeve, or coordinate it with ivory and sand tones for a tonal look.",
+    description: "The Golden Shell - Bracelet moves pale bead accents through several leaf- and shell-shaped gold-toned forms, then closes the rhythm with more rounded centers. The repeating motifs look like a small botanical sketch crossing the wrist rather than a plain row of beads. Ivory and sand clothing keep the palette together; a short sleeve gives the pattern room.",
   }),
   createProduct({
     id: "new-series-015",
@@ -222,7 +222,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "necklace",
     price: 54.99,
     detailCount: 5,
-    description: "The Violet Pendant - Necklace combines a faceted purple stone-like center with a strand of alternating dark, mauve, and smoky beads. A rounded gold-toned frame and ornate connector give the pendant a strong, centered finish. Let it sit over a plain crew neck so the color story stays visible, or echo one of the muted bead tones in a layered outfit.",
+    description: "The Violet Pendant - Necklace centers a faceted purple stone-like shape inside a rounded gold-toned frame and places it beneath a strand of dark, mauve, and smoky beads. Ornate connectors break up the bead line and draw attention toward the pendant's center. A crew neck leaves the pendant unobstructed; a muted purple accessory can continue the color story.",
   }),
   createProduct({
     id: "new-series-016",
@@ -231,7 +231,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "necklace",
     price: 59.99,
     detailCount: 2,
-    description: "The Falling Pearl - Lariat uses a fine gold-toned chain with graduated pearl-like beads that descend from a small openwork centerpiece to a final round drop. Its Y-shaped line draws the eye downward and gives a clean neckline a little movement. Wear it over a solid scoop neck, or let the long drop peek through an open blazer for an elongated styling line.",
+    description: "The Falling Pearl - Lariat descends from a fine gold-toned chain through graduated pearl-like beads, an openwork center, and a final round drop. Its Y-shaped layout leaves the upper neckline quiet while the lower drop supplies the vertical emphasis; a scoop neck shows the full path, and an open blazer lets the last bead appear between the lapels.",
   }),
   createProduct({
     id: "new-series-017",
@@ -240,7 +240,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "necklace",
     price: 56.99,
     detailCount: 1,
-    description: "The Green Layer - Necklace builds a symmetrical line from alternating small and larger pearl-like beads, joined by a delicate central openwork link and a long pendant drop. The layered spacing keeps the design airy while the warm cream palette stays easy to coordinate. Pair it with an open collar for a defined focal point, or wear it over a fine knit for a softer contrast.",
+    description: "The Green Layer - Necklace is shown in the approved gallery as a fine gold-toned chain with alternating pale rounded beads, an openwork center, and a long pendant drop. The upper line stays spare. At the center, the chain gathers into a narrow Y shape and releases into a single lower bead. To bring the green note suggested by the title into an outfit, try sage, olive, or soft green clothing.",
   }),
   createProduct({
     id: "new-series-018",
@@ -249,7 +249,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "necklace",
     price: 62.99,
     detailCount: 1,
-    description: "The Dreamcatcher Pearl - Lariat keeps a fine chain quiet at the neckline, then gathers pearl-like beads around a small openwork medallion before extending into a long drop. The balanced upper line and trailing center create a graceful lariat silhouette. Style it with a clean V-neck or an open shirt, letting the pendant shape the space without adding another necklace.",
+    description: "The Dreamcatcher Pearl - Lariat keeps its chain fine at the shoulders, collects pearl-like beads around a small openwork medallion, and finishes with a long central drop. A small oval frame gives the middle a defined pause before the hanging beads continue downward. An open shirt leaves the medallion visible; a V-neck follows the line of the lariat.",
   }),
   createProduct({
     id: "new-series-019",
@@ -258,7 +258,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "necklace",
     price: 57.99,
     detailCount: 3,
-    description: "The Pearl Drop - Choker follows the neck with a close line of small pearl-like beads and adds several slim chain drops along the front edge. The repeated drops create a fringe effect that moves the eye across the collar line. Keep your neckline simple so the detail remains legible, or pair it with a low bun and a dark top for a crisp light-on-dark contrast.",
+    description: "The Pearl Drop - Choker closes around the neck with a row of small pearl-like beads and sends several slim chain drops down from the front. Different drop lengths create a fringe edge that can be read as a narrow line or a wider fan, depending on the angle; a plain collar keeps the fringe visible, while a dark top makes the pale beads stand apart.",
   }),
   createProduct({
     id: "new-series-020",
@@ -267,7 +267,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "necklace",
     price: 64.99,
     detailCount: 2,
-    description: "The Pearl Cascade - Choker pairs a fine gold-toned chain with many hanging strands of pearl-like beads arranged in a soft cascade. The asymmetrical lengths give the neckline a sense of motion while the repeated pale accents keep the palette cohesive. Wear it with a square or open neckline when you want the cascade visible, and keep earrings small so the layers have room to speak.",
+    description: "The Pearl Cascade - Choker combines a fine gold-toned chain with many strands of pearl-like beads that fall at varied lengths across the front. The cascading lines create movement below the close neckline. Repeated pale points keep the whole design visually connected; an open or square neckline frames the strands, and small earrings leave the layered front unobstructed.",
   }),
   createProduct({
     id: "new-series-021",
@@ -276,7 +276,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "necklace",
     price: 59.99,
     detailCount: 1,
-    description: "The Midnight Drop - Choker brings a pale, close-set pearl-like line together with fine gold-toned chains that fall into a pointed front arrangement. The vertical fringe gives the classic collar line a more dramatic, night-time mood while keeping the palette restrained. Wear it over black or charcoal for a sharp tonal look, or use a white shirt to make the center line stand out.",
+    description: "The Midnight Drop - Choker is shown as a pale close-set bead line with fine gold-toned chains dropping into a pointed front fringe. Against a black or charcoal top, the light beads take on the night-time contrast suggested by the name, while the image's own palette stays pale and warm. A simple neckline keeps the descending chain lengths easy to see.",
   }),
   createProduct({
     id: "new-series-022",
@@ -285,7 +285,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "eyewear chain",
     price: 34.99,
     detailCount: 4,
-    description: "The Pearl Line - Eyewear Chain strings rounded pearl-like beads at measured intervals along a fine gold-toned chain, with clear loops at each end for glasses. The long, quiet line keeps the accessory easy to read while adding a soft point of light near the shoulders. Use it with clear or metal frames when you want the chain to blend in, or let it contrast with dark frames.",
+    description: "The Pearl Line - Eyewear Chain places rounded pearl-like beads at intervals along a fine gold-toned chain, ending in clear loops for glasses. The beaded sections sit near the frames and the quieter chain extends toward the shoulders, giving the accessory a long, open shape; clear, silver, or dark frames each create a different contrast, so choose the one that suits the rest of the outfit.",
   }),
   createProduct({
     id: "new-series-023",
@@ -294,7 +294,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "eyewear chain",
     price: 36.99,
     detailCount: 2,
-    description: "The Shell Drop - Eyewear Chain anchors each end with a small fan-shaped shell-like pendant on a slim gold-toned chain. The scalloped drop gives a functional glasses chain a distinct coastal-inspired accent without overwhelming the frame. Pair it with simple sunglasses for a noticeable finish, or choose light-colored frames so the pale pendants and warm chain stay in balance.",
+    description: "The Shell Drop - Eyewear Chain hangs a small fan-shaped shell-like pendant from each side of a slim gold-toned chain, with clear loops at the ends. Scalloped edges make the pale pendants easy to spot while the long line remains visually light. Light frames blend with the pendants; darker sunglasses make the shell-like shapes more apparent.",
   }),
   createProduct({
     id: "new-series-024",
@@ -303,7 +303,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "eyewear chain",
     price: 32.99,
     detailCount: 0,
-    description: "The Classic Pearl - Eyewear Chain keeps a slim gold-toned line understated with evenly spaced pearl-like beads through the front sections and clear glasses loops at both ends. Its restrained rhythm can sit behind the neck or fall along the shoulders without competing with the frames. Wear it with everyday optical frames, or use it to soften a structured blazer and button-down.",
+    description: "The Classic Pearl - Eyewear Chain keeps its front section quiet with evenly spaced pearl-like beads, then continues as a slim gold-toned line to clear glasses loops. The restrained rhythm can rest behind the neck or fall along the shoulders without taking over the frames. An everyday optical pair suits the simple line; a structured blazer gives it a cleaner backdrop.",
   }),
   createProduct({
     id: "new-series-025",
@@ -312,7 +312,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "eyewear chain",
     price: 34.99,
     detailCount: 0,
-    description: "The Turquoise Note - Eyewear Chain adds two vertical runs of irregular turquoise-colored beads to an otherwise fine gold-toned glasses chain. The small stone-like shapes create a clear color break near the shoulders and make the accessory easy to spot from the front. Pair it with neutral frames and denim, or repeat the blue-green note in a scarf or small bag.",
+    description: "The Turquoise Note - Eyewear Chain interrupts its fine gold-toned line with two vertical groups of irregular turquoise-colored beads and clear loops for glasses. The blue-green sections appear near the shoulders when worn, making the chain read as a small color accent rather than an all-over strand. Neutral frames keep the turquoise visible; denim repeats the cool note.",
   }),
   createProduct({
     id: "new-series-026",
@@ -321,7 +321,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 36.99,
     detailCount: 0,
-    description: "The Blueheart Bloom - Hair Stick centers a white, many-petaled flower on a slim gold-toned stick, with a cool blue-green round center that gives the pale bloom a fresh point of color. The long line reads cleanly against the floral top. Use it to finish a low twist or loose updo, and let the blue center echo a cool-toned blouse.",
+    description: "The Blueheart Bloom - Hair Stick sets a white many-petaled flower on a slim gold-toned stick and places a cool blue-green round center at its heart. The long straight line contrasts with the irregular petal edges, giving an updo one clear horizontal-to-vertical transition. Through a low twist, both parts remain visible; a cool-toned blouse can echo the center.",
   }),
   createProduct({
     id: "new-series-027",
@@ -330,7 +330,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 38.99,
     detailCount: 0,
-    description: "The Ivory Woodflower - Hair Stick combines a dark wood-toned curved stick with a small white flower and a pearl-like hanging accent. The warm brown base grounds the pale floral detail, creating an organic contrast between the long line and the rounded ornament. Slide it through a loose bun for a relaxed finish, or pair it with cream and brown layers for a tonal look.",
+    description: "The Ivory Woodflower - Hair Stick pairs a dark wood-toned curved stick with a small white flower and one pearl-like hanging accent. Brown and ivory create the main contrast, while the drop gives the side of an updo a small moving point; a loose bun leaves the curve visible, and cream and brown layers keep the palette close.",
   }),
   createProduct({
     id: "new-series-028",
@@ -339,7 +339,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 42.99,
     detailCount: 0,
-    description: "The Pearl Cluster - Hair Claw gathers irregular white pearl-like forms into a full floral cluster around a rounded center, with a visible gold-toned claw base behind it. Its dense top becomes a clear focal point even when the hair is styled simply. Use it to lift a low twist or hold a side section, and keep other hair accessories quiet so the cluster remains the detail.",
+    description: "The Pearl Cluster - Hair Claw gathers irregular white pearl-like forms into a dense flower-like top over a visible gold-toned claw base. Rounded and petal-shaped pieces overlap around the center, so the upper section carries most of the visual weight. For a low twist, the cluster has a clear place to sit; a plain hair tie keeps the rest quiet.",
   }),
   createProduct({
     id: "new-series-029",
@@ -348,7 +348,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 34.99,
     detailCount: 0,
-    description: "The Golden Pearl - Hair Stick uses a long, slim gold-toned line topped by one luminous elongated pearl-like accent and a small open floral connector. The simple vertical profile gives the ornament a refined, uncluttered finish. Slide it into a smooth bun for a polished line, or use it with softly pinned hair when you want the pale accent to catch the light.",
+    description: "The Golden Pearl - Hair Stick uses a long, slim gold-toned stick topped with one elongated pearl-like accent and a small open floral connector. Its straight body leaves the upper ornament as the only rounded focus, creating a simple line through an updo. Smoothly pinned hair shows the silhouette; softly gathered hair adds a less formal setting.",
   }),
   createProduct({
     id: "new-series-030",
@@ -357,7 +357,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 39.99,
     detailCount: 0,
-    description: "The Pearl Halo - U Pin places a five-petal flower and rounded pearl-like center inside a circular halo of small pale accents, then extends into two long prongs. The open ring gives the piece a clear frame and a little negative space. Tuck it into a bun or braided updo as the finishing point, pairing it with a plain neckline so the floral circle remains visible.",
+    description: "The Pearl Halo - U Pin frames a five-petal flower and rounded pearl-like center with a circular ring of small pale accents, then extends into two long prongs. The open center leaves negative space around the flower, while the prongs continue the vertical direction into the hairstyle. Against a bun or braid, the halo has a clear backdrop; a plain neckline keeps attention above the shoulders.",
   }),
   createProduct({
     id: "new-series-031",
@@ -366,7 +366,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 39.99,
     detailCount: 0,
-    description: "The Triple Bloom - Hair Clip brings three flower-like clusters together across a gold-toned bar, with varied pale rounded forms and a warmer center in the middle bloom. The horizontal shape reads like a small floral band rather than a single ornament. Place it above a low ponytail or across a side sweep, and choose a simple outfit when you want the three-part silhouette to carry the look.",
+    description: "The Triple Bloom - Hair Clip arranges three flower-like clusters across a gold-toned bar, using pale rounded forms and a warmer center in the middle bloom. Read from the side, it behaves like a short floral band; read from the front, the three centers create an easy rhythm. Place it beside a low ponytail, or let a simple side sweep expose the full bar.",
   }),
   createProduct({
     id: "new-series-032",
@@ -375,7 +375,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 38.99,
     detailCount: 0,
-    description: "The Shell Petal - Hair Clip arranges irregular pale shell-like pieces and small rounded bead accents over an open gold-toned filigree base. Its asymmetrical petal shapes give the clip a gathered, beach-inspired feel while the warm outline keeps the composition defined. Use it to pin one side of the hair or finish a loose half-up style, then echo the pale tones in your outfit.",
+    description: "The Shell Petal - Hair Clip sets irregular pale shell-like pieces and small rounded bead accents over an open gold-toned filigree base. Uneven petal shapes give the clip its gathered outline, while the filigree background keeps gaps visible between the pieces. A half-up style shows the whole arrangement; a pale blouse continues the shell-like color.",
   }),
   createProduct({
     id: "new-series-033",
@@ -384,7 +384,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 37.99,
     detailCount: 0,
-    description: "The Woodflower Pearl - Hair Stick pairs a dark wood-toned stick with two small floral ornaments and a single pale drop, creating a gentle contrast between the long curved base and the light details. The shape feels botanical without becoming overly ornate. Wear it through a low bun or twist, and let the brown base complement warm neutrals, denim, or natural textures.",
+    description: "The Woodflower Pearl - Hair Stick uses a dark wood-toned stick, two small floral ornaments, and one pale drop hanging from the upper section. The long brown base is visually quiet beside the light flowers, so the ornament reads as a botanical detail rather than a full headpiece. Within a low bun, the curved line stays easy to follow; denim or warm neutrals echo the base.",
   }),
   createProduct({
     id: "new-series-034",
@@ -393,7 +393,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 36.99,
     detailCount: 0,
-    description: "The Daisy Chain - Hair Stick turns a pale daisy-like flower into a playful hair accent with a bright yellow center, pearl-like petal forms, and two trailing gold-toned chains. The long stick keeps the silhouette directional while the chains add movement beside the updo. Use it in a loose bun or braid, especially with cream, yellow, or denim accents elsewhere in the look.",
+    description: "The Daisy Chain - Hair Stick centers a pale daisy-like flower with a bright yellow middle, pearl-like petal forms, and two trailing gold-toned chains. The stick gives the floral head a straight counterline, while the two chains extend the shape into motion beside the updo. A braid or loose bun gives the chains room; cream, yellow, or denim clothing picks up the visible colors.",
   }),
   createProduct({
     id: "new-series-035",
@@ -402,7 +402,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 39.99,
     detailCount: 0,
-    description: "The Cloud Pearl - Hair Stick uses a dark openwork stick with a rounded top and three pearl-like drops suspended from fine gold-toned chains. The airy cut-outs keep the long silhouette from feeling heavy, while the pale drops create a gentle trailing detail. Slide it through a bun or twist, and pair it with soft neutrals for a calm, graphic finish.",
+    description: "The Cloud Pearl - Hair Stick has a dark openwork top, a long narrow stick, and three pearl-like drops suspended from separate gold-toned chains. Cut-out spaces keep the upper shape legible, and the hanging drops create a small cluster beside the hair rather than across it. A twisted bun presents the full length; soft neutral clothing keeps the contrast clear.",
   }),
   createProduct({
     id: "new-series-036",
@@ -411,7 +411,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 41.99,
     detailCount: 0,
-    description: "The Amber Bloom - U Pin combines a white five-petal flower, a warm amber-colored center, and small branch-like details above a long double-prong base. The bright center gives the pale bloom a sunny focal point, while the open prongs keep the profile clear. Use it to anchor a bun or chignon, and repeat the amber tone with a warm scarf or understated makeup.",
+    description: "The Amber Bloom - U Pin combines a white five-petal flower, an amber-colored center, branch-like details, and a long double-prong base. The bright center sits inside the pale petals like a small sun, while the open prongs leave the lower half visually spare. For a bun or chignon, the pin has a clear frame; a warm scarf can repeat the amber note.",
   }),
   createProduct({
     id: "new-series-037",
@@ -420,7 +420,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 38.99,
     detailCount: 0,
-    description: "The Pink Pearl Star - Hair Clip brings a pale star-shaped flower to a gold-toned bar, with a soft pink rounded center and small bright accents around it. The pointed petals give the clip a crisp outline, while the center keeps it romantic. Wear it on a side sweep or at the base of a ponytail, and let the pink tone stand against cream, navy, or washed denim.",
+    description: "The Pink Pearl Star - Hair Clip puts a pale pointed flower on a gold-toned bar, with a soft pink rounded center and small bright accents around it. Pointed petals make the outline crisp in the gallery, while the center brings a warmer spot into the otherwise pale arrangement. From a side sweep, the star shape stays open; cream, navy, or washed denim sets the pink against a darker field.",
   }),
   createProduct({
     id: "new-series-038",
@@ -429,7 +429,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 44.99,
     detailCount: 0,
-    description: "The Pearl Canopy - U Pin combines a small cluster of rounded pearl-like forms with an open rectangular frame and several fine gold-toned chains that hang below it. The mix of fixed and moving lines creates a canopy-like profile with a clear vertical direction. Tuck it into a bun or braided style when you want a little ceremony, keeping the neckline clean.",
+    description: "The Pearl Canopy - U Pin places a small rounded cluster inside an open rectangular frame and suspends several fine gold-toned chains below it. Fixed beads and moving lines share the same vertical path, giving the piece a canopy-like shape for an updo. A braid can hold the frame near the crown; a clean neckline leaves the chains visible.",
   }),
   createProduct({
     id: "new-series-039",
@@ -438,7 +438,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 39.99,
     detailCount: 0,
-    description: "The Pearl Moth - Hair Clip uses a warm gold-toned bar as the base for an organic cluster of pale, irregular pearl-like forms, including a darker rounded accent that gives the center depth. The wing-like arrangement feels playful and sculptural without needing extra ornament. Pin it at the temple or on a low twist, and let the shape contrast with a dark top.",
+    description: "The Pearl Moth - Hair Clip uses a warm gold-toned bar beneath an organic cluster of pale irregular forms, including one darker rounded accent at the center. The wing-like spread suggests a moth shape through its silhouette, while the mixed surfaces keep the close-up varied. Pin it near a temple or low twist; a dark top makes the pale forms easier to read.",
   }),
   createProduct({
     id: "new-series-040",
@@ -447,7 +447,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 36.99,
     detailCount: 0,
-    description: "The Blush Cluster - Hair Clip gathers soft pink and white rounded forms into a compact floral grouping on a slim gold-toned clip. Its close arrangement creates a small, concentrated point of color that can brighten a simple hairstyle. Place it above one ear or at the side of a low ponytail, pairing it with cream, blush, or warm beige for a gentle palette.",
+    description: "The Blush Cluster - Hair Clip gathers soft pink and white rounded forms into a compact floral group on a slim gold-toned clip. Its small footprint concentrates the color in one place, which lets a simple hairstyle remain the background. Above one ear or beside a ponytail, it adds a gentle blush note; cream and warm beige keep that note visible.",
   }),
   createProduct({
     id: "new-series-041",
@@ -456,7 +456,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 38.99,
     detailCount: 0,
-    description: "The Sea Glass Bloom - Hair Clip centers a cool blue-green rounded accent inside a cluster of pale petal-like forms on a warm gold-toned bar. The contrast between the watery center and luminous petals gives the clip a fresh, coastal color story. Use it to finish a side sweep or half-up style, and repeat the blue-green note with denim or a cool-toned knit.",
+    description: "The Sea Glass Bloom - Hair Clip centers a cool blue-green round accent inside pale petal-like forms on a warm gold-toned bar. The watery center and light petals make a clear cool-warm contrast, while the bar gives the cluster a firm horizontal base. In a side sweep or half-up style, the bloom stays in view; denim or a cool knit echoes the center.",
   }),
   createProduct({
     id: "new-series-042",
@@ -465,7 +465,7 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 42.99,
     detailCount: 0,
-    description: "The Blue Sun - Hair Stick sets a round blue center inside a small radiating frame on a dark wood-toned stick, with a line of pearl-like drops trailing from one side. The sunburst shape and open channels give the long piece a graphic, directional feel. Slide it through a bun or twist, and pair it with cream, navy, or other cool neutrals.",
+    description: "The Blue Sun - Hair Stick sets a round blue center within a small radiating frame on a dark wood-toned stick, with pearl-like drops trailing from one side. Open channels around the center give the ornament a sunburst outline, while the long body turns the shape into a directional hair line. An updo with a loose twist shows the full piece; cream and navy make the blue easier to notice.",
   }),
   createProduct({
     id: "new-series-043",
@@ -474,6 +474,6 @@ export const NEW_SERIES_PRODUCTS: Product[] = [
     kind: "hair accessory",
     price: 43.99,
     detailCount: 0,
-    description: "The Jade Dragonfly - Hair Clip captures a dragonfly silhouette with pale, textured wings, a green oval center, deep violet round accents, and a warm gold-toned body. The mix of jewel-like color and wing texture makes it a distinctive focal point. Wear it on a side sweep or pinned-back section, using a simple hairstyle and letting the green and violet accents provide the contrast.",
+    description: "The Jade Dragonfly - Hair Clip depicts pale textured wings around a green oval center, with deep violet round accents and a warm gold-toned body. Wing texture, color blocks, and the horizontal clip bar make the insect outline easy to recognize in the approved image. Near a side sweep or pinned-back section, the green and violet colors can sit against a simple neutral top.",
   }),
 ];

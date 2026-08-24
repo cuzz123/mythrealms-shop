@@ -244,6 +244,95 @@ test("new-series products have explicit, distinct, substantive descriptions", ()
   }
 });
 
+test("new-series product copy excludes unsupported material and quality language", () => {
+  const bannedLanguage = [
+    /\bpolished\b/i,
+    /\bone-of-a-kind\b/i,
+    /\brefined\b/i,
+    /\bdistinctive\b/i,
+    /\bunique\b/i,
+    /\bpremium\b/i,
+    /\bluxur(?:y|ious)\b/i,
+    /\bhigh[- ]quality\b/i,
+    /\bquality\b/i,
+    /\bdurab(?:le|ility)\b/i,
+    /\blong[- ]lasting\b/i,
+    /\bcomfortable\b/i,
+    /\blightweight\b/i,
+    /\bhand[- ]?made\b/i,
+    /\bcraftsmanship\b/i,
+    /\bhypoallergenic\b/i,
+    /\bwaterproof\b/i,
+  ];
+
+  for (const slug of NEW_SERIES_SLUGS) {
+    const product = getStorefrontProductBySlug(slug);
+    assert.ok(product, `Expected approved new-series product ${slug}`);
+    for (const pattern of bannedLanguage) {
+      assert.doesNotMatch(product.description, pattern, `${slug} contains unsupported language ${pattern}`);
+    }
+  }
+});
+
+test("new-series product copy avoids repeated long phrases and sentence templates", () => {
+  const products = NEW_SERIES_SLUGS.map((slug) => {
+    const product = getStorefrontProductBySlug(slug);
+    assert.ok(product, `Expected approved new-series product ${slug}`);
+    return product;
+  });
+  const repeatedNgrams = new Map<string, Set<string>>();
+
+  for (const product of products) {
+    const words = product.description
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, " ")
+      .split(/\s+/)
+      .filter(Boolean);
+    for (let index = 0; index + 7 <= words.length; index += 1) {
+      const phrase = words.slice(index, index + 7).join(" ");
+      const owners = repeatedNgrams.get(phrase) ?? new Set<string>();
+      owners.add(product.slug);
+      repeatedNgrams.set(phrase, owners);
+    }
+  }
+
+  const sharedLongPhrases = [...repeatedNgrams.entries()]
+    .filter(([, owners]) => owners.size > 1)
+    .map(([phrase]) => phrase);
+  assert.deepEqual(sharedLongPhrases, [], `Shared long phrases: ${sharedLongPhrases.join(" | ")}`);
+
+  const repeatedSentenceOpenings = new Map<string, Set<string>>();
+  for (const product of products) {
+    for (const sentence of product.description.split(/[.!?]+/).slice(1)) {
+      const opening = sentence
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9 -]/g, " ")
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 3)
+        .join(" ");
+      if (!opening) continue;
+      const owners = repeatedSentenceOpenings.get(opening) ?? new Set<string>();
+      owners.add(product.slug);
+      repeatedSentenceOpenings.set(opening, owners);
+    }
+  }
+
+  const sharedOpenings = [...repeatedSentenceOpenings.entries()]
+    .filter(([, owners]) => owners.size > 1)
+    .map(([opening]) => opening);
+  assert.deepEqual(sharedOpenings, [], `Shared sentence openings: ${sharedOpenings.join(" | ")}`);
+
+  const sentenceCounts = products.map((product) =>
+    product.description.split(/[.!?]+/).filter((sentence) => sentence.trim()).length,
+  );
+  assert.ok(
+    new Set(sentenceCounts).size > 1,
+    `Sentence counts should vary across the catalog; observed ${sentenceCounts.join(", ")}`,
+  );
+});
+
 test("storefront products expose truthful card image roles", () => {
   const editorialCore = getStorefrontProductBySlug("pearl-series-13");
   const editorialWorn = getStorefrontProductBySlug("pearl-series-18");
