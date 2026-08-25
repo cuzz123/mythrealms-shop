@@ -6,12 +6,14 @@ import { renderToStaticMarkup } from "react-dom/server";
 import RefundPage from "../src/app/refund/page";
 import ShippingPage, { metadata as shippingMetadata } from "../src/app/shipping/page";
 import ContactPage from "../src/app/contact/page";
+import AboutPage from "../src/app/about/page";
 import PrivacyPage, { metadata as privacyMetadata } from "../src/app/privacy/page";
 import TermsPage, { metadata as termsMetadata } from "../src/app/terms/page";
 import CheckoutPageModule from "../src/app/checkout/page";
 import { useCartStore } from "../src/lib/cart";
 import { buildOrganizationSchema } from "../src/lib/seo/schema";
 import { STORE_POLICY_FACTS } from "../src/lib/storefront/policies";
+import { OrganizationJsonLd } from "../src/components/ui/JsonLd";
 
 const CheckoutPage =
   typeof CheckoutPageModule === "function"
@@ -46,6 +48,8 @@ test("structured policy facts remain stable for checkout and schema consumers", 
     handlingBusinessDays: { min: 2, max: 5 },
     usStandardTransitBusinessDays: { min: 8, max: 14 },
     returnWindowDays: 30,
+    acceptedReturnCondition: "unused-or-lightly-used",
+    refundInitiationBusinessDays: 1,
     returnMethod: "https://schema.org/ReturnByMail",
     returnFees: "https://schema.org/ReturnFeesCustomerResponsibility",
     customerRemorseReturnFees:
@@ -88,25 +92,65 @@ test("checkout continues to render the centralized price boundary", () => {
   );
 });
 
-test("customer-facing policy pages use Maverenne and avoid unverified promises", () => {
+test("customer-facing trust pages disclose the merchant identity, support channel, and fulfillment model", () => {
   const shipping = renderToStaticMarkup(createElement(ShippingPage));
   const refund = renderToStaticMarkup(createElement(RefundPage));
   const privacy = renderToStaticMarkup(createElement(PrivacyPage));
   const terms = renderToStaticMarkup(createElement(TermsPage));
   const contact = renderToStaticMarkup(createElement(ContactPage));
-  const visible = [shipping, refund, privacy, terms, contact].join("\n");
+  const about = renderToStaticMarkup(createElement(AboutPage));
+  const checkout = renderCheckoutAtPrice(20);
+  const visible = [shipping, refund, privacy, terms, contact, about, checkout].join("\n");
 
   assert.match(visible, /Maverenne/);
-  assert.doesNotMatch(visible, /MythRealms|mythrealms\.com|mythrealms@/i);
-  assert.match(shipping, /See the current policy page for confirmed details\./i);
-  assert.match(refund, /See the current policy page for confirmed details\./i);
+  assert.match(contact, /Maverenne@outlook\.com/i);
+  assert.match(about, /independent online jewelry retailer/i);
+  assert.match(about, /supplier-direct fulfillment/i);
+  assert.match(checkout, /supplier-direct fulfillment/i);
+  assert.match(checkout, /2[–-]5 business days/i);
+  assert.match(checkout, /8[–-]14 business days/i);
+  assert.match(checkout, /value="United States"/i);
+  assert.match(checkout, /aria-readonly="true"/i);
+  assert.doesNotMatch(checkout, /country-list|United Kingdom|Canada/i);
+  assert.doesNotMatch(visible, /MythRealms|mythrealms\.com|mythrealms@|maverenne\.invalid/i);
+  assert.doesNotMatch(checkout, /handcrafted|crafted to order|2-3 weeks/i);
   assert.doesNotMatch(
     visible,
-    /ships? worldwide|DHL|FedEx|7-20 business days|6-8 business days|30-day return|30 days from|48 hours|tracking number|guardian match/i,
+    /ships? worldwide|DHL|FedEx|7-20 business days|6-8 business days|48 hours|tracking number|guardian match/i,
   );
   assert.match(String(shippingMetadata.title), /Maverenne/);
   assert.match(String(privacyMetadata.title), /Maverenne/);
   assert.match(String(termsMetadata.title), /Maverenne/);
+});
+
+test("visible shipping and return promises match the structured policy facts", () => {
+  const shipping = renderToStaticMarkup(createElement(ShippingPage));
+  const refund = renderToStaticMarkup(createElement(RefundPage));
+
+  assert.match(shipping, /United States/i);
+  assert.match(shipping, /2[–-]5 business days/i);
+  assert.match(shipping, /8[–-]14 business days/i);
+  assert.match(shipping, /\$4\.99/);
+  assert.match(shipping, /\$69\.99/);
+  assert.match(shipping, /estimated/i);
+
+  assert.match(refund, /30 days (?:of|after) delivery/i);
+  assert.match(refund, /unused or lightly used/i);
+  assert.match(refund, /1 business day/i);
+  assert.match(refund, /received and inspected/i);
+  assert.match(refund, /contact us before (?:mailing|sending|returning)/i);
+  assert.match(refund, /return address/i);
+  assert.match(refund, /customer is responsible for return shipping/i);
+  assert.match(refund, /defective|incorrect item/i);
+  assert.match(refund, /original payment method/i);
+});
+
+test("public organization schema exposes the verified Maverenne support email", () => {
+  const organization = renderToStaticMarkup(createElement(OrganizationJsonLd));
+
+  assert.match(organization, /Maverenne@outlook\.com/i);
+  assert.match(organization, /customer service/i);
+  assert.doesNotMatch(organization, /maverenne\.invalid|mythrealms/i);
 });
 
 test("organization schema emits only verified shipping and return policy facts", () => {

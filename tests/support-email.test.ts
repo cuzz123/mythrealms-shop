@@ -83,13 +83,13 @@ test("reports success only after the provider accepts delivery", async () => {
   assert.match(String(request?.body), /MythRealms <support@example\.com>/);
 });
 
-test("support recipient uses configured email and a non-deliverable development fallback", () => {
+test("support recipient uses configured email and the verified public fallback", () => {
   assert.equal(
     getSupportEmail(" help@maverenne.com "),
     "help@maverenne.com",
   );
-  assert.equal(getSupportEmail(""), "support@maverenne.invalid");
-  assert.equal(getSupportEmail("   "), "support@maverenne.invalid");
+  assert.equal(getSupportEmail(""), "Maverenne@outlook.com");
+  assert.equal(getSupportEmail("   "), "Maverenne@outlook.com");
 });
 
 test("PayPal order description uses the centralized customer-facing brand", () => {

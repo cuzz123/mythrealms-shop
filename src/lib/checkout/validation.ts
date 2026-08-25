@@ -4,6 +4,7 @@ import type {
   CheckoutRequest,
   ShippingAddressInput,
 } from "@/lib/checkout/types";
+import { STORE_SHIPPING_COUNTRY } from "@/lib/storefront/policies";
 
 const MAX_LINES = 20;
 const MAX_LINE_QUANTITY = 10;
@@ -117,6 +118,11 @@ function parseShippingAddress(value: unknown): ShippingAddressInput {
   const country = requiredString(value.country, "Country").toUpperCase();
   if (!/^[A-Z]{2}$/.test(country)) {
     throw new CheckoutInputError("Please select a valid country");
+  }
+  if (country !== STORE_SHIPPING_COUNTRY) {
+    throw new CheckoutInputError(
+      "Shipping is currently available only within the United States",
+    );
   }
 
   const zip = requiredString(value.zip, "ZIP/Postal code");

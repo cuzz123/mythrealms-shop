@@ -11,7 +11,10 @@ import {
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/utils";
 import { imageUrl } from "@/lib/images";
-import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
+import {
+  STORE_POLICY_FACTS,
+  STORE_SHIPPING_COUNTRY,
+} from "@/lib/storefront/policies";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { FreeShippingProgress } from "@/components/storefront/FreeShippingProgress";
 import Link from "next/link";
@@ -24,8 +27,6 @@ import {
   type TrackingEventTarget,
 } from "@/lib/tracking";
 
-const COUNTRY_NAMES: Record<string, string> = { US:"United States",GB:"United Kingdom",CA:"Canada",AU:"Australia",DE:"Germany",FR:"France",JP:"Japan",SG:"Singapore",IT:"Italy",ES:"Spain",NL:"Netherlands",SE:"Sweden",NO:"Norway",DK:"Denmark",FI:"Finland",CH:"Switzerland",AT:"Austria",BE:"Belgium",IE:"Ireland",NZ:"New Zealand",KR:"South Korea",HK:"Hong Kong",TW:"Taiwan",MY:"Malaysia",TH:"Thailand",PH:"Philippines",ID:"Indonesia",IN:"India",BR:"Brazil",MX:"Mexico",AE:"United Arab Emirates",SA:"Saudi Arabia",IL:"Israel",PT:"Portugal",PL:"Poland" };
-const COUNTRY_CODES: Record<string, string> = Object.fromEntries(Object.entries(COUNTRY_NAMES).map(([k,v]) => [v,k]));
 const freeShippingThreshold =
   STORE_POLICY_FACTS.freeShippingThresholdUsd.toFixed(2);
 const standardShippingFlatRate =
@@ -105,7 +106,7 @@ export default function CheckoutPage() {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [country, setCountry] = useState("US");
+  const country = STORE_SHIPPING_COUNTRY;
   const [zip, setZip] = useState("");
 
   // Discount
@@ -258,7 +259,8 @@ export default function CheckoutPage() {
           return "Please enter a valid postal code";
         return "";
       case "country":
-        if (!COUNTRY_NAMES[value]) return "Please select a valid country";
+        if (value !== STORE_SHIPPING_COUNTRY)
+          return "Shipping is currently available only within the United States";
         return "";
       default:
         return "";
@@ -373,7 +375,6 @@ export default function CheckoutPage() {
       city: setCity,
       state: setState,
       zip: setZip,
-      country: setCountry,
     };
 
     const hasError = touched[field] && errors[field];
@@ -433,10 +434,16 @@ export default function CheckoutPage() {
       </h1>
 
       <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg p-4 mb-6 text-sm text-[var(--text-secondary)]">
-        <strong className="text-[var(--accent)]">Crafted to Order</strong> —
-        Each MythRealms piece is handcrafted upon order. Please allow{" "}
-        <strong>2-3 weeks</strong> for production and delivery. You will receive
-        updates at every stage.
+        <strong className="text-[var(--accent)]">Supplier-direct fulfillment</strong> —
+        Orders require{" "}
+        <strong>
+          {STORE_POLICY_FACTS.handlingBusinessDays.min}–{STORE_POLICY_FACTS.handlingBusinessDays.max} business days
+        </strong>{" "}
+        for processing. Standard transit is estimated at{" "}
+        <strong>
+          {STORE_POLICY_FACTS.usStandardTransitBusinessDays.min}–{STORE_POLICY_FACTS.usStandardTransitBusinessDays.max} business days
+        </strong>{" "}
+        after processing; these time ranges are estimates, not guaranteed delivery dates.
       </div>
 
       <form onSubmit={(event) => event.preventDefault()} noValidate>
@@ -471,32 +478,14 @@ export default function CheckoutPage() {
                       Country <span className="text-[var(--sale)] ml-0.5">*</span>
                     </label>
                     <input
-                      list="country-list"
-                      value={COUNTRY_NAMES[country] || country}
-                      onChange={(e) => {
-                        const code = COUNTRY_CODES[e.target.value] || e.target.value;
-                        setCountry(code);
-                      }}
-                      onBlur={() => handleBlur("country")}
-                      placeholder="Type to search..."
-                      aria-invalid={!!(touched.country && errors.country)}
-                      aria-describedby={errors.country ? "country-error" : undefined}
-                      className={`${inputClass} ${
-                        touched.country && errors.country
-                          ? inputErrorClass
-                          : inputNormalClass
-                      }`}
+                      value="United States"
+                      readOnly
+                      aria-readonly="true"
+                      className={`${inputClass} ${inputNormalClass} cursor-not-allowed opacity-80`}
                     />
-                    {touched.country && errors.country && (
-                      <p id="country-error" className="mt-1 text-xs text-[var(--sale)]">
-                        {errors.country}
-                      </p>
-                    )}
-                    <datalist id="country-list">
-                      {Object.entries(COUNTRY_NAMES).map(([code, name]) => (
-                        <option key={code} value={name}>{code}</option>
-                      ))}
-                    </datalist>
+                    <p className="mt-1.5 text-xs text-[var(--text-muted)]">
+                      We currently ship only within the United States.
+                    </p>
                   </div>
                 </div>
               </div>

@@ -5,9 +5,10 @@ import {
   deliverSupportEmail,
   SupportEmailError,
 } from "@/lib/server/support-email";
+import { resolveSupportEmail } from "@/lib/storefront/merchant";
 
 export function getSupportEmail(value = process.env.SUPPORT_EMAIL): string {
-  return value?.trim() || "support@maverenne.invalid";
+  return resolveSupportEmail(value);
 }
 
 function escapeHtml(value: string): string {

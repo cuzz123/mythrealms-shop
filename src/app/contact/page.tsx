@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/Button";
 import { BRAND } from "@/lib/brand-identity";
+import { MERCHANT_FACTS } from "@/lib/storefront/merchant";
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
@@ -50,6 +51,12 @@ export default function ContactPage() {
         <h1 className="mb-3 font-serif text-5xl font-bold text-[var(--text)]">Contact Us</h1>
         <p className="mx-auto max-w-lg text-[var(--text-muted)]">
           Questions about a piece or an order? Send us a note and we will review the details.
+        </p>
+        <p className="mt-4 text-sm text-[var(--text-secondary)]">
+          You can also email us at{" "}
+          <a href={`mailto:${MERCHANT_FACTS.supportEmail}`} className="font-medium text-[var(--accent)] hover:underline">
+            {MERCHANT_FACTS.supportEmail}
+          </a>.
         </p>
       </div>
 

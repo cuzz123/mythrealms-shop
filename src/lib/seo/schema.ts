@@ -1,4 +1,7 @@
-import type { StorePolicyFacts } from "@/lib/storefront/policies";
+import {
+  STORE_SHIPPING_COUNTRY,
+  type StorePolicyFacts,
+} from "@/lib/storefront/policies";
 import { BRAND } from "@/lib/brand-identity";
 
 const SCHEMA_CONTEXT = "https://schema.org";
@@ -161,7 +164,7 @@ export function buildProductSchema(input: ProductSchemaInput) {
               },
         shippingDestination: {
           "@type": "DefinedRegion",
-          addressCountry: "US",
+          addressCountry: STORE_SHIPPING_COUNTRY,
         },
         deliveryTime: {
           "@type": "ShippingDeliveryTime",
@@ -183,7 +186,7 @@ export function buildProductSchema(input: ProductSchemaInput) {
   const hasMerchantReturnPolicy = input.policyFacts && currency === "USD"
     ? {
         "@type": "MerchantReturnPolicy",
-        applicableCountry: "US",
+        applicableCountry: STORE_SHIPPING_COUNTRY,
         returnPolicyCategory:
           "https://schema.org/MerchantReturnFiniteReturnWindow",
         merchantReturnDays: input.policyFacts.returnWindowDays,
@@ -272,7 +275,7 @@ export function buildOrganizationSchema(input: OrganizationSchemaInput) {
             "@type": "ShippingConditions",
             shippingDestination: {
               "@type": "DefinedRegion",
-              addressCountry: "US",
+              addressCountry: STORE_SHIPPING_COUNTRY,
             },
             orderValue: {
               "@type": "MonetaryAmount",
@@ -295,7 +298,7 @@ export function buildOrganizationSchema(input: OrganizationSchemaInput) {
             "@type": "ShippingConditions",
             shippingDestination: {
               "@type": "DefinedRegion",
-              addressCountry: "US",
+              addressCountry: STORE_SHIPPING_COUNTRY,
             },
             orderValue: {
               "@type": "MonetaryAmount",
@@ -317,7 +320,7 @@ export function buildOrganizationSchema(input: OrganizationSchemaInput) {
   const returnPolicy = input.policyFacts
     ? {
         "@type": "MerchantReturnPolicy",
-        applicableCountry: "US",
+        applicableCountry: STORE_SHIPPING_COUNTRY,
         returnPolicyCategory:
           "https://schema.org/MerchantReturnFiniteReturnWindow",
         merchantReturnDays: input.policyFacts.returnWindowDays,

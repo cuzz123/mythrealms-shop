@@ -5,8 +5,7 @@ import {
   deliverSupportEmail,
   SupportEmailError,
 } from "@/lib/server/support-email";
-
-const SUPPORT_EMAIL = process.env.SUPPORT_EMAIL || "mythrealms@outlook.com";
+import { resolveSupportEmail } from "@/lib/storefront/merchant";
 
 function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (character) => {
@@ -47,7 +46,7 @@ export async function POST(request: NextRequest) {
     }
 
     await deliverSupportEmail({
-      to: SUPPORT_EMAIL,
+      to: resolveSupportEmail(process.env.SUPPORT_EMAIL),
       replyTo: email,
       subject: `Return Request | Order ${orderId}`,
       html: `<h2>Return Request</h2><p><strong>Order ID:</strong> ${escapeHtml(orderId)}</p><p><strong>Customer Email:</strong> ${escapeHtml(email)}</p><p><strong>Reason:</strong> ${escapeHtml(reason)}</p><p><strong>Details:</strong> ${escapeHtml(description || "N/A").replace(/\n/g, "<br>")}</p>`,

@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 
 import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl } from "@/lib/site";
-
-const supportEmail = process.env.SUPPORT_EMAIL?.trim() || "support@maverenne.invalid";
+import { MERCHANT_FACTS } from "@/lib/storefront/merchant";
 
 export const metadata: Metadata = {
   title: `Terms of Service — ${BRAND.name}`,
@@ -24,6 +23,10 @@ export default function TermsPage() {
       <p className="mb-10 text-sm text-[var(--text-muted)]">{BRAND.name}</p>
       <div className="space-y-8 leading-relaxed text-[var(--text-secondary)]">
         <section>
+          <h2 className="mb-3 font-serif text-2xl font-bold text-[var(--text)]">The retailer</h2>
+          <p>Maverenne is an independent online jewelry retailer. We use supplier-direct fulfillment, and an order may be shipped directly by a supply partner.</p>
+        </section>
+        <section>
           <h2 className="mb-3 font-serif text-2xl font-bold text-[var(--text)]">Using the store</h2>
           <p>Use the site lawfully and provide accurate information when creating an account, contacting support, or placing an order.</p>
         </section>
@@ -42,7 +45,7 @@ export default function TermsPage() {
         </section>
         <section>
           <h2 className="mb-3 font-serif text-2xl font-bold text-[var(--text)]">Contact</h2>
-          <p>Questions about these terms can be sent to <a href={`mailto:${supportEmail}`} className="text-[var(--accent)] hover:underline">{supportEmail}</a>.</p>
+          <p>Questions about these terms can be sent to <a href={`mailto:${MERCHANT_FACTS.supportEmail}`} className="text-[var(--accent)] hover:underline">{MERCHANT_FACTS.supportEmail}</a>.</p>
         </section>
         <p>If a detail is not stated on the relevant product or policy page, it is not confirmed.</p>
       </div>

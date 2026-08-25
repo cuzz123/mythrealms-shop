@@ -6,7 +6,7 @@ import { STORY_CONTENT } from "@/lib/editorial/story";
 import { buildAboutPageSchema } from "@/lib/seo/schema";
 import { absoluteUrl } from "@/lib/site";
 
-const { seo, heading, statement } = STORY_CONTENT;
+const { seo, heading, statement, businessModel, fulfillment } = STORY_CONTENT;
 const canonicalUrl = absoluteUrl("/about");
 
 export const metadata: Metadata = {
@@ -56,6 +56,10 @@ export default function AboutPage() {
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--text-secondary)]">
             {statement}
           </p>
+          <div className="mt-8 space-y-4 text-base leading-7 text-[var(--text-secondary)]">
+            <p>{businessModel}</p>
+            <p>{fulfillment}</p>
+          </div>
           <nav aria-label="About Maverenne links" className="mt-8">
             <ul className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-[var(--accent)]">
               <li>

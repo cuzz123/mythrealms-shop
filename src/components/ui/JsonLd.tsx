@@ -13,6 +13,7 @@ import {
 } from "@/lib/seo/schema";
 import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl, siteUrl } from "@/lib/site";
+import { MERCHANT_FACTS } from "@/lib/storefront/merchant";
 import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
 
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
@@ -117,19 +118,18 @@ export function BreadcrumbJsonLd({ items }: BreadcrumbSchemaProps) {
 }
 
 export function OrganizationJsonLd() {
-  const { contactPoint: _unverifiedContactPoint, ...organization } =
-    buildOrganizationSchema({
-      url: siteUrl,
-      logo: absoluteUrl("/apple-icon.png"),
-      contactEmail: "",
-      description: BRAND.promise,
-      policyFacts: STORE_POLICY_FACTS,
-      knowsAbout: [
-        "Pearl jewelry",
-        "Jewelry styling",
-        "Pearl care",
-      ],
-    });
+  const organization = buildOrganizationSchema({
+    url: siteUrl,
+    logo: absoluteUrl("/apple-icon.png"),
+    contactEmail: MERCHANT_FACTS.supportEmail,
+    description: BRAND.promise,
+    policyFacts: STORE_POLICY_FACTS,
+    knowsAbout: [
+      "Pearl jewelry",
+      "Jewelry styling",
+      "Pearl care",
+    ],
+  });
 
   return (
     <JsonLd

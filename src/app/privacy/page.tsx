@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 
 import { BRAND } from "@/lib/brand-identity";
 import { absoluteUrl } from "@/lib/site";
-
-const supportEmail = process.env.SUPPORT_EMAIL?.trim() || "support@maverenne.invalid";
+import { MERCHANT_FACTS } from "@/lib/storefront/merchant";
 
 export const metadata: Metadata = {
   title: `Privacy Policy — ${BRAND.name}`,
@@ -37,7 +36,7 @@ export default function PrivacyPage() {
         </section>
         <section>
           <h2 className="mb-3 font-serif text-2xl font-bold text-[var(--text)]">Questions and requests</h2>
-          <p>To ask about your information, contact <a href={`mailto:${supportEmail}`} className="text-[var(--accent)] hover:underline">{supportEmail}</a>. We may need to verify the requester before acting on an account or order.</p>
+          <p>To ask about your information, contact <a href={`mailto:${MERCHANT_FACTS.supportEmail}`} className="text-[var(--accent)] hover:underline">{MERCHANT_FACTS.supportEmail}</a>. We may need to verify the requester before acting on an account or order.</p>
         </section>
         <p>If a detail is not stated on the relevant product or policy page, it is not confirmed.</p>
       </div>

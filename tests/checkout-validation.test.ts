@@ -127,3 +127,21 @@ test("rejects invalid email and incomplete shipping addresses", () => {
     });
   }
 });
+
+test("rejects checkout destinations outside the United States", () => {
+  const request = validRequest();
+  request.shippingAddress.country = "CA";
+
+  assert.throws(
+    () => parseCheckoutRequest(request),
+    (error: unknown) => {
+      assert.ok(error instanceof CheckoutInputError);
+      assert.equal(error.status, 400);
+      assert.equal(
+        error.message,
+        "Shipping is currently available only within the United States",
+      );
+      return true;
+    },
+  );
+});
