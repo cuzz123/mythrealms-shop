@@ -5,6 +5,8 @@ type StoryContent = Readonly<{
   }>;
   heading: string;
   statement: string;
+  businessModel: string;
+  fulfillment: string;
 }>;
 
 export const STORY_CONTENT = {
@@ -16,4 +18,8 @@ export const STORY_CONTENT = {
   heading: "About Maverenne",
   statement:
     "Thoughtful jewelry and accessories for everyday moments that feel like your own.",
+  businessModel:
+    "Maverenne is an independent online jewelry retailer serving customers through maverenne.com.",
+  fulfillment:
+    "We use supplier-direct fulfillment, so an order may be packed and shipped directly by a supply partner. Maverenne remains your point of contact for product, order, shipping, and return questions.",
 } as const satisfies StoryContent;

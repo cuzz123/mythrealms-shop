@@ -92,7 +92,7 @@ test("About renders only the approved neutral introduction and matching JSON-LD"
   ]);
 });
 
-test("About content stays within the approved factual boundary", () => {
+test("About content discloses only the approved merchant and fulfillment facts", () => {
   const content = JSON.stringify(STORY_CONTENT);
 
   assert.equal(STORY_CONTENT.seo.title, TITLE);
@@ -100,8 +100,13 @@ test("About content stays within the approved factual boundary", () => {
   assert.equal(STORY_CONTENT.heading, "About Maverenne");
   assert.equal("sectionHeading" in STORY_CONTENT, false);
   assert.equal(STORY_CONTENT.statement, DESCRIPTION);
+  assert.match(STORY_CONTENT.businessModel, /independent online jewelry retailer/i);
+  assert.match(STORY_CONTENT.businessModel, /maverenne\.com/i);
+  assert.match(STORY_CONTENT.fulfillment, /supplier-direct fulfillment/i);
+  assert.match(STORY_CONTENT.fulfillment, /supply partner/i);
+  assert.match(STORY_CONTENT.fulfillment, /Maverenne remains your point of contact/i);
   assert.doesNotMatch(
     content,
-    /MythRealms|Mediterranean|founder|history|location|date|material|source|catalog|price|stock|shipping|returns|support|legal/i,
+    /MythRealms|Mediterranean|founder|history|location|date|material|source|catalog|price|stock|legal|factory|warehouse|manufacturer|owned inventory/i,
   );
 });
