@@ -1,7 +1,7 @@
 ﻿"use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { type StorefrontProduct } from "@/lib/storefront/catalog";
+import { getProductType, type StorefrontProduct, type StorefrontProductType } from "@/lib/storefront/catalog";
 import { formatPrice } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, ShoppingBag, Minus, Plus, Share2, ChevronDown, Info, Heart, Check, Loader2 } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
@@ -18,6 +18,7 @@ import { StickyAddToCart } from "@/components/storefront/StickyAddToCart";
 import { absoluteImageUrl } from "@/lib/images";
 import { absoluteUrl } from "@/lib/site";
 import { STORE_POLICY_FACTS } from "@/lib/storefront/policies";
+import { getPurchaseGuideForProductType } from "@/lib/seo/product-guides";
 
 function PurchaseFacts({ description, benefitTriplet }: { description: string; benefitTriplet: string }) {
   return (
@@ -30,13 +31,16 @@ function PurchaseFacts({ description, benefitTriplet }: { description: string; b
   );
 }
 
-function LearningLinks() {
+function LearningLinks({ productType }: { productType: StorefrontProductType }) {
+  const guide = getPurchaseGuideForProductType(productType);
+
   return (
     <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold">
       <Link href="/pearls/care" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">How to care for pearl jewelry</Link>
       <Link href="/pearls/how-to-wear" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">How to wear pearls</Link>
       <Link href="/pearls/freshwater-pearls" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">What are freshwater pearls?</Link>
       <Link href="/gifts" className="border-b border-[var(--text)] pb-1 text-[var(--text)]">Shop pearl gifts</Link>
+      <Link href={guide.href} className="border-b border-[var(--text)] pb-1 text-[var(--text)]">{guide.label}</Link>
     </div>
   );
 }
@@ -75,6 +79,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
   }, [slug]);
 
   const p = product;
+  const productType = getProductType(p);
   const displayName = productDisplayName(p);
   const displayDescription = productShortDescription(p);
   const benefitTriplet = productBenefitTriplet(p);
@@ -492,7 +497,7 @@ export function Product1688({ product }: { product: StorefrontProduct }) {
               <h3 id="learn-about-your-pearls-title" className="font-serif text-xl font-medium text-[var(--text)]">
                 Learn about your pearls
               </h3>
-              <LearningLinks />
+              <LearningLinks productType={productType} />
             </section>
           </div>
         </div>

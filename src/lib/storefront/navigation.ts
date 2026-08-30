@@ -43,6 +43,7 @@ export const FOOTER_GROUPS: readonly FooterGroup[] = [
       { label: "Pearl Symbolism", href: "/pearls/symbolism" },
       { label: "How to Wear Pearls", href: "/pearls/how-to-wear" },
       { label: "Freshwater Pearls", href: "/pearls/freshwater-pearls" },
+      { label: "Pearl Size Guide", href: "/size-guide" },
       { label: "FAQs", href: "/faq" },
     ],
   },

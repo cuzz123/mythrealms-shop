@@ -1,4 +1,8 @@
-import type { StorefrontProduct } from "@/lib/storefront/catalog";
+import {
+  getProductType,
+  type StorefrontProduct,
+  type StorefrontProductType,
+} from "@/lib/storefront/catalog";
 
 export type PearlEdit = Readonly<{
   slug: string;
@@ -87,13 +91,40 @@ export function getComplementaryProducts(
   productSlug: string,
   products: readonly StorefrontProduct[],
 ): StorefrontProduct[] {
+  const sourceProduct = products.find((product) => product.slug === productSlug);
+  if (!sourceProduct) return [];
+
+  const getKnownProductType = (
+    product: StorefrontProduct,
+  ): StorefrontProductType | undefined => {
+    try {
+      return getProductType(product);
+    } catch {
+      return undefined;
+    }
+  };
+  const sourceType = getKnownProductType(sourceProduct);
+  if (!sourceType) return [];
+
   const edit = PEARL_EDITS.find((candidate) => candidate.productSlugs.includes(productSlug));
-  if (!edit) return [];
+  const editProductSlugs = new Set(edit?.productSlugs ?? []);
+  const selected: StorefrontProduct[] = [];
+  const selectedSlugs = new Set([productSlug]);
 
-  getPearlEditProducts(edit, products);
-  const editProductSlugs = new Set(edit.productSlugs);
+  const addMatchingProducts = (matches: (product: StorefrontProduct) => boolean) => {
+    for (const product of products) {
+      if (selected.length >= 4) return;
+      if (selectedSlugs.has(product.slug) || !matches(product)) continue;
+      selected.push(product);
+      selectedSlugs.add(product.slug);
+    }
+  };
 
-  return products
-    .filter((product) => product.slug !== productSlug && editProductSlugs.has(product.slug))
-    .slice(0, 4);
+  // Keep editorially curated companions first, then use the product taxonomy,
+  // and finally the stable catalog order to fill any remaining slots.
+  addMatchingProducts((product) => editProductSlugs.has(product.slug));
+  addMatchingProducts((product) => getKnownProductType(product) === sourceType);
+  addMatchingProducts((product) => getKnownProductType(product) !== undefined);
+
+  return selected;
 }
